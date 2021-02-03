@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>TiDB on I want to be a better coder(iwtbabc)</title>
-    <link>http://iwtbabc.github.io/tags/tidb/</link>
-    <description>Recent content in TiDB on I want to be a better coder(iwtbabc)</description>
+    <title>TiDB on Leftpocket的个人博客</title>
+    <link>https://left-pocket.github.io/tags/tidb/</link>
+    <description>Recent content in TiDB on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 06 Aug 2020 13:00:51 +0800</lastBuildDate><atom:link href="http://iwtbabc.github.io/tags/tidb/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 06 Aug 2020 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/tidb/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>TiDB Write Conflict问题分析</title>
-      <link>http://iwtbabc.github.io/post/db-tidb-write-conflict/</link>
+      <link>https://left-pocket.github.io/post/db-tidb-write-conflict/</link>
       <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
       
-      <guid>http://iwtbabc.github.io/post/db-tidb-write-conflict/</guid>
+      <guid>https://left-pocket.github.io/post/db-tidb-write-conflict/</guid>
       <description>背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了write conflict. [2020/08/25 06:01:44.781 +08:00] [WARN] [session.go:623] [retrying] [conn=26799778] [schemaVersion=194] [retryCnt=0] [queryNum=0] [sql=&amp;quot;UPDATE user_tab SET `region` = ?, `status` = ?, `update_time` = ? WHERE `from_userid` = ? AND `to_userid` = ? AND `type`</description>
     </item>
     

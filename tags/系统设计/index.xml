@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>系统设计 on I want to be a better coder(iwtbabc)</title>
-    <link>http://iwtbabc.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</link>
-    <description>Recent content in 系统设计 on I want to be a better coder(iwtbabc)</description>
+    <title>系统设计 on Leftpocket的个人博客</title>
+    <link>https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</link>
+    <description>Recent content in 系统设计 on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 22 Jan 2021 13:00:51 +0800</lastBuildDate><atom:link href="http://iwtbabc.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Jan 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>朋友圈技术设计与实现</title>
-      <link>http://iwtbabc.github.io/post/system_design/friends_status/</link>
+      <link>https://left-pocket.github.io/post/system_design/friends_status/</link>
       <pubDate>Fri, 22 Jan 2021 13:00:51 +0800</pubDate>
       
-      <guid>http://iwtbabc.github.io/post/system_design/friends_status/</guid>
+      <guid>https://left-pocket.github.io/post/system_design/friends_status/</guid>
       <description>最近在产品上实现了微信朋友圈的功能，在这里分享一下朋友圈功能的设计与实现。 下一篇文章将讲解朋友圈状态的评论和点赞功能的设计与实现。</description>
     </item>
     
     <item>
       <title>点赞和评论 技术设计与实现</title>
-      <link>http://iwtbabc.github.io/post/system_design/friends_comment_like/</link>
+      <link>https://left-pocket.github.io/post/system_design/friends_comment_like/</link>
       <pubDate>Fri, 22 Jan 2021 13:00:51 +0800</pubDate>
       
-      <guid>http://iwtbabc.github.io/post/system_design/friends_comment_like/</guid>
+      <guid>https://left-pocket.github.io/post/system_design/friends_comment_like/</guid>
       <description>上篇文章介绍了朋友圈的技术设计，这篇将介绍朋友圈点赞和评论的实现方式。 需求介绍 对某条状态实现点赞与取消点赞的功能。 点赞列表按时间从小到大排序</description>
     </item>
     

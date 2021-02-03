@@ -1,108 +1,108 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on I want to be a better coder(iwtbabc)</title>
-    <link>http://iwtbabc.github.io/post/</link>
-    <description>Recent content in Posts on I want to be a better coder(iwtbabc)</description>
+    <title>Posts on Leftpocket的个人博客</title>
+    <link>https://left-pocket.github.io/post/</link>
+    <description>Recent content in Posts on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 22 Jan 2021 13:00:51 +0800</lastBuildDate><atom:link href="http://iwtbabc.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Jan 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>朋友圈技术设计与实现</title>
-      <link>http://iwtbabc.github.io/post/system_design/friends_status/</link>
+      <link>https://left-pocket.github.io/post/system_design/friends_status/</link>
       <pubDate>Fri, 22 Jan 2021 13:00:51 +0800</pubDate>
       
-      <guid>http://iwtbabc.github.io/post/system_design/friends_status/</guid>
+      <guid>https://left-pocket.github.io/post/system_design/friends_status/</guid>
       <description>最近在产品上实现了微信朋友圈的功能，在这里分享一下朋友圈功能的设计与实现。 下一篇文章将讲解朋友圈状态的评论和点赞功能的设计与实现。</description>
     </item>
     
     <item>
       <title>点赞和评论 技术设计与实现</title>
-      <link>http://iwtbabc.github.io/post/system_design/friends_comment_like/</link>
+      <link>https://left-pocket.github.io/post/system_design/friends_comment_like/</link>
       <pubDate>Fri, 22 Jan 2021 13:00:51 +0800</pubDate>
       
-      <guid>http://iwtbabc.github.io/post/system_design/friends_comment_like/</guid>
+      <guid>https://left-pocket.github.io/post/system_design/friends_comment_like/</guid>
       <description>上篇文章介绍了朋友圈的技术设计，这篇将介绍朋友圈点赞和评论的实现方式。 需求介绍 对某条状态实现点赞与取消点赞的功能。 点赞列表按时间从小到大排序</description>
     </item>
     
     <item>
       <title>vscode配置leetcode插件</title>
-      <link>http://iwtbabc.github.io/post/vscode-leetcode/</link>
+      <link>https://left-pocket.github.io/post/vscode-leetcode/</link>
       <pubDate>Sat, 12 Dec 2020 13:00:51 +0800</pubDate>
       
-      <guid>http://iwtbabc.github.io/post/vscode-leetcode/</guid>
+      <guid>https://left-pocket.github.io/post/vscode-leetcode/</guid>
       <description>作为一名合格的程序猿，大家找工作的时候经常需要刷leetcode, leetcode官网上面写代码没有IDE上面写代码那么方便，更重要的是，可</description>
     </item>
     
     <item>
       <title>Redis Zset的精度问题分析及解决方案</title>
-      <link>http://iwtbabc.github.io/post/redis-zset-score/</link>
+      <link>https://left-pocket.github.io/post/redis-zset-score/</link>
       <pubDate>Fri, 04 Dec 2020 13:00:51 +0800</pubDate>
       
-      <guid>http://iwtbabc.github.io/post/redis-zset-score/</guid>
+      <guid>https://left-pocket.github.io/post/redis-zset-score/</guid>
       <description>背景 最近使用Redis的SortedSet，使用int64作为score时遇到了一些预料之外的情况，在此总结一下。 介绍 项目中采用Redis S</description>
     </item>
     
     <item>
       <title>snowflake算法及最佳实践</title>
-      <link>http://iwtbabc.github.io/post/snowflake/</link>
+      <link>https://left-pocket.github.io/post/snowflake/</link>
       <pubDate>Tue, 24 Nov 2020 13:00:51 +0800</pubDate>
       
-      <guid>http://iwtbabc.github.io/post/snowflake/</guid>
+      <guid>https://left-pocket.github.io/post/snowflake/</guid>
       <description>背景 这篇文章来讲解snowflake是什么，以及它实际应用的最佳实践方案。 snowflake算法 什么是 Snowflake Twitter的snowflake分</description>
     </item>
     
     <item>
       <title>分布式ID生成方案</title>
-      <link>http://iwtbabc.github.io/post/uid-generator/</link>
+      <link>https://left-pocket.github.io/post/uid-generator/</link>
       <pubDate>Sat, 21 Nov 2020 00:07:57 +0800</pubDate>
       
-      <guid>http://iwtbabc.github.io/post/uid-generator/</guid>
+      <guid>https://left-pocket.github.io/post/uid-generator/</guid>
       <description>背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一。那一般生成ID都有哪些解决方案呢？特别是在复杂的分布式系统业务场景</description>
     </item>
     
     <item>
       <title>Centos7安装SSR教程</title>
-      <link>http://iwtbabc.github.io/post/ssr-centos7/</link>
+      <link>https://left-pocket.github.io/post/ssr-centos7/</link>
       <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
       
-      <guid>http://iwtbabc.github.io/post/ssr-centos7/</guid>
+      <guid>https://left-pocket.github.io/post/ssr-centos7/</guid>
       <description>记录一下在centos7下安装ssr(shadowsocksr)的教程。 安装必要依赖包 yum install git -y yum install epel-release -y yum install libsodium -y yum install epel-release -y yum install libsodium -y 下载shado</description>
     </item>
     
     <item>
       <title>TiDB Write Conflict问题分析</title>
-      <link>http://iwtbabc.github.io/post/db-tidb-write-conflict/</link>
+      <link>https://left-pocket.github.io/post/db-tidb-write-conflict/</link>
       <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
       
-      <guid>http://iwtbabc.github.io/post/db-tidb-write-conflict/</guid>
+      <guid>https://left-pocket.github.io/post/db-tidb-write-conflict/</guid>
       <description>背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了write conflict. [2020/08/25 06:01:44.781 +08:00] [WARN] [session.go:623] [retrying] [conn=26799778] [schemaVersion=194] [retryCnt=0] [queryNum=0] [sql=&amp;quot;UPDATE user_tab SET `region` = ?, `status` = ?, `update_time` = ? WHERE `from_userid` = ? AND `to_userid` = ? AND `type`</description>
     </item>
     
     <item>
       <title>使用hugo搭建个人博客</title>
-      <link>http://iwtbabc.github.io/post/hugo-creation/</link>
+      <link>https://left-pocket.github.io/post/hugo-creation/</link>
       <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
       
-      <guid>http://iwtbabc.github.io/post/hugo-creation/</guid>
+      <guid>https://left-pocket.github.io/post/hugo-creation/</guid>
       <description>最近使用hugo搭建博客，准备自己记录一下学习过程。 就先记录一下搭建hugo博客的流程。 本篇记录一下怎么在本机电脑成功运行hugo生成静态博</description>
     </item>
     
     <item>
       <title>把hugo博客托管到github上</title>
-      <link>http://iwtbabc.github.io/post/hugo-github/</link>
+      <link>https://left-pocket.github.io/post/hugo-github/</link>
       <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
       
-      <guid>http://iwtbabc.github.io/post/hugo-github/</guid>
+      <guid>https://left-pocket.github.io/post/hugo-github/</guid>
       <description>上一篇介绍了怎么在本机搭建hugo博客，这一篇将主要介绍怎么把hugo静态博客托管到github上。 创建Github Pages 假设你需要部署在 GitHub Pages 上</description>
     </item>
     
     <item>
       <title></title>
-      <link>http://iwtbabc.github.io/post/interview/</link>
+      <link>https://left-pocket.github.io/post/interview/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://iwtbabc.github.io/post/interview/</guid>
+      <guid>https://left-pocket.github.io/post/interview/</guid>
       <description>一 数据结构与算法 二 C++&amp;amp;C++11 三 Golang 四 Redis 五 MySQL 六 Linux 七 系统设计 秒杀系统设计</description>
     </item>
     
