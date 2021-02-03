@@ -7,21 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>leetcode | Leftpocket的个人博客</title>
-    <meta property="og:title" content="leetcode - Leftpocket的个人博客">
+    <title>使用hugo搭建个人博客 | Leftpocket的个人博客</title>
+    <meta property="og:title" content="使用hugo搭建个人博客 - Leftpocket的个人博客">
     <meta property="og:type" content="article">
         
+    <meta property="article:published_time" content='2020-08-06T13:00:51&#43;08:00'>
         
-    <meta name="Keywords" content="blog">
-    <meta name="description" content="leetcode">
+        
+    <meta property="article:modified_time" content='2020-08-06T13:00:51&#43;08:00'>
+        
+    <meta name="Keywords" content="[hugo]">
+    <meta name="description" content="使用hugo搭建个人博客">
         
     <meta name="author" content="leftpocket">
-    <meta property="og:url" content="https://left-pocket.github.io/categories/leetcode/">
+    <meta property="og:url" content="https://left-pocket.github.io/post/hugo/hugo-creation/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
-    <link rel="alternate" type="application/rss+xml+xml" href="https://left-pocket.github.io/categories/leetcode/index.xml" title="Leftpocket的个人博客" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -49,7 +52,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="https://left-pocket.github.io/">首页</a>
+                    <a class="current" href="https://left-pocket.github.io/">首页</a>
                     
                     <a  href="https://left-pocket.github.io/archives/" title="归档">归档</a>
                     
@@ -69,46 +72,180 @@
                     
 <div class="res-cons">
     
-    <h3 class="archive-title">
-        分类
-        <span class="keyword">leetcode</span>
-        中的文章
-    </h3>
-    
-
-    
     <article class="post">
         <header>
-            <h1 class="post-title">
-                <a href="https://left-pocket.github.io/post/vscode-leetcode/">vscode配置leetcode插件</a>
-            </h1>
+            <h1 class="post-title">使用hugo搭建个人博客</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年12月12日
+            2020年8月6日
         </date>
         
-        <div class="post-meta meta-category">
-            |
+        <div class="post-meta">
+            <span>|</span>
             
-            <a href='/categories/vscode'>vscode</a>
-            
-            <a href='/categories/leetcode'>leetcode</a>
+            <span class="meta-category"><a href='/categories/hugo'>hugo</a></span>
             
         </div>
         
+        
+        
         <div class="post-content">
-            作为一名合格的程序猿，大家找工作的时候经常需要刷leetcode, leetcode官网上面写代码没有IDE上面写代码那么方便，更重要的是，可……
-            <p class="readmore"><a href="https://left-pocket.github.io/post/vscode-leetcode/">阅读全文</a></p>
+            <p>最近使用hugo搭建博客，准备自己记录一下学习过程。
+就先记录一下搭建hugo博客的流程。
+本篇记录一下怎么在本机电脑成功运行hugo生成静态博客。
+下篇将记录怎么把hugo博客托管到github Pages上面。</p>
+<h2 id="hugo">hugo</h2>
+<p>hugo 是由Go语言实现的静态网站生成器。简单，易用，高效，易扩展。</p>
+<h2 id="安装">安装</h2>
+<p>我这边介绍在macOS上的安装教程。其他环境（Windows/linux）类似。</p>
+<pre><code>&gt;&gt;&gt; brew install hugo
+&gt;&gt;&gt; hugo version
+Hugo Static Site Generator v0.74.3/extended darwin/amd64
+</code></pre><h2 id="创建站点">创建站点</h2>
+<p>创建一个站点 <strong>iwtbabc</strong>， 并进入到站点根目录。</p>
+<pre><code>&gt;&gt;&gt; hugo new site iwtbabc
+&gt;&gt;&gt; cd iwtbabc
+&gt;&gt;&gt; ls
+archetypes  content     layouts     resources   themes
+config.toml data        public      static
+</code></pre><p><strong>config.toml</strong> 是配置文件，在里面可以定义博客地址，构建配置，标题，导航栏等等。
+<strong>themes</strong>是主题目录，可以下载喜欢的主题，然后配置在<strong>config.toml</strong>里面。
+<strong>content</strong>是博客文章的目录。</p>
+<p>推荐一款主题，可以在根目录下载并配置。</p>
+<pre><code>git clone https://github.com/flysnow-org/maupassant-hugo themes/maupassant
+</code></pre><p><strong>注</strong>：如果是从其他地方copy过来的站点，有可能遇到:</p>
+<pre><code>WARN 2021/02/03 10:56:17 found no layout file for &quot;HTML&quot; for kind &quot;home&quot;: You should create a template file which matches Hugo Layouts Lookup Rules for this combination.
+</code></pre><p>这个时候需要重新<strong>git clone</strong>一下主题。</p>
+<h2 id="配置">配置</h2>
+<p>推荐一款个人使用的配置</p>
+<pre><code>baseURL = &quot;http://iwtbabc.github.io/&quot;
+languageCode = &quot;en-us&quot;
+title = &quot;I want to be a better coder(iwtbabc)&quot;
+theme = &quot;maupassant&quot;
+hasCJKLanguage = true
+enableRobotsTXT = true
+PaginatePath = &quot;page&quot;
+
+[author]
+    name = &quot;leftpocket&quot;
+    homepage = &quot;http://iwtbabc.github.io/&quot;
+
+[params]
+    subtitle = &quot;I want to be a better coder&quot;
+    description = &quot;iwtbabc&quot;
+    keywords = &quot;blog&quot;
+
+    customCSS = [&quot;custom.css&quot;]
+    #customJS = [&quot;app.extra.js&quot;]
+
+    search_provider = &quot;google&quot;
+
+[params.utteranc]
+    enable = true
+    repo = &quot;stormwy/blog-comments&quot;
+    issueTerm = &quot;pathname&quot;
+    theme = &quot;github-light&quot;
+
+[[params.links]]
+
+
+
+[[menu.main]]
+    identifier = &quot;archives&quot;
+    name = &quot;归档&quot;
+    url = &quot;/archives/&quot;
+    weight = 2
+
+[[menu.main]]
+    identifier = &quot;about&quot;
+    name = &quot;关于&quot;
+    url = &quot;/about/&quot;
+    weight = 3
+</code></pre><h2 id="发布第一篇文章">发布第一篇文章</h2>
+<pre><code>hugo new post/my-first-post.md
+</code></pre><p>其中有着 draft 选项。当 draft 为 true 的时候，默认是不会渲染的。 我们可以将 draft 改为 false，或者在渲染启动时候添加参数 hugo server -D 就会渲染。</p>
+<p>这是我的文章配置。</p>
+<pre><code>---
+title: &quot;My First Post&quot;
+date: 2020-08-06T13:00:51+08:00
+tags : [
+&quot;hugo&quot;,
+]
+categories : [
+&quot;hugo&quot;,
+]
+keywords : [
+&quot;hugo&quot;,
+]
+---
+This is the first post
+</code></pre><h2 id="执行命令">执行命令</h2>
+<pre><code>&gt;&gt;&gt; hugo server
+
+                   | EN  
+-------------------+-----
+  Pages            | 11  
+  Paginator pages  |  0  
+  Non-page files   |  0  
+  Static files     |  5  
+  Processed images |  0  
+  Aliases          |  2  
+  Sitemaps         |  1  
+  Cleaned          |  0  
+
+Built in 21 ms
+Watching for changes in /Users/jianfei.ma/hugo/iwtbabc/{archetypes,content,data,layouts,static,themes}
+Watching for config changes in /Users/jianfei.ma/hugo/iwtbabc/config.toml
+Environment: &quot;development&quot;
+Serving pages from memory
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
+Press Ctrl+C to stop
+</code></pre><p>在浏览器输入 <a href="http://localhost:1313/">http://localhost:1313/</a>  即可看到具体效果。</p>
+<p>下一篇将具体讲如何把hugo博客托管到github Pages上。</p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/hugo/hugo-github/">把hugo博客托管到github上</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/hugo'>hugo</a></li>
+                
+            </ul>
+            
         </div>
     </article>
     
-
     
 
-
-
-
-
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "stormwy/blog-comments"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
 </div>
 
                     <footer id="footer">
@@ -131,6 +268,16 @@
 </footer>
 
 
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>

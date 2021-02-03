@@ -7,21 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>leetcode | Leftpocket的个人博客</title>
-    <meta property="og:title" content="leetcode - Leftpocket的个人博客">
+    <title>Redis Zset的精度问题分析及解决方案 | Leftpocket的个人博客</title>
+    <meta property="og:title" content="Redis Zset的精度问题分析及解决方案 - Leftpocket的个人博客">
     <meta property="og:type" content="article">
         
+    <meta property="article:published_time" content='2020-12-04T13:00:51&#43;08:00'>
         
-    <meta name="Keywords" content="blog">
-    <meta name="description" content="leetcode">
+        
+    <meta property="article:modified_time" content='2020-12-04T13:00:51&#43;08:00'>
+        
+    <meta name="Keywords" content="[Redis ZSet]">
+    <meta name="description" content="Redis Zset的精度问题分析及解决方案">
         
     <meta name="author" content="leftpocket">
-    <meta property="og:url" content="https://left-pocket.github.io/categories/leetcode/">
+    <meta property="og:url" content="https://left-pocket.github.io/post/redis/redis-zset-score/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
-    <link rel="alternate" type="application/rss+xml+xml" href="https://left-pocket.github.io/categories/leetcode/index.xml" title="Leftpocket的个人博客" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -49,7 +52,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="https://left-pocket.github.io/">首页</a>
+                    <a class="current" href="https://left-pocket.github.io/">首页</a>
                     
                     <a  href="https://left-pocket.github.io/archives/" title="归档">归档</a>
                     
@@ -69,46 +72,121 @@
                     
 <div class="res-cons">
     
-    <h3 class="archive-title">
-        分类
-        <span class="keyword">leetcode</span>
-        中的文章
-    </h3>
-    
-
-    
     <article class="post">
         <header>
-            <h1 class="post-title">
-                <a href="https://left-pocket.github.io/post/vscode-leetcode/">vscode配置leetcode插件</a>
-            </h1>
+            <h1 class="post-title">Redis Zset的精度问题分析及解决方案</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年12月12日
+            2020年12月4日
         </date>
         
-        <div class="post-meta meta-category">
-            |
+        <div class="post-meta">
+            <span>|</span>
             
-            <a href='/categories/vscode'>vscode</a>
-            
-            <a href='/categories/leetcode'>leetcode</a>
+            <span class="meta-category"><a href='/categories/redis'>Redis</a></span>
             
         </div>
         
+        
+        
         <div class="post-content">
-            作为一名合格的程序猿，大家找工作的时候经常需要刷leetcode, leetcode官网上面写代码没有IDE上面写代码那么方便，更重要的是，可……
-            <p class="readmore"><a href="https://left-pocket.github.io/post/vscode-leetcode/">阅读全文</a></p>
+            <h3 id="背景">背景</h3>
+<p>最近使用Redis的SortedSet，使用int64作为score时遇到了一些预料之外的情况，在此总结一下。</p>
+<h2 id="介绍">介绍</h2>
+<p>项目中采用Redis SortedSet存储用户一些信息，score值存储的msgid（消息ID）。msgid采用snowflake算法生成，按照时间有序。</p>
+<p>Snowflake的算法在我之前的博客里面有讲解：
+<a href="http://leftpocket.tk/post/snowflake/" title="Snowflake算法">Snowflake算法</a></p>
+<p>我们这边生成的msgid是根据snowflake算法生成的int64位整数。例如：215857550229364734</p>
+<p>我们发现数值很接近的msgid，在redis中无法通过score进行区分。</p>
+<p>举个列子，在redis中tzset结构里存入如下几条数据。</p>
+<pre><code>ZADD tzset 215857550229364734 test1
+ZADD tzset 215857550229364735 test2
+ZADD tzset 215857550229364736 test3
+ZADD tzset 215857550229364737 test4
+ZADD tzset 215857550229375123 test5
+</code></pre><p>查询看一下结果</p>
+<pre><code>127.0.0.1:6379&gt; zrange tzset 0 -1 WITHSCORES
+ 1) &quot;test1&quot;
+ 2) &quot;2.1585755022936474e+17&quot;
+ 3) &quot;test2&quot;
+ 4) &quot;2.1585755022936474e+17&quot;
+ 5) &quot;test3&quot;
+ 6) &quot;2.1585755022936474e+17&quot;
+ 7) &quot;test4&quot;
+ 8) &quot;2.1585755022936474e+17&quot;
+ 9) &quot;test5&quot;
+10) &quot;2.1585755022937514e+17&quot;
+</code></pre><p>我们发现score值采用科学计数法表示，test1,test2,test3,test4几个元素的score值显示是一样的。</p>
+<p>使用score=215857550229364735 执行查询，结果如下:</p>
+<pre><code>127.0.0.1:6379&gt; zrangebyscore tzset 215857550229364735 215857550229364735
+1) &quot;test1&quot;
+2) &quot;test2&quot;
+3) &quot;test3&quot;
+4) &quot;test4&quot;
+</code></pre><pre><code>127.0.0.1:6379&gt; zrangebyscore tzset (215857550229364735 215857550229375123
+1) &quot;test5&quot;
+</code></pre><h1 id="问题描述">问题描述</h1>
+<p>这导致了我们使用socre做分页查找的时候，（一页10个，下一页使用上一页最后一个socre来继续查找）。会导致其中的一些数据丢失。
+这些都是因为SortedSet的类型是double64的浮点数，存在精度问题。</p>
+<p>贴上Redis官方文档ZADD指令的描述里面的一段话。
+<a href="https://redis.io/commands/zadd" title="Redis ZAdd">Redis ZAdd</a></p>
+<pre><code>Range of integer scores that can be expressed precisely
+Redis sorted sets use a double 64-bit floating point number to represent the score. In all the architectures we support, this is represented as an IEEE 754 floating point number, that is able to represent precisely integer numbers between -(2^53) and +(2^53) included. In more practical terms, all the integers between -9007199254740992 and 9007199254740992 are perfectly representable. Larger integers, or fractions, are internally represented in exponential form, so it is possible that you get only an approximation of the decimal number, or of the very big integer, that you set as score.
+</code></pre><p>简单来说，double64位的浮点数只有53bit的精度。所以使用int64的大整数是需要注意，这个大整数的值不能大于这个最大值。
+对于snowflake算法，之前的文章中有讲过。它是使用41+10+12=63位的大整数。在此场景下是有精度问题的。</p>
+<h1 id="解决方案">解决方案</h1>
+<p>可以改造一下score的生成规则，比如我就修改了各个部分的长度。</p>
+<ol>
+<li>修改timestamp的精度，由millionseconds改为seconds.</li>
+<li>修改node的长度，由10位改为9位。（1024-&gt;512).</li>
+</ol>
+<p>这样总长度就变为 32+9+12=53位。
+当然也可以根据需求随机组合。比如把timestamp改为10millionseconds级别，或者100millionseconds级别。然后把step的精度变小一点。</p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/db-tidb-write-conflict/">TiDB Write Conflict问题分析</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/db'>db</a></li>
+                
+                <li><a href='/tags/redis'>Redis</a></li>
+                
+            </ul>
+            
         </div>
     </article>
     
-
     
 
-
-
-
-
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "stormwy/blog-comments"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
 </div>
 
                     <footer id="footer">
@@ -131,6 +209,16 @@
 </footer>
 
 
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>

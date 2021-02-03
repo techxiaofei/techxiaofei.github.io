@@ -18,10 +18,10 @@
     
     <item>
       <title>分布式ID生成方案</title>
-      <link>https://left-pocket.github.io/post/uid-generator/</link>
+      <link>https://left-pocket.github.io/post/system_design/uid-generator/</link>
       <pubDate>Sat, 21 Nov 2020 00:07:57 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/post/uid-generator/</guid>
+      <guid>https://left-pocket.github.io/post/system_design/uid-generator/</guid>
       <description>背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一。那一般生成ID都有哪些解决方案呢？特别是在复杂的分布式系统业务场景</description>
     </item>
     

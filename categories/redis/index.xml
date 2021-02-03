@@ -9,10 +9,10 @@
     <lastBuildDate>Fri, 04 Dec 2020 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/redis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Redis Zset的精度问题分析及解决方案</title>
-      <link>https://left-pocket.github.io/post/redis-zset-score/</link>
+      <link>https://left-pocket.github.io/post/redis/redis-zset-score/</link>
       <pubDate>Fri, 04 Dec 2020 13:00:51 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/post/redis-zset-score/</guid>
+      <guid>https://left-pocket.github.io/post/redis/redis-zset-score/</guid>
       <description>背景 最近使用Redis的SortedSet，使用int64作为score时遇到了一些预料之外的情况，在此总结一下。 介绍 项目中采用Redis S</description>
     </item>
     

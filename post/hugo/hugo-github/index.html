@@ -7,21 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>leetcode | Leftpocket的个人博客</title>
-    <meta property="og:title" content="leetcode - Leftpocket的个人博客">
+    <title>把hugo博客托管到github上 | Leftpocket的个人博客</title>
+    <meta property="og:title" content="把hugo博客托管到github上 - Leftpocket的个人博客">
     <meta property="og:type" content="article">
         
+    <meta property="article:published_time" content='2020-08-06T13:00:51&#43;08:00'>
         
-    <meta name="Keywords" content="blog">
-    <meta name="description" content="leetcode">
+        
+    <meta property="article:modified_time" content='2020-08-06T13:00:51&#43;08:00'>
+        
+    <meta name="Keywords" content="[hugo]">
+    <meta name="description" content="把hugo博客托管到github上">
         
     <meta name="author" content="leftpocket">
-    <meta property="og:url" content="https://left-pocket.github.io/categories/leetcode/">
+    <meta property="og:url" content="https://left-pocket.github.io/post/hugo/hugo-github/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
-    <link rel="alternate" type="application/rss+xml+xml" href="https://left-pocket.github.io/categories/leetcode/index.xml" title="Leftpocket的个人博客" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -49,7 +52,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="https://left-pocket.github.io/">首页</a>
+                    <a class="current" href="https://left-pocket.github.io/">首页</a>
                     
                     <a  href="https://left-pocket.github.io/archives/" title="归档">归档</a>
                     
@@ -69,46 +72,134 @@
                     
 <div class="res-cons">
     
-    <h3 class="archive-title">
-        分类
-        <span class="keyword">leetcode</span>
-        中的文章
-    </h3>
-    
-
-    
     <article class="post">
         <header>
-            <h1 class="post-title">
-                <a href="https://left-pocket.github.io/post/vscode-leetcode/">vscode配置leetcode插件</a>
-            </h1>
+            <h1 class="post-title">把hugo博客托管到github上</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年12月12日
+            2020年8月6日
         </date>
         
-        <div class="post-meta meta-category">
-            |
+        <div class="post-meta">
+            <span>|</span>
             
-            <a href='/categories/vscode'>vscode</a>
-            
-            <a href='/categories/leetcode'>leetcode</a>
+            <span class="meta-category"><a href='/categories/hugo'>hugo</a></span>
             
         </div>
         
+        
+        
         <div class="post-content">
-            作为一名合格的程序猿，大家找工作的时候经常需要刷leetcode, leetcode官网上面写代码没有IDE上面写代码那么方便，更重要的是，可……
-            <p class="readmore"><a href="https://left-pocket.github.io/post/vscode-leetcode/">阅读全文</a></p>
+            <p>上一篇介绍了怎么在本机搭建hugo博客，这一篇将主要介绍怎么把hugo静态博客托管到github上。</p>
+<h2 id="创建github-pages">创建Github Pages</h2>
+<p>假设你需要部署在 GitHub Pages 上，首先在GitHub上创建一个Repository，命名为：{your_user_name}.github.io. 比如我的Repo就叫 <strong>iwtbabc.github.io</strong></p>
+<p>Repo的权限需要选择Public, 否则无法访问。</p>
+<p>然后在你的Repo里面点击Settings, 下拉，找到Github Pages。</p>
+<p>
+        <img class="mx-auto" alt="Settings" src="/img/hugo/github-settings.png" />   
+    
+
+        <img class="mx-auto" alt="Github Pages" src="/img/hugo/github-pages.png" />   
+    </p>
+<p>点击<strong>Change Theme</strong> 选择一款主题，保存。</p>
+<p>过几分钟之后，通过访问
+<a href="https://iwtbabc.github.io/">https://iwtbabc.github.io/</a> 能正常打开，说明github Page设置正常。</p>
+<h2 id="初始化hugo博客">初始化hugo博客</h2>
+<p>这个在上一篇文章里面有讲解：如果有疑问可以回顾上一篇文章。
+<a href="http://leftpocket.tk/post/hugo-creation/">使用hugo搭建个人博客</a></p>
+<h2 id="发布hugo到github">发布hugo到github</h2>
+<p>在hugo根目录中执行 <strong>hugo</strong> 指令。会生成一个public文件夹，我们只需要把public的文件夹上传到github, 一分钟左右，就能正常查看博客内容。</p>
+<p><strong>这里解释一下</strong></p>
+<ul>
+<li>hugo站点：这个是原始内容，可以不用提交到github，也可以选择在github上创建一个新的repo，并提交。</li>
+<li>hugo站点内的public目录(软链接)：这个是使用<strong>hugo</strong>指令生成的发布内容，需要发不到Github Pages上。</li>
+</ul>
+<p>有两种方式发布到github.</p>
+<h3 id="方法1">方法1</h3>
+<p>进入到public目录。</p>
+<pre><code>git init
+git add *
+git commit -m &quot;comments&quot;
+git remote add origin https://github.com/iwtbabc/iwtbabc.github.io.git
+git pull origin master
+git push -u origin master
+</code></pre><p>就可以上传到github.</p>
+<p><strong>Notes</strong>
+使用 <strong>git pull origin master</strong> 的时候可能会遇到</p>
+<pre><code>fatal: refusing to merge unrelated histories
+</code></pre><p>的错误，所以需要在此命令后加上 <strong>&ndash;allow-unrelated-histories</strong> 的参数。</p>
+<p>以后每次博客有修改，使用hugo命令发布到public文件夹，然后push到github即可。</p>
+<p>使用这种方式的话
+如果想把整个hugo的工程也托管到github，可以在根目录使用同样git指令。由于public目录是public子目录。个人建议创建一个软链接。注意需要使用绝对路径。这样两个github repo就没有上下级关系了。方便分别上传。</p>
+<ol>
+<li>在hugo站点外某个目录创建一个left-pocket-public目录。</li>
+<li>在hugo站点内建立一个public的软链接到站点外。
+ln -s 站点外的实际目录 站点内命名为public的软链接</li>
+</ol>
+<pre><code>ln -s /Users/hugo/left-pocket-public /Users/hugo/iwtbabc/public
+</code></pre><p>这样就可以分别在外层目录和hugo站点目录执行上述git指令，提交到不同的Repo.(hugo站点需要额外创建一个Repo，方法2有讲)。</p>
+<h3 id="方法2">方法2</h3>
+<p>这种方式更简单一点.
+在任意hugo站点外，直接用git clone把创建好的github pages Repo克隆下来。</p>
+<pre><code>git clone git@github.com:left-pocket/left-pocket.github.io.git
+</code></pre><p>然后创建把这个git Repo目录和public创建软链接：</p>
+<pre><code>ln -s /Users/hugo/left-pocket.github.io /Users/hugo/left-pocket/public
+</code></pre><p>然后在hugo站点使用<strong>hugo</strong>指令，就会自动在git仓库生成内容。
+最终执行git add/commit/push之后，打开
+<a href="https://left-pocket.github.io/">https://left-pocket.github.io/</a>
+就能看到博客内容。</p>
+<p>使用这种方法，如果也想把整个hugo站点发布到github，可以使用<em><strong>方法1</strong></em>.
+我这里直接在github上创建了一个Repo叫hugo。</p>
+<pre><code>git init
+git add *
+git commit -m &quot;comments&quot;
+git branch -M main
+git remote add origin https://github.com/iwtbabc/iwtbabc.github.io.git
+git pull origin main
+git push -u origin main
+</code></pre>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/hugo/hugo-creation/">使用hugo搭建个人博客</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/hugo'>hugo</a></li>
+                
+            </ul>
+            
         </div>
     </article>
     
-
     
 
-
-
-
-
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "stormwy/blog-comments"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
 </div>
 
                     <footer id="footer">
@@ -131,6 +222,16 @@
 </footer>
 
 
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
