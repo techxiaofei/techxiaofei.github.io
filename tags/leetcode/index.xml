@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>leetcode on I want to be a better coder(iwtbabc)</title>
+    <link>http://iwtbabc.github.io/tags/leetcode/</link>
+    <description>Recent content in leetcode on I want to be a better coder(iwtbabc)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 12 Dec 2020 13:00:51 +0800</lastBuildDate><atom:link href="http://iwtbabc.github.io/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>vscode配置leetcode插件</title>
+      <link>http://iwtbabc.github.io/post/vscode-leetcode/</link>
+      <pubDate>Sat, 12 Dec 2020 13:00:51 +0800</pubDate>
+      
+      <guid>http://iwtbabc.github.io/post/vscode-leetcode/</guid>
+      <description>作为一名合格的程序猿，大家找工作的时候经常需要刷leetcode, leetcode官网上面写代码没有IDE上面写代码那么方便，更重要的是，可</description>
+    </item>
+    
+  </channel>
+</rss>
