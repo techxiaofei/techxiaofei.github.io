@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>布隆过滤器(Bloom Filter)详解 | Leftpocket的个人博客</title>
+    <meta property="og:title" content="布隆过滤器(Bloom Filter)详解 - Leftpocket的个人博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-02-03T13:00:51&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-02-03T13:00:51&#43;08:00'>
+        
+    <meta name="Keywords" content="[Bloom Filter Redis 布隆过滤器]">
+    <meta name="description" content="布隆过滤器(Bloom Filter)详解">
+        
+    <meta name="author" content="leftpocket">
+    <meta property="og:url" content="https://left-pocket.github.io/post/algorithm/bloom_filter/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/custom.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://left-pocket.github.io/">
+                        Leftpocket的个人博客
+                    </a>
+                
+                <p class="description">个人博客</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://left-pocket.github.io/">首页</a>
+                    
+                    <a  href="https://left-pocket.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://left-pocket.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">布隆过滤器(Bloom Filter)详解</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年2月3日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%AE%97%E6%B3%95'>算法</a></span>
+            
+        </div>
+        
+        
+        
+        <div class="post-content">
+            <h1 id="布隆过滤器是什么">布隆过滤器是什么</h1>
+<p>本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入和查询，可以用来告诉你 “某样东西一定不存在或者可能存在”。</p>
+<p>相比于传统的 List、Set、Map 等数据结构，它更高效、占用空间更少，但是缺点是其返回的结果是概率性的，而不是确切的。
+可以一句话总结：如果Bloom Filter告诉你某个数据不存在，那么它一定不存在。（确定）
+如果Bloom Filter告诉你某个数据存在，那么它不一定存在。（不确定）</p>
+<p>然后你可能要问了，他都不一定存在了，那它有什么用。
+它虽然不保证100%存在，但是这个<strong>误判率</strong>却是可以控制的，一般根据场景你可以设置一个可以接受的错误率，比如 0.0001(万分之一)，0.00001(十万分之一)。在很多场景下，这个概率是可以接受的。在这些场景下，它就有用武之地了。
+而它的优点非常明显，就是极少的空间占用，一般比正常存所有数据可以节省90%左右的内存。
+如果有人对具体的<strong>误判率</strong>怎么用数学公式推算出来的算法感兴趣。下面的<strong>详解</strong>部分会给出推导的链接，我这里就不推导了。</p>
+<h1 id="问题">问题</h1>
+<p><strong>大概描述了一下什么是布隆过滤器，我根据实际场景来让大家了解一下在什么场景下需要布隆过滤器，它又解决了什么问题。</strong></p>
+<p>我们有一个需求，是判断任意的两个userid有没有聊过天。即(useridA, useridB)是否聊过天，来决定前端场景是否展示对方的username。
+我们最初的设计是放在Redis里面，存放的格式是：</p>
+<pre><code>Redis String
+Key: {prefix}{useridA},{useridB}
+Value: &quot;1&quot;
+</code></pre><p>我们的Userid是int32的递增值，现在已经有10位整数。（eg: 1212341234）。所以这个key至少有22bytes.
+但是最终统计出来，我们的userid聊天的unique pair (useridA, useridB) 有4 Billion(40亿)的数据。
+也就是我们至少需要存40亿的数据到Redis。
+网上可以找到Redis内存计算器，输入数据量，key的长度，value的长度。算出来大概需要400G的内存。
+这个内存不只是简单的[len(Key)+len(Value)] * count 这么简单。因为Redis的数据结构、指针等都需要占用内存。具体实际占用内存要达到 数据所占内存的2.5～4倍。有兴趣的同学可以自己往Redis里面插入1百万的数据进行测试。就会有一个大概的印象。</p>
+<p>这个内存占用非常夸张，因为以后还会有更多的userid参与聊天，需要的内存更多，考虑到内存的安全线至少在50%以下。我们至少需要申请1TB的内存。而且以后很可能很快就需要扩容。
+所以我们就需要考虑到有没有既节省内存，就能快速判断的方式。</p>
+<p>布隆过滤器(Bloom Filter)荣耀登场。</p>
+<h1 id="详解">详解</h1>
+<h2 id="图解理论">图解理论</h2>
+<p>布隆过滤器实际上是一个很长的二进制向量和一系列随机映射函数，二进制大家应该都清楚，存储的数据不是0就是1，默认是0。</p>
+<p>主要用于判断一个元素是否在一个集合中，0代表不存在某个数据，1代表存在某个数据。</p>
+<p>举个例子（图）：
+我们有一系列的数据，<strong>list</strong>=(1, 2, 3, 1025, 1028)
+有一个1024长度的Bit数组。
+对我们的数据映射到1024长度的Bit数组上。使用最简单的hash函数 mod1024(list)=(1,2,3,1,4)
+这样可以用极少的内存判断某个值是否存在。
+但是大家会发现一个问题 mod1024(1) = mod1024(1025) = 1, 这就会导致误判。这个误判率跟你的数据的总长度和Bit数组的长度相关。</p>
+<p>于是布隆过滤器就优化了它的实现。使用多个hash函数(k个)。多个哈希函数会把数据映射到不同的Bit数组的位上。
+这样判断的时候需要判断k个位都为1，则此数据存在，否则不存在。
+这种算法同样有一定的误判率。但是会大大降低误判率。</p>
+<p><strong>我们首先定义以下布隆过滤器的相关变量。</strong></p>
+<ul>
+<li>n: 总的数据量的数量大小。</li>
+<li>p: 误判率的大小 (0.01 means 1%)</li>
+<li>k: hash函数的数量</li>
+<li>m: 需要的Bit数组的Bits空间量。</li>
+</ul>
+<p>有数学公式可以推导出来。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">EstimateParameters</span>(<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">uint</span>, <span style="color:#a6e22e">p</span> <span style="color:#66d9ef">float64</span>) (<span style="color:#66d9ef">int64</span>, <span style="color:#66d9ef">int64</span>) {
+	<span style="color:#a6e22e">m</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Ceil</span>(float64(<span style="color:#a6e22e">n</span>) <span style="color:#f92672">*</span> <span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Log</span>(<span style="color:#a6e22e">p</span>) <span style="color:#f92672">/</span> <span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Log</span>(<span style="color:#ae81ff">1.0</span><span style="color:#f92672">/</span><span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Pow</span>(<span style="color:#ae81ff">2.0</span>, <span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Ln2</span>)))
+	<span style="color:#a6e22e">k</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Ln2</span><span style="color:#f92672">*</span><span style="color:#a6e22e">m</span><span style="color:#f92672">/</span>float64(<span style="color:#a6e22e">n</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.5</span>
+
+	<span style="color:#66d9ef">return</span> int64(<span style="color:#a6e22e">m</span>), int64(<span style="color:#a6e22e">k</span>)
+}
+</code></pre></div><p>由以上的算法可以看出，当我们给定总的数据量大小n，以及期待的误判率p。
+可以得到hash函数的数量k, 以及总空间的大小m。(推荐值)
+当然有兴趣的也可以自己推导数学公式。
+<a href="https://www.jianshu.com/p/28dd26aaf2ee">公式推导</a>。</p>
+<p>也可以修改hash函数的数量k，总空间的大小m也会跟着改变。
+在n和p固定的情况下，k的数量越多，需要的m就会越少。
+自己可以尝试下修改任意一个变量，(n,p,k), 看看其他几个值的变化规律。</p>
+<p><a href="https://hur.st/bloomfilter/">布隆过滤器计算器</a></p>
+<h2 id="redis内实现">Redis内实现</h2>
+<p>Redis在4.0版本推出了 module 的形式，可以将 module 作为插件额外实现Redis的一些功能。官网推荐了一个 <a href="https://github.com/RedisBloom/RedisBloom">RedisBloom</a> 作为 Redis 布隆过滤器的 Module。
+它主要使用的命令包含两个命令:</p>
+<ol>
+<li>bff.add key value  //添加某个value</li>
+<li>bff.exists key value  //判断某个value是否存在。</li>
+</ol>
+<h3 id="redisbloom-安装">RedisBloom 安装</h3>
+<p>Redis不是默认就有，需要安装module才可以使用其命令。
+未安装之前提示：</p>
+<pre><code>127.0.0.1:6379&gt; bf.add bloom_key bloom_value
+(error) ERR unknown command `bf.add`, with args beginning with: `bloom_key`, `bloom_value`,
+</code></pre><p>可以使用docker安装，也可以使用源码安装：
+这里只展示一下docker安装并测试简单指令，有需要源码安装的可以网上查看教程。</p>
+<ol>
+<li>拉镜像</li>
+<li>docker运行redisbloom</li>
+<li>进入docker</li>
+<li>执行redis-cli</li>
+</ol>
+<pre><code>docker pull redislabs/rebloom:latest
+docker run -p 6379:6379 --name redis-redisbloom redislabs/rebloom:latest
+docker exec -it redis-redisbloom bash
+# redis-cli
+127.0.0.1:6379&gt; bf.add bloom_key bloom_value
+(integer) 1
+127.0.0.1:6379&gt; bf.exists bloom_key bloom_value
+(integer) 1
+127.0.0.1:6379&gt; bf.exists bloom_key bloom_other
+(integer) 0
+</code></pre><p>Redis的Bloom Filter内部使用Redis的Bitmap来实现。
+Bitmap基于最小的单位bit进行存储，所以非常省空间。
+redis中bit映射被限制在512MB之内。
+有兴趣可以看一下Redis的官方文档。<a href="https://redislabs.com/redis-best-practices/bloom-filter-pattern/">Redis BloomFilter</a></p>
+<h2 id="go语言bloom-filter实现">go语言Bloom Filter实现</h2>
+<p>由于Redis的Bloom Filter并非Redis原生自带的功能，需要安装module才能使用，很多时候生产环境使用的云服务并不一定完美支持，所以一般开发过程中都是自己实现Bloom Filter并储存储存介质中。(比如：使用Redis的setbit/getbit储存在Bitmap中)。
+我们项目使用Golang，所以我自己实现了一个Golang的Bloom Filter并储存在Redis中，也可以选择储存在其他介质中，只需要实现<strong>BitmapProvider</strong> interface就可以。Bloom Filter和具体储存完全解耦。
+源代码如下：<a href="https://github.com/">Go-bloom</a></p>
+<p><em>README.md</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">client</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">redis</span>.<span style="color:#a6e22e">Client</span>
+<span style="color:#a6e22e">client</span> = <span style="color:#a6e22e">redis</span>.<span style="color:#a6e22e">NewClient</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">redis</span>.<span style="color:#a6e22e">Options</span>{
+    <span style="color:#a6e22e">Addr</span>:     <span style="color:#e6db74">&#34;127.0.0.1:6379&#34;</span>,
+    <span style="color:#a6e22e">Password</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+    <span style="color:#a6e22e">DB</span>:       <span style="color:#ae81ff">0</span>,
+    <span style="color:#a6e22e">PoolSize</span>: <span style="color:#ae81ff">256</span>,
+})
+<span style="color:#75715e">//use the estimate m and k.
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">m</span>, <span style="color:#a6e22e">k</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">bloom</span>.<span style="color:#a6e22e">EstimateParameters</span>(<span style="color:#ae81ff">100000</span>, <span style="color:#ae81ff">0.001</span>)
+<span style="color:#75715e">//new a Bloom Filter
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">bitSet</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">bloom</span>.<span style="color:#a6e22e">NewRedisBitSet</span>(<span style="color:#e6db74">&#34;test_key&#34;</span>, <span style="color:#a6e22e">m</span>, <span style="color:#a6e22e">client</span>)
+<span style="color:#a6e22e">b</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">bloom</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">m</span>, <span style="color:#a6e22e">k</span>, <span style="color:#a6e22e">bitSet</span>)
+
+<span style="color:#75715e">//check exist
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">data</span> <span style="color:#f92672">:=</span> []byte(<span style="color:#e6db74">&#34;some key&#34;</span>)
+<span style="color:#a6e22e">exists</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">Exists</span>(<span style="color:#a6e22e">data</span>)
+<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">Add</span>(<span style="color:#a6e22e">data</span>)
+<span style="color:#a6e22e">exists</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">Exists</span>(<span style="color:#a6e22e">data</span>)
+</code></pre></div><h2 id="缺点">缺点</h2>
+<p>Bloom Filter说了那么多优点，到底有什么限制呢，毕竟如果它全是优点，没有缺点，那么全量数据储存还有什么意义呢。</p>
+<ol>
+<li>不支持删除
+因为布隆过滤器是通过多个哈希函数把数据映射到多个bit中，那么不同的value可能映射到其中相同的bit中，所以如果删除某一个value，会影响所有其他映射到同样的bit中的value。</li>
+<li>误判率
+由于是hash映射，所以多个value可能映射到同样的bit位中，可以通过增大hash的数量来减少误判率，但是无法完全避免。</li>
+</ol>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/redis/redis-zset-score/">Redis Zset的精度问题分析及解决方案</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/%E7%AE%97%E6%B3%95'>算法</a></li>
+                
+                <li><a href='/tags/redis'>Redis</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "stormwy/blog-comments"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://left-pocket.github.io/">Leftpocket的个人博客 By leftpocket</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='//www.google.com/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://left-pocket.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/algorithm/bloom_filter/" title="布隆过滤器(Bloom Filter)详解">布隆过滤器(Bloom Filter)详解</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/system_design/friends_status/" title="朋友圈技术设计与实现">朋友圈技术设计与实现</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/system_design/friends_comment_like/" title="点赞和评论 技术设计与实现">点赞和评论 技术设计与实现</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/vscode-leetcode/" title="vscode配置leetcode插件">vscode配置leetcode插件</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/redis/redis-zset-score/" title="Redis Zset的精度问题分析及解决方案">Redis Zset的精度问题分析及解决方案</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/snowflake/" title="snowflake算法及最佳实践">snowflake算法及最佳实践</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/system_design/uid-generator/" title="分布式ID生成方案">分布式ID生成方案</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/ssr-centos7/" title="Centos7安装SSR教程">Centos7安装SSR教程</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/db-tidb-write-conflict/" title="TiDB Write Conflict问题分析">TiDB Write Conflict问题分析</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/hugo/hugo-creation/" title="使用hugo搭建个人博客">使用hugo搭建个人博客</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://left-pocket.github.io/categories/db/">db (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/hugo/">hugo (2)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/leetcode/">leetcode (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/redis/">Redis (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/server/">server (2)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/vscode/">vscode (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E6%9D%82%E4%B9%B1/">杂乱 (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E7%AE%97%E6%B3%95/">算法 (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计 (2)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://left-pocket.github.io/tags/db/">db</a>
+    
+    <a href="https://left-pocket.github.io/tags/hugo/">hugo</a>
+    
+    <a href="https://left-pocket.github.io/tags/leetcode/">leetcode</a>
+    
+    <a href="https://left-pocket.github.io/tags/redis/">Redis</a>
+    
+    <a href="https://left-pocket.github.io/tags/snowflake/">snowflake</a>
+    
+    <a href="https://left-pocket.github.io/tags/ssr/">ssr</a>
+    
+    <a href="https://left-pocket.github.io/tags/tidb/">TiDB</a>
+    
+    <a href="https://left-pocket.github.io/tags/vscode/">vscode</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E7%AE%97%E6%B3%95/">算法</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="" title=""></a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://left-pocket.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

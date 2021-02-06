@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>算法 on Leftpocket的个人博客</title>
+    <link>https://left-pocket.github.io/categories/%E7%AE%97%E6%B3%95/</link>
+    <description>Recent content in 算法 on Leftpocket的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 03 Feb 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>布隆过滤器(Bloom Filter)详解</title>
+      <link>https://left-pocket.github.io/post/algorithm/bloom_filter/</link>
+      <pubDate>Wed, 03 Feb 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/algorithm/bloom_filter/</guid>
+      <description>布隆过滤器是什么 本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入</description>
+    </item>
+    
+  </channel>
+</rss>
