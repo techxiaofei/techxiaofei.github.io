@@ -6,7 +6,16 @@
     <description>Recent content in Redis on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 03 Feb 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 17 Feb 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis SDS简单动态字符串</title>
+      <link>https://left-pocket.github.io/post/redis/redis_sds/</link>
+      <pubDate>Wed, 17 Feb 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/redis/redis_sds/</guid>
+      <description>SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串表示， 几乎所有的 Redis 模块中都用了 sds。 本章将对 SDS 的实现、性能和功能等方</description>
+    </item>
+    
     <item>
       <title>布隆过滤器(Bloom Filter)详解</title>
       <link>https://left-pocket.github.io/post/algorithm/bloom_filter/</link>
