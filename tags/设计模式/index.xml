@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>设计模式 on Leftpocket的个人博客</title>
+    <link>https://left-pocket.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
+    <description>Recent content in 设计模式 on Leftpocket的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 01 Jan 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>博客分类</title>
+      <link>https://left-pocket.github.io/post/catalog/golang_design_patterns/</link>
+      <pubDate>Fri, 01 Jan 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/catalog/golang_design_patterns/</guid>
+      <description>Golang 设计模式篇 Functional Options 函数式选项模式 [Decorator 装饰器模式]https://github.com） 系统设计篇 #</description>
+    </item>
+    
+  </channel>
+</rss>

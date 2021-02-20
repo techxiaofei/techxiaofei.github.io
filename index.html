@@ -71,6 +71,98 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://left-pocket.github.io/post/catalog/golang_design_patterns/" title="博客分类">博客分类</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月1日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            Golang 设计模式篇 Functional Options 函数式选项模式 [Decorator 装饰器模式]https://github.com） 系统设计篇 #……
+        </div>
+        <p class="readmore"><a href="https://left-pocket.github.io/post/catalog/golang_design_patterns/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://left-pocket.github.io/post/catalog/interview_tech_stack/" title="服务端面试技术栈">服务端面试技术栈</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月1日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E9%9D%A2%E8%AF%95'>面试</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            网络编程篇 数据结构与算法篇 Redis篇 MySQL篇 Golang篇 设计模式篇 Kafka篇 C/C++篇 系统设计篇 Linux技术篇……
+        </div>
+        <p class="readmore"><a href="https://left-pocket.github.io/post/catalog/interview_tech_stack/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://left-pocket.github.io/post/golang/functional_options/" title="Golang函数式选项(Functional Options)编程模式">Golang函数式选项(Functional Options)编程模式</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年2月18日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概览 最近阅读源码的时候看到一段不错的代码，但是当时却不是非常理解为什么这么写。 我们先来看一下源代码： type Server struct { Addr string Port int Protocol string Timeout time.Duration MaxConns int } type Option func(*Server) func Protocol(p……
+        </div>
+        <p class="readmore"><a href="https://left-pocket.github.io/post/golang/functional_options/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://left-pocket.github.io/post/golang/decorator/" title="Golang装饰器(Decorator)设计模式">Golang装饰器(Decorator)设计模式</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年2月18日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            今天我们来介绍decorator这个经典的设计模式。 定义：装饰器模式主要对现有的类对象进行包裹和封装，以期望在不改变类对象及其类定义的情况下……
+        </div>
+        <p class="readmore"><a href="https://left-pocket.github.io/post/golang/decorator/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://left-pocket.github.io/post/redis/redis_sds/" title="Redis SDS简单动态字符串">Redis SDS简单动态字符串</a>
             </h1>
         </header>
@@ -208,98 +300,6 @@
         <p class="readmore"><a href="https://left-pocket.github.io/post/redis/redis-zset-score/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://left-pocket.github.io/post/snowflake/" title="snowflake算法及最佳实践">snowflake算法及最佳实践</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月24日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/server'>server</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            背景 这篇文章来讲解snowflake是什么，以及它实际应用的最佳实践方案。 snowflake算法 什么是 Snowflake Twitter的snowflake分……
-        </div>
-        <p class="readmore"><a href="https://left-pocket.github.io/post/snowflake/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://left-pocket.github.io/post/system_design/uid-generator/" title="分布式ID生成方案">分布式ID生成方案</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月21日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/server'>server</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一。那一般生成ID都有哪些解决方案呢？特别是在复杂的分布式系统业务场景……
-        </div>
-        <p class="readmore"><a href="https://left-pocket.github.io/post/system_design/uid-generator/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://left-pocket.github.io/post/ssr-centos7/" title="Centos7安装SSR教程">Centos7安装SSR教程</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月6日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%9D%82%E4%B9%B1'>杂乱</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            记录一下在centos7下安装ssr(shadowsocksr)的教程。 安装必要依赖包 yum install git -y yum install epel-release -y yum install libsodium -y yum install epel-release -y yum install libsodium -y 下载shado……
-        </div>
-        <p class="readmore"><a href="https://left-pocket.github.io/post/ssr-centos7/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://left-pocket.github.io/post/db-tidb-write-conflict/" title="TiDB Write Conflict问题分析">TiDB Write Conflict问题分析</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月6日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/db'>db</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了write conflict. [2020/08/25 06:01:44.781 +08:00] [WARN] [session.go:623] [retrying] [conn=26799778] [schemaVersion=194] [retryCnt=0] [queryNum=0] [sql=&quot;UPDATE user_tab SET `region` = ?, `status` = ?, `update_time` = ? WHERE `from_userid` = ? AND `to_userid` = ? AND `type`……
-        </div>
-        <p class="readmore"><a href="https://left-pocket.github.io/post/db-tidb-write-conflict/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -374,6 +374,22 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://left-pocket.github.io/post/catalog/golang_design_patterns/" title="博客分类">博客分类</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/catalog/interview_tech_stack/" title="服务端面试技术栈">服务端面试技术栈</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/golang/functional_options/" title="Golang函数式选项(Functional Options)编程模式">Golang函数式选项(Functional Options)编程模式</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/golang/decorator/" title="Golang装饰器(Decorator)设计模式">Golang装饰器(Decorator)设计模式</a>
+    </li>
+    
+    <li>
         <a href="https://left-pocket.github.io/post/redis/redis_sds/" title="Redis SDS简单动态字符串">Redis SDS简单动态字符串</a>
     </li>
     
@@ -397,22 +413,6 @@
         <a href="https://left-pocket.github.io/post/redis/redis-zset-score/" title="Redis Zset的精度问题分析及解决方案">Redis Zset的精度问题分析及解决方案</a>
     </li>
     
-    <li>
-        <a href="https://left-pocket.github.io/post/snowflake/" title="snowflake算法及最佳实践">snowflake算法及最佳实践</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/system_design/uid-generator/" title="分布式ID生成方案">分布式ID生成方案</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/ssr-centos7/" title="Centos7安装SSR教程">Centos7安装SSR教程</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/db-tidb-write-conflict/" title="TiDB Write Conflict问题分析">TiDB Write Conflict问题分析</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -423,6 +423,8 @@
 <ul class="widget-list">
     
     <li><a href="https://left-pocket.github.io/categories/db/">db (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/golang/">Golang (3)</a></li>
     
     <li><a href="https://left-pocket.github.io/categories/hugo/">hugo (2)</a></li>
     
@@ -440,6 +442,8 @@
     
     <li><a href="https://left-pocket.github.io/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计 (2)</a></li>
     
+    <li><a href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/">面试 (1)</a></li>
+    
 </ul>
     </section>
 
@@ -449,11 +453,15 @@
     
     <a href="https://left-pocket.github.io/tags/db/">db</a>
     
+    <a href="https://left-pocket.github.io/tags/golang/">Golang</a>
+    
     <a href="https://left-pocket.github.io/tags/hugo/">hugo</a>
     
     <a href="https://left-pocket.github.io/tags/leetcode/">leetcode</a>
     
     <a href="https://left-pocket.github.io/tags/redis/">Redis</a>
+    
+    <a href="https://left-pocket.github.io/tags/server/">Server</a>
     
     <a href="https://left-pocket.github.io/tags/snowflake/">snowflake</a>
     
@@ -466,6 +474,8 @@
     <a href="https://left-pocket.github.io/tags/%E7%AE%97%E6%B3%95/">算法</a>
     
     <a href="https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
     
 </div>
     </section>

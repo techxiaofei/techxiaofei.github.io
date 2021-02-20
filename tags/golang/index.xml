@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Golang on Leftpocket的个人博客</title>
+    <link>https://left-pocket.github.io/tags/golang/</link>
+    <description>Recent content in Golang on Leftpocket的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 18 Feb 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>博客分类</title>
+      <link>https://left-pocket.github.io/post/catalog/golang_design_patterns/</link>
+      <pubDate>Fri, 01 Jan 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/catalog/golang_design_patterns/</guid>
+      <description>Golang 设计模式篇 Functional Options 函数式选项模式 [Decorator 装饰器模式]https://github.com） 系统设计篇 #</description>
+    </item>
+    
+    <item>
+      <title>Golang函数式选项(Functional Options)编程模式</title>
+      <link>https://left-pocket.github.io/post/golang/functional_options/</link>
+      <pubDate>Thu, 18 Feb 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/golang/functional_options/</guid>
+      <description>概览 最近阅读源码的时候看到一段不错的代码，但是当时却不是非常理解为什么这么写。 我们先来看一下源代码： type Server struct { Addr string Port int Protocol string Timeout time.Duration MaxConns int } type Option func(*Server) func Protocol(p</description>
+    </item>
+    
+    <item>
+      <title>Golang装饰器(Decorator)设计模式</title>
+      <link>https://left-pocket.github.io/post/golang/decorator/</link>
+      <pubDate>Thu, 18 Feb 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/golang/decorator/</guid>
+      <description>今天我们来介绍decorator这个经典的设计模式。 定义：装饰器模式主要对现有的类对象进行包裹和封装，以期望在不改变类对象及其类定义的情况下</description>
+    </item>
+    
+  </channel>
+</rss>

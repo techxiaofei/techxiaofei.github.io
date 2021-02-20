@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Server on Leftpocket的个人博客</title>
+    <link>https://left-pocket.github.io/tags/server/</link>
+    <description>Recent content in Server on Leftpocket的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 01 Jan 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/server/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>服务端面试技术栈</title>
+      <link>https://left-pocket.github.io/post/catalog/interview_tech_stack/</link>
+      <pubDate>Fri, 01 Jan 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/catalog/interview_tech_stack/</guid>
+      <description>网络编程篇 数据结构与算法篇 Redis篇 MySQL篇 Golang篇 设计模式篇 Kafka篇 C/C++篇 系统设计篇 Linux技术篇</description>
+    </item>
+    
+  </channel>
+</rss>
