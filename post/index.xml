@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 18 Feb 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 20 Mar 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>博客分类</title>
       <link>https://left-pocket.github.io/post/catalog/golang_design_patterns/</link>
@@ -23,6 +23,15 @@
       
       <guid>https://left-pocket.github.io/post/catalog/interview_tech_stack/</guid>
       <description>网络编程篇 数据结构与算法篇 Redis篇 MySQL篇 Golang篇 设计模式篇 Kafka篇 C/C++篇 系统设计篇 Linux技术篇</description>
+    </item>
+    
+    <item>
+      <title>Golang append是并发安全的吗</title>
+      <link>https://left-pocket.github.io/post/golang/append/</link>
+      <pubDate>Sat, 20 Mar 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/golang/append/</guid>
+      <description>背景 最近开发的时候写了下面这段类似的代码。 func TestAppend() (result []int) { var wg sync.WaitGroup for i := 0; i &amp;lt; 100; i++ { v := i wg.Add(1) go func() { // other logic result = append(result, v) wg.Done() }() } wg.Wait() //fmt.Printf(&amp;#34;%v\n&amp;#34;, len(result)) return result } 就像这样，然后顺利</description>
     </item>
     
     <item>
@@ -158,6 +167,15 @@
       
       <guid>https://left-pocket.github.io/post/interview/</guid>
       <description>一 数据结构与算法 二 C++&amp;amp;C++11 三 Golang 四 Redis 五 MySQL 六 Linux 七 系统设计 秒杀系统设计</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://left-pocket.github.io/post/system_design/unique_node/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/system_design/unique_node/</guid>
+      <description></description>
     </item>
     
   </channel>
