@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MySQL on Leftpocket的个人博客</title>
+    <link>https://left-pocket.github.io/tags/mysql/</link>
+    <description>Recent content in MySQL on Leftpocket的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 05 Apr 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MySQL死锁的产生</title>
+      <link>https://left-pocket.github.io/post/mysql/dead_lock/</link>
+      <pubDate>Mon, 05 Apr 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/mysql/dead_lock/</guid>
+      <description>背景 MySQL死锁问题涉及到MySQL一系列的基础知识，比如事务，隔离级别，各种锁类型，以及各种 SQL 语句的加锁原理。很多开发人员很少会遇到死锁</description>
+    </item>
+    
+  </channel>
+</rss>

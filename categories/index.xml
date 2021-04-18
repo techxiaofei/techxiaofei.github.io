@@ -6,13 +6,22 @@
     <description>Recent content in Categories on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Mar 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 18 Apr 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Golang</title>
       <link>https://left-pocket.github.io/categories/golang/</link>
-      <pubDate>Sat, 20 Mar 2021 13:00:51 +0800</pubDate>
+      <pubDate>Sun, 18 Apr 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/categories/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MySQL</title>
+      <link>https://left-pocket.github.io/categories/mysql/</link>
+      <pubDate>Mon, 05 Apr 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/categories/mysql/</guid>
       <description></description>
     </item>
     

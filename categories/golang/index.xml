@@ -6,7 +6,7 @@
     <description>Recent content in Golang on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Mar 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/golang/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 18 Apr 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/golang/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>博客分类</title>
       <link>https://left-pocket.github.io/post/catalog/golang_design_patterns/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://left-pocket.github.io/post/catalog/golang_design_patterns/</guid>
       <description>Golang 设计模式篇 Functional Options 函数式选项模式 [Decorator 装饰器模式]https://github.com） 系统设计篇 #</description>
+    </item>
+    
+    <item>
+      <title>goroutine的实现原理</title>
+      <link>https://left-pocket.github.io/post/golang/goroutine_implementation/</link>
+      <pubDate>Sun, 18 Apr 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/golang/goroutine_implementation/</guid>
+      <description>协程基础知识 1.Goroutine是Go语言的协程（Coroutine），Groutine从语言层面上实现了并发，和线程一样共享堆，不共享栈</description>
     </item>
     
     <item>
