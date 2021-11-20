@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
 
     <title>使用hugo搭建个人博客 | Leftpocket的个人博客</title>
     <meta property="og:title" content="使用hugo搭建个人博客 - Leftpocket的个人博客">
@@ -48,7 +50,7 @@
                         Leftpocket的个人博客
                     </a>
                 
-                <p class="description">个人博客</p>
+                <p class="description">码农在新加坡</p>
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
@@ -87,6 +89,11 @@
             
         </div>
         
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
         
         
         <div class="post-content">
@@ -162,7 +169,8 @@ PaginatePath = &quot;page&quot;
     url = &quot;/about/&quot;
     weight = 3
 </code></pre><p><!-- raw HTML omitted --><strong>Note:</strong><!-- raw HTML omitted --></p>
-<p><strong>[params.utteranc]</strong> 是用来支持评论系统的。<strong>utterances</strong> 本来是一款基于 <strong>GitHub issues</strong> 的评论工具，类似的评论工具还有很多，有兴趣的可以研究下。</p>
+<p><strong>[params.utteranc]</strong> 是用来支持评论系统的。<strong>utterances</strong> 本来是一款基于 <strong>GitHub issues</strong> 的评论工具，类似的评论工具还有很多，有兴趣的可以研究下。
+这个评论系统是结合下一篇文章 <strong>把hugo博客托管到github上</strong> 一起使用的。</p>
 <h2 id="发布第一篇文章">发布第一篇文章</h2>
 <pre tabindex="0"><code>hugo new post/my-first-post.md
 </code></pre><p>其中有着 draft 选项。当 draft 为 true 的时候，默认是不会渲染的。 我们可以将 draft 改为 false，或者在渲染启动时候添加参数 hugo server -D 就会渲染。</p>
@@ -285,6 +293,8 @@ Press Ctrl+C to stop
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
 
 
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
 
 
 
