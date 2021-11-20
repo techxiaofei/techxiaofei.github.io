@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>snowflake算法及最佳实践 | Leftpocket的个人博客</title>
+    <meta property="og:title" content="snowflake算法及最佳实践 - Leftpocket的个人博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2020-11-24T13:00:51&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2020-11-24T13:00:51&#43;08:00'>
+        
+    <meta name="Keywords" content="[uuid, snowflake]">
+    <meta name="description" content="snowflake算法及最佳实践">
+        
+    <meta name="author" content="leftpocket">
+    <meta property="og:url" content="https://left-pocket.github.io/post/system_design/snowflake/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/custom.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://left-pocket.github.io/">
+                        Leftpocket的个人博客
+                    </a>
+                
+                <p class="description">码农在新加坡</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://left-pocket.github.io/">首页</a>
+                    
+                    <a  href="https://left-pocket.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://left-pocket.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">snowflake算法及最佳实践</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月24日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/server'>server</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <h2 id="背景">背景</h2>
+<p>这篇文章来讲解snowflake是什么，以及它实际应用的最佳实践方案。</p>
+<h2 id="snowflake算法">snowflake算法</h2>
+<h3 id="什么是-snowflake">什么是 Snowflake</h3>
+<p>Twitter的snowflake分布式ID的算法是目前广泛使用的分布式ID算法，尽管有很多变种，比如位数的不同，时间片大小不同、node bit数放在最后等各种变种，但是主要思想还是来自于snowflake的思想。 同时访问方法也各种个样，比如提供memcached协议访问和Redis协议访问等等。</p>
+<p>Twitter在2010年儿童节的时候在官方博客上介绍了snowflake算法,内部用来表示每一条tweet。</p>
+<p>
+        <img class="mx-auto" alt="snowflake" src="/img/server/snowflake.png" />   
+    </p>
+<p>snowflake算法采用64bit存储ID, 最高位备用，暂时不使用。接下来的41 bit做时间戳，最小时间单位为毫秒。再接下来的10 bit做机器ID(worker id)，然后最后12 bit在单位时间(毫秒)递增。</p>
+<p>41 bit表示时间戳大约可以使用69年(2^41 -1), 为了尽可能的表示时间，时间戳可以从第一次部署的时候开始计算，比如2020-02-02 00:00:00, 这样69年内可以无虞。</p>
+<p>10 bit区分机器，所以可以支持1024台机器。 你也可以把10bit分成两部分，一部分做数据中心的ID,一部分做机器的ID，比如55分的化，可以支持32个数据中心，每个数据中心最多可以支持32台机器。</p>
+<p>12 bit自增值可以表示4096的ID,也就是说每台机器每以毫秒最多产生4096个ID,这是它的最大性能。</p>
+<p>正如前面所说，时间戳、机器ID、自增ID所占的位数可以根据你实际的情况做调整。</p>
+<p>snowflake还有一个很好的特性就是基本保持顺序性，因为它的前几位是时间戳，可以对ID按照时间进行排序。</p>
+<h3 id="snowflake算法详解">snowflake算法详解</h3>
+<p>golang核心代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#75715e">// Package snowflake provides a very simple Twitter snowflake generator and parser.
+</span><span style="color:#75715e"></span><span style="color:#f92672">package</span> <span style="color:#a6e22e">snowflake</span>
+
+<span style="color:#66d9ef">var</span> (
+	<span style="color:#75715e">// Epoch is set to the twitter snowflake epoch of Nov 04 2010 01:42:54 UTC in milliseconds
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// You may customize this to set a different epoch for your application.
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">Epoch</span> <span style="color:#66d9ef">int64</span> = <span style="color:#ae81ff">1288834974657</span>
+
+	<span style="color:#75715e">// NodeBits holds the number of bits to use for Node
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// Remember, you have a total 22 bits to share between Node/Step
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">NodeBits</span> <span style="color:#66d9ef">uint8</span> = <span style="color:#ae81ff">10</span>
+
+	<span style="color:#75715e">// StepBits holds the number of bits to use for Step
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// Remember, you have a total 22 bits to share between Node/Step
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">StepBits</span> <span style="color:#66d9ef">uint8</span> = <span style="color:#ae81ff">12</span>
+
+	<span style="color:#75715e">// DEPRECATED: the below four variables will be removed in a future release.
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">mu</span>        <span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">Mutex</span>
+	<span style="color:#a6e22e">nodeMax</span>   <span style="color:#66d9ef">int64</span> = <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> ^ (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#a6e22e">NodeBits</span>)
+	<span style="color:#a6e22e">nodeMask</span>        = <span style="color:#a6e22e">nodeMax</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#a6e22e">StepBits</span>
+	<span style="color:#a6e22e">stepMask</span>  <span style="color:#66d9ef">int64</span> = <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> ^ (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#a6e22e">StepBits</span>)
+	<span style="color:#a6e22e">timeShift</span>       = <span style="color:#a6e22e">NodeBits</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">StepBits</span>
+	<span style="color:#a6e22e">nodeShift</span>       = <span style="color:#a6e22e">StepBits</span>
+)
+
+<span style="color:#75715e">// A Node struct holds the basic information needed for a snowflake generator
+</span><span style="color:#75715e">// node
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Node</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">mu</span>    <span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">Mutex</span>
+	<span style="color:#a6e22e">epoch</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Time</span>
+	<span style="color:#a6e22e">time</span>  <span style="color:#66d9ef">int64</span>
+	<span style="color:#a6e22e">node</span>  <span style="color:#66d9ef">int64</span>
+	<span style="color:#a6e22e">step</span>  <span style="color:#66d9ef">int64</span>
+
+	<span style="color:#a6e22e">nodeMax</span>   <span style="color:#66d9ef">int64</span>
+	<span style="color:#a6e22e">nodeMask</span>  <span style="color:#66d9ef">int64</span>
+	<span style="color:#a6e22e">stepMask</span>  <span style="color:#66d9ef">int64</span>
+	<span style="color:#a6e22e">timeShift</span> <span style="color:#66d9ef">uint8</span>
+	<span style="color:#a6e22e">nodeShift</span> <span style="color:#66d9ef">uint8</span>
+}
+
+<span style="color:#75715e">// An ID is a custom type used for a snowflake ID.  This is used so we can
+</span><span style="color:#75715e">// attach methods onto the ID.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ID</span> <span style="color:#66d9ef">int64</span>
+
+<span style="color:#75715e">// NewNode returns a new snowflake node that can be used to generate snowflake
+</span><span style="color:#75715e">// IDs
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewNode</span>(<span style="color:#a6e22e">node</span> <span style="color:#66d9ef">int64</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">Node</span>, <span style="color:#66d9ef">error</span>) {
+
+	<span style="color:#75715e">// re-calc in case custom NodeBits or StepBits were set
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// DEPRECATED: the below block will be removed in a future release.
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">mu</span>.<span style="color:#a6e22e">Lock</span>()
+	<span style="color:#a6e22e">nodeMax</span> = <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> ^ (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#a6e22e">NodeBits</span>)
+	<span style="color:#a6e22e">nodeMask</span> = <span style="color:#a6e22e">nodeMax</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#a6e22e">StepBits</span>
+	<span style="color:#a6e22e">stepMask</span> = <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> ^ (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#a6e22e">StepBits</span>)
+	<span style="color:#a6e22e">timeShift</span> = <span style="color:#a6e22e">NodeBits</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">StepBits</span>
+	<span style="color:#a6e22e">nodeShift</span> = <span style="color:#a6e22e">StepBits</span>
+	<span style="color:#a6e22e">mu</span>.<span style="color:#a6e22e">Unlock</span>()
+
+	<span style="color:#a6e22e">n</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Node</span>{}
+	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">node</span> = <span style="color:#a6e22e">node</span>
+	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">nodeMax</span> = <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> ^ (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#a6e22e">NodeBits</span>)
+	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">nodeMask</span> = <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">nodeMax</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#a6e22e">StepBits</span>
+	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">stepMask</span> = <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> ^ (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#a6e22e">StepBits</span>)
+	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">timeShift</span> = <span style="color:#a6e22e">NodeBits</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">StepBits</span>
+	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">nodeShift</span> = <span style="color:#a6e22e">StepBits</span>
+
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">node</span> &lt; <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">node</span> &gt; <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">nodeMax</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;Node number must be between 0 and &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">strconv</span>.<span style="color:#a6e22e">FormatInt</span>(<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">nodeMax</span>, <span style="color:#ae81ff">10</span>))
+	}
+
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">curTime</span> = <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>()
+	<span style="color:#75715e">// add time.Duration to curTime to make sure we use the monotonic clock if available
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">epoch</span> = <span style="color:#a6e22e">curTime</span>.<span style="color:#a6e22e">Add</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Unix</span>(<span style="color:#a6e22e">Epoch</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, (<span style="color:#a6e22e">Epoch</span><span style="color:#f92672">%</span><span style="color:#ae81ff">1000</span>)<span style="color:#f92672">*</span><span style="color:#ae81ff">1000000</span>).<span style="color:#a6e22e">Sub</span>(<span style="color:#a6e22e">curTime</span>))
+
+	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">n</span>, <span style="color:#66d9ef">nil</span>
+}
+
+<span style="color:#75715e">// Generate creates and returns a unique snowflake ID
+</span><span style="color:#75715e">// To help guarantee uniqueness
+</span><span style="color:#75715e">// - Make sure your system is keeping accurate system time
+</span><span style="color:#75715e">// - Make sure you never have multiple nodes running with the same node ID
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">n</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Node</span>) <span style="color:#a6e22e">Generate</span>() <span style="color:#a6e22e">ID</span> {
+
+	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">mu</span>.<span style="color:#a6e22e">Lock</span>()
+
+	<span style="color:#a6e22e">now</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Since</span>(<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">epoch</span>).<span style="color:#a6e22e">Nanoseconds</span>() <span style="color:#f92672">/</span> <span style="color:#ae81ff">1000000</span>
+
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">now</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">time</span> {
+		<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">step</span> = (<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">step</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">stepMask</span>
+
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">step</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+			<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">now</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">time</span> {
+				<span style="color:#a6e22e">now</span> = <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Since</span>(<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">epoch</span>).<span style="color:#a6e22e">Nanoseconds</span>() <span style="color:#f92672">/</span> <span style="color:#ae81ff">1000000</span>
+			}
+		}
+	} <span style="color:#66d9ef">else</span> {
+		<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">step</span> = <span style="color:#ae81ff">0</span>
+	}
+
+	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">time</span> = <span style="color:#a6e22e">now</span>
+
+	<span style="color:#a6e22e">r</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ID</span>((<span style="color:#a6e22e">now</span>)<span style="color:#f92672">&lt;&lt;</span><span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">timeShift</span> |
+		(<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">node</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">nodeShift</span>) |
+		(<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">step</span>),
+	)
+
+	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">mu</span>.<span style="color:#a6e22e">Unlock</span>()
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">r</span>
+}
+</code></pre></div><p>右边的12 bit是step, 也就是步长，每次生成ID的时候，先比较timestamp，如果跟上次是相同的timestamp，那么step+1，直到到达最大值:1&laquo;12-1.
+所以在同一毫秒内，同一台个实例，最多生成4096个ID，之后就会重复。
+中间的10 bit是nodeID, 也就是实例的ID，最多支持1024个实例。所以每一秒最多可以产生1000<em>1024</em>4096～=4billion的ID.
+左边的41 bit是timestamp(ms), 每一毫秒变化一次。</p>
+<p>具体的bit可以根据自己的需求进行调整，比如既可以是(41,10,12)，也可以是(41,6,16)&hellip;</p>
+<p>完整的golang代码repo:
+<a href="https://github.com/bwmarrin/snowflake">snowflake github</a></p>
+<h3 id="时钟回拨">时钟回拨</h3>
+<p>可以找2bit位作为时钟回拨位，发现有时钟回拨就将回拨位加1，达到最大位后再从0开始进行循环。
+例如上图中的， 10 bit的机器号=&gt;8 bit的机器号+2 bit的回拨位.
+每次发现时钟回拨，就把回拨位+1.大于最大值(3)后重设为0.</p>
+<p>如图所示，在同一个时间段，最多支持时钟回拨3次。多于3次则有概率重复。实际场景中足够使用了。</p>
+<p>
+        <img class="mx-auto" alt="snowflake_time" src="/img/server/snowflake_time.png" />   
+    </p>
+<h3 id="nodeid生成">NodeID生成</h3>
+<p>NodeID有很多生成规则。</p>
+<ul>
+<li>配置文件：有些服务每一个实例都在配置文件配置有唯一的一个ID，用以区分其他的实例。我们可以使用这个配置。</li>
+<li>随机值：</li>
+<li>环境变量：</li>
+<li>Redis</li>
+<li>MySQL</li>
+</ul>
+<h2 id="链接">链接</h2>
+<p><a href="https://tech.meituan.com/2017/04/21/mt-leaf.html">美团点评分布式ID生成方案</a></p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/system_design/uid-generator/">分布式ID生成方案</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/snowflake'>snowflake</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "stormwy/blog-comments"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://left-pocket.github.io/">Leftpocket的个人博客 By leftpocket</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='//www.google.com/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://left-pocket.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/catalog/golang_design_patterns/" title="博客分类">博客分类</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/interview/" title="后端面试必备">后端面试必备</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/catalog/interview_tech_stack/" title="服务端面试技术栈">服务端面试技术栈</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/git/git_rebase/" title="git rebase使用详解">git rebase使用详解</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/golang/goroutine_implementation/" title="goroutine的实现原理">goroutine的实现原理</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/mysql/dead_lock/" title="MySQL死锁的产生">MySQL死锁的产生</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/golang/append/" title="Golang append是并发安全的吗">Golang append是并发安全的吗</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/golang/functional_options/" title="Golang函数式选项(Functional Options)编程模式">Golang函数式选项(Functional Options)编程模式</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/golang/decorator/" title="Golang装饰器(Decorator)设计模式">Golang装饰器(Decorator)设计模式</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/redis/redis_sds/" title="Redis SDS简单动态字符串">Redis SDS简单动态字符串</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://left-pocket.github.io/categories/db/">db (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/git/">git (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/golang/">Golang (5)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/hugo/">hugo (2)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/leetcode/">leetcode (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/mysql/">MySQL (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/redis/">Redis (2)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/server/">server (2)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/vscode/">vscode (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E6%9D%82%E4%B9%B1/">杂乱 (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E7%AE%97%E6%B3%95/">算法 (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计 (2)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/">面试 (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://left-pocket.github.io/tags/db/">db</a>
+    
+    <a href="https://left-pocket.github.io/tags/git/">git</a>
+    
+    <a href="https://left-pocket.github.io/tags/golang/">Golang</a>
+    
+    <a href="https://left-pocket.github.io/tags/hugo/">hugo</a>
+    
+    <a href="https://left-pocket.github.io/tags/leetcode/">leetcode</a>
+    
+    <a href="https://left-pocket.github.io/tags/mysql/">MySQL</a>
+    
+    <a href="https://left-pocket.github.io/tags/redis/">Redis</a>
+    
+    <a href="https://left-pocket.github.io/tags/server/">Server</a>
+    
+    <a href="https://left-pocket.github.io/tags/snowflake/">snowflake</a>
+    
+    <a href="https://left-pocket.github.io/tags/ssr/">ssr</a>
+    
+    <a href="https://left-pocket.github.io/tags/tidb/">TiDB</a>
+    
+    <a href="https://left-pocket.github.io/tags/vscode/">vscode</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E7%AE%97%E6%B3%95/">算法</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="" title=""></a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://left-pocket.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

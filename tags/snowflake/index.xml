@@ -9,10 +9,10 @@
     <lastBuildDate>Tue, 24 Nov 2020 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/snowflake/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>snowflake算法及最佳实践</title>
-      <link>https://left-pocket.github.io/post/snowflake/</link>
+      <link>https://left-pocket.github.io/post/system_design/snowflake/</link>
       <pubDate>Tue, 24 Nov 2020 13:00:51 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/post/snowflake/</guid>
+      <guid>https://left-pocket.github.io/post/system_design/snowflake/</guid>
       <description>背景 这篇文章来讲解snowflake是什么，以及它实际应用的最佳实践方案。 snowflake算法 什么是 Snowflake Twitter的snowflake分</description>
     </item>
     
