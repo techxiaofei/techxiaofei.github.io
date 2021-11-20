@@ -99,13 +99,13 @@
 <p>我们这边生成的msgid是根据snowflake算法生成的int64位整数。例如：215857550229364734</p>
 <p>我们发现数值很接近的msgid，在redis中无法通过score进行区分。</p>
 <p>举个列子，在redis中tzset结构里存入如下几条数据。</p>
-<pre><code>ZADD tzset 215857550229364734 test1
+<pre tabindex="0"><code>ZADD tzset 215857550229364734 test1
 ZADD tzset 215857550229364735 test2
 ZADD tzset 215857550229364736 test3
 ZADD tzset 215857550229364737 test4
 ZADD tzset 215857550229375123 test5
 </code></pre><p>查询看一下结果</p>
-<pre><code>127.0.0.1:6379&gt; zrange tzset 0 -1 WITHSCORES
+<pre tabindex="0"><code>127.0.0.1:6379&gt; zrange tzset 0 -1 WITHSCORES
  1) &quot;test1&quot;
  2) &quot;2.1585755022936474e+17&quot;
  3) &quot;test2&quot;
@@ -118,19 +118,19 @@ ZADD tzset 215857550229375123 test5
 10) &quot;2.1585755022937514e+17&quot;
 </code></pre><p>我们发现score值采用科学计数法表示，test1,test2,test3,test4几个元素的score值显示是一样的。</p>
 <p>使用score=215857550229364735 执行查询，结果如下:</p>
-<pre><code>127.0.0.1:6379&gt; zrangebyscore tzset 215857550229364735 215857550229364735
+<pre tabindex="0"><code>127.0.0.1:6379&gt; zrangebyscore tzset 215857550229364735 215857550229364735
 1) &quot;test1&quot;
 2) &quot;test2&quot;
 3) &quot;test3&quot;
 4) &quot;test4&quot;
-</code></pre><pre><code>127.0.0.1:6379&gt; zrangebyscore tzset (215857550229364735 215857550229375123
+</code></pre><pre tabindex="0"><code>127.0.0.1:6379&gt; zrangebyscore tzset (215857550229364735 215857550229375123
 1) &quot;test5&quot;
 </code></pre><h1 id="问题描述">问题描述</h1>
 <p>这导致了我们使用socre做分页查找的时候，（一页10个，下一页使用上一页最后一个socre来继续查找）。会导致其中的一些数据丢失。
 这些都是因为SortedSet的类型是double64的浮点数，存在精度问题。</p>
 <p>贴上Redis官方文档ZADD指令的描述里面的一段话。
 <a href="https://redis.io/commands/zadd" title="Redis ZAdd">Redis ZAdd</a></p>
-<pre><code>Range of integer scores that can be expressed precisely
+<pre tabindex="0"><code>Range of integer scores that can be expressed precisely
 Redis sorted sets use a double 64-bit floating point number to represent the score. In all the architectures we support, this is represented as an IEEE 754 floating point number, that is able to represent precisely integer numbers between -(2^53) and +(2^53) included. In more practical terms, all the integers between -9007199254740992 and 9007199254740992 are perfectly representable. Larger integers, or fractions, are internally represented in exponential form, so it is possible that you get only an approximation of the decimal number, or of the very big integer, that you set as score.
 </code></pre><p>简单来说，double64位的浮点数只有53bit的精度。所以使用int64的大整数是需要注意，这个大整数的值不能大于这个最大值。
 对于snowflake算法，之前的文章中有讲过。它是使用41+10+12=63位的大整数。在此场景下是有精度问题的。</p>
@@ -253,6 +253,10 @@ Redis sorted sets use a double 64-bit floating point number to represent the sco
     </li>
     
     <li>
+        <a href="https://left-pocket.github.io/post/git/git_rebase/" title="git rebase使用详解">git rebase使用详解</a>
+    </li>
+    
+    <li>
         <a href="https://left-pocket.github.io/post/golang/goroutine_implementation/" title="goroutine的实现原理">goroutine的实现原理</a>
     </li>
     
@@ -280,10 +284,6 @@ Redis sorted sets use a double 64-bit floating point number to represent the sco
         <a href="https://left-pocket.github.io/post/algorithm/bloom_filter/" title="布隆过滤器(Bloom Filter)详解">布隆过滤器(Bloom Filter)详解</a>
     </li>
     
-    <li>
-        <a href="https://left-pocket.github.io/post/system_design/friends_status/" title="朋友圈技术设计与实现">朋友圈技术设计与实现</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -294,6 +294,8 @@ Redis sorted sets use a double 64-bit floating point number to represent the sco
 <ul class="widget-list">
     
     <li><a href="https://left-pocket.github.io/categories/db/">db (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/git/">git (1)</a></li>
     
     <li><a href="https://left-pocket.github.io/categories/golang/">Golang (5)</a></li>
     
@@ -325,6 +327,8 @@ Redis sorted sets use a double 64-bit floating point number to represent the sco
 <div class="tagcloud">
     
     <a href="https://left-pocket.github.io/tags/db/">db</a>
+    
+    <a href="https://left-pocket.github.io/tags/git/">git</a>
     
     <a href="https://left-pocket.github.io/tags/golang/">Golang</a>
     

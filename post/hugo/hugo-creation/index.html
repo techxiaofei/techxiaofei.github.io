@@ -98,12 +98,12 @@
 <p>hugo 是由Go语言实现的静态网站生成器。简单，易用，高效，易扩展。</p>
 <h2 id="安装">安装</h2>
 <p>我这边介绍在macOS上的安装教程。其他环境（Windows/linux）类似。</p>
-<pre><code>&gt;&gt;&gt; brew install hugo
+<pre tabindex="0"><code>&gt;&gt;&gt; brew install hugo
 &gt;&gt;&gt; hugo version
 Hugo Static Site Generator v0.74.3/extended darwin/amd64
 </code></pre><h2 id="创建站点">创建站点</h2>
 <p>创建一个站点 <strong>iwtbabc</strong>， 并进入到站点根目录。</p>
-<pre><code>&gt;&gt;&gt; hugo new site iwtbabc
+<pre tabindex="0"><code>&gt;&gt;&gt; hugo new site iwtbabc
 &gt;&gt;&gt; cd iwtbabc
 &gt;&gt;&gt; ls
 archetypes  content     layouts     resources   themes
@@ -112,13 +112,13 @@ config.toml data        public      static
 <strong>themes</strong>是主题目录，可以下载喜欢的主题，然后配置在<strong>config.toml</strong>里面。
 <strong>content</strong>是博客文章的目录。</p>
 <p>推荐一款主题，可以在根目录下载并配置。</p>
-<pre><code>git clone https://github.com/flysnow-org/maupassant-hugo themes/maupassant
+<pre tabindex="0"><code>git clone https://github.com/flysnow-org/maupassant-hugo themes/maupassant
 </code></pre><p><strong>注</strong>：如果是从其他地方copy过来的站点，有可能遇到:</p>
-<pre><code>WARN 2021/02/03 10:56:17 found no layout file for &quot;HTML&quot; for kind &quot;home&quot;: You should create a template file which matches Hugo Layouts Lookup Rules for this combination.
+<pre tabindex="0"><code>WARN 2021/02/03 10:56:17 found no layout file for &quot;HTML&quot; for kind &quot;home&quot;: You should create a template file which matches Hugo Layouts Lookup Rules for this combination.
 </code></pre><p>这个时候需要重新<strong>git clone</strong>一下主题。</p>
 <h2 id="配置">配置</h2>
 <p>推荐一款个人使用的配置</p>
-<pre><code>baseURL = &quot;http://iwtbabc.github.io/&quot;
+<pre tabindex="0"><code>baseURL = &quot;http://iwtbabc.github.io/&quot;
 languageCode = &quot;en-us&quot;
 title = &quot;I want to be a better coder(iwtbabc)&quot;
 theme = &quot;maupassant&quot;
@@ -162,10 +162,10 @@ PaginatePath = &quot;page&quot;
     url = &quot;/about/&quot;
     weight = 3
 </code></pre><h2 id="发布第一篇文章">发布第一篇文章</h2>
-<pre><code>hugo new post/my-first-post.md
+<pre tabindex="0"><code>hugo new post/my-first-post.md
 </code></pre><p>其中有着 draft 选项。当 draft 为 true 的时候，默认是不会渲染的。 我们可以将 draft 改为 false，或者在渲染启动时候添加参数 hugo server -D 就会渲染。</p>
 <p>这是我的文章配置。</p>
-<pre><code>---
+<pre tabindex="0"><code>---
 title: &quot;My First Post&quot;
 date: 2020-08-06T13:00:51+08:00
 tags : [
@@ -180,7 +180,7 @@ keywords : [
 ---
 This is the first post
 </code></pre><h2 id="执行命令">执行命令</h2>
-<pre><code>&gt;&gt;&gt; hugo server
+<pre tabindex="0"><code>&gt;&gt;&gt; hugo server
 
                    | EN  
 -------------------+-----
@@ -312,6 +312,10 @@ Press Ctrl+C to stop
     </li>
     
     <li>
+        <a href="https://left-pocket.github.io/post/git/git_rebase/" title="git rebase使用详解">git rebase使用详解</a>
+    </li>
+    
+    <li>
         <a href="https://left-pocket.github.io/post/golang/goroutine_implementation/" title="goroutine的实现原理">goroutine的实现原理</a>
     </li>
     
@@ -339,10 +343,6 @@ Press Ctrl+C to stop
         <a href="https://left-pocket.github.io/post/algorithm/bloom_filter/" title="布隆过滤器(Bloom Filter)详解">布隆过滤器(Bloom Filter)详解</a>
     </li>
     
-    <li>
-        <a href="https://left-pocket.github.io/post/system_design/friends_status/" title="朋友圈技术设计与实现">朋友圈技术设计与实现</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -353,6 +353,8 @@ Press Ctrl+C to stop
 <ul class="widget-list">
     
     <li><a href="https://left-pocket.github.io/categories/db/">db (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/git/">git (1)</a></li>
     
     <li><a href="https://left-pocket.github.io/categories/golang/">Golang (5)</a></li>
     
@@ -384,6 +386,8 @@ Press Ctrl+C to stop
 <div class="tagcloud">
     
     <a href="https://left-pocket.github.io/tags/db/">db</a>
+    
+    <a href="https://left-pocket.github.io/tags/git/">git</a>
     
     <a href="https://left-pocket.github.io/tags/golang/">Golang</a>
     

@@ -117,7 +117,7 @@
 <p>有两种方式发布到github.</p>
 <h3 id="方法1">方法1</h3>
 <p>进入到public目录。</p>
-<pre><code>git init
+<pre tabindex="0"><code>git init
 git add *
 git commit -m &quot;comments&quot;
 git remote add origin https://github.com/iwtbabc/iwtbabc.github.io.git
@@ -126,7 +126,7 @@ git push -u origin master
 </code></pre><p>就可以上传到github.</p>
 <p><strong>Notes</strong>
 使用 <strong>git pull origin master</strong> 的时候可能会遇到</p>
-<pre><code>fatal: refusing to merge unrelated histories
+<pre tabindex="0"><code>fatal: refusing to merge unrelated histories
 </code></pre><p>的错误，所以需要在此命令后加上 <strong>&ndash;allow-unrelated-histories</strong> 的参数。</p>
 <p>以后每次博客有修改，使用hugo命令发布到public文件夹，然后push到github即可。</p>
 <p>使用这种方式的话
@@ -136,21 +136,21 @@ git push -u origin master
 <li>在hugo站点内建立一个public的软链接到站点外。
 ln -s 站点外的实际目录 站点内命名为public的软链接</li>
 </ol>
-<pre><code>ln -s /Users/hugo/left-pocket-public /Users/hugo/iwtbabc/public
+<pre tabindex="0"><code>ln -s /Users/hugo/left-pocket-public /Users/hugo/iwtbabc/public
 </code></pre><p>这样就可以分别在外层目录和hugo站点目录执行上述git指令，提交到不同的Repo.(hugo站点需要额外创建一个Repo，方法2有讲)。</p>
 <h3 id="方法2">方法2</h3>
 <p>这种方式更简单一点.
 在任意hugo站点外，直接用git clone把创建好的github pages Repo克隆下来。</p>
-<pre><code>git clone git@github.com:left-pocket/left-pocket.github.io.git
+<pre tabindex="0"><code>git clone git@github.com:left-pocket/left-pocket.github.io.git
 </code></pre><p>然后创建把这个git Repo目录和public创建软链接：</p>
-<pre><code>ln -s /Users/hugo/left-pocket.github.io /Users/hugo/left-pocket/public
+<pre tabindex="0"><code>ln -s /Users/hugo/left-pocket.github.io /Users/hugo/left-pocket/public
 </code></pre><p>然后在hugo站点使用<strong>hugo</strong>指令，就会自动在git仓库生成内容。
 最终执行git add/commit/push之后，打开
 <a href="https://left-pocket.github.io/">https://left-pocket.github.io/</a>
 就能看到博客内容。</p>
 <p>使用这种方法，如果也想把整个hugo站点发布到github，可以使用<em><strong>方法1</strong></em>.
 我这里直接在github上创建了一个Repo叫hugo。</p>
-<pre><code>git init
+<pre tabindex="0"><code>git init
 git add *
 git commit -m &quot;comments&quot;
 git branch -M main
@@ -266,6 +266,10 @@ git push -u origin main
     </li>
     
     <li>
+        <a href="https://left-pocket.github.io/post/git/git_rebase/" title="git rebase使用详解">git rebase使用详解</a>
+    </li>
+    
+    <li>
         <a href="https://left-pocket.github.io/post/golang/goroutine_implementation/" title="goroutine的实现原理">goroutine的实现原理</a>
     </li>
     
@@ -293,10 +297,6 @@ git push -u origin main
         <a href="https://left-pocket.github.io/post/algorithm/bloom_filter/" title="布隆过滤器(Bloom Filter)详解">布隆过滤器(Bloom Filter)详解</a>
     </li>
     
-    <li>
-        <a href="https://left-pocket.github.io/post/system_design/friends_status/" title="朋友圈技术设计与实现">朋友圈技术设计与实现</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -307,6 +307,8 @@ git push -u origin main
 <ul class="widget-list">
     
     <li><a href="https://left-pocket.github.io/categories/db/">db (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/git/">git (1)</a></li>
     
     <li><a href="https://left-pocket.github.io/categories/golang/">Golang (5)</a></li>
     
@@ -338,6 +340,8 @@ git push -u origin main
 <div class="tagcloud">
     
     <a href="https://left-pocket.github.io/tags/db/">db</a>
+    
+    <a href="https://left-pocket.github.io/tags/git/">git</a>
     
     <a href="https://left-pocket.github.io/tags/golang/">Golang</a>
     

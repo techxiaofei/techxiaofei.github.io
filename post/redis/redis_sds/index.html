@@ -95,7 +95,7 @@
 <h1 id="简单动态字符串sds">简单动态字符串(SDS)</h1>
 <h2 id="什么是sds">什么是SDS</h2>
 <p>举一个例子， 当我们set一个值时：</p>
-<pre><code>redis&gt; SET msg &quot;Redis&quot;
+<pre tabindex="0"><code>redis&gt; SET msg &quot;Redis&quot;
 OK
 </code></pre><p>那么Redis将在数据库创建一个新的键值对，其中：</p>
 <ul>
@@ -104,7 +104,7 @@ OK
 </ul>
 <p>我们来查看一下SDS的数据结构：
 每个 sds.h/sdshdr 结构表示一个 SDS 值：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">struct</span> sdshdr {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">struct</span> sdshdr {
 
     <span style="color:#75715e">// 记录 buf 数组中已使用字节的数量
 </span><span style="color:#75715e"></span>    <span style="color:#75715e">// 等于 SDS 所保存字符串的长度
@@ -141,10 +141,10 @@ OK
         <img class="mx-auto" alt="strcat" src="/img/redis/strcat.png" />   
     </p>
 <p>如果过程中，用户想对s1进行扩展</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">strcat(s1, <span style="color:#e6db74">&#34;Cluster&#34;</span>);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">strcat(s1, <span style="color:#e6db74">&#34;Cluster&#34;</span>);
 </code></pre></div><p>由于没有注意到s预分配的空间大小，执行以后会导致s1的内容缓冲到s2，以至于s2的内容被意外修改成Cluster，这种错误对数据库的使用过程致命的。</p>
 <p>而SDS在sdscat时会预先检查空间是否足够，不够的话会通过sdsMakeRoomFor自动为要拼接的字符串扩展空间.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">sds <span style="color:#a6e22e">sdscatlen</span>(sds s, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>t, size_t len) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">sds <span style="color:#a6e22e">sdscatlen</span>(sds s, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>t, size_t len) {
     size_t curlen <span style="color:#f92672">=</span> sdslen(s);
     s <span style="color:#f92672">=</span> sdsMakeRoomFor(s,len);
     <span style="color:#66d9ef">if</span> (s <span style="color:#f92672">==</span> NULL) <span style="color:#66d9ef">return</span> NULL;
@@ -302,6 +302,10 @@ C 字符串中的字符必须符合某种编码（比如 ASCII）， 并且除�
     </li>
     
     <li>
+        <a href="https://left-pocket.github.io/post/git/git_rebase/" title="git rebase使用详解">git rebase使用详解</a>
+    </li>
+    
+    <li>
         <a href="https://left-pocket.github.io/post/golang/goroutine_implementation/" title="goroutine的实现原理">goroutine的实现原理</a>
     </li>
     
@@ -329,10 +333,6 @@ C 字符串中的字符必须符合某种编码（比如 ASCII）， 并且除�
         <a href="https://left-pocket.github.io/post/algorithm/bloom_filter/" title="布隆过滤器(Bloom Filter)详解">布隆过滤器(Bloom Filter)详解</a>
     </li>
     
-    <li>
-        <a href="https://left-pocket.github.io/post/system_design/friends_status/" title="朋友圈技术设计与实现">朋友圈技术设计与实现</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -343,6 +343,8 @@ C 字符串中的字符必须符合某种编码（比如 ASCII）， 并且除�
 <ul class="widget-list">
     
     <li><a href="https://left-pocket.github.io/categories/db/">db (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/git/">git (1)</a></li>
     
     <li><a href="https://left-pocket.github.io/categories/golang/">Golang (5)</a></li>
     
@@ -374,6 +376,8 @@ C 字符串中的字符必须符合某种编码（比如 ASCII）， 并且除�
 <div class="tagcloud">
     
     <a href="https://left-pocket.github.io/tags/db/">db</a>
+    
+    <a href="https://left-pocket.github.io/tags/git/">git</a>
     
     <a href="https://left-pocket.github.io/tags/golang/">Golang</a>
     

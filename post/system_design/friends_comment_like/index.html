@@ -108,7 +108,7 @@ Cache更新策略采用了监听MySQL的Binlog来更新Cache的方式，而不�
 <p>由于点赞和评论系统基本一致，评论会稍微略复杂，因为多了一个评论内容。这里就以评论系统为例，看一下整个系统如何设计。</p>
 <h3 id="定义结构">定义结构</h3>
 <p>首先看一下数据储存格式：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#f92672">`</span>comment_tab<span style="color:#f92672">`</span> (
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#f92672">`</span>comment_tab<span style="color:#f92672">`</span> (
   <span style="color:#f92672">`</span>comment_id<span style="color:#f92672">`</span> bigint(<span style="color:#ae81ff">20</span>) unsigned <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
   <span style="color:#f92672">`</span>userid<span style="color:#f92672">`</span> bigint(<span style="color:#ae81ff">20</span>) unsigned <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
   <span style="color:#f92672">`</span>activity_id<span style="color:#f92672">`</span> bigint(<span style="color:#ae81ff">20</span>) unsigned <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
@@ -118,7 +118,7 @@ Cache更新策略采用了监听MySQL的Binlog来更新Cache的方式，而不�
   <span style="color:#66d9ef">KEY</span> <span style="color:#f92672">`</span>idx_activity_id<span style="color:#f92672">`</span> (<span style="color:#f92672">`</span>activity_id<span style="color:#f92672">`</span>, <span style="color:#f92672">`</span>update_time<span style="color:#f92672">`</span>)
 ) ENGINE<span style="color:#f92672">=</span>InnoDB <span style="color:#66d9ef">DEFAULT</span> CHARSET<span style="color:#f92672">=</span>utf8mb4 <span style="color:#66d9ef">COLLATE</span><span style="color:#f92672">=</span>utf8mb4_unicode_ci
 </code></pre></div><p>并定义了protobuf映射comment_tab的一行数据。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">//protobuf类型，序列化
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">//protobuf类型，序列化
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">message</span> <span style="color:#a6e22e">CommentData</span> {
     <span style="color:#a6e22e">optional</span> <span style="color:#66d9ef">int64</span> <span style="color:#a6e22e">comment_id</span> = <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">//unique id
 </span><span style="color:#75715e"></span>    <span style="color:#a6e22e">optional</span> <span style="color:#66d9ef">int64</span> <span style="color:#a6e22e">userid</span> = <span style="color:#ae81ff">2</span>;  <span style="color:#75715e">//the userid who comment to this activity
@@ -130,7 +130,7 @@ Cache更新策略采用了监听MySQL的Binlog来更新Cache的方式，而不�
 <ol>
 <li>获取评论列表，支持分页。</li>
 </ol>
-<pre><code>Request:
+<pre tabindex="0"><code>Request:
     activity_id,
     cursor,  //cursor默认为0，下次请求的cursor为上次返回的cursor以便可以分页向后查找。
     limit,  //每次查询的次数。
@@ -334,6 +334,10 @@ Redis sorted sets use a double 64-bit floating point number to represent the sco
     </li>
     
     <li>
+        <a href="https://left-pocket.github.io/post/git/git_rebase/" title="git rebase使用详解">git rebase使用详解</a>
+    </li>
+    
+    <li>
         <a href="https://left-pocket.github.io/post/golang/goroutine_implementation/" title="goroutine的实现原理">goroutine的实现原理</a>
     </li>
     
@@ -361,10 +365,6 @@ Redis sorted sets use a double 64-bit floating point number to represent the sco
         <a href="https://left-pocket.github.io/post/algorithm/bloom_filter/" title="布隆过滤器(Bloom Filter)详解">布隆过滤器(Bloom Filter)详解</a>
     </li>
     
-    <li>
-        <a href="https://left-pocket.github.io/post/system_design/friends_status/" title="朋友圈技术设计与实现">朋友圈技术设计与实现</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -375,6 +375,8 @@ Redis sorted sets use a double 64-bit floating point number to represent the sco
 <ul class="widget-list">
     
     <li><a href="https://left-pocket.github.io/categories/db/">db (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/git/">git (1)</a></li>
     
     <li><a href="https://left-pocket.github.io/categories/golang/">Golang (5)</a></li>
     
@@ -406,6 +408,8 @@ Redis sorted sets use a double 64-bit floating point number to represent the sco
 <div class="tagcloud">
     
     <a href="https://left-pocket.github.io/tags/db/">db</a>
+    
+    <a href="https://left-pocket.github.io/tags/git/">git</a>
     
     <a href="https://left-pocket.github.io/tags/golang/">Golang</a>
     

@@ -93,7 +93,7 @@
             <h1 id="概览">概览</h1>
 <p>最近阅读源码的时候看到一段不错的代码，但是当时却不是非常理解为什么这么写。
 我们先来看一下源代码：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Server</span> <span style="color:#66d9ef">struct</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Server</span> <span style="color:#66d9ef">struct</span> {
 	<span style="color:#a6e22e">Addr</span>     <span style="color:#66d9ef">string</span>
 	<span style="color:#a6e22e">Port</span>     <span style="color:#66d9ef">int</span>
 	<span style="color:#a6e22e">Protocol</span> <span style="color:#66d9ef">string</span>
@@ -153,7 +153,7 @@
 <h2 id="重载函数">重载函数</h2>
 <p>因为Go语言不像C++一样支持重载函数，所以，你得用不同的函数名来应对不同的配置选项。
 像这样：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewDefaultServer</span>(<span style="color:#a6e22e">addr</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">port</span> <span style="color:#66d9ef">int</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>, <span style="color:#66d9ef">error</span>) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewDefaultServer</span>(<span style="color:#a6e22e">addr</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">port</span> <span style="color:#66d9ef">int</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>, <span style="color:#66d9ef">error</span>) {
   <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Server</span>{<span style="color:#a6e22e">addr</span>, <span style="color:#a6e22e">port</span>, <span style="color:#e6db74">&#34;tcp&#34;</span>, <span style="color:#ae81ff">30</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>, <span style="color:#ae81ff">100</span>}, <span style="color:#66d9ef">nil</span>
 }
 <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewServerWithConns</span>(<span style="color:#a6e22e">addr</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">port</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">conn</span> <span style="color:#66d9ef">int</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>, <span style="color:#66d9ef">error</span>) {
@@ -169,19 +169,19 @@
 于是我们可以想着优化一下。</p>
 <h2 id="配置化">配置化</h2>
 <p>把所有可选的参数放到一个Config的struct中。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Config</span> <span style="color:#66d9ef">struct</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Config</span> <span style="color:#66d9ef">struct</span> {
     <span style="color:#a6e22e">Protocol</span> <span style="color:#66d9ef">string</span>
     <span style="color:#a6e22e">Timeout</span>  <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>
     <span style="color:#a6e22e">Maxconns</span> <span style="color:#66d9ef">int</span>
 }
 </code></pre></div><p>然后把Config放到Server的struct中。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Server</span> <span style="color:#66d9ef">struct</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Server</span> <span style="color:#66d9ef">struct</span> {
     <span style="color:#a6e22e">Addr</span> <span style="color:#66d9ef">string</span>
     <span style="color:#a6e22e">Port</span> <span style="color:#66d9ef">int</span>
     <span style="color:#a6e22e">Conf</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Config</span>
 }
 </code></pre></div><p>于是，我们只需要一个 NewServer() 的函数了，在使用前需要构造 Config 对象。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewServer</span>(<span style="color:#a6e22e">addr</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">port</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">conf</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Config</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>, <span style="color:#66d9ef">error</span>) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewServer</span>(<span style="color:#a6e22e">addr</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">port</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">conf</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Config</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>, <span style="color:#66d9ef">error</span>) {
     <span style="color:#75715e">//...
 </span><span style="color:#75715e"></span>}
 <span style="color:#75715e">//Using the default configuratrion
@@ -193,7 +193,7 @@
 <h2 id="builder模式">Builder模式</h2>
 <p>有些同学会觉得引入一个额外的Config结构有点冗余。
 于是有了Builder模式的出现。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">sb</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>) <span style="color:#a6e22e">Create</span>(<span style="color:#a6e22e">addr</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">port</span> <span style="color:#66d9ef">int</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">sb</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>) <span style="color:#a6e22e">Create</span>(<span style="color:#a6e22e">addr</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">port</span> <span style="color:#66d9ef">int</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span> {
   <span style="color:#a6e22e">srv</span>.<span style="color:#a6e22e">Addr</span> = <span style="color:#a6e22e">addr</span>
   <span style="color:#a6e22e">srv</span>.<span style="color:#a6e22e">Port</span> = <span style="color:#a6e22e">port</span>
   <span style="color:#75715e">//其它代码设置其它成员的默认值
@@ -215,7 +215,7 @@
   <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">srv</span>
 }
 </code></pre></div><p>于是就可以以如下的方式来使用了</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">srv</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Server</span>{}
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">srv</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Server</span>{}
 <span style="color:#a6e22e">server</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">srv</span>.<span style="color:#a6e22e">Create</span>(<span style="color:#e6db74">&#34;127.0.0.1&#34;</span>, <span style="color:#ae81ff">8080</span>).
   <span style="color:#a6e22e">WithProtocol</span>(<span style="color:#e6db74">&#34;udp&#34;</span>).
   <span style="color:#a6e22e">WithMaxConn</span>(<span style="color:#ae81ff">1024</span>).
@@ -225,9 +225,9 @@
 是不是觉得完美了，接近了。</p>
 <h2 id="functional-options模式">Functional Options模式</h2>
 <p>Functional Options模式首先需要定义一个函数类型。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Option</span> <span style="color:#66d9ef">func</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Option</span> <span style="color:#66d9ef">func</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>)
 </code></pre></div><p>然后，我们可以使用函数式的方式定义一组如下的函数：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Protocol</span>(<span style="color:#a6e22e">p</span> <span style="color:#66d9ef">string</span>) <span style="color:#a6e22e">Option</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Protocol</span>(<span style="color:#a6e22e">p</span> <span style="color:#66d9ef">string</span>) <span style="color:#a6e22e">Option</span> {
 	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>) {
 		<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">Protocol</span> = <span style="color:#a6e22e">p</span>
 	}
@@ -244,7 +244,7 @@
         <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">MaxConns</span> = <span style="color:#a6e22e">maxconns</span>
     }
 }
-</code></pre></div><p>这个模式和Builder模式的区别是，Builder模式返回的是* Server对象，Functional Options返回的是函数类型**func(* Server)**。</p>
+</code></pre></div><p>这个模式和Builder模式的区别是，Builder模式返回的是* Server对象，Functional Options返回的是函数类型<strong>func(* Server)</strong>。</p>
 <p>上面这组代码传入一个参数，然后返回一个函数，返回的这个函数会设置自己的 Server 参数。例如：</p>
 <ul>
 <li>当我们调用其中的一个函数用 MaxConns(30) 时</li>
@@ -252,7 +252,7 @@
 这个叫高阶函数。</li>
 </ul>
 <p>这样我们就方便在NewServer里面统一初始化。循环对我们的函数类型执行调用操作。 option(&amp;srv).</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewServer</span>(<span style="color:#a6e22e">addr</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">port</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">options</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">func</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>)) (<span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>, <span style="color:#66d9ef">error</span>) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewServer</span>(<span style="color:#a6e22e">addr</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">port</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">options</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">func</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>)) (<span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>, <span style="color:#66d9ef">error</span>) {
   <span style="color:#a6e22e">srv</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Server</span>{
     <span style="color:#a6e22e">Addr</span>:     <span style="color:#a6e22e">addr</span>,
     <span style="color:#a6e22e">Port</span>:     <span style="color:#a6e22e">port</span>,
@@ -267,7 +267,7 @@
 </span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">srv</span>, <span style="color:#66d9ef">nil</span>
 }
 </code></pre></div><p>调用方式如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">srv1</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewServer</span>(<span style="color:#e6db74">&#34;127.0.0.1&#34;</span>, <span style="color:#ae81ff">8000</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">srv1</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewServer</span>(<span style="color:#e6db74">&#34;127.0.0.1&#34;</span>, <span style="color:#ae81ff">8000</span>)
 <span style="color:#a6e22e">srv2</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewServer</span>(<span style="color:#e6db74">&#34;127.0.0.1&#34;</span>, <span style="color:#ae81ff">8000</span>, <span style="color:#a6e22e">Protocol</span>(<span style="color:#e6db74">&#34;udp&#34;</span>), <span style="color:#a6e22e">Timeout</span>(<span style="color:#ae81ff">10</span>), <span style="color:#a6e22e">MaxConns</span>(<span style="color:#ae81ff">100</span>))
 </code></pre></div><p>怎么样，是不是高度的整洁和优雅？不但解决了使用 Config 对象方式 的需要有一个config参数，但在不需要的时候，是放 nil 还是放 Config{}的选择困难，也不需要引用一个Builder的控制对象，直接使用函数式编程的试，在代码阅读上也很优雅。</p>
 <p>所以，以后，大家在要玩类似的代码时，强烈推荐使用Functional Options这种方式，这种方式至少带来了如下的好处：</p>
@@ -389,6 +389,10 @@
     </li>
     
     <li>
+        <a href="https://left-pocket.github.io/post/git/git_rebase/" title="git rebase使用详解">git rebase使用详解</a>
+    </li>
+    
+    <li>
         <a href="https://left-pocket.github.io/post/golang/goroutine_implementation/" title="goroutine的实现原理">goroutine的实现原理</a>
     </li>
     
@@ -416,10 +420,6 @@
         <a href="https://left-pocket.github.io/post/algorithm/bloom_filter/" title="布隆过滤器(Bloom Filter)详解">布隆过滤器(Bloom Filter)详解</a>
     </li>
     
-    <li>
-        <a href="https://left-pocket.github.io/post/system_design/friends_status/" title="朋友圈技术设计与实现">朋友圈技术设计与实现</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -430,6 +430,8 @@
 <ul class="widget-list">
     
     <li><a href="https://left-pocket.github.io/categories/db/">db (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/git/">git (1)</a></li>
     
     <li><a href="https://left-pocket.github.io/categories/golang/">Golang (5)</a></li>
     
@@ -461,6 +463,8 @@
 <div class="tagcloud">
     
     <a href="https://left-pocket.github.io/tags/db/">db</a>
+    
+    <a href="https://left-pocket.github.io/tags/git/">git</a>
     
     <a href="https://left-pocket.github.io/tags/golang/">Golang</a>
     

@@ -92,16 +92,16 @@
         <div class="post-content">
             <p>记录一下在centos7下安装ssr(shadowsocksr)的教程。</p>
 <h2 id="安装必要依赖包">安装必要依赖包</h2>
-<pre><code>yum install git -y
+<pre tabindex="0"><code>yum install git -y
 yum install epel-release -y
 yum install libsodium -y
 yum install epel-release -y
 yum install libsodium -y
 </code></pre><h2 id="下载shadowsocksr">下载shadowsocksr</h2>
-<pre><code>git clone -b manyuser https://github.com/shadowsocksr-backup/shadowsocksr.git &amp;&amp; cd shadowsocksr/
+<pre tabindex="0"><code>git clone -b manyuser https://github.com/shadowsocksr-backup/shadowsocksr.git &amp;&amp; cd shadowsocksr/
 </code></pre><h2 id="修改配置">修改配置</h2>
 <p>vim user-config.json</p>
-<pre><code>{
+<pre tabindex="0"><code>{
     &quot;server&quot;: &quot;0.0.0.0&quot;,
     &quot;server_port&quot;: 80,
     &quot;local_address&quot;: &quot;127.0.0.1&quot;,
@@ -233,6 +233,10 @@ python server.py -d start</p>
     </li>
     
     <li>
+        <a href="https://left-pocket.github.io/post/git/git_rebase/" title="git rebase使用详解">git rebase使用详解</a>
+    </li>
+    
+    <li>
         <a href="https://left-pocket.github.io/post/golang/goroutine_implementation/" title="goroutine的实现原理">goroutine的实现原理</a>
     </li>
     
@@ -260,10 +264,6 @@ python server.py -d start</p>
         <a href="https://left-pocket.github.io/post/algorithm/bloom_filter/" title="布隆过滤器(Bloom Filter)详解">布隆过滤器(Bloom Filter)详解</a>
     </li>
     
-    <li>
-        <a href="https://left-pocket.github.io/post/system_design/friends_status/" title="朋友圈技术设计与实现">朋友圈技术设计与实现</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -274,6 +274,8 @@ python server.py -d start</p>
 <ul class="widget-list">
     
     <li><a href="https://left-pocket.github.io/categories/db/">db (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/git/">git (1)</a></li>
     
     <li><a href="https://left-pocket.github.io/categories/golang/">Golang (5)</a></li>
     
@@ -305,6 +307,8 @@ python server.py -d start</p>
 <div class="tagcloud">
     
     <a href="https://left-pocket.github.io/tags/db/">db</a>
+    
+    <a href="https://left-pocket.github.io/tags/git/">git</a>
     
     <a href="https://left-pocket.github.io/tags/golang/">Golang</a>
     

@@ -92,7 +92,7 @@
         <div class="post-content">
             <h2 id="背景">背景</h2>
 <p>我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了write conflict.</p>
-<pre><code>[2020/08/25 06:01:44.781 +08:00] [WARN] [session.go:623] [retrying] [conn=26799778] [schemaVersion=194] [retryCnt=0] [queryNum=0] [sql=&quot;UPDATE user_tab SET `region` = ?, `status` = ?, `update_time` = ? WHERE `from_userid` = ? AND `to_userid` = ? AND `type` = ? [arguments: (ID, 0, 1598306504, 118049824, 8572364, 1)]&quot;]
+<pre tabindex="0"><code>[2020/08/25 06:01:44.781 +08:00] [WARN] [session.go:623] [retrying] [conn=26799778] [schemaVersion=194] [retryCnt=0] [queryNum=0] [sql=&quot;UPDATE user_tab SET `region` = ?, `status` = ?, `update_time` = ? WHERE `from_userid` = ? AND `to_userid` = ? AND `type` = ? [arguments: (ID, 0, 1598306504, 118049824, 8572364, 1)]&quot;]
 [2020/08/25 06:01:44.782 +08:00] [WARN] [session.go:644] [&quot;transaction association&quot;] [conn=26799778] [&quot;retrying txnStartTS&quot;=418986460378563450] [&quot;original txnStartTS&quot;=418986460352348716]
 [2020/08/25 06:01:44.783 +08:00] [INFO] [2pc.go:1104] [&quot;2PC clean up done&quot;] [conn=26799778] [txnStartTS=418986460352348716]
 [2020/08/25 06:01:45.612 +08:00] [WARN] [client_batch.go:577] [&quot;send request is cancelled&quot;] [to=10.65.234.201:20160] [cause=&quot;context canceled&quot;]
@@ -127,15 +127,15 @@
 <!-- raw HTML omitted -->key={tableID=47, indexID=1, indexValues={string, }}<!-- raw HTML omitted -->：表示当前事务中冲突的数据，tableID 表示发生冲突的表的 ID，indexID 表示是索引数据发生了冲突。如果是数据发生了冲突，会打印 handle=x 表示对应哪行数据发生了冲突，indexValues 表示发生冲突的索引数据
 <!-- raw HTML omitted -->primary={tableID=47, indexID=1, indexValues={string, }}<!-- raw HTML omitted -->：表示当前事务中的 Primary Key 信息</p>
 <p>通过 pd-ctl 将时间戳转换为可读时间：</p>
-<pre><code>./pd-ctl -u https://127.0.0.1:2379 tso {TIMESTAMP}
+<pre tabindex="0"><code>./pd-ctl -u https://127.0.0.1:2379 tso {TIMESTAMP}
 </code></pre><p>通过 tableID 查找具体的表名：</p>
-<pre><code>curl http://{TiDBIP}:10080/db-table/{tableID}
+<pre tabindex="0"><code>curl http://{TiDBIP}:10080/db-table/{tableID}
 </code></pre><p>通过 indexID 查找具体的索引名：</p>
-<pre><code>SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEXES WHERE TABLE_SCHEMA='{table_name}' AND TABLE_NAME='{table_name}' AND INDEX_ID={indexID};
+<pre tabindex="0"><code>SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEXES WHERE TABLE_SCHEMA='{table_name}' AND TABLE_NAME='{table_name}' AND INDEX_ID={indexID};
 </code></pre><p>另外在 v3.0.8 及之后版本默认使用悲观事务模式，从而避免在事务提交的时候因为冲突而导致失败，无需修改应用程序。悲观事务模式下会在每个 DML 语句执行的时候，加上悲观锁，用于防止其他事务修改相同 Key，从而保证在最后提交的 prewrite 阶段不会出现写写冲突的情况。</p>
 <h2 id="总结">总结</h2>
 <p>TiDB的乐观锁，会导致使用普通的SQL语句更新的时候。</p>
-<pre><code>UPDATE user_tab set name = `***` where userid = `a`
+<pre tabindex="0"><code>UPDATE user_tab set name = `***` where userid = `a`
 </code></pre><p>TiDB中当有并发请求对同一个unique key进行update操作的时候，由于乐观锁的机制，会出现Write Conflict. 而MySQL使用的是悲观锁，不会出现Write Conflict.</p>
 
         </div>
@@ -239,6 +239,10 @@
     </li>
     
     <li>
+        <a href="https://left-pocket.github.io/post/git/git_rebase/" title="git rebase使用详解">git rebase使用详解</a>
+    </li>
+    
+    <li>
         <a href="https://left-pocket.github.io/post/golang/goroutine_implementation/" title="goroutine的实现原理">goroutine的实现原理</a>
     </li>
     
@@ -266,10 +270,6 @@
         <a href="https://left-pocket.github.io/post/algorithm/bloom_filter/" title="布隆过滤器(Bloom Filter)详解">布隆过滤器(Bloom Filter)详解</a>
     </li>
     
-    <li>
-        <a href="https://left-pocket.github.io/post/system_design/friends_status/" title="朋友圈技术设计与实现">朋友圈技术设计与实现</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -280,6 +280,8 @@
 <ul class="widget-list">
     
     <li><a href="https://left-pocket.github.io/categories/db/">db (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/git/">git (1)</a></li>
     
     <li><a href="https://left-pocket.github.io/categories/golang/">Golang (5)</a></li>
     
@@ -311,6 +313,8 @@
 <div class="tagcloud">
     
     <a href="https://left-pocket.github.io/tags/db/">db</a>
+    
+    <a href="https://left-pocket.github.io/tags/git/">git</a>
     
     <a href="https://left-pocket.github.io/tags/golang/">Golang</a>
     

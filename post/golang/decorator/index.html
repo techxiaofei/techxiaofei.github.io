@@ -94,24 +94,24 @@
 <strong>定义：装饰器模式主要对现有的类对象进行包裹和封装，以期望在不改变类对象及其类定义的情况下，为对象添加额外功能。是一种对象结构型模式。</strong></p>
 <h1 id="python装饰器模式">Python装饰器模式</h1>
 <p>如果你熟悉Python，对装饰器模式应该不陌生。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(method):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(method):
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inner</span>(a, b):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;before...&#34;</span>)
+        print(<span style="color:#e6db74">&#34;before...&#34;</span>)
         ret <span style="color:#f92672">=</span> method(a, b)
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;after...&#34;</span>)
+        print(<span style="color:#e6db74">&#34;after...&#34;</span>)
         <span style="color:#66d9ef">return</span> ret
     <span style="color:#66d9ef">return</span> inner
 
 <span style="color:#a6e22e">@wrapper</span>
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(a, b):
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;run add&#34;</span>)
+    print(<span style="color:#e6db74">&#34;run add&#34;</span>)
     <span style="color:#66d9ef">return</span> a <span style="color:#f92672">+</span> b
 
 ret <span style="color:#f92672">=</span> add(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>)
 <span style="color:#f92672">//</span>ret <span style="color:#f92672">=</span> wrapper(add)(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>)
-<span style="color:#66d9ef">print</span>(ret)
+print(ret)
 </code></pre></div><p>这就是最简单的装饰器模式，可以看到，在不改变<strong>add</strong>的定义的情况下，使用<strong>wrapper</strong>对<strong>add</strong>进行装饰。最终会输出：</p>
-<pre><code>before...
+<pre tabindex="0"><code>before...
 run add
 after...
 3
@@ -120,7 +120,7 @@ after...
 <p>在Golang中，装饰器(decorator)是一个这样的函数：它的参数是具体类型的函数，在装饰函数里面执行具体的函数之余，执行其他操作。</p>
 <h2 id="简单示例">简单示例：</h2>
 <p>我们先来看一个最简单的示例：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 <span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
 <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">decorator</span>(<span style="color:#a6e22e">f</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>)) <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>) {
     <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>) {
@@ -137,12 +137,12 @@ after...
 }
 </code></pre></div><p>是不是跟Python的装饰器一模一样，只不过Python支持@decorator语法糖，可以简化调用过程中的decorator。
 这里你也可以这么写：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">hello</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">decorator</span>(<span style="color:#a6e22e">Hello</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">hello</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">decorator</span>(<span style="color:#a6e22e">Hello</span>)
 <span style="color:#a6e22e">hello</span>(<span style="color:#e6db74">&#34;Hello&#34;</span>)
 </code></pre></div><p>decorator是一个高阶函数，输入参数是一个函数，输出参数也是一个函数。就是装饰一个函数的作用，在不改变被装饰的函数的前提下，执行一些其他的操作。
 这个示例看起来没什么作用，只是示范用，下面举几个在实际开发过程中常用的案例。</p>
 <h2 id="计算运行时间">计算运行时间</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
 	<span style="color:#e6db74">&#34;fmt&#34;</span>
@@ -179,7 +179,7 @@ after...
 
 </code></pre></div><p>可以看到我们有任何一个函数<strong>Add</strong>, 需要计算函数执行时间，又不想修改函数本身，此时定义一个装饰器函数calculateRunTime，来修饰需要统计的函数Add。</p>
 <h2 id="http">HTTP</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
     <span style="color:#e6db74">&#34;fmt&#34;</span>
@@ -320,6 +320,10 @@ after...
     </li>
     
     <li>
+        <a href="https://left-pocket.github.io/post/git/git_rebase/" title="git rebase使用详解">git rebase使用详解</a>
+    </li>
+    
+    <li>
         <a href="https://left-pocket.github.io/post/golang/goroutine_implementation/" title="goroutine的实现原理">goroutine的实现原理</a>
     </li>
     
@@ -347,10 +351,6 @@ after...
         <a href="https://left-pocket.github.io/post/algorithm/bloom_filter/" title="布隆过滤器(Bloom Filter)详解">布隆过滤器(Bloom Filter)详解</a>
     </li>
     
-    <li>
-        <a href="https://left-pocket.github.io/post/system_design/friends_status/" title="朋友圈技术设计与实现">朋友圈技术设计与实现</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -361,6 +361,8 @@ after...
 <ul class="widget-list">
     
     <li><a href="https://left-pocket.github.io/categories/db/">db (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/git/">git (1)</a></li>
     
     <li><a href="https://left-pocket.github.io/categories/golang/">Golang (5)</a></li>
     
@@ -392,6 +394,8 @@ after...
 <div class="tagcloud">
     
     <a href="https://left-pocket.github.io/tags/db/">db</a>
+    
+    <a href="https://left-pocket.github.io/tags/git/">git</a>
     
     <a href="https://left-pocket.github.io/tags/golang/">Golang</a>
     

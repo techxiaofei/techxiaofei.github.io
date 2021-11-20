@@ -104,7 +104,7 @@
 <p><strong>大概描述了一下什么是布隆过滤器，我根据实际场景来让大家了解一下在什么场景下需要布隆过滤器，它又解决了什么问题。</strong></p>
 <p>我们有一个需求，是判断任意的两个userid有没有聊过天。即(useridA, useridB)是否聊过天，来决定前端场景是否展示对方的username。
 我们最初的设计是放在Redis里面，存放的格式是：</p>
-<pre><code>Redis String
+<pre tabindex="0"><code>Redis String
 Key: {prefix}{useridA},{useridB}
 Value: &quot;1&quot;
 </code></pre><p>我们的Userid是int32的递增值，现在已经有10位整数。（eg: 1212341234）。所以这个key至少有22bytes.
@@ -170,7 +170,7 @@ Value: &quot;1&quot;
 <p>你可能会好奇，误判率是什么。
 因为我们使用的是hash映射。不同的数据经过不同的hash函数是有几率映射到同一个位置的。
 例如：</p>
-<pre><code>f1(golang)=2, f2(golang)=6, f3(golang)=11
+<pre tabindex="0"><code>f1(golang)=2, f2(golang)=6, f3(golang)=11
  
  
 f1(python)=6
@@ -194,7 +194,7 @@ f3(cpp)=2
 <h3 id="redisbloom-安装">RedisBloom 安装</h3>
 <p>Redis不是默认就有，需要安装module才可以使用其命令。
 未安装之前提示：</p>
-<pre><code>127.0.0.1:6379&gt; bf.add bloom_key bloom_value
+<pre tabindex="0"><code>127.0.0.1:6379&gt; bf.add bloom_key bloom_value
 (error) ERR unknown command `bf.add`, with args beginning with: `bloom_key`, `bloom_value`,
 </code></pre><p>可以使用docker安装，也可以使用源码安装：
 这里只展示一下docker安装并测试简单指令，有需要源码安装的可以网上查看教程。</p>
@@ -204,7 +204,7 @@ f3(cpp)=2
 <li>进入docker</li>
 <li>执行redis-cli</li>
 </ol>
-<pre><code>docker pull redislabs/rebloom:latest
+<pre tabindex="0"><code>docker pull redislabs/rebloom:latest
 docker run -p 6379:6379 --name redis-redisbloom redislabs/rebloom:latest
 docker exec -it redis-redisbloom bash
 # redis-cli
@@ -230,7 +230,7 @@ redis中bit映射被限制在512MB之内。
         <img class="mx-auto" alt="Bloom" src="/img/algorithm/bloom_redis.png" />   
     </p>
 <p>核心代码如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">redisMaxLength</span> <span style="color:#66d9ef">int64</span> = <span style="color:#ae81ff">8</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">512</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1024</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1024</span>  <span style="color:#75715e">//512M
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">redisMaxLength</span> <span style="color:#66d9ef">int64</span> = <span style="color:#ae81ff">8</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">512</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1024</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1024</span>  <span style="color:#75715e">//512M
 </span><span style="color:#75715e"></span> 
 <span style="color:#a6e22e">offsets</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">int64</span>{<span style="color:#a6e22e">f1</span>(<span style="color:#e6db74">&#34;data1&#34;</span>), <span style="color:#a6e22e">f2</span>(<span style="color:#e6db74">&#34;data1&#34;</span>), <span style="color:#f92672">...</span>, <span style="color:#a6e22e">fk</span>(<span style="color:#e6db74">&#34;data1&#34;</span>)}
  
@@ -244,7 +244,7 @@ redis中bit映射被限制在512MB之内。
 </span><span style="color:#75715e"></span>    <span style="color:#a6e22e">redis</span>.<span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">GetBit</span>(<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">thisOffset</span>)  <span style="color:#75715e">//get
 </span><span style="color:#75715e"></span>}
 </code></pre></div><p><em>使用案例</em></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">client</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">redis</span>.<span style="color:#a6e22e">Client</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">client</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">redis</span>.<span style="color:#a6e22e">Client</span>
 <span style="color:#a6e22e">client</span> = <span style="color:#a6e22e">redis</span>.<span style="color:#a6e22e">NewClient</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">redis</span>.<span style="color:#a6e22e">Options</span>{
     <span style="color:#a6e22e">Addr</span>:     <span style="color:#e6db74">&#34;127.0.0.1:6379&#34;</span>,
     <span style="color:#a6e22e">Password</span>: <span style="color:#e6db74">&#34;&#34;</span>,
@@ -387,6 +387,10 @@ redis中bit映射被限制在512MB之内。
     </li>
     
     <li>
+        <a href="https://left-pocket.github.io/post/git/git_rebase/" title="git rebase使用详解">git rebase使用详解</a>
+    </li>
+    
+    <li>
         <a href="https://left-pocket.github.io/post/golang/goroutine_implementation/" title="goroutine的实现原理">goroutine的实现原理</a>
     </li>
     
@@ -414,10 +418,6 @@ redis中bit映射被限制在512MB之内。
         <a href="https://left-pocket.github.io/post/algorithm/bloom_filter/" title="布隆过滤器(Bloom Filter)详解">布隆过滤器(Bloom Filter)详解</a>
     </li>
     
-    <li>
-        <a href="https://left-pocket.github.io/post/system_design/friends_status/" title="朋友圈技术设计与实现">朋友圈技术设计与实现</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -428,6 +428,8 @@ redis中bit映射被限制在512MB之内。
 <ul class="widget-list">
     
     <li><a href="https://left-pocket.github.io/categories/db/">db (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/git/">git (1)</a></li>
     
     <li><a href="https://left-pocket.github.io/categories/golang/">Golang (5)</a></li>
     
@@ -459,6 +461,8 @@ redis中bit映射被限制在512MB之内。
 <div class="tagcloud">
     
     <a href="https://left-pocket.github.io/tags/db/">db</a>
+    
+    <a href="https://left-pocket.github.io/tags/git/">git</a>
     
     <a href="https://left-pocket.github.io/tags/golang/">Golang</a>
     

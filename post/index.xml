@@ -6,14 +6,14 @@
     <description>Recent content in Posts on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 18 Apr 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 20 Nov 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>博客分类</title>
       <link>https://left-pocket.github.io/post/catalog/golang_design_patterns/</link>
       <pubDate>Fri, 01 Jan 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/catalog/golang_design_patterns/</guid>
-      <description>Golang 设计模式篇 Functional Options 函数式选项模式 [Decorator 装饰器模式]https://github.com） 系统设计篇 #</description>
+      <description>Golang 设计模式篇 Functional Options 函数式选项模式 [Decorator 装饰器模式]https://github.com） 系统设计篇</description>
     </item>
     
     <item>
@@ -23,6 +23,15 @@
       
       <guid>https://left-pocket.github.io/post/catalog/interview_tech_stack/</guid>
       <description>网络编程篇 数据结构与算法篇 Redis篇 MySQL篇 Golang篇 设计模式篇 Kafka篇 C/C++篇 系统设计篇 Linux技术篇</description>
+    </item>
+    
+    <item>
+      <title>git rebase使用详解</title>
+      <link>https://left-pocket.github.io/post/git/git_rebase/</link>
+      <pubDate>Sat, 20 Nov 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/git/git_rebase/</guid>
+      <description>背景 刚开始接触git的时候只会一些简单的指令，pull, add, commit, merge, push 等几个基础命令就可以了。但是经常使用git后，还是需要了解一些相对高端的常用</description>
     </item>
     
     <item>

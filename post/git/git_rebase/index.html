@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>git rebase使用详解 | Leftpocket的个人博客</title>
+    <meta property="og:title" content="git rebase使用详解 - Leftpocket的个人博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-11-20T13:00:51&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-11-20T13:00:51&#43;08:00'>
+        
+    <meta name="Keywords" content="[git rebase]">
+    <meta name="description" content="git rebase使用详解">
+        
+    <meta name="author" content="leftpocket">
+    <meta property="og:url" content="https://left-pocket.github.io/post/git/git_rebase/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/custom.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://left-pocket.github.io/">
+                        Leftpocket的个人博客
+                    </a>
+                
+                <p class="description">个人博客</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://left-pocket.github.io/">首页</a>
+                    
+                    <a  href="https://left-pocket.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://left-pocket.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">git rebase使用详解</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年11月20日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/git'>git</a></span>
+            
+        </div>
+        
+        
+        
+        <div class="post-content">
+            <h1 id="背景">背景</h1>
+<p>刚开始接触git的时候只会一些简单的指令，<strong>pull, add, commit, merge, push</strong> 等几个基础命令就可以了。但是经常使用git后，还是需要了解一些相对高端的常用指令。
+像 <strong>rebase/reset/revert</strong> 等，也是需要常用到的指令。这一篇文章我们先讲 <strong>git rebase</strong> 命令的常见用法。</p>
+<h1 id="理解rebase命令">理解Rebase命令</h1>
+<p><strong>概念</strong></p>
+<p><strong>git rebase</strong> 命令的文档描述是：</p>
+<pre tabindex="0"><code>Reapply commits on top of another base tip
+</code></pre><p>从字面上理解是「在另一个基端之上重新应用提交」，这个定义听起来有点抽象，换个角度可以理解为「将分支的基础从一个提交改成另一个提交，使其看起来就像是从另一个提交中创建了分支一样」。</p>
+<p>下面我来详细讲解一下git rebase最常用的两个用法，让大家更深入的理解 <strong>在另一个基端之上重新应用提交</strong> 的概念。</p>
+<p>Rebase常用的两个使用场景是：</p>
+<ul>
+<li>合并commit记录</li>
+<li>合并分支（重写提交历史）</li>
+</ul>
+<h2 id="一合并commit记录">一、合并commit记录</h2>
+<p>有时候开发一个 <strong>feature</strong> 的时候，在自己的 <strong>feature</strong> 分支有过多次修改记录，多的时候有好几十次。每次都进行了一些小的修改。这么多commit看起来很不舒服，而且如果合并到master，导入了过多的commit，导致充满了很多无用的commit记录，如果有一天线上出现问题需要回滚代码，大量的commit记录会让你爆炸。</p>
+<p>
+        <img class="mx-auto" alt="slice" src="/img/git/git_mr_1.png" />   
+    </p>
+<p>我这里实际的演示，我在我的开发分支 <strong>feature1</strong> 开发了一个功能，有多条<strong>commit</strong> 记录，我想要合并成一条，然后提交MR到<strong>master（main）</strong>。</p>
+<p><!-- raw HTML omitted --><strong>Note：</strong><!-- raw HTML omitted --> <strong>github</strong> 叫 <strong>Pull Request</strong>， <strong>github</strong> 叫 <strong>Merge Request</strong>，只是叫法不一样。</p>
+<p>这个时候就需要用到git rebase了。这个命令并不难，对于git命令的新手来说不熟悉的情况下可能不太敢使用。</p>
+<h3 id="1-合并最近的三条提交记录">1. 合并最近的三条提交记录</h3>
+<p>执行：</p>
+<pre tabindex="0"><code>git rebase -i HEAD~3
+</code></pre><p>或者</p>
+<pre tabindex="0"><code>git rebase -i commit_id
+</code></pre><p>这里的commit_id是你要合并的第一条commit的<strong>前一条</strong>。</p>
+<p>会自动进入vi编辑模式。
+
+        <img class="mx-auto" alt="slice" src="/img/git/git_rebase.png" />   
+    </p>
+<p>这里可以看到我们有三次提交记录：</p>
+<pre tabindex="0"><code>pick 3ae8e31 fix 1
+pick c2828fb fix 2
+pick 6077ab1 fix 3
+
+# Rebase c0933b9..6077ab1 onto c0933b9 (3 commands)
+#
+# Commands:
+# p, pick &lt;commit&gt; = use commit
+# r, reword &lt;commit&gt; = use commit, but edit the commit message
+# e, edit &lt;commit&gt; = use commit, but stop for amending
+# s, squash &lt;commit&gt; = use commit, but meld into previous commit
+# f, fixup &lt;commit&gt; = like &quot;squash&quot;, but discard this commit's log message
+# x, exec &lt;command&gt; = run command (the rest of the line) using shell
+# b, break = stop here (continue rebase later with 'git rebase --continue')
+</code></pre><p>这里有一些<strong>Commands</strong>，每个有不同的作用，上面都有详细的解释。
+我们暂时只需要关注两个，一个是 <strong>p(pick)</strong>, 一个是 <strong>s(squash)</strong>。
+把第一个commit使用 <strong>p</strong>，后面的所有commit都使用 <strong>s</strong>。</p>
+<h3 id="2把除第一条commit外都改成squash">2、把除第一条commit外都改成squash</h3>
+<pre tabindex="0"><code>pick 3ae8e31 fix 1
+s c2828fb fix 2
+s 6077ab1 fix 3
+</code></pre><p>像以上这样，把 <strong>pick</strong> 改成 <strong>s(squash)</strong>。
+然后使用 <strong>:wq</strong> 退出编辑。</p>
+<h3 id="3修改commit信息可选">3、修改commit信息（可选）</h3>
+<p>如果你觉得第一条的commit不太好，想改成一个比较可读性的commit记录，可以直接修改。
+
+        <img class="mx-auto" alt="slice" src="/img/git/git_rebase_wq.png" />   
+    </p>
+<p>这里我把</p>
+<pre tabindex="0"><code>fix 1
+</code></pre><p>直接编辑 修改为</p>
+<pre tabindex="0"><code>feature 1 development
+</code></pre><p>然后 <strong>:wq</strong> 退出。</p>
+<h3 id="4-git-log查看commit记录">4、 git log查看commit记录。</h3>
+<p>这个时候会发现git log里面关于你的feature只有一条commit记录了，就是rebase成功了。</p>
+<h3 id="5git-push--f">5、git push -f</h3>
+<p>最后一步就是执行 <strong>git push -f</strong> 强制push到远端。一定要加 <strong>-f</strong> 或者 <strong>&ndash;force</strong>。不然无法push成功。因为你当前的本地分支已经回到了之前的提交点。</p>
+<p>这个时候刷新一下你的MR的页面。就会发现：</p>
+<p>
+        <img class="mx-auto" alt="slice" src="/img/git/git_rebase_push.png" />   
+    </p>
+<p>你的commit已经合并了。这个时候你在Merge到master分支，就只有这一条commit记录了。是不是非常干净了。</p>
+<h2 id="二合并分支">二、合并分支</h2>
+<p>rebase的第二大作用就是合并分支了。
+<strong>rebase</strong> 通常用于重写提交历史。下面的使用场景在大多数 Git 工作流中是十分常见的：</p>
+<ul>
+<li>我们从 <strong>master</strong> 分支拉取了一条 <em>feature1</em>* 分支在本地进行功能开发</li>
+<li>远程的 <strong>master</strong> 分支在之后又合并了一些新的提交</li>
+<li>我们想在 <strong>feature1</strong> 分支集成 <strong>master</strong> 的最新更改</li>
+</ul>
+<p>下面用具体的例子来描述</p>
+<h3 id="1我们先从-master-分支切出一个-feature1-分支进行开发">1、我们先从 <strong>master</strong> 分支切出一个 <strong>feature1</strong> 分支，进行开发：</h3>
+<pre tabindex="0"><code>git:(master) git checkout -b feature1
+</code></pre><pre tabindex="0"><code>  D  feature1
+ /
+A  master
+</code></pre><h3 id="2这个时候你的同事可能开发了-feature2-并合并到了-master此时master-已经领先于你的-feature1-分支了">2、这个时候你的同事可能开发了 <strong>feature2</strong> 并合并到了 <strong>master</strong>，此时<strong>master</strong> 已经领先于你的 <strong>feature1</strong> 分支了。</h3>
+<pre tabindex="0"><code>  D  feature1
+ /
+A --- B master
+</code></pre><h3 id="3之后我们需要同步-master-的改动">3、之后我们需要同步 <strong>master</strong> 的改动。</h3>
+<p>最常用的做法就是：</p>
+<pre tabindex="0"><code>git merge master
+</code></pre><pre tabindex="0"><code>  D --- E feature1'
+ /     /
+A --- B master
+</code></pre><p>使用过git命令的人都了解这个命令。
+合并之后查看一下log。执行：</p>
+<pre tabindex="0"><code>git log
+</code></pre><p>就会发现多了一些 <strong>merge</strong> 的commit信息。如果你的feature的开发周期很长，经常需要定期merge master，就会发现多了很多的 commit 信息。想要保持一份干净的 <strong>commit</strong>， 这个时候 <strong>git rebase</strong> 就派上用场了。</p>
+<h3 id="4使用-git-rebase-master-代替-git-merge-master">4、使用 <strong>git rebase master</strong> 代替 <strong>git merge master</strong></h3>
+<pre tabindex="0"><code>git rebase master
+</code></pre><p>这里 <strong>git rebase</strong> 的原理是什么呢？</p>
+<ol>
+<li>git 会把 feature1 分支里面的每个 commit 取消掉；</li>
+<li>把上面的操作临时保存成 patch 文件，存在 .git/rebase 目录下；</li>
+<li>把 feature1 分支更新到最新的 master 分支；</li>
+<li>把上面保存的 patch 文件应用到 feature1 分支上；</li>
+</ol>
+<pre tabindex="0"><code>        D feature1
+       /
+A --- B master
+</code></pre><p>从 <strong>commit</strong> 记录我们可以看出来，<strong>feature1</strong> 分支是基于 <strong>feature2</strong> 合并后的 <strong>master</strong>，就像把一个并行的流程变成一个串行的流程。就没有了 <strong>merge</strong> 的 <strong>commit</strong> 记录，看起来会清晰多了。</p>
+<p><strong>Note:</strong>
+在 rebase 的过程中，也许会出现冲突 conflict。在这种情况，git 会停止 rebase 并会让你去解决冲突。在解决完冲突后，用 git add 命令去更新这些内容。</p>
+<pre tabindex="0"><code>git rebase --continue
+</code></pre><p>在任何时候，我们都可以用 &ndash;abort 参数来终止 rebase 的行动，并且分支会回到 rebase 开始前的状态。</p>
+<pre tabindex="0"><code>git rebase —abort
+</code></pre><h2 id="更多使用场景">更多使用场景</h2>
+<p>通过 rebase 策略执行 git pull
+Git 在最近的某个版本起，直接运行 git pull 会有如下提示消息：</p>
+<p>warning: 不建议在没有为偏离分支指定合并策略时执行 pull 操作。 您可以在执行下一次 pull 操作之前执行下面一条命令来抑制本消息：</p>
+<p>git config pull.rebase false  # 合并（缺省策略）
+git config pull.rebase true   # 变基
+git config pull.ff only       # 仅快进</p>
+<p>&hellip;&hellip;
+原来 git pull 时也可以通过 rebase 来进行合并，这是因为 git pull 实际上等于 git fetch + git merge ，我们可以在第二步直接用 git rebase 替换 git merge来合并 fetch 取得的变更，作用同样是避免额外的 merge 提交以保持线性的提交历史。</p>
+<p>两者的区别在上文中已进行过对比，我们可以把对比示例中的 Matser 分支当成远程分支，把 Feature 分支当成本地分支，当我们在本地执行 git pull 时，其实就是拉取 Master 的更改然后合并到 Feature 分支。如果两个分支都有不同的提交，默认的 git merge 方式会生成一个单独的 merge 提交以整合这些提交；而使用 git rebase 则相当于基于远程分支的最新提交重新创建本地分支，然后再重新应用本地所添加的提交。</p>
+<p>具体的使用方式有多种：</p>
+<p>每次执行 pull 命令时添加特定选项： git pull &ndash;rebase 。
+为当前仓库设定配置项： git config pull.rebase true，在 git config 后添加 &ndash;global 选项可以使该配置项对所有仓库生效。</p>
+<h1 id="结论">结论</h1>
+<p>git-rebase 存在的价值是：对一个分支做「变基」操作。
+1.当我们某一个分支有过多的 <strong>commit</strong> 记录需要整合，执行 <strong>rebase</strong> 来合并提交。
+2.当我们在一个过时的分支上面开发的时候，执行 <strong>rebase</strong> 以此同步 <strong>master</strong> 分支最新变动；
+3.假如我们要启动一个放置了很久的并行工作，现在有时间来继续这件事情，很显然这个分支已经落后了。这时候需要在最新的基准上面开始工作，所以 rebase 是最合适的选择。</p>
+
+        </div>
+
+        
+
+
+        
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/git'>git</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "stormwy/blog-comments"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://left-pocket.github.io/">Leftpocket的个人博客 By leftpocket</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='//www.google.com/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://left-pocket.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/catalog/golang_design_patterns/" title="博客分类">博客分类</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/catalog/interview_tech_stack/" title="服务端面试技术栈">服务端面试技术栈</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/git/git_rebase/" title="git rebase使用详解">git rebase使用详解</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/golang/goroutine_implementation/" title="goroutine的实现原理">goroutine的实现原理</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/mysql/dead_lock/" title="MySQL死锁的产生">MySQL死锁的产生</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/golang/append/" title="Golang append是并发安全的吗">Golang append是并发安全的吗</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/golang/functional_options/" title="Golang函数式选项(Functional Options)编程模式">Golang函数式选项(Functional Options)编程模式</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/golang/decorator/" title="Golang装饰器(Decorator)设计模式">Golang装饰器(Decorator)设计模式</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/redis/redis_sds/" title="Redis SDS简单动态字符串">Redis SDS简单动态字符串</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/algorithm/bloom_filter/" title="布隆过滤器(Bloom Filter)详解">布隆过滤器(Bloom Filter)详解</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://left-pocket.github.io/categories/db/">db (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/git/">git (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/golang/">Golang (5)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/hugo/">hugo (2)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/leetcode/">leetcode (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/mysql/">MySQL (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/redis/">Redis (2)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/server/">server (2)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/vscode/">vscode (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E6%9D%82%E4%B9%B1/">杂乱 (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E7%AE%97%E6%B3%95/">算法 (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计 (2)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/">面试 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://left-pocket.github.io/tags/db/">db</a>
+    
+    <a href="https://left-pocket.github.io/tags/git/">git</a>
+    
+    <a href="https://left-pocket.github.io/tags/golang/">Golang</a>
+    
+    <a href="https://left-pocket.github.io/tags/hugo/">hugo</a>
+    
+    <a href="https://left-pocket.github.io/tags/leetcode/">leetcode</a>
+    
+    <a href="https://left-pocket.github.io/tags/mysql/">MySQL</a>
+    
+    <a href="https://left-pocket.github.io/tags/redis/">Redis</a>
+    
+    <a href="https://left-pocket.github.io/tags/server/">Server</a>
+    
+    <a href="https://left-pocket.github.io/tags/snowflake/">snowflake</a>
+    
+    <a href="https://left-pocket.github.io/tags/ssr/">ssr</a>
+    
+    <a href="https://left-pocket.github.io/tags/tidb/">TiDB</a>
+    
+    <a href="https://left-pocket.github.io/tags/vscode/">vscode</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E7%AE%97%E6%B3%95/">算法</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="" title=""></a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://left-pocket.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

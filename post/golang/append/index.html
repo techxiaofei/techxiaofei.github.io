@@ -92,7 +92,7 @@
         <div class="post-content">
             <h1 id="背景">背景</h1>
 <p>最近开发的时候写了下面这段类似的代码。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestAppend</span>() (<span style="color:#a6e22e">result</span> []<span style="color:#66d9ef">int</span>) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestAppend</span>() (<span style="color:#a6e22e">result</span> []<span style="color:#66d9ef">int</span>) {
 	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">wg</span> <span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">WaitGroup</span>
 	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">100</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
 		<span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">i</span>
@@ -114,7 +114,7 @@
 我们都知道slice是对数组一个连续片段的引用，当slice长度增加的时候，可能底层的数组会被换掉。当出在换底层数组之前，切片同时被多个goroutine拿到，并执行append操作。那么很多goroutine的append结果会被覆盖，导致n个gouroutine append后，长度小于n。</p>
 <h1 id="原因分析">原因分析</h1>
 <p>要分析这个原因，我们需要了解slice的底层结构。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">slice</span> <span style="color:#66d9ef">struct</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">slice</span> <span style="color:#66d9ef">struct</span> {
     <span style="color:#a6e22e">array</span> <span style="color:#a6e22e">unsafe</span>.<span style="color:#a6e22e">Pointer</span>
     <span style="color:#a6e22e">len</span>   <span style="color:#66d9ef">int</span>
     <span style="color:#a6e22e">cap</span>   <span style="color:#66d9ef">int</span>
@@ -127,7 +127,7 @@
 <p>有两种方案解决这个问题。</p>
 <h2 id="方案1">方案1</h2>
 <p>可以给append操作加锁，这样就会保证操作操作的原子性。不会被另一个goroutine打断。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestAppendWithLock</span>() (<span style="color:#a6e22e">result</span> []<span style="color:#66d9ef">int</span>) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestAppendWithLock</span>() (<span style="color:#a6e22e">result</span> []<span style="color:#66d9ef">int</span>) {
 	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">wg</span> <span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">WaitGroup</span>
 	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">lock</span> <span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">Mutex</span>
 	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">100</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
@@ -148,7 +148,7 @@
 }
 </code></pre></div><h2 id="方案2">方案2</h2>
 <p>如果slice的长度固定的情况下。可以直接使用make初始化固定长度，并使用下标赋值。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestSliceAppend</span>() (<span style="color:#a6e22e">result</span> []<span style="color:#66d9ef">int</span>) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestSliceAppend</span>() (<span style="color:#a6e22e">result</span> []<span style="color:#66d9ef">int</span>) {
 	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">wg</span> <span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">WaitGroup</span>
 	<span style="color:#a6e22e">result</span> = make([]<span style="color:#66d9ef">int</span>, <span style="color:#ae81ff">100</span>)
 	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">100</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
@@ -165,14 +165,14 @@
 }
 </code></pre></div><h1 id="后记">后记</h1>
 <p>你以为这就完了吗，其实并没有。在并发场景下，append导致的问题并不只是导致数据不一致的问题，有小概率会导致service crash.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
 	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">a</span> &lt; <span style="color:#ae81ff">100000</span>; <span style="color:#a6e22e">a</span><span style="color:#f92672">++</span> {
 		<span style="color:#a6e22e">res</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">TestAppend</span>()
 		println(<span style="color:#e6db74">&#34;len(res):&#34;</span>, len(<span style="color:#a6e22e">res</span>))
 	}
 }
 </code></pre></div><p>使用循环不停的执行并发append操作。过一段时间你就会发现：</p>
-<pre><code>panic: runtime error: invalid memory address or nil pointer dereference
+<pre tabindex="0"><code>panic: runtime error: invalid memory address or nil pointer dereference
 [signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x108933f]
 
 goroutine 9278997 [running]:
@@ -184,13 +184,13 @@ created by main.TestAppend
 Process finished with exit code 2
 </code></pre><p>的报错。
 正是</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">result</span> = append(<span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">v</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">result</span> = append(<span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">v</span>)
 </code></pre></div><p>这一行。</p>
 <p>这个报错曾经导致生产环境的service偶尔crash，这个概率非常低。
 我们使用*-race*的参数执行函数</p>
-<pre><code>go run -race main.go
+<pre tabindex="0"><code>go run -race main.go
 </code></pre><p>可以看到<em>DATA RACE</em>的报错。</p>
-<pre><code>==================
+<pre tabindex="0"><code>==================
 WARNING: DATA RACE
 Read at 0x00c000100000 by goroutine 8:
   runtime.growslice()
@@ -198,7 +198,7 @@ Read at 0x00c000100000 by goroutine 8:
   main.TestAppend.func1()
       /Users/jianfei.ma/coreserver/src/github.com/left-pocket/go-practice/concurrency_append/main.go:20 +0x179
 
-</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">growslice</span>(<span style="color:#a6e22e">et</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">_type</span>, <span style="color:#a6e22e">old</span> <span style="color:#a6e22e">slice</span>, <span style="color:#a6e22e">cap</span> <span style="color:#66d9ef">int</span>) <span style="color:#a6e22e">slice</span> {  <span style="color:#75715e">//line 76
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">growslice</span>(<span style="color:#a6e22e">et</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">_type</span>, <span style="color:#a6e22e">old</span> <span style="color:#a6e22e">slice</span>, <span style="color:#a6e22e">cap</span> <span style="color:#66d9ef">int</span>) <span style="color:#a6e22e">slice</span> {  <span style="color:#75715e">//line 76
 </span><span style="color:#75715e"></span>}
 </code></pre></div><p>发现了RACE CONDITION。
 使用goland的debug模式继续分析。
@@ -207,7 +207,7 @@ Read at 0x00c000100000 by goroutine 8:
     </p>
 <p>发现是在growslice函数里面调用memmove的时候发生了panic。基本可以确认是在slice扩容的过程中panic。
 可以在TestAppend里面加一行代码，来间接验证是扩容会产生panic。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestAppend</span>() (<span style="color:#a6e22e">result</span> []<span style="color:#66d9ef">int</span>) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestAppend</span>() (<span style="color:#a6e22e">result</span> []<span style="color:#66d9ef">int</span>) {
 	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">wg</span> <span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">WaitGroup</span>
 	<span style="color:#a6e22e">result</span> = make([]<span style="color:#66d9ef">int</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">100</span>) <span style="color:#75715e">//set capacity first, will not add capacity anymore
 </span><span style="color:#75715e"></span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">100</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
@@ -337,6 +337,10 @@ Read at 0x00c000100000 by goroutine 8:
     </li>
     
     <li>
+        <a href="https://left-pocket.github.io/post/git/git_rebase/" title="git rebase使用详解">git rebase使用详解</a>
+    </li>
+    
+    <li>
         <a href="https://left-pocket.github.io/post/golang/goroutine_implementation/" title="goroutine的实现原理">goroutine的实现原理</a>
     </li>
     
@@ -364,10 +368,6 @@ Read at 0x00c000100000 by goroutine 8:
         <a href="https://left-pocket.github.io/post/algorithm/bloom_filter/" title="布隆过滤器(Bloom Filter)详解">布隆过滤器(Bloom Filter)详解</a>
     </li>
     
-    <li>
-        <a href="https://left-pocket.github.io/post/system_design/friends_status/" title="朋友圈技术设计与实现">朋友圈技术设计与实现</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -378,6 +378,8 @@ Read at 0x00c000100000 by goroutine 8:
 <ul class="widget-list">
     
     <li><a href="https://left-pocket.github.io/categories/db/">db (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/git/">git (1)</a></li>
     
     <li><a href="https://left-pocket.github.io/categories/golang/">Golang (5)</a></li>
     
@@ -409,6 +411,8 @@ Read at 0x00c000100000 by goroutine 8:
 <div class="tagcloud">
     
     <a href="https://left-pocket.github.io/tags/db/">db</a>
+    
+    <a href="https://left-pocket.github.io/tags/git/">git</a>
     
     <a href="https://left-pocket.github.io/tags/golang/">Golang</a>
     

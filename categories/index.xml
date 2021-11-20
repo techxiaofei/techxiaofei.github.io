@@ -6,7 +6,16 @@
     <description>Recent content in Categories on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 18 Apr 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 20 Nov 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>git</title>
+      <link>https://left-pocket.github.io/categories/git/</link>
+      <pubDate>Sat, 20 Nov 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/categories/git/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Golang</title>
       <link>https://left-pocket.github.io/categories/golang/</link>
