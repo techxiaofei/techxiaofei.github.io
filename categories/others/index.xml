@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Others on Leftpocket的个人博客</title>
+    <link>https://left-pocket.github.io/categories/others/</link>
+    <description>Recent content in Others on Leftpocket的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 06 Aug 2020 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/others/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Centos7安装SSR教程</title>
+      <link>https://left-pocket.github.io/post/others/ssr-centos7/</link>
+      <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/others/ssr-centos7/</guid>
+      <description>记录一下在centos7下安装ssr(shadowsocksr)的教程。 安装必要依赖包 yum install git -y yum install epel-release -y yum install libsodium -y yum install epel-release -y yum install libsodium -y 下载shado</description>
+    </item>
+    
+  </channel>
+</rss>

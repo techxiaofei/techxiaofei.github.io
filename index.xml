@@ -8,6 +8,15 @@
     <language>en-us</language>
     <lastBuildDate>Sat, 20 Nov 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>新加坡工作内推</title>
+      <link>https://left-pocket.github.io/post/others/singapore-job/</link>
+      <pubDate>Sat, 20 Nov 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/others/singapore-job/</guid>
+      <description>本人就职于东南亚最大的电商平台 Shopee 做码农。 公司近些年快速发展，在整个东南亚占有极高的市场，同时还在飞速开拓新的市场。 工作965，弹性工作制，不</description>
+    </item>
+    
+    <item>
       <title>博客分类</title>
       <link>https://left-pocket.github.io/post/catalog/golang_design_patterns/</link>
       <pubDate>Fri, 01 Jan 2021 13:00:51 +0800</pubDate>
@@ -126,10 +135,10 @@
     
     <item>
       <title>vscode配置leetcode插件</title>
-      <link>https://left-pocket.github.io/post/vscode-leetcode/</link>
+      <link>https://left-pocket.github.io/post/others/vscode-leetcode/</link>
       <pubDate>Sat, 12 Dec 2020 13:00:51 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/post/vscode-leetcode/</guid>
+      <guid>https://left-pocket.github.io/post/others/vscode-leetcode/</guid>
       <description>作为一名合格的程序猿，大家找工作的时候经常需要刷leetcode, leetcode官网上面写代码没有IDE上面写代码那么方便，更重要的是，可</description>
     </item>
     
@@ -162,10 +171,10 @@
     
     <item>
       <title>Centos7安装SSR教程</title>
-      <link>https://left-pocket.github.io/post/ssr-centos7/</link>
+      <link>https://left-pocket.github.io/post/others/ssr-centos7/</link>
       <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/post/ssr-centos7/</guid>
+      <guid>https://left-pocket.github.io/post/others/ssr-centos7/</guid>
       <description>记录一下在centos7下安装ssr(shadowsocksr)的教程。 安装必要依赖包 yum install git -y yum install epel-release -y yum install libsodium -y yum install epel-release -y yum install libsodium -y 下载shado</description>
     </item>
     
