@@ -157,7 +157,19 @@ git branch -M main
 git remote add origin https://github.com/iwtbabc/iwtbabc.github.io.git
 git pull origin main
 git push -u origin main
-</code></pre>
+</code></pre><h2 id="支持评论">支持评论</h2>
+<p>在 <strong>config.toml</strong> 添加配置。</p>
+<pre tabindex="0"><code>[params.utteranc]
+    enable = true
+    repo = &quot;stormwy/blog-comments&quot;
+    issueTerm = &quot;pathname&quot;
+    theme = &quot;github-light&quot;
+</code></pre><p>即可支持评论。
+<strong>[params.utteranc]</strong> 是用来支持评论系统的。<strong>utterances</strong> 本来是一款基于 <strong>GitHub issues</strong> 的评论工具，类似的评论工具还有很多，有兴趣的可以研究下。
+完整配置可参考：
+<a href="https://left-pocket.github.io/post/hugo/hugo-creation/">https://left-pocket.github.io/post/hugo/hugo-creation/</a></p>
+<p>&lt;全文完&gt;</p>
+
         </div>
 
         
