@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 21 Nov 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Nov 2021 14:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>手游服务器开发技术详解</title>
+      <link>https://left-pocket.github.io/post/game/game_development/</link>
+      <pubDate>Sun, 21 Nov 2021 14:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/game/game_development/</guid>
+      <description>原文地址：https://left-pocket.github.io 从事游戏服务器开发差不多两年时间，两年间参与了不少项目，学到了很多游戏服</description>
+    </item>
+    
     <item>
       <title>二级指针的作用详解</title>
       <link>https://left-pocket.github.io/post/cpp/secondary_pointer/</link>

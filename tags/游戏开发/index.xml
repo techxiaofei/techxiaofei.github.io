@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>游戏开发 on Leftpocket的个人博客</title>
+    <link>https://left-pocket.github.io/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/</link>
+    <description>Recent content in 游戏开发 on Leftpocket的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 21 Nov 2021 14:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>手游服务器开发技术详解</title>
+      <link>https://left-pocket.github.io/post/game/game_development/</link>
+      <pubDate>Sun, 21 Nov 2021 14:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/game/game_development/</guid>
+      <description>原文地址：https://left-pocket.github.io 从事游戏服务器开发差不多两年时间，两年间参与了不少项目，学到了很多游戏服</description>
+    </item>
+    
+  </channel>
+</rss>

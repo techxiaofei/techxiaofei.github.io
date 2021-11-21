@@ -6,7 +6,16 @@
     <description>Recent content on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 21 Nov 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Nov 2021 14:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>手游服务器开发技术详解</title>
+      <link>https://left-pocket.github.io/post/game/game_development/</link>
+      <pubDate>Sun, 21 Nov 2021 14:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/game/game_development/</guid>
+      <description>原文地址：https://left-pocket.github.io 从事游戏服务器开发差不多两年时间，两年间参与了不少项目，学到了很多游戏服</description>
+    </item>
+    
     <item>
       <title>二级指针的作用详解</title>
       <link>https://left-pocket.github.io/post/cpp/secondary_pointer/</link>
@@ -22,7 +31,7 @@
       <pubDate>Sun, 21 Nov 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/about/</guid>
-      <description>目前在东南亚最大的电商平台 Shopee 当码农，主要负责后端开发工作。 个人擅长C++, Golang, 网络编程, Redis, MySQL, TiDB等技术栈。有多年面试官经验，在这里分享各种</description>
+      <description>目前在东南亚最大的电商平台 Shopee 当码农，坐标在 新加坡，主要负责后端开发工作。 个人擅长C++, Golang, 网络编程, Redis, MySQL, TiDB等技术栈。有多年面试官经验，</description>
     </item>
     
     <item>
