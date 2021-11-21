@@ -22,7 +22,7 @@
       <pubDate>Sat, 20 Mar 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/golang/append/</guid>
-      <description>原文地址：https://left-pocket.github.io/ 背景 最近开发的时候写了下面这段类似的代码。 func TestAppend() (result []int) { var wg sync.WaitGroup for i := 0; i &amp;lt;</description>
+      <description>原文地址：https://left-pocket.github.io 背景 最近开发的时候写了下面这段类似的代码。 func TestAppend() (result []int) { var wg sync.WaitGroup for i := 0; i &amp;lt; 100;</description>
     </item>
     
     <item>

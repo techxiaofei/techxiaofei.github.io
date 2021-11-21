@@ -13,7 +13,7 @@
       <pubDate>Sat, 20 Nov 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/others/singapore-job/</guid>
-      <description>原文地址：https://left-pocket.github.io/ 本人就职于东南亚最大的电商平台 Shopee 做码农。 公司近些年快速发展，在整个东南</description>
+      <description>原文地址：https://left-pocket.github.io 本人就职于东南亚最大的电商平台 Shopee 做码农。 公司近些年快速发展，在整个东南亚</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Sun, 21 Nov 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/cpp/secondary_pointer/</guid>
-      <description>原文地址：https://left-pocket.github.io/ ​ 一、概念 在如下的A指向B、B指向C的指向关系中： 首先 C是&amp;quot;</description>
+      <description>原文地址：https://left-pocket.github.io ​ 一、概念 在如下的A指向B、B指向C的指向关系中： 首先 C是&amp;quot;一</description>
     </item>
     
     <item>
@@ -31,7 +31,7 @@
       <pubDate>Sat, 20 Nov 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/git/git_rebase/</guid>
-      <description>原文地址：https://left-pocket.github.io/ 背景 刚开始接触git的时候只会一些简单的指令，pull, add, commit, merge, push 等几个</description>
+      <description>原文地址：https://left-pocket.github.io 背景 刚开始接触git的时候只会一些简单的指令，pull, add, commit, merge, push 等几个基</description>
     </item>
     
     <item>
@@ -58,7 +58,7 @@
       <pubDate>Sat, 20 Mar 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/golang/append/</guid>
-      <description>原文地址：https://left-pocket.github.io/ 背景 最近开发的时候写了下面这段类似的代码。 func TestAppend() (result []int) { var wg sync.WaitGroup for i := 0; i &amp;lt;</description>
+      <description>原文地址：https://left-pocket.github.io 背景 最近开发的时候写了下面这段类似的代码。 func TestAppend() (result []int) { var wg sync.WaitGroup for i := 0; i &amp;lt; 100;</description>
     </item>
     
     <item>
@@ -94,7 +94,7 @@
       <pubDate>Wed, 03 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/algorithm/bloom_filter/</guid>
-      <description>原文地址：https://left-pocket.github.io/ 布隆过滤器是什么 本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结</description>
+      <description>原文地址：https://left-pocket.github.io 布隆过滤器是什么 本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结构</description>
     </item>
     
     <item>
