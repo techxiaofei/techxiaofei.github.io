@@ -97,7 +97,8 @@
         
         
         <div class="post-content">
-            <h2 id="背景">背景</h2>
+            <p>原文地址：<a href="https://left-pocket.github.io/post/mysql/db-tidb-write-conflict/">https://left-pocket.github.io/</a></p>
+<h2 id="背景">背景</h2>
 <p>我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了write conflict.</p>
 <pre tabindex="0"><code>[2020/08/25 06:01:44.781 +08:00] [WARN] [session.go:623] [retrying] [conn=26799778] [schemaVersion=194] [retryCnt=0] [queryNum=0] [sql=&quot;UPDATE user_tab SET `region` = ?, `status` = ?, `update_time` = ? WHERE `from_userid` = ? AND `to_userid` = ? AND `type` = ? [arguments: (ID, 0, 1598306504, 118049824, 8572364, 1)]&quot;]
 [2020/08/25 06:01:44.782 +08:00] [WARN] [session.go:644] [&quot;transaction association&quot;] [conn=26799778] [&quot;retrying txnStartTS&quot;=418986460378563450] [&quot;original txnStartTS&quot;=418986460352348716]

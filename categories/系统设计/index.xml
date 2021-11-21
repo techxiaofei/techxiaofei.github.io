@@ -13,7 +13,7 @@
       <pubDate>Fri, 22 Jan 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/friends_status/</guid>
-      <description>最近在产品上实现了微信朋友圈的功能，在这里分享一下朋友圈功能的设计与实现。 下一篇文章将讲解朋友圈状态的评论和点赞功能的设计与实现。</description>
+      <description>原文地址：https://left-pocket.github.io/ 最近在产品上实现了微信朋友圈的功能，在这里分享一下朋友圈功能的设计与实</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Fri, 22 Jan 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/friends_comment_like/</guid>
-      <description>上篇文章介绍了朋友圈的技术设计，这篇将介绍朋友圈点赞和评论的实现方式。 需求介绍 对某条状态实现点赞与取消点赞的功能。 点赞列表按时间从小到大排序</description>
+      <description>原文地址：https://left-pocket.github.io/ 上篇文章介绍了朋友圈的技术设计，这篇将介绍朋友圈点赞和评论的实现方式。</description>
     </item>
     
   </channel>

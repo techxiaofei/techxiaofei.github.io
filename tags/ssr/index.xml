@@ -13,7 +13,7 @@
       <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/others/ssr-centos7/</guid>
-      <description>记录一下在centos7下安装ssr(shadowsocksr)的教程。 安装必要依赖包 yum install git -y yum install epel-release -y yum install libsodium -y yum install epel-release -y yum install libsodium -y 下载shado</description>
+      <description>原文地址：https://left-pocket.github.io/ 记录一下在centos7下安装ssr(shadowsocksr)的教程</description>
     </item>
     
   </channel>

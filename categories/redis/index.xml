@@ -13,7 +13,7 @@
       <pubDate>Wed, 17 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/redis/redis_sds/</guid>
-      <description>SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串表示， 几乎所有的 Redis 模块中都用了 sds。 本章将对 SDS 的实现、性能和功能等方</description>
+      <description>原文地址：https://left-pocket.github.io/ SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Fri, 04 Dec 2020 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/redis/redis-zset-score/</guid>
-      <description>背景 最近使用Redis的SortedSet，使用int64作为score时遇到了一些预料之外的情况，在此总结一下。 介绍 项目中采用Redis S</description>
+      <description>原文地址：https://left-pocket.github.io/ 背景 最近使用Redis的SortedSet，使用int64作为scor</description>
     </item>
     
   </channel>

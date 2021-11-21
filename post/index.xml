@@ -13,7 +13,7 @@
       <pubDate>Sat, 20 Nov 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/others/singapore-job/</guid>
-      <description>本人就职于东南亚最大的电商平台 Shopee 做码农。 公司近些年快速发展，在整个东南亚占有极高的市场，同时还在飞速开拓新的市场。 工作965，弹性工作制，不</description>
+      <description>原文地址：https://left-pocket.github.io/ 本人就职于东南亚最大的电商平台 Shopee 做码农。 公司近些年快速发展，在整个东南</description>
     </item>
     
     <item>
@@ -49,7 +49,7 @@
       <pubDate>Sat, 20 Nov 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/git/git_rebase/</guid>
-      <description>背景 刚开始接触git的时候只会一些简单的指令，pull, add, commit, merge, push 等几个基础命令就可以了。但是经常使用git后，还是需要了解一些相对高端的常用</description>
+      <description>原文地址：https://left-pocket.github.io/ 背景 刚开始接触git的时候只会一些简单的指令，pull, add, commit, merge, push 等几个</description>
     </item>
     
     <item>
@@ -58,7 +58,7 @@
       <pubDate>Sun, 18 Apr 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/golang/goroutine_implementation/</guid>
-      <description>协程基础知识 1.Goroutine是Go语言的协程（Coroutine），Groutine从语言层面上实现了并发，和线程一样共享堆，不共享栈</description>
+      <description>原文地址：https://left-pocket.github.io/ 协程基础知识 1.Goroutine是Go语言的协程（Coroutine</description>
     </item>
     
     <item>
@@ -67,7 +67,7 @@
       <pubDate>Mon, 05 Apr 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/mysql/dead_lock/</guid>
-      <description>背景 MySQL死锁问题涉及到MySQL一系列的基础知识，比如事务，隔离级别，各种锁类型，以及各种 SQL 语句的加锁原理。很多开发人员很少会遇到死锁</description>
+      <description>原文地址：https://left-pocket.github.io/ 背景 MySQL死锁问题涉及到MySQL一系列的基础知识，比如事务，隔离</description>
     </item>
     
     <item>
@@ -76,7 +76,7 @@
       <pubDate>Sat, 20 Mar 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/golang/append/</guid>
-      <description>背景 最近开发的时候写了下面这段类似的代码。 func TestAppend() (result []int) { var wg sync.WaitGroup for i := 0; i &amp;lt; 100; i++ { v := i wg.Add(1) go func() { // other logic result = append(result, v) wg.Done() }() } wg.Wait() //fmt.Printf(&amp;#34;%v\n&amp;#34;, len(result)) return result } 就像这样，然后顺利</description>
+      <description>原文地址：https://left-pocket.github.io/ 背景 最近开发的时候写了下面这段类似的代码。 func TestAppend() (result []int) { var wg sync.WaitGroup for i := 0; i &amp;lt;</description>
     </item>
     
     <item>
@@ -85,7 +85,7 @@
       <pubDate>Thu, 18 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/golang/functional_options/</guid>
-      <description>概览 最近阅读源码的时候看到一段不错的代码，但是当时却不是非常理解为什么这么写。 我们先来看一下源代码： type Server struct { Addr string Port int Protocol string Timeout time.Duration MaxConns int } type Option func(*Server) func Protocol(p</description>
+      <description>原文地址：https://left-pocket.github.io/ 概览 最近阅读源码的时候看到一段不错的代码，但是当时却不是非常理解为什么</description>
     </item>
     
     <item>
@@ -94,7 +94,7 @@
       <pubDate>Thu, 18 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/golang/decorator/</guid>
-      <description>今天我们来介绍decorator这个经典的设计模式。 定义：装饰器模式主要对现有的类对象进行包裹和封装，以期望在不改变类对象及其类定义的情况下</description>
+      <description>原文地址：https://left-pocket.github.io/ 今天我们来介绍decorator这个经典的设计模式。 定义：装饰器模式主</description>
     </item>
     
     <item>
@@ -103,7 +103,7 @@
       <pubDate>Wed, 17 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/redis/redis_sds/</guid>
-      <description>SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串表示， 几乎所有的 Redis 模块中都用了 sds。 本章将对 SDS 的实现、性能和功能等方</description>
+      <description>原文地址：https://left-pocket.github.io/ SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串</description>
     </item>
     
     <item>
@@ -112,7 +112,7 @@
       <pubDate>Wed, 03 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/algorithm/bloom_filter/</guid>
-      <description>布隆过滤器是什么 本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入</description>
+      <description>原文地址：https://left-pocket.github.io/ 布隆过滤器是什么 本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结</description>
     </item>
     
     <item>
@@ -121,7 +121,7 @@
       <pubDate>Fri, 22 Jan 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/friends_status/</guid>
-      <description>最近在产品上实现了微信朋友圈的功能，在这里分享一下朋友圈功能的设计与实现。 下一篇文章将讲解朋友圈状态的评论和点赞功能的设计与实现。</description>
+      <description>原文地址：https://left-pocket.github.io/ 最近在产品上实现了微信朋友圈的功能，在这里分享一下朋友圈功能的设计与实</description>
     </item>
     
     <item>
@@ -130,7 +130,7 @@
       <pubDate>Fri, 22 Jan 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/friends_comment_like/</guid>
-      <description>上篇文章介绍了朋友圈的技术设计，这篇将介绍朋友圈点赞和评论的实现方式。 需求介绍 对某条状态实现点赞与取消点赞的功能。 点赞列表按时间从小到大排序</description>
+      <description>原文地址：https://left-pocket.github.io/ 上篇文章介绍了朋友圈的技术设计，这篇将介绍朋友圈点赞和评论的实现方式。</description>
     </item>
     
     <item>
@@ -139,7 +139,7 @@
       <pubDate>Sat, 12 Dec 2020 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/others/vscode-leetcode/</guid>
-      <description>作为一名合格的程序猿，大家找工作的时候经常需要刷leetcode, leetcode官网上面写代码没有IDE上面写代码那么方便，更重要的是，可</description>
+      <description>原文地址：https://left-pocket.github.io/ 作为一名合格的程序猿，大家找工作的时候经常需要刷leetcode, le</description>
     </item>
     
     <item>
@@ -148,7 +148,7 @@
       <pubDate>Fri, 04 Dec 2020 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/redis/redis-zset-score/</guid>
-      <description>背景 最近使用Redis的SortedSet，使用int64作为score时遇到了一些预料之外的情况，在此总结一下。 介绍 项目中采用Redis S</description>
+      <description>原文地址：https://left-pocket.github.io/ 背景 最近使用Redis的SortedSet，使用int64作为scor</description>
     </item>
     
     <item>
@@ -157,7 +157,7 @@
       <pubDate>Tue, 24 Nov 2020 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/snowflake/</guid>
-      <description>背景 这篇文章来讲解snowflake是什么，以及它实际应用的最佳实践方案。 snowflake算法 什么是 Snowflake Twitter的snowflake分</description>
+      <description>原文地址：https://left-pocket.github.io/ 背景 这篇文章来讲解snowflake是什么，以及它实际应用的最佳实践方</description>
     </item>
     
     <item>
@@ -166,7 +166,7 @@
       <pubDate>Sat, 21 Nov 2020 00:07:57 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/uid-generator/</guid>
-      <description>背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一。那一般生成ID都有哪些解决方案呢？特别是在复杂的分布式系统业务场景</description>
+      <description>原文地址：https://left-pocket.github.io/ 背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯</description>
     </item>
     
     <item>
@@ -175,7 +175,7 @@
       <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/others/ssr-centos7/</guid>
-      <description>记录一下在centos7下安装ssr(shadowsocksr)的教程。 安装必要依赖包 yum install git -y yum install epel-release -y yum install libsodium -y yum install epel-release -y yum install libsodium -y 下载shado</description>
+      <description>原文地址：https://left-pocket.github.io/ 记录一下在centos7下安装ssr(shadowsocksr)的教程</description>
     </item>
     
     <item>
@@ -184,7 +184,7 @@
       <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/mysql/db-tidb-write-conflict/</guid>
-      <description>背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了write conflict. [2020/08/25 06:01:44.781 +08:00] [WARN] [session.go:623] [retrying] [conn=26799778] [schemaVersion=194] [retryCnt=0] [queryNum=0] [sql=&amp;quot;UPDATE user_tab SET `region` = ?, `status` = ?, `update_time` = ? WHERE `from_userid` = ? AND `to_userid` = ? AND `type`</description>
+      <description>原文地址：https://left-pocket.github.io/ 背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了wri</description>
     </item>
     
     <item>
@@ -193,7 +193,7 @@
       <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/hugo/hugo-creation/</guid>
-      <description>最近使用hugo搭建博客，准备自己记录一下学习过程。 就先记录一下搭建hugo博客的流程。 本篇记录一下怎么在本机电脑成功运行hugo生成静态博</description>
+      <description>原文地址：https://left-pocket.github.io/ 最近使用hugo搭建博客，准备自己记录一下学习过程。 就先记录一下搭建h</description>
     </item>
     
     <item>
@@ -202,7 +202,7 @@
       <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/hugo/hugo-github/</guid>
-      <description>上一篇介绍了怎么在本机搭建hugo博客，这一篇将主要介绍怎么把hugo静态博客托管到github上。 创建Github Pages 假设你需要部署在 GitHub Pages 上</description>
+      <description>原文地址：https://left-pocket.github.io/ 上一篇介绍了怎么在本机搭建hugo博客，这一篇将主要介绍怎么把hugo</description>
     </item>
     
   </channel>
