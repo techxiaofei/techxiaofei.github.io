@@ -163,7 +163,7 @@ func:<span style="color:#f92672">&amp;</span>p<span style="color:#f92672">=</spa
 <p>note:4-&gt;p重新指向b.</p>
 <p>note:5-&gt;退出函数,p的修改并不会对q造成影响。</p>
 <p>结论:</p>
-<p>编译器总是要为函数的每个参数制作临时副本，指针参数p的副本是 p，编译器使 p = q(但是&amp;p != &amp;q,也就是他们并不在同一块内存地址，只是他们的内容一样，都是a的地址)。如果函数体内的程序修改了p的内容(比如在这里它指向b)。在本例中，p申请了新的内存，只是把 p所指的内存地址改变了(变成了b的地址,但是q指向的内存地址没有影响)，所以在这里并不影响函数外的指针q。</p>
+<p>编译器总是要为函数的每个参数制作临时副本，指针参数p的副本是 p，编译器使 p = q(<strong>但是&amp;p != &amp;q,也就是他们并不在同一块内存地址，只是他们的内容一样，都是a的地址</strong>)。如果函数体内的程序修改了p的内容(比如在这里它指向b)。在本例中，p申请了新的内存，只是把 p所指的内存地址改变了(<strong>变成了b的地址,但是q指向的内存地址没有影响</strong>)，所以在这里并不影响函数外的指针q。</p>
 <p>这就需要二级指针操作：</p>
 <h2 id="2二级指针操作">2.二级指针操作</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
