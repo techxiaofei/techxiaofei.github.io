@@ -6,9 +6,9 @@
     <description>Recent content in Posts on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Nov 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Nov 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>新加坡工作内推</title>
+      <title>新加坡工作内推&amp;个人技术公众号推广</title>
       <link>https://left-pocket.github.io/post/others/singapore-job/</link>
       <pubDate>Sat, 20 Nov 2021 13:00:51 +0800</pubDate>
       
@@ -17,30 +17,12 @@
     </item>
     
     <item>
-      <title>博客分类</title>
-      <link>https://left-pocket.github.io/post/catalog/golang_design_patterns/</link>
-      <pubDate>Fri, 01 Jan 2021 13:00:51 +0800</pubDate>
+      <title>二级指针的作用详解</title>
+      <link>https://left-pocket.github.io/post/cpp/secondary_pointer/</link>
+      <pubDate>Sun, 21 Nov 2021 13:00:51 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/post/catalog/golang_design_patterns/</guid>
-      <description>Golang 设计模式篇 Functional Options 函数式选项模式 [Decorator 装饰器模式]https://github.com） 系统设计篇</description>
-    </item>
-    
-    <item>
-      <title>后端面试必备</title>
-      <link>https://left-pocket.github.io/post/interview/</link>
-      <pubDate>Fri, 01 Jan 2021 13:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/interview/</guid>
-      <description>一 数据结构与算法 二 C++&amp;amp;C++11 三 Golang 四 Redis 五 MySQL 六 Linux 七 系统设计 秒杀系统设计</description>
-    </item>
-    
-    <item>
-      <title>服务端面试技术栈</title>
-      <link>https://left-pocket.github.io/post/catalog/interview_tech_stack/</link>
-      <pubDate>Fri, 01 Jan 2021 13:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/catalog/interview_tech_stack/</guid>
-      <description>网络编程篇 数据结构与算法篇 Redis篇 MySQL篇 Golang篇 设计模式篇 Kafka篇 C/C++篇 系统设计篇 Linux技术篇</description>
+      <guid>https://left-pocket.github.io/post/cpp/secondary_pointer/</guid>
+      <description>原文地址：https://left-pocket.github.io/ ​ 一、概念 在如下的A指向B、B指向C的指向关系中： 首先 C是&amp;quot;</description>
     </item>
     
     <item>
@@ -131,6 +113,33 @@
       
       <guid>https://left-pocket.github.io/post/system_design/friends_comment_like/</guid>
       <description>原文地址：https://left-pocket.github.io/ 上篇文章介绍了朋友圈的技术设计，这篇将介绍朋友圈点赞和评论的实现方式。</description>
+    </item>
+    
+    <item>
+      <title>博客分类</title>
+      <link>https://left-pocket.github.io/post/catalog/golang_design_patterns/</link>
+      <pubDate>Fri, 01 Jan 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/catalog/golang_design_patterns/</guid>
+      <description>Golang 设计模式篇 Functional Options 函数式选项模式 [Decorator 装饰器模式]https://github.com） 系统设计篇</description>
+    </item>
+    
+    <item>
+      <title>后端面试必备</title>
+      <link>https://left-pocket.github.io/post/interview/</link>
+      <pubDate>Fri, 01 Jan 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/interview/</guid>
+      <description>一 数据结构与算法 二 C++&amp;amp;C++11 三 Golang 四 Redis 五 MySQL 六 Linux 七 系统设计 秒杀系统设计</description>
+    </item>
+    
+    <item>
+      <title>服务端面试技术栈</title>
+      <link>https://left-pocket.github.io/post/catalog/interview_tech_stack/</link>
+      <pubDate>Fri, 01 Jan 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/catalog/interview_tech_stack/</guid>
+      <description>网络编程篇 数据结构与算法篇 Redis篇 MySQL篇 Golang篇 设计模式篇 Kafka篇 C/C++篇 系统设计篇 Linux技术篇</description>
     </item>
     
     <item>

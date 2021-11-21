@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>c&#43;&#43; on Leftpocket的个人博客</title>
+    <link>https://left-pocket.github.io/categories/c&#43;&#43;/</link>
+    <description>Recent content in c&#43;&#43; on Leftpocket的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 21 Nov 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/c++/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>二级指针的作用详解</title>
+      <link>https://left-pocket.github.io/post/cpp/secondary_pointer/</link>
+      <pubDate>Sun, 21 Nov 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/cpp/secondary_pointer/</guid>
+      <description>原文地址：https://left-pocket.github.io/ ​ 一、概念 在如下的A指向B、B指向C的指向关系中： 首先 C是&amp;quot;</description>
+    </item>
+    
+  </channel>
+</rss>

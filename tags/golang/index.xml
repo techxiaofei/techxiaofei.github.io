@@ -8,15 +8,6 @@
     <language>en-us</language>
     <lastBuildDate>Sun, 18 Apr 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>博客分类</title>
-      <link>https://left-pocket.github.io/post/catalog/golang_design_patterns/</link>
-      <pubDate>Fri, 01 Jan 2021 13:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/catalog/golang_design_patterns/</guid>
-      <description>Golang 设计模式篇 Functional Options 函数式选项模式 [Decorator 装饰器模式]https://github.com） 系统设计篇</description>
-    </item>
-    
-    <item>
       <title>goroutine的实现原理</title>
       <link>https://left-pocket.github.io/post/golang/goroutine_implementation/</link>
       <pubDate>Sun, 18 Apr 2021 13:00:51 +0800</pubDate>
@@ -50,6 +41,15 @@
       
       <guid>https://left-pocket.github.io/post/golang/decorator/</guid>
       <description>原文地址：https://left-pocket.github.io/ 今天我们来介绍decorator这个经典的设计模式。 定义：装饰器模式主</description>
+    </item>
+    
+    <item>
+      <title>博客分类</title>
+      <link>https://left-pocket.github.io/post/catalog/golang_design_patterns/</link>
+      <pubDate>Fri, 01 Jan 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/catalog/golang_design_patterns/</guid>
+      <description>Golang 设计模式篇 Functional Options 函数式选项模式 [Decorator 装饰器模式]https://github.com） 系统设计篇</description>
     </item>
     
   </channel>
