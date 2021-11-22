@@ -6,7 +6,16 @@
     <description>Recent content on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 21 Nov 2021 14:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 Nov 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>c&#43;&#43;中static的用法详解</title>
+      <link>https://left-pocket.github.io/post/cpp/static/</link>
+      <pubDate>Mon, 22 Nov 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/cpp/static/</guid>
+      <description>​ 原文地址：https://left-pocket.github.io 背景 static 是 C/C++ 中很常用的修饰符，它被用来控制变量的存储方式和可见性。而 static 在</description>
+    </item>
+    
     <item>
       <title>手游服务器开发技术详解</title>
       <link>https://left-pocket.github.io/post/game/game_development/</link>

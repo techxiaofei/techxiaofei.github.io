@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>c&#43;&#43;中static的用法详解 | Leftpocket的个人博客</title>
+    <meta property="og:title" content="c&#43;&#43;中static的用法详解 - Leftpocket的个人博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-11-22T13:00:51&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-11-22T13:00:51&#43;08:00'>
+        
+    <meta name="Keywords" content="[c&#43;&#43; static]">
+    <meta name="description" content="c&#43;&#43;中static的用法详解">
+        
+    <meta name="author" content="leftpocket">
+    <meta property="og:url" content="https://left-pocket.github.io/post/cpp/static/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script data-ad-client="ca-pub-8922621224955535" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/custom.css'>
+    
+
+    
+    <meta name="baidu-site-verification" content="code-swx03nFBNS" />
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://left-pocket.github.io">
+                        Leftpocket的个人博客
+                    </a>
+                
+                <p class="description">码农在新加坡</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://left-pocket.github.io">首页</a>
+                    
+                    <a  href="https://left-pocket.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://left-pocket.github.io/about/" title="关于我">关于我</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">c&#43;&#43;中static的用法详解</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年11月22日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/c&#43;&#43;'>c&#43;&#43;</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <p>​</p>
+<p>原文地址：<a href="https://left-pocket.github.io/post/cpp/static/">https://left-pocket.github.io</a></p>
+<h1 id="背景">背景</h1>
+<p><strong>static</strong> 是 <strong>C/C++</strong> 中很常用的修饰符，它被用来控制变量的存储方式和可见性。而 <strong>static</strong> 在 <strong>C</strong> 语言和 <strong>C++</strong> 语言中各有多个用途，下面我就分类讲解：</p>
+<ul>
+<li>C语言中static的三种用途</li>
+<li>C++语言中static的两种用途</li>
+</ul>
+<h1 id="c语言中static的用法">C语言中static的用法</h1>
+<p>C 语言的 static 关键字有三种（具体来说是两种）用途：</p>
+<h2 id="1-静态局部变量用于函数体内部修饰变量这种变量的生存期长于该函数">1. 静态局部变量：用于函数体内部修饰变量，这种变量的生存期长于该函数。</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">foo</span>(){
+	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// note:1
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">//int i = 1;  // note:2
+</span><span style="color:#75715e"></span>	i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+	<span style="color:#66d9ef">return</span> i;
+}
+</code></pre></div><p>要明白这个用法，我们首先要了解 <strong>c/c++</strong> 的内存分布，以及 <strong>static</strong> 所在的区间。</p>
+<p>对于一个完整的程序，在内存中的分布情况如下图：　 </p>
+<ul>
+<li>1.栈区： 由编译器自动分配释放，像局部变量，函数参数，都是在栈区。会随着作用于退出而释放空间。</li>
+<li>2.堆区：程序员分配并释放的区域，像malloc(c),new(c++) </li>
+<li>3.全局数据区(静态区)：全局变量和静态变量的存储是放在一块的，初始化的全局变量和静态变量在一块区域，未初始化的全局变量和未初始化的静态变量在相邻的另一块区域。程序结束释放。</li>
+<li>4.代码区</li>
+</ul>
+<p>所以上面 <strong>note:1</strong> 的 <strong>static</strong> 是在 <em>全局数据区</em> 分配的,那么它存在的意思是什么？又是什么时候初始化的呢？</p>
+<p><strong>首先回答第一个问题</strong>：</p>
+<p>它存在的意义就是随着第一次函数的调用而初始化，却不随着函数的调用结束而销毁(如果把以上的 <strong>note:1</strong> 换成 <strong>note:2</strong>,那么i就是在栈区分配了，会随着foo的调用结束而释放)。</p>
+<p><strong>那么第二个问题也就浮出水面了</strong>：</p>
+<p>它是在第一次调用进入 <strong>note:1</strong> 的时候初始化。且只初始化一次，也就是你第二次调用foo(),不会继续初始化，而会直接跳过。</p>
+<p>那么它跟定义一个全局变量有什么区别呢，同样是初始化一次，连续调用foo()的结果是一样的，但是，使用全局变量的话，变量就不属于函数本身了，不再仅受函数的控制，给程序的维护带来不便。
+　　静态局部变量正好可以解决这个问题。静态局部变量保存在全局数据区，而不是保存在栈中，每次的值保持到下一次调用，直到下次赋新值。</p>
+<p>那么我们总结一下，静态局部变量的特点（括号内为 <strong>note:2</strong>,也就是局部变量的对比）：</p>
+<ul>
+<li>（1）该变量在全局数据区分配内存(局部变量在栈区分配内存);</li>
+<li>（2）静态局部变量在程序执行到该对象的声明处时被首次初始化，即以后的函数调用不再进行初始化(局部变量每次函数调用都会被初始化);</li>
+<li>（3）静态局部变量一般在声明处初始化，如果没有显式初始化，会被程序自动初始化为0(局部变量不会被初始化);</li>
+<li>（4）它始终驻留在全局数据区，直到程序运行结束。但其作用域为局部作用域，也就是不能在函数体外面使用它(局部变量在栈区，在函数结束后立即释放内存);</li>
+</ul>
+<h2 id="2静态全局变量定义在函数体外用于修饰全局变量表示该变量只在本文件可见">2.静态全局变量：定义在函数体外，用于修饰全局变量，表示该变量只在本文件可见。</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">//note:3
+</span><span style="color:#75715e">//int i = 1;  //note:4
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">foo</span>()
+{
+	i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+	<span style="color:#66d9ef">return</span> i;
+}
+</code></pre></div><p><strong>note:3</strong> 和 <strong>note:4</strong> 有什么差异呢？</p>
+<p>你调用foo(),无论调用几次，他们的结果都是一样的。也就是说在本文件内调用他们是完全相同的。那么他们的区别是什么呢？</p>
+<p><strong>文件隔离！</strong></p>
+<p>假设我有一个文件a.c,我们再新建一个b.c,内容如下。
+ </p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">//file a.c
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">//static int n = 15;  //note:5
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>;  <span style="color:#75715e">//note:6
+</span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">//file b.c
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">int</span> n;
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fn</span>()
+{
+	n<span style="color:#f92672">++</span>;
+	printf(<span style="color:#e6db74">&#34;after: %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,n);
+}
+
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>()
+{
+	printf(<span style="color:#e6db74">&#34;before: %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,n);
+	fn();
+}
+</code></pre></div><p>我们先使用 <strong>note:6</strong>,也就是 <strong>非静态全局变量</strong>，发现输出为:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">before: <span style="color:#ae81ff">15</span>
+after: <span style="color:#ae81ff">16</span>
+</code></pre></div><p>也就是我们的 <em>b.c</em> 通过 <strong>extern</strong> 使用了 <em>a.c</em> 定义的全局变量。
+那么我们改成使用 <strong>note:5</strong>,也就是使用静态全局变量呢？</p>
+<pre tabindex="0"><code>gcc a.c b.c -o output.out
+</code></pre><p>会出现类似 <code>undeference to &quot;n&quot;</code> 的报错，它是找不到n的，因为 <strong>static</strong> 进行了文件隔离，你是没办法访问 <em>a.c</em> 定义的静态全局变量的，当然你用
+<code>#include &quot;a.c&quot;</code>
+那就不一样了。</p>
+<p><strong>以上我们就可以得出静态全局变量的特点：</strong></p>
+<ul>
+<li>静态全局变量不能被其它文件所用(全局变量可以);</li>
+<li>其它文件中可以定义相同名字的变量，不会发生冲突(自然了，因为static隔离了文件，其它文件使用相同的名字的变量，也跟它没关系了);</li>
+</ul>
+<h2 id="3静态函数准确的说静态函数跟静态全局变量的作用类似">3.静态函数：准确的说，静态函数跟静态全局变量的作用类似：</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">//file a.c
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fn</span>()
+{
+	printf(<span style="color:#e6db74">&#34;this is non-static func in a&#34;</span>);
+}
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">//file b.c
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fn</span>();  <span style="color:#75715e">//我们用extern声明其他文件的fn(),供本文件使用。
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>()
+{
+	fn();
+}
+</code></pre></div><p>可以正常输出：</p>
+<pre tabindex="0"><code>this is non-static func in a。
+</code></pre><p>当给void fn()加上static的关键字之后呢？</p>
+<pre tabindex="0"><code>undefined reference to &quot;fn&quot;.
+</code></pre><p><strong>所以，静态函数的好处跟静态全局变量的好处就类似了：</strong></p>
+<ul>
+<li>1.静态函数不能被其它文件所用;</li>
+<li>2.其它文件中可以定义相同名字的函数，不会发生冲突;</li>
+</ul>
+<p><strong>上面一共说了三种用法，为什么说准确来说是两种呢？</strong></p>
+<ul>
+<li>1.一种是修饰变量，一种是修饰函数，所以说是两种（这种解释不多）。</li>
+<li>2.静态全局变量和修饰静态函数的作用是一样的，一般合并为一种。（这是比较多的分法）。</li>
+</ul>
+<h2 id="c语言中static的用法-1">C++语言中static的用法</h2>
+<p>C++ 语言的 static 关键字有二种用途
+当然以上的几种，也可以用在c++中。还有额外的两种用法：</p>
+<h2 id="1静态数据成员">1.静态数据成员</h2>
+<p>用于修饰 class 的数据成员，即所谓“静态成员”。这种数据成员的生存期大于 class 的对象（实体 instance）。静态数据成员是每个 class 有一份，普通数据成员是每个 instance 有一份，因此静态数据成员也叫做类变量，而普通数据成员也叫做实例变量。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Rectangle</span>
+{
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+	<span style="color:#66d9ef">int</span> m_w,m_h;
+	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> s_sum;
+	
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+	Rectangle(<span style="color:#66d9ef">int</span> w,<span style="color:#66d9ef">int</span> h)
+	{
+		<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>m_w <span style="color:#f92672">=</span> w;
+		<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>m_h <span style="color:#f92672">=</span> h;
+		s_sum <span style="color:#f92672">+=</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>m_w <span style="color:#f92672">*</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>m_h);
+	}
+
+
+	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">GetSum</span>()
+	{
+		cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;sum = &#34;</span><span style="color:#f92672">&lt;&lt;</span>s_sum<span style="color:#f92672">&lt;&lt;</span>endl;
+	}
+};
+
+<span style="color:#66d9ef">int</span> Rectangle<span style="color:#f92672">::</span>s_sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">//初始化
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+	cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;sizeof(Rectangle)=&#34;</span><span style="color:#f92672">&lt;&lt;</span><span style="color:#66d9ef">sizeof</span>(Rectangle)<span style="color:#f92672">&lt;&lt;</span>endl;
+	Rectangle <span style="color:#f92672">*</span>rect1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Rectangle(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>);
+	rect1<span style="color:#f92672">-&gt;</span>GetSum();
+	cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;sizeof(rect1)=&#34;</span><span style="color:#f92672">&lt;&lt;</span><span style="color:#66d9ef">sizeof</span>(<span style="color:#f92672">*</span>rect1)<span style="color:#f92672">&lt;&lt;</span>endl;
+	Rectangle rect2(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>);
+	rect2.GetSum();
+	cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;sizeof(rect2)=&#34;</span><span style="color:#f92672">&lt;&lt;</span><span style="color:#66d9ef">sizeof</span>(rect2)<span style="color:#f92672">&lt;&lt;</span>endl;
+	
+	system(<span style="color:#e6db74">&#34;pause&#34;</span>);
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>结果如下：</p>
+<pre tabindex="0"><code>sizeof(Rectangle)=8
+sum = 12
+sizeof(rect1)=8
+sum = 12
+sizeof(rect1)=8
+</code></pre><p>由此可知：<code>sizeof(Rectangle)=8bytes=sizeof(m_w)+sizeof(m_h)</code>。也就是说 <strong>static</strong> 并不占用 <strong>Rectangle</strong> 的内存空间。
+那么 <strong>static</strong> 在哪里分配内存的呢？是的，全局数据区(静态区)。
+再看看 <strong>GetSum()</strong>，第一次12=3*4，第二次18=12+2*3。由此可得，<strong>static</strong> 只会被初始化一次，于实例无关。</p>
+<p><strong>结论：</strong></p>
+<p>对于非静态数据成员，每个类对象(实例)都有自己的拷贝。而静态数据成员被当作是类的成员，由该类型的所有对象共享访问,对该类的多个对象来说，静态数据成员只分配一次内存。
+静态数据成员存储在全局数据区。静态数据成员定义时要分配空间，所以不能在类声明中定义。</p>
+<p>也就是说，你每 <strong>new</strong> 一个 <strong>Rectangle</strong>，并不会为 <strong>static int s_sum</strong> 的构建一份内存拷贝，它是不管你 <strong>new</strong> 了多少 <strong>Rectangle</strong> 的实例，因为它只与类Rectangle挂钩，而跟你每一个Rectangle的对象没关系。</p>
+<h2 id="2静态成员函数">2、静态成员函数</h2>
+<p>用于修饰 class 的成员函数。</p>
+<p>我们对上面的例子稍加改动：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Rectangle</span>
+{
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+	<span style="color:#66d9ef">int</span> m_w,m_h;
+	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> s_sum;
+	
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+	Rectangle(<span style="color:#66d9ef">int</span> w,<span style="color:#66d9ef">int</span> h)
+	{
+		<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>m_w <span style="color:#f92672">=</span> w;
+		<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>m_h <span style="color:#f92672">=</span> h;
+		s_sum <span style="color:#f92672">+=</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>m_w <span style="color:#f92672">*</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>m_h);
+	}
+
+
+	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">GetSum</span>()  <span style="color:#75715e">//这里加上static
+</span><span style="color:#75715e"></span>	{
+		cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;sum = &#34;</span><span style="color:#f92672">&lt;&lt;</span>s_sum<span style="color:#f92672">&lt;&lt;</span>endl;
+	}
+};
+
+<span style="color:#66d9ef">int</span> Rectangle<span style="color:#f92672">::</span>s_sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">//初始化
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+	cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;sizeof(Rectangle)=&#34;</span><span style="color:#f92672">&lt;&lt;</span><span style="color:#66d9ef">sizeof</span>(Rectangle)<span style="color:#f92672">&lt;&lt;</span>endl;
+	Rectangle <span style="color:#f92672">*</span>rect1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Rectangle(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>);
+	rect1<span style="color:#f92672">-&gt;</span>GetSum();
+	cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;sizeof(rect1)=&#34;</span><span style="color:#f92672">&lt;&lt;</span><span style="color:#66d9ef">sizeof</span>(<span style="color:#f92672">*</span>rect1)<span style="color:#f92672">&lt;&lt;</span>endl;
+	Rectangle rect2(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>);
+	rect2.GetSum();  <span style="color:#75715e">//可以用对象名.函数名访问
+</span><span style="color:#75715e"></span>	cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;sizeof(rect2)=&#34;</span><span style="color:#f92672">&lt;&lt;</span><span style="color:#66d9ef">sizeof</span>(rect2)<span style="color:#f92672">&lt;&lt;</span>endl;
+	Rectangle<span style="color:#f92672">::</span>GetSum();  <span style="color:#75715e">//也可以可以用类名::函数名访问
+</span><span style="color:#75715e"></span>
+	system(<span style="color:#e6db74">&#34;pause&#34;</span>);
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p><strong>上面注释可见:</strong>
+对 <strong>GetSum()</strong> 加上 <strong>static</strong>，使它变成一个静态成员函数，可以用类名::函数名进行访问。</p>
+<p><strong>那么静态成员函数有特点呢？</strong></p>
+<ul>
+<li>1.静态成员之间可以相互访问，包括静态成员函数访问静态数据成员和访问静态成员函数;</li>
+<li>2.非静态成员函数可以任意地访问静态成员函数和静态数据成员;</li>
+<li>3.静态成员函数不能访问非静态成员函数和非静态数据成员;</li>
+<li>4.调用静态成员函数，可以用成员访问操作符(.)和(-&gt;)为一个类的对象或指向类对象的指针调用静态成员函数,也可以用类名::函数名调用(因为他本来就是属于类的，用类名调用很正常)</li>
+</ul>
+<p>前三点其实是一点：<strong>静态成员函数不能访问非静态(包括成员函数和数据成员)，但是非静态可以访问静态。</strong></p>
+<p>有点晕吗？没关系，我来给你解释：</p>
+<p>因为静态是属于类的，它是不知道你创建了10个还是100个对象，所以它对你对象的函数或者数据是一无所知的，所以它没办法调用，而反过来，你创建的对象是对类一清二楚的(不然你怎么从它那里实例化呢)，所以你是可以调用类函数和类成员的，就像不管GetSum是不是static，都可以调用static的s_sum一样。</p>
+<p>​&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+
+        <img class="mx-auto" alt="pic" src="/img/personal/qrcode_2.png" />   
+    </p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/cpp/secondary_pointer/">二级指针的作用详解</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/c&#43;&#43;'>c&#43;&#43;</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "stormwy/blog-comments"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://left-pocket.github.io">Leftpocket的个人博客 By leftpocket</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://left-pocket.github.io/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">Leftpocket</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='//www.google.com/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://left-pocket.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/cpp/static/" title="c&#43;&#43;中static的用法详解">c&#43;&#43;中static的用法详解</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/game/game_development/" title="手游服务器开发技术详解">手游服务器开发技术详解</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/cpp/secondary_pointer/" title="二级指针的作用详解">二级指针的作用详解</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/git/git_rebase/" title="git rebase使用详解">git rebase使用详解</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/golang/goroutine_implementation/" title="goroutine的实现原理">goroutine的实现原理</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/mysql/dead_lock/" title="MySQL死锁的产生">MySQL死锁的产生</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/golang/append/" title="Golang append是并发安全的吗">Golang append是并发安全的吗</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/golang/functional_options/" title="Golang函数式选项(Functional Options)编程模式">Golang函数式选项(Functional Options)编程模式</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/golang/decorator/" title="Golang装饰器(Decorator)设计模式">Golang装饰器(Decorator)设计模式</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/redis/redis_sds/" title="Redis SDS简单动态字符串">Redis SDS简单动态字符串</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://left-pocket.github.io/categories/c&#43;&#43;/">c&#43;&#43; (2)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/db/">db (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/git/">git (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/golang/">Golang (5)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/hugo/">hugo (2)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/leetcode/">leetcode (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/mysql/">MySQL (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/others/">Others (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/redis/">Redis (2)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/server/">server (2)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/vscode/">vscode (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E7%AE%97%E6%B3%95/">算法 (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计 (2)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/">面试 (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://left-pocket.github.io/tags/c&#43;&#43;/">c&#43;&#43;</a>
+    
+    <a href="https://left-pocket.github.io/tags/db/">db</a>
+    
+    <a href="https://left-pocket.github.io/tags/git/">git</a>
+    
+    <a href="https://left-pocket.github.io/tags/golang/">Golang</a>
+    
+    <a href="https://left-pocket.github.io/tags/hugo/">hugo</a>
+    
+    <a href="https://left-pocket.github.io/tags/leetcode/">leetcode</a>
+    
+    <a href="https://left-pocket.github.io/tags/mysql/">MySQL</a>
+    
+    <a href="https://left-pocket.github.io/tags/redis/">Redis</a>
+    
+    <a href="https://left-pocket.github.io/tags/server/">Server</a>
+    
+    <a href="https://left-pocket.github.io/tags/snowflake/">snowflake</a>
+    
+    <a href="https://left-pocket.github.io/tags/ssr/">ssr</a>
+    
+    <a href="https://left-pocket.github.io/tags/tidb/">TiDB</a>
+    
+    <a href="https://left-pocket.github.io/tags/vscode/">vscode</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E7%AE%97%E6%B3%95/">算法</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://left-pocket.github.io/about/" title="关于我" style="color:#0000FF;">关于我-微信及公众号</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/left-pocket" title="Leftpocket的知乎" style="color:#0000FF;">Leftpocket的知乎</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://left-pocket.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
