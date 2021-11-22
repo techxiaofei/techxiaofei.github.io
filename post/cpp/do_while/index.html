@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>do{...}while(0)的用法 | Leftpocket的个人博客</title>
+    <meta property="og:title" content="do{...}while(0)的用法 - Leftpocket的个人博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-11-22T15:00:51&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-11-22T15:00:51&#43;08:00'>
+        
+    <meta name="Keywords" content="[c&#43;&#43; while]">
+    <meta name="description" content="do{...}while(0)的用法">
+        
+    <meta name="author" content="leftpocket">
+    <meta property="og:url" content="https://left-pocket.github.io/post/cpp/do_while/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script data-ad-client="ca-pub-8922621224955535" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/custom.css'>
+    
+
+    
+    <meta name="baidu-site-verification" content="code-swx03nFBNS" />
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://left-pocket.github.io">
+                        Leftpocket的个人博客
+                    </a>
+                
+                <p class="description">码农在新加坡</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://left-pocket.github.io">首页</a>
+                    
+                    <a  href="https://left-pocket.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://left-pocket.github.io/about/" title="关于我">关于我</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">do{...}while(0)的用法</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年11月22日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/c&#43;&#43;'>c&#43;&#43;</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <p>​​</p>
+<p>原文地址：<a href="https://left-pocket.github.io/post/cpp/do_while/">https://left-pocket.github.io</a></p>
+<h1 id="零导引">零.导引</h1>
+<p>第一次见到 <code>do{...}while(0)</code> 是在学习 <strong>libevent</strong> 的时候，看到里面有很多类似</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#define TT_URI(want) do { 						\
+</span><span style="color:#75715e">	char *ret = evhttp_uri_join(uri, url_tmp, sizeof(url_tmp));	\
+</span><span style="color:#75715e">	tt_want(ret != NULL);						\
+</span><span style="color:#75715e">	tt_want(ret == url_tmp);					\
+</span><span style="color:#75715e">	if (strcmp(ret,want) != 0)					\
+</span><span style="color:#75715e">		TT_FAIL((&#34;\&#34;%s\&#34; != \&#34;%s\&#34;&#34;,ret,want));			\
+</span><span style="color:#75715e">	} while(0)
+</span></code></pre></div><p>当时特别疑惑，<code>do{...}while()</code> 不是做循环的吗，类似 <strong>for,while</strong> 的语法，不过现实开发中，用 <strong>for</strong> 和 <strong>while</strong> 的比较多，<code>do{...}while()</code> 比较少了，算是比较不常用的语法。
+但是在这里，这样的代码一看就不是一个循环，<code>do{...}while()</code>表面上在这里一点意义都没有，那么为什么要这么用呢？特别疑惑的google之，恍然大悟，原来 <code>do{...}while()</code> 还有此等妙用，看来自己还差得远啊。</p>
+<p>总体来说，<code>do{...}while(0)</code> 有两种用法。</p>
+<h1 id="一定义宏实现局部作用域">一.定义宏，实现局部作用域</h1>
+<p>大家做c语言题目的时候，一道必考题就是 <strong>#define</strong> 的算术运算。</p>
+<p>比如，我随手写一个最简单的 <strong>#define</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#define FUNC(x) x*3+4
+</span><span style="color:#75715e"></span>...
+<span style="color:#66d9ef">int</span> result <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> FUNC(<span style="color:#ae81ff">3</span>);
+</code></pre></div><p>result输出多少?  <strong>26？</strong>
+错！</p>
+<p>这是c语言新手一定会犯的错误，至少我上大学的时候第一次看到这，我就做错了。</p>
+<p>要知道这道题答案是多少，首先就要知道 <strong>#define</strong> 的作用。</p>
+<ul>
+<li>#define M (a+b)　它的作用是指定标识符M来代替表达式(a+b)。在编写源程序时，所有的(a+b)都可由M代替，而对源程序作编译时，将先由预处理程序进行宏代换，即用(a+b)表达式去置换所有的宏名M，然后再进行编译。</li>
+<li>c语言允许宏带有参数。在宏定义中的参数称为形式参数，在宏调用中的参数称为实际参数。对带参数的宏，在调用中，不仅要宏展开，而且要用实参去代换形参。</li>
+</ul>
+<p><strong>也就是#define是在预处理的时候进行直接替换</strong> (这句话是这一节的重点)
+例如之上的展开就是：</p>
+<p><code>int result = 2 * x * 3 + 4</code></p>
+<p>x用实参3代替就是：</p>
+<p><code>int result = 2 * 3 * 3 + 4 = 22</code>
+而不是 <strong>26</strong>.</p>
+<p>有些人可能说，这些我都知道，这跟 <strong>do{&hellip;}while(0)</strong> 有什么关系。</p>
+<p>其实，我只是为了告诉你，#define使用的时候要特别小心，尤其是#define一个很复杂的逻辑的时候。</p>
+<p>我们举个简单的#define的例子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print</span>()
+{
+	cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;print: &#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
+}
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">send</span>()
+{
+	cout <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;send: &#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
+}
+
+<span style="color:#75715e">#define LOG print();send();
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+	
+	<span style="color:#66d9ef">if</span> (false)
+		LOG
+
+	cout <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;hello world&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
+
+	system(<span style="color:#e6db74">&#34;pause&#34;</span>);
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>这个代码输出什么?
+理论上，<code>if(false)</code> 里面的代码不会被执行，也就是LOG不会被执行，所以只应该打印出 <code>hello world</code>.</p>
+<p>但是事实上：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">send:
+hello world
+</code></pre></div><p>纳闷？</p>
+<p>注意我上面说的一句话：</p>
+<p>也就是 <strong>#define</strong> 是在预处理的时候进行直接替换！(这句话是这一节的重点)</p>
+<p>也就是说，上面的 <strong>if(false)&hellip;</strong> 在这里是：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">	<span style="color:#66d9ef">if</span> (false)
+		print();
+	send();
+
+	cout <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;hello world&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
+</code></pre></div><p>懂了吧。</p>
+<p>怎么解决了，有些人马上想到，用 <strong>{&hellip;}</strong> 把 <strong>#define</strong> 的值括住不就可以了。的确，在这里是可以的。</p>
+<p>我们在写代码的时候都习惯在语句右面加上分号，如果在宏中使用{},我们通常会这么写：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#define LOG {print();send();};
+</span></code></pre></div><p>当我们的if后面有一个else呢？</p>
+<p>就变成了：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">	<span style="color:#66d9ef">if</span> (false)
+	{
+		print();
+		send();
+	};
+	<span style="color:#66d9ef">else</span>
+	{
+		cout <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;hello&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
+	}
+</code></pre></div><p>这样就会因为if语句后面多加了个;而编译不通过。不要说你说，那我不加;那要是你开发一个大型项目的时候你自己也不知道你自己要不要加;了，你就会被自己给绕晕了，所以统一的规范很重要。</p>
+<p><strong>那么来我们的最终版本：</strong> <code>do{...}while(0);</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#define LOG do{print();send();}while (0);
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+	<span style="color:#66d9ef">if</span> (false)
+		LOG
+	<span style="color:#66d9ef">else</span>
+	{
+		cout <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;hello&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
+	}
+
+	cout <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;hello world&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
+
+	system(<span style="color:#e6db74">&#34;pause&#34;</span>);
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>就相当于：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">	<span style="color:#66d9ef">if</span> (false)
+		<span style="color:#66d9ef">do</span>{
+			print();
+			send();
+		}<span style="color:#66d9ef">while</span> (<span style="color:#ae81ff">0</span>);
+	<span style="color:#66d9ef">else</span>
+	{
+		cout <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;hello&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
+	}
+
+	cout <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;hello world&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
+</code></pre></div><p>用 <code>do{...}while(0);</code> 包裹住要操作的 <strong>#define</strong>,无论你外面怎么操作，都不会影响 <strong>#define</strong> 的操作。妙哉妙哉啊。</p>
+<h1 id="二替代goto">二.替代goto</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dosomething</span>()
+{
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">clear</span>()
+{
+
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">foo</span>()
+{
+	<span style="color:#66d9ef">int</span> error <span style="color:#f92672">=</span> dosomething();
+
+	<span style="color:#66d9ef">if</span>(error <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+	{
+		<span style="color:#66d9ef">goto</span> END;
+	}
+
+	<span style="color:#66d9ef">if</span>(error <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+	{
+		<span style="color:#66d9ef">goto</span> END;
+	}
+
+END:
+	clear();
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>当然这只是一个简单的例子，有些人说，我可以不用 <strong>goto</strong>，在每一个 <strong>goto</strong> 调用的地方直接，那么加一个判断，你就要加一条 <strong>clear()</strong>，万一你漏了呢？而且正常情况下, <strong>foo</strong> 里面的 <strong>if</strong> 有很多个，你要写很多 <strong>goto</strong>, <strong>END</strong> 里面的逻辑也更复杂。这样就更要小心。</p>
+<p>由于 <strong>goto</strong> 不符合软件工程的结构化，而且有可能使得代码难懂，所以很多人都不倡导使用，那这个时候就可以用<code>do{}while(0)</code>来进行统一的管理：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">foo</span>()
+{
+	<span style="color:#66d9ef">do</span> 
+	{
+		<span style="color:#66d9ef">int</span> error <span style="color:#f92672">=</span> dosomething();
+
+		<span style="color:#66d9ef">if</span>(error <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+		{
+			<span style="color:#66d9ef">break</span>;
+		}
+
+		<span style="color:#66d9ef">if</span>(error <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+		{
+			<span style="color:#66d9ef">break</span>;
+		}
+	} <span style="color:#66d9ef">while</span> (<span style="color:#ae81ff">0</span>);
+	
+	clear();
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>是不是看起来好看多了，而且还避免了由于错误导致的严重bug（比如你在clear里面是清理内存的操作，你忘记了写goto，而走不到END里面）。</p>
+<p>在<code>do{...}while(0)</code>里面，在任何地方都可以break跳出，然后继续下面的执行逻辑。即使你不写break，也会在执行完一遍do之后，while(0)不满足，自己跳出去。</p>
+<p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+
+        <img class="mx-auto" alt="pic" src="/img/personal/qrcode_2.png" />   
+    
+​</p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/cpp/static/">c&#43;&#43;中static的用法详解</a></li>
+        
+        <li><a href="/post/cpp/secondary_pointer/">二级指针的作用详解</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/c&#43;&#43;'>c&#43;&#43;</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "stormwy/blog-comments"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://left-pocket.github.io">Leftpocket的个人博客 By leftpocket</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://left-pocket.github.io/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">Leftpocket</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='//www.google.com/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://left-pocket.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/cpp/do_while/" title="do{...}while(0)的用法">do{...}while(0)的用法</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/cpp/static/" title="c&#43;&#43;中static的用法详解">c&#43;&#43;中static的用法详解</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/game/game_development/" title="手游服务器开发技术详解">手游服务器开发技术详解</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/cpp/secondary_pointer/" title="二级指针的作用详解">二级指针的作用详解</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/git/git_rebase/" title="git rebase使用详解">git rebase使用详解</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/golang/goroutine_implementation/" title="goroutine的实现原理">goroutine的实现原理</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/mysql/dead_lock/" title="MySQL死锁的产生">MySQL死锁的产生</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/golang/append/" title="Golang append是并发安全的吗">Golang append是并发安全的吗</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/golang/functional_options/" title="Golang函数式选项(Functional Options)编程模式">Golang函数式选项(Functional Options)编程模式</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/golang/decorator/" title="Golang装饰器(Decorator)设计模式">Golang装饰器(Decorator)设计模式</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://left-pocket.github.io/categories/c&#43;&#43;/">c&#43;&#43; (3)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/db/">db (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/git/">git (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/golang/">Golang (5)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/hugo/">hugo (2)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/leetcode/">leetcode (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/mysql/">MySQL (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/others/">Others (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/redis/">Redis (2)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/server/">server (2)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/vscode/">vscode (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E7%AE%97%E6%B3%95/">算法 (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计 (2)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/">面试 (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://left-pocket.github.io/tags/c&#43;&#43;/">c&#43;&#43;</a>
+    
+    <a href="https://left-pocket.github.io/tags/db/">db</a>
+    
+    <a href="https://left-pocket.github.io/tags/git/">git</a>
+    
+    <a href="https://left-pocket.github.io/tags/golang/">Golang</a>
+    
+    <a href="https://left-pocket.github.io/tags/hugo/">hugo</a>
+    
+    <a href="https://left-pocket.github.io/tags/leetcode/">leetcode</a>
+    
+    <a href="https://left-pocket.github.io/tags/mysql/">MySQL</a>
+    
+    <a href="https://left-pocket.github.io/tags/redis/">Redis</a>
+    
+    <a href="https://left-pocket.github.io/tags/server/">Server</a>
+    
+    <a href="https://left-pocket.github.io/tags/snowflake/">snowflake</a>
+    
+    <a href="https://left-pocket.github.io/tags/ssr/">ssr</a>
+    
+    <a href="https://left-pocket.github.io/tags/tidb/">TiDB</a>
+    
+    <a href="https://left-pocket.github.io/tags/vscode/">vscode</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E7%AE%97%E6%B3%95/">算法</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://left-pocket.github.io/about/" title="关于我" style="color:#0000FF;">关于我-微信及公众号</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/left-pocket" title="Leftpocket的知乎" style="color:#0000FF;">Leftpocket的知乎</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://left-pocket.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

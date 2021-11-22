@@ -6,7 +6,16 @@
     <description>Recent content in c&#43;&#43; on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Nov 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 Nov 2021 15:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>do{...}while(0)的用法</title>
+      <link>https://left-pocket.github.io/post/cpp/do_while/</link>
+      <pubDate>Mon, 22 Nov 2021 15:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/cpp/do_while/</guid>
+      <description>​​ 原文地址：https://left-pocket.github.io 零.导引 第一次见到 do{...}while(0) 是在学习 libevent 的时候，看到里面有很多类似 #define TT_URI(want) do { \ char</description>
+    </item>
+    
     <item>
       <title>c&#43;&#43;中static的用法详解</title>
       <link>https://left-pocket.github.io/post/cpp/static/</link>

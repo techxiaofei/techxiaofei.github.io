@@ -112,7 +112,8 @@
 </ul>
 <h1 id="c语言中static的用法">C语言中static的用法</h1>
 <p>C 语言的 static 关键字有三种（具体来说是两种）用途：</p>
-<h2 id="1-静态局部变量用于函数体内部修饰变量这种变量的生存期长于该函数">1. 静态局部变量：用于函数体内部修饰变量，这种变量的生存期长于该函数。</h2>
+<h2 id="1-静态局部变量">1. 静态局部变量</h2>
+<p>用于函数体内部修饰变量，这种变量的生存期长于该函数。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">foo</span>(){
 	<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// note:1
 </span><span style="color:#75715e"></span>	<span style="color:#75715e">//int i = 1;  // note:2
@@ -141,7 +142,8 @@
 <li>（3）静态局部变量一般在声明处初始化，如果没有显式初始化，会被程序自动初始化为0(局部变量不会被初始化);</li>
 <li>（4）它始终驻留在全局数据区，直到程序运行结束。但其作用域为局部作用域，也就是不能在函数体外面使用它(局部变量在栈区，在函数结束后立即释放内存);</li>
 </ul>
-<h2 id="2静态全局变量定义在函数体外用于修饰全局变量表示该变量只在本文件可见">2.静态全局变量：定义在函数体外，用于修饰全局变量，表示该变量只在本文件可见。</h2>
+<h2 id="2静态全局变量">2.静态全局变量</h2>
+<p>定义在函数体外，用于修饰全局变量，表示该变量只在本文件可见。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">//note:3
 </span><span style="color:#75715e">//int i = 1;  //note:4
 </span><span style="color:#75715e"></span>
@@ -190,7 +192,8 @@ after: <span style="color:#ae81ff">16</span>
 <li>静态全局变量不能被其它文件所用(全局变量可以);</li>
 <li>其它文件中可以定义相同名字的变量，不会发生冲突(自然了，因为static隔离了文件，其它文件使用相同的名字的变量，也跟它没关系了);</li>
 </ul>
-<h2 id="3静态函数准确的说静态函数跟静态全局变量的作用类似">3.静态函数：准确的说，静态函数跟静态全局变量的作用类似：</h2>
+<h2 id="3静态函数">3.静态函数</h2>
+<p>准确的说，静态函数跟静态全局变量的作用类似：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">//file a.c
 </span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
@@ -279,7 +282,7 @@ sizeof(rect1)=8
 <p>对于非静态数据成员，每个类对象(实例)都有自己的拷贝。而静态数据成员被当作是类的成员，由该类型的所有对象共享访问,对该类的多个对象来说，静态数据成员只分配一次内存。
 静态数据成员存储在全局数据区。静态数据成员定义时要分配空间，所以不能在类声明中定义。</p>
 <p>也就是说，你每 <strong>new</strong> 一个 <strong>Rectangle</strong>，并不会为 <strong>static int s_sum</strong> 的构建一份内存拷贝，它是不管你 <strong>new</strong> 了多少 <strong>Rectangle</strong> 的实例，因为它只与类Rectangle挂钩，而跟你每一个Rectangle的对象没关系。</p>
-<h2 id="2静态成员函数">2、静态成员函数</h2>
+<h2 id="2静态成员函数">2.静态成员函数</h2>
 <p>用于修饰 class 的成员函数。</p>
 <p>我们对上面的例子稍加改动：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
@@ -440,6 +443,10 @@ sizeof(rect1)=8
 <ul class="widget-list">
     
     <li>
+        <a href="https://left-pocket.github.io/post/cpp/do_while/" title="do{...}while(0)的用法">do{...}while(0)的用法</a>
+    </li>
+    
+    <li>
         <a href="https://left-pocket.github.io/post/cpp/static/" title="c&#43;&#43;中static的用法详解">c&#43;&#43;中static的用法详解</a>
     </li>
     
@@ -475,10 +482,6 @@ sizeof(rect1)=8
         <a href="https://left-pocket.github.io/post/golang/decorator/" title="Golang装饰器(Decorator)设计模式">Golang装饰器(Decorator)设计模式</a>
     </li>
     
-    <li>
-        <a href="https://left-pocket.github.io/post/redis/redis_sds/" title="Redis SDS简单动态字符串">Redis SDS简单动态字符串</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -488,7 +491,7 @@ sizeof(rect1)=8
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://left-pocket.github.io/categories/c&#43;&#43;/">c&#43;&#43; (2)</a></li>
+    <li><a href="https://left-pocket.github.io/categories/c&#43;&#43;/">c&#43;&#43; (3)</a></li>
     
     <li><a href="https://left-pocket.github.io/categories/db/">db (1)</a></li>
     
