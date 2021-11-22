@@ -190,8 +190,8 @@ hello world
 	{
 		cout <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;hello&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
 	}
-</code></pre></div><p>这样就会因为if语句后面多加了个;而编译不通过。不要说你说，那我不加;那要是你开发一个大型项目的时候你自己也不知道你自己要不要加;了，你就会被自己给绕晕了，所以统一的规范很重要。</p>
-<p><strong>那么来我们的最终版本：</strong> <code>do{...}while(0);</code></p>
+</code></pre></div><p>这样就会因为if语句后面多加了个 <strong>&quot;;&quot;</strong> 而编译不通过。不要说你说，那我不加 <strong>&quot;;&quot;</strong> 那要是你开发一个大型项目的时候你自己也不知道你自己要不要加 **&quot;;&quot;**了，你就会被自己给绕晕了，所以统一的规范很重要。</p>
+<p><strong>那么来我们的最终版本</strong> <code>do{...}while(0);</code></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#define LOG do{print();send();}while (0);
 </span><span style="color:#75715e"></span>
 <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
@@ -413,7 +413,7 @@ END:
     </li>
     
     <li>
-        <a href="https://left-pocket.github.io/post/golang/functional_options/" title="Golang函数式选项(Functional Options)编程模式">Golang函数式选项(Functional Options)编程模式</a>
+        <a href="https://left-pocket.github.io/post/golang/functional_options/" title="Golang函数式选项模式">Golang函数式选项模式</a>
     </li>
     
     <li>

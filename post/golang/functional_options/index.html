@@ -9,8 +9,8 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>Golang函数式选项(Functional Options)编程模式 | Leftpocket的个人博客</title>
-    <meta property="og:title" content="Golang函数式选项(Functional Options)编程模式 - Leftpocket的个人博客">
+    <title>Golang函数式选项模式 | Leftpocket的个人博客</title>
+    <meta property="og:title" content="Golang函数式选项模式 - Leftpocket的个人博客">
     <meta property="og:type" content="article">
         
     <meta property="article:published_time" content='2021-02-18T13:00:51&#43;08:00'>
@@ -19,7 +19,7 @@
     <meta property="article:modified_time" content='2021-02-18T13:00:51&#43;08:00'>
         
     <meta name="Keywords" content="[Golang Functional Options]">
-    <meta name="description" content="Golang函数式选项(Functional Options)编程模式">
+    <meta name="description" content="Golang函数式选项模式">
         
     <meta name="author" content="leftpocket">
     <meta property="og:url" content="https://left-pocket.github.io/post/golang/functional_options/">
@@ -81,7 +81,7 @@
     
     <article class="post">
         <header>
-            <h1 class="post-title">Golang函数式选项(Functional Options)编程模式</h1>
+            <h1 class="post-title">Golang函数式选项模式</h1>
         </header>
         <date class="post-meta meta-date">
             2021年2月18日
@@ -103,194 +103,191 @@
         
         <div class="post-content">
             <p>原文地址：<a href="https://left-pocket.github.io/post/golang/functional_options/">https://left-pocket.github.io/</a></p>
-<h1 id="概览">概览</h1>
+<h3 id="概览">概览</h3>
 <p>最近阅读源码的时候看到一段不错的代码，但是当时却不是非常理解为什么这么写。
 我们先来看一下源代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Server</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">Addr</span>     <span style="color:#66d9ef">string</span>
-	<span style="color:#a6e22e">Port</span>     <span style="color:#66d9ef">int</span>
-	<span style="color:#a6e22e">Protocol</span> <span style="color:#66d9ef">string</span>
-	<span style="color:#a6e22e">Timeout</span>  <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>
-	<span style="color:#a6e22e">MaxConns</span> <span style="color:#66d9ef">int</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">User</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">ID</span>     <span style="color:#66d9ef">string</span>
+	<span style="color:#a6e22e">Name</span>   <span style="color:#66d9ef">string</span>
+	<span style="color:#a6e22e">Age</span>    <span style="color:#66d9ef">int</span>
+	<span style="color:#a6e22e">Email</span>  <span style="color:#66d9ef">string</span>
+	<span style="color:#a6e22e">Phone</span>  <span style="color:#66d9ef">string</span>
+	<span style="color:#a6e22e">Gender</span> <span style="color:#66d9ef">string</span>
 }
 
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Option</span> <span style="color:#66d9ef">func</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>)
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Option</span> <span style="color:#66d9ef">func</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>)
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Protocol</span>(<span style="color:#a6e22e">p</span> <span style="color:#66d9ef">string</span>) <span style="color:#a6e22e">Option</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>) {
-		<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">Protocol</span> = <span style="color:#a6e22e">p</span>
-	}
-}
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Timeout</span>(<span style="color:#a6e22e">timeout</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>) <span style="color:#a6e22e">Option</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>) {
-		<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">Timeout</span> = <span style="color:#a6e22e">timeout</span>
-	}
-}
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">MaxConns</span>(<span style="color:#a6e22e">maxconns</span> <span style="color:#66d9ef">int</span>) <span style="color:#a6e22e">Option</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>) {
-		<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">MaxConns</span> = <span style="color:#a6e22e">maxconns</span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">WithAge</span>(<span style="color:#a6e22e">age</span> <span style="color:#66d9ef">int</span>) <span style="color:#a6e22e">Option</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">u</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>) {
+		<span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Age</span> = <span style="color:#a6e22e">age</span>
 	}
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewServer</span>(<span style="color:#a6e22e">addr</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">port</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">options</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">func</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>)) (<span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>, <span style="color:#66d9ef">error</span>) {
-	<span style="color:#a6e22e">srv</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Server</span>{
-		<span style="color:#a6e22e">Addr</span>:     <span style="color:#a6e22e">addr</span>,
-		<span style="color:#a6e22e">Port</span>:     <span style="color:#a6e22e">port</span>,
-		<span style="color:#a6e22e">Protocol</span>: <span style="color:#e6db74">&#34;tcp&#34;</span>,
-		<span style="color:#a6e22e">Timeout</span>:  <span style="color:#ae81ff">30</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>,
-		<span style="color:#a6e22e">MaxConns</span>: <span style="color:#ae81ff">1000</span>,
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">WithEmail</span>(<span style="color:#a6e22e">email</span> <span style="color:#66d9ef">string</span>) <span style="color:#a6e22e">Option</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">u</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>) {
+		<span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Email</span> = <span style="color:#a6e22e">email</span>
+	}
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">WithPhone</span>(<span style="color:#a6e22e">phone</span> <span style="color:#66d9ef">string</span>) <span style="color:#a6e22e">Option</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">u</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>) {
+		<span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Phone</span> = <span style="color:#a6e22e">phone</span>
+	}
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">WithGender</span>(<span style="color:#a6e22e">gender</span> <span style="color:#66d9ef">string</span>) <span style="color:#a6e22e">Option</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">u</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>) {
+		<span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Gender</span> = <span style="color:#a6e22e">gender</span>
+	}
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewUser</span>(<span style="color:#a6e22e">id</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">options</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">func</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>)) (<span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>, <span style="color:#66d9ef">error</span>) {
+	<span style="color:#a6e22e">user</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">User</span>{
+		<span style="color:#a6e22e">ID</span>:     <span style="color:#a6e22e">id</span>,
+		<span style="color:#a6e22e">Name</span>:   <span style="color:#a6e22e">name</span>,
+		<span style="color:#a6e22e">Age</span>:    <span style="color:#ae81ff">0</span>,
+		<span style="color:#a6e22e">Email</span>:  <span style="color:#e6db74">&#34;&#34;</span>,
+		<span style="color:#a6e22e">Phone</span>:  <span style="color:#e6db74">&#34;&#34;</span>,
+		<span style="color:#a6e22e">Gender</span>: <span style="color:#e6db74">&#34;female&#34;</span>,
 	}
 	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">option</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">options</span> {
-		<span style="color:#a6e22e">option</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">srv</span>)
+		<span style="color:#a6e22e">option</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">user</span>)
 	}
 	<span style="color:#75715e">//...
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">srv</span>, <span style="color:#66d9ef">nil</span>
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">user</span>, <span style="color:#66d9ef">nil</span>
 }
 
 <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-	<span style="color:#a6e22e">srv</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewServer</span>(<span style="color:#e6db74">&#34;127.0.0.1&#34;</span>, <span style="color:#ae81ff">8000</span>, <span style="color:#a6e22e">Protocol</span>(<span style="color:#e6db74">&#34;udp&#34;</span>), <span style="color:#a6e22e">Timeout</span>(<span style="color:#ae81ff">10</span>), <span style="color:#a6e22e">MaxConns</span>(<span style="color:#ae81ff">100</span>))
+	<span style="color:#a6e22e">user</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewUser</span>(<span style="color:#e6db74">&#34;1&#34;</span>, <span style="color:#e6db74">&#34;Ada&#34;</span>, <span style="color:#a6e22e">WithAge</span>(<span style="color:#ae81ff">18</span>), <span style="color:#a6e22e">WithPhone</span>(<span style="color:#e6db74">&#34;123456&#34;</span>))
 	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;NewServer: err:%v&#34;</span>, <span style="color:#a6e22e">err</span>)
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;NewUser: err:%v&#34;</span>, <span style="color:#a6e22e">err</span>)
 	}
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;NewServer Success, protocol:%v, maxConn:%v&#34;</span>, <span style="color:#a6e22e">srv</span>.<span style="color:#a6e22e">Protocol</span>, <span style="color:#a6e22e">srv</span>.<span style="color:#a6e22e">MaxConns</span>)
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;NewUser Success&#34;</span>)
 }
-</code></pre></div><p>当时呢，也不是很明白NewServer这个构造函数为什么要这么写，后来跟别人讨论的时候才知道了这是一种设计模式–函数式选项(functional options)模式。
-什么是函数式选项模式，为什么要这么写，容我一步一步把一个最简单的写法优化到这种写法。这样大家可能就会恍然大悟。</p>
-<h1 id="深入理解">深入理解</h1>
+</code></pre></div><p>当时呢，也不是很明白 <strong>NewUser</strong> 这个构造函数为什么要这么写，后来查看了资料才知道了这是一种设计模式–<strong>函数式选项(functional options)模式</strong>。</p>
+<p>什么是函数式选项模式，为什么要这么写，容我一步一步把一个最简单的写法优化到这种写法。这样大家可能就会恍然大悟。</p>
 <p>这个编程模式解决了什么问题了，其实就是动态灵活的配置不同的参数。
-想想看如果我们刚入门golang，可能会怎么实现配置功能。
+想想看如果我们刚入门 <strong>Golang</strong>，可能会怎么实现配置功能。
 假设需求是这样的：</p>
-<ul>
-<li>有一个Server结构，有许多参数需要配置，其中Addr和Port是必须填的，其他参数是可选的。</li>
-</ul>
-<h2 id="重载函数">重载函数</h2>
-<p>因为Go语言不像C++一样支持重载函数，所以，你得用不同的函数名来应对不同的配置选项。
-像这样：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewDefaultServer</span>(<span style="color:#a6e22e">addr</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">port</span> <span style="color:#66d9ef">int</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>, <span style="color:#66d9ef">error</span>) {
-  <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Server</span>{<span style="color:#a6e22e">addr</span>, <span style="color:#a6e22e">port</span>, <span style="color:#e6db74">&#34;tcp&#34;</span>, <span style="color:#ae81ff">30</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>, <span style="color:#ae81ff">100</span>}, <span style="color:#66d9ef">nil</span>
+<p><strong>需求：</strong> 网站注册有一个User结构，注册的时候有很多属性是可选的，只有ID和Name是必须的。</p>
+<h3 id="重载函数">重载函数</h3>
+<p>如果你有 <strong>C++</strong> 或者 <strong>Java</strong> 的编程基础，你的第一反应应该是函数重载。</p>
+<p>但是因为 <strong>Golang</strong> 语言不像 <strong>C++</strong> 一样支持重载函数，所以，你得用不同的函数名来应对不同的配置选项。</p>
+<p>像这样：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewUserDefault</span>(<span style="color:#a6e22e">id</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>, <span style="color:#66d9ef">error</span>) {
+  <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">User</span>{<span style="color:#a6e22e">ID</span>: <span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">Name</span>: <span style="color:#a6e22e">name</span>}, <span style="color:#66d9ef">nil</span>
 }
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewServerWithConns</span>(<span style="color:#a6e22e">addr</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">port</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">conn</span> <span style="color:#66d9ef">int</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>, <span style="color:#66d9ef">error</span>) {
-  <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Server</span>{<span style="color:#a6e22e">addr</span>, <span style="color:#a6e22e">port</span>, <span style="color:#e6db74">&#34;tcp&#34;</span>, <span style="color:#ae81ff">30</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>, <span style="color:#a6e22e">conn</span>}, <span style="color:#66d9ef">nil</span>
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewUserWithPhone</span>(<span style="color:#a6e22e">id</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">phone</span> <span style="color:#66d9ef">string</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>, <span style="color:#66d9ef">error</span>) {
+  <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">User</span>{<span style="color:#a6e22e">ID</span>: <span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">Name</span>: <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">Phone</span>: <span style="color:#a6e22e">phone</span>}, <span style="color:#66d9ef">nil</span>
 }
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewServerWithTimeout</span>(<span style="color:#a6e22e">addr</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">port</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">timeout</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>, <span style="color:#66d9ef">error</span>) {
-  <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Server</span>{<span style="color:#a6e22e">addr</span>, <span style="color:#a6e22e">port</span>, <span style="color:#e6db74">&#34;tcp&#34;</span>, <span style="color:#a6e22e">timeout</span>, <span style="color:#ae81ff">100</span>}, <span style="color:#66d9ef">nil</span>
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewUserWithEmail</span>(<span style="color:#a6e22e">id</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">email</span> <span style="color:#66d9ef">string</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>, <span style="color:#66d9ef">error</span>) {
+  <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">User</span>{<span style="color:#a6e22e">ID</span>: <span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">Name</span>: <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">Email</span>: <span style="color:#a6e22e">email</span>}, <span style="color:#66d9ef">nil</span>
 }
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewServerWithMaxConnAndTimeout</span>(<span style="color:#a6e22e">addr</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">port</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">maxconns</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">timeout</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>, <span style="color:#66d9ef">error</span>) {
-  <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Server</span>{<span style="color:#a6e22e">addr</span>, <span style="color:#a6e22e">port</span>, <span style="color:#e6db74">&#34;tcp&#34;</span>, <span style="color:#ae81ff">30</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>, <span style="color:#a6e22e">maxconns</span>}, <span style="color:#66d9ef">nil</span>
-}
-</code></pre></div><p>代码看起来很直白，但是每多加一个参数呢。
-于是我们可以想着优化一下。</p>
-<h2 id="配置化">配置化</h2>
-<p>把所有可选的参数放到一个Config的struct中。</p>
+</code></pre></div><p>如果一共只有两三个参数的情况下，比较简单，但是更多的选项的组合就代码看起来很乱了。</p>
+<h3 id="配置化">配置化</h3>
+<p>这个时候我们可能会想到，配置化。
+把所有可选的参数放到一个Config的struct中。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Config</span> <span style="color:#66d9ef">struct</span> {
-    <span style="color:#a6e22e">Protocol</span> <span style="color:#66d9ef">string</span>
-    <span style="color:#a6e22e">Timeout</span>  <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>
-    <span style="color:#a6e22e">Maxconns</span> <span style="color:#66d9ef">int</span>
+    <span style="color:#a6e22e">Age</span>    <span style="color:#66d9ef">int</span>
+    <span style="color:#a6e22e">Email</span>  <span style="color:#66d9ef">string</span>
+    <span style="color:#a6e22e">Phone</span>  <span style="color:#66d9ef">string</span>
+    <span style="color:#a6e22e">Gender</span> <span style="color:#66d9ef">string</span>
 }
-</code></pre></div><p>然后把Config放到Server的struct中。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Server</span> <span style="color:#66d9ef">struct</span> {
-    <span style="color:#a6e22e">Addr</span> <span style="color:#66d9ef">string</span>
-    <span style="color:#a6e22e">Port</span> <span style="color:#66d9ef">int</span>
+</code></pre></div><p>然后把Config放到User的struct中。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">User</span> <span style="color:#66d9ef">struct</span> {
+    <span style="color:#a6e22e">ID</span>   <span style="color:#66d9ef">string</span>
+    <span style="color:#a6e22e">Name</span> <span style="color:#66d9ef">string</span>
     <span style="color:#a6e22e">Conf</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Config</span>
 }
-</code></pre></div><p>于是，我们只需要一个 NewServer() 的函数了，在使用前需要构造 Config 对象。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewServer</span>(<span style="color:#a6e22e">addr</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">port</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">conf</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Config</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>, <span style="color:#66d9ef">error</span>) {
+</code></pre></div><p>于是，我们只需要一个 NewUser() 的函数了，在使用前需要构造 Config 对象。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewUser</span>(<span style="color:#a6e22e">id</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">conf</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Config</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>, <span style="color:#66d9ef">error</span>) {
     <span style="color:#75715e">//...
 </span><span style="color:#75715e"></span>}
 <span style="color:#75715e">//Using the default configuratrion
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">srv1</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewServer</span>(<span style="color:#e6db74">&#34;localhost&#34;</span>, <span style="color:#ae81ff">9000</span>, <span style="color:#66d9ef">nil</span>)
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">user</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewUser</span>(<span style="color:#e6db74">&#34;1&#34;</span>, <span style="color:#e6db74">&#34;Ada&#34;</span>, <span style="color:#66d9ef">nil</span>)
 
-<span style="color:#a6e22e">conf</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Config</span>{<span style="color:#a6e22e">Protocol</span>:<span style="color:#e6db74">&#34;tcp&#34;</span>, <span style="color:#a6e22e">Timeout</span>: <span style="color:#ae81ff">60</span><span style="color:#f92672">*</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>, <span style="color:#a6e22e">Maxconns</span>: <span style="color:#ae81ff">1000</span>}
-<span style="color:#a6e22e">srv2</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewServer</span>(<span style="color:#e6db74">&#34;locahost&#34;</span>, <span style="color:#ae81ff">9000</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">conf</span>)
-</code></pre></div><p>这段代码算是不错了，大多数情况下，我们可能就止步于此了。这也是我看到的大部分的代码写法。但是此方法多引入了一个Config对象，并需要判断是否为nil。</p>
-<h2 id="builder模式">Builder模式</h2>
-<p>有些同学会觉得引入一个额外的Config结构有点冗余。
-于是有了Builder模式的出现。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">sb</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>) <span style="color:#a6e22e">Create</span>(<span style="color:#a6e22e">addr</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">port</span> <span style="color:#66d9ef">int</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span> {
-  <span style="color:#a6e22e">srv</span>.<span style="color:#a6e22e">Addr</span> = <span style="color:#a6e22e">addr</span>
-  <span style="color:#a6e22e">srv</span>.<span style="color:#a6e22e">Port</span> = <span style="color:#a6e22e">port</span>
-  <span style="color:#75715e">//其它代码设置其它成员的默认值
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">srv</span>
-}
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">srv</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>) <span style="color:#a6e22e">WithProtocol</span>(<span style="color:#a6e22e">protocol</span> <span style="color:#66d9ef">string</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span> {
-  <span style="color:#a6e22e">srv</span>.<span style="color:#a6e22e">Protocol</span> = <span style="color:#a6e22e">protocol</span> 
-  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">srv</span>
-}
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">srv</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>) <span style="color:#a6e22e">WithMaxConn</span>( <span style="color:#a6e22e">maxconn</span> <span style="color:#66d9ef">int</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span> {
-  <span style="color:#a6e22e">srv</span>.<span style="color:#a6e22e">MaxConns</span> = <span style="color:#a6e22e">maxconn</span>
-  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">srv</span>
-}
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">srv</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>) <span style="color:#a6e22e">WithTimeOut</span>( <span style="color:#a6e22e">timeout</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span> {
-  <span style="color:#a6e22e">srv</span>.<span style="color:#a6e22e">Timeout</span> = <span style="color:#a6e22e">timeout</span>
-  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">srv</span>
-}
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">srv</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>) <span style="color:#a6e22e">Build</span>() (<span style="color:#a6e22e">Server</span>) {
-  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">srv</span>
-}
-</code></pre></div><p>于是就可以以如下的方式来使用了</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">srv</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Server</span>{}
-<span style="color:#a6e22e">server</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">srv</span>.<span style="color:#a6e22e">Create</span>(<span style="color:#e6db74">&#34;127.0.0.1&#34;</span>, <span style="color:#ae81ff">8080</span>).
-  <span style="color:#a6e22e">WithProtocol</span>(<span style="color:#e6db74">&#34;udp&#34;</span>).
-  <span style="color:#a6e22e">WithMaxConn</span>(<span style="color:#ae81ff">1024</span>).
-  <span style="color:#a6e22e">WithTimeOut</span>(<span style="color:#ae81ff">30</span><span style="color:#f92672">*</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>).
+<span style="color:#a6e22e">conf</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Config</span>{<span style="color:#a6e22e">Age</span>:<span style="color:#ae81ff">18</span>, <span style="color:#a6e22e">Phone</span>: <span style="color:#e6db74">&#34;123456&#34;</span>}
+<span style="color:#a6e22e">user2</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewUser</span>(<span style="color:#e6db74">&#34;2&#34;</span>, <span style="color:#e6db74">&#34;Bob&#34;</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">conf</span>)
+</code></pre></div><p>这段代码看起来算是不错了，很多时候我使用的一些开源库也是这么写的。通过引入一个Config对象来解决多个参数的组合的问题。</p>
+<h3 id="builder模式">Builder模式</h3>
+<p>有些经常使用Java的同学会想到Builder模式。</p>
+<p>于是就可以以如下的方式来使用了:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">user</span> <span style="color:#f92672">:=</span> new(<span style="color:#a6e22e">UserBuilder</span>).<span style="color:#a6e22e">Create</span>(<span style="color:#e6db74">&#34;1&#34;</span>, <span style="color:#e6db74">&#34;Ada&#34;</span>).
+  <span style="color:#a6e22e">age</span>(<span style="color:#ae81ff">18</span>).
+  <span style="color:#a6e22e">phone</span>(<span style="color:#e6db74">&#34;123456&#34;</span>).
+  <span style="color:#a6e22e">gender</span>(<span style="color:#e6db74">&#34;female&#34;</span>).
   <span style="color:#a6e22e">Build</span>()
-</code></pre></div><p>一气呵成。
-是不是觉得完美了，接近了。</p>
-<h2 id="functional-options模式">Functional Options模式</h2>
-<p>Functional Options模式首先需要定义一个函数类型。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Option</span> <span style="color:#66d9ef">func</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>)
-</code></pre></div><p>然后，我们可以使用函数式的方式定义一组如下的函数：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Protocol</span>(<span style="color:#a6e22e">p</span> <span style="color:#66d9ef">string</span>) <span style="color:#a6e22e">Option</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>) {
-		<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">Protocol</span> = <span style="color:#a6e22e">p</span>
+</code></pre></div><p>需要引入一个抽象的UserBuilder对象，来包装User对象，最终Build一个User对象返回。</p>
+<h3 id="函数式选项模式">函数式选项模式</h3>
+<p><strong>函数式选项模式</strong> 首先需要定义一个函数类型：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Option</span> <span style="color:#66d9ef">func</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>)
+</code></pre></div><p>然后，我们定义一组返回函数的函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">WithAge</span>(<span style="color:#a6e22e">age</span> <span style="color:#66d9ef">int</span>) <span style="color:#a6e22e">Option</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">u</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>) {
+		<span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Age</span> = <span style="color:#a6e22e">age</span>
 	}
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Timeout</span>(<span style="color:#a6e22e">timeout</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>) <span style="color:#a6e22e">Option</span> {
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>) {
-        <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">Timeout</span> = <span style="color:#a6e22e">timeout</span>
-    }
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">WithEmail</span>(<span style="color:#a6e22e">email</span> <span style="color:#66d9ef">string</span>) <span style="color:#a6e22e">Option</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">u</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>) {
+		<span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Email</span> = <span style="color:#a6e22e">email</span>
+	}
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">MaxConns</span>(<span style="color:#a6e22e">maxconns</span> <span style="color:#66d9ef">int</span>) <span style="color:#a6e22e">Option</span> {
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>) {
-        <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">MaxConns</span> = <span style="color:#a6e22e">maxconns</span>
-    }
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">WithPhone</span>(<span style="color:#a6e22e">phone</span> <span style="color:#66d9ef">string</span>) <span style="color:#a6e22e">Option</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">u</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>) {
+		<span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Phone</span> = <span style="color:#a6e22e">phone</span>
+	}
 }
-</code></pre></div><p>这个模式和Builder模式的区别是，Builder模式返回的是* Server对象，Functional Options返回的是函数类型<strong>func(* Server)</strong>。</p>
-<p>上面这组代码传入一个参数，然后返回一个函数，返回的这个函数会设置自己的 Server 参数。例如：</p>
-<ul>
-<li>当我们调用其中的一个函数用 MaxConns(30) 时</li>
-<li>其返回值是一个 func(s* Server) { s.MaxConns = 30 } 的函数。
-这个叫高阶函数。</li>
-</ul>
-<p>这样我们就方便在NewServer里面统一初始化。循环对我们的函数类型执行调用操作。 option(&amp;srv).</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewServer</span>(<span style="color:#a6e22e">addr</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">port</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">options</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">func</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>)) (<span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>, <span style="color:#66d9ef">error</span>) {
-  <span style="color:#a6e22e">srv</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Server</span>{
-    <span style="color:#a6e22e">Addr</span>:     <span style="color:#a6e22e">addr</span>,
-    <span style="color:#a6e22e">Port</span>:     <span style="color:#a6e22e">port</span>,
-    <span style="color:#a6e22e">Protocol</span>: <span style="color:#e6db74">&#34;tcp&#34;</span>,
-    <span style="color:#a6e22e">Timeout</span>:  <span style="color:#ae81ff">30</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>,
-    <span style="color:#a6e22e">MaxConns</span>: <span style="color:#ae81ff">1000</span>,
-  }
-  <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">option</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">options</span> {
-    <span style="color:#a6e22e">option</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">srv</span>)
-  }
-  <span style="color:#75715e">//...
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">srv</span>, <span style="color:#66d9ef">nil</span>
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">WithGender</span>(<span style="color:#a6e22e">gender</span> <span style="color:#66d9ef">string</span>) <span style="color:#a6e22e">Option</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">u</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>) {
+		<span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Gender</span> = <span style="color:#a6e22e">gender</span>
+	}
+}
+</code></pre></div><p>这个模式和Builder模式的区别是，Builder模式返回的是 <strong>* User</strong> 对象，<strong>Functional Options</strong> 返回的是函数类型 <strong>func(* User)</strong>。</p>
+<p>上面这组代码传入一个参数，然后返回一个函数，返回的这个函数会设置自己的 <strong>User</strong> 参数。</p>
+<p>这样我们就方便在 <strong>NewUser</strong> 里面统一初始化。循环对我们的函数类型执行调用操作。 <code>option(&amp;user)</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewUser</span>(<span style="color:#a6e22e">id</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">options</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">func</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>)) (<span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>, <span style="color:#66d9ef">error</span>) {
+	<span style="color:#a6e22e">user</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">User</span>{
+		<span style="color:#a6e22e">ID</span>:     <span style="color:#a6e22e">id</span>,
+		<span style="color:#a6e22e">Name</span>:   <span style="color:#a6e22e">name</span>,
+		<span style="color:#a6e22e">Age</span>:    <span style="color:#ae81ff">0</span>,
+		<span style="color:#a6e22e">Email</span>:  <span style="color:#e6db74">&#34;&#34;</span>,
+		<span style="color:#a6e22e">Phone</span>:  <span style="color:#e6db74">&#34;&#34;</span>,
+		<span style="color:#a6e22e">Gender</span>: <span style="color:#e6db74">&#34;female&#34;</span>,
+	}
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">option</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">options</span> {
+		<span style="color:#a6e22e">option</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">user</span>)
+	}
+	<span style="color:#75715e">//...
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">user</span>, <span style="color:#66d9ef">nil</span>
 }
 </code></pre></div><p>调用方式如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">srv1</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewServer</span>(<span style="color:#e6db74">&#34;127.0.0.1&#34;</span>, <span style="color:#ae81ff">8000</span>)
-<span style="color:#a6e22e">srv2</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewServer</span>(<span style="color:#e6db74">&#34;127.0.0.1&#34;</span>, <span style="color:#ae81ff">8000</span>, <span style="color:#a6e22e">Protocol</span>(<span style="color:#e6db74">&#34;udp&#34;</span>), <span style="color:#a6e22e">Timeout</span>(<span style="color:#ae81ff">10</span>), <span style="color:#a6e22e">MaxConns</span>(<span style="color:#ae81ff">100</span>))
-</code></pre></div><p>怎么样，是不是高度的整洁和优雅？不但解决了使用 Config 对象方式 的需要有一个config参数，但在不需要的时候，是放 nil 还是放 Config{}的选择困难，也不需要引用一个Builder的控制对象，直接使用函数式编程的试，在代码阅读上也很优雅。</p>
-<p>所以，以后，大家在要玩类似的代码时，强烈推荐使用Functional Options这种方式，这种方式至少带来了如下的好处：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">user1</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewUser</span>(<span style="color:#e6db74">&#34;1&#34;</span>, <span style="color:#e6db74">&#34;Ada&#34;</span>)
+<span style="color:#a6e22e">user2</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewUser</span>(<span style="color:#e6db74">&#34;2&#34;</span>, <span style="color:#e6db74">&#34;Bob&#34;</span>, <span style="color:#a6e22e">WithPhone</span>(<span style="color:#e6db74">&#34;123456&#34;</span>), <span style="color:#a6e22e">WithGender</span>(<span style="color:#e6db74">&#34;male&#34;</span>))
+</code></pre></div><p>这个看起来比较整洁和优雅，对外的接口只有一个NewUser。</p>
+<p>相比于Builder模式，不需要引入一个Builder对象。</p>
+<p>对比配置化的模式，也不需要引入一个新的Config。</p>
+<h3 id="总结">总结</h3>
+<p><strong>Golang</strong> 由于语言本身的特性，不支持函数重载，<strong>函数式选项</strong> 的编程模式在一定程度上解决了其他语言需要通过函数重载解决的问题。
+<strong>函数式选项</strong> 编程有以下优点：</p>
+<p><strong>优点：</strong></p>
 <ul>
-<li>直觉式的编程</li>
-<li>高度的可配置化</li>
+<li>任意顺序传递参数</li>
+<li>支持默认值</li>
+<li>向后兼容性</li>
 <li>很容易维护和扩展</li>
-<li>自文档</li>
-<li>对于新来的人很容易上手</li>
 </ul>
+<p>看了这么多，是不是想马上上手重构你之前的代码了。</p>
+<p>虽然 <strong>函数式选项</strong> 编程模式有很多优点，但是设计模式的存在都是为了弥补语言特性的缺陷的一种手段。它是为了解决代码扩展性的问题，往往是通过增加抽象牺牲了简单性，切勿过度使用。有些简单的配置，就不需要设计的这么通用了。</p>
+<p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+
+        <img class="mx-auto" alt="pic" src="/img/personal/qrcode_2.png" />   
+    </p>
 
         </div>
 
@@ -425,7 +422,7 @@
     </li>
     
     <li>
-        <a href="https://left-pocket.github.io/post/golang/functional_options/" title="Golang函数式选项(Functional Options)编程模式">Golang函数式选项(Functional Options)编程模式</a>
+        <a href="https://left-pocket.github.io/post/golang/functional_options/" title="Golang函数式选项模式">Golang函数式选项模式</a>
     </li>
     
     <li>
