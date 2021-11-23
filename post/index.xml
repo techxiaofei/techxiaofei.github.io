@@ -89,12 +89,12 @@
     </item>
     
     <item>
-      <title>Golang函数式选项模式</title>
+      <title>Golang函数式选项(Functional Options)模式</title>
       <link>https://left-pocket.github.io/post/golang/functional_options/</link>
       <pubDate>Thu, 18 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/golang/functional_options/</guid>
-      <description>原文地址：https://left-pocket.github.io/ 概览 最近阅读源码的时候看到一段不错的代码，但是当时却不是非常理解为什么</description>
+      <description>原文地址：https://left-pocket.github.io 概览 最近阅读源码的时候看到一段不错的代码，但是当时却不是非常理解为什么这</description>
     </item>
     
     <item>
