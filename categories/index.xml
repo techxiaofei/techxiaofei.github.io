@@ -6,16 +6,7 @@
     <description>Recent content in Categories on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 23 Nov 2021 18:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>algorithm</title>
-      <link>https://left-pocket.github.io/categories/algorithm/</link>
-      <pubDate>Tue, 23 Nov 2021 18:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/categories/algorithm/</guid>
-      <description></description>
-    </item>
-    
+    <lastBuildDate>Tue, 23 Nov 2021 01:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>hugo</title>
       <link>https://left-pocket.github.io/categories/hugo/</link>
@@ -76,6 +67,15 @@
       <pubDate>Wed, 17 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/categories/redis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>algorithm</title>
+      <link>https://left-pocket.github.io/categories/algorithm/</link>
+      <pubDate>Wed, 03 Feb 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/categories/algorithm/</guid>
       <description></description>
     </item>
     
