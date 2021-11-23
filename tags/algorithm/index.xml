@@ -6,7 +6,16 @@
     <description>Recent content in algorithm on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 03 Feb 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 23 Nov 2021 18:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LRU缓存机制，你想知道的都在这</title>
+      <link>https://left-pocket.github.io/post/algorithm/lru/</link>
+      <pubDate>Tue, 23 Nov 2021 18:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/algorithm/lru/</guid>
+      <description>​​ 原文地址：https://left-pocket.github.io 概述 LRU是Least Recently Used的缩写，译为最近最少使用。它的理论基</description>
+    </item>
+    
     <item>
       <title>布隆过滤器(Bloom Filter)详解</title>
       <link>https://left-pocket.github.io/post/algorithm/bloom_filter/</link>
