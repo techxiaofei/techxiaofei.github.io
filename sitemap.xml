@@ -2,25 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://left-pocket.github.io/categories/</loc>
+    <lastmod>2021-11-23T01:00:51+08:00</lastmod>
+  </url><url>
+    <loc>https://left-pocket.github.io/tags/hugo/</loc>
+    <lastmod>2021-11-23T01:00:51+08:00</lastmod>
+  </url><url>
+    <loc>https://left-pocket.github.io/categories/hugo/</loc>
+    <lastmod>2021-11-23T01:00:51+08:00</lastmod>
+  </url><url>
+    <loc>https://left-pocket.github.io/</loc>
+    <lastmod>2021-11-23T01:00:51+08:00</lastmod>
+  </url><url>
+    <loc>https://left-pocket.github.io/post/</loc>
+    <lastmod>2021-11-23T01:00:51+08:00</lastmod>
+  </url><url>
+    <loc>https://left-pocket.github.io/tags/</loc>
+    <lastmod>2021-11-23T01:00:51+08:00</lastmod>
+  </url><url>
+    <loc>https://left-pocket.github.io/post/hugo/hugo_0/</loc>
+    <lastmod>2021-11-23T01:00:51+08:00</lastmod>
+  </url><url>
     <loc>https://left-pocket.github.io/tags/c&#43;&#43;/</loc>
     <lastmod>2021-11-22T15:00:51+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/categories/c&#43;&#43;/</loc>
     <lastmod>2021-11-22T15:00:51+08:00</lastmod>
   </url><url>
-    <loc>https://left-pocket.github.io/categories/</loc>
-    <lastmod>2021-11-22T15:00:51+08:00</lastmod>
-  </url><url>
     <loc>https://left-pocket.github.io/post/cpp/do_while/</loc>
-    <lastmod>2021-11-22T15:00:51+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/</loc>
-    <lastmod>2021-11-22T15:00:51+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/post/</loc>
-    <lastmod>2021-11-22T15:00:51+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/tags/</loc>
     <lastmod>2021-11-22T15:00:51+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/post/cpp/static/</loc>
@@ -168,12 +177,6 @@
     <lastmod>2020-08-06T13:00:51+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/categories/db/</loc>
-    <lastmod>2020-08-06T13:00:51+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/tags/hugo/</loc>
-    <lastmod>2020-08-06T13:00:51+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/categories/hugo/</loc>
     <lastmod>2020-08-06T13:00:51+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/categories/others/</loc>
