@@ -9,11 +9,11 @@
     <lastBuildDate>Thu, 06 Aug 2020 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/db/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>TiDB Write Conflict问题分析</title>
-      <link>https://left-pocket.github.io/post/mysql/db-tidb-write-conflict/</link>
+      <link>https://left-pocket.github.io/post/mysql/db_tidb_write_conflict/</link>
       <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/post/mysql/db-tidb-write-conflict/</guid>
-      <description>原文地址：https://left-pocket.github.io/ 背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了wri</description>
+      <guid>https://left-pocket.github.io/post/mysql/db_tidb_write_conflict/</guid>
+      <description>原文地址：https://left-pocket.github.io 背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了writ</description>
     </item>
     
   </channel>

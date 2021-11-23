@@ -18,20 +18,20 @@
     
     <item>
       <title>使用hugo搭建个人博客</title>
-      <link>https://left-pocket.github.io/post/hugo/hugo-creation/</link>
+      <link>https://left-pocket.github.io/post/hugo/hugo_creation/</link>
       <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/post/hugo/hugo-creation/</guid>
-      <description>原文地址：https://left-pocket.github.io/ 最近使用hugo搭建博客，准备自己记录一下学习过程。 就先记录一下搭建h</description>
+      <guid>https://left-pocket.github.io/post/hugo/hugo_creation/</guid>
+      <description>原文地址：https://left-pocket.github.io 最近使用hugo搭建博客，准备自己记录一下学习过程。 就先记录一下搭建hu</description>
     </item>
     
     <item>
       <title>把hugo博客托管到github上</title>
-      <link>https://left-pocket.github.io/post/hugo/hugo-github/</link>
+      <link>https://left-pocket.github.io/post/hugo/hugo_github/</link>
       <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/post/hugo/hugo-github/</guid>
-      <description>原文地址：https://left-pocket.github.io/ 上一篇介绍了怎么在本机搭建hugo博客，这一篇将主要介绍怎么把hugo</description>
+      <guid>https://left-pocket.github.io/post/hugo/hugo_github/</guid>
+      <description>原文地址：https://left-pocket.github.io 上一篇介绍了怎么在本机搭建hugo博客，这一篇将主要介绍怎么把hugo静</description>
     </item>
     
   </channel>
