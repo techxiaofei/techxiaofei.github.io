@@ -3,16 +3,25 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://left-pocket.github.io/categories/</loc>
-    <lastmod>2021-11-25T00:01:00+08:00</lastmod>
+    <lastmod>2021-11-26T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/</loc>
-    <lastmod>2021-11-25T00:01:00+08:00</lastmod>
+    <lastmod>2021-11-26T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://left-pocket.github.io/tags/mysql/</loc>
+    <lastmod>2021-11-26T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://left-pocket.github.io/categories/mysql/</loc>
+    <lastmod>2021-11-26T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/post/</loc>
-    <lastmod>2021-11-25T00:01:00+08:00</lastmod>
+    <lastmod>2021-11-26T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/tags/</loc>
-    <lastmod>2021-11-25T00:01:00+08:00</lastmod>
+    <lastmod>2021-11-26T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://left-pocket.github.io/post/mysql/covering_index/</loc>
+    <lastmod>2021-11-26T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/tags/%E9%9D%A2%E8%AF%95/</loc>
     <lastmod>2021-11-25T00:01:00+08:00</lastmod>
@@ -94,12 +103,6 @@
   </url><url>
     <loc>https://left-pocket.github.io/post/golang/goroutine_implementation/</loc>
     <lastmod>2021-04-18T13:00:51+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/tags/mysql/</loc>
-    <lastmod>2021-04-05T13:00:51+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/categories/mysql/</loc>
-    <lastmod>2021-04-05T13:00:51+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/post/mysql/dead_lock/</loc>
     <lastmod>2021-04-05T13:00:51+08:00</lastmod>
@@ -214,8 +217,6 @@
   </url><url>
     <loc>https://left-pocket.github.io/post/hugo/hugo_github/</loc>
     <lastmod>2020-08-06T13:00:51+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/post/mysql/cover_index/</loc>
   </url><url>
     <loc>https://left-pocket.github.io/archives/</loc>
   </url>
