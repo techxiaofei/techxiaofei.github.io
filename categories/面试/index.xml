@@ -6,7 +6,25 @@
     <description>Recent content in 面试 on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 01 Jan 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 25 Nov 2021 00:01:00 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>面试之网络编程</title>
+      <link>https://left-pocket.github.io/post/interview/tcpip/</link>
+      <pubDate>Thu, 25 Nov 2021 00:01:00 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/interview/tcpip/</guid>
+      <description>​ 原文地址：https://left-pocket.github.io 面试系列将剖析各个面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现</description>
+    </item>
+    
+    <item>
+      <title>面试之网络编程-socket可读可写条件</title>
+      <link>https://left-pocket.github.io/post/tcpip/socket_read_write/</link>
+      <pubDate>Thu, 25 Nov 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/tcpip/socket_read_write/</guid>
+      <description>​ 原文地址：https://left-pocket.github.io 面试系列将剖析各个面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现</description>
+    </item>
+    
     <item>
       <title>服务端面试技术栈</title>
       <link>https://left-pocket.github.io/post/catalog/interview_tech_stack/</link>

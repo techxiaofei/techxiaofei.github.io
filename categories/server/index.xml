@@ -13,7 +13,7 @@
       <pubDate>Tue, 24 Nov 2020 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/snowflake/</guid>
-      <description>原文地址：https://left-pocket.github.io/ 背景 这篇文章来讲解snowflake是什么，以及它实际应用的最佳实践方</description>
+      <description>原文地址：https://left-pocket.github.io 背景 这篇文章来讲解snowflake是什么，以及它实际应用的最佳实践方案</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Sat, 21 Nov 2020 00:07:57 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/uid-generator/</guid>
-      <description>原文地址：https://left-pocket.github.io/ 背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯</description>
+      <description>原文地址：https://left-pocket.github.io 背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一</description>
     </item>
     
   </channel>

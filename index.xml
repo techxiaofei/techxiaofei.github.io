@@ -6,7 +6,25 @@
     <description>Recent content on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 23 Nov 2021 18:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 25 Nov 2021 00:01:00 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>面试之网络编程</title>
+      <link>https://left-pocket.github.io/post/interview/tcpip/</link>
+      <pubDate>Thu, 25 Nov 2021 00:01:00 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/interview/tcpip/</guid>
+      <description>​ 原文地址：https://left-pocket.github.io 面试系列将剖析各个面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现</description>
+    </item>
+    
+    <item>
+      <title>面试之网络编程-socket可读可写条件</title>
+      <link>https://left-pocket.github.io/post/tcpip/socket_read_write/</link>
+      <pubDate>Thu, 25 Nov 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/tcpip/socket_read_write/</guid>
+      <description>​ 原文地址：https://left-pocket.github.io 面试系列将剖析各个面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现</description>
+    </item>
+    
     <item>
       <title>LRU缓存机制，你想知道的这里都有</title>
       <link>https://left-pocket.github.io/post/algorithm/lru/</link>
@@ -148,7 +166,7 @@
       <pubDate>Fri, 22 Jan 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/friends_status/</guid>
-      <description>原文地址：https://left-pocket.github.io/ 最近在产品上实现了微信朋友圈的功能，在这里分享一下朋友圈功能的设计与实</description>
+      <description>原文地址：https://left-pocket.github.io 最近在产品上实现了微信朋友圈的功能，在这里分享一下朋友圈功能的设计与实现</description>
     </item>
     
     <item>
@@ -157,7 +175,7 @@
       <pubDate>Fri, 22 Jan 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/friends_comment_like/</guid>
-      <description>原文地址：https://left-pocket.github.io/ 上篇文章介绍了朋友圈的技术设计，这篇将介绍朋友圈点赞和评论的实现方式。</description>
+      <description>原文地址：https://left-pocket.github.io 上篇文章介绍了朋友圈的技术设计，这篇将介绍朋友圈点赞和评论的实现方式。 需</description>
     </item>
     
     <item>
@@ -211,7 +229,7 @@
       <pubDate>Tue, 24 Nov 2020 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/snowflake/</guid>
-      <description>原文地址：https://left-pocket.github.io/ 背景 这篇文章来讲解snowflake是什么，以及它实际应用的最佳实践方</description>
+      <description>原文地址：https://left-pocket.github.io 背景 这篇文章来讲解snowflake是什么，以及它实际应用的最佳实践方案</description>
     </item>
     
     <item>
@@ -220,7 +238,7 @@
       <pubDate>Sat, 21 Nov 2020 00:07:57 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/uid-generator/</guid>
-      <description>原文地址：https://left-pocket.github.io/ 背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯</description>
+      <description>原文地址：https://left-pocket.github.io 背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一</description>
     </item>
     
     <item>
@@ -257,6 +275,51 @@
       
       <guid>https://left-pocket.github.io/post/hugo/hugo_github/</guid>
       <description>原文地址：https://left-pocket.github.io 上一篇介绍了怎么在本机搭建hugo博客，这一篇将主要介绍怎么把hugo静</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://left-pocket.github.io/post/interview/algorithm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/interview/algorithm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://left-pocket.github.io/post/interview/cpp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/interview/cpp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://left-pocket.github.io/post/interview/golang/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/interview/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://left-pocket.github.io/post/interview/mysql/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/interview/mysql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://left-pocket.github.io/post/interview/redis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/interview/redis/</guid>
+      <description></description>
     </item>
     
     <item>
