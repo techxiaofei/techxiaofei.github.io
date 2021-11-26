@@ -3,33 +3,45 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://left-pocket.github.io/categories/</loc>
-    <lastmod>2021-11-25T00:01:00+08:00</lastmod>
+    <lastmod>2021-11-26T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/</loc>
-    <lastmod>2021-11-25T00:01:00+08:00</lastmod>
+    <lastmod>2021-11-26T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://left-pocket.github.io/tags/mysql/</loc>
+    <lastmod>2021-11-26T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://left-pocket.github.io/categories/mysql/</loc>
+    <lastmod>2021-11-26T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/post/</loc>
-    <lastmod>2021-11-25T00:01:00+08:00</lastmod>
+    <lastmod>2021-11-26T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/tags/</loc>
+    <lastmod>2021-11-26T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://left-pocket.github.io/post/mysql/covering_index/</loc>
+    <lastmod>2021-11-26T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://left-pocket.github.io/post/interview/mysql/</loc>
+    <lastmod>2021-11-25T00:03:00+08:00</lastmod>
+  </url><url>
+    <loc>https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/</loc>
+    <lastmod>2021-11-25T00:03:00+08:00</lastmod>
+  </url><url>
+    <loc>https://left-pocket.github.io/post/interview/tcpip/</loc>
     <lastmod>2021-11-25T00:01:00+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/tags/%E9%9D%A2%E8%AF%95/</loc>
     <lastmod>2021-11-25T00:01:00+08:00</lastmod>
   </url><url>
-    <loc>https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/</loc>
-    <lastmod>2021-11-25T00:01:00+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/post/interview/tcpip/</loc>
-    <lastmod>2021-11-25T00:01:00+08:00</lastmod>
+    <loc>https://left-pocket.github.io/post/tcpip/socket_read_write/</loc>
+    <lastmod>2021-11-25T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2021-11-25T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2021-11-25T00:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/post/tcpip/socket_read_write/</loc>
     <lastmod>2021-11-25T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/tags/algorithm/</loc>
@@ -94,12 +106,6 @@
   </url><url>
     <loc>https://left-pocket.github.io/post/golang/goroutine_implementation/</loc>
     <lastmod>2021-04-18T13:00:51+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/tags/mysql/</loc>
-    <lastmod>2021-04-05T13:00:51+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/categories/mysql/</loc>
-    <lastmod>2021-04-05T13:00:51+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/post/mysql/dead_lock/</loc>
     <lastmod>2021-04-05T13:00:51+08:00</lastmod>
@@ -194,16 +200,10 @@
     <loc>https://left-pocket.github.io/post/others/ssr_centos7/</loc>
     <lastmod>2020-08-06T13:00:51+08:00</lastmod>
   </url><url>
-    <loc>https://left-pocket.github.io/categories/db/</loc>
-    <lastmod>2020-08-06T13:00:51+08:00</lastmod>
-  </url><url>
     <loc>https://left-pocket.github.io/categories/others/</loc>
     <lastmod>2020-08-06T13:00:51+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/tags/ssr/</loc>
-    <lastmod>2020-08-06T13:00:51+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/tags/tidb/</loc>
     <lastmod>2020-08-06T13:00:51+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/post/mysql/db_tidb_write_conflict/</loc>
@@ -214,16 +214,6 @@
   </url><url>
     <loc>https://left-pocket.github.io/post/hugo/hugo_github/</loc>
     <lastmod>2020-08-06T13:00:51+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/post/interview/algorithm/</loc>
-  </url><url>
-    <loc>https://left-pocket.github.io/post/interview/cpp/</loc>
-  </url><url>
-    <loc>https://left-pocket.github.io/post/interview/golang/</loc>
-  </url><url>
-    <loc>https://left-pocket.github.io/post/interview/mysql/</loc>
-  </url><url>
-    <loc>https://left-pocket.github.io/post/interview/redis/</loc>
   </url><url>
     <loc>https://left-pocket.github.io/archives/</loc>
   </url>
