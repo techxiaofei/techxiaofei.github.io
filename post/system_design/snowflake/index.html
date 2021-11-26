@@ -117,7 +117,7 @@
 <p>优点：本地生成，生成简单，性能好，没有高可用风险
 缺点：长度过长，存储冗余，且无序不可读，查询效率低</p>
 <h3 id="数据库自增id">数据库自增ID</h3>
-<p>使用数据库的id自增策略，如 MySQL 的 auto_increment。并且可以使用多台数据库分别设置不同步长，生成不重复ID的策略来实现高可用。</p>
+<p>使用数据库的id自增策略，如 MySQL 的 <code>auto_increment</code>。并且可以使用多台数据库分别设置不同步长，生成不重复ID的策略来实现高可用。</p>
 <p>优点：数据库生成的ID绝对有序，高可用实现方式简单
 缺点：需要独立部署数据库实例，成本高，有性能瓶颈</p>
 <h3 id="redis生成id">Redis生成ID</h3>
@@ -139,128 +139,54 @@ E：5, 10, 15, 20, 25
         <img class="mx-auto" alt="snowflake" src="/img/server/snowflake.png" />   
     </p>
 <p>snowflake算法采用64bit存储ID, 最高位备用，暂时不使用。接下来的41 bit做时间戳，最小时间单位为毫秒。再接下来的10 bit做机器ID(worker id)，然后最后12 bit在单位时间(毫秒)递增。</p>
-<p>41 bit表示时间戳大约可以使用69年(2^41 -1), 为了尽可能的表示时间，时间戳可以从第一次部署的时候开始计算，比如2020-02-02 00:00:00, 这样69年内可以无虞。</p>
-<p>10 bit区分机器，所以可以支持1024台机器。 你也可以把10bit分成两部分，一部分做数据中心的ID,一部分做机器的ID，比如55分的化，可以支持32个数据中心，每个数据中心最多可以支持32台机器。</p>
-<p>12 bit自增值可以表示4096的ID,也就是说每台机器每以毫秒最多产生4096个ID,这是它的最大性能。</p>
+<p><strong>41 bit表示时间戳</strong>大约可以使用69年(2^41 -1), 为了尽可能的表示时间，时间戳可以从第一次部署的时候开始计算，比如2020-02-02 00:00:00, 这样69年内可以无虞。</p>
+<p><strong>10 bit区分机器</strong>，所以可以支持1024台机器。 你也可以把10bit分成两部分，一部分做数据中心的ID,一部分做机器的ID，比如55分的化，可以支持32个数据中心，每个数据中心最多可以支持32台机器。</p>
+<p><strong>12 bit自增值</strong>可以表示4096的ID,也就是说每台机器每以毫秒最多产生4096个ID,这是它的最大性能。</p>
 <p>正如前面所说，时间戳、机器ID、自增ID所占的位数可以根据你实际的情况做调整。</p>
 <p>snowflake还有一个很好的特性就是基本保持顺序性，因为它的前几位是时间戳，可以对ID按照时间进行排序。</p>
 <h4 id="snowflake算法详解">snowflake算法详解</h4>
 <p>golang核心代码如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Package snowflake provides a very simple Twitter snowflake generator and parser.
-</span><span style="color:#75715e"></span><span style="color:#f92672">package</span> <span style="color:#a6e22e">snowflake</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">var</span> (
+    <span style="color:#75715e">// 可以设置成系统第一次上线的时间，单位:毫秒。占用41位，可以使用69年。
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">Epoch</span> <span style="color:#66d9ef">int64</span> = <span style="color:#ae81ff">1288834974657</span>
 
-<span style="color:#66d9ef">var</span> (
-	<span style="color:#75715e">// Epoch is set to the twitter snowflake epoch of Nov 04 2010 01:42:54 UTC in milliseconds
-</span><span style="color:#75715e"></span>	<span style="color:#75715e">// You may customize this to set a different epoch for your application.
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">Epoch</span> <span style="color:#66d9ef">int64</span> = <span style="color:#ae81ff">1288834974657</span>
+    <span style="color:#75715e">// 实例的ID占用10位，最多支持1024个实例。
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">NodeBits</span> <span style="color:#66d9ef">uint8</span> = <span style="color:#ae81ff">10</span>
 
-	<span style="color:#75715e">// NodeBits holds the number of bits to use for Node
-</span><span style="color:#75715e"></span>	<span style="color:#75715e">// Remember, you have a total 22 bits to share between Node/Step
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">NodeBits</span> <span style="color:#66d9ef">uint8</span> = <span style="color:#ae81ff">10</span>
-
-	<span style="color:#75715e">// StepBits holds the number of bits to use for Step
-</span><span style="color:#75715e"></span>	<span style="color:#75715e">// Remember, you have a total 22 bits to share between Node/Step
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">StepBits</span> <span style="color:#66d9ef">uint8</span> = <span style="color:#ae81ff">12</span>
-
-	<span style="color:#75715e">// DEPRECATED: the below four variables will be removed in a future release.
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">mu</span>        <span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">Mutex</span>
-	<span style="color:#a6e22e">nodeMax</span>   <span style="color:#66d9ef">int64</span> = <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> ^ (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#a6e22e">NodeBits</span>)
-	<span style="color:#a6e22e">nodeMask</span>        = <span style="color:#a6e22e">nodeMax</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#a6e22e">StepBits</span>
-	<span style="color:#a6e22e">stepMask</span>  <span style="color:#66d9ef">int64</span> = <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> ^ (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#a6e22e">StepBits</span>)
-	<span style="color:#a6e22e">timeShift</span>       = <span style="color:#a6e22e">NodeBits</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">StepBits</span>
-	<span style="color:#a6e22e">nodeShift</span>       = <span style="color:#a6e22e">StepBits</span>
+    <span style="color:#75715e">// 步长占用12位，每一台实例上每一毫秒最多产生2^12=4096个不重复的数据。
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">StepBits</span> <span style="color:#66d9ef">uint8</span> = <span style="color:#ae81ff">12</span>
 )
 
-<span style="color:#75715e">// A Node struct holds the basic information needed for a snowflake generator
-</span><span style="color:#75715e">// node
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Node</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">mu</span>    <span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">Mutex</span>
-	<span style="color:#a6e22e">epoch</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Time</span>
-	<span style="color:#a6e22e">time</span>  <span style="color:#66d9ef">int64</span>
-	<span style="color:#a6e22e">node</span>  <span style="color:#66d9ef">int64</span>
-	<span style="color:#a6e22e">step</span>  <span style="color:#66d9ef">int64</span>
-
-	<span style="color:#a6e22e">nodeMax</span>   <span style="color:#66d9ef">int64</span>
-	<span style="color:#a6e22e">nodeMask</span>  <span style="color:#66d9ef">int64</span>
-	<span style="color:#a6e22e">stepMask</span>  <span style="color:#66d9ef">int64</span>
-	<span style="color:#a6e22e">timeShift</span> <span style="color:#66d9ef">uint8</span>
-	<span style="color:#a6e22e">nodeShift</span> <span style="color:#66d9ef">uint8</span>
-}
-
-<span style="color:#75715e">// An ID is a custom type used for a snowflake ID.  This is used so we can
-</span><span style="color:#75715e">// attach methods onto the ID.
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ID</span> <span style="color:#66d9ef">int64</span>
-
-<span style="color:#75715e">// NewNode returns a new snowflake node that can be used to generate snowflake
-</span><span style="color:#75715e">// IDs
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewNode</span>(<span style="color:#a6e22e">node</span> <span style="color:#66d9ef">int64</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">Node</span>, <span style="color:#66d9ef">error</span>) {
-
-	<span style="color:#75715e">// re-calc in case custom NodeBits or StepBits were set
-</span><span style="color:#75715e"></span>	<span style="color:#75715e">// DEPRECATED: the below block will be removed in a future release.
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">mu</span>.<span style="color:#a6e22e">Lock</span>()
-	<span style="color:#a6e22e">nodeMax</span> = <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> ^ (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#a6e22e">NodeBits</span>)
-	<span style="color:#a6e22e">nodeMask</span> = <span style="color:#a6e22e">nodeMax</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#a6e22e">StepBits</span>
-	<span style="color:#a6e22e">stepMask</span> = <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> ^ (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#a6e22e">StepBits</span>)
-	<span style="color:#a6e22e">timeShift</span> = <span style="color:#a6e22e">NodeBits</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">StepBits</span>
-	<span style="color:#a6e22e">nodeShift</span> = <span style="color:#a6e22e">StepBits</span>
-	<span style="color:#a6e22e">mu</span>.<span style="color:#a6e22e">Unlock</span>()
-
-	<span style="color:#a6e22e">n</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Node</span>{}
-	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">node</span> = <span style="color:#a6e22e">node</span>
-	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">nodeMax</span> = <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> ^ (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#a6e22e">NodeBits</span>)
-	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">nodeMask</span> = <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">nodeMax</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#a6e22e">StepBits</span>
-	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">stepMask</span> = <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> ^ (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#a6e22e">StepBits</span>)
-	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">timeShift</span> = <span style="color:#a6e22e">NodeBits</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">StepBits</span>
-	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">nodeShift</span> = <span style="color:#a6e22e">StepBits</span>
-
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">node</span> &lt; <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">node</span> &gt; <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">nodeMax</span> {
-		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;Node number must be between 0 and &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">strconv</span>.<span style="color:#a6e22e">FormatInt</span>(<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">nodeMax</span>, <span style="color:#ae81ff">10</span>))
-	}
-
-	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">curTime</span> = <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>()
-	<span style="color:#75715e">// add time.Duration to curTime to make sure we use the monotonic clock if available
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">epoch</span> = <span style="color:#a6e22e">curTime</span>.<span style="color:#a6e22e">Add</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Unix</span>(<span style="color:#a6e22e">Epoch</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, (<span style="color:#a6e22e">Epoch</span><span style="color:#f92672">%</span><span style="color:#ae81ff">1000</span>)<span style="color:#f92672">*</span><span style="color:#ae81ff">1000000</span>).<span style="color:#a6e22e">Sub</span>(<span style="color:#a6e22e">curTime</span>))
-
-	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">n</span>, <span style="color:#66d9ef">nil</span>
-}
-
-<span style="color:#75715e">// Generate creates and returns a unique snowflake ID
-</span><span style="color:#75715e">// To help guarantee uniqueness
-</span><span style="color:#75715e">// - Make sure your system is keeping accurate system time
-</span><span style="color:#75715e">// - Make sure you never have multiple nodes running with the same node ID
+<span style="color:#75715e">// 生成算法
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">n</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Node</span>) <span style="color:#a6e22e">Generate</span>() <span style="color:#a6e22e">ID</span> {
 
-	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">mu</span>.<span style="color:#a6e22e">Lock</span>()
+    <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">mu</span>.<span style="color:#a6e22e">Lock</span>()
+    <span style="color:#75715e">// 从设定的时间戳到现在经历的毫秒数
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">now</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Since</span>(<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">epoch</span>).<span style="color:#a6e22e">Nanoseconds</span>() <span style="color:#f92672">/</span> <span style="color:#ae81ff">1000000</span>
+    <span style="color:#75715e">//和上次记录一样，step加1，否则step重制为0
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">now</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">time</span> {
+        <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">step</span> = (<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">step</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">stepMask</span>
 
-	<span style="color:#a6e22e">now</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Since</span>(<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">epoch</span>).<span style="color:#a6e22e">Nanoseconds</span>() <span style="color:#f92672">/</span> <span style="color:#ae81ff">1000000</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">step</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+            <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">now</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">time</span> {
+                <span style="color:#a6e22e">now</span> = <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Since</span>(<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">epoch</span>).<span style="color:#a6e22e">Nanoseconds</span>() <span style="color:#f92672">/</span> <span style="color:#ae81ff">1000000</span>
+            }
+        }
+    } <span style="color:#66d9ef">else</span> {
+        <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">step</span> = <span style="color:#ae81ff">0</span>
+    }
 
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">now</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">time</span> {
-		<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">step</span> = (<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">step</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">stepMask</span>
+    <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">time</span> = <span style="color:#a6e22e">now</span>
+    <span style="color:#75715e">// 时间戳 41 位 ｜ node 10位 ｜ step 12位
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">r</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ID</span>((<span style="color:#a6e22e">now</span>)<span style="color:#f92672">&lt;&lt;</span><span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">timeShift</span> |
+        (<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">node</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">nodeShift</span>) |
+        (<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">step</span>),
+    )
 
-		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">step</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
-			<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">now</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">time</span> {
-				<span style="color:#a6e22e">now</span> = <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Since</span>(<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">epoch</span>).<span style="color:#a6e22e">Nanoseconds</span>() <span style="color:#f92672">/</span> <span style="color:#ae81ff">1000000</span>
-			}
-		}
-	} <span style="color:#66d9ef">else</span> {
-		<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">step</span> = <span style="color:#ae81ff">0</span>
-	}
-
-	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">time</span> = <span style="color:#a6e22e">now</span>
-
-	<span style="color:#a6e22e">r</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ID</span>((<span style="color:#a6e22e">now</span>)<span style="color:#f92672">&lt;&lt;</span><span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">timeShift</span> |
-		(<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">node</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">nodeShift</span>) |
-		(<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">step</span>),
-	)
-
-	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">mu</span>.<span style="color:#a6e22e">Unlock</span>()
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">r</span>
+    <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">mu</span>.<span style="color:#a6e22e">Unlock</span>()
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">r</span>
 }
-</code></pre></div><p>右边的12 bit是step, 也就是步长，每次生成ID的时候，先比较timestamp，如果跟上次是相同的timestamp，那么step+1，直到到达最大值:1&laquo;12-1.
-所以在同一毫秒内，同一台个实例，最多生成4096个ID，之后就会重复。
-中间的10 bit是nodeID, 也就是实例的ID，最多支持1024个实例。所以每一秒最多可以产生<code>1000*1024*4096～=4billion</code>的ID.
-左边的41 bit是timestamp(ms), 每一毫秒变化一次。</p>
-<p>具体的bit可以根据自己的需求进行调整，比如既可以是(41,10,12)，也可以是(41,6,16)&hellip;</p>
+</code></pre></div><p>具体的bit可以根据自己的需求进行调整，比如既可以是(41,10,12)，也可以是(41,6,16)&hellip;</p>
 <p>完整的golang代码repo:
 <a href="https://github.com/bwmarrin/snowflake">snowflake github</a></p>
 <p><strong>优点：</strong></p>
