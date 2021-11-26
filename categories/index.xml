@@ -35,11 +35,11 @@
     </item>
     
     <item>
-      <title>algorithm</title>
-      <link>https://left-pocket.github.io/categories/algorithm/</link>
+      <title>算法</title>
+      <link>https://left-pocket.github.io/categories/%E7%AE%97%E6%B3%95/</link>
       <pubDate>Tue, 23 Nov 2021 18:00:51 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/categories/algorithm/</guid>
+      <guid>https://left-pocket.github.io/categories/%E7%AE%97%E6%B3%95/</guid>
       <description></description>
     </item>
     
@@ -107,15 +107,6 @@
     </item>
     
     <item>
-      <title>interview</title>
-      <link>https://left-pocket.github.io/categories/interview/</link>
-      <pubDate>Fri, 01 Jan 2021 13:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/categories/interview/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>leetcode</title>
       <link>https://left-pocket.github.io/categories/leetcode/</link>
       <pubDate>Sat, 12 Dec 2020 13:00:51 +0800</pubDate>
@@ -125,11 +116,11 @@
     </item>
     
     <item>
-      <title>vscode</title>
-      <link>https://left-pocket.github.io/categories/vscode/</link>
+      <title>Others</title>
+      <link>https://left-pocket.github.io/categories/others/</link>
       <pubDate>Sat, 12 Dec 2020 13:00:51 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/categories/vscode/</guid>
+      <guid>https://left-pocket.github.io/categories/others/</guid>
       <description></description>
     </item>
     
@@ -139,15 +130,6 @@
       <pubDate>Tue, 24 Nov 2020 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/categories/server/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Others</title>
-      <link>https://left-pocket.github.io/categories/others/</link>
-      <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/categories/others/</guid>
       <description></description>
     </item>
     
