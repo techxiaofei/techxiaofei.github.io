@@ -17,15 +17,6 @@
     </item>
     
     <item>
-      <title>布隆过滤器(Bloom Filter)详解</title>
-      <link>https://left-pocket.github.io/post/algorithm/bloom_filter/</link>
-      <pubDate>Wed, 03 Feb 2021 13:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/algorithm/bloom_filter/</guid>
-      <description>原文地址：https://left-pocket.github.io 布隆过滤器是什么 本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结构</description>
-    </item>
-    
-    <item>
       <title>Redis Zset的精度问题分析及解决方案</title>
       <link>https://left-pocket.github.io/post/redis/redis_zset_score/</link>
       <pubDate>Fri, 04 Dec 2020 13:00:51 +0800</pubDate>

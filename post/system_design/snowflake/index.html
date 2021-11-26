@@ -9,8 +9,8 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>snowflake算法及最佳实践 | Leftpocket的个人博客</title>
-    <meta property="og:title" content="snowflake算法及最佳实践 - Leftpocket的个人博客">
+    <title>分布式ID生成方案-snowflake算法 | Leftpocket的个人博客</title>
+    <meta property="og:title" content="分布式ID生成方案-snowflake算法 - Leftpocket的个人博客">
     <meta property="og:type" content="article">
         
     <meta property="article:published_time" content='2020-11-24T13:00:51&#43;08:00'>
@@ -18,8 +18,8 @@
         
     <meta property="article:modified_time" content='2020-11-24T13:00:51&#43;08:00'>
         
-    <meta name="Keywords" content="[uuid, snowflake]">
-    <meta name="description" content="snowflake算法及最佳实践">
+    <meta name="Keywords" content="[snowflake]">
+    <meta name="description" content="分布式ID生成方案-snowflake算法">
         
     <meta name="author" content="leftpocket">
     <meta property="og:url" content="https://left-pocket.github.io/post/system_design/snowflake/">
@@ -81,7 +81,7 @@
     
     <article class="post">
         <header>
-            <h1 class="post-title">snowflake算法及最佳实践</h1>
+            <h1 class="post-title">分布式ID生成方案-snowflake算法</h1>
         </header>
         <date class="post-meta meta-date">
             2020年11月24日
@@ -90,7 +90,7 @@
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='/categories/server'>server</a></span>
+            <span class="meta-category"><a href='/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1'>系统设计</a></span>
             
         </div>
         
@@ -104,9 +104,35 @@
         <div class="post-content">
             <p>原文地址：<a href="https://left-pocket.github.io/post/system_design/snowflake/">https://left-pocket.github.io</a></p>
 <h2 id="背景">背景</h2>
-<p>这篇文章来讲解snowflake是什么，以及它实际应用的最佳实践方案。</p>
-<h2 id="snowflake算法">snowflake算法</h2>
-<h3 id="什么是-snowflake">什么是 Snowflake</h3>
+<p>在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一。那一般生成ID都有哪些解决方案呢？特别是在复杂的分布式系统业务场景中，我们应该采用哪种适合自己的解决方案是十分重要的。下面我们一一来列举一下，不一定全部适合，这些解决方案仅供你参考，或许对你有用。</p>
+<h2 id="分布式id的特性">分布式ID的特性</h2>
+<ul>
+<li>唯一性：确保生成的ID是全网唯一的。</li>
+<li>有序递增性：确保生成的ID是对于某个用户或者业务是按一定的数字有序递增的。</li>
+<li>高可用性：确保任何时候都能正确的生成ID。</li>
+</ul>
+<h2 id="分布式id生成方案">分布式ID生成方案</h2>
+<h3 id="uuid">UUID</h3>
+<p>算法的核心思想是结合机器的网卡、当地时间、一个随记数来生成UUID。</p>
+<p>优点：本地生成，生成简单，性能好，没有高可用风险
+缺点：长度过长，存储冗余，且无序不可读，查询效率低</p>
+<h3 id="数据库自增id">数据库自增ID</h3>
+<p>使用数据库的id自增策略，如 MySQL 的 auto_increment。并且可以使用多台数据库分别设置不同步长，生成不重复ID的策略来实现高可用。</p>
+<p>优点：数据库生成的ID绝对有序，高可用实现方式简单
+缺点：需要独立部署数据库实例，成本高，有性能瓶颈</p>
+<h3 id="redis生成id">Redis生成ID</h3>
+<p>Redis的所有命令操作都是单线程的，本身提供像 incr 和 increby 这样的自增原子命令，所以能保证生成的 ID 肯定是唯一有序的。</p>
+<p>优点：不依赖于数据库，灵活方便，且性能优于数据库；数字ID天然排序，对分页或者需要排序的结果很有帮助。
+缺点：如果系统中没有Redis，还需要引入新的组件，增加系统复杂度；需要编码和配置的工作量比较大。</p>
+<p>考虑到单节点的性能瓶颈，可以使用 Redis 集群来获取更高的吞吐量。假如一个集群中有5台 Redis。可以初始化每台 Redis 的值分别是1, 2, 3, 4, 5，然后步长都是 5。各个 Redis 生成的 ID 为：</p>
+<pre tabindex="0"><code>A：1, 6, 11, 16, 21
+B：2, 7, 12, 17, 22
+C：3, 8, 13, 18, 23
+D：4, 9, 14, 19, 24
+E：5, 10, 15, 20, 25
+</code></pre><p>步长和初始值一定需要事先确定。使用 Redis 集群也可以防止单点故障的问题。
+另外，比较适合使用 Redis 来生成每天从0开始的流水号。比如订单号 = 日期 + 当日自增长号。可以每天在 Redis 中生成一个 Key ，使用 INCR 进行累加。</p>
+<h3 id="snowflake算法">snowflake算法</h3>
 <p>Twitter的snowflake分布式ID的算法是目前广泛使用的分布式ID算法，尽管有很多变种，比如位数的不同，时间片大小不同、node bit数放在最后等各种变种，但是主要思想还是来自于snowflake的思想。 同时访问方法也各种个样，比如提供memcached协议访问和Redis协议访问等等。</p>
 <p>Twitter在2010年儿童节的时候在官方博客上介绍了snowflake算法,内部用来表示每一条tweet。</p>
 <p>
@@ -118,9 +144,9 @@
 <p>12 bit自增值可以表示4096的ID,也就是说每台机器每以毫秒最多产生4096个ID,这是它的最大性能。</p>
 <p>正如前面所说，时间戳、机器ID、自增ID所占的位数可以根据你实际的情况做调整。</p>
 <p>snowflake还有一个很好的特性就是基本保持顺序性，因为它的前几位是时间戳，可以对ID按照时间进行排序。</p>
-<h3 id="snowflake算法详解">snowflake算法详解</h3>
+<h4 id="snowflake算法详解">snowflake算法详解</h4>
 <p>golang核心代码如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#75715e">// Package snowflake provides a very simple Twitter snowflake generator and parser.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Package snowflake provides a very simple Twitter snowflake generator and parser.
 </span><span style="color:#75715e"></span><span style="color:#f92672">package</span> <span style="color:#a6e22e">snowflake</span>
 
 <span style="color:#66d9ef">var</span> (
@@ -232,30 +258,36 @@
 }
 </code></pre></div><p>右边的12 bit是step, 也就是步长，每次生成ID的时候，先比较timestamp，如果跟上次是相同的timestamp，那么step+1，直到到达最大值:1&laquo;12-1.
 所以在同一毫秒内，同一台个实例，最多生成4096个ID，之后就会重复。
-中间的10 bit是nodeID, 也就是实例的ID，最多支持1024个实例。所以每一秒最多可以产生1000<em>1024</em>4096～=4billion的ID.
+中间的10 bit是nodeID, 也就是实例的ID，最多支持1024个实例。所以每一秒最多可以产生<code>1000*1024*4096～=4billion</code>的ID.
 左边的41 bit是timestamp(ms), 每一毫秒变化一次。</p>
 <p>具体的bit可以根据自己的需求进行调整，比如既可以是(41,10,12)，也可以是(41,6,16)&hellip;</p>
 <p>完整的golang代码repo:
 <a href="https://github.com/bwmarrin/snowflake">snowflake github</a></p>
-<h3 id="时钟回拨">时钟回拨</h3>
+<p><strong>优点：</strong></p>
+<ul>
+<li>存储少, 8个字节</li>
+<li>可读性高</li>
+<li>性能好，可以中心化的产生ID,也可以独立节点生成</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>时间回拨会重复产生ID</li>
+</ul>
+<h4 id="时钟回拨">时钟回拨</h4>
+<p>如果我们的场景需要解决时钟回拨的问题：</p>
 <p>可以找2bit位作为时钟回拨位，发现有时钟回拨就将回拨位加1，达到最大位后再从0开始进行循环。
 例如上图中的， 10 bit的机器号=&gt;8 bit的机器号+2 bit的回拨位.
 每次发现时钟回拨，就把回拨位+1.大于最大值(3)后重设为0.</p>
-<p>如图所示，在同一个时间段，最多支持时钟回拨3次。多于3次则有概率重复。实际场景中足够使用了。</p>
+<p>如图所示，在同一个时间段，最多支持时钟回拨3次。
+每次回拨后，时钟回拨位不同，导致最终生成的ID也不同。</p>
 <p>
         <img class="mx-auto" alt="snowflake_time" src="/img/server/snowflake_time.png" />   
     </p>
-<h3 id="nodeid生成">NodeID生成</h3>
-<p>NodeID有很多生成规则。</p>
-<ul>
-<li>配置文件：有些服务每一个实例都在配置文件配置有唯一的一个ID，用以区分其他的实例。我们可以使用这个配置。</li>
-<li>随机值：</li>
-<li>环境变量：</li>
-<li>Redis</li>
-<li>MySQL</li>
-</ul>
-<h2 id="链接">链接</h2>
-<p><a href="https://tech.meituan.com/2017/04/21/mt-leaf.html">美团点评分布式ID生成方案</a></p>
+<p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+
+        <img class="mx-auto" alt="pic" src="/img/personal/qrcode_2.png" />   
+    </p>
 
         </div>
 
@@ -264,21 +296,12 @@
 
         
 
-<div class="post-archive">
-    <h2>See Also</h2>
-    <ul class="listing">
-        
-        <li><a href="/post/system_design/uid-generator/">分布式ID生成方案</a></li>
-        
-    </ul>
-</div>
-
 
         <div class="post-meta meta-tags">
             
             <ul class="clearfix">
                 
-                <li><a href='/tags/snowflake'>snowflake</a></li>
+                <li><a href='/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1'>系统设计</a></li>
                 
             </ul>
             
@@ -372,7 +395,7 @@
     </li>
     
     <li>
-        <a href="https://left-pocket.github.io/post/algorithm/lru/" title="LRU缓存机制，你想知道的这里都有">LRU缓存机制，你想知道的这里都有</a>
+        <a href="https://left-pocket.github.io/post/system_design/lru/" title="LRU缓存机制，你想知道的这里都有">LRU缓存机制，你想知道的这里都有</a>
     </li>
     
     <li>
@@ -420,13 +443,9 @@
     
     <li><a href="https://left-pocket.github.io/categories/redis/">Redis (2)</a></li>
     
-    <li><a href="https://left-pocket.github.io/categories/server/">server (2)</a></li>
-    
     <li><a href="https://left-pocket.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (1)</a></li>
     
-    <li><a href="https://left-pocket.github.io/categories/%E7%AE%97%E6%B3%95/">算法 (2)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计 (2)</a></li>
+    <li><a href="https://left-pocket.github.io/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计 (5)</a></li>
     
     <li><a href="https://left-pocket.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (1)</a></li>
     
@@ -455,15 +474,11 @@
     
     <a href="https://left-pocket.github.io/tags/server/">Server</a>
     
-    <a href="https://left-pocket.github.io/tags/snowflake/">snowflake</a>
-    
     <a href="https://left-pocket.github.io/tags/ssr/">ssr</a>
     
     <a href="https://left-pocket.github.io/tags/vscode/">vscode</a>
     
     <a href="https://left-pocket.github.io/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a>
-    
-    <a href="https://left-pocket.github.io/tags/%E7%AE%97%E6%B3%95/">算法</a>
     
     <a href="https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计</a>
     

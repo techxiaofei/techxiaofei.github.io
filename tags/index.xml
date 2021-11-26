@@ -35,11 +35,11 @@
     </item>
     
     <item>
-      <title>算法</title>
-      <link>https://left-pocket.github.io/tags/%E7%AE%97%E6%B3%95/</link>
+      <title>系统设计</title>
+      <link>https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</link>
       <pubDate>Tue, 23 Nov 2021 18:00:51 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/tags/%E7%AE%97%E6%B3%95/</guid>
+      <guid>https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</guid>
       <description></description>
     </item>
     
@@ -98,15 +98,6 @@
     </item>
     
     <item>
-      <title>系统设计</title>
-      <link>https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</link>
-      <pubDate>Fri, 22 Jan 2021 13:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Server</title>
       <link>https://left-pocket.github.io/tags/server/</link>
       <pubDate>Fri, 01 Jan 2021 13:00:51 +0800</pubDate>
@@ -139,15 +130,6 @@
       <pubDate>Sat, 12 Dec 2020 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/tags/vscode/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>snowflake</title>
-      <link>https://left-pocket.github.io/tags/snowflake/</link>
-      <pubDate>Tue, 24 Nov 2020 13:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/tags/snowflake/</guid>
       <description></description>
     </item>
     

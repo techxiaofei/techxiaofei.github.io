@@ -45,10 +45,10 @@
     
     <item>
       <title>LRU缓存机制，你想知道的这里都有</title>
-      <link>https://left-pocket.github.io/post/algorithm/lru/</link>
+      <link>https://left-pocket.github.io/post/system_design/lru/</link>
       <pubDate>Tue, 23 Nov 2021 18:00:51 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/post/algorithm/lru/</guid>
+      <guid>https://left-pocket.github.io/post/system_design/lru/</guid>
       <description>​​ 原文地址：https://left-pocket.github.io 概述 LRU是Least Recently Used的缩写，译为最近最少使用。它的理论基</description>
     </item>
     
@@ -162,10 +162,10 @@
     
     <item>
       <title>布隆过滤器(Bloom Filter)详解</title>
-      <link>https://left-pocket.github.io/post/algorithm/bloom_filter/</link>
+      <link>https://left-pocket.github.io/post/system_design/bloom_filter/</link>
       <pubDate>Wed, 03 Feb 2021 13:00:51 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/post/algorithm/bloom_filter/</guid>
+      <guid>https://left-pocket.github.io/post/system_design/bloom_filter/</guid>
       <description>原文地址：https://left-pocket.github.io 布隆过滤器是什么 本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结构</description>
     </item>
     
@@ -224,20 +224,11 @@
     </item>
     
     <item>
-      <title>snowflake算法及最佳实践</title>
+      <title>分布式ID生成方案-snowflake算法</title>
       <link>https://left-pocket.github.io/post/system_design/snowflake/</link>
       <pubDate>Tue, 24 Nov 2020 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/snowflake/</guid>
-      <description>原文地址：https://left-pocket.github.io 背景 这篇文章来讲解snowflake是什么，以及它实际应用的最佳实践方案</description>
-    </item>
-    
-    <item>
-      <title>分布式ID生成方案</title>
-      <link>https://left-pocket.github.io/post/system_design/uid-generator/</link>
-      <pubDate>Sat, 21 Nov 2020 00:07:57 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/system_design/uid-generator/</guid>
       <description>原文地址：https://left-pocket.github.io 背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一</description>
     </item>
     
