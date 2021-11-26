@@ -9,8 +9,8 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>面试之MySQL-什么回表查询 | Leftpocket的个人博客</title>
-    <meta property="og:title" content="面试之MySQL-什么回表查询 - Leftpocket的个人博客">
+    <title>后端面试之MySQL-什么是回表查询和覆盖索引 | Leftpocket的个人博客</title>
+    <meta property="og:title" content="后端面试之MySQL-什么是回表查询和覆盖索引 - Leftpocket的个人博客">
     <meta property="og:type" content="article">
         
     <meta property="article:published_time" content='2021-11-26T00:00:00&#43;08:00'>
@@ -19,7 +19,7 @@
     <meta property="article:modified_time" content='2021-11-26T00:00:00&#43;08:00'>
         
     <meta name="Keywords" content="[MySQL 回表查询]">
-    <meta name="description" content="面试之MySQL-什么回表查询">
+    <meta name="description" content="后端面试之MySQL-什么是回表查询和覆盖索引">
         
     <meta name="author" content="leftpocket">
     <meta property="og:url" content="https://left-pocket.github.io/post/mysql/covering_index/">
@@ -81,7 +81,7 @@
     
     <article class="post">
         <header>
-            <h1 class="post-title">面试之MySQL-什么回表查询</h1>
+            <h1 class="post-title">后端面试之MySQL-什么是回表查询和覆盖索引</h1>
         </header>
         <date class="post-meta meta-date">
             2021年11月26日
@@ -102,8 +102,10 @@
         
         
         <div class="post-content">
-            <h1 id="背景">背景</h1>
-<p>关于回表查询，是MySQL里面一个非常重要的知识点。理解回表查询，让你在实际项目中操作数据库的时候会有更好的性能考虑。
+            <p>原文地址：<a href="https://left-pocket.github.io/post/mysql/covering_index/">https://left-pocket.github.io</a></p>
+<p><strong>后端面试</strong>系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。</p>
+<h1 id="背景">背景</h1>
+<p>关于回表查询，是MySQL里面一个非常重要的知识点。理解回表查询，让你在实际项目中操作数据库的时候会有更好的性能考虑。<br>
 回表查询也是我面试必考的一个基础知识。</p>
 <h1 id="什么是回表查询">什么是回表查询？</h1>
 <p>这先要从InnoDB的索引实现说起，InnoDB有两大类索引：</p>
@@ -128,20 +130,20 @@
 )ENGINE<span style="color:#f92672">=</span>InnoDB <span style="color:#66d9ef">DEFAULT</span> CHARSET<span style="color:#f92672">=</span>utf8;
 </code></pre></div><p>注：</p>
 <ul>
-<li>主键（PK）: id</li>
-<li>普通索引：name</li>
+<li>主键（PK）: id （聚集索引）</li>
+<li>普通索引：name （非聚集索引）</li>
 </ul>
 <h3 id="什么时候回表">什么时候回表？</h3>
 <p>当我们查询语句如下的时候：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> id, name, age <span style="color:#66d9ef">from</span> student_tab <span style="color:#66d9ef">where</span> name <span style="color:#f92672">=</span> <span style="color:#f92672">`</span>Bob<span style="color:#f92672">`</span>;
 </code></pre></div><p>的时候，就会出现 <strong>回表查询</strong>。</p>
-<p>为什么呢？
+<p>为什么呢？<br>
 因为：普通索引叶子结点只储存当前记录对应的主键ID。我们通过普通索引 <code>name = Bob</code> 查找记录，找到最终 <code>id = 13</code>， 但是我们最终返回的数据还有 <code>age</code>，这个时候只通过普通索引无法返回我们需要的所有数据，就需要回到聚集索引里面查找。
 这就是 <strong>回表查询</strong>。</p>
 <p>
         <img class="mx-auto" alt="回表" src="/img/mysql/covering_index.png" />   
     </p>
-<h3 id="使用普通索引查询都是回表查询呢">使用普通索引查询都是回表查询呢？</h3>
+<h3 id="使用普通索引查询都是回表查询吗">使用普通索引查询都是回表查询吗？</h3>
 <p>不是的。<br>
 当你的查询条件为这样：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> id, name <span style="color:#66d9ef">from</span> student_tab <span style="color:#66d9ef">where</span> name <span style="color:#f92672">=</span> <span style="color:#f92672">`</span>Bob<span style="color:#f92672">`</span>;
@@ -152,11 +154,45 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">INDEX</span> <span style="color:#f92672">`</span>idx_name_age<span style="color:#f92672">`</span> (<span style="color:#f92672">`</span>name<span style="color:#f92672">`</span>, <span style="color:#f92672">`</span>age<span style="color:#f92672">`</span>)
 </code></pre></div><p>当使用</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> id, name, age <span style="color:#66d9ef">from</span> student_tab <span style="color:#66d9ef">where</span> name <span style="color:#f92672">=</span> <span style="color:#f92672">`</span>Bob<span style="color:#f92672">`</span>;
-</code></pre></div><p>查询的时候，name和age在一个联合索引上，所以在普通索引上是有age的信息的，这个时候就不需要回表。
-这就引入了下个问题，什么是索引覆盖。</p>
-<h3 id="什么是索引覆盖">什么是索引覆盖？</h3>
-<p>索引覆盖是一种避免回表查询的优化策略。具体做法就是将要查询的数据作为索引建立普通索引。
+</code></pre></div><p>查询的时候，name和age在一个联合索引上，所以在普通索引上是有age的信息的，这个时候就不需要回表。<br>
+这就引入了下个问题，什么是覆盖索引。</p>
+<h3 id="什么是覆盖索引">什么是覆盖索引？</h3>
+<p>覆盖索引是一种避免回表查询的优化策略。具体做法就是将要查询的数据作为索引建立普通索引。
 只需要在一棵索引树上就能获取SQL所需的所有列数据，无需回表，速度更快。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> student_tab <span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">INDEX</span> idx_name;
+<span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> student_tab <span style="color:#66d9ef">ADD</span> <span style="color:#66d9ef">INDEX</span> idx_name_age(name, age);
+
+<span style="color:#66d9ef">select</span> id, name, age <span style="color:#66d9ef">from</span> student_tab <span style="color:#66d9ef">where</span> name <span style="color:#f92672">=</span> <span style="color:#f92672">`</span>Bob<span style="color:#f92672">`</span>;
+</code></pre></div><p>流程为：</p>
+<ul>
+<li>在name,age联合索引树上找到名称为<code>Bob</code>的节点</li>
+<li>此时节点索引里包含信息 <code>name, age</code>, 节点对应的值为 主键索引 <code>id</code>。</li>
+<li>包含我们所需要的所有信息，索引覆盖，无需回表。</li>
+</ul>
+<h3 id="确定数据库成功使用了覆盖索引呢">确定数据库成功使用了覆盖索引呢？</h3>
+<p>使用explian查看 Extra 列是否是 <code>Using index</code>。</p>
+<blockquote>
+<p>Using index means that all information is returned from the index, without seeking the records in the table. This is only possible if all fields required by the query are covered by the index.</p>
+</blockquote>
+<p>意思是：Using index是指所有的信息可以从index里面返回，不需要从table中寻找记录。当且仅当所有查询需要的字段都覆盖在索引里面的时候才会存在。</p>
+<p>当这个表有 索引 <code>INDEX idx_name (name)</code> 时：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">explain</span> <span style="color:#66d9ef">select</span> id, name <span style="color:#66d9ef">from</span> student_tab <span style="color:#66d9ef">where</span> name <span style="color:#f92672">=</span> <span style="color:#f92672">`</span>Bob<span style="color:#f92672">`</span>;
+explian <span style="color:#66d9ef">select</span> id, name, age <span style="color:#66d9ef">from</span> student_tab <span style="color:#66d9ef">where</span> name <span style="color:#f92672">=</span> <span style="color:#f92672">`</span>Bob<span style="color:#f92672">`</span>;
+</code></pre></div><p>
+        <img class="mx-auto" alt="覆盖索引" src="/img/mysql/mysql_index.png" />   
+    </p>
+<p>发现如果查询 <code>age</code>的时候是无法使用覆盖索引的。</p>
+<p>当这个表有 索引 INDEX <code>idx_name_age (name, age)</code> 时：</p>
+<pre tabindex="0"><code>explian select id, name, age from student_tab where name = `Bob`;
+</code></pre><p>
+        <img class="mx-auto" alt="覆盖索引" src="/img/mysql/mysql_index2.png" />   
+    </p>
+<p>可以看到，<code>Extra = Using index</code>，这个时候就可以使用覆盖索引。</p>
+<p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+
+        <img class="mx-auto" alt="pic" src="/img/personal/qrcode_2.png" />   
+    </p>
 
         </div>
 
@@ -169,7 +205,11 @@
     <h2>See Also</h2>
     <ul class="listing">
         
+        <li><a href="/post/interview/mysql/">后端面试之MySQL</a></li>
+        
         <li><a href="/post/mysql/dead_lock/">MySQL死锁的产生</a></li>
+        
+        <li><a href="/post/mysql/db_tidb_write_conflict/">TiDB Write Conflict问题分析</a></li>
         
     </ul>
 </div>
@@ -257,15 +297,19 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://left-pocket.github.io/post/mysql/covering_index/" title="面试之MySQL-什么回表查询">面试之MySQL-什么回表查询</a>
+        <a href="https://left-pocket.github.io/post/mysql/covering_index/" title="后端面试之MySQL-什么是回表查询和覆盖索引">后端面试之MySQL-什么是回表查询和覆盖索引</a>
     </li>
     
     <li>
-        <a href="https://left-pocket.github.io/post/interview/tcpip/" title="面试之网络编程">面试之网络编程</a>
+        <a href="https://left-pocket.github.io/post/interview/mysql/" title="后端面试之MySQL">后端面试之MySQL</a>
     </li>
     
     <li>
-        <a href="https://left-pocket.github.io/post/tcpip/socket_read_write/" title="面试之网络编程-socket可读可写条件">面试之网络编程-socket可读可写条件</a>
+        <a href="https://left-pocket.github.io/post/interview/tcpip/" title="后端面试之网络编程">后端面试之网络编程</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/tcpip/socket_read_write/" title="后端面试之网络编程-socket可读可写条件">后端面试之网络编程-socket可读可写条件</a>
     </li>
     
     <li>
@@ -292,10 +336,6 @@
         <a href="https://left-pocket.github.io/post/cpp/secondary_pointer/" title="二级指针的作用详解">二级指针的作用详解</a>
     </li>
     
-    <li>
-        <a href="https://left-pocket.github.io/post/git/git_rebase/" title="git rebase使用详解">git rebase使用详解</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -309,8 +349,6 @@
     
     <li><a href="https://left-pocket.github.io/categories/c&#43;&#43;/">c&#43;&#43; (3)</a></li>
     
-    <li><a href="https://left-pocket.github.io/categories/db/">db (1)</a></li>
-    
     <li><a href="https://left-pocket.github.io/categories/git/">git (1)</a></li>
     
     <li><a href="https://left-pocket.github.io/categories/golang/">Golang (5)</a></li>
@@ -321,7 +359,7 @@
     
     <li><a href="https://left-pocket.github.io/categories/leetcode/">leetcode (1)</a></li>
     
-    <li><a href="https://left-pocket.github.io/categories/mysql/">MySQL (2)</a></li>
+    <li><a href="https://left-pocket.github.io/categories/mysql/">MySQL (4)</a></li>
     
     <li><a href="https://left-pocket.github.io/categories/others/">Others (1)</a></li>
     
@@ -337,7 +375,7 @@
     
     <li><a href="https://left-pocket.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (1)</a></li>
     
-    <li><a href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/">面试 (3)</a></li>
+    <li><a href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/">面试 (4)</a></li>
     
 </ul>
     </section>
@@ -371,8 +409,6 @@
     <a href="https://left-pocket.github.io/tags/snowflake/">snowflake</a>
     
     <a href="https://left-pocket.github.io/tags/ssr/">ssr</a>
-    
-    <a href="https://left-pocket.github.io/tags/tidb/">TiDB</a>
     
     <a href="https://left-pocket.github.io/tags/vscode/">vscode</a>
     

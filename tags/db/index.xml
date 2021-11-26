@@ -16,14 +16,5 @@
       <description>原文地址：https://left-pocket.github.io/ 背景 最近使用Redis的SortedSet，使用int64作为scor</description>
     </item>
     
-    <item>
-      <title>TiDB Write Conflict问题分析</title>
-      <link>https://left-pocket.github.io/post/mysql/db_tidb_write_conflict/</link>
-      <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/mysql/db_tidb_write_conflict/</guid>
-      <description>原文地址：https://left-pocket.github.io 背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了writ</description>
-    </item>
-    
   </channel>
 </rss>
