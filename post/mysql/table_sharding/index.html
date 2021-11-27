@@ -9,20 +9,20 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>vscode配置leetcode插件 | Leftpocket的个人博客</title>
-    <meta property="og:title" content="vscode配置leetcode插件 - Leftpocket的个人博客">
+    <title>MySQL什么情况需要分库分表 | Leftpocket的个人博客</title>
+    <meta property="og:title" content="MySQL什么情况需要分库分表 - Leftpocket的个人博客">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2020-12-12T13:00:51&#43;08:00'>
+    <meta property="article:published_time" content='2021-11-27T01:00:51&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2020-12-12T13:00:51&#43;08:00'>
+    <meta property="article:modified_time" content='2021-11-27T01:00:51&#43;08:00'>
         
-    <meta name="Keywords" content="[vscode leetcode]">
-    <meta name="description" content="vscode配置leetcode插件">
+    <meta name="Keywords" content="[MySQL]">
+    <meta name="description" content="MySQL什么情况需要分库分表">
         
     <meta name="author" content="leftpocket">
-    <meta property="og:url" content="https://left-pocket.github.io/post/others/vscode_leetcode/">
+    <meta property="og:url" content="https://left-pocket.github.io/post/mysql/table_sharding/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -81,18 +81,16 @@
     
     <article class="post">
         <header>
-            <h1 class="post-title">vscode配置leetcode插件</h1>
+            <h1 class="post-title">MySQL什么情况需要分库分表</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年12月12日
+            2021年11月27日
         </date>
         
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='/categories/others'>Others</a></span>
-            
-            <span class="meta-category"><a href='/categories/leetcode'>leetcode</a></span>
+            <span class="meta-category"><a href='/categories/mysql'>MySQL</a></span>
             
         </div>
         
@@ -104,58 +102,7 @@
         
         
         <div class="post-content">
-            <p>原文地址：<a href="https://left-pocket.github.io/post/others/vscode_leetcode/">https://left-pocket.github.io</a></p>
-<p>作为一名合格的程序猿，大家找工作的时候经常需要刷leetcode, leetcode官网上面写代码没有IDE上面写代码那么方便，更重要的是，可以上班打开IDE假装写代码，实则是刷题。VSCode+leetcode插件就是来解决在IDE上刷leetcode的问题而产生的。</p>
-<h1 id="安装">安装</h1>
-<ul>
-<li><a href="https://code.visualstudio.com/" title="VSCode">VSCode</a></li>
-<li><a href="https://nodejs.org/en/" title="NodeJS">NodeJS</a></li>
-<li>leetcode插件(VSCode里面搜索leetcode)</li>
-</ul>
-<p>安装NodeJS是因为 LeetCode 插件依赖 Node.JS。</p>
-<p><strong>注意：请确保Node在PATH环境变量中。您也可以通过设定 leetcode.nodePath 选项来指定 Node.js 可执行文件的路径。</strong></p>
-<h1 id="步骤">步骤</h1>
-<h2 id="安装leetcode插件">安装leetcode插件</h2>
-<p>安装完成VSCode和NodeJS后打开VSCode开始安装leetcode插件</p>
-<p>
-        <img class="mx-auto" alt="leetcode_install" src="/img/leetcode/leetcode_install.png" />   
-    </p>
-<p>安装好leetcode插件之后左边会出现一个leetcode图标，点击图标进行登陆。
-
-        <img class="mx-auto" alt="leetcode_login" src="/img/leetcode/leetcode_login.png" />   
-    </p>
-<p><strong>注意：无法登陆leetcode的解决办法</strong>
-近期我们发现插件出现了无法登录 leetcode.com 节点的问题。原因是因为近期 leetcode.com 改变了登录机制。
-如果你出现这样的问题，可以把你的leetcode绑定到第三方账号(github/google等)，然后选择第三方登录。</p>
-<h2 id="登陆成功的界面展示">登陆成功的界面展示</h2>
-<p>
-        <img class="mx-auto" alt="leetcode_preview2" src="/img/leetcode/leetcode_preview2.png" />   
-    </p>
-<ul>
-<li>
-<p>直接点击题目或者在 LeetCode Explorer 中右键题目并选择 Preview Problem 可查看题目描述</p>
-</li>
-<li>
-<p>选择 Show Problem 可直接进行答题。</p>
-</li>
-</ul>
-<p>注意：你可以通过更新配置项 leetcode.workspaceFolder 来指定保存题目文件所用的工作区路径。默认工作区路径为：$HOME/.leetcode/。</p>
-<p>注意：你可以通过更新配置项 leetcode.showCommentDescription 来指定是否要在注释中包含题目描述。</p>
-<p>注意：你可以通过 LeetCode: Switch Default Language 命令变更答题时默认使用编程语言。</p>
-<h2 id="编辑器快捷方式">编辑器快捷方式</h2>
-<p>插件会在编辑区域内支持五种不同的快捷方式（Code Lens）:
-
-        <img class="mx-auto" alt="leetcode_shortcut" src="/img/leetcode/leetcode_shortcut.png" />   
-    </p>
-<p>Submit: 提交你的答案至 LeetCode；</p>
-<ul>
-<li>Test: 用给定的测试用例测试你的答案；</li>
-<li>Star: 收藏或取消收藏该问题；</li>
-<li>Solution: 显示该问题的高票解答；</li>
-<li>Description: 显示该问题的题目描述。</li>
-</ul>
-<p>注意：你可以通过 leetcode.editor.shortcuts 配置项来定制需要激活的快捷方式。默认情况下只有 Submit 和 Test 会被激活。</p>
-
+            
         </div>
 
         
@@ -163,14 +110,27 @@
 
         
 
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/mysql/covering_index/">后端面试之MySQL-什么是回表查询和覆盖索引</a></li>
+        
+        <li><a href="/post/interview/mysql/">后端面试之MySQL</a></li>
+        
+        <li><a href="/post/mysql/dead_lock/">MySQL死锁的产生</a></li>
+        
+        <li><a href="/post/mysql/db_tidb_write_conflict/">TiDB Write Conflict问题分析</a></li>
+        
+    </ul>
+</div>
+
 
         <div class="post-meta meta-tags">
             
             <ul class="clearfix">
                 
-                <li><a href='/tags/vscode'>vscode</a></li>
-                
-                <li><a href='/tags/leetcode'>leetcode</a></li>
+                <li><a href='/tags/mysql'>MySQL</a></li>
                 
             </ul>
             

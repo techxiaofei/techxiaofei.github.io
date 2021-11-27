@@ -105,10 +105,12 @@
             <p>原文地址：<a href="https://left-pocket.github.io/post/system_design/bloom_filter/">https://left-pocket.github.io</a></p>
 <h1 id="布隆过滤器是什么">布隆过滤器是什么</h1>
 <p>本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入和查询，可以用来告诉你 “某样东西一定不存在或者可能存在”。</p>
-<p>相比于传统的 List、Set、Map 等数据结构，它更高效、占用空间更少，但是缺点是其返回的结果是概率性的，而不是确切的。
-可以一句话总结：
-如果Bloom Filter告诉你某个数据不存在，那么它一定不存在。
-如果Bloom Filter告诉你某个数据存在，那么它不一定存在。</p>
+<p>相比于传统的 List、Set、Map 等数据结构，它更高效、占用空间更少，但是缺点是其返回的结果是概率性的，而不是确切的。<br>
+可以一句话总结：</p>
+<ul>
+<li>如果Bloom Filter告诉你某个数据不存在，那么它一定不存在。</li>
+<li>如果Bloom Filter告诉你某个数据存在，那么它不一定存在。</li>
+</ul>
 <p>然后你可能要问了，他都不一定存在了，那它有什么用。
 它虽然不保证100%存在，但是这个<strong>误判率</strong>却是可以控制的，一般根据场景你可以设置一个可以接受的错误率，比如 0.0001(万分之一)，0.00001(十万分之一)。在很多场景下，这个概率是可以接受的。在这些场景下，它就有用武之地了。
 而它的优点非常明显，就是极少的空间占用，一般比正常存所有数据可以节省90%左右的内存。
@@ -193,9 +195,9 @@ f3(cpp)=2
 这个时候我们检查 <strong>golang</strong> 是否存在，由于这几个位置的值都为1， 所以系统会告诉我们 golang 存在。
 实际上我们并没有插入 golang。</p>
 <p>所以我们回到最初的定义：
-本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入和查询，可以用来告诉你 “某样东西一定不存在或者可能存在”。</p>
-<p>如果布隆过滤器告诉你个数据不存在，那么它一定不存在。
-如果布隆过滤器告诉你某个数据存在，那么它可能存在。（也可能不存在，误判）。</p>
+本质上<strong>布隆过滤器</strong>是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入和查询，可以用来告诉你 “<strong>某样东西一定不存在或者可能存在</strong>”。</p>
+<p>如果布隆过滤器告诉你个数据不存在，那么它<strong>一定不存在</strong>。
+如果布隆过滤器告诉你某个数据存在，那么它<strong>可能存在</strong>。（也可能不存在，误判）。</p>
 <h1 id="实现">实现</h1>
 <h2 id="redis内实现">Redis内实现</h2>
 <p>Redis在4.0版本推出了 module 的形式，可以将 module 作为插件额外实现Redis的一些功能。官网推荐了一个 <a href="https://github.com/RedisBloom/RedisBloom">RedisBloom</a> 作为 Redis 布隆过滤器的 Module。
@@ -234,7 +236,7 @@ redis中bit映射被限制在512MB之内。
 <h2 id="go语言bloom-filter实现">go语言Bloom Filter实现</h2>
 <p>由于Redis的Bloom Filter并非Redis原生自带的功能，需要安装module才能使用，很多时候生产环境使用的云服务并不一定完美支持，所以一般开发过程中都是自己实现Bloom Filter并储存储存介质中。(比如：使用Redis的setbit/getbit储存在Bitmap中)。
 我们项目使用Golang，所以我自己实现了一个Golang的Bloom Filter并储存在Redis中，也可以选择储存在其他介质中，只需要实现<strong>BitmapProvider</strong> interface就可以。Bloom Filter和具体储存完全解耦。
-源代码如下：<a href="https://github.com/">Go-bloom</a></p>
+源代码如下：<a href="https://github.com/left-pocket/go-bloom">Go-bloom</a></p>
 <h3 id="实现详解">实现详解</h3>
 <p>我们的实现中，使用了Redis的Bitmap， Bitmap有 <strong>GETBIT和SETBIT</strong> 命令来操作Bit。
 在Redis中，一个字符串最多可以为512MB.</p>
@@ -243,7 +245,7 @@ redis中bit映射被限制在512MB之内。
         <img class="mx-auto" alt="Bloom" src="/img/algorithm/bloom_redis.png" />   
     </p>
 <p>核心代码如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">redisMaxLength</span> <span style="color:#66d9ef">int64</span> = <span style="color:#ae81ff">8</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">512</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1024</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1024</span>  <span style="color:#75715e">//512M
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">redisMaxLength</span> <span style="color:#66d9ef">int64</span> = <span style="color:#ae81ff">8</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">512</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1024</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1024</span>  <span style="color:#75715e">//512M
 </span><span style="color:#75715e"></span> 
 <span style="color:#a6e22e">offsets</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">int64</span>{<span style="color:#a6e22e">f1</span>(<span style="color:#e6db74">&#34;data1&#34;</span>), <span style="color:#a6e22e">f2</span>(<span style="color:#e6db74">&#34;data1&#34;</span>), <span style="color:#f92672">...</span>, <span style="color:#a6e22e">fk</span>(<span style="color:#e6db74">&#34;data1&#34;</span>)}
  
@@ -283,12 +285,15 @@ redis中bit映射被限制在512MB之内。
 </ul>
 <h2 id="缺点">缺点</h2>
 <ul>
-<li>不支持删除
-因为布隆过滤器是通过多个哈希函数把数据映射到多个bit中，那么不同的value可能映射到其中相同的bit中，所以如果删除某一个value，会影响所有其他映射到同样的bit中的value。</li>
-<li>误判率
-由于是hash映射，所以多个value可能映射到同样的bit位中，可以通过增大hash的数量来减少误判率，但是无法完全避免。</li>
+<li>不支持删除 因为布隆过滤器是通过多个哈希函数把数据映射到多个bit中，那么不同的value可能映射到其中相同的bit中，所以如果删除某一个value，会影响所有其他映射到同样的bit中的value。</li>
+<li>误判率 由于是hash映射，所以多个value可能映射到同样的bit位中，可以通过增大hash的数量来减少误判率，但是无法完全避免。</li>
 <li>如果总的元素数量大于最初预估的总元素数量，误判率就会升高，需要重新扩容并初始化布隆过滤器。</li>
 </ul>
+<p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+
+        <img class="mx-auto" alt="pic" src="/img/personal/qrcode_2.png" />   
+    </p>
 
         </div>
 
@@ -395,6 +400,10 @@ redis中bit映射被限制在512MB之内。
 <ul class="widget-list">
     
     <li>
+        <a href="https://left-pocket.github.io/post/mysql/table_sharding/" title="MySQL什么情况需要分库分表">MySQL什么情况需要分库分表</a>
+    </li>
+    
+    <li>
         <a href="https://left-pocket.github.io/post/mysql/covering_index/" title="后端面试之MySQL-什么是回表查询和覆盖索引">后端面试之MySQL-什么是回表查询和覆盖索引</a>
     </li>
     
@@ -430,10 +439,6 @@ redis中bit映射被限制在512MB之内。
         <a href="https://left-pocket.github.io/post/game/game_development/" title="手游服务器开发技术详解">手游服务器开发技术详解</a>
     </li>
     
-    <li>
-        <a href="https://left-pocket.github.io/post/cpp/secondary_pointer/" title="二级指针的作用详解">二级指针的作用详解</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -453,7 +458,7 @@ redis中bit映射被限制在512MB之内。
     
     <li><a href="https://left-pocket.github.io/categories/leetcode/">leetcode (1)</a></li>
     
-    <li><a href="https://left-pocket.github.io/categories/mysql/">MySQL (4)</a></li>
+    <li><a href="https://left-pocket.github.io/categories/mysql/">MySQL (5)</a></li>
     
     <li><a href="https://left-pocket.github.io/categories/others/">Others (2)</a></li>
     
