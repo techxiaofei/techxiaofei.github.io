@@ -9,17 +9,17 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>把hugo博客托管到github上 | Leftpocket的个人博客</title>
-    <meta property="og:title" content="把hugo博客托管到github上 - Leftpocket的个人博客">
+    <title>从零开始搭建个人博客（二）- 把hugo博客托管到github上 | Leftpocket的个人博客</title>
+    <meta property="og:title" content="从零开始搭建个人博客（二）- 把hugo博客托管到github上 - Leftpocket的个人博客">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2020-08-06T13:00:51&#43;08:00'>
+    <meta property="article:published_time" content='2021-11-23T01:00:58&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2020-08-06T13:00:51&#43;08:00'>
+    <meta property="article:modified_time" content='2021-11-23T01:00:58&#43;08:00'>
         
     <meta name="Keywords" content="[hugo]">
-    <meta name="description" content="把hugo博客托管到github上">
+    <meta name="description" content="从零开始搭建个人博客（二）- 把hugo博客托管到github上">
         
     <meta name="author" content="leftpocket">
     <meta property="og:url" content="https://left-pocket.github.io/post/hugo/hugo_github/">
@@ -81,10 +81,10 @@
     
     <article class="post">
         <header>
-            <h1 class="post-title">把hugo博客托管到github上</h1>
+            <h1 class="post-title">从零开始搭建个人博客（二）- 把hugo博客托管到github上</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年8月6日
+            2021年11月23日
         </date>
         
         <div class="post-meta">
@@ -103,85 +103,80 @@
         
         <div class="post-content">
             <p>原文地址：<a href="https://left-pocket.github.io/post/hugo/hugo_github/">https://left-pocket.github.io</a></p>
-<p>上一篇介绍了怎么在本机搭建hugo博客，这一篇将主要介绍怎么把hugo静态博客托管到github上。</p>
-<h2 id="创建github-pages">创建Github Pages</h2>
-<p>假设你需要部署在 GitHub Pages 上，首先在GitHub上创建一个Repository，命名为：{your_user_name}.github.io. 比如我的Repo就叫 <strong>iwtbabc.github.io</strong></p>
-<p>Repo的权限需要选择Public, 否则无法访问。</p>
+<h1 id="背景">背景</h1>
+<p>使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。<br>
+这里分享一个系列教程：<strong>从零开始搭建个人博客</strong>，把我的经验分享在这里。<br>
+系列地址：<a href="https://left-pocket.github.io/post/hugo/hugo_0/">https://left-pocket.github.io</a></p>
+<h1 id="从零开始搭建个人博客二--把hugo博客托管到github上">从零开始搭建个人博客（二）- 把hugo博客托管到github上</h1>
+<p>上一篇文章，我们学习了怎么搭建个人博客，但是只是在局域网内运行，现在我们要把博客部署到互联网中。<br>
+如果你没有自己的云服务器，不要慌，我们可以把个人博客搭建在<code>Github Pages</code>中，就跟搭建在自己的服务器一样。<br>
+<code>Github Pages</code>是Github提供的一个静态网站托管服务，可以用于存放静态网页，包括博客，项目文档甚至整本书。非常适合我们搭建个人博客。</p>
+<h3 id="创建github-pages">创建Github Pages</h3>
+<p>要想把个人博客托管在Github Pages上，首先你需要有一个Github账号，作为程序员，应该每个人都有自己的Github账号。<br>
+下面我介绍下怎么部署在Github Pages上：<br>
+假设你需要部署在 GitHub Pages 上，首先在GitHub上创建一个Repository，命名为：<code>{your_username}.github.io</code>. 比如我的Repo就叫 <code>left-pocket-test.github.io</code>。<br>
+如果你对你的username不满意，需要先在<code>Setting-&gt;Account-&gt;Change username</code>修改一个你满意的username。<br>
+<strong>注：</strong> Repository的前缀一定要跟你的username保持一致。</p>
+<p>
+        <img class="mx-auto" alt="Settings" src="/img/hugo/github_create.png" />   
+    </p>
+<p>Repo的权限需要选择Public, 否则无法访问。<br>
+勾选<code>Add a README.md</code>，主要是为了自动创建main分支。</p>
 <p>然后在你的Repo里面点击Settings, 下拉，找到Github Pages。</p>
 <p>
-        <img class="mx-auto" alt="Settings" src="/img/hugo/github-settings.png" />   
+        <img class="mx-auto" alt="Settings" src="/img/hugo/github_setting.png" />   
     
 
-        <img class="mx-auto" alt="Github Pages" src="/img/hugo/github-pages.png" />   
+        <img class="mx-auto" alt="Github Pages" src="/img/hugo/github_pages.png" />   
     </p>
-<p>点击<strong>Change Theme</strong> 选择一款主题，保存。</p>
+<p>点击<strong>Change Theme</strong> 选择一款主题，保存。<br>
+这里随便选择一款，因为后续托管Hugo博客之后现在的设置就覆盖了，选择后会提示：<code>Your site is published at https://left-pocket-test.github.io/</code>。</p>
+<p>
+        <img class="mx-auto" alt="Github Pages" src="/img/hugo/github_page2.png" />   
+    </p>
 <p>过几分钟之后，通过访问
-<a href="https://iwtbabc.github.io/">https://iwtbabc.github.io/</a> 能正常打开，说明github Page设置正常。</p>
-<h2 id="初始化hugo博客">初始化hugo博客</h2>
+<a href="https://left-pocket-test.github.io/">https://left-pocket-test.github.io/</a> 能正常打开，说明github Page设置正常。
+
+        <img class="mx-auto" alt="Github Pages" src="/img/hugo/github_page3.png" />   
+    </p>
+<h3 id="初始化hugo博客">初始化hugo博客</h3>
 <p>这个在上一篇文章里面有讲解：如果有疑问可以回顾上一篇文章。
-<a href="http://leftpocket.tk/post/hugo-creation/">使用hugo搭建个人博客</a></p>
-<h2 id="发布hugo到github">发布hugo到github</h2>
-<p>在hugo根目录中执行 <strong>hugo</strong> 指令。会生成一个public文件夹，我们只需要把public的文件夹上传到github, 一分钟左右，就能正常查看博客内容。</p>
+<a href="https://left-pocket.github.io/post/hugo/hugo_creation/">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</a></p>
+<h3 id="发布hugo到github">发布hugo到github</h3>
+<p>现在我们有了Hugo博客，有了Github Pages，那么下一步就是把hugo博客发布到github。这样我们才能在互联网的任何地方访问我们的博客。<br>
+在我们本地的hugo根目录中执行 <strong>hugo</strong> 指令。会生成一个public文件夹，我们只需要把public的文件夹上传到github上刚才创建的Repo里面, 一分钟左右，就能正常查看博客内容。</p>
 <p><strong>这里解释一下</strong></p>
 <ul>
 <li>hugo站点：这个是原始内容，可以不用提交到github，也可以选择在github上创建一个新的repo，并提交。</li>
-<li>hugo站点内的public目录(软链接)：这个是使用<strong>hugo</strong>指令生成的发布内容，需要发不到Github Pages上。</li>
+<li>hugo站点内的public目录(软链接)：这个是使用<strong>hugo</strong>指令生成的发布内容，需要发布到Github Pages上。</li>
 </ul>
-<p>有两种方式发布到github.</p>
-<h3 id="方法1">方法1</h3>
-<p>进入到public目录。</p>
-<pre tabindex="0"><code>git init
-git add *
-git commit -m &quot;comments&quot;
-git remote add origin https://github.com/iwtbabc/iwtbabc.github.io.git
-git pull origin master
-git push -u origin master
-</code></pre><p>就可以上传到github.</p>
-<p><strong>Notes</strong>
-使用 <strong>git pull origin master</strong> 的时候可能会遇到</p>
-<pre tabindex="0"><code>fatal: refusing to merge unrelated histories
-</code></pre><p>的错误，所以需要在此命令后加上 <strong>&ndash;allow-unrelated-histories</strong> 的参数。</p>
-<p>以后每次博客有修改，使用hugo命令发布到public文件夹，然后push到github即可。</p>
-<p>使用这种方式的话
-如果想把整个hugo的工程也托管到github，可以在根目录使用同样git指令。由于public目录是public子目录。个人建议创建一个软链接。注意需要使用绝对路径。这样两个github repo就没有上下级关系了。方便分别上传。</p>
-<ol>
-<li>在hugo站点外某个目录创建一个left-pocket-public目录。</li>
-<li>在hugo站点内建立一个public的软链接到站点外。
-ln -s 站点外的实际目录 站点内命名为public的软链接</li>
-</ol>
-<pre tabindex="0"><code>ln -s /Users/hugo/left-pocket-public /Users/hugo/iwtbabc/public
-</code></pre><p>这样就可以分别在外层目录和hugo站点目录执行上述git指令，提交到不同的Repo.(hugo站点需要额外创建一个Repo，方法2有讲)。</p>
-<h3 id="方法2">方法2</h3>
-<p>这种方式更简单一点.
+<p>我们的hugo站点是<strong>源文件</strong> （带主题，图片，markdown源文件），public是<strong>目标文件</strong>（最终生成的css/js/html文件）。我们最终网页上展示的是目标文件，所以需要使用<strong>hugo</strong>指令生成目标文件。</p>
+<h3 id="使用git指令发布到github">使用git指令发布到github</h3>
+<p>这种方式更简单一点，推荐使用这一种方式：
 在任意hugo站点外，直接用git clone把创建好的github pages Repo克隆下来。</p>
-<pre tabindex="0"><code>git clone git@github.com:left-pocket/left-pocket.github.io.git
-</code></pre><p>然后创建把这个git Repo目录和public创建软链接：</p>
-<pre tabindex="0"><code>ln -s /Users/hugo/left-pocket.github.io /Users/hugo/left-pocket/public
-</code></pre><p>然后在hugo站点使用<strong>hugo</strong>指令，就会自动在git仓库生成内容。
-最终执行git add/commit/push之后，打开
-<a href="https://left-pocket.github.io/">https://left-pocket.github.io/</a>
-就能看到博客内容。</p>
-<p>使用这种方法，如果也想把整个hugo站点发布到github，可以使用<em><strong>方法1</strong></em>.
-我这里直接在github上创建了一个Repo叫hugo。</p>
-<pre tabindex="0"><code>git init
-git add *
-git commit -m &quot;comments&quot;
-git branch -M main
-git remote add origin https://github.com/iwtbabc/iwtbabc.github.io.git
-git pull origin main
-git push -u origin main
-</code></pre><h2 id="支持评论">支持评论</h2>
-<p>在 <strong>config.toml</strong> 添加配置。</p>
-<pre tabindex="0"><code>[params.utteranc]
-    enable = true
-    repo = &quot;stormwy/blog-comments&quot;
-    issueTerm = &quot;pathname&quot;
-    theme = &quot;github-light&quot;
-</code></pre><p>即可支持评论。
-<strong>[params.utteranc]</strong> 是用来支持评论系统的。<strong>utterances</strong> 本来是一款基于 <strong>GitHub issues</strong> 的评论工具，类似的评论工具还有很多，有兴趣的可以研究下。
-完整配置可参考：</p>
-<p><a href="https://left-pocket.github.io/post/hugo/hugo-creation/">https://left-pocket.github.io/post/hugo/hugo-creation/</a></p>
+<pre tabindex="0"><code>git clone git@github.com:left-pocket-test/left-pocket-test.github.io.git
+</code></pre><p>然后创建把这个<code>git Repo目录</code>和hugo站点的根目录的<code>public</code>创建软链接：</p>
+<pre tabindex="0"><code>ln -s /Users/hugo/left-pocket-test.github.io /Users/hugo/left-pocket-test/public
+</code></pre><p>然后在<code>hugo站点</code>使用<strong>hugo</strong>指令，就会自动在public软链接也就是git repo下生成目标文件。<br>
+最终执行git add/commit/push之后，打开<br>
+<a href="https://left-pocket-test.github.io/">https://left-pocket-test.github.io/</a><br>
+就能看到博客内容。 (可能有几分钟延迟，耐心等待)。</p>
+<p>
+        <img class="mx-auto" alt="Github Pages" src="/img/hugo/github_hugo.png" />   
+    </p>
+<p>如果git push提示没有权限：</p>
+<pre tabindex="0"><code>ERROR: Permission to left-pocket-test/left-pocket-test.github.io.git denied to left-pocket.
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+</code></pre><p>那就在Github上添加一下ssh key就好了。</p>
+<p>现在我们<code>left-pocket-test.github.io</code>存放的是目标文件，有些人也想把hugo站点文件，也就是源文件也上传到github保存。<br>
+那么在Github上另创一个Repo来保存源文件也是可以的，源文件对最终的展示效果没有影响，只是为了方便保存。我个人创建了一个单独的hugo仓库来保存源文件。</p>
 <p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+
+        <img class="mx-auto" alt="pic" src="/img/personal/qrcode_2.png" />   
+    </p>
 
         </div>
 
@@ -195,6 +190,8 @@ git push -u origin main
     <ul class="listing">
         
         <li><a href="/post/hugo/hugo_creation/">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</a></li>
+        
+        <li><a href="/post/hugo/hugo_0/">从零开始搭建个人博客（零）- 序章</a></li>
         
     </ul>
 </div>
@@ -302,6 +299,14 @@ git push -u origin main
     </li>
     
     <li>
+        <a href="https://left-pocket.github.io/post/hugo/hugo_github/" title="从零开始搭建个人博客（二）- 把hugo博客托管到github上">从零开始搭建个人博客（二）- 把hugo博客托管到github上</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/hugo/hugo_creation/" title="从零开始搭建个人博客（一）- 使用hugo搭建个人博客">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</a>
+    </li>
+    
+    <li>
         <a href="https://left-pocket.github.io/post/hugo/hugo_0/" title="从零开始搭建个人博客（零）- 序章">从零开始搭建个人博客（零）- 序章</a>
     </li>
     
@@ -311,14 +316,6 @@ git push -u origin main
     
     <li>
         <a href="https://left-pocket.github.io/post/cpp/static/" title="c&#43;&#43;中static的用法详解">c&#43;&#43;中static的用法详解</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/game/game_development/" title="手游服务器开发技术详解">手游服务器开发技术详解</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/cpp/secondary_pointer/" title="二级指针的作用详解">二级指针的作用详解</a>
     </li>
     
 </ul>

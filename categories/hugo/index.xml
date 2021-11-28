@@ -6,7 +6,25 @@
     <description>Recent content in hugo on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 23 Nov 2021 01:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 23 Nov 2021 01:00:58 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>从零开始搭建个人博客（二）- 把hugo博客托管到github上</title>
+      <link>https://left-pocket.github.io/post/hugo/hugo_github/</link>
+      <pubDate>Tue, 23 Nov 2021 01:00:58 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/hugo/hugo_github/</guid>
+      <description>原文地址：https://left-pocket.github.io 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多</description>
+    </item>
+    
+    <item>
+      <title>从零开始搭建个人博客（一）- 使用hugo搭建个人博客</title>
+      <link>https://left-pocket.github.io/post/hugo/hugo_creation/</link>
+      <pubDate>Tue, 23 Nov 2021 01:00:55 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/hugo/hugo_creation/</guid>
+      <description>原文地址：https://left-pocket.github.io 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多</description>
+    </item>
+    
     <item>
       <title>从零开始搭建个人博客（零）- 序章</title>
       <link>https://left-pocket.github.io/post/hugo/hugo_0/</link>
@@ -14,24 +32,6 @@
       
       <guid>https://left-pocket.github.io/post/hugo/hugo_0/</guid>
       <description>原文地址：https://left-pocket.github.io 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多</description>
-    </item>
-    
-    <item>
-      <title>从零开始搭建个人博客（一）- 使用hugo搭建个人博客</title>
-      <link>https://left-pocket.github.io/post/hugo/hugo_creation/</link>
-      <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/hugo/hugo_creation/</guid>
-      <description>原文地址：https://left-pocket.github.io 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多</description>
-    </item>
-    
-    <item>
-      <title>把hugo博客托管到github上</title>
-      <link>https://left-pocket.github.io/post/hugo/hugo_github/</link>
-      <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/hugo/hugo_github/</guid>
-      <description>原文地址：https://left-pocket.github.io 上一篇介绍了怎么在本机搭建hugo博客，这一篇将主要介绍怎么把hugo静</description>
     </item>
     
   </channel>

@@ -13,10 +13,10 @@
     <meta property="og:title" content="从零开始搭建个人博客（一）- 使用hugo搭建个人博客 - Leftpocket的个人博客">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2020-08-06T13:00:51&#43;08:00'>
+    <meta property="article:published_time" content='2021-11-23T01:00:55&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2020-08-06T13:00:51&#43;08:00'>
+    <meta property="article:modified_time" content='2021-11-23T01:00:55&#43;08:00'>
         
     <meta name="Keywords" content="[hugo]">
     <meta name="description" content="从零开始搭建个人博客（一）- 使用hugo搭建个人博客">
@@ -84,7 +84,7 @@
             <h1 class="post-title">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年8月6日
+            2021年11月23日
         </date>
         
         <div class="post-meta">
@@ -108,7 +108,7 @@
 这里分享一个系列教程：<strong>从零开始搭建个人博客</strong>，把我的经验分享在这里。<br>
 系列地址：<a href="https://left-pocket.github.io/post/hugo/hugo_0/">https://left-pocket.github.io</a></p>
 <h1 id="从零开始搭建个人博客一--使用hugo搭建个人博客">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</h1>
-<h2 id="介绍">介绍</h2>
+<h3 id="介绍">介绍</h3>
 <p>很多人都想搭建个人博客，不知道怎么做。实际上现在市场上有很多静态博客生成器。这个生成器会帮你生成一个静态博客的内容，而你只需要关注你的博客的每一篇内容就可以。<br>
 比较常用的个人博客生成器有：</p>
 <ul>
@@ -117,14 +117,14 @@
 <li>Hexo</li>
 </ul>
 <p>我这里悬着Hugo来搭建我的个人博客，因为它简单，快速，开源，使用Go语言，社区活跃等优点。</p>
-<h2 id="hugo">hugo</h2>
+<h3 id="hugo">hugo</h3>
 <p>hugo 是由Go语言实现的静态网站生成器。简单，易用，高效，易扩展。</p>
-<h2 id="安装">安装</h2>
+<h3 id="安装">安装</h3>
 <p>我这边介绍在macOS上的安装教程。其他环境（Windows/linux）类似。</p>
 <pre tabindex="0"><code>&gt;&gt;&gt; brew install hugo
 &gt;&gt;&gt; hugo version
 hugo v0.89.4+extended darwin/arm64 BuildDate=unknown
-</code></pre><h2 id="创建站点">创建站点</h2>
+</code></pre><h3 id="创建站点">创建站点</h3>
 <p>创建一个站点 <strong>left-pocket-test</strong>， 并进入到站点根目录。
 这个站点命名没那么重要，可以随意取名。</p>
 <pre tabindex="0"><code>&gt;&gt;&gt; hugo new site left-pocket-test
@@ -139,7 +139,7 @@ config.toml data        public      static
 <strong>public</strong>是编译后的目标文件的目录。</p>
 <p>注：当前目录是你的<strong>源文件</strong>，也就是包括一堆模版，博客源文件（markdown），配置文件，图片的一个源文件的集合。
 最终展示在网页的是<strong>目标文件</strong>，也就根据你的资源和配置，最终生成的一个个包括css，js的html文件集合。</p>
-<h2 id="主题">主题</h2>
+<h3 id="主题">主题</h3>
 <p>在最终我们的博客可以运行之前，我们需要配置一个主题。</p>
 <p>推荐一款主题，可以在根目录下载并配置。<br>
 可以去官方主题网站：<a href="https://themes.gohugo.io/">https://themes.gohugo.io/</a><br>
@@ -242,19 +242,28 @@ logoTitle = &quot;Leftpocket的个人博客&quot;
 
 [author]                  # essential                     # 必需
   name = &quot;Leftpocket&quot;
-</code></pre><h2 id="发布第一篇文章">发布第一篇文章</h2>
+</code></pre><h3 id="发布第一篇文章">发布第一篇文章</h3>
 <p>配置完成后，发布第一篇文章。</p>
 <pre tabindex="0"><code>hugo new post/my-first-post.md
 </code></pre><p>其中有着 draft 选项。当 draft 为 true 的时候，默认是不会渲染的，渲染 draft 需要加 <strong>-D</strong> 的启动参数。 我们可以将 draft 改为 false，这样默认就可以渲染了。<br>
 一般来说，把<strong>draft: true</strong>去掉，加一些markdown语法的内容就可以了。<br>
-后续可以直接自己直接在编辑器里面 **content/post/**目录下创建 <strong>md</strong> 文件来写博客。比较方便。</p>
+后续可以直接自己直接在编辑器里面 **content/post/**目录下创建 <strong>md</strong> 文件来写博客。比较方便。也可以在post里面创建多层目录，方便归类。</p>
 <p>这是我的文章配置。</p>
 <pre tabindex="0"><code>---
 title: &quot;My First Post&quot;
 date: 2021-11-28T16:46:27+08:00
+tags : [
+&quot;hugo&quot;,
+]
+categories : [
+&quot;hugo&quot;,
+]
+keywords : [
+&quot;hugo&quot;,
+]
 ---
 This is the first post.
-</code></pre><h2 id="执行命令">执行命令</h2>
+</code></pre><h3 id="执行命令">执行命令</h3>
 <pre tabindex="0"><code>&gt;&gt;&gt; hugo server
 
                    | EN  
@@ -276,13 +285,19 @@ Serving pages from memory
 Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
 Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
 Press Ctrl+C to stop
-</code></pre><p>在浏览器输入 <a href="http://localhost:1313/">http://localhost:1313/</a>  即可看到具体效果。</p>
+</code></pre><p>在浏览器输入 <a href="http://localhost:1313/">http://localhost:1313/</a>  即可看到具体效果。<br>
+其中文章中，可以设置 <code>tag</code>, <code>categories</code>, <code>keywords</code>等属性。</p>
 <p>
         <img class="mx-auto" alt="Settings" src="/img/hugo/hugo_create.png" />   
     </p>
 <p>Demo完成，我们现在可以在本地浏览器上浏览你的hugo博客。<br>
 你也可以查看配置的描述，自己尝试修改配置的一些参数，看一下浏览器的效果。比如说你可以把页面里面的英文标签改为中文的，直接在配置里面修改就行。<br>
 hugo是立即生效的，不需要重新启动。</p>
+<p>如果需要插入图片，需要放在static目录下：
+比如我们添加一张图片 <code>static/img/test.png</code>
+那么在md文章里面插入：</p>
+<pre tabindex="0"><code>![test图片](/img/test.png)
+</code></pre><p>即可正常显示。</p>
 <p>下一篇将具体讲如何把hugo博客托管到github Pages上。就相当于部署到了服务器上，这样你就可以随时随地查看你的博客了。</p>
 <p>&lt;全文完&gt;</p>
 <p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
@@ -301,7 +316,7 @@ hugo是立即生效的，不需要重新启动。</p>
     <h2>See Also</h2>
     <ul class="listing">
         
-        <li><a href="/post/hugo/hugo_github/">把hugo博客托管到github上</a></li>
+        <li><a href="/post/hugo/hugo_0/">从零开始搭建个人博客（零）- 序章</a></li>
         
     </ul>
 </div>
@@ -409,6 +424,14 @@ hugo是立即生效的，不需要重新启动。</p>
     </li>
     
     <li>
+        <a href="https://left-pocket.github.io/post/hugo/hugo_github/" title="从零开始搭建个人博客（二）- 把hugo博客托管到github上">从零开始搭建个人博客（二）- 把hugo博客托管到github上</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/hugo/hugo_creation/" title="从零开始搭建个人博客（一）- 使用hugo搭建个人博客">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</a>
+    </li>
+    
+    <li>
         <a href="https://left-pocket.github.io/post/hugo/hugo_0/" title="从零开始搭建个人博客（零）- 序章">从零开始搭建个人博客（零）- 序章</a>
     </li>
     
@@ -418,14 +441,6 @@ hugo是立即生效的，不需要重新启动。</p>
     
     <li>
         <a href="https://left-pocket.github.io/post/cpp/static/" title="c&#43;&#43;中static的用法详解">c&#43;&#43;中static的用法详解</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/game/game_development/" title="手游服务器开发技术详解">手游服务器开发技术详解</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/cpp/secondary_pointer/" title="二级指针的作用详解">二级指针的作用详解</a>
     </li>
     
 </ul>
