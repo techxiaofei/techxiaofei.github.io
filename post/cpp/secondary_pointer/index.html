@@ -1,108 +1,161 @@
-<!doctype html>
-<html lang="en-us">
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>二级指针的作用详解 - Leftpocket的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <title>二级指针的作用详解 | Leftpocket的个人博客</title>
-    <meta property="og:title" content="二级指针的作用详解 - Leftpocket的个人博客">
-    <meta property="og:type" content="article">
-        
-    <meta property="article:published_time" content='2021-11-21T13:00:51&#43;08:00'>
-        
-        
-    <meta property="article:modified_time" content='2021-11-21T13:00:51&#43;08:00'>
-        
-    <meta name="Keywords" content="[c&#43;&#43; 二级指针]">
-    <meta name="description" content="二级指针的作用详解">
-        
-    <meta name="author" content="leftpocket">
-    <meta property="og:url" content="https://left-pocket.github.io/post/cpp/secondary_pointer/">
-    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-    <link rel="stylesheet" href='/css/normalize.css'>
-    <link rel="stylesheet" href='/css/style.css'>
-    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    
-    <script data-ad-client="ca-pub-8922621224955535" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    
-    
-    
-    
-    
-    
-        <link rel="stylesheet" href='/css/custom.css'>
-    
+<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：https://left-pocket.github.io ​ 一、概念 在如下的A指向B、B指向C的指向关系中： 首先 C是&amp;quot;一" /><meta name="keywords" content="c&#43;&#43;, 二级指针" />
 
-    
-    <meta name="baidu-site-verification" content="code-swx03nFBNS" />
+
+<meta name="baidu-site-verification" content="code-swx03nFBNS" />
+<meta name="google-site-verification" content="sGfWBA2Wby1_gxJO3xmOtvpAOU2cCyhwXuU-2m4u75Y" />
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://left-pocket.github.io/post/cpp/secondary_pointer/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="二级指针的作用详解" />
+<meta property="og:description" content="原文地址：https://left-pocket.github.io ​ 一、概念 在如下的A指向B、B指向C的指向关系中： 首先 C是&quot;一" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://left-pocket.github.io/post/cpp/secondary_pointer/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-11-21T13:00:51+08:00" />
+<meta property="article:modified_time" content="2021-11-21T13:00:51+08:00" />
+
+<meta itemprop="name" content="二级指针的作用详解">
+<meta itemprop="description" content="原文地址：https://left-pocket.github.io ​ 一、概念 在如下的A指向B、B指向C的指向关系中： 首先 C是&quot;一"><meta itemprop="datePublished" content="2021-11-21T13:00:51+08:00" />
+<meta itemprop="dateModified" content="2021-11-21T13:00:51+08:00" />
+<meta itemprop="wordCount" content="1624">
+<meta itemprop="keywords" content="c&#43;&#43;," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="二级指针的作用详解"/>
+<meta name="twitter:description" content="原文地址：https://left-pocket.github.io ​ 一、概念 在如下的A指向B、B指向C的指向关系中： 首先 C是&quot;一"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
-
-
 <body>
-    <header id="header" class="clearfix">
-    <div class="container">
-        <div class="col-group">
-            <div class="site-name ">
-                
-                    <a id="logo" href="https://left-pocket.github.io">
-                        Leftpocket的个人博客
-                    </a>
-                
-                <p class="description">码农在新加坡</p>
-            </div>
-            <div>
-                <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://left-pocket.github.io">首页</a>
-                    
-                    <a  href="https://left-pocket.github.io/archives/" title="归档">归档</a>
-                    
-                    <a  href="https://left-pocket.github.io/about/" title="关于我">关于我</a>
-                    
-                </nav>
-            </div>
-        </div>
-    </div>
-</header>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Leftpocket的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
 
-    <div id="body">
-        <div class="container">
-            <div class="col-group">
+  
 
-                <div class="col-8" id="main">
-                    
-<div class="res-cons">
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Leftpocket的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">二级指针的作用详解</h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年11月21日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/c&#43;&#43;'>c&#43;&#43;</a></span>
-            
-        </div>
-        
-        
-        <div class="post-meta">
-            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
-                    阅读</span></span>
-        </div>
-        
-        
-        <div class="post-content">
-            <p>原文地址：<a href="https://left-pocket.github.io/post/cpp/secondary_pointer/">https://left-pocket.github.io</a>
+    <header class="post-header">
+      <h1 class="post-title">二级指针的作用详解</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-11-21 </span>
+        <div class="post-category">
+            <a href="/categories/c&#43;&#43;/"> c&#43;&#43; </a>
+            </div>
+          <span class="more-meta"> 约 1624 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一概念">一、概念</a></li>
+    <li><a href="#二使用">二、使用</a>
+      <ul>
+        <li><a href="#1先看看一级指针的实现">1.先看看一级指针的实现</a></li>
+        <li><a href="#2二级指针操作">2.二级指针操作</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>原文地址：<a href="https://left-pocket.github.io/post/cpp/secondary_pointer/">https://left-pocket.github.io</a>
 ​</p>
 <h1 id="一概念">一、概念</h1>
 <p>在如下的A指向B、B指向C的指向关系中：</p>
@@ -110,56 +163,117 @@
 <p>C是&quot;一段内容&quot;,比如你用malloc或者new分配了一块内存，然后塞进去&quot;一段内容&quot;,那就是C了。C的起始地址是 <strong>0x00000008</strong>。</p>
 <p>B是一个指针变量,其中存放着C的地址，但是B也要占空间的啊，所以B也有地址，B的起始地址是 <strong>0x00000004</strong>,但是B内存中存放的是C的地址，所以B里面的内容就是 <strong>0x00000008</strong>。</p>
 <p>那么到此为止都比较好理解:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">B<span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00000008</span>;  <span style="color:#75715e">//B的内容 
-</span><span style="color:#75715e"></span><span style="color:#f92672">*</span>B <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;一段内容&#34;</span>;  <span style="color:#75715e">//B解引用，也就是B指针指向的C的值
-</span><span style="color:#75715e"></span><span style="color:#f92672">&amp;</span>B <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00000004</span>;  <span style="color:#75715e">//B取地址，B的地址是0x00000004
-</span></code></pre></div><p>
-        <img class="mx-auto" alt="pic" src="/img/cpp/secondary_pointer.png" />   
-    </p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="n">B</span><span class="o">=</span> <span class="mh">0x00000008</span><span class="p">;</span>  <span class="c1">//B的内容 
+</span><span class="c1"></span><span class="o">*</span><span class="n">B</span> <span class="o">=</span> <span class="s">&#34;一段内容&#34;</span><span class="p">;</span>  <span class="c1">//B解引用，也就是B指针指向的C的值
+</span><span class="c1"></span><span class="o">&amp;</span><span class="n">B</span> <span class="o">=</span> <span class="mh">0x00000004</span><span class="p">;</span>  <span class="c1">//B取地址，B的地址是0x00000004
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/img/cpp/secondary_pointer.png" alt="pic"></p>
 <p>那么，再来看A：</p>
 <p>A是二级指针变量，其中存放着B的地址 <strong>0x00000004</strong>,A也有地址，是 <strong>0x00000000</strong>;</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#f92672">*</span>A <span style="color:#f92672">=</span> B<span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00000008</span>;  <span style="color:#75715e">//A解引用也就是B的内容 
-</span><span style="color:#75715e"></span><span style="color:#f92672">**</span>A <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>B <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;一段内容&#34;</span>;  <span style="color:#75715e">//B解引用，也就是B指针指向的C的值
-</span><span style="color:#75715e"></span>A <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>B <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00000004</span>;  <span style="color:#75715e">//A存的是B的地址，B的地址是0x00000004
-</span><span style="color:#75715e"></span><span style="color:#f92672">&amp;</span>A <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00000000</span>;  <span style="color:#75715e">//A取地址
-</span></code></pre></div><h1 id="二使用">二、使用</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="o">*</span><span class="n">A</span> <span class="o">=</span> <span class="n">B</span><span class="o">=</span> <span class="mh">0x00000008</span><span class="p">;</span>  <span class="c1">//A解引用也就是B的内容 
+</span><span class="c1"></span><span class="o">**</span><span class="n">A</span> <span class="o">=</span> <span class="o">*</span><span class="n">B</span> <span class="o">=</span> <span class="s">&#34;一段内容&#34;</span><span class="p">;</span>  <span class="c1">//B解引用，也就是B指针指向的C的值
+</span><span class="c1"></span><span class="n">A</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">B</span> <span class="o">=</span> <span class="mh">0x00000004</span><span class="p">;</span>  <span class="c1">//A存的是B的地址，B的地址是0x00000004
+</span><span class="c1"></span><span class="o">&amp;</span><span class="n">A</span> <span class="o">=</span> <span class="mh">0x00000000</span><span class="p">;</span>  <span class="c1">//A取地址
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="二使用">二、使用</h1>
 <p>二级指针作为函数参数的作用:在函数外部定义一个指针p，在函数内给指针赋值，函数结束后对指针p生效，那么我们就需要二级指针。</p>
 <p>看看下面一段代码：有两个变量a,b,指针q,q指向a，我们想让q指向b,在函数里面实现。</p>
 <h2 id="1先看看一级指针的实现">1.先看看一级指针的实现</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 
-<span style="color:#66d9ef">int</span> a<span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
-<span style="color:#66d9ef">int</span> b <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>;
-<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>q;
+<span class="kt">int</span> <span class="n">a</span><span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">q</span><span class="p">;</span>
 
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">func</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>p)
-{
-	cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;func:&amp;p=&#34;</span><span style="color:#f92672">&lt;&lt;&amp;</span>p<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;,p=&#34;</span><span style="color:#f92672">&lt;&lt;</span>p<span style="color:#f92672">&lt;&lt;</span>endl;  <span style="color:#75715e">//note:3
-</span><span style="color:#75715e"></span>	p <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>b;
-	cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;func:&amp;p=&#34;</span><span style="color:#f92672">&lt;&lt;&amp;</span>p<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;,p=&#34;</span><span style="color:#f92672">&lt;&lt;</span>p<span style="color:#f92672">&lt;&lt;</span>endl;  <span style="color:#75715e">//note:4
-</span><span style="color:#75715e"></span>}
+<span class="kt">void</span> <span class="nf">func</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;func:&amp;p=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="s">&#34;,p=&#34;</span><span class="o">&lt;&lt;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>  <span class="c1">//note:3
+</span><span class="c1"></span>	<span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span>
+	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;func:&amp;p=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="s">&#34;,p=&#34;</span><span class="o">&lt;&lt;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>  <span class="c1">//note:4
+</span><span class="c1"></span><span class="p">}</span>
 
 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-{
-	cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;&amp;a=&#34;</span><span style="color:#f92672">&lt;&lt;&amp;</span>a<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;,&amp;b=&#34;</span><span style="color:#f92672">&lt;&lt;&amp;</span>b<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;,&amp;q=&#34;</span><span style="color:#f92672">&lt;&lt;&amp;</span>q<span style="color:#f92672">&lt;&lt;</span>endl;  <span style="color:#75715e">//note:1
-</span><span style="color:#75715e"></span>	q <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>a;
-	cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;*q=&#34;</span><span style="color:#f92672">&lt;&lt;*</span>q<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;,q=&#34;</span><span style="color:#f92672">&lt;&lt;</span>q<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;,&amp;q=&#34;</span><span style="color:#f92672">&lt;&lt;&amp;</span>q<span style="color:#f92672">&lt;&lt;</span>endl;  <span style="color:#75715e">//note:2
-</span><span style="color:#75715e"></span>	func(q);
-	cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;*q=&#34;</span><span style="color:#f92672">&lt;&lt;*</span>q<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;,q=&#34;</span><span style="color:#f92672">&lt;&lt;</span>q<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;,&amp;q=&#34;</span><span style="color:#f92672">&lt;&lt;&amp;</span>q<span style="color:#f92672">&lt;&lt;</span>endl;  <span style="color:#75715e">//note:5
-</span><span style="color:#75715e"></span>
-	system(<span style="color:#e6db74">&#34;pause&#34;</span>);
-	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><p>这么写有什么问题？为什么*q不等于100？我们看一下输出便知：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#f92672">&amp;</span>a<span style="color:#f92672">=</span><span style="color:#ae81ff">0032F</span><span style="color:#ae81ff">000</span>,<span style="color:#f92672">&amp;</span>b<span style="color:#f92672">=</span><span style="color:#ae81ff">0032F</span><span style="color:#ae81ff">004</span>,<span style="color:#f92672">&amp;</span>q<span style="color:#f92672">=</span><span style="color:#ae81ff">0032F</span><span style="color:#ae81ff">228</span>
-<span style="color:#f92672">*</span>q<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>,q<span style="color:#f92672">=</span><span style="color:#ae81ff">0032F</span><span style="color:#ae81ff">000</span>,<span style="color:#f92672">&amp;</span>q<span style="color:#f92672">=</span><span style="color:#ae81ff">0032F</span><span style="color:#ae81ff">228</span>
-func:<span style="color:#f92672">&amp;</span>p<span style="color:#f92672">=</span><span style="color:#ae81ff">0018F</span>D24,p<span style="color:#f92672">=</span><span style="color:#ae81ff">0032F</span><span style="color:#ae81ff">000</span>
-func:<span style="color:#f92672">&amp;</span>p<span style="color:#f92672">=</span><span style="color:#ae81ff">0018F</span>D24,p<span style="color:#f92672">=</span><span style="color:#ae81ff">0032F</span><span style="color:#ae81ff">004</span>
-<span style="color:#f92672">*</span>q<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>,q<span style="color:#f92672">=</span><span style="color:#ae81ff">0032F</span><span style="color:#ae81ff">000</span>,<span style="color:#f92672">&amp;</span>q<span style="color:#f92672">=</span><span style="color:#ae81ff">0032F</span><span style="color:#ae81ff">228</span>
-</code></pre></div><p>我们看输出:</p>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;&amp;a=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">a</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;b=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">b</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;q=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>  <span class="c1">//note:1
+</span><span class="c1"></span>	<span class="n">q</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>
+	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;*q=&#34;</span><span class="o">&lt;&lt;*</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,q=&#34;</span><span class="o">&lt;&lt;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;q=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>  <span class="c1">//note:2
+</span><span class="c1"></span>	<span class="n">func</span><span class="p">(</span><span class="n">q</span><span class="p">);</span>
+	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;*q=&#34;</span><span class="o">&lt;&lt;*</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,q=&#34;</span><span class="o">&lt;&lt;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;q=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>  <span class="c1">//note:5
+</span><span class="c1"></span>
+	<span class="n">system</span><span class="p">(</span><span class="s">&#34;pause&#34;</span><span class="p">);</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这么写有什么问题？为什么*q不等于100？我们看一下输出便知：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="o">&amp;</span><span class="n">a</span><span class="o">=</span><span class="mf">0032F</span><span class="mo">000</span><span class="p">,</span><span class="o">&amp;</span><span class="n">b</span><span class="o">=</span><span class="mf">0032F</span><span class="mo">004</span><span class="p">,</span><span class="o">&amp;</span><span class="n">q</span><span class="o">=</span><span class="mf">0032F</span><span class="mi">228</span>
+<span class="o">*</span><span class="n">q</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mf">0032F</span><span class="mo">000</span><span class="p">,</span><span class="o">&amp;</span><span class="n">q</span><span class="o">=</span><span class="mf">0032F</span><span class="mi">228</span>
+<span class="nl">func</span><span class="p">:</span><span class="o">&amp;</span><span class="n">p</span><span class="o">=</span><span class="mf">0018F</span><span class="n">D24</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="mf">0032F</span><span class="mo">000</span>
+<span class="nl">func</span><span class="p">:</span><span class="o">&amp;</span><span class="n">p</span><span class="o">=</span><span class="mf">0018F</span><span class="n">D24</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="mf">0032F</span><span class="mo">004</span>
+<span class="o">*</span><span class="n">q</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mf">0032F</span><span class="mo">000</span><span class="p">,</span><span class="o">&amp;</span><span class="n">q</span><span class="o">=</span><span class="mf">0032F</span><span class="mi">228</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们看输出:</p>
 <p>note:1-&gt;a,b,q都有一个地址.</p>
 <p>note:2-&gt;q指向a.</p>
 <p>note:3-&gt;我们发现参数p的地址变了,跟q不一样了，是的参数传递是制作了一个副本,也就是p和q不是同一个指针,但是指向的地址0x0032F000(a的地址)还是不变的.</p>
@@ -169,286 +283,211 @@ func:<span style="color:#f92672">&amp;</span>p<span style="color:#f92672">=</spa
 <p>编译器总是要为函数的每个参数制作临时副本，指针参数p的副本是 p，编译器使 p = q(<strong>但是&amp;p != &amp;q,也就是他们并不在同一块内存地址，只是他们的内容一样，都是a的地址</strong>)。如果函数体内的程序修改了p的内容(比如在这里它指向b)。在本例中，p申请了新的内存，只是把 p所指的内存地址改变了(<strong>变成了b的地址,但是q指向的内存地址没有影响</strong>)，所以在这里并不影响函数外的指针q。</p>
 <p>这就需要二级指针操作：</p>
 <h2 id="2二级指针操作">2.二级指针操作</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 
-<span style="color:#66d9ef">int</span> a<span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
-<span style="color:#66d9ef">int</span> b <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>;
-<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>q;
+<span class="kt">int</span> <span class="n">a</span><span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">q</span><span class="p">;</span>
 
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">func</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">**</span>p)  <span style="color:#75715e">//2
-</span><span style="color:#75715e"></span>{
-	cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;func:&amp;p=&#34;</span><span style="color:#f92672">&lt;&lt;&amp;</span>p<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;,p=&#34;</span><span style="color:#f92672">&lt;&lt;</span>p<span style="color:#f92672">&lt;&lt;</span>endl;
-	<span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>b;  <span style="color:#75715e">//3
-</span><span style="color:#75715e"></span>	cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;func:&amp;p=&#34;</span><span style="color:#f92672">&lt;&lt;&amp;</span>p<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;,p=&#34;</span><span style="color:#f92672">&lt;&lt;</span>p<span style="color:#f92672">&lt;&lt;</span>endl;
-}
+<span class="kt">void</span> <span class="nf">func</span><span class="p">(</span><span class="kt">int</span> <span class="o">**</span><span class="n">p</span><span class="p">)</span>  <span class="c1">//2
+</span><span class="c1"></span><span class="p">{</span>
+	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;func:&amp;p=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="s">&#34;,p=&#34;</span><span class="o">&lt;&lt;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+	<span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span>  <span class="c1">//3
+</span><span class="c1"></span>	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;func:&amp;p=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="s">&#34;,p=&#34;</span><span class="o">&lt;&lt;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
 
 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-{
-	cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;&amp;a=&#34;</span><span style="color:#f92672">&lt;&lt;&amp;</span>a<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;,&amp;b=&#34;</span><span style="color:#f92672">&lt;&lt;&amp;</span>b<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;,&amp;q=&#34;</span><span style="color:#f92672">&lt;&lt;&amp;</span>q<span style="color:#f92672">&lt;&lt;</span>endl;
-	q <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>a;
-	cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;*q=&#34;</span><span style="color:#f92672">&lt;&lt;*</span>q<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;,q=&#34;</span><span style="color:#f92672">&lt;&lt;</span>q<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;,&amp;q=&#34;</span><span style="color:#f92672">&lt;&lt;&amp;</span>q<span style="color:#f92672">&lt;&lt;</span>endl;
-	func(<span style="color:#f92672">&amp;</span>q);  <span style="color:#75715e">//1
-</span><span style="color:#75715e"></span>	cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;*q=&#34;</span><span style="color:#f92672">&lt;&lt;*</span>q<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;,q=&#34;</span><span style="color:#f92672">&lt;&lt;</span>q<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;,&amp;q=&#34;</span><span style="color:#f92672">&lt;&lt;&amp;</span>q<span style="color:#f92672">&lt;&lt;</span>endl;
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;&amp;a=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">a</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;b=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">b</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;q=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+	<span class="n">q</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>
+	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;*q=&#34;</span><span class="o">&lt;&lt;*</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,q=&#34;</span><span class="o">&lt;&lt;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;q=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+	<span class="n">func</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">);</span>  <span class="c1">//1
+</span><span class="c1"></span>	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;*q=&#34;</span><span class="o">&lt;&lt;*</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,q=&#34;</span><span class="o">&lt;&lt;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;q=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
 
-	system(<span style="color:#e6db74">&#34;pause&#34;</span>);
-	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><p>这里只改了三个地方，变成传二级指针。我们再看:</p>
+	<span class="n">system</span><span class="p">(</span><span class="s">&#34;pause&#34;</span><span class="p">);</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这里只改了三个地方，变成传二级指针。我们再看:</p>
 <p>因为传了指针q的地址(二级指针**p)到函数,所以二级指针拷贝(拷贝的是p,一级指针中拷贝的是q所以才有问题),（拷贝了指针但是指针内容也就是指针所指向的地址是不变的）所以它还是指向一级指针q(*p = q)。在这里无论拷贝多少次，它依然指向q，那么 *p = &amp;b;自然的就是 q = &amp;b;了。</p>
 <p>3.再看一个例子：</p>
 <p>我们代码中以二级指针作为参数比较常见的是，定义了一个指针 <strong>MyClass *ptr=NULL</strong>，在函数内对指针赋值 <strong>*ptr=malloc(&hellip;)</strong>，函数结束后指针依然有效.这个时候就必须要用二级指针作为参数 <strong>func(MyClass **p,&hellip;)</strong>，一级指针为什么不行上面说了。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">void</span>  <span style="color:#a6e22e">my_malloc</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>s)  
-{  
-	<span style="color:#f92672">*</span>s<span style="color:#f92672">=</span>(<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)malloc(<span style="color:#ae81ff">100</span>);  
-}  
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span>  <span class="nf">my_malloc</span><span class="p">(</span><span class="kt">char</span> <span class="o">**</span><span class="n">s</span><span class="p">)</span>  
+<span class="p">{</span>  
+	<span class="o">*</span><span class="n">s</span><span class="o">=</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>  
+<span class="p">}</span>  
  
-<span style="color:#66d9ef">void</span>  <span style="color:#a6e22e">main</span>()  
-{  
-	<span style="color:#66d9ef">char</span>  <span style="color:#f92672">*</span>p<span style="color:#f92672">=</span>NULL;  
-	my_malloc(<span style="color:#f92672">&amp;</span>p);
-	<span style="color:#75715e">//do something
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span>(p)
-		free(p);  
-}
-</code></pre></div><p>这里给指针p分配内存，<strong>do something</strong>，然后 <strong>free(p)</strong>，如果用一级指针，那么就相当于给一个p的拷贝s分配内存，p依然没分配内存，用二级指针之后，才对p分配了内存。</p>
+<span class="kt">void</span>  <span class="nf">main</span><span class="p">()</span>  
+<span class="p">{</span>  
+	<span class="kt">char</span>  <span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>  
+	<span class="n">my_malloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="p">);</span>
+	<span class="c1">//do something
+</span><span class="c1"></span>	<span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+		<span class="n">free</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>  
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这里给指针p分配内存，<strong>do something</strong>，然后 <strong>free(p)</strong>，如果用一级指针，那么就相当于给一个p的拷贝s分配内存，p依然没分配内存，用二级指针之后，才对p分配了内存。</p>
 <p>&lt;全文完&gt;</p>
 <p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+<img src="/img/personal/qrcode_2.png" alt="pic"></p>
 
-        <img class="mx-auto" alt="pic" src="/img/personal/qrcode_2.png" />   
-    </p>
+    </div>
 
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-11-21
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/c&#43;&#43;/">c&#43;&#43;</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/game/game_development/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">手游服务器开发技术详解</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/git/git_rebase/">
+            <span class="next-text nav-default">git rebase使用详解</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
         </div>
-
         
 
+  
 
-        
-
-
-        <div class="post-meta meta-tags">
-            
-            <ul class="clearfix">
-                
-                <li><a href='/tags/c&#43;&#43;'>c&#43;&#43;</a></li>
-                
-            </ul>
-            
-        </div>
-    </article>
-    
-    
-
-    
-    
-    <div class="post bg-white">
-      <script src="https://utteranc.es/client.js"
-            repo= "stormwy/blog-comments"
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
             issue-term="pathname"
             theme="github-light"
             crossorigin="anonymous"
             async>
-      </script>
-    </div>
-    
-</div>
-
-                    <footer id="footer">
-    <div>
-        &copy; 2021 <a href="https://left-pocket.github.io">Leftpocket的个人博客 By leftpocket</a>
-        
-    </div>
-    <br />
-    <div>
-        <div class="github-badge">
-            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
-        </div>
-        <div class="github-badge">
-            <a href="https://left-pocket.github.io/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">Leftpocket</span></a>
-        </div>
-    </div>
-</footer>
-
-
-    
-    <script type="text/javascript">
-        window.MathJax = {
-            tex2jax: {
-                inlineMath: [['$', '$']],
-                processEscapes: true
-                }
-            };
     </script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
 
-<a id="rocket" href="#top"></a>
-<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+      </div>
+    </main>
 
-
-
-    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
-
-
-
-
-                </div>
-
-                <div id="secondary">
-    <section class="widget">
-        <form id="search" action='//www.google.com/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
-      
-      <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://left-pocket.github.io">
-      <button type="submit" class="submit icon-search"></button>
-</form>
-    </section>
-    
-    <section class="widget">
-        <h3 class="widget-title">最近文章</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/mysql/covering_index/" title="后端面试之MySQL-什么是回表查询和覆盖索引">后端面试之MySQL-什么是回表查询和覆盖索引</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/interview/mysql/" title="后端面试之MySQL">后端面试之MySQL</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/interview/tcpip/" title="后端面试之网络编程">后端面试之网络编程</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/tcpip/socket_read_write/" title="后端面试之网络编程-socket可读可写条件">后端面试之网络编程-socket可读可写条件</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/system_design/lru/" title="LRU缓存机制，你想知道的这里都有">LRU缓存机制，你想知道的这里都有</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/hugo/hugo_github/" title="从零开始搭建个人博客（二）- 把hugo博客托管到github上">从零开始搭建个人博客（二）- 把hugo博客托管到github上</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/hugo/hugo_creation/" title="从零开始搭建个人博客（一）- 使用hugo搭建个人博客">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/hugo/hugo_0/" title="从零开始搭建个人博客（零）- 序章">从零开始搭建个人博客（零）- 序章</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/cpp/do_while/" title="do{...}while(0)的用法">do{...}while(0)的用法</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/cpp/static/" title="c&#43;&#43;中static的用法详解">c&#43;&#43;中static的用法详解</a>
-    </li>
-    
-</ul>
-    </section>
-
-    
-
-    <section class="widget">
-        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
-<ul class="widget-list">
-    
-    <li><a href="https://left-pocket.github.io/categories/c&#43;&#43;/">c&#43;&#43; (3)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/git/">git (1)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/golang/">Golang (5)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/hugo/">hugo (3)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/leetcode/">leetcode (1)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/mysql/">MySQL (4)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/others/">Others (2)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/redis/">Redis (2)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (1)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计 (5)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (1)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/">面试 (4)</a></li>
-    
-</ul>
-    </section>
-
-    <section class="widget">
-        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
-<div class="tagcloud">
-    
-    <a href="https://left-pocket.github.io/tags/c&#43;&#43;/">c&#43;&#43;</a>
-    
-    <a href="https://left-pocket.github.io/tags/git/">git</a>
-    
-    <a href="https://left-pocket.github.io/tags/golang/">Golang</a>
-    
-    <a href="https://left-pocket.github.io/tags/hugo/">hugo</a>
-    
-    <a href="https://left-pocket.github.io/tags/leetcode/">leetcode</a>
-    
-    <a href="https://left-pocket.github.io/tags/mysql/">MySQL</a>
-    
-    <a href="https://left-pocket.github.io/tags/redis/">Redis</a>
-    
-    <a href="https://left-pocket.github.io/tags/server/">Server</a>
-    
-    <a href="https://left-pocket.github.io/tags/ssr/">ssr</a>
-    
-    <a href="https://left-pocket.github.io/tags/vscode/">vscode</a>
-    
-    <a href="https://left-pocket.github.io/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a>
-    
-    <a href="https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计</a>
-    
-    <a href="https://left-pocket.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
-    
-    <a href="https://left-pocket.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
-    
-    <a href="https://left-pocket.github.io/tags/%E9%9D%A2%E8%AF%95/">面试</a>
-    
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="leftpocket12@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://left-pocket.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-    </section>
 
-    
-<section class="widget">
-    <h3 class="widget-title">友情链接</h3>
-    <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://left-pocket.github.io/about/" title="关于我" style="color:#0000FF;">关于我-微信及公众号</a>
-        </li>
-        
-        <li>
-            <a target="_blank" href="https://www.zhihu.com/people/left-pocket" title="Leftpocket的知乎" style="color:#0000FF;">Leftpocket的知乎</a>
-        </li>
-        
-    </ul>
-</section>
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
 
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
 
-    <section class="widget">
-        <h3 class="widget-title">其它</h3>
-        <ul class="widget-list">
-            <li><a href="https://left-pocket.github.io/index.xml">文章 RSS</a></li>
-        </ul>
-    </section>
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
 </div>
-            </div>
-        </div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
     </div>
-</body>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
 
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
 </html>

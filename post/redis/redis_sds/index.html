@@ -1,138 +1,216 @@
-<!doctype html>
-<html lang="en-us">
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Redis SDS简单动态字符串 - Leftpocket的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <title>Redis SDS简单动态字符串 | Leftpocket的个人博客</title>
-    <meta property="og:title" content="Redis SDS简单动态字符串 - Leftpocket的个人博客">
-    <meta property="og:type" content="article">
-        
-    <meta property="article:published_time" content='2021-02-17T13:00:51&#43;08:00'>
-        
-        
-    <meta property="article:modified_time" content='2021-02-17T13:00:51&#43;08:00'>
-        
-    <meta name="Keywords" content="[Redis SDS]">
-    <meta name="description" content="Redis SDS简单动态字符串">
-        
-    <meta name="author" content="leftpocket">
-    <meta property="og:url" content="https://left-pocket.github.io/post/redis/redis_sds/">
-    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-    <link rel="stylesheet" href='/css/normalize.css'>
-    <link rel="stylesheet" href='/css/style.css'>
-    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    
-    <script data-ad-client="ca-pub-8922621224955535" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    
-    
-    
-    
-    
-    
-        <link rel="stylesheet" href='/css/custom.css'>
-    
+<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：https://left-pocket.github.io/ SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串" /><meta name="keywords" content="Redis, SDS" />
 
-    
-    <meta name="baidu-site-verification" content="code-swx03nFBNS" />
+
+<meta name="baidu-site-verification" content="code-swx03nFBNS" />
+<meta name="google-site-verification" content="sGfWBA2Wby1_gxJO3xmOtvpAOU2cCyhwXuU-2m4u75Y" />
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://left-pocket.github.io/post/redis/redis_sds/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Redis SDS简单动态字符串" />
+<meta property="og:description" content="原文地址：https://left-pocket.github.io/ SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://left-pocket.github.io/post/redis/redis_sds/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-02-17T13:00:51+08:00" />
+<meta property="article:modified_time" content="2021-02-17T13:00:51+08:00" />
+
+<meta itemprop="name" content="Redis SDS简单动态字符串">
+<meta itemprop="description" content="原文地址：https://left-pocket.github.io/ SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串"><meta itemprop="datePublished" content="2021-02-17T13:00:51+08:00" />
+<meta itemprop="dateModified" content="2021-02-17T13:00:51+08:00" />
+<meta itemprop="wordCount" content="2056">
+<meta itemprop="keywords" content="Redis," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Redis SDS简单动态字符串"/>
+<meta name="twitter:description" content="原文地址：https://left-pocket.github.io/ SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
-
-
 <body>
-    <header id="header" class="clearfix">
-    <div class="container">
-        <div class="col-group">
-            <div class="site-name ">
-                
-                    <a id="logo" href="https://left-pocket.github.io">
-                        Leftpocket的个人博客
-                    </a>
-                
-                <p class="description">码农在新加坡</p>
-            </div>
-            <div>
-                <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://left-pocket.github.io">首页</a>
-                    
-                    <a  href="https://left-pocket.github.io/archives/" title="归档">归档</a>
-                    
-                    <a  href="https://left-pocket.github.io/about/" title="关于我">关于我</a>
-                    
-                </nav>
-            </div>
-        </div>
-    </div>
-</header>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Leftpocket的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
 
-    <div id="body">
-        <div class="container">
-            <div class="col-group">
+  
 
-                <div class="col-8" id="main">
-                    
-<div class="res-cons">
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Leftpocket的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">Redis SDS简单动态字符串</h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年2月17日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/redis'>Redis</a></span>
-            
-        </div>
-        
-        
-        <div class="post-meta">
-            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
-                    阅读</span></span>
-        </div>
-        
-        
-        <div class="post-content">
-            <p>原文地址：<a href="https://left-pocket.github.io/post/redis/redis_sds/">https://left-pocket.github.io/</a></p>
+    <header class="post-header">
+      <h1 class="post-title">Redis SDS简单动态字符串</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-02-17 </span>
+        <div class="post-category">
+            <a href="/categories/redis/"> Redis </a>
+            </div>
+          <span class="more-meta"> 约 2056 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#简单动态字符串sds">简单动态字符串(SDS)</a>
+      <ul>
+        <li><a href="#什么是sds">什么是SDS</a></li>
+        <li><a href="#sds相对于c字符串有什么好处呢">SDS相对于C字符串有什么好处呢？</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>原文地址：<a href="https://left-pocket.github.io/post/redis/redis_sds/">https://left-pocket.github.io/</a></p>
 <p>SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串表示， 几乎所有的 Redis 模块中都用了 sds。</p>
 <p>本章将对 SDS 的实现、性能和功能等方面进行介绍， 并说明 Redis 使用 SDS 而不是传统 C 字符串的原因。</p>
 <h1 id="简单动态字符串sds">简单动态字符串(SDS)</h1>
 <h2 id="什么是sds">什么是SDS</h2>
 <p>举一个例子， 当我们set一个值时：</p>
-<pre tabindex="0"><code>redis&gt; SET msg &quot;Redis&quot;
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">redis&gt; SET msg &#34;Redis&#34;
 OK
-</code></pre><p>那么Redis将在数据库创建一个新的键值对，其中：</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>那么Redis将在数据库创建一个新的键值对，其中：</p>
 <ul>
 <li>键值对的键是一个字符串对象， 对象的底层实现是一个保存着字符串 “msg” 的 SDS 。</li>
 <li>键值对的值也是一个字符串对象， 对象的底层实现是一个保存着字符串 “hello world” 的 SDS 。</li>
 </ul>
 <p>我们来查看一下SDS的数据结构：
 每个 sds.h/sdshdr 结构表示一个 SDS 值：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">struct</span> sdshdr {
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="k">struct</span> <span class="n">sdshdr</span> <span class="p">{</span>
 
-    <span style="color:#75715e">// 记录 buf 数组中已使用字节的数量
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 等于 SDS 所保存字符串的长度
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> len;
+    <span class="c1">// 记录 buf 数组中已使用字节的数量
+</span><span class="c1"></span>    <span class="c1">// 等于 SDS 所保存字符串的长度
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">len</span><span class="p">;</span>
 
-    <span style="color:#75715e">// 记录 buf 数组中未使用字节的数量
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> free;
+    <span class="c1">// 记录 buf 数组中未使用字节的数量
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">free</span><span class="p">;</span>
 
-    <span style="color:#75715e">// 字节数组，用于保存字符串
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">char</span> buf[];
+    <span class="c1">// 字节数组，用于保存字符串
+</span><span class="c1"></span>    <span class="kt">char</span> <span class="n">buf</span><span class="p">[];</span>
 
-};
-</code></pre></div><p>
-        <img class="mx-auto" alt="SDS" src="/img/redis/redis_sdshdr.png" />   
-    </p>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/img/redis/redis_sdshdr.png" alt="SDS"></p>
 <p>上图展示了一个SDS示例：</p>
 <ul>
 <li>free 属性的值为 0 ， 表示这个 SDS 没有分配任何未使用空间。</li>
@@ -150,23 +228,43 @@ OK
 <p>传统C字符串由于不记录自身长度，在对字符串进行操作的时候容易带来缓冲区溢出。
 比如 strcpy()函数：strcpy()函数将源字符串复制到缓冲区。如果源字符串碰巧来自用户输入，且没有专门限制其大小，则有可能会造成缓冲区溢出。</p>
 <p>再比如/strcat函数，将src字符串拼接到dest字符串后面。strcat假定用户在执行这个函数时， 已经为dest分配了足够多的内存， 可以容纳src字符串中的所有内容，而一旦这个假定不成立时，就会产生缓冲区溢出。</p>
-<p>
-        <img class="mx-auto" alt="strcat" src="/img/redis/strcat.png" />   
-    </p>
+<p><img src="/img/redis/strcat.png" alt="strcat"></p>
 <p>如果过程中，用户想对s1进行扩展</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">strcat(s1, <span style="color:#e6db74">&#34;Cluster&#34;</span>);
-</code></pre></div><p>由于没有注意到s预分配的空间大小，执行以后会导致s1的内容缓冲到s2，以至于s2的内容被意外修改成Cluster，这种错误对数据库的使用过程致命的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="n">strcat</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="s">&#34;Cluster&#34;</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>由于没有注意到s预分配的空间大小，执行以后会导致s1的内容缓冲到s2，以至于s2的内容被意外修改成Cluster，这种错误对数据库的使用过程致命的。</p>
 <p>而SDS在sdscat时会预先检查空间是否足够，不够的话会通过sdsMakeRoomFor自动为要拼接的字符串扩展空间.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">sds <span style="color:#a6e22e">sdscatlen</span>(sds s, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>t, size_t len) {
-    size_t curlen <span style="color:#f92672">=</span> sdslen(s);
-    s <span style="color:#f92672">=</span> sdsMakeRoomFor(s,len);
-    <span style="color:#66d9ef">if</span> (s <span style="color:#f92672">==</span> NULL) <span style="color:#66d9ef">return</span> NULL;
-    memcpy(s<span style="color:#f92672">+</span>curlen, t, len);
-    sdssetlen(s, curlen<span style="color:#f92672">+</span>len);
-    s[curlen<span style="color:#f92672">+</span>len] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;\0&#39;</span>;
-    <span style="color:#66d9ef">return</span> s;
-}
-</code></pre></div><p><strong>3.减少因修改字符串带来的内存重分配次数</strong>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="n">sds</span> <span class="nf">sdscatlen</span><span class="p">(</span><span class="n">sds</span> <span class="n">s</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">size_t</span> <span class="n">curlen</span> <span class="o">=</span> <span class="n">sdslen</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">sdsMakeRoomFor</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">len</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">memcpy</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="n">curlen</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+    <span class="n">sdssetlen</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">curlen</span><span class="o">+</span><span class="n">len</span><span class="p">);</span>
+    <span class="n">s</span><span class="p">[</span><span class="n">curlen</span><span class="o">+</span><span class="n">len</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>3.减少因修改字符串带来的内存重分配次数</strong>
 因为 C 字符串的长度和底层数组的长度之间存在着这种关联性， 所以每次增长或者缩短一个 C 字符串， 程序都总要对保存这个 C 字符串的数组进行一次内存重分配操作</p>
 <p>SDS对于内存操作实现了空间预分配和惰性空间释放两种优化策略。
 1.空间预分配
@@ -205,246 +303,110 @@ C 字符串中的字符必须符合某种编码（比如 ASCII）， 并且除�
 </tbody>
 </table>
 
-        </div>
+    </div>
 
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-02-17
         
-
-
-        
-
-<div class="post-archive">
-    <h2>See Also</h2>
-    <ul class="listing">
-        
-        <li><a href="/post/redis/redis_zset_score/">Redis Zset的精度问题分析及解决方案</a></li>
-        
-        <li><a href="/post/system_design/bloom_filter/">布隆过滤器(Bloom Filter)详解</a></li>
-        
-    </ul>
+    </span>
+  </p>
+  
+  
 </div>
-
-
-        <div class="post-meta meta-tags">
-            
-            <ul class="clearfix">
-                
-                <li><a href='/tags/redis'>Redis</a></li>
-                
-            </ul>
-            
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/redis/">Redis</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/golang/decorator/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Golang装饰器(Decorator)设计模式</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/system_design/bloom_filter/">
+            <span class="next-text nav-default">布隆过滤器(Bloom Filter)详解</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
         </div>
-    </article>
-    
-    
+        
 
-    
-    
-    <div class="post bg-white">
-      <script src="https://utteranc.es/client.js"
-            repo= "stormwy/blog-comments"
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
             issue-term="pathname"
             theme="github-light"
             crossorigin="anonymous"
             async>
-      </script>
-    </div>
-    
-</div>
-
-                    <footer id="footer">
-    <div>
-        &copy; 2021 <a href="https://left-pocket.github.io">Leftpocket的个人博客 By leftpocket</a>
-        
-    </div>
-    <br />
-    <div>
-        <div class="github-badge">
-            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
-        </div>
-        <div class="github-badge">
-            <a href="https://left-pocket.github.io/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">Leftpocket</span></a>
-        </div>
-    </div>
-</footer>
-
-
-    
-    <script type="text/javascript">
-        window.MathJax = {
-            tex2jax: {
-                inlineMath: [['$', '$']],
-                processEscapes: true
-                }
-            };
     </script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
 
-<a id="rocket" href="#top"></a>
-<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+      </div>
+    </main>
 
-
-
-    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
-
-
-
-
-                </div>
-
-                <div id="secondary">
-    <section class="widget">
-        <form id="search" action='//www.google.com/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
-      
-      <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://left-pocket.github.io">
-      <button type="submit" class="submit icon-search"></button>
-</form>
-    </section>
-    
-    <section class="widget">
-        <h3 class="widget-title">最近文章</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/mysql/covering_index/" title="后端面试之MySQL-什么是回表查询和覆盖索引">后端面试之MySQL-什么是回表查询和覆盖索引</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/interview/mysql/" title="后端面试之MySQL">后端面试之MySQL</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/interview/tcpip/" title="后端面试之网络编程">后端面试之网络编程</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/tcpip/socket_read_write/" title="后端面试之网络编程-socket可读可写条件">后端面试之网络编程-socket可读可写条件</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/system_design/lru/" title="LRU缓存机制，你想知道的这里都有">LRU缓存机制，你想知道的这里都有</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/hugo/hugo_github/" title="从零开始搭建个人博客（二）- 把hugo博客托管到github上">从零开始搭建个人博客（二）- 把hugo博客托管到github上</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/hugo/hugo_creation/" title="从零开始搭建个人博客（一）- 使用hugo搭建个人博客">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/hugo/hugo_0/" title="从零开始搭建个人博客（零）- 序章">从零开始搭建个人博客（零）- 序章</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/cpp/do_while/" title="do{...}while(0)的用法">do{...}while(0)的用法</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/cpp/static/" title="c&#43;&#43;中static的用法详解">c&#43;&#43;中static的用法详解</a>
-    </li>
-    
-</ul>
-    </section>
-
-    
-
-    <section class="widget">
-        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
-<ul class="widget-list">
-    
-    <li><a href="https://left-pocket.github.io/categories/c&#43;&#43;/">c&#43;&#43; (3)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/git/">git (1)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/golang/">Golang (5)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/hugo/">hugo (3)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/leetcode/">leetcode (1)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/mysql/">MySQL (4)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/others/">Others (2)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/redis/">Redis (2)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (1)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计 (5)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (1)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/">面试 (4)</a></li>
-    
-</ul>
-    </section>
-
-    <section class="widget">
-        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
-<div class="tagcloud">
-    
-    <a href="https://left-pocket.github.io/tags/c&#43;&#43;/">c&#43;&#43;</a>
-    
-    <a href="https://left-pocket.github.io/tags/git/">git</a>
-    
-    <a href="https://left-pocket.github.io/tags/golang/">Golang</a>
-    
-    <a href="https://left-pocket.github.io/tags/hugo/">hugo</a>
-    
-    <a href="https://left-pocket.github.io/tags/leetcode/">leetcode</a>
-    
-    <a href="https://left-pocket.github.io/tags/mysql/">MySQL</a>
-    
-    <a href="https://left-pocket.github.io/tags/redis/">Redis</a>
-    
-    <a href="https://left-pocket.github.io/tags/server/">Server</a>
-    
-    <a href="https://left-pocket.github.io/tags/ssr/">ssr</a>
-    
-    <a href="https://left-pocket.github.io/tags/vscode/">vscode</a>
-    
-    <a href="https://left-pocket.github.io/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a>
-    
-    <a href="https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计</a>
-    
-    <a href="https://left-pocket.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
-    
-    <a href="https://left-pocket.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
-    
-    <a href="https://left-pocket.github.io/tags/%E9%9D%A2%E8%AF%95/">面试</a>
-    
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="leftpocket12@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://left-pocket.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-    </section>
 
-    
-<section class="widget">
-    <h3 class="widget-title">友情链接</h3>
-    <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://left-pocket.github.io/about/" title="关于我" style="color:#0000FF;">关于我-微信及公众号</a>
-        </li>
-        
-        <li>
-            <a target="_blank" href="https://www.zhihu.com/people/left-pocket" title="Leftpocket的知乎" style="color:#0000FF;">Leftpocket的知乎</a>
-        </li>
-        
-    </ul>
-</section>
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
 
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
 
-    <section class="widget">
-        <h3 class="widget-title">其它</h3>
-        <ul class="widget-list">
-            <li><a href="https://left-pocket.github.io/index.xml">文章 RSS</a></li>
-        </ul>
-    </section>
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
 </div>
-            </div>
-        </div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
     </div>
-</body>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
 
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
 </html>

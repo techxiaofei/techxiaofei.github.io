@@ -1,116 +1,181 @@
-<!doctype html>
-<html lang="en-us">
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>TiDB Write Conflict问题分析 - Leftpocket的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <title>TiDB Write Conflict问题分析 | Leftpocket的个人博客</title>
-    <meta property="og:title" content="TiDB Write Conflict问题分析 - Leftpocket的个人博客">
-    <meta property="og:type" content="article">
-        
-    <meta property="article:published_time" content='2020-08-06T13:00:51&#43;08:00'>
-        
-        
-    <meta property="article:modified_time" content='2020-08-06T13:00:51&#43;08:00'>
-        
-    <meta name="Keywords" content="[TiDB]">
-    <meta name="description" content="TiDB Write Conflict问题分析">
-        
-    <meta name="author" content="leftpocket">
-    <meta property="og:url" content="https://left-pocket.github.io/post/mysql/db_tidb_write_conflict/">
-    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-    <link rel="stylesheet" href='/css/normalize.css'>
-    <link rel="stylesheet" href='/css/style.css'>
-    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    
-    <script data-ad-client="ca-pub-8922621224955535" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    
-    
-    
-    
-    
-    
-        <link rel="stylesheet" href='/css/custom.css'>
-    
+<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：https://left-pocket.github.io 背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了writ" /><meta name="keywords" content="TiDB" />
 
-    
-    <meta name="baidu-site-verification" content="code-swx03nFBNS" />
+
+<meta name="baidu-site-verification" content="code-swx03nFBNS" />
+<meta name="google-site-verification" content="sGfWBA2Wby1_gxJO3xmOtvpAOU2cCyhwXuU-2m4u75Y" />
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://left-pocket.github.io/post/mysql/db_tidb_write_conflict/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="TiDB Write Conflict问题分析" />
+<meta property="og:description" content="原文地址：https://left-pocket.github.io 背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了writ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://left-pocket.github.io/post/mysql/db_tidb_write_conflict/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-08-06T13:00:51+08:00" />
+<meta property="article:modified_time" content="2020-08-06T13:00:51+08:00" />
+
+<meta itemprop="name" content="TiDB Write Conflict问题分析">
+<meta itemprop="description" content="原文地址：https://left-pocket.github.io 背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了writ"><meta itemprop="datePublished" content="2020-08-06T13:00:51+08:00" />
+<meta itemprop="dateModified" content="2020-08-06T13:00:51+08:00" />
+<meta itemprop="wordCount" content="1391">
+<meta itemprop="keywords" content="MySQL," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="TiDB Write Conflict问题分析"/>
+<meta name="twitter:description" content="原文地址：https://left-pocket.github.io 背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了writ"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
-
-
 <body>
-    <header id="header" class="clearfix">
-    <div class="container">
-        <div class="col-group">
-            <div class="site-name ">
-                
-                    <a id="logo" href="https://left-pocket.github.io">
-                        Leftpocket的个人博客
-                    </a>
-                
-                <p class="description">码农在新加坡</p>
-            </div>
-            <div>
-                <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://left-pocket.github.io">首页</a>
-                    
-                    <a  href="https://left-pocket.github.io/archives/" title="归档">归档</a>
-                    
-                    <a  href="https://left-pocket.github.io/about/" title="关于我">关于我</a>
-                    
-                </nav>
-            </div>
-        </div>
-    </div>
-</header>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Leftpocket的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
 
-    <div id="body">
-        <div class="container">
-            <div class="col-group">
+  
 
-                <div class="col-8" id="main">
-                    
-<div class="res-cons">
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Leftpocket的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">TiDB Write Conflict问题分析</h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月6日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/mysql'>MySQL</a></span>
-            
-        </div>
-        
-        
-        <div class="post-meta">
-            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
-                    阅读</span></span>
-        </div>
-        
-        
-        <div class="post-content">
-            <p>原文地址：<a href="https://left-pocket.github.io/post/mysql/db_tidb_write_conflict/">https://left-pocket.github.io</a></p>
+    <header class="post-header">
+      <h1 class="post-title">TiDB Write Conflict问题分析</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-08-06 </span>
+        <div class="post-category">
+            <a href="/categories/mysql/"> MySQL </a>
+            </div>
+          <span class="more-meta"> 约 1391 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#背景">背景</a></li>
+        <li><a href="#tidb乐观锁">TiDB乐观锁</a></li>
+        <li><a href="#出现锁冲突的原因">出现锁冲突的原因</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>原文地址：<a href="https://left-pocket.github.io/post/mysql/db_tidb_write_conflict/">https://left-pocket.github.io</a></p>
 <h2 id="背景">背景</h2>
 <p>我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了write conflict.</p>
-<pre tabindex="0"><code>[2020/08/25 06:01:44.781 +08:00] [WARN] [session.go:623] [retrying] [conn=26799778] [schemaVersion=194] [retryCnt=0] [queryNum=0] [sql=&quot;UPDATE user_tab SET `region` = ?, `status` = ?, `update_time` = ? WHERE `from_userid` = ? AND `to_userid` = ? AND `type` = ? [arguments: (ID, 0, 1598306504, 118049824, 8572364, 1)]&quot;]
-[2020/08/25 06:01:44.782 +08:00] [WARN] [session.go:644] [&quot;transaction association&quot;] [conn=26799778] [&quot;retrying txnStartTS&quot;=418986460378563450] [&quot;original txnStartTS&quot;=418986460352348716]
-[2020/08/25 06:01:44.783 +08:00] [INFO] [2pc.go:1104] [&quot;2PC clean up done&quot;] [conn=26799778] [txnStartTS=418986460352348716]
-[2020/08/25 06:01:45.612 +08:00] [WARN] [client_batch.go:577] [&quot;send request is cancelled&quot;] [to=10.65.234.201:20160] [cause=&quot;context canceled&quot;]
-[2020/08/25 06:01:45.612 +08:00] [WARN] [session.go:425] [sql] [conn=26799680] [label=general] [error=&quot;[kv:9007]Write conflict, txnStartTS=418986459434844923, conflictStartTS=418986459434844925, conflictCommitTS=418986460457205920, key={tableID=89, handle=8646911292299313507} primary={tableID=89, handle=1729382264526793474} [try again later]&quot;] [txn=&quot;Txn{state=invalid}&quot;]
-</code></pre><p>以下就针对以上log进行分析。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="p">[</span><span class="mi">2020</span><span class="o">/</span><span class="mi">08</span><span class="o">/</span><span class="mi">25</span><span class="w"> </span><span class="mi">06</span><span class="p">:</span><span class="mi">01</span><span class="p">:</span><span class="mi">44</span><span class="p">.</span><span class="mi">781</span><span class="w"> </span><span class="o">+</span><span class="mi">08</span><span class="p">:</span><span class="mi">00</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">WARN</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">session</span><span class="p">.</span><span class="n">go</span><span class="p">:</span><span class="mi">623</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">retrying</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">conn</span><span class="o">=</span><span class="mi">26799778</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">schemaVersion</span><span class="o">=</span><span class="mi">194</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">retryCnt</span><span class="o">=</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">queryNum</span><span class="o">=</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="k">sql</span><span class="o">=</span><span class="s2">&#34;UPDATE user_tab SET `region` = ?, `status` = ?, `update_time` = ? WHERE `from_userid` = ? AND `to_userid` = ? AND `type` = ? [arguments: (ID, 0, 1598306504, 118049824, 8572364, 1)]&#34;</span><span class="p">]</span><span class="w">
+</span><span class="w"></span><span class="p">[</span><span class="mi">2020</span><span class="o">/</span><span class="mi">08</span><span class="o">/</span><span class="mi">25</span><span class="w"> </span><span class="mi">06</span><span class="p">:</span><span class="mi">01</span><span class="p">:</span><span class="mi">44</span><span class="p">.</span><span class="mi">782</span><span class="w"> </span><span class="o">+</span><span class="mi">08</span><span class="p">:</span><span class="mi">00</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">WARN</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">session</span><span class="p">.</span><span class="n">go</span><span class="p">:</span><span class="mi">644</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;transaction association&#34;</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">conn</span><span class="o">=</span><span class="mi">26799778</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;retrying txnStartTS&#34;</span><span class="o">=</span><span class="mi">418986460378563450</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;original txnStartTS&#34;</span><span class="o">=</span><span class="mi">418986460352348716</span><span class="p">]</span><span class="w">
+</span><span class="w"></span><span class="p">[</span><span class="mi">2020</span><span class="o">/</span><span class="mi">08</span><span class="o">/</span><span class="mi">25</span><span class="w"> </span><span class="mi">06</span><span class="p">:</span><span class="mi">01</span><span class="p">:</span><span class="mi">44</span><span class="p">.</span><span class="mi">783</span><span class="w"> </span><span class="o">+</span><span class="mi">08</span><span class="p">:</span><span class="mi">00</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">INFO</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="n">pc</span><span class="p">.</span><span class="n">go</span><span class="p">:</span><span class="mi">1104</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;2PC clean up done&#34;</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">conn</span><span class="o">=</span><span class="mi">26799778</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">txnStartTS</span><span class="o">=</span><span class="mi">418986460352348716</span><span class="p">]</span><span class="w">
+</span><span class="w"></span><span class="p">[</span><span class="mi">2020</span><span class="o">/</span><span class="mi">08</span><span class="o">/</span><span class="mi">25</span><span class="w"> </span><span class="mi">06</span><span class="p">:</span><span class="mi">01</span><span class="p">:</span><span class="mi">45</span><span class="p">.</span><span class="mi">612</span><span class="w"> </span><span class="o">+</span><span class="mi">08</span><span class="p">:</span><span class="mi">00</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">WARN</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">client_batch</span><span class="p">.</span><span class="n">go</span><span class="p">:</span><span class="mi">577</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;send request is cancelled&#34;</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="k">to</span><span class="o">=</span><span class="mi">10</span><span class="p">.</span><span class="mi">65</span><span class="p">.</span><span class="mi">234</span><span class="p">.</span><span class="mi">201</span><span class="p">:</span><span class="mi">20160</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">cause</span><span class="o">=</span><span class="s2">&#34;context canceled&#34;</span><span class="p">]</span><span class="w">
+</span><span class="w"></span><span class="p">[</span><span class="mi">2020</span><span class="o">/</span><span class="mi">08</span><span class="o">/</span><span class="mi">25</span><span class="w"> </span><span class="mi">06</span><span class="p">:</span><span class="mi">01</span><span class="p">:</span><span class="mi">45</span><span class="p">.</span><span class="mi">612</span><span class="w"> </span><span class="o">+</span><span class="mi">08</span><span class="p">:</span><span class="mi">00</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">WARN</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">session</span><span class="p">.</span><span class="n">go</span><span class="p">:</span><span class="mi">425</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="k">sql</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">conn</span><span class="o">=</span><span class="mi">26799680</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">label</span><span class="o">=</span><span class="n">general</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">error</span><span class="o">=</span><span class="s2">&#34;[kv:9007]Write conflict, txnStartTS=418986459434844923, conflictStartTS=418986459434844925, conflictCommitTS=418986460457205920, key={tableID=89, handle=8646911292299313507} primary={tableID=89, handle=1729382264526793474} [try again later]&#34;</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">txn</span><span class="o">=</span><span class="s2">&#34;Txn{state=invalid}&#34;</span><span class="p">]</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>以下就针对以上log进行分析。</p>
 <h2 id="tidb乐观锁">TiDB乐观锁</h2>
 <p>在 v3.0.8 版本之前，TiDB 默认采用乐观事务模型，在事务执行过程中并不会做冲突检测，而是在事务最终 COMMIT 提交时触发两阶段提交，并检测是否存在写写冲突。当出现写写冲突，并且开启了事务重试机制，则 TiDB 会在限定次数内进行重试，最终重试成功或者达到重试次数上限后，会给客户端返回结果。因此，如果 TiDB 集群中存在大量的写写冲突情况，容易导致集群的 Duration 比较高。</p>
 <h2 id="出现锁冲突的原因">出现锁冲突的原因</h2>
@@ -127,259 +192,156 @@
 <li>写写冲突发生在 prewrite 阶段，当发现有其他的事务在写当前 Key (data.commit_ts &gt;txn.start_ts)，则会发生写写冲突。</li>
 </ol>
 <p>TiDB 会根据 tidb_disable_txn_auto_retry 和 tidb_retry_limit 参数设置的情况决定是否进行重试，如果设置了不重试，或者重试次数达到上限后还是没有 prewrite 成功，则向 TiDB 返回 Write Conflict 错误。</p>
-<p>
-        <img class="mx-auto" alt="write_conflict" src="/img/db/tidb-write-conflict.png" />   
-    </p>
+<p><img src="/img/db/tidb-write-conflict.png" alt="write_conflict"></p>
 <p>txnlock 表示集群中存在写写冲突，txnLockFast 表示集群中存在读写冲突。</p>
 <p>也可以通过 TiDB 日志查看是否有 [kv:9007]Write conflict 关键字，如果搜索到对应关键字，则可以表明集群中存在写写冲突。</p>
 <p>关于日志的解释如下：</p>
-<p><!-- raw HTML omitted -->[kv:9007]Write conflict<!-- raw HTML omitted -->：表示出现了写写冲突
-<!-- raw HTML omitted -->txnStartTS=416617006551793665<!-- raw HTML omitted -->：表示当前事务的 start_ts 时间戳，可以通过 pd-ctl 工具将时间戳转换为具体时间
-<!-- raw HTML omitted -->conflictStartTS=416617018650001409<!-- raw HTML omitted -->：表示冲突事务的 start_ts 时间戳，可以通过 pd-ctl 工具将时间戳转换为具体时间
-<!-- raw HTML omitted -->conflictCommitTS=416617023093080065<!-- raw HTML omitted -->：表示冲突事务的 commit_ts 时间戳，可以通过 pd-ctl 工具将时间戳转换为具体时间
-<!-- raw HTML omitted -->key={tableID=47, indexID=1, indexValues={string, }}<!-- raw HTML omitted -->：表示当前事务中冲突的数据，tableID 表示发生冲突的表的 ID，indexID 表示是索引数据发生了冲突。如果是数据发生了冲突，会打印 handle=x 表示对应哪行数据发生了冲突，indexValues 表示发生冲突的索引数据
-<!-- raw HTML omitted -->primary={tableID=47, indexID=1, indexValues={string, }}<!-- raw HTML omitted -->：表示当前事务中的 Primary Key 信息</p>
+<p><font color=Blue>[kv:9007]Write conflict</font>：表示出现了写写冲突
+<font color=Blue>txnStartTS=416617006551793665</font>：表示当前事务的 start_ts 时间戳，可以通过 pd-ctl 工具将时间戳转换为具体时间
+<font color=Blue>conflictStartTS=416617018650001409</font>：表示冲突事务的 start_ts 时间戳，可以通过 pd-ctl 工具将时间戳转换为具体时间
+<font color=Blue>conflictCommitTS=416617023093080065</font>：表示冲突事务的 commit_ts 时间戳，可以通过 pd-ctl 工具将时间戳转换为具体时间
+<font color=Blue>key={tableID=47, indexID=1, indexValues={string, }}</font>：表示当前事务中冲突的数据，tableID 表示发生冲突的表的 ID，indexID 表示是索引数据发生了冲突。如果是数据发生了冲突，会打印 handle=x 表示对应哪行数据发生了冲突，indexValues 表示发生冲突的索引数据
+<font color=Blue>primary={tableID=47, indexID=1, indexValues={string, }}</font>：表示当前事务中的 Primary Key 信息</p>
 <p>通过 pd-ctl 将时间戳转换为可读时间：</p>
-<pre tabindex="0"><code>./pd-ctl -u https://127.0.0.1:2379 tso {TIMESTAMP}
-</code></pre><p>通过 tableID 查找具体的表名：</p>
-<pre tabindex="0"><code>curl http://{TiDBIP}:10080/db-table/{tableID}
-</code></pre><p>通过 indexID 查找具体的索引名：</p>
-<pre tabindex="0"><code>SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEXES WHERE TABLE_SCHEMA='{table_name}' AND TABLE_NAME='{table_name}' AND INDEX_ID={indexID};
-</code></pre><p>另外在 v3.0.8 及之后版本默认使用悲观事务模式，从而避免在事务提交的时候因为冲突而导致失败，无需修改应用程序。悲观事务模式下会在每个 DML 语句执行的时候，加上悲观锁，用于防止其他事务修改相同 Key，从而保证在最后提交的 prewrite 阶段不会出现写写冲突的情况。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">./pd-ctl -u https://127.0.0.1:2379 tso {TIMESTAMP}
+</code></pre></td></tr></table>
+</div>
+</div><p>通过 tableID 查找具体的表名：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">curl http://{TiDBIP}:10080/db-table/{tableID}
+</code></pre></td></tr></table>
+</div>
+</div><p>通过 indexID 查找具体的索引名：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEXES WHERE TABLE_SCHEMA=&#39;{table_name}&#39; AND TABLE_NAME=&#39;{table_name}&#39; AND INDEX_ID={indexID};
+</code></pre></td></tr></table>
+</div>
+</div><p>另外在 v3.0.8 及之后版本默认使用悲观事务模式，从而避免在事务提交的时候因为冲突而导致失败，无需修改应用程序。悲观事务模式下会在每个 DML 语句执行的时候，加上悲观锁，用于防止其他事务修改相同 Key，从而保证在最后提交的 prewrite 阶段不会出现写写冲突的情况。</p>
 <h2 id="总结">总结</h2>
 <p>TiDB的乐观锁，会导致使用普通的SQL语句更新的时候。</p>
-<pre tabindex="0"><code>UPDATE user_tab set name = `***` where userid = `a`
-</code></pre><p>TiDB中当有并发请求对同一个unique key进行update操作的时候，由于乐观锁的机制，会出现Write Conflict. 而MySQL使用的是悲观锁，不会出现Write Conflict.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">UPDATE</span><span class="w"> </span><span class="n">user_tab</span><span class="w"> </span><span class="kt">set</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">`***`</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">userid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">`</span><span class="n">a</span><span class="o">`</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>TiDB中当有并发请求对同一个unique key进行update操作的时候，由于乐观锁的机制，会出现Write Conflict. 而MySQL使用的是悲观锁，不会出现Write Conflict.</p>
 
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-08-06
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/mysql/">MySQL</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/others/ssr_centos7/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Centos7安装SSR教程</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        
+      </nav>
+    </footer>
+  </article>
         </div>
-
         
 
+  
 
-        
-
-
-        <div class="post-meta meta-tags">
-            
-            <ul class="clearfix">
-                
-                <li><a href='/tags/mysql'>MySQL</a></li>
-                
-            </ul>
-            
-        </div>
-    </article>
-    
-    
-
-    
-    
-    <div class="post bg-white">
-      <script src="https://utteranc.es/client.js"
-            repo= "stormwy/blog-comments"
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
             issue-term="pathname"
             theme="github-light"
             crossorigin="anonymous"
             async>
-      </script>
-    </div>
-    
-</div>
-
-                    <footer id="footer">
-    <div>
-        &copy; 2021 <a href="https://left-pocket.github.io">Leftpocket的个人博客 By leftpocket</a>
-        
-    </div>
-    <br />
-    <div>
-        <div class="github-badge">
-            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
-        </div>
-        <div class="github-badge">
-            <a href="https://left-pocket.github.io/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">Leftpocket</span></a>
-        </div>
-    </div>
-</footer>
-
-
-    
-    <script type="text/javascript">
-        window.MathJax = {
-            tex2jax: {
-                inlineMath: [['$', '$']],
-                processEscapes: true
-                }
-            };
     </script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
 
-<a id="rocket" href="#top"></a>
-<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+      </div>
+    </main>
 
-
-
-    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
-
-
-
-
-                </div>
-
-                <div id="secondary">
-    <section class="widget">
-        <form id="search" action='//www.google.com/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
-      
-      <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://left-pocket.github.io">
-      <button type="submit" class="submit icon-search"></button>
-</form>
-    </section>
-    
-    <section class="widget">
-        <h3 class="widget-title">最近文章</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/mysql/covering_index/" title="后端面试之MySQL-什么是回表查询和覆盖索引">后端面试之MySQL-什么是回表查询和覆盖索引</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/interview/mysql/" title="后端面试之MySQL">后端面试之MySQL</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/interview/tcpip/" title="后端面试之网络编程">后端面试之网络编程</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/tcpip/socket_read_write/" title="后端面试之网络编程-socket可读可写条件">后端面试之网络编程-socket可读可写条件</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/system_design/lru/" title="LRU缓存机制，你想知道的这里都有">LRU缓存机制，你想知道的这里都有</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/hugo/hugo_github/" title="从零开始搭建个人博客（二）- 把hugo博客托管到github上">从零开始搭建个人博客（二）- 把hugo博客托管到github上</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/hugo/hugo_creation/" title="从零开始搭建个人博客（一）- 使用hugo搭建个人博客">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/hugo/hugo_0/" title="从零开始搭建个人博客（零）- 序章">从零开始搭建个人博客（零）- 序章</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/cpp/do_while/" title="do{...}while(0)的用法">do{...}while(0)的用法</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/cpp/static/" title="c&#43;&#43;中static的用法详解">c&#43;&#43;中static的用法详解</a>
-    </li>
-    
-</ul>
-    </section>
-
-    
-
-    <section class="widget">
-        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
-<ul class="widget-list">
-    
-    <li><a href="https://left-pocket.github.io/categories/c&#43;&#43;/">c&#43;&#43; (3)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/git/">git (1)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/golang/">Golang (5)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/hugo/">hugo (3)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/leetcode/">leetcode (1)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/mysql/">MySQL (4)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/others/">Others (2)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/redis/">Redis (2)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (1)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计 (5)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (1)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/">面试 (4)</a></li>
-    
-</ul>
-    </section>
-
-    <section class="widget">
-        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
-<div class="tagcloud">
-    
-    <a href="https://left-pocket.github.io/tags/c&#43;&#43;/">c&#43;&#43;</a>
-    
-    <a href="https://left-pocket.github.io/tags/git/">git</a>
-    
-    <a href="https://left-pocket.github.io/tags/golang/">Golang</a>
-    
-    <a href="https://left-pocket.github.io/tags/hugo/">hugo</a>
-    
-    <a href="https://left-pocket.github.io/tags/leetcode/">leetcode</a>
-    
-    <a href="https://left-pocket.github.io/tags/mysql/">MySQL</a>
-    
-    <a href="https://left-pocket.github.io/tags/redis/">Redis</a>
-    
-    <a href="https://left-pocket.github.io/tags/server/">Server</a>
-    
-    <a href="https://left-pocket.github.io/tags/ssr/">ssr</a>
-    
-    <a href="https://left-pocket.github.io/tags/vscode/">vscode</a>
-    
-    <a href="https://left-pocket.github.io/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a>
-    
-    <a href="https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计</a>
-    
-    <a href="https://left-pocket.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
-    
-    <a href="https://left-pocket.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
-    
-    <a href="https://left-pocket.github.io/tags/%E9%9D%A2%E8%AF%95/">面试</a>
-    
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="leftpocket12@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://left-pocket.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-    </section>
 
-    
-<section class="widget">
-    <h3 class="widget-title">友情链接</h3>
-    <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://left-pocket.github.io/about/" title="关于我" style="color:#0000FF;">关于我-微信及公众号</a>
-        </li>
-        
-        <li>
-            <a target="_blank" href="https://www.zhihu.com/people/left-pocket" title="Leftpocket的知乎" style="color:#0000FF;">Leftpocket的知乎</a>
-        </li>
-        
-    </ul>
-</section>
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
 
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
 
-    <section class="widget">
-        <h3 class="widget-title">其它</h3>
-        <ul class="widget-list">
-            <li><a href="https://left-pocket.github.io/index.xml">文章 RSS</a></li>
-        </ul>
-    </section>
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
 </div>
-            </div>
-        </div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
     </div>
-</body>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
 
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
 </html>

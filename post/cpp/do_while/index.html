@@ -1,128 +1,199 @@
-<!doctype html>
-<html lang="en-us">
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>do{...}while(0)的用法 - Leftpocket的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <title>do{...}while(0)的用法 | Leftpocket的个人博客</title>
-    <meta property="og:title" content="do{...}while(0)的用法 - Leftpocket的个人博客">
-    <meta property="og:type" content="article">
-        
-    <meta property="article:published_time" content='2021-11-22T15:00:51&#43;08:00'>
-        
-        
-    <meta property="article:modified_time" content='2021-11-22T15:00:51&#43;08:00'>
-        
-    <meta name="Keywords" content="[c&#43;&#43; while]">
-    <meta name="description" content="do{...}while(0)的用法">
-        
-    <meta name="author" content="leftpocket">
-    <meta property="og:url" content="https://left-pocket.github.io/post/cpp/do_while/">
-    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-    <link rel="stylesheet" href='/css/normalize.css'>
-    <link rel="stylesheet" href='/css/style.css'>
-    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    
-    <script data-ad-client="ca-pub-8922621224955535" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    
-    
-    
-    
-    
-    
-        <link rel="stylesheet" href='/css/custom.css'>
-    
+<meta name="author" content="码农在新加坡" /><meta name="description" content="​​ 原文地址：https://left-pocket.github.io 零.导引 第一次见到 do{...}while(0) 是在学习 libevent 的时候，看到里面有很多类似 1 2 3 4 5 6" /><meta name="keywords" content="c&#43;&#43;, while" />
 
-    
-    <meta name="baidu-site-verification" content="code-swx03nFBNS" />
+
+<meta name="baidu-site-verification" content="code-swx03nFBNS" />
+<meta name="google-site-verification" content="sGfWBA2Wby1_gxJO3xmOtvpAOU2cCyhwXuU-2m4u75Y" />
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://left-pocket.github.io/post/cpp/do_while/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="do{...}while(0)的用法" />
+<meta property="og:description" content="​​ 原文地址：https://left-pocket.github.io 零.导引 第一次见到 do{...}while(0) 是在学习 libevent 的时候，看到里面有很多类似 1 2 3 4 5 6" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://left-pocket.github.io/post/cpp/do_while/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-11-22T15:00:51+08:00" />
+<meta property="article:modified_time" content="2021-11-22T15:00:51+08:00" />
+
+<meta itemprop="name" content="do{...}while(0)的用法">
+<meta itemprop="description" content="​​ 原文地址：https://left-pocket.github.io 零.导引 第一次见到 do{...}while(0) 是在学习 libevent 的时候，看到里面有很多类似 1 2 3 4 5 6"><meta itemprop="datePublished" content="2021-11-22T15:00:51+08:00" />
+<meta itemprop="dateModified" content="2021-11-22T15:00:51+08:00" />
+<meta itemprop="wordCount" content="1845">
+<meta itemprop="keywords" content="c&#43;&#43;," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="do{...}while(0)的用法"/>
+<meta name="twitter:description" content="​​ 原文地址：https://left-pocket.github.io 零.导引 第一次见到 do{...}while(0) 是在学习 libevent 的时候，看到里面有很多类似 1 2 3 4 5 6"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
-
-
 <body>
-    <header id="header" class="clearfix">
-    <div class="container">
-        <div class="col-group">
-            <div class="site-name ">
-                
-                    <a id="logo" href="https://left-pocket.github.io">
-                        Leftpocket的个人博客
-                    </a>
-                
-                <p class="description">码农在新加坡</p>
-            </div>
-            <div>
-                <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://left-pocket.github.io">首页</a>
-                    
-                    <a  href="https://left-pocket.github.io/archives/" title="归档">归档</a>
-                    
-                    <a  href="https://left-pocket.github.io/about/" title="关于我">关于我</a>
-                    
-                </nav>
-            </div>
-        </div>
-    </div>
-</header>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Leftpocket的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
 
-    <div id="body">
-        <div class="container">
-            <div class="col-group">
+  
 
-                <div class="col-8" id="main">
-                    
-<div class="res-cons">
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Leftpocket的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">do{...}while(0)的用法</h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年11月22日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/c&#43;&#43;'>c&#43;&#43;</a></span>
-            
-        </div>
-        
-        
-        <div class="post-meta">
-            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
-                    阅读</span></span>
-        </div>
-        
-        
-        <div class="post-content">
-            <p>​​</p>
+    <header class="post-header">
+      <h1 class="post-title">do{...}while(0)的用法</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-11-22 </span>
+        <div class="post-category">
+            <a href="/categories/c&#43;&#43;/"> c&#43;&#43; </a>
+            </div>
+          <span class="more-meta"> 约 1845 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#零导引">零.导引</a></li>
+    <li><a href="#一定义宏实现局部作用域">一.定义宏，实现局部作用域</a></li>
+    <li><a href="#二替代goto">二.替代goto</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>​​</p>
 <p>原文地址：<a href="https://left-pocket.github.io/post/cpp/do_while/">https://left-pocket.github.io</a></p>
 <h1 id="零导引">零.导引</h1>
 <p>第一次见到 <code>do{...}while(0)</code> 是在学习 <strong>libevent</strong> 的时候，看到里面有很多类似</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#define TT_URI(want) do { 						\
-</span><span style="color:#75715e">	char *ret = evhttp_uri_join(uri, url_tmp, sizeof(url_tmp));	\
-</span><span style="color:#75715e">	tt_want(ret != NULL);						\
-</span><span style="color:#75715e">	tt_want(ret == url_tmp);					\
-</span><span style="color:#75715e">	if (strcmp(ret,want) != 0)					\
-</span><span style="color:#75715e">		TT_FAIL((&#34;\&#34;%s\&#34; != \&#34;%s\&#34;&#34;,ret,want));			\
-</span><span style="color:#75715e">	} while(0)
-</span></code></pre></div><p>当时特别疑惑，<code>do{...}while()</code> 不是做循环的吗，类似 <strong>for,while</strong> 的语法，不过现实开发中，用 <strong>for</strong> 和 <strong>while</strong> 的比较多，<code>do{...}while()</code> 比较少了，算是比较不常用的语法。
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#define TT_URI(want) do { 						\
+</span><span class="cp">	char *ret = evhttp_uri_join(uri, url_tmp, sizeof(url_tmp));	\
+</span><span class="cp">	tt_want(ret != NULL);						\
+</span><span class="cp">	tt_want(ret == url_tmp);					\
+</span><span class="cp">	if (strcmp(ret,want) != 0)					\
+</span><span class="cp">		TT_FAIL((&#34;\&#34;%s\&#34; != \&#34;%s\&#34;&#34;,ret,want));			\
+</span><span class="cp">	} while(0)
+</span></code></pre></td></tr></table>
+</div>
+</div><p>当时特别疑惑，<code>do{...}while()</code> 不是做循环的吗，类似 <strong>for,while</strong> 的语法，不过现实开发中，用 <strong>for</strong> 和 <strong>while</strong> 的比较多，<code>do{...}while()</code> 比较少了，算是比较不常用的语法。
 但是在这里，这样的代码一看就不是一个循环，<code>do{...}while()</code>表面上在这里一点意义都没有，那么为什么要这么用呢？特别疑惑的google之，恍然大悟，原来 <code>do{...}while()</code> 还有此等妙用，看来自己还差得远啊。</p>
 <p>总体来说，<code>do{...}while(0)</code> 有两种用法。</p>
 <h1 id="一定义宏实现局部作用域">一.定义宏，实现局部作用域</h1>
 <p>大家做c语言题目的时候，一道必考题就是 <strong>#define</strong> 的算术运算。</p>
 <p>比如，我随手写一个最简单的 <strong>#define</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#define FUNC(x) x*3+4
-</span><span style="color:#75715e"></span>...
-<span style="color:#66d9ef">int</span> result <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> FUNC(<span style="color:#ae81ff">3</span>);
-</code></pre></div><p>result输出多少?  <strong>26？</strong>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#define FUNC(x) x*3+4
+</span><span class="cp"></span><span class="p">...</span>
+<span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">FUNC</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>result输出多少?  <strong>26？</strong>
 错！</p>
 <p>这是c语言新手一定会犯的错误，至少我上大学的时候第一次看到这，我就做错了。</p>
 <p>要知道这道题答案是多少，首先就要知道 <strong>#define</strong> 的作用。</p>
@@ -139,387 +210,416 @@
 <p>有些人可能说，这些我都知道，这跟 <strong>do{&hellip;}while(0)</strong> 有什么关系。</p>
 <p>其实，我只是为了告诉你，#define使用的时候要特别小心，尤其是#define一个很复杂的逻辑的时候。</p>
 <p>我们举个简单的#define的例子：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print</span>()
-{
-	cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;print: &#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
-}
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">print</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;print: &#34;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">send</span>()
-{
-	cout <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;send: &#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
-}
+<span class="kt">void</span> <span class="nf">send</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">cout</span> <span class="o">&lt;&lt;</span><span class="s">&#34;send: &#34;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span style="color:#75715e">#define LOG print();send();
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+<span class="cp">#define LOG print();send();
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
 	
-	<span style="color:#66d9ef">if</span> (false)
-		LOG
+	<span class="k">if</span> <span class="p">(</span><span class="nb">false</span><span class="p">)</span>
+		<span class="n">LOG</span>
 
-	cout <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;hello world&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
+	<span class="n">cout</span> <span class="o">&lt;&lt;</span><span class="s">&#34;hello world&#34;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
 
-	system(<span style="color:#e6db74">&#34;pause&#34;</span>);
-	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><p>这个代码输出什么?
+	<span class="n">system</span><span class="p">(</span><span class="s">&#34;pause&#34;</span><span class="p">);</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这个代码输出什么?
 理论上，<code>if(false)</code> 里面的代码不会被执行，也就是LOG不会被执行，所以只应该打印出 <code>hello world</code>.</p>
 <p>但是事实上：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">send:
-hello world
-</code></pre></div><p>纳闷？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="nl">send</span><span class="p">:</span>
+<span class="n">hello</span> <span class="n">world</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>纳闷？</p>
 <p>注意我上面说的一句话：</p>
 <p>也就是 <strong>#define</strong> 是在预处理的时候进行直接替换！(这句话是这一节的重点)</p>
 <p>也就是说，上面的 <strong>if(false)&hellip;</strong> 在这里是：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">	<span style="color:#66d9ef">if</span> (false)
-		print();
-	send();
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++">	<span class="k">if</span> <span class="p">(</span><span class="nb">false</span><span class="p">)</span>
+		<span class="n">print</span><span class="p">();</span>
+	<span class="n">send</span><span class="p">();</span>
 
-	cout <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;hello world&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
-</code></pre></div><p>懂了吧。</p>
+	<span class="n">cout</span> <span class="o">&lt;&lt;</span><span class="s">&#34;hello world&#34;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>懂了吧。</p>
 <p>怎么解决了，有些人马上想到，用 <strong>{&hellip;}</strong> 把 <strong>#define</strong> 的值括住不就可以了。的确，在这里是可以的。</p>
 <p>我们在写代码的时候都习惯在语句右面加上分号，如果在宏中使用{},我们通常会这么写：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#define LOG {print();send();};
-</span></code></pre></div><p>当我们的if后面有一个else呢？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#define LOG {print();send();};
+</span></code></pre></td></tr></table>
+</div>
+</div><p>当我们的if后面有一个else呢？</p>
 <p>就变成了：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">	<span style="color:#66d9ef">if</span> (false)
-	{
-		print();
-		send();
-	};
-	<span style="color:#66d9ef">else</span>
-	{
-		cout <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;hello&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
-	}
-</code></pre></div><p>这样就会因为if语句后面多加了个 <strong>&quot;;&quot;</strong> 而编译不通过。不要说你说，那我不加 <strong>&quot;;&quot;</strong> 那要是你开发一个大型项目的时候你自己也不知道你自己要不要加 **&quot;;&quot;**了，你就会被自己给绕晕了，所以统一的规范很重要。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++">	<span class="k">if</span> <span class="p">(</span><span class="nb">false</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">print</span><span class="p">();</span>
+		<span class="n">send</span><span class="p">();</span>
+	<span class="p">};</span>
+	<span class="k">else</span>
+	<span class="p">{</span>
+		<span class="n">cout</span> <span class="o">&lt;&lt;</span><span class="s">&#34;hello&#34;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+	<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这样就会因为if语句后面多加了个 <strong>&quot;;&quot;</strong> 而编译不通过。不要说你说，那我不加 <strong>&quot;;&quot;</strong> 那要是你开发一个大型项目的时候你自己也不知道你自己要不要加 **&quot;;&quot;**了，你就会被自己给绕晕了，所以统一的规范很重要。</p>
 <p><strong>那么来我们的最终版本</strong> <code>do{...}while(0);</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#define LOG do{print();send();}while (0);
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
-	<span style="color:#66d9ef">if</span> (false)
-		LOG
-	<span style="color:#66d9ef">else</span>
-	{
-		cout <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;hello&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
-	}
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#define LOG do{print();send();}while (0);
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nb">false</span><span class="p">)</span>
+		<span class="n">LOG</span>
+	<span class="k">else</span>
+	<span class="p">{</span>
+		<span class="n">cout</span> <span class="o">&lt;&lt;</span><span class="s">&#34;hello&#34;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+	<span class="p">}</span>
 
-	cout <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;hello world&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
+	<span class="n">cout</span> <span class="o">&lt;&lt;</span><span class="s">&#34;hello world&#34;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
 
-	system(<span style="color:#e6db74">&#34;pause&#34;</span>);
-	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><p>就相当于：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">	<span style="color:#66d9ef">if</span> (false)
-		<span style="color:#66d9ef">do</span>{
-			print();
-			send();
-		}<span style="color:#66d9ef">while</span> (<span style="color:#ae81ff">0</span>);
-	<span style="color:#66d9ef">else</span>
-	{
-		cout <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;hello&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
-	}
+	<span class="n">system</span><span class="p">(</span><span class="s">&#34;pause&#34;</span><span class="p">);</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>就相当于：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++">	<span class="k">if</span> <span class="p">(</span><span class="nb">false</span><span class="p">)</span>
+		<span class="k">do</span><span class="p">{</span>
+			<span class="n">print</span><span class="p">();</span>
+			<span class="n">send</span><span class="p">();</span>
+		<span class="p">}</span><span class="k">while</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+	<span class="k">else</span>
+	<span class="p">{</span>
+		<span class="n">cout</span> <span class="o">&lt;&lt;</span><span class="s">&#34;hello&#34;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+	<span class="p">}</span>
 
-	cout <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;hello world&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
-</code></pre></div><p>用 <code>do{...}while(0);</code> 包裹住要操作的 <strong>#define</strong>,无论你外面怎么操作，都不会影响 <strong>#define</strong> 的操作。妙哉妙哉啊。</p>
+	<span class="n">cout</span> <span class="o">&lt;&lt;</span><span class="s">&#34;hello world&#34;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>用 <code>do{...}while(0);</code> 包裹住要操作的 <strong>#define</strong>,无论你外面怎么操作，都不会影响 <strong>#define</strong> 的操作。妙哉妙哉啊。</p>
 <h1 id="二替代goto">二.替代goto</h1>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dosomething</span>()
-{
-	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">int</span> <span class="nf">dosomething</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">clear</span>()
-{
+<span class="kt">int</span> <span class="nf">clear</span><span class="p">()</span>
+<span class="p">{</span>
 
-}
+<span class="p">}</span>
 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">foo</span>()
-{
-	<span style="color:#66d9ef">int</span> error <span style="color:#f92672">=</span> dosomething();
+<span class="kt">int</span> <span class="nf">foo</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">error</span> <span class="o">=</span> <span class="n">dosomething</span><span class="p">();</span>
 
-	<span style="color:#66d9ef">if</span>(error <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
-	{
-		<span style="color:#66d9ef">goto</span> END;
-	}
+	<span class="k">if</span><span class="p">(</span><span class="n">error</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">goto</span> <span class="n">END</span><span class="p">;</span>
+	<span class="p">}</span>
 
-	<span style="color:#66d9ef">if</span>(error <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
-	{
-		<span style="color:#66d9ef">goto</span> END;
-	}
+	<span class="k">if</span><span class="p">(</span><span class="n">error</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">goto</span> <span class="n">END</span><span class="p">;</span>
+	<span class="p">}</span>
 
-END:
-	clear();
-	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><p>当然这只是一个简单的例子，有些人说，我可以不用 <strong>goto</strong>，在每一个 <strong>goto</strong> 调用的地方直接，那么加一个判断，你就要加一条 <strong>clear()</strong>，万一你漏了呢？而且正常情况下, <strong>foo</strong> 里面的 <strong>if</strong> 有很多个，你要写很多 <strong>goto</strong>, <strong>END</strong> 里面的逻辑也更复杂。这样就更要小心。</p>
+<span class="nl">END</span><span class="p">:</span>
+	<span class="n">clear</span><span class="p">();</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>当然这只是一个简单的例子，有些人说，我可以不用 <strong>goto</strong>，在每一个 <strong>goto</strong> 调用的地方直接，那么加一个判断，你就要加一条 <strong>clear()</strong>，万一你漏了呢？而且正常情况下, <strong>foo</strong> 里面的 <strong>if</strong> 有很多个，你要写很多 <strong>goto</strong>, <strong>END</strong> 里面的逻辑也更复杂。这样就更要小心。</p>
 <p>由于 <strong>goto</strong> 不符合软件工程的结构化，而且有可能使得代码难懂，所以很多人都不倡导使用，那这个时候就可以用<code>do{}while(0)</code>来进行统一的管理：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">foo</span>()
-{
-	<span style="color:#66d9ef">do</span> 
-	{
-		<span style="color:#66d9ef">int</span> error <span style="color:#f92672">=</span> dosomething();
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">int</span> <span class="nf">foo</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="k">do</span> 
+	<span class="p">{</span>
+		<span class="kt">int</span> <span class="n">error</span> <span class="o">=</span> <span class="n">dosomething</span><span class="p">();</span>
 
-		<span style="color:#66d9ef">if</span>(error <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
-		{
-			<span style="color:#66d9ef">break</span>;
-		}
+		<span class="k">if</span><span class="p">(</span><span class="n">error</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="k">break</span><span class="p">;</span>
+		<span class="p">}</span>
 
-		<span style="color:#66d9ef">if</span>(error <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
-		{
-			<span style="color:#66d9ef">break</span>;
-		}
-	} <span style="color:#66d9ef">while</span> (<span style="color:#ae81ff">0</span>);
+		<span class="k">if</span><span class="p">(</span><span class="n">error</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="k">break</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 	
-	clear();
-	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><p>是不是看起来好看多了，而且还避免了由于错误导致的严重bug（比如你在clear里面是清理内存的操作，你忘记了写goto，而走不到END里面）。</p>
+	<span class="n">clear</span><span class="p">();</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>是不是看起来好看多了，而且还避免了由于错误导致的严重bug（比如你在clear里面是清理内存的操作，你忘记了写goto，而走不到END里面）。</p>
 <p>在<code>do{...}while(0)</code>里面，在任何地方都可以break跳出，然后继续下面的执行逻辑。即使你不写break，也会在执行完一遍do之后，while(0)不满足，自己跳出去。</p>
 <p>&lt;全文完&gt;</p>
 <p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
-
-        <img class="mx-auto" alt="pic" src="/img/personal/qrcode_2.png" />   
-    
+<img src="/img/personal/qrcode_2.png" alt="pic">
 ​</p>
 
-        </div>
+    </div>
 
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-11-22
         
-
-
-        
-
-<div class="post-archive">
-    <h2>See Also</h2>
-    <ul class="listing">
-        
-        <li><a href="/post/cpp/static/">c&#43;&#43;中static的用法详解</a></li>
-        
-        <li><a href="/post/cpp/secondary_pointer/">二级指针的作用详解</a></li>
-        
-    </ul>
+    </span>
+  </p>
+  
+  
 </div>
-
-
-        <div class="post-meta meta-tags">
-            
-            <ul class="clearfix">
-                
-                <li><a href='/tags/c&#43;&#43;'>c&#43;&#43;</a></li>
-                
-            </ul>
-            
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/c&#43;&#43;/">c&#43;&#43;</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/hugo/hugo_0/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">从零开始搭建个人博客（零）- 序章</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/cpp/static/">
+            <span class="next-text nav-default">c&#43;&#43;中static的用法详解</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
         </div>
-    </article>
-    
-    
+        
 
-    
-    
-    <div class="post bg-white">
-      <script src="https://utteranc.es/client.js"
-            repo= "stormwy/blog-comments"
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
             issue-term="pathname"
             theme="github-light"
             crossorigin="anonymous"
             async>
-      </script>
-    </div>
-    
-</div>
-
-                    <footer id="footer">
-    <div>
-        &copy; 2021 <a href="https://left-pocket.github.io">Leftpocket的个人博客 By leftpocket</a>
-        
-    </div>
-    <br />
-    <div>
-        <div class="github-badge">
-            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
-        </div>
-        <div class="github-badge">
-            <a href="https://left-pocket.github.io/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">Leftpocket</span></a>
-        </div>
-    </div>
-</footer>
-
-
-    
-    <script type="text/javascript">
-        window.MathJax = {
-            tex2jax: {
-                inlineMath: [['$', '$']],
-                processEscapes: true
-                }
-            };
     </script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
 
-<a id="rocket" href="#top"></a>
-<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+      </div>
+    </main>
 
-
-
-    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
-
-
-
-
-                </div>
-
-                <div id="secondary">
-    <section class="widget">
-        <form id="search" action='//www.google.com/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
-      
-      <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://left-pocket.github.io">
-      <button type="submit" class="submit icon-search"></button>
-</form>
-    </section>
-    
-    <section class="widget">
-        <h3 class="widget-title">最近文章</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/mysql/covering_index/" title="后端面试之MySQL-什么是回表查询和覆盖索引">后端面试之MySQL-什么是回表查询和覆盖索引</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/interview/mysql/" title="后端面试之MySQL">后端面试之MySQL</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/interview/tcpip/" title="后端面试之网络编程">后端面试之网络编程</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/tcpip/socket_read_write/" title="后端面试之网络编程-socket可读可写条件">后端面试之网络编程-socket可读可写条件</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/system_design/lru/" title="LRU缓存机制，你想知道的这里都有">LRU缓存机制，你想知道的这里都有</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/hugo/hugo_github/" title="从零开始搭建个人博客（二）- 把hugo博客托管到github上">从零开始搭建个人博客（二）- 把hugo博客托管到github上</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/hugo/hugo_creation/" title="从零开始搭建个人博客（一）- 使用hugo搭建个人博客">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/hugo/hugo_0/" title="从零开始搭建个人博客（零）- 序章">从零开始搭建个人博客（零）- 序章</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/cpp/do_while/" title="do{...}while(0)的用法">do{...}while(0)的用法</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/cpp/static/" title="c&#43;&#43;中static的用法详解">c&#43;&#43;中static的用法详解</a>
-    </li>
-    
-</ul>
-    </section>
-
-    
-
-    <section class="widget">
-        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
-<ul class="widget-list">
-    
-    <li><a href="https://left-pocket.github.io/categories/c&#43;&#43;/">c&#43;&#43; (3)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/git/">git (1)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/golang/">Golang (5)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/hugo/">hugo (3)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/leetcode/">leetcode (1)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/mysql/">MySQL (4)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/others/">Others (2)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/redis/">Redis (2)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (1)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计 (5)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (1)</a></li>
-    
-    <li><a href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/">面试 (4)</a></li>
-    
-</ul>
-    </section>
-
-    <section class="widget">
-        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
-<div class="tagcloud">
-    
-    <a href="https://left-pocket.github.io/tags/c&#43;&#43;/">c&#43;&#43;</a>
-    
-    <a href="https://left-pocket.github.io/tags/git/">git</a>
-    
-    <a href="https://left-pocket.github.io/tags/golang/">Golang</a>
-    
-    <a href="https://left-pocket.github.io/tags/hugo/">hugo</a>
-    
-    <a href="https://left-pocket.github.io/tags/leetcode/">leetcode</a>
-    
-    <a href="https://left-pocket.github.io/tags/mysql/">MySQL</a>
-    
-    <a href="https://left-pocket.github.io/tags/redis/">Redis</a>
-    
-    <a href="https://left-pocket.github.io/tags/server/">Server</a>
-    
-    <a href="https://left-pocket.github.io/tags/ssr/">ssr</a>
-    
-    <a href="https://left-pocket.github.io/tags/vscode/">vscode</a>
-    
-    <a href="https://left-pocket.github.io/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a>
-    
-    <a href="https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计</a>
-    
-    <a href="https://left-pocket.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
-    
-    <a href="https://left-pocket.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
-    
-    <a href="https://left-pocket.github.io/tags/%E9%9D%A2%E8%AF%95/">面试</a>
-    
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="leftpocket12@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://left-pocket.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-    </section>
 
-    
-<section class="widget">
-    <h3 class="widget-title">友情链接</h3>
-    <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://left-pocket.github.io/about/" title="关于我" style="color:#0000FF;">关于我-微信及公众号</a>
-        </li>
-        
-        <li>
-            <a target="_blank" href="https://www.zhihu.com/people/left-pocket" title="Leftpocket的知乎" style="color:#0000FF;">Leftpocket的知乎</a>
-        </li>
-        
-    </ul>
-</section>
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
 
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
 
-    <section class="widget">
-        <h3 class="widget-title">其它</h3>
-        <ul class="widget-list">
-            <li><a href="https://left-pocket.github.io/index.xml">文章 RSS</a></li>
-        </ul>
-    </section>
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
 </div>
-            </div>
-        </div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
     </div>
-</body>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
 
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
 </html>

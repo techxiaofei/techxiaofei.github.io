@@ -5,7 +5,7 @@
     <link>https://left-pocket.github.io/tags/golang/</link>
     <description>Recent content in Golang on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>zh-cn</language>
     <lastBuildDate>Sun, 18 Apr 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>goroutine的实现原理</title>
@@ -22,7 +22,7 @@
       <pubDate>Sat, 20 Mar 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/golang/append/</guid>
-      <description>原文地址：https://left-pocket.github.io 背景 最近开发的时候写了下面这段类似的代码。 func TestAppend() (result []int) { var wg sync.WaitGroup for i := 0; i &amp;lt; 100;</description>
+      <description>原文地址：https://left-pocket.github.io 背景 最近开发的时候写了下面这段类似的代码。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15</description>
     </item>
     
     <item>

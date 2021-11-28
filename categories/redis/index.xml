@@ -5,7 +5,7 @@
     <link>https://left-pocket.github.io/categories/redis/</link>
     <description>Recent content in Redis on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>zh-cn</language>
     <lastBuildDate>Wed, 17 Feb 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/redis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Redis SDS简单动态字符串</title>
