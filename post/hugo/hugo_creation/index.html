@@ -9,8 +9,8 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>使用hugo搭建个人博客 | Leftpocket的个人博客</title>
-    <meta property="og:title" content="使用hugo搭建个人博客 - Leftpocket的个人博客">
+    <title>从零开始搭建个人博客（一）- 使用hugo搭建个人博客 | Leftpocket的个人博客</title>
+    <meta property="og:title" content="从零开始搭建个人博客（一）- 使用hugo搭建个人博客 - Leftpocket的个人博客">
     <meta property="og:type" content="article">
         
     <meta property="article:published_time" content='2020-08-06T13:00:51&#43;08:00'>
@@ -19,7 +19,7 @@
     <meta property="article:modified_time" content='2020-08-06T13:00:51&#43;08:00'>
         
     <meta name="Keywords" content="[hugo]">
-    <meta name="description" content="使用hugo搭建个人博客">
+    <meta name="description" content="从零开始搭建个人博客（一）- 使用hugo搭建个人博客">
         
     <meta name="author" content="leftpocket">
     <meta property="og:url" content="https://left-pocket.github.io/post/hugo/hugo_creation/">
@@ -81,7 +81,7 @@
     
     <article class="post">
         <header>
-            <h1 class="post-title">使用hugo搭建个人博客</h1>
+            <h1 class="post-title">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</h1>
         </header>
         <date class="post-meta meta-date">
             2020年8月6日
@@ -103,98 +103,277 @@
         
         <div class="post-content">
             <p>原文地址：<a href="https://left-pocket.github.io/post/hugo/hugo_creation/">https://left-pocket.github.io</a></p>
-<p>最近使用hugo搭建博客，准备自己记录一下学习过程。
-就先记录一下搭建hugo博客的流程。
-本篇记录一下怎么在本机电脑成功运行hugo生成静态博客。
-下篇将记录怎么把hugo博客托管到github Pages上面。</p>
+<h1 id="背景">背景</h1>
+<p>使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。<br>
+这里分享一个系列教程：<strong>从零开始搭建个人博客</strong>，把我的经验分享在这里。<br>
+系列地址：<a href="https://left-pocket.github.io/post/hugo/hugo_0/">https://left-pocket.github.io</a></p>
+<h1 id="从零开始搭建个人博客一--使用hugo搭建个人博客">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</h1>
+<h2 id="介绍">介绍</h2>
+<p>很多人都想搭建个人博客，不知道怎么做。实际上现在市场上有很多静态博客生成器。这个生成器会帮你生成一个静态博客的内容，而你只需要关注你的博客的每一篇内容就可以。<br>
+比较常用的个人博客生成器有：</p>
+<ul>
+<li>Jekyll</li>
+<li>Hugo</li>
+<li>Hexo</li>
+</ul>
+<p>我这里悬着Hugo来搭建我的个人博客，因为它简单，快速，开源，使用Go语言，社区活跃等优点。</p>
 <h2 id="hugo">hugo</h2>
 <p>hugo 是由Go语言实现的静态网站生成器。简单，易用，高效，易扩展。</p>
 <h2 id="安装">安装</h2>
 <p>我这边介绍在macOS上的安装教程。其他环境（Windows/linux）类似。</p>
 <pre tabindex="0"><code>&gt;&gt;&gt; brew install hugo
 &gt;&gt;&gt; hugo version
-Hugo Static Site Generator v0.74.3/extended darwin/amd64
+hugo v0.89.4+extended darwin/arm64 BuildDate=unknown
 </code></pre><h2 id="创建站点">创建站点</h2>
-<p>创建一个站点 <strong>iwtbabc</strong>， 并进入到站点根目录。</p>
-<pre tabindex="0"><code>&gt;&gt;&gt; hugo new site iwtbabc
-&gt;&gt;&gt; cd iwtbabc
+<p>创建一个站点 <strong>left-pocket-test</strong>， 并进入到站点根目录。
+这个站点命名没那么重要，可以随意取名。</p>
+<pre tabindex="0"><code>&gt;&gt;&gt; hugo new site left-pocket-test
+&gt;&gt;&gt; cd left-pocket-test
 &gt;&gt;&gt; ls
 archetypes  content     layouts     resources   themes
 config.toml data        public      static
 </code></pre><p><strong>config.toml</strong> 是配置文件，在里面可以定义博客地址，构建配置，标题，导航栏等等。
 <strong>themes</strong>是主题目录，可以下载喜欢的主题，然后配置在<strong>config.toml</strong>里面。
-<strong>content</strong>是博客文章的目录。</p>
-<p>推荐一款主题，可以在根目录下载并配置。</p>
-<pre tabindex="0"><code>git clone https://left-pocket.github.io/ themes/leftpocket
-</code></pre><p><strong>注</strong>：如果是从其他地方copy过来的站点，有可能遇到:</p>
+<strong>content</strong>是博客文章的目录。
+<strong>static</strong>是博客的静态资源，比如图片
+<strong>public</strong>是编译后的目标文件的目录。</p>
+<p>注：当前目录是你的<strong>源文件</strong>，也就是包括一堆模版，博客源文件（markdown），配置文件，图片的一个源文件的集合。
+最终展示在网页的是<strong>目标文件</strong>，也就根据你的资源和配置，最终生成的一个个包括css，js的html文件集合。</p>
+<h2 id="主题">主题</h2>
+<p>在最终我们的博客可以运行之前，我们需要配置一个主题。</p>
+<p>推荐一款主题，可以在根目录下载并配置。<br>
+可以去官方主题网站：<a href="https://themes.gohugo.io/">https://themes.gohugo.io/</a><br>
+挑选你喜欢的主题。</p>
+<p>我们选择一款比较活跃的主题：<a href="https://github.com/olOwOlo/hugo-theme-even">Even</a></p>
+<p>安装主题：</p>
+<pre tabindex="0"><code>git clone https://github.com/olOwOlo/hugo-theme-even themes/even
+</code></pre><p>这个时候even这个主题就被下载到<strong>themes</strong>目录下。</p>
+<p><strong>注</strong>：如果是从其他地方copy过来的站点，有可能遇到:</p>
 <pre tabindex="0"><code>WARN 2021/02/03 10:56:17 found no layout file for &quot;HTML&quot; for kind &quot;home&quot;: You should create a template file which matches Hugo Layouts Lookup Rules for this combination.
 </code></pre><p>这个时候需要重新<strong>git clone</strong>一下主题。</p>
-<h2 id="配置">配置</h2>
-<p>推荐一款个人使用的配置</p>
-<pre tabindex="0"><code>baseURL = &quot;http://iwtbabc.github.io/&quot;
-languageCode = &quot;en-us&quot;
-title = &quot;I want to be a better coder(iwtbabc)&quot;
-theme = &quot;leftpocket&quot;
-hasCJKLanguage = true
+<h3 id="配置">配置</h3>
+<p>下载好主题后，主题的<strong>exampleSite</strong>目录一般会有一个<strong>config.toml</strong>配置文件。复制到你的根目录下的<strong>config.tmol</strong>文件，然后根据注释做一些基本的修改。</p>
+<p>这是我复制下来的配置做的一些简单的修改：</p>
+<pre tabindex="0"><code>baseURL = &quot;http://localhost:1313/&quot;
+languageCode = &quot;en&quot;
+defaultContentLanguage = &quot;en&quot;                             # en / zh-cn / ... (This field determines which i18n file to use)
+title = &quot;Leftpocket的个人博客&quot;
+preserveTaxonomyNames = true
 enableRobotsTXT = true
-PaginatePath = &quot;page&quot;
+enableEmoji = true
+theme = &quot;even&quot;
+enableGitInfo = false # use git commit log to generate lastmod record # 可根据 Git 中的提交生成最近更新记录。
 
-[author]
-    name = &quot;leftpocket&quot;
-    homepage = &quot;http://iwtbabc.github.io/&quot;
+# Syntax highlighting by Chroma. NOTE: Don't enable `highlightInClient` and `chroma` at the same time!
+pygmentsOptions = &quot;linenos=table&quot;
+pygmentsCodefences = true
+pygmentsUseClasses = true
+pygmentsCodefencesGuessSyntax = true
+
+hasCJKLanguage = true     # has chinese/japanese/korean ? # 自动检测是否包含 中文\日文\韩文
+paginate = 5                                              # 首页每页显示的文章数
+disqusShortname = &quot;&quot;      # disqus_shortname
+googleAnalytics = &quot;&quot;      # UA-XXXXXXXX-X
+copyright = &quot;&quot;            # default: author.name ↓        # 默认为下面配置的author.name ↓
+
+[author]                  # essential                     # 必需
+  name = &quot;Leftpocket&quot;
+
+[sitemap]                 # essential                     # 必需
+  changefreq = &quot;weekly&quot;
+  priority = 0.5
+  filename = &quot;sitemap.xml&quot;
+
+[[menu.main]]             # config your menu              # 配置目录
+  name = &quot;Home&quot;
+  weight = 10
+  identifier = &quot;home&quot;
+  url = &quot;/&quot;
+[[menu.main]]
+  name = &quot;Archives&quot;
+  weight = 20
+  identifier = &quot;archives&quot;
+  url = &quot;/post/&quot;
+[[menu.main]]
+  name = &quot;Tags&quot;
+  weight = 30
+  identifier = &quot;tags&quot;
+  url = &quot;/tags/&quot;
+[[menu.main]]
+  name = &quot;Categories&quot;
+  weight = 40
+  identifier = &quot;categories&quot;
+  url = &quot;/categories/&quot;
 
 [params]
-    subtitle = &quot;I want to be a better coder&quot;
-    description = &quot;iwtbabc&quot;
-    keywords = &quot;blog&quot;
+  version = &quot;4.x&quot;           # Used to give a friendly message when you have an incompatible update
+  debug = false             # If true, load `eruda.min.js`. See https://github.com/liriliri/eruda
 
-    customCSS = [&quot;custom.css&quot;]
-    #customJS = [&quot;app.extra.js&quot;]
+  since = &quot;2017&quot;            # Site creation time          # 站点建立时间
+  # use public git repo url to link lastmod git commit, enableGitInfo should be true.
+  # 指定 git 仓库地址，可以生成指向最近更新的 git commit 的链接，需要将 enableGitInfo 设置成 true.
+  gitRepo = &quot;&quot;
 
-    search_provider = &quot;google&quot;
+  # site info (optional)                                  # 站点信息（可选，不需要的可以直接注释掉）
+  logoTitle = &quot;Leftpocket的个人博客&quot;        # default: the title value    # 默认值: 上面设置的title值
+  keywords = [&quot;Hugo&quot;, &quot;theme&quot;,&quot;even&quot;]
+  description = &quot;Hugo theme even example site.&quot;
 
-[params.utteranc]
-    enable = true
-    repo = &quot;stormwy/blog-comments&quot;
-    issueTerm = &quot;pathname&quot;
-    theme = &quot;github-light&quot;
+  # paginate of archives, tags and categories             # 归档、标签、分类每页显示的文章数目，建议修改为一个较大的值
+  archivePaginate = 50
 
-[[params.links]]
+  # show 'xx Posts In Total' in archive page ?            # 是否在归档页显示文章的总数
+  showArchiveCount = false
 
+  # The date format to use; for a list of valid formats, see https://gohugo.io/functions/format/
+  dateFormatToUse = &quot;2006-01-02&quot;
 
+  # show word count and read time ?                       # 是否显示字数统计与阅读时间
+  moreMeta = false
 
-[[menu.main]]
-    identifier = &quot;archives&quot;
-    name = &quot;归档&quot;
-    url = &quot;/archives/&quot;
-    weight = 2
+  # Syntax highlighting by highlight.js
+  highlightInClient = false
 
-[[menu.main]]
-    identifier = &quot;about&quot;
-    name = &quot;关于&quot;
-    url = &quot;/about/&quot;
-    weight = 3
-</code></pre><p><!-- raw HTML omitted --><strong>Note:</strong><!-- raw HTML omitted --></p>
-<p><strong>[params.utteranc]</strong> 是用来支持评论系统的。<strong>utterances</strong> 本来是一款基于 <strong>GitHub issues</strong> 的评论工具，类似的评论工具还有很多，有兴趣的可以研究下。
-这个评论系统是结合下一篇文章 <strong>把hugo博客托管到github上</strong> 一起使用的。</p>
-<h2 id="发布第一篇文章">发布第一篇文章</h2>
+  # 一些全局开关，你也可以在每一篇内容的 front matter 中针对单篇内容关闭或开启某些功能，在 archetypes/default.md 查看更多信息。
+  # Some global options, you can also close or open something in front matter for a single post, see more information from `archetypes/default.md`.
+  toc = true                                                                            # 是否开启目录
+  autoCollapseToc = false   # Auto expand and collapse toc                              # 目录自动展开/折叠
+  fancybox = true           # see https://github.com/fancyapps/fancybox                 # 是否启用fancybox（图片可点击）
+
+  # mathjax
+  mathjax = false           # see https://www.mathjax.org/                              # 是否使用mathjax（数学公式）
+  mathjaxEnableSingleDollar = false                                                     # 是否使用 $...$ 即可進行inline latex渲染
+  mathjaxEnableAutoNumber = false                                                       # 是否使用公式自动编号
+  mathjaxUseLocalFiles = false  # You should install mathjax in `your-site/static/lib/mathjax`
+
+  postMetaInFooter = true   # contain author, lastMod, markdown link, license           # 包含作者，上次修改时间，markdown链接，许可信息
+  linkToMarkDown = false    # Only effective when hugo will output .md files.           # 链接到markdown原始文件（仅当允许hugo生成markdown文件时有效）
+  contentCopyright = ''     # e.g. '&lt;a rel=&quot;license noopener&quot; href=&quot;https://creativecommons.org/licenses/by-nc-nd/4.0/&quot; target=&quot;_blank&quot;&gt;CC BY-NC-ND 4.0&lt;/a&gt;'
+
+  changyanAppid = &quot;&quot;        # Changyan app id             # 畅言
+  changyanAppkey = &quot;&quot;       # Changyan app key
+
+  livereUID = &quot;&quot;            # LiveRe UID                  # 来必力
+
+  baiduPush = false        # baidu push                  # 百度
+  baiduAnalytics = &quot;&quot;      # Baidu Analytics
+  baiduVerification = &quot;&quot;   # Baidu Verification
+  googleVerification = &quot;&quot;  # Google Verification         # 谷歌
+
+  # Link custom CSS and JS assets
+  #   (relative to /static/css and /static/js respectively)
+  customCSS = []
+  customJS = []
+
+  uglyURLs = false          # please keep same with uglyurls setting
+
+  # Show language selector for multilingual site.
+  showLanguageSelector = false
+
+  # Display a message at the beginning of an article to warn the readers that it's content may be outdated.
+  # 在文章开头显示提示信息，提醒读者文章内容可能过时。
+  [params.outdatedInfoWarning]
+    enable = false
+    hint = 30               # Display hint if the last modified time is more than these days ago.    # 如果文章最后更新于这天数之前，显示提醒
+    warn = 180              # Display warning if the last modified time is more than these days ago.    # 如果文章最后更新于这天数之前，显示警告
+
+  [params.gitment]          # Gitment is a comment system based on GitHub issues. see https://github.com/imsun/gitment
+    owner = &quot;&quot;              # Your GitHub ID
+    repo = &quot;&quot;               # The repo to store comments
+    clientId = &quot;&quot;           # Your client ID
+    clientSecret = &quot;&quot;       # Your client secret
+
+  [params.utterances]       # https://utteranc.es/
+    owner = &quot;&quot;              # Your GitHub ID
+    repo = &quot;&quot;               # The repo to store comments
+
+  [params.gitalk]           # Gitalk is a comment system based on GitHub issues. see https://github.com/gitalk/gitalk
+    owner = &quot;&quot;              # Your GitHub ID
+    repo = &quot;&quot;               # The repo to store comments
+    clientId = &quot;&quot;           # Your client ID
+    clientSecret = &quot;&quot;       # Your client secret
+
+  # Valine.
+  # You can get your appid and appkey from https://leancloud.cn
+  # more info please open https://valine.js.org
+  [params.valine]
+    enable = false
+    appId = '你的appId'
+    appKey = '你的appKey'
+    notify = false  # mail notifier , https://github.com/xCss/Valine/wiki
+    verify = false # Verification code
+    avatar = 'mm'
+    placeholder = '说点什么吧...'
+    visitor = false
+
+  [params.flowchartDiagrams]# see https://blog.olowolo.com/example-site/post/js-flowchart-diagrams/
+    enable = false
+    options = &quot;&quot;
+
+  [params.sequenceDiagrams] # see https://blog.olowolo.com/example-site/post/js-sequence-diagrams/
+    enable = false
+    options = &quot;&quot;            # default: &quot;{theme: 'simple'}&quot;
+
+  [params.busuanzi]         # count web traffic by busuanzi                             # 是否使用不蒜子统计站点访问量
+    enable = false
+    siteUV = true
+    sitePV = true
+    pagePV = true
+
+  [params.reward]                                         # 文章打赏
+    enable = false
+    wechat = &quot;/path/to/your/wechat-qr-code.png&quot;           # 微信二维码
+    alipay = &quot;/path/to/your/alipay-qr-code.png&quot;           # 支付宝二维码
+
+  [params.social]                                         # 社交链接
+    a-email = &quot;mailto:your@email.com&quot;
+    b-stack-overflow = &quot;http://localhost:1313&quot;
+    c-twitter = &quot;http://localhost:1313&quot;
+    d-facebook = &quot;http://localhost:1313&quot;
+    e-linkedin = &quot;http://localhost:1313&quot;
+    f-google = &quot;http://localhost:1313&quot;
+    g-github = &quot;http://localhost:1313&quot;
+    h-weibo = &quot;http://localhost:1313&quot;
+    i-zhihu = &quot;http://localhost:1313&quot;
+    j-douban = &quot;http://localhost:1313&quot;
+    k-pocket = &quot;http://localhost:1313&quot;
+    l-tumblr = &quot;http://localhost:1313&quot;
+    m-instagram = &quot;http://localhost:1313&quot;
+    n-gitlab = &quot;http://localhost:1313&quot;
+    o-bilibili = &quot;http://localhost:1313&quot;
+
+# See https://gohugo.io/about/hugo-and-gdpr/
+[privacy]
+  [privacy.googleAnalytics]
+    anonymizeIP = true      # 12.214.31.144 -&gt; 12.214.31.0
+  [privacy.youtube]
+    privacyEnhanced = true
+
+# see https://gohugo.io/getting-started/configuration-markup
+[markup]
+  [markup.tableOfContents]
+    startLevel = 1
+  [markup.goldmark.renderer]
+    unsafe = true
+</code></pre><p>具体的高级配置，会在后续的高级配置详细介绍，我们这一篇主要讲解基础配置。
+暂时只需要修改 <strong>title</strong> 和 <strong>autohr</strong> 相关的内容就可以了。</p>
+<pre tabindex="0"><code>title = &quot;Leftpocket的个人博客&quot;
+logoTitle = &quot;Leftpocket的个人博客&quot;
+
+[author]                  # essential                     # 必需
+  name = &quot;Leftpocket&quot;
+</code></pre><h2 id="发布第一篇文章">发布第一篇文章</h2>
+<p>配置完成后，发布第一篇文章。</p>
 <pre tabindex="0"><code>hugo new post/my-first-post.md
-</code></pre><p>其中有着 draft 选项。当 draft 为 true 的时候，默认是不会渲染的。 我们可以将 draft 改为 false，或者在渲染启动时候添加参数 hugo server -D 就会渲染。</p>
+</code></pre><p>其中有着 draft 选项。当 draft 为 true 的时候，默认是不会渲染的，渲染 draft 需要加 <strong>-D</strong> 的启动参数。 我们可以将 draft 改为 false，这样默认就可以渲染了。<br>
+一般来说，把<strong>draft: true</strong>去掉，加一些markdown语法的内容就可以了。<br>
+后续可以直接自己直接在编辑器里面 **content/post/**目录下创建 <strong>md</strong> 文件来写博客。比较方便。</p>
 <p>这是我的文章配置。</p>
 <pre tabindex="0"><code>---
 title: &quot;My First Post&quot;
-date: 2020-08-06T13:00:51+08:00
-tags : [
-&quot;hugo&quot;,
-]
-categories : [
-&quot;hugo&quot;,
-]
-keywords : [
-&quot;hugo&quot;,
-]
+date: 2021-11-28T16:46:27+08:00
 ---
-This is the first post
+This is the first post.
 </code></pre><h2 id="执行命令">执行命令</h2>
 <pre tabindex="0"><code>&gt;&gt;&gt; hugo server
 
@@ -210,15 +389,26 @@ This is the first post
   Cleaned          |  0  
 
 Built in 21 ms
-Watching for changes in /Users/jianfei.ma/hugo/iwtbabc/{archetypes,content,data,layouts,static,themes}
-Watching for config changes in /Users/jianfei.ma/hugo/iwtbabc/config.toml
+Watching for changes in /Users/hugo/iwtbabc/{archetypes,content,data,layouts,static,themes}
+Watching for config changes in /Users/hugo/iwtbabc/config.toml
 Environment: &quot;development&quot;
 Serving pages from memory
 Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
 Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
 Press Ctrl+C to stop
 </code></pre><p>在浏览器输入 <a href="http://localhost:1313/">http://localhost:1313/</a>  即可看到具体效果。</p>
-<p>下一篇将具体讲如何把hugo博客托管到github Pages上。</p>
+<p>
+        <img class="mx-auto" alt="Settings" src="/img/hugo/hugo_create.png" />   
+    </p>
+<p>Demo完成，我们现在可以在本地浏览器上浏览你的hugo博客。<br>
+你也可以查看配置的描述，自己尝试修改配置的一些参数，看一下浏览器的效果。比如说你可以把页面里面的英文标签改为中文的，直接在配置里面修改就行。<br>
+hugo是立即生效的，不需要重新启动。</p>
+<p>下一篇将具体讲如何把hugo博客托管到github Pages上。就相当于部署到了服务器上，这样你就可以随时随地查看你的博客了。</p>
+<p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+
+        <img class="mx-auto" alt="pic" src="/img/personal/qrcode_2.png" />   
+    </p>
 
         </div>
 
