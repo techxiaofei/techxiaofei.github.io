@@ -53,7 +53,7 @@
 <meta itemprop="name" content="从零开始搭建个人博客（二）- 把hugo博客托管到github上">
 <meta itemprop="description" content="原文地址：https://left-pocket.github.io 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多"><meta itemprop="datePublished" content="2021-11-23T01:00:59+08:00" />
 <meta itemprop="dateModified" content="2021-11-23T01:00:59+08:00" />
-<meta itemprop="wordCount" content="1842">
+<meta itemprop="wordCount" content="2030">
 <meta itemprop="keywords" content="hugo," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="从零开始搭建个人博客（二）- 把hugo博客托管到github上"/>
 <meta name="twitter:description" content="原文地址：https://left-pocket.github.io 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多"/>
@@ -140,8 +140,8 @@
         <div class="post-category">
             <a href="/categories/hugo/"> hugo </a>
             </div>
-          <span class="more-meta"> 约 1842 字 </span>
-          <span class="more-meta"> 预计阅读 4 分钟 </span>
+          <span class="more-meta"> 约 2030 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -158,8 +158,9 @@
           <ul>
             <li><a href="#创建github-pages">创建Github Pages</a></li>
             <li><a href="#初始化hugo博客">初始化hugo博客</a></li>
-            <li><a href="#发布hugo到github">发布hugo到github</a></li>
-            <li><a href="#使用git指令发布到github">使用git指令发布到github</a></li>
+            <li><a href="#hugo站点和目标文件">hugo站点和目标文件</a></li>
+            <li><a href="#发布博客到github-pages">发布博客到Github Pages</a></li>
+            <li><a href="#发布源文件到github">发布源文件到Github</a></li>
           </ul>
         </li>
       </ul>
@@ -199,16 +200,16 @@
 <h3 id="初始化hugo博客">初始化hugo博客</h3>
 <p>这个在上一篇文章里面有讲解：如果有疑问可以回顾上一篇文章。
 <a href="https://left-pocket.github.io/post/hugo/hugo_creation/">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</a></p>
-<h3 id="发布hugo到github">发布hugo到github</h3>
+<h3 id="hugo站点和目标文件">hugo站点和目标文件</h3>
 <p>现在我们有了Hugo博客，有了Github Pages，那么下一步就是把hugo博客发布到github。这样我们才能在互联网的任何地方访问我们的博客。<br>
 在我们本地的hugo根目录中执行 <strong>hugo</strong> 指令。会生成一个public文件夹，我们只需要把public的文件夹上传到github上刚才创建的Repo里面, 一分钟左右，就能正常查看博客内容。</p>
 <p><strong>这里解释一下</strong></p>
 <ul>
 <li>hugo站点：这个是原始内容，可以不用提交到github，也可以选择在github上创建一个新的repo，并提交。</li>
-<li>hugo站点内的public目录(软链接)：这个是使用<strong>hugo</strong>指令生成的发布内容，需要发布到Github Pages上。</li>
+<li>hugo站点内的public目录：这个是使用<strong>hugo</strong>指令生成的发布内容，需要发布到Github Pages上。</li>
 </ul>
 <p>我们的hugo站点是<strong>源文件</strong> （带主题，图片，markdown源文件），public是<strong>目标文件</strong>（最终生成的css/js/html文件）。我们最终网页上展示的是目标文件，所以需要使用<strong>hugo</strong>指令生成目标文件。</p>
-<h3 id="使用git指令发布到github">使用git指令发布到github</h3>
+<h3 id="发布博客到github-pages">发布博客到Github Pages</h3>
 <p>这种方式更简单一点，推荐使用这一种方式：
 在任意hugo站点外，直接用git clone把创建好的github pages Repo克隆下来。</p>
 <div class="highlight"><div class="chroma">
@@ -249,8 +250,35 @@ Please make sure you have the correct access rights
 </code></pre></td></tr></table>
 </div>
 </div><p>那就在Github上添加一下ssh key就好了。</p>
+<h3 id="发布源文件到github">发布源文件到Github</h3>
 <p>现在我们<code>left-pocket-test.github.io</code>存放的是目标文件，有些人也想把hugo站点文件，也就是源文件也上传到github保存。<br>
 那么在Github上另创一个Repo来保存源文件也是可以的，源文件对最终的展示效果没有影响，只是为了方便保存。我个人创建了一个单独的hugo仓库来保存源文件。</p>
+<ol>
+<li>在Github创建一个空的Repo
+创建完会提示你怎么使用指令把本地内容上传到Github</li>
+<li>在源文件目录下执行指令</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">echo &#34;# left-pocket-test&#34; &gt;&gt; README.md
+git init
+git add *
+git commit -m &#34;first commit&#34;
+git branch -M main
+git remote add origin git@github.com:left-pocket-test/left-pocket-test.git
+git push -u origin main
+</code></pre></td></tr></table>
+</div>
+</div><p>这个时候你的源文件就上传到Github的一个新的仓库<code>left-pocket-test</code>了。这是用来保存源文件的。而<code>left-pocket-test.github.io</code>是用来保存网站的目标文件的。</p>
 <p>&lt;全文完&gt;</p>
 <p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
 <img src="/img/personal/qrcode_2.png" alt="pic"></p>
