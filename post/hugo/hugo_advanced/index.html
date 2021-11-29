@@ -53,7 +53,7 @@
 <meta itemprop="name" content="从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼">
 <meta itemprop="description" content="原文地址：https://left-pocket.github.io/ 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很"><meta itemprop="datePublished" content="2021-11-23T01:01:59+08:00" />
 <meta itemprop="dateModified" content="2021-11-23T01:01:59+08:00" />
-<meta itemprop="wordCount" content="976">
+<meta itemprop="wordCount" content="1005">
 <meta itemprop="keywords" content="hugo," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼"/>
 <meta name="twitter:description" content="原文地址：https://left-pocket.github.io/ 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很"/>
@@ -140,8 +140,8 @@
         <div class="post-category">
             <a href="/categories/hugo/"> hugo </a>
             </div>
-          <span class="more-meta"> 约 976 字 </span>
-          <span class="more-meta"> 预计阅读 2 分钟 </span>
+          <span class="more-meta"> 约 1005 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -158,6 +158,7 @@
           <ul>
             <li><a href="#url和语言">URL和语言</a></li>
             <li><a href="#每页展示数量">每页展示数量</a></li>
+            <li><a href="#开启目录">开启目录</a></li>
             <li><a href="#菜单栏语言">菜单栏语言</a></li>
             <li><a href="#添加关于页面">添加关于页面</a></li>
             <li><a href="#站点创建时间">站点创建时间</a></li>
@@ -207,7 +208,19 @@ defaultContentLanguage = &#34;zh-cn&#34;
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">paginate = 10  # 首页每页显示的文章数
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="菜单栏语言">菜单栏语言</h3>
+</div><h3 id="开启目录">开启目录</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">toc = true               # 是否开启目录
+autoCollapseToc = false  # 目录自动展开/折叠
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/img/hugo/hugo_toc.png" alt="toc"></p>
+<h3 id="菜单栏语言">菜单栏语言</h3>
 <p>把name改成中文</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
