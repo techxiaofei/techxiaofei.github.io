@@ -43,14 +43,5 @@
       <description>原文地址：https://left-pocket.github.io 今天我们来介绍decorator这个经典的设计模式。 定义：装饰器模式主要</description>
     </item>
     
-    <item>
-      <title>博客分类</title>
-      <link>https://left-pocket.github.io/post/catalog/golang_design_patterns/</link>
-      <pubDate>Fri, 01 Jan 2021 13:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/catalog/golang_design_patterns/</guid>
-      <description>Golang 设计模式篇 Functional Options 函数式选项模式 [Decorator 装饰器模式]https://github.com） 系统设计篇</description>
-    </item>
-    
   </channel>
 </rss>

@@ -233,24 +233,6 @@
     </item>
     
     <item>
-      <title>博客分类</title>
-      <link>https://left-pocket.github.io/post/catalog/golang_design_patterns/</link>
-      <pubDate>Fri, 01 Jan 2021 13:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/catalog/golang_design_patterns/</guid>
-      <description>Golang 设计模式篇 Functional Options 函数式选项模式 [Decorator 装饰器模式]https://github.com） 系统设计篇</description>
-    </item>
-    
-    <item>
-      <title>服务端面试技术栈</title>
-      <link>https://left-pocket.github.io/post/catalog/interview_tech_stack/</link>
-      <pubDate>Fri, 01 Jan 2021 13:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/catalog/interview_tech_stack/</guid>
-      <description>网络编程篇 数据结构与算法篇 Redis篇 MySQL篇 Golang篇 设计模式篇 Kafka篇 C/C++篇 系统设计篇 Linux技术篇</description>
-    </item>
-    
-    <item>
       <title>vscode配置leetcode插件</title>
       <link>https://left-pocket.github.io/post/others/vscode_leetcode/</link>
       <pubDate>Sat, 12 Dec 2020 13:00:51 +0800</pubDate>

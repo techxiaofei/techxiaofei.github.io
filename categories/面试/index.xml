@@ -34,14 +34,5 @@
       <description>​ 原文地址：https://left-pocket.github.io 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点</description>
     </item>
     
-    <item>
-      <title>服务端面试技术栈</title>
-      <link>https://left-pocket.github.io/post/catalog/interview_tech_stack/</link>
-      <pubDate>Fri, 01 Jan 2021 13:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/catalog/interview_tech_stack/</guid>
-      <description>网络编程篇 数据结构与算法篇 Redis篇 MySQL篇 Golang篇 设计模式篇 Kafka篇 C/C++篇 系统设计篇 Linux技术篇</description>
-    </item>
-    
   </channel>
 </rss>

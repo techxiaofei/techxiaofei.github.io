@@ -352,34 +352,6 @@
   </url>
   
   <url>
-    <loc>https://left-pocket.github.io/tags/server/</loc>
-    <lastmod>2021-01-01T13:00:51+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://left-pocket.github.io/post/catalog/golang_design_patterns/</loc>
-    <lastmod>2021-01-01T13:00:51+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://left-pocket.github.io/post/catalog/interview_tech_stack/</loc>
-    <lastmod>2021-01-01T13:00:51+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://left-pocket.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2021-01-01T13:00:51+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://left-pocket.github.io/tags/leetcode/</loc>
     <lastmod>2020-12-12T13:00:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
