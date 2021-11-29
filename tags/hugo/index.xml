@@ -6,7 +6,16 @@
     <description>Recent content in hugo on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 23 Nov 2021 01:00:59 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 23 Nov 2021 01:01:59 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼</title>
+      <link>https://left-pocket.github.io/post/hugo/hugo_advanced/</link>
+      <pubDate>Tue, 23 Nov 2021 01:01:59 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/hugo/hugo_advanced/</guid>
+      <description>原文地址：https://left-pocket.github.io/ 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很</description>
+    </item>
+    
     <item>
       <title>从零开始搭建个人博客（二）- 把hugo博客托管到github上</title>
       <link>https://left-pocket.github.io/post/hugo/hugo_github/</link>
