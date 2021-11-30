@@ -224,15 +224,6 @@
     </item>
     
     <item>
-      <title>朋友圈技术设计与实现</title>
-      <link>https://left-pocket.github.io/post/system_design/friends_status/</link>
-      <pubDate>Fri, 22 Jan 2021 13:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/system_design/friends_status/</guid>
-      <description>原文地址：https://left-pocket.github.io 背景 最近实现了一个功能，类似于微信的朋友圈，以及点赞评论，我将分两篇介绍</description>
-    </item>
-    
-    <item>
       <title>点赞和评论 技术设计与实现</title>
       <link>https://left-pocket.github.io/post/system_design/friends_comment_like/</link>
       <pubDate>Fri, 22 Jan 2021 13:00:51 +0800</pubDate>
