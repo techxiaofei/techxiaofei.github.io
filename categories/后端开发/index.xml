@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>后端开发 on Leftpocket的个人博客</title>
+    <link>https://left-pocket.github.io/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/</link>
+    <description>Recent content in 后端开发 on Leftpocket的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 30 Nov 2021 14:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>后端开发除了增删改查还有什么？</title>
+      <link>https://left-pocket.github.io/post/backend/backend_development/</link>
+      <pubDate>Tue, 30 Nov 2021 14:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/backend/backend_development/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>手游服务器开发技术详解</title>
+      <link>https://left-pocket.github.io/post/backend/game_development/</link>
+      <pubDate>Sun, 21 Nov 2021 14:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/backend/game_development/</guid>
+      <description>原文地址：https://left-pocket.github.io 回顾我的码农生涯，在做互联网电商后端开发之前做过大概6年的游戏后端开发，</description>
+    </item>
+    
+  </channel>
+</rss>

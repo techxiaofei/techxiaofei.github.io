@@ -53,7 +53,7 @@
 <meta itemprop="name" content="从零开始搭建个人博客（五）- 申请免费域名并绑定到个人博客">
 <meta itemprop="description" content="原文地址：https://left-pocket.github.io 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多"><meta itemprop="datePublished" content="2021-11-23T01:03:59+08:00" />
 <meta itemprop="dateModified" content="2021-11-23T01:03:59+08:00" />
-<meta itemprop="wordCount" content="1158">
+<meta itemprop="wordCount" content="1218">
 <meta itemprop="keywords" content="hugo," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="从零开始搭建个人博客（五）- 申请免费域名并绑定到个人博客"/>
 <meta name="twitter:description" content="原文地址：https://left-pocket.github.io 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多"/>
@@ -140,7 +140,7 @@
         <div class="post-category">
             <a href="/categories/hugo/"> hugo </a>
             </div>
-          <span class="more-meta"> 约 1158 字 </span>
+          <span class="more-meta"> 约 1218 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -213,7 +213,7 @@ Freenom，免费域名服务商。<br>
 <p><img src="/img/hugo/hugo_dns_final.png" alt="万网"></p>
 <h3 id="绑定github-pages">绑定Github Pages</h3>
 <p>一、添加CNAME文件
-在你的github pages项目根目录上新建一个<code>CNAME</code>文件，在CNAME文件上写入你想绑定的域名：</p>
+在你的github pages项目根目录上新建一个<code>CNAME</code>文件，在CNAME文件上写入你想绑定的域名，不需要带<code>https</code>和<code>www</code>：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -226,10 +226,10 @@ Freenom，免费域名服务商。<br>
 <p>这个CNAME文件有什么用呢？稍后再说。</p>
 <p>二、在DNSPod添加A记录</p>
 <p><img src="/img/hugo/hugo_dns_pod2.png" alt="万网"></p>
-<p>为什么<code>192.30.252.153</code>和<code>192.30.252.154</code>，因为这是github pages官网说的IP地址。网上有些人说A记录是<code>ping xxx.github.io</code>之后的IP地址，这些都是不可信的。</p>
+<p>为什么<code>192.30.252.153</code>和<code>192.30.252.154</code>，因为这是github pages官网说的IP地址。网上有些人说A记录是<code>ping xxx.github.io</code>之后的IP地址，你也可以试试是否可行。反正这两个ip是肯定不会出错的。</p>
 <p>但是你可能会奇怪，每个人都是这两个IP地址的话，那么Github怎么知道我的域名而不是其他人的域名呢？<br>
 答案就在上一步操作中的<code>CNAME</code>文件，这里指定了其所对应的域名，github会自动处理，将两者对应起来。</p>
-<p>另外，如果你添加CNAME记录把域名指向<code>left-pocket-test.github.io</code>的话，也会成功（像上面Vercel一样）。但是官方是不推荐最终做法的，因为可能会<code>导致其他服务出现问题</code>。</p>
+<p>如果你不想在github上添加CNAME文件，也可以在DNSPod上添加CNAME记录把域名指向<code>left-pocket-test.github.io</code>的话，也会成功（像上面Vercel一样）。但是官方是不推荐最终做法的，因为可能会<code>导致其他服务出现问题</code>。</p>
 <p><img src="/img/hugo/hugo_dns_github_final.png" alt="万网"></p>
 <p>&lt;全文完&gt;</p>
 <p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
