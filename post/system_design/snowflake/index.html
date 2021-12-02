@@ -53,7 +53,7 @@
 <meta itemprop="name" content="分布式ID生成方案-snowflake算法">
 <meta itemprop="description" content="原文地址：https://left-pocket.github.io 背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一"><meta itemprop="datePublished" content="2020-11-24T13:00:51+08:00" />
 <meta itemprop="dateModified" content="2020-11-24T13:00:51+08:00" />
-<meta itemprop="wordCount" content="2169">
+<meta itemprop="wordCount" content="2215">
 <meta itemprop="keywords" content="系统设计," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="分布式ID生成方案-snowflake算法"/>
 <meta name="twitter:description" content="原文地址：https://left-pocket.github.io 背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一"/>
@@ -140,7 +140,7 @@
         <div class="post-category">
             <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/"> 系统设计 </a>
             </div>
-          <span class="more-meta"> 约 2169 字 </span>
+          <span class="more-meta"> 约 2215 字 </span>
           <span class="more-meta"> 预计阅读 5 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -151,16 +151,23 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#分布式id生成方案">分布式ID生成方案</a>
       <ul>
-        <li><a href="#背景">背景</a></li>
-        <li><a href="#分布式id的特性">分布式ID的特性</a></li>
-        <li><a href="#分布式id生成方案">分布式ID生成方案</a>
+        <li>
           <ul>
             <li><a href="#uuid">UUID</a></li>
             <li><a href="#数据库自增id">数据库自增ID</a></li>
             <li><a href="#redis生成id">Redis生成ID</a></li>
-            <li><a href="#snowflake算法">snowflake算法</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#snowflake算法">snowflake算法</a>
+      <ul>
+        <li>
+          <ul>
+            <li></li>
           </ul>
         </li>
       </ul>
@@ -171,15 +178,12 @@
 </div>
     <div class="post-content">
       <p>原文地址：<a href="https://left-pocket.github.io/post/system_design/snowflake/">https://left-pocket.github.io</a></p>
-<h2 id="背景">背景</h2>
-<p>在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一。那一般生成ID都有哪些解决方案呢？特别是在复杂的分布式系统业务场景中，我们应该采用哪种适合自己的解决方案是十分重要的。下面我们一一来列举一下，不一定全部适合，这些解决方案仅供你参考，或许对你有用。</p>
-<h2 id="分布式id的特性">分布式ID的特性</h2>
-<ul>
-<li>唯一性：确保生成的ID是全网唯一的。</li>
-<li>有序递增性：确保生成的ID是对于某个用户或者业务是按一定的数字有序递增的。</li>
-<li>高可用性：确保任何时候都能正确的生成ID。</li>
-</ul>
-<h2 id="分布式id生成方案">分布式ID生成方案</h2>
+<h1 id="背景">背景</h1>
+<p>在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一。我们称之为分布式ID，分布式ID需要满足 唯一性、趋势递增性、高可用性、高性能等特点。</p>
+<p>snowflake算法，也叫雪花算法，是其中的一种分布式ID生成方案。是twitter公司内部分布式项目采用的ID生成算法，开源后广受国内大厂的好评，在该算法影响下各大公司相继开发出各具特色的分布式生成器。</p>
+<p>讲解雪花算法前，我们先概述一下分布式ID有哪些生成方案。</p>
+<h1 id="分布式id生成方案">分布式ID生成方案</h1>
+<p>分布式ID有以下几种生成方式：</p>
 <h3 id="uuid">UUID</h3>
 <p>算法的核心思想是结合机器的网卡、当地时间、一个随记数来生成UUID。</p>
 <p>优点：本地生成，生成简单，性能好，没有高可用风险
@@ -211,14 +215,15 @@ E：5, 10, 15, 20, 25
 </div>
 </div><p>步长和初始值一定需要事先确定。使用 Redis 集群也可以防止单点故障的问题。
 另外，比较适合使用 Redis 来生成每天从0开始的流水号。比如订单号 = 日期 + 当日自增长号。可以每天在 Redis 中生成一个 Key ，使用 INCR 进行累加。</p>
-<h3 id="snowflake算法">snowflake算法</h3>
-<p>Twitter的snowflake分布式ID的算法是目前广泛使用的分布式ID算法，尽管有很多变种，比如位数的不同，时间片大小不同、node bit数放在最后等各种变种，但是主要思想还是来自于snowflake的思想。 同时访问方法也各种个样，比如提供memcached协议访问和Redis协议访问等等。</p>
+<h1 id="snowflake算法">snowflake算法</h1>
+<p>雪花算法（Snowflake）是twitter公司内部分布式项目采用的ID生成算法，开源后广受国内大厂的好评，在该算法影响下各大公司相继开发出各具特色的分布式生成器。</p>
+<p>Twitter的snowflake分布式ID的算法是目前广泛使用的分布式ID算法，尽管有很多变种，比如位数的不同，时间片大小不同、node bit数放在最后等各种变种，但是主要思想还是来自于snowflake的思想。</p>
 <p>Twitter在2010年儿童节的时候在官方博客上介绍了snowflake算法,内部用来表示每一条tweet。</p>
 <p><img src="/img/server/snowflake.png" alt="snowflake"></p>
 <p>snowflake算法采用64bit存储ID, 最高位备用，暂时不使用。接下来的41 bit做时间戳，最小时间单位为毫秒。再接下来的10 bit做机器ID(worker id)，然后最后12 bit在单位时间(毫秒)递增。</p>
 <p><strong>41 bit表示时间戳</strong>大约可以使用69年(2^41 -1), 为了尽可能的表示时间，时间戳可以从第一次部署的时候开始计算，比如2020-02-02 00:00:00, 这样69年内可以无虞。</p>
 <p><strong>10 bit区分机器</strong>，所以可以支持1024台机器。 你也可以把10bit分成两部分，一部分做数据中心的ID,一部分做机器的ID，比如55分的化，可以支持32个数据中心，每个数据中心最多可以支持32台机器。</p>
-<p><strong>12 bit自增值</strong>可以表示4096的ID,也就是说每台机器每以毫秒最多产生4096个ID,这是它的最大性能。</p>
+<p><strong>12 bit自增值</strong>可以表示4096的ID,也就是说每台机器每毫秒最多产生4096个ID,这是它的最大性能。</p>
 <p>正如前面所说，时间戳、机器ID、自增ID所占的位数可以根据你实际的情况做调整。</p>
 <p>snowflake还有一个很好的特性就是基本保持顺序性，因为它的前几位是时间戳，可以对ID按照时间进行排序。</p>
 <h4 id="snowflake算法详解">snowflake算法详解</h4>
@@ -284,7 +289,7 @@ E：5, 10, 15, 20, 25
     <span class="nx">n</span><span class="p">.</span><span class="nx">mu</span><span class="p">.</span><span class="nf">Lock</span><span class="p">()</span>
     <span class="c1">// 从设定的时间戳到现在经历的毫秒数
 </span><span class="c1"></span>    <span class="nx">now</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Since</span><span class="p">(</span><span class="nx">n</span><span class="p">.</span><span class="nx">epoch</span><span class="p">).</span><span class="nf">Nanoseconds</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000000</span>
-    <span class="c1">//和上次记录一样，step加1，否则step重制为0
+    <span class="c1">//和上次记录一样，step加1，否则step重置为0
 </span><span class="c1"></span>    <span class="k">if</span> <span class="nx">now</span> <span class="o">==</span> <span class="nx">n</span><span class="p">.</span><span class="nx">time</span> <span class="p">{</span>
         <span class="nx">n</span><span class="p">.</span><span class="nx">step</span> <span class="p">=</span> <span class="p">(</span><span class="nx">n</span><span class="p">.</span><span class="nx">step</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nx">n</span><span class="p">.</span><span class="nx">stepMask</span>
 

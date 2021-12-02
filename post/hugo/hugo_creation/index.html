@@ -53,7 +53,7 @@
 <meta itemprop="name" content="从零开始搭建个人博客（一）- 使用hugo搭建个人博客">
 <meta itemprop="description" content="原文地址：https://left-pocket.github.io 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多"><meta itemprop="datePublished" content="2021-11-23T01:00:55+08:00" />
 <meta itemprop="dateModified" content="2021-11-23T01:00:55+08:00" />
-<meta itemprop="wordCount" content="2504">
+<meta itemprop="wordCount" content="2474">
 <meta itemprop="keywords" content="hugo," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="从零开始搭建个人博客（一）- 使用hugo搭建个人博客"/>
 <meta name="twitter:description" content="原文地址：https://left-pocket.github.io 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多"/>
@@ -140,7 +140,7 @@
         <div class="post-category">
             <a href="/categories/hugo/"> hugo </a>
             </div>
-          <span class="more-meta"> 约 2504 字 </span>
+          <span class="more-meta"> 约 2474 字 </span>
           <span class="more-meta"> 预计阅读 5 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -187,7 +187,7 @@
 <li>Hugo</li>
 <li>Hexo</li>
 </ul>
-<p>我这里悬着Hugo来搭建我的个人博客，因为它简单，快速，开源，使用Go语言，社区活跃等优点。</p>
+<p>我这里选择Hugo来搭建我的个人博客，因为它简单，快速，开源，使用Go语言，社区活跃等优点。</p>
 <h3 id="hugo">hugo</h3>
 <p>hugo 是由Go语言实现的静态网站生成器。简单，易用，高效，易扩展。</p>
 <h3 id="安装">安装</h3>
@@ -223,13 +223,15 @@ archetypes  content     layouts     resources   themes
 config.toml data        public      static
 </code></pre></td></tr></table>
 </div>
-</div><p><strong>config.toml</strong> 是配置文件，在里面可以定义博客地址，构建配置，标题，导航栏等等。
-<strong>themes</strong>是主题目录，可以下载喜欢的主题，然后配置在<strong>config.toml</strong>里面。
-<strong>content</strong>是博客文章的目录。
-<strong>static</strong>是博客的静态资源，比如图片
-<strong>public</strong>是编译后的目标文件的目录。</p>
+</div><ul>
+<li><strong>config.toml</strong> 是配置文件，在里面可以定义博客地址，构建配置，标题，导航栏等等。</li>
+<li><strong>themes</strong>是主题目录，可以下载喜欢的主题，然后配置在<strong>config.toml</strong>里面。</li>
+<li><strong>content</strong>是博客文章的目录。</li>
+<li><strong>static</strong>是博客的静态资源，比如图片</li>
+<li><strong>public</strong>是编译后的目标文件的目录。</li>
+</ul>
 <p>注：当前目录是你的<strong>源文件</strong>，也就是包括一堆模版，博客源文件（markdown），配置文件，图片的一个源文件的集合。
-最终展示在网页的是<strong>目标文件</strong>，也就根据你的资源和配置，最终生成的一个个包括css，js的html文件集合。</p>
+最终展示在网页的是<strong>目标文件</strong>，也就根据你的资源和配置，最终生成的一个个包括css，js的html网页。</p>
 <h3 id="主题">主题</h3>
 <p>在最终我们的博客可以运行之前，我们需要配置一个主题。</p>
 <p>推荐一款主题，可以在根目录下载并配置。<br>
@@ -435,11 +437,9 @@ config.toml data        public      static
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">title = &#34;Leftpocket的个人博客&#34;
-logoTitle = &#34;Leftpocket的个人博客&#34;
 
 [author]                  # essential                     # 必需
   name = &#34;Leftpocket&#34;
@@ -457,7 +457,7 @@ logoTitle = &#34;Leftpocket的个人博客&#34;
 </div>
 </div><p>其中有着 draft 选项。当 draft 为 true 的时候，默认是不会渲染的，渲染 draft 需要加 <strong>-D</strong> 的启动参数。 我们可以将 draft 改为 false，这样默认就可以渲染了。<br>
 一般来说，把<strong>draft: true</strong>去掉，加一些markdown语法的内容就可以了。<br>
-后续可以直接自己直接在编辑器里面 **content/post/**目录下创建 <strong>md</strong> 文件来写博客。比较方便。也可以在post里面创建多层目录，方便归类。</p>
+后续可以直接自己直接在编辑器里面 **content/post/**目录下创建 <strong>md</strong> 文件来写博客，比较方便。也可以在post里面创建多层目录，方便归类。</p>
 <p>这是我的文章配置。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
