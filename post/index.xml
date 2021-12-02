@@ -44,6 +44,15 @@
     </item>
     
     <item>
+      <title>从零开始搭建个人博客（一）- 使用hugo搭建个人博客</title>
+      <link>https://left-pocket.github.io/post/hugo/hugo_creation/</link>
+      <pubDate>Thu, 02 Dec 2021 01:00:55 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/hugo/hugo_creation/</guid>
+      <description>原文地址：https://left-pocket.github.io 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多</description>
+    </item>
+    
+    <item>
       <title>后端面试之MySQL-什么是回表查询和覆盖索引</title>
       <link>https://left-pocket.github.io/post/mysql/covering_index/</link>
       <pubDate>Fri, 26 Nov 2021 00:00:00 +0800</pubDate>
@@ -89,15 +98,6 @@
     </item>
     
     <item>
-      <title>从零开始搭建个人博客（一）- 使用hugo搭建个人博客</title>
-      <link>https://left-pocket.github.io/post/hugo/hugo_creation/</link>
-      <pubDate>Tue, 23 Nov 2021 01:00:55 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/hugo/hugo_creation/</guid>
-      <description>原文地址：https://left-pocket.github.io 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多</description>
-    </item>
-    
-    <item>
       <title>从零开始搭建个人博客（零）- 序章</title>
       <link>https://left-pocket.github.io/post/hugo/hugo_0/</link>
       <pubDate>Tue, 23 Nov 2021 01:00:50 +0800</pubDate>
@@ -126,10 +126,10 @@
     
     <item>
       <title>手游服务器开发技术详解</title>
-      <link>https://left-pocket.github.io/post/game/game_development/</link>
+      <link>https://left-pocket.github.io/post/backend/game_development/</link>
       <pubDate>Sun, 21 Nov 2021 14:00:51 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/post/game/game_development/</guid>
+      <guid>https://left-pocket.github.io/post/backend/game_development/</guid>
       <description>原文地址：https://left-pocket.github.io 回顾我的码农生涯，在做互联网电商后端开发之前做过大概6年的游戏后端开发，</description>
     </item>
     
