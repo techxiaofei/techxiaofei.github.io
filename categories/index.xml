@@ -6,22 +6,22 @@
     <description>Recent content in Categories on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 02 Dec 2021 01:04:55 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 02 Dec 2021 10:00:00 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MySQL</title>
+      <link>https://left-pocket.github.io/categories/mysql/</link>
+      <pubDate>Thu, 02 Dec 2021 10:00:00 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/categories/mysql/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>hugo</title>
       <link>https://left-pocket.github.io/categories/hugo/</link>
       <pubDate>Thu, 02 Dec 2021 01:04:55 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/categories/hugo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>MySQL</title>
-      <link>https://left-pocket.github.io/categories/mysql/</link>
-      <pubDate>Fri, 26 Nov 2021 00:00:00 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/categories/mysql/</guid>
       <description></description>
     </item>
     

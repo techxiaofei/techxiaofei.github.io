@@ -6,7 +6,16 @@
     <description>Recent content in MySQL on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 26 Nov 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 02 Dec 2021 10:00:00 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>后端面试之MySQL-InnoDB一颗B&#43;树可以存放多少行数据？</title>
+      <link>https://left-pocket.github.io/post/mysql/innodb_row/</link>
+      <pubDate>Thu, 02 Dec 2021 10:00:00 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/mysql/innodb_row/</guid>
+      <description>背景 MySQL的InnoDB引擎一棵B+树可以存放多少行数据？这是一个很有趣的面试题。 也许你会猜1千万，2千万，或者上亿条数据？其实这里面问</description>
+    </item>
+    
     <item>
       <title>后端面试之MySQL-什么是回表查询和覆盖索引</title>
       <link>https://left-pocket.github.io/post/mysql/covering_index/</link>
