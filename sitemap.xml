@@ -3,14 +3,70 @@
   
   <url>
     <loc>https://left-pocket.github.io/categories/</loc>
-    <lastmod>2021-11-26T00:00:00+08:00</lastmod>
+    <lastmod>2021-12-02T01:04:55+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://left-pocket.github.io/tags/hugo/</loc>
+    <lastmod>2021-12-02T01:04:55+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://left-pocket.github.io/categories/hugo/</loc>
+    <lastmod>2021-12-02T01:04:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://left-pocket.github.io/</loc>
-    <lastmod>2021-11-26T00:00:00+08:00</lastmod>
+    <lastmod>2021-12-02T01:04:55+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://left-pocket.github.io/post/</loc>
+    <lastmod>2021-12-02T01:04:55+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://left-pocket.github.io/tags/</loc>
+    <lastmod>2021-12-02T01:04:55+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://left-pocket.github.io/post/hugo/hugo_dns/</loc>
+    <lastmod>2021-12-02T01:04:55+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://left-pocket.github.io/post/hugo/hugo_vercel/</loc>
+    <lastmod>2021-12-02T01:03:55+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://left-pocket.github.io/post/hugo/hugo_advanced/</loc>
+    <lastmod>2021-12-02T01:02:55+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://left-pocket.github.io/post/hugo/hugo_github/</loc>
+    <lastmod>2021-12-02T01:01:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -24,20 +80,6 @@
   
   <url>
     <loc>https://left-pocket.github.io/categories/mysql/</loc>
-    <lastmod>2021-11-26T00:00:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://left-pocket.github.io/post/</loc>
-    <lastmod>2021-11-26T00:00:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://left-pocket.github.io/tags/</loc>
     <lastmod>2021-11-26T00:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -121,48 +163,6 @@
   </url>
   
   <url>
-    <loc>https://left-pocket.github.io/tags/hugo/</loc>
-    <lastmod>2021-11-23T01:03:59+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://left-pocket.github.io/categories/hugo/</loc>
-    <lastmod>2021-11-23T01:03:59+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://left-pocket.github.io/post/hugo/hugo_dns/</loc>
-    <lastmod>2021-11-23T01:03:59+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://left-pocket.github.io/post/hugo/hugo_vercel/</loc>
-    <lastmod>2021-11-23T01:02:59+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://left-pocket.github.io/post/hugo/hugo_advanced/</loc>
-    <lastmod>2021-11-23T01:01:59+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://left-pocket.github.io/post/hugo/hugo_github/</loc>
-    <lastmod>2021-11-23T01:00:59+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://left-pocket.github.io/post/hugo/hugo_creation/</loc>
     <lastmod>2021-11-23T01:00:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -219,7 +219,7 @@
   </url>
   
   <url>
-    <loc>https://left-pocket.github.io/post/backend/game_development/</loc>
+    <loc>https://left-pocket.github.io/post/game/game_development/</loc>
     <lastmod>2021-11-21T14:00:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

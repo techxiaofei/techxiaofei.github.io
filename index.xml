@@ -6,7 +6,43 @@
     <description>Recent content on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 26 Nov 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 02 Dec 2021 01:04:55 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>从零开始搭建个人博客（五）- 申请免费域名并绑定到个人博客</title>
+      <link>https://left-pocket.github.io/post/hugo/hugo_dns/</link>
+      <pubDate>Thu, 02 Dec 2021 01:04:55 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/hugo/hugo_dns/</guid>
+      <description>原文地址：https://left-pocket.github.io 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多</description>
+    </item>
+    
+    <item>
+      <title>从零开始搭建个人博客（四）- hugo自动部署到vercel</title>
+      <link>https://left-pocket.github.io/post/hugo/hugo_vercel/</link>
+      <pubDate>Thu, 02 Dec 2021 01:03:55 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/hugo/hugo_vercel/</guid>
+      <description>原文地址：https://left-pocket.github.io 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多</description>
+    </item>
+    
+    <item>
+      <title>从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼</title>
+      <link>https://left-pocket.github.io/post/hugo/hugo_advanced/</link>
+      <pubDate>Thu, 02 Dec 2021 01:02:55 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/hugo/hugo_advanced/</guid>
+      <description>原文地址：https://left-pocket.github.io 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多</description>
+    </item>
+    
+    <item>
+      <title>从零开始搭建个人博客（二）- 把hugo博客托管到github上</title>
+      <link>https://left-pocket.github.io/post/hugo/hugo_github/</link>
+      <pubDate>Thu, 02 Dec 2021 01:01:55 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/hugo/hugo_github/</guid>
+      <description>原文地址：https://left-pocket.github.io 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多</description>
+    </item>
+    
     <item>
       <title>后端面试之MySQL-什么是回表查询和覆盖索引</title>
       <link>https://left-pocket.github.io/post/mysql/covering_index/</link>
@@ -53,42 +89,6 @@
     </item>
     
     <item>
-      <title>从零开始搭建个人博客（五）- 申请免费域名并绑定到个人博客</title>
-      <link>https://left-pocket.github.io/post/hugo/hugo_dns/</link>
-      <pubDate>Tue, 23 Nov 2021 01:03:59 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/hugo/hugo_dns/</guid>
-      <description>原文地址：https://left-pocket.github.io 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多</description>
-    </item>
-    
-    <item>
-      <title>从零开始搭建个人博客（四）- hugo自动部署到vercel</title>
-      <link>https://left-pocket.github.io/post/hugo/hugo_vercel/</link>
-      <pubDate>Tue, 23 Nov 2021 01:02:59 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/hugo/hugo_vercel/</guid>
-      <description>原文地址：https://left-pocket.github.io 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多</description>
-    </item>
-    
-    <item>
-      <title>从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼</title>
-      <link>https://left-pocket.github.io/post/hugo/hugo_advanced/</link>
-      <pubDate>Tue, 23 Nov 2021 01:01:59 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/hugo/hugo_advanced/</guid>
-      <description>原文地址：https://left-pocket.github.io 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多</description>
-    </item>
-    
-    <item>
-      <title>从零开始搭建个人博客（二）- 把hugo博客托管到github上</title>
-      <link>https://left-pocket.github.io/post/hugo/hugo_github/</link>
-      <pubDate>Tue, 23 Nov 2021 01:00:59 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/hugo/hugo_github/</guid>
-      <description>原文地址：https://left-pocket.github.io 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多</description>
-    </item>
-    
-    <item>
       <title>从零开始搭建个人博客（一）- 使用hugo搭建个人博客</title>
       <link>https://left-pocket.github.io/post/hugo/hugo_creation/</link>
       <pubDate>Tue, 23 Nov 2021 01:00:55 +0800</pubDate>
@@ -126,10 +126,10 @@
     
     <item>
       <title>手游服务器开发技术详解</title>
-      <link>https://left-pocket.github.io/post/backend/game_development/</link>
+      <link>https://left-pocket.github.io/post/game/game_development/</link>
       <pubDate>Sun, 21 Nov 2021 14:00:51 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/post/backend/game_development/</guid>
+      <guid>https://left-pocket.github.io/post/game/game_development/</guid>
       <description>原文地址：https://left-pocket.github.io 回顾我的码农生涯，在做互联网电商后端开发之前做过大概6年的游戏后端开发，</description>
     </item>
     
