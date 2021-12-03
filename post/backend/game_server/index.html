@@ -53,7 +53,7 @@
 <meta itemprop="name" content="游戏服务器和普通服务器的区别">
 <meta itemprop="description" content="原文地址：https://left-pocket.github.io 背景 我做过六年游戏服务端开发，后来想换个方向，转做电商后端开发，做了两年"><meta itemprop="datePublished" content="2021-12-03T14:00:51+08:00" />
 <meta itemprop="dateModified" content="2021-12-03T14:00:51+08:00" />
-<meta itemprop="wordCount" content="1799">
+<meta itemprop="wordCount" content="1937">
 <meta itemprop="keywords" content="后端开发," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="游戏服务器和普通服务器的区别"/>
 <meta name="twitter:description" content="原文地址：https://left-pocket.github.io 背景 我做过六年游戏服务端开发，后来想换个方向，转做电商后端开发，做了两年"/>
@@ -140,7 +140,7 @@
         <div class="post-category">
             <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"> 后端开发 </a>
             </div>
-          <span class="more-meta"> 约 1799 字 </span>
+          <span class="more-meta"> 约 1937 字 </span>
           <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -179,6 +179,7 @@
         </li>
       </ul>
     </li>
+    <li><a href="#总结">总结</a></li>
   </ul>
 </nav>
   </div>
@@ -223,7 +224,10 @@
 <p>互联网的业务说到底就是增删改查。（当然1000用户的增删改查和10亿用户的增删改查不一样）。高并发不属于业务的范畴，我现在处理百亿级数据和千万级QPS的服务，主要考虑高并发下的服务的拆分，架构的设计，微服务化，数据分库分表，缓存设计，异步存储，热点处理等等一系列高并发下的性能考虑。但是仅仅业务本身的复杂度相对游戏真的低很多。</p>
 <h3 id="cpu密集型">CPU密集型</h3>
 <p>互联网的服务器大多是CPU密集型的。业务层涉及到大量的数据计算。</p>
+<h1 id="总结">总结</h1>
 <p>以上就是一个同时做过游戏开发和互联网开发的程序对这两个的区别的一些总结。</p>
+<p>我做游戏的时候主要关注的是业务的玩法方面设计一个复杂的玩法需要考虑很多，需要了解的是玩法的设计。<br>
+做互联网的时候，主要关注的就是数据的操作，往往高并发最终的瓶颈会落在DB这一层，怎么优化DB就很重要，比如我说的分库分表，索引的设计，缓存的设计，预热机制，热点数据的处理等等。</p>
 <p>&lt;全文完&gt;</p>
 <p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
 <img src="/img/personal/qrcode_2.png" alt="pic"></p>
