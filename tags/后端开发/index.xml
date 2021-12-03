@@ -6,7 +6,16 @@
     <description>Recent content in 后端开发 on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 21 Nov 2021 14:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 03 Dec 2021 14:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>游戏服务器和普通服务器的区别</title>
+      <link>https://left-pocket.github.io/post/backend/game_server/</link>
+      <pubDate>Fri, 03 Dec 2021 14:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/backend/game_server/</guid>
+      <description>原文地址：https://left-pocket.github.io 背景 我做过六年游戏服务端开发，后来想换个方向，转做电商后端开发，做了两年</description>
+    </item>
+    
     <item>
       <title>手游服务器开发技术详解</title>
       <link>https://left-pocket.github.io/post/backend/game_development/</link>

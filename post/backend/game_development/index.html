@@ -53,7 +53,7 @@
 <meta itemprop="name" content="手游服务器开发技术详解">
 <meta itemprop="description" content="原文地址：https://left-pocket.github.io 回顾我的码农生涯，在做互联网电商后端开发之前做过大概6年的游戏后端开发，"><meta itemprop="datePublished" content="2021-11-21T14:00:51+08:00" />
 <meta itemprop="dateModified" content="2021-11-21T14:00:51+08:00" />
-<meta itemprop="wordCount" content="4009">
+<meta itemprop="wordCount" content="2753">
 <meta itemprop="keywords" content="后端开发," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="手游服务器开发技术详解"/>
 <meta name="twitter:description" content="原文地址：https://left-pocket.github.io 回顾我的码农生涯，在做互联网电商后端开发之前做过大概6年的游戏后端开发，"/>
@@ -140,8 +140,8 @@
         <div class="post-category">
             <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"> 后端开发 </a>
             </div>
-          <span class="more-meta"> 约 4009 字 </span>
-          <span class="more-meta"> 预计阅读 9 分钟 </span>
+          <span class="more-meta"> 约 2753 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -151,16 +151,6 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#互联网和游戏后端开发的区别">互联网和游戏后端开发的区别</a>
-      <ul>
-        <li>
-          <ul>
-            <li><a href="#游戏特有的">游戏特有的：</a></li>
-            <li><a href="#互联网特有的">互联网特有的：</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
     <li><a href="#一聊聊服务器开发有哪些东西要考虑">一.聊聊服务器开发有哪些东西要考虑</a>
       <ul>
         <li><a href="#1开发语言的选择">1.开发语言的选择</a></li>
@@ -187,58 +177,8 @@
 <p>之前从事游戏服务器开发期间参与了不少项目，学到了很多游戏服务器开发技术，参与过几个不同架构的服务器开发，就此聊聊游戏服务器开发需要的技术，给刚进入游戏后端开发的同学一些指导。</p>
 <p>这边文章我先说一下我理解的互联网和游戏后端开发的主要区别，然后着重讲一下游戏服务器开发需要的技术栈。</p>
 <p>如果你想自己写一个服务器开发框架，那么希望这篇文章对你有一定的帮助。</p>
-<h1 id="互联网和游戏后端开发的区别">互联网和游戏后端开发的区别</h1>
-<h3 id="游戏特有的">游戏特有的：</h3>
-<ul>
-<li>
-<p><strong>保持连接</strong>：游戏一般来说需要保持一个客户端到服务端的连接，可以对客户端的玩家的行为（移动，攻击，操作，互动，聊天）进行及时的反馈以及主动推送给相关的玩家。所以游戏更多的使用TCP来保持客户端和服务端的连接，少量游戏会使用UDP或者HTTP。</p>
-</li>
-<li>
-<p><strong>保持状态</strong>：服务端会保持一份玩家的实体，当玩家进行操作时，下次通信的数据会依赖之前的通信的数据。</p>
-</li>
-<li>
-<p><strong>主动推送</strong>：游戏服务器由于保持连接和状态，任何数据的改动可以通过服务端主动通知客户端的方式，这样就只需要推送修改的数据。不需要客户端频繁去刷新。</p>
-</li>
-<li>
-<p><strong>低延迟</strong>：很多游戏服务器，尤其是 RPG，MOBA， FPS等游戏，对延迟容忍度非常低，网络拥堵情况下tcp协议由于重传机制，拥塞机制导致非常慢，就需要重新设计协议来处理。</p>
-</li>
-<li>
-<p><strong>写频繁</strong>：游戏中的每一个操作都可能是一个数据，移动、攻击、交易、经验增长等等，所以游戏通常来说需要定时写数据，否则可能会有DB性能瓶颈。</p>
-</li>
-<li>
-<p><strong>互动</strong>：很多游戏是多人游戏，需要玩家互动，这个时候需要保持任何玩家之间都能及时的互动或者沟通，对服务器架构上的设计就有一定的要求，互联网的很多业务分离的微服务架构，很难让所有的玩家能及时的沟通。</p>
-</li>
-<li>
-<p><strong>复杂度高</strong>：由于游戏大多数是交互的，所以做游戏后端开发的业务复杂度比互联网是高的，互联网主要是增删改查（高并发下也挺复杂，但是主要是性能复杂度）。但是游戏却是业务复杂度。比如，你做一个战斗系统，回合制（梦幻西游）的战斗系统怎么做，怎么保存交互的状态，Moba（网络编程）的战斗系统怎么做，怎么处理每一帧的指令。</p>
-</li>
-<li>
-<p><strong>IO密集型</strong>：游戏大多数是IO密集型的，它的主要瓶颈在网络/磁盘IO，而不是CPU。因为游戏很多多人在线，相互之间同步的数据导致整体的IO非常高。因为CPU并不高，导致很多时候都不需要多线程。</p>
-</li>
-</ul>
-<h3 id="互联网特有的">互联网特有的：</h3>
-<ul>
-<li>
-<p><strong>请求响应</strong>：互联网应用一般只需要支持请求响应式的通信，最常用的协议是HTTP来做客户端和服务端的通信。互联网应用一般来说只用关心自己的行为，而不太关注其他用户的行为（即使关注，也没有ms级别的响应要求），所以一般来说即使需要读到其他用户的数据，只需要刷新一下页面就好，也不需要服务端实时推送。</p>
-</li>
-<li>
-<p><strong>无状态</strong>：互联网的应用一般是无状态的，也就是每次进行不同的操作，都需要服务端进行完整的数据读取操作，无法利用上次请求的数据。</p>
-</li>
-<li>
-<p><strong>服务拆分</strong>：互联网是比较容易做服务拆分的，因为业务相对独立，做成微服务架构，依赖关系用网络请求来请求数据。一个很长的调用链拿到所有数据。</p>
-</li>
-<li>
-<p><strong>读频繁</strong>：互联网一般是一个读频繁的场景，需要大量的读取数据，只有特定的行为才需要写入。要考虑一定的缓存机制，对数据库的设计要求更高。</p>
-</li>
-<li>
-<p><strong>延迟容忍</strong>：可以容忍一定的延迟，100ms和10ms对用户的体验影响并不大。</p>
-</li>
-<li>
-<p><strong>增删改查</strong>：互联网说到底就是增删改查。（当然1000用户的增删改查和10亿用户的增删改查不一样）。我现在处理十亿级数据千万级QPS的服务。主要考虑高并发下的服务的拆分，架构的设计，微服务化，数据拆分，缓存设计，异步存储，热点处理等等一系列高并发下的性能考虑。但是仅仅业务本身的复杂度相对游戏较低低，游戏有很多玩法是互联网没有的。</p>
-</li>
-<li>
-<p><strong>CPU密集型</strong>：互联网的服务器大多是CPU密集型的。业务层涉及到大量的数据计算。</p>
-</li>
-</ul>
+<p>如果你想了解游戏后端开发和互联网后端开发的区别是什么，欢迎看这篇文章：</p>
+<p><strong>游戏服务器和普通服务器的区别：</strong><a href="https://left-pocket.github.io/post/backend/game_server/">https://left-pocket.github.io</a></p>
 <h1 id="一聊聊服务器开发有哪些东西要考虑">一.聊聊服务器开发有哪些东西要考虑</h1>
 <h2 id="1开发语言的选择">1.开发语言的选择</h2>
 <p>工欲善其事,必先利其器，选择一门适合的开发语法对后期开发有着事半功倍的作用。</p>
