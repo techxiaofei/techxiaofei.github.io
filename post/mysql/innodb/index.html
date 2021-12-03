@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>后端面试之MySQL-InnoDB一颗B&#43;树可以存放多少行数据？ - Leftpocket的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：https://left-pocket.github.io 背景 MySQL的InnoDB引擎一棵B&#43;树可以存放多少行数据？这是一个很" /><meta name="keywords" content="MySQL" />
+
+
+<meta name="baidu-site-verification" content="code-swx03nFBNS" />
+<meta name="google-site-verification" content="sGfWBA2Wby1_gxJO3xmOtvpAOU2cCyhwXuU-2m4u75Y" />
+
+
+<script data-ad-client="ca-pub-8922621224955535" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://left-pocket.github.io/post/mysql/innodb/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="后端面试之MySQL-InnoDB一颗B&#43;树可以存放多少行数据？" />
+<meta property="og:description" content="原文地址：https://left-pocket.github.io 背景 MySQL的InnoDB引擎一棵B&#43;树可以存放多少行数据？这是一个很" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://left-pocket.github.io/post/mysql/innodb/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-02T10:00:00+08:00" />
+<meta property="article:modified_time" content="2021-12-02T10:00:00+08:00" />
+
+<meta itemprop="name" content="后端面试之MySQL-InnoDB一颗B&#43;树可以存放多少行数据？">
+<meta itemprop="description" content="原文地址：https://left-pocket.github.io 背景 MySQL的InnoDB引擎一棵B&#43;树可以存放多少行数据？这是一个很"><meta itemprop="datePublished" content="2021-12-02T10:00:00+08:00" />
+<meta itemprop="dateModified" content="2021-12-02T10:00:00+08:00" />
+<meta itemprop="wordCount" content="3061">
+<meta itemprop="keywords" content="MySQL," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="后端面试之MySQL-InnoDB一颗B&#43;树可以存放多少行数据？"/>
+<meta name="twitter:description" content="原文地址：https://left-pocket.github.io 背景 MySQL的InnoDB引擎一棵B&#43;树可以存放多少行数据？这是一个很"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Leftpocket的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Leftpocket的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">后端面试之MySQL-InnoDB一颗B&#43;树可以存放多少行数据？</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-12-02 </span>
+        <div class="post-category">
+            <a href="/categories/mysql/"> MySQL </a>
+            </div>
+          <span class="more-meta"> 约 3061 字 </span>
+          <span class="more-meta"> 预计阅读 7 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#mysql支持哪几种储存引擎">MySQL支持哪几种储存引擎</a></li>
+    <li><a href="#innodb索引">InnoDB索引</a>
+      <ul>
+        <li><a href="#什么是b树">什么是B+树</a></li>
+      </ul>
+    </li>
+    <li><a href="#文件结构">文件结构</a></li>
+    <li><a href="#b树而非b树或hash">B+树而非B树或Hash</a></li>
+    <li><a href="#主键索引">主键索引</a></li>
+    <li><a href="#为什么推荐使用自增id做主键">为什么推荐使用自增ID做主键</a></li>
+    <li><a href="#储存计算">储存计算</a></li>
+    <li><a href="#每层分支">每层分支</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>原文地址：<a href="https://left-pocket.github.io/post/mysql/innodb/">https://left-pocket.github.io</a></p>
+<h1 id="背景">背景</h1>
+<p>MySQL的InnoDB引擎一棵<code>B+树</code>可以存放多少行数据？这是一个很有趣的面试题。<br>
+也许你会猜1千万，2千万，或者上亿条数据？其实这里面问的是你对InnoDB B+树这个结构的一些细节的掌握程度。<br>
+这个问题的答案也许没有那么重要，重要的是怎么通过这么一个问题，看懂InnoDB B+树数据结构的本质。<br>
+看完这篇文章，你可以同时回答以下几个关于InnoDB B+树的面试题：</p>
+<ul>
+<li>MySQL B+树能存多少数据</li>
+<li>MySQL B+树每层能有多少分支</li>
+<li>MySQL 为什么使用B+树而非B树/Hash</li>
+<li>MySQL 为什么推荐使用自增ID做主键</li>
+</ul>
+<h1 id="mysql支持哪几种储存引擎">MySQL支持哪几种储存引擎</h1>
+<ul>
+<li>InnoDB - 具备外键支持功能的事务处理引擎</li>
+<li>MyISAM - 主要的非事务处理存储引擎</li>
+<li>Memory - 置于内存的表</li>
+<li>Merge - 用来管理由多个 MyISAM 表构成的表集合</li>
+<li>Archive - 用于数据存档的引擎，数据被插入后就不能在修改了，且不支持索引。</li>
+<li>CSV - 在存储数据时，会以逗号作为数据项之间的分隔符。</li>
+<li>Blackhole - 会丢弃写操作，该操作会返回空内容。</li>
+</ul>
+<p>而InnoDB作为最主要的储存引擎，也是MySQL的核心。
+了解InnoDB储存引擎，有助于我们深入理解MySQL的机制。
+而InnoDB的核心就是它的B+树索引。</p>
+<h1 id="innodb索引">InnoDB索引</h1>
+<p>InnoDB支持以下几种索引：</p>
+<ul>
+<li>B+树索引 - 传统意义上的索引，B+树索引并不能根据键值找到具体的行数据，B+树索引只能找到行数据锁在的页，然后通过把页读到内存，再在内存中查找到行数据。B+树索引也是最常用的最为频繁使用的索引。</li>
+<li>全文索引 - 全文索引是一种比较特殊的索引，一般都是基于倒排索引来实现的，可以解决 <code>like %xxx%</code>语句时，索引会失效的问题。</li>
+<li>哈希索引 - 由数据库自身根据你的使用情况创建的，并不能人为的干预，所以叫作自适应哈希索引，采用的是哈希表数据结构。所以对于字典类型查询就非常的快，但是对于范围查询就无能为力啦。</li>
+</ul>
+<h2 id="什么是b树">什么是B+树</h2>
+<p>B+树是一种树数据结构，通常用于数据库和操作系统的文件系统中。B+树的特点是能够保持数据稳定有序，其插入与修改拥有较稳定的对数时间复杂度。<br>
+一个B+树有以下特征：
+有n个子树的中间节点包含n个元素，每个元素不保存数据，只用来索引，所有数据都保存在叶子节点。
+所有叶子节点包含元素的信息以及指向记录的指针，且叶子节点按关键字自小到大顺序链接。
+所有的中间节点元素都同时存在于子节点，在子节点元素中是最大（或最小）元素。</p>
+<p><img src="/img/mysql/mysql_innodb_bplus.png" alt="B+树"></p>
+<p>所有的数据都在叶子节点，且每一个叶子节点都带有指向下一个节点的指针，形成了一个有序的链表。为什么要有序呢？其实是为了范围查询。<br>
+比如说<code>select * from tab where id &gt; 1 and id &lt; 100;</code>这个语句，当找到1后，只需顺着节点和指针顺序遍历就可以一次性访问到所有数据节点，极大的提高了范围区间的查询效率。而哈希索引对这种范围查询是无能为力的。</p>
+<p>以下为B+树的优势：</p>
+<ul>
+<li>单一节点存储更多元素，减少IO</li>
+<li>所有查询都要找到叶子节点，查询稳定</li>
+<li>所有叶子节点形成有序链表，方便范围查询</li>
+</ul>
+<p>一般性情况，数据库的B+树的高度一般在2~4层，这就是说找到某一键值的行记录最多需要2到4次逻辑IO，速度是非常快的。<br>
+当然，由上图可得，范围查找的IO次数取决于范围查找的数量。</p>
+<h1 id="文件结构">文件结构</h1>
+<p>InnoDB存储引擎的最小储存单元——页（Page），一个页的大小默认是是16K，我们可以通过参数自定义设置大小。<br>
+在InnoDB中B+树的一个节点大小为<code>1页</code>，也就是16k。之所以设置为一页，是因为对于大部分业务，一页就足够了。<br>
+但如果表中一行的数据长度超过了16k，这时候就会出现行溢出，溢出的行是存放在另外的地方，存放该溢出数据的页叫<code>uncompresse blob page</code>。<br>
+还需注意的是，InnoDB采用聚簇索引的方式把数据存放起来，即B+树结构，因此每个页块中至少有两行数据，否则就失去了B+树的意义（每一个页中只有一条数据，整个树就退化成为了一条双向链表），这样就得出了一行数据的最大长度就限制为了8k。<br>
+总结一下：</p>
+<ol>
+<li>InnoDB 存储引擎的最小存储单元是页，页可以用于存放数据也可以用于存放键值 + 指针，在 B+ 树中叶子节点存放数据，非叶子节点存放键值 + 指针。</li>
+<li>索引组织表通过非叶子节点的二分查找法以及指针确定数据在哪个页中，进而在去数据页中查找到需要的数据。</li>
+</ol>
+<h1 id="b树而非b树或hash">B+树而非B树或Hash</h1>
+<p>Hash的话范围查找或者排序性能很差，只能进行全表扫描并依次判断是否满足条件。
+B树可以在非叶结点中存储数据，每个节点都能储存数据，每个节点能分配给子节点的空间更少，层数更多。IO次数更多。范围查找需要向父子节点间遍历，IO次数更多。</p>
+<h1 id="主键索引">主键索引</h1>
+<p>使用数据库的自动增长（auto_increment），是比较简单和常见的ID生成方案，数据库内部可以确保生成id的唯一性。
+如果在创建表时没有显式地定义主键,则InnoDB存储引擎会按如下方式选择或创建主键:</p>
+<ol>
+<li>首先判断表中是否有非空的唯一索引,如果有,则该列即为主键。</li>
+<li>如果不符合上述条件,InnoDB存储引擎自动创建一个6字节大小的指针。</li>
+</ol>
+<h1 id="为什么推荐使用自增id做主键">为什么推荐使用自增ID做主键</h1>
+<p>这也是一个常见的面试题。为什么呢，通过上面我们应该了解了B+树到本质。</p>
+<p>如果是主键是自增ID，那么就在一页插入满才插入下一页。</p>
+<p>如果碰到不规则数据插入时，为了保持B+树的平衡，会造成频繁的页分裂和页旋转，插入速度比较慢。</p>
+<p>所以聚簇索引的主键值应尽量是连续增长的值，而不是随机值(不要用随机字符串或UUID)。</p>
+<p>故对于InnoDB的主键，尽量用整型，而且是递增的整型。这样在存储/查询上都是非常高效的。</p>
+<p>为什么不用string呢，一般你用string做主键的话，一般使用UUID这种唯一性高的，或者电话号码或者身份证号码这种唯一性的，都大于8字节。
+除了上面说的插入性能，由于每个非主键索引的叶子节点上都是主键的值。如果用身份证号做主键，那么每个二级索引的叶子节点占用约20个字节，而如果用整型做主键，则只要4个字节，如果是长整型（bigint）则是8个字节。显然，主键长度越小，普通索引的叶子节点就越小，普通索引占用的空间也就越小。</p>
+<h1 id="储存计算">储存计算</h1>
+<p>其实储存计算有一个前提，我们要先假设主键ID的大小和一行数据的大小：
+我们假设主键ID为bigint类型，8字节。
+一行数据大小为1K左右。
+这样我们那么一个页可以存放 16 行这样的数据。
+数据页16K是一个包含文件头/页头/页尾等结构的数据页。
+所以以上只是估算。
+<img src="/img/mysql/mysql_innodb_page.png" alt="B+树"></p>
+<p>其实这也很好算，我们假设主键 ID 为 bigint 类型，长度为 8 字节，而指针大小在 InnoDB 源码中设置为 6 字节，这样一共 14 字节，我们一个页中能存放多少这样的单元，其实就代表有多少指针，即 <code>16384/14=1170</code>。<br>
+所以我们每个非叶子结点最多有<code>1170</code>个子节点。<br>
+那么可以算出一棵高度为 2 的 B+ 树，能存放 <code>1170*16=18720</code> 条这样的数据记录。</p>
+<p>根据同样的原理我们可以算出一个高度为 3 的 B+ 树可以存放： <code>1170*1170*16=21902400</code> （2100万）条这样的记录。
+那如果四层呢。
+那就是<code>1170*1170*1170*16=256亿</code>。当然了，大部分的InnoDB的B+树都是3到4层，为了性能，3层会更好。</p>
+<p>如果主键是4字节，或者一页的数据更少的情况下，那么数据量会更多。
+以上是大概预估。目的是为了让大家更深入的了解InnoDB B+树的知识，做到自己心中有数。其实这个面试题的意思，并不是为了得到一个具体的数字，二是分析这个问题本身。</p>
+<h1 id="每层分支">每层分支</h1>
+<p>这也是一个面试题。
+从上面其实我们已经得到答案了，那就是如果bigint主键，就是1170个分支。
+如果是int主键，那就是16348/10=1600个分支。总之在1000+以上。</p>
+<p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+<img src="/img/personal/qrcode_2.png" alt="pic"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-12-02
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/mysql/">MySQL</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/hugo/hugo_dns/">
+            <span class="next-text nav-default">从零开始搭建个人博客（五）- 申请免费域名并绑定到个人博客</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="leftpocket12@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://left-pocket.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -53,7 +53,7 @@
 <meta itemprop="name" content="手游服务器开发技术详解">
 <meta itemprop="description" content="原文地址：https://left-pocket.github.io 回顾我的码农生涯，在做互联网电商后端开发之前做过大概6年的游戏后端开发，"><meta itemprop="datePublished" content="2021-11-21T14:00:51+08:00" />
 <meta itemprop="dateModified" content="2021-11-21T14:00:51+08:00" />
-<meta itemprop="wordCount" content="3913">
+<meta itemprop="wordCount" content="4009">
 <meta itemprop="keywords" content="后端开发," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="手游服务器开发技术详解"/>
 <meta name="twitter:description" content="原文地址：https://left-pocket.github.io 回顾我的码农生涯，在做互联网电商后端开发之前做过大概6年的游戏后端开发，"/>
@@ -140,8 +140,8 @@
         <div class="post-category">
             <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"> 后端开发 </a>
             </div>
-          <span class="more-meta"> 约 3913 字 </span>
-          <span class="more-meta"> 预计阅读 8 分钟 </span>
+          <span class="more-meta"> 约 4009 字 </span>
+          <span class="more-meta"> 预计阅读 9 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -200,9 +200,6 @@
 <p><strong>主动推送</strong>：游戏服务器由于保持连接和状态，任何数据的改动可以通过服务端主动通知客户端的方式，这样就只需要推送修改的数据。不需要客户端频繁去刷新。</p>
 </li>
 <li>
-<p><strong>低带宽</strong>：因为游戏可以服务端保持状态，所以每次请求只需要发送修改的数据即可。</p>
-</li>
-<li>
 <p><strong>低延迟</strong>：很多游戏服务器，尤其是 RPG，MOBA， FPS等游戏，对延迟容忍度非常低，网络拥堵情况下tcp协议由于重传机制，拥塞机制导致非常慢，就需要重新设计协议来处理。</p>
 </li>
 <li>
@@ -215,7 +212,7 @@
 <p><strong>复杂度高</strong>：由于游戏大多数是交互的，所以做游戏后端开发的业务复杂度比互联网是高的，互联网主要是增删改查（高并发下也挺复杂，但是主要是性能复杂度）。但是游戏却是业务复杂度。比如，你做一个战斗系统，回合制（梦幻西游）的战斗系统怎么做，怎么保存交互的状态，Moba（网络编程）的战斗系统怎么做，怎么处理每一帧的指令。</p>
 </li>
 <li>
-<p><strong>IO密集型</strong>：游戏大多数是IO密集型的，</p>
+<p><strong>IO密集型</strong>：游戏大多数是IO密集型的，它的主要瓶颈在网络/磁盘IO，而不是CPU。因为游戏很多多人在线，相互之间同步的数据导致整体的IO非常高。因为CPU并不高，导致很多时候都不需要多线程。</p>
 </li>
 </ul>
 <h3 id="互联网特有的">互联网特有的：</h3>
@@ -230,16 +227,16 @@
 <p><strong>服务拆分</strong>：互联网是比较容易做服务拆分的，因为业务相对独立，做成微服务架构，依赖关系用网络请求来请求数据。一个很长的调用链拿到所有数据。</p>
 </li>
 <li>
-<p><strong>高带宽</strong>：互联网应用由于无状态的特性，每次请求不同的页面，需要加载所有的必要数据，比如每次进入到商品页面需要把商品的数据重新加载到客户端。</p>
-</li>
-<li>
 <p><strong>读频繁</strong>：互联网一般是一个读频繁的场景，需要大量的读取数据，只有特定的行为才需要写入。要考虑一定的缓存机制，对数据库的设计要求更高。</p>
 </li>
 <li>
 <p><strong>延迟容忍</strong>：可以容忍一定的延迟，100ms和10ms对用户的体验影响并不大。</p>
 </li>
 <li>
-<p><strong>增删改查</strong>：互联网说到底就是增删改查，（当然1000用户的增删改查和10亿用户的增删改查不一样）。主要考虑高并发下的数据的优化，服务的拆分，架构的设计等等。</p>
+<p><strong>增删改查</strong>：互联网说到底就是增删改查。（当然1000用户的增删改查和10亿用户的增删改查不一样）。我现在处理十亿级数据千万级QPS的服务。主要考虑高并发下的服务的拆分，架构的设计，微服务化，数据拆分，缓存设计，异步存储，热点处理等等一系列高并发下的性能考虑。但是仅仅业务本身的复杂度相对游戏较低低，游戏有很多玩法是互联网没有的。</p>
+</li>
+<li>
+<p><strong>CPU密集型</strong>：互联网的服务器大多是CPU密集型的。业务层涉及到大量的数据计算。</p>
 </li>
 </ul>
 <h1 id="一聊聊服务器开发有哪些东西要考虑">一.聊聊服务器开发有哪些东西要考虑</h1>
