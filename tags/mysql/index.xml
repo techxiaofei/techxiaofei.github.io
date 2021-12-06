@@ -35,15 +35,6 @@
     </item>
     
     <item>
-      <title>后端面试之MySQL</title>
-      <link>https://left-pocket.github.io/post/interview/mysql/</link>
-      <pubDate>Thu, 25 Nov 2021 00:03:00 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/interview/mysql/</guid>
-      <description>​ 原文地址：https://left-pocket.github.io 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点</description>
-    </item>
-    
-    <item>
       <title>MySQL死锁的产生</title>
       <link>https://left-pocket.github.io/post/mysql/dead_lock/</link>
       <pubDate>Mon, 05 Apr 2021 13:00:51 +0800</pubDate>

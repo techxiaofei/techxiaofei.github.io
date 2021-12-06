@@ -142,34 +142,6 @@
   </url>
   
   <url>
-    <loc>https://left-pocket.github.io/post/interview/mysql/</loc>
-    <lastmod>2021-11-25T00:03:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/</loc>
-    <lastmod>2021-11-25T00:03:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://left-pocket.github.io/post/interview/tcpip/</loc>
-    <lastmod>2021-11-25T00:01:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://left-pocket.github.io/tags/%E9%9D%A2%E8%AF%95/</loc>
-    <lastmod>2021-11-25T00:01:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://left-pocket.github.io/post/tcpip/socket_read_write/</loc>
     <lastmod>2021-11-25T00:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -185,6 +157,20 @@
   
   <url>
     <loc>https://left-pocket.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2021-11-25T00:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://left-pocket.github.io/tags/%E9%9D%A2%E8%AF%95/</loc>
+    <lastmod>2021-11-25T00:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/</loc>
     <lastmod>2021-11-25T00:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
