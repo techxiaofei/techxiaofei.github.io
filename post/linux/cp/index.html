@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Leftpocket的个人博客</title>
+  <title> - Leftpocket的个人博客</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="码农在新加坡" /><meta name="description" content="Hugo theme even example site." /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="码农在新加坡" /><meta name="description" content="inode 结构 了解文件操作命令例如rm、mv、cp的底层原理时，需要先了解 linux 中文件系统的基本原理。 在linux 系统中，磁盘通常被格式化为 ext3 或 ext4 格式，" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 <meta name="baidu-site-verification" content="code-swx03nFBNS" />
@@ -30,9 +30,7 @@
 <meta name="generator" content="Hugo 0.89.4 with theme even" />
 
 
-<link rel="canonical" href="https://left-pocket.github.io/" />
-  <link href="https://left-pocket.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Leftpocket的个人博客" />
-  <link href="https://left-pocket.github.io/index.xml" rel="feed" type="application/rss+xml" title="Leftpocket的个人博客" />
+<link rel="canonical" href="https://left-pocket.github.io/post/linux/cp/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -45,15 +43,20 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="Leftpocket的个人博客" />
-<meta property="og:description" content="Hugo theme even example site." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://left-pocket.github.io/" />
+<meta property="og:title" content="" />
+<meta property="og:description" content="inode 结构 了解文件操作命令例如rm、mv、cp的底层原理时，需要先了解 linux 中文件系统的基本原理。 在linux 系统中，磁盘通常被格式化为 ext3 或 ext4 格式，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://left-pocket.github.io/post/linux/cp/" /><meta property="article:section" content="post" />
 
-<meta itemprop="name" content="Leftpocket的个人博客">
-<meta itemprop="description" content="Hugo theme even example site."><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Leftpocket的个人博客"/>
-<meta name="twitter:description" content="Hugo theme even example site."/>
+
+
+<meta itemprop="name" content="">
+<meta itemprop="description" content="inode 结构 了解文件操作命令例如rm、mv、cp的底层原理时，需要先了解 linux 中文件系统的基本原理。 在linux 系统中，磁盘通常被格式化为 ext3 或 ext4 格式，">
+
+<meta itemprop="wordCount" content="505">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="inode 结构 了解文件操作命令例如rm、mv、cp的底层原理时，需要先了解 linux 中文件系统的基本原理。 在linux 系统中，磁盘通常被格式化为 ext3 或 ext4 格式，"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -123,39 +126,99 @@
     <main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
-          <section id="posts" class="posts">
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/linux/cp/"></a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
-        <span class="more-meta"> 约 505 字 </span>
-        <span class="more-meta"> 预计阅读 2 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      inode 结构 了解文件操作命令例如rm、mv、cp的底层原理时，需要先了解 linux 中文件系统的基本原理。 在linux 系统中，磁盘通常被格式化为 ext3 或 ext4 格式，
-    </div>
-    <div class="read-more">
-      <a href="/post/linux/cp/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    </section>
-  
-  <nav class="pagination">
-    <a class="prev" href="/page/3/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text">上一页</span>
-      </a>
+          <article class="post">
     
-  </nav>
+    <header class="post-header">
+      <h1 class="post-title"></h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 0001-01-01 </span>
+        
+          <span class="more-meta"> 约 505 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#rm">rm</a></li>
+    <li><a href="#rename">rename</a></li>
+    <li><a href="#unlikn">unlikn</a></li>
+    <li><a href="#cp">cp</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#不存在">不存在</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#mv">mv</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>inode 结构
+了解文件操作命令例如rm、mv、cp的底层原理时，需要先了解 linux 中文件系统的基本原理。</p>
+<p>在linux 系统中，磁盘通常被格式化为 ext3 或 ext4 格式，这两种文件系统对文件的存储和访问是通过一种被称为 inode 即 i 节点的机制来实现的。</p>
+<p>每个文件都对应一个 i 节点，i 节点存储了除文件名和文件内容之外的所有信息。</p>
+<p>除文件名和文件内容之外，一个文件还有哪些信息呢？其实这些额外的信息和文件的存储及读写方式有关。当我们读写文件时，通常是以流的形式，即认为文件的内容是连续的。但是在磁盘上，一个文件的内容通常是由多个固定大小的数据块即block构成的，并且这些数据块通常是不连续的。这时就需要一个额外的数据结构来保存各数据块的位置、数据块之间的顺序关系、文件大小、文件访问权限、文件的拥有者及修改时间等信息，即文件的元信息，而维护这些元信息的数据结构就被称为 i 结点。可以说，一个i 节点中包含了进程访问文件时所需要的所有信息。</p>
+<h1 id="rm">rm</h1>
+<h1 id="rename">rename</h1>
+<h1 id="unlikn">unlikn</h1>
+<h1 id="cp">cp</h1>
+<h3 id="不存在">不存在</h3>
+<p>当file_2不存在时，执行cp source destination，可以发现file_2和file_1的inode不一样，也就是用open()新建一个文件file_2，然后读取file_1的数据再写入file_2。</p>
+<h1 id="mv">mv</h1>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        0001-01-01
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/mysql/db_tidb_write_conflict/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">TiDB Write Conflict问题分析</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        
+      </nav>
+    </footer>
+  </article>
         </div>
         
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
 
       </div>
     </main>
