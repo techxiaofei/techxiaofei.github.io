@@ -53,7 +53,7 @@
 <meta itemprop="name" content="后端面试之Linux-cp和mv命令的区别">
 <meta itemprop="description" content="原文地址：https://left-pocket.github.io 背景 如果你突然被面试官问：cp和mv这两个linux的命令有什么区别？ 你"><meta itemprop="datePublished" content="2021-12-07T00:00:00+08:00" />
 <meta itemprop="dateModified" content="2021-12-07T00:00:00+08:00" />
-<meta itemprop="wordCount" content="2502">
+<meta itemprop="wordCount" content="2460">
 <meta itemprop="keywords" content="Linux," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="后端面试之Linux-cp和mv命令的区别"/>
 <meta name="twitter:description" content="原文地址：https://left-pocket.github.io 背景 如果你突然被面试官问：cp和mv这两个linux的命令有什么区别？ 你"/>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/linux/"> Linux </a>
             </div>
-          <span class="more-meta"> 约 2502 字 </span>
+          <span class="more-meta"> 约 2460 字 </span>
           <span class="more-meta"> 预计阅读 5 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -360,13 +360,12 @@ unlinkat(AT_FDCWD, &#34;src.txt&#34;, 0)        = 0
 </div><h3 id="unlink系统调用">unlink系统调用</h3>
 <p>从文件系统中删除一个名称。如果名称是文件的最后一个连接，并且没有其它进程将文件打开，名称对应的文件会实际被删除。<br>
 如果文件仍旧是打开的，或者是被进程占用，其内容不会被删除。只有当进程关闭该文件或终止时(这种情况下，内核关闭该进程所打开的全部文件)，该文件的内容才会被删除。</p>
-<p>所以你可能会遇到，一个进程在读写文件时，你发现磁盘空间不足，使用rm删除文件，却发现空间却没有释放的情况。
-使用<code>lsof | grep deleted</code>可以查看占用的进程。kill进城之后，文件才能真正的被删除。</p>
+<p>所以你可能会遇到，一个进程在读写文件时，你发现磁盘空间不足，使用rm删除文件，却发现磁盘空间却没有释放的情况。
+使用<code>lsof | grep deleted</code>可以查看占用的进程。kill进程之后，文件才能真正的被删除。</p>
 <h3 id="结论-2">结论</h3>
 <ul>
-<li>rm-&gt;unlink，只有当所有的进程都不占用此文件的时候，才会真正的从磁盘删除。</li>
+<li>rm调用unlink系统调用，只有当所有的进程都不占用此文件的时候，才会真正的从磁盘删除。</li>
 </ul>
-<p>既然我们看完了三个基础的命令，现在需要看一下他们使用的底层函数，rename和unlink。</p>
 <h1 id="替换可执行程序">替换可执行程序</h1>
 <p>不知道你还记不记得你是怎么替换可执行文件的，一般来说：</p>
 <p>可当你使用</p>
@@ -400,7 +399,7 @@ service restart backend_server
 <ul>
 <li>cp调用open系统函数，只会复制文件数据，不会复制inode索引节点的元数据。（不改变inode）</li>
 <li>mv调用rename系统调用，把<code>src.txt</code>重命名为目标文件，会将存储于inode索引节点上的文件元信息也移动到新文件中。（改变inode）</li>
-<li>rm-&gt;unlink，只有当所有的进程都不占用此文件的时候，才会真正的从磁盘删除。</li>
+<li>rm调用unlink系统调用，只有当所有的进程都不占用此文件的时候，才会真正的从磁盘删除。</li>
 </ul>
 <p>&lt;全文完&gt;</p>
 <p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
