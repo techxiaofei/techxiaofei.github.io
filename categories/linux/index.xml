@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on Leftpocket的个人博客</title>
+    <link>https://left-pocket.github.io/categories/linux/</link>
+    <description>Recent content in Linux on Leftpocket的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 07 Dec 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>后端面试之Linux-cp和mv指令的区别</title>
+      <link>https://left-pocket.github.io/post/linux/cp/</link>
+      <pubDate>Tue, 07 Dec 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/linux/cp/</guid>
+      <description>原文地址：https://left-pocket.github.io 背景 如果你突然被面试官问：cp和mv这两个linux的命令有什么区别？ 你</description>
+    </item>
+    
+  </channel>
+</rss>
