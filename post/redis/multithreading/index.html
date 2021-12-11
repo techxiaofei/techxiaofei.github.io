@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="码农在新加坡" /><meta name="description" content="背景 Redis是什么 Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储系统。 你可以把它作为数据库，缓存和消息中间" /><meta name="keywords" content="Redis" />
+<meta name="author" content="码农在新加坡" /><meta name="description" content="Redis基础 Redis是什么 Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储系统。 你可以把它作为数据库，缓存" /><meta name="keywords" content="Redis" />
 
 
 <meta name="baidu-site-verification" content="code-swx03nFBNS" />
@@ -44,19 +44,19 @@
 
 
 <meta property="og:title" content="一文看懂Redis 6.0多线程IO" />
-<meta property="og:description" content="背景 Redis是什么 Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储系统。 你可以把它作为数据库，缓存和消息中间" />
+<meta property="og:description" content="Redis基础 Redis是什么 Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储系统。 你可以把它作为数据库，缓存" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://left-pocket.github.io/post/redis/multithreading/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-12-09T00:00:51+08:00" />
 <meta property="article:modified_time" content="2021-12-09T00:00:51+08:00" />
 
 <meta itemprop="name" content="一文看懂Redis 6.0多线程IO">
-<meta itemprop="description" content="背景 Redis是什么 Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储系统。 你可以把它作为数据库，缓存和消息中间"><meta itemprop="datePublished" content="2021-12-09T00:00:51+08:00" />
+<meta itemprop="description" content="Redis基础 Redis是什么 Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储系统。 你可以把它作为数据库，缓存"><meta itemprop="datePublished" content="2021-12-09T00:00:51+08:00" />
 <meta itemprop="dateModified" content="2021-12-09T00:00:51+08:00" />
-<meta itemprop="wordCount" content="3194">
+<meta itemprop="wordCount" content="3396">
 <meta itemprop="keywords" content="Redis," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="一文看懂Redis 6.0多线程IO"/>
-<meta name="twitter:description" content="背景 Redis是什么 Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储系统。 你可以把它作为数据库，缓存和消息中间"/>
+<meta name="twitter:description" content="Redis基础 Redis是什么 Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储系统。 你可以把它作为数据库，缓存"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/redis/"> Redis </a>
             </div>
-          <span class="more-meta"> 约 3194 字 </span>
+          <span class="more-meta"> 约 3396 字 </span>
           <span class="more-meta"> 预计阅读 7 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -147,7 +147,7 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#背景">背景</a>
+    <li><a href="#redis基础">Redis基础</a>
       <ul>
         <li>
           <ul>
@@ -155,18 +155,28 @@
             <li><a href="#为什么用redis">为什么用Redis</a></li>
             <li><a href="#redis为什么快">Redis为什么快</a></li>
             <li><a href="#redis是单线程的吗">Redis是单线程的吗</a></li>
+            <li><a href="#redis网络模型">Redis网络模型</a></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><a href="#redis单线程模型">Redis单线程模型</a></li>
     <li><a href="#reactor模型">Reactor模型</a>
       <ul>
         <li>
           <ul>
             <li><a href="#单线程reactor模型">单线程Reactor模型</a></li>
             <li><a href="#master-worker-reactor模型">Master-Worker Reactor模型</a></li>
-            <li><a href="#redis-60的reactor模型">Redis 6.0的Reactor模型</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#redis-60的reactor模型">Redis 6.0的Reactor模型</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#为什么redis-60-要使用多线程">为什么Redis 6.0 要使用多线程</a></li>
+            <li><a href="#redis-60-网络模型">Redis 6.0 网络模型</a></li>
+            <li><a href="#redis-60和memcached多线程模型对比">Redis 6.0和Memcached多线程模型对比</a></li>
           </ul>
         </li>
       </ul>
@@ -177,7 +187,7 @@
   </div>
 </div>
     <div class="post-content">
-      <h1 id="背景">背景</h1>
+      <h1 id="redis基础">Redis基础</h1>
 <h3 id="redis是什么">Redis是什么</h3>
 <p>Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储系统。</p>
 <p>你可以把它作为数据库，缓存和消息中间件来使用。同时支持<code>strings</code>，<code>lists</code>，<code>hashes</code>，<code>sets</code>，<code>sorted sets</code>，<code>bitmaps</code>，<code>hyperloglogs</code>和<code>geospatial indexes</code>等数据类型。</p>
@@ -211,10 +221,11 @@
 但是整个网络模型依然是单线程的，所以我们称之为单线程。</p>
 </li>
 <li>
-<p><code>Redis 6.0</code> 就真正的在网络模型上加入<code>多线程IO</code>来解决网络IO的性能瓶颈。</p>
+<p><code>Redis 6.0</code> 就真正的在网络模型上加入<code>多线程IO</code>来解决网络IO的性能瓶颈。
+此时IO读写是多线程的，执行命令依旧是单线程的。</p>
 </li>
 </ol>
-<h1 id="redis单线程模型">Redis单线程模型</h1>
+<h3 id="redis网络模型">Redis网络模型</h3>
 <p>一张图看懂Redis的单线程模型：</p>
 <p><img src="/img/redis/redis_io.png" alt="redis"></p>
 <p>redis的网络事件处理器是基于Reactor模式，又叫做文件事件处理器。</p>
@@ -242,12 +253,12 @@ Redis 在处理客户端的请求时，包括<code>接收</code>(socket读)、<c
 </ul>
 <p>缺点：</p>
 <ul>
-<li>仅用一个线程处理请求，对于多核资源机器来说是有点浪费的</li>
+<li>仅用一个线程处理请求，对于多核资源机器来说是有点浪费的。</li>
 <li>当处理读写任务的线程负载比较重，将会阻塞后续的事件处理，导致整体延迟变大。</li>
 </ul>
 <p>应用：</p>
 <ul>
-<li>Redis线程模型。（6.0以前）</li>
+<li>Redis网络模型。（6.0版本以前）</li>
 </ul>
 <h3 id="master-worker-reactor模型">Master-Worker Reactor模型</h3>
 <p><img src="/img/redis/reactor2.png" alt="redis"></p>
@@ -265,33 +276,45 @@ Redis 在处理客户端的请求时，包括<code>接收</code>(socket读)、<c
 </ul>
 <p>缺点：</p>
 <ul>
-<li>增加了复杂度，如果多个subReactor操作同一份数据，可能有线程安全的问题。</li>
+<li>如果多个线程可能操作同一份数据，就涉及到底层数据同步的问题，则必然会引入某些同步机制，比如锁。增加了代码复杂度，同时增加了同步机制的开销。</li>
 </ul>
 <p>应用：</p>
 <ul>
-<li>Nginx, netty, Swoole, Memcached就是使用的这个模型</li>
+<li>Nginx, Netty, Swoole, Memcached就是使用的这个模型</li>
 </ul>
-<h3 id="redis-60的reactor模型">Redis 6.0的Reactor模型</h3>
-<p>6.0 版本之后，Redis 正式在核心网络模型中引入了多线程，也就是所谓的 <code>I/O threading</code>，至此 Redis 真正拥有了多线程模型。
-但是Redis的多线程模型却，并非标准的<code>Master-Worker Reactor</code>模型。他的多线程 <strong>只负责IO读写，不负责具体的执行。</strong></p>
-<p>为什么Redis 6.0 要使用多线程呢？<br>
-之前说了，CPU不是Redis的瓶颈，Redis的瓶颈最有可能是机器内存大小和网络带宽。
-从Redis自身角度来说，因为读写网络的<code>read/write</code>系统调用占用了Redis执行期间大部分CPU时间，瓶颈主要在于网络的 IO 消耗, 所以选择多线程IO来实现读写。主线程来执行Redis命令。<br>
-其实就是：将主线程 IO 读写任务拆分出来给一组独立的线程处理，使得多个 socket 读写可以并行化，但是 Redis 命令还是主线程串行执行。</p>
+<h1 id="redis-60的reactor模型">Redis 6.0的Reactor模型</h1>
+<p>Redis 6.0版本之后，Redis 正式在核心网络模型中引入了多线程，也就是所谓的 <code>I/O threading</code>，至此 Redis 真正拥有了多线程模型。
+但是Redis的多线程模型却并非标准的<code>Master-Worker Reactor</code>模型。他的多线程 <strong>只负责IO读写，不负责具体的执行。</strong></p>
+<h3 id="为什么redis-60-要使用多线程">为什么Redis 6.0 要使用多线程</h3>
+<p>之前说了，CPU不是Redis的瓶颈，Redis的瓶颈最有可能是机器内存大小和网络带宽。
+从Redis自身角度来说，因为读写网络的<code>read/write</code>系统调用占用了Redis执行期间大部分CPU时间，瓶颈主要在于网络的 IO 消耗, 所以选择多线程IO来实现读写。主线程来执行Redis命令。</p>
+<p><strong>总结就是：</strong><br>
+将主线程 IO 读写任务拆分出来给一组独立的线程处理，使得多个 socket 读写可以并行化，但是 Redis 命令还是主线程串行执行。</p>
+<h3 id="redis-60-网络模型">Redis 6.0 网络模型</h3>
 <p><img src="/img/redis/reactor3.png" alt="redis"></p>
 <p><strong>为什么这么设计呢？</strong></p>
+<ol>
+<li>前面提到 Redis 最初选择单线程网络模型的理由是：CPU 通常不会成为性能瓶颈，瓶颈往往是内存和网络，因此单线程足够了。那么为什么现在 Redis 又要引入多线程呢？很简单，就是 Redis 的<code>网络 I/O 瓶颈</code>已经越来越明显了。所以这个多线程是为了<code>解决IO的瓶颈</code>的。</li>
+<li>如果多线程包括了<code>IO读写，解析和执行</code>的整个过程，那么多线程需要面临线程安全的问题，Redis 6.0版本之前是没有考虑线程安全的，如果使用多线程来处理命令的执行，需要大量的改动来保证多线程的安全机制，实现更复杂。为了避免了不必要的上下文切换和竞争条件，多线程导致的切换而消耗 CPU，也不用考虑各种锁的问题，就让执行这一步只使用主线程。</li>
+</ol>
+<h3 id="redis-60和memcached多线程模型对比">Redis 6.0和Memcached多线程模型对比</h3>
+<p>相同点：</p>
 <ul>
-<li>前面提到 Redis 最初选择单线程网络模型的理由是：CPU 通常不会成为性能瓶颈，瓶颈往往是内存和网络，因此单线程足够了。那么为什么现在 Redis 又要引入多线程呢？很简单，就是 Redis 的网络 I/O 瓶颈已经越来越明显了。所以这个多线程是为了解决IO的瓶颈的。</li>
-<li>第二个原因就是，如果多线程包括了解析和执行的整个过程，那么多线程需要面临线程安全的问题，Redis 6.0版本之前是没有考虑线程安全的，如果使用多线程来处理命令的执行，需要大量的改动来保证多线程的安全机制，实现更复杂。为了避免了不必要的上下文切换和竞争条件，多线程导致的切换而消耗 CPU，也不用考虑各种锁的问题，就让执行这一步只使用主线程。</li>
+<li>都采用了 Master-Worker 的线程的模型</li>
+</ul>
+<p>不同点：</p>
+<ul>
+<li>Memcached 执行主逻辑也是在 Worker 线程里，模型更加简单，实现了真正的线程隔离，通过各种锁机制来保证数据的线程安全。</li>
+<li>而 Redis 把执行逻辑交还给 Master 线程，虽然一定程度上增加了模型复杂度，但也解决了数据的线程安全问题。</li>
 </ul>
 <h1 id="总结">总结</h1>
 <p>让我们来回顾一下 Redis 多线程网络模型的设计方案：</p>
 <ul>
-<li>使用 I/O 线程实现网络 I/O 多线程化，I/O 线程只负责网络 I/O 和命令解析，不执行客户端命令。</li>
+<li>使用 I/O 线程实现网络 I/O 多线程化，I/O 线程只负责网络 I/O 和命令解析，不执行具体的命令。</li>
 </ul>
 <p>Redis 的多线程网络模型实际上并不是一个标准的 <code>Master-Workers Reactor</code> 模型，Redis 的多线程方案中，I/O 线程任务仅仅是通过 socket 读取客户端请求命令并解析，却没有真正去执行命令。</p>
-<p>所有客户端命令最后还需要回到主线程去执行，因此对多核的利用率并不算高，而且每次主线程都必须在分配完任务之后忙轮询等待所有 I/O 线程完成任务之后才能继续执行其他逻辑。</p>
-<p>在我看来，Redis 目前的多线程方案更像是一个折中的选择：既保持了原系统的兼容性，又能利用多核提升 I/O 性能。</p>
+<p>所有客户端命令最后还需要回到<code>主线程去执行</code>，因此对多核的利用率并不算高，而且每次主线程都必须在分配完任务之后忙轮询等待所有 I/O 线程完成任务之后才能继续执行其他逻辑。</p>
+<p>Redis 目前的多线程方案更像是一个折中的选择：既保持了原系统的兼容性，又能利用多核提升 I/O 性能，来解决网络IO的性能瓶颈。</p>
 <p>&lt;全文完&gt;</p>
 <p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
 <img src="/img/personal/qrcode_2.png" alt="pic"></p>

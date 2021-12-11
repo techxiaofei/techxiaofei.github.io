@@ -13,7 +13,7 @@
       <pubDate>Thu, 09 Dec 2021 00:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/redis/multithreading/</guid>
-      <description>背景 Redis是什么 Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储系统。 你可以把它作为数据库，缓存和消息中间</description>
+      <description>Redis基础 Redis是什么 Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储系统。 你可以把它作为数据库，缓存</description>
     </item>
     
     <item>
