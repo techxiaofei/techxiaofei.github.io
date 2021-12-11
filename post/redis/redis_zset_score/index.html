@@ -53,7 +53,7 @@
 <meta itemprop="name" content="Redis Zset的精度问题分析及解决方案">
 <meta itemprop="description" content="原文地址：https://left-pocket.github.io/ 背景 最近使用Redis的SortedSet，使用int64作为scor"><meta itemprop="datePublished" content="2020-12-04T13:00:51+08:00" />
 <meta itemprop="dateModified" content="2020-12-04T13:00:51+08:00" />
-<meta itemprop="wordCount" content="1103">
+<meta itemprop="wordCount" content="1143">
 <meta itemprop="keywords" content="Redis," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Redis Zset的精度问题分析及解决方案"/>
 <meta name="twitter:description" content="原文地址：https://left-pocket.github.io/ 背景 最近使用Redis的SortedSet，使用int64作为scor"/>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/redis/"> Redis </a>
             </div>
-          <span class="more-meta"> 约 1103 字 </span>
+          <span class="more-meta"> 约 1143 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -272,6 +272,9 @@ Redis sorted sets use a double 64-bit floating point number to represent the sco
 </ol>
 <p>这样总长度就变为 32+9+12=53位。
 当然也可以根据需求随机组合。比如把timestamp改为10millionseconds级别，或者100millionseconds级别。然后把step的精度变小一点。</p>
+<p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+<img src="/img/personal/qrcode_2.png" alt="pic"></p>
 
     </div>
 
