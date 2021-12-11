@@ -53,7 +53,7 @@
 <meta itemprop="name" content="后端面试之Linux-cp和mv命令的区别">
 <meta itemprop="description" content="原文地址：https://left-pocket.github.io 背景 如果你突然被面试官问：cp和mv这两个linux的命令有什么区别？ 你"><meta itemprop="datePublished" content="2021-12-07T00:00:00+08:00" />
 <meta itemprop="dateModified" content="2021-12-07T00:00:00+08:00" />
-<meta itemprop="wordCount" content="2460">
+<meta itemprop="wordCount" content="2475">
 <meta itemprop="keywords" content="Linux," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="后端面试之Linux-cp和mv命令的区别"/>
 <meta name="twitter:description" content="原文地址：https://left-pocket.github.io 背景 如果你突然被面试官问：cp和mv这两个linux的命令有什么区别？ 你"/>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/linux/"> Linux </a>
             </div>
-          <span class="more-meta"> 约 2460 字 </span>
+          <span class="more-meta"> 约 2475 字 </span>
           <span class="more-meta"> 预计阅读 5 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -274,7 +274,7 @@ open(&#34;destination.txt&#34;, O_WRONLY|O_TRUNC) = 4
 <h1 id="mv">mv</h1>
 <h3 id="目标文件不存在时-1">目标文件不存在时</h3>
 <p>当目标文件<code>dest.txt</code>不存在时，执行<code>mv src.txt dest.txt</code>。<br>
-可以发现<code>dest.txt</code>和<code>src.txt</code>的inode一样，底层调用了rename()，他们的inode信息保持不变。
+可以发现<code>dest.txt</code>和<code>src.txt</code>的inode一样，底层调用了rename()，inode信息与<code>src.txt</code>的索引节点保持一致。<br>
 注：centos 7.5以上的版本，调用<code>renameat2</code>函数，7.5及以下的函数，依旧调用<code>rename</code>函数，没有本质的区别。</p>
 <p><strong>mv前：</strong></p>
 <ul>
@@ -304,7 +304,7 @@ renameat2(AT_FDCWD, &#34;src.txt&#34;, AT_FDCWD, &#34;dest.txt&#34;, 0) = 0
 </div>
 </div><h3 id="目标文件存在时-1">目标文件存在时</h3>
 <p>当目标文件<code>dest.txt</code>存在时，执行<code>mv src.txt dest.txt</code>。<br>
-可以发现<code>dest.txt</code>和<code>src.txt</code>的inode一样（之前的<code>dest.txt</code>的inode不见了），底层调用了rename()，他们的inode信息保持不变。</p>
+可以发现<code>dest.txt</code>和<code>src.txt</code>的inode一样（之前的<code>dest.txt</code>的inode不见了），底层调用了rename()，inode变为<code>src.txt</code>的索引节点。</p>
 <p><strong>mv前：</strong></p>
 <ul>
 <li>src.txt: <code>Inode: 34643179</code></li>
@@ -427,7 +427,11 @@ service restart backend_server
           <a href="/tags/linux/">Linux</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/redis/multithreading/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">一文看懂Redis 6.0多线程IO</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
         <a class="next" href="/post/mysql/table/">
             <span class="next-text nav-default">MySQL对于千万级的大表要怎么优化？</span>
             <span class="next-text nav-mobile">下一篇</span>

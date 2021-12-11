@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 07 Dec 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Dec 2021 00:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>一文看懂Redis 6.0多线程IO</title>
+      <link>https://left-pocket.github.io/post/redis/multithreading/</link>
+      <pubDate>Thu, 09 Dec 2021 00:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/redis/multithreading/</guid>
+      <description>背景 Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储系统，你可以把它作为数据库，缓存和消息中间件来使用。同时支</description>
+    </item>
+    
     <item>
       <title>后端面试之Linux-cp和mv命令的区别</title>
       <link>https://left-pocket.github.io/post/linux/cp/</link>
