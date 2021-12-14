@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos" /><meta name="keywords" content="MySQL" />
+<meta name="author" content="码农在新加坡" /><meta name="description" content="背景 MySQL死锁问题涉及到MySQL一系列的基础知识，比如事务，隔离级别，各种锁类型，以及各种 SQL 语句的加锁原理。很多开发人员很少会遇到死锁" /><meta name="keywords" content="MySQL" />
 
 
 <meta name="baidu-site-verification" content="code-swx03nFBNS" />
@@ -44,19 +44,19 @@
 
 
 <meta property="og:title" content="MySQL死锁的产生" />
-<meta property="og:description" content="原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos" />
+<meta property="og:description" content="背景 MySQL死锁问题涉及到MySQL一系列的基础知识，比如事务，隔离级别，各种锁类型，以及各种 SQL 语句的加锁原理。很多开发人员很少会遇到死锁" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://left-pocket.github.io/post/mysql/dead_lock/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-04-05T13:00:51+08:00" />
 <meta property="article:modified_time" content="2021-04-05T13:00:51+08:00" />
 
 <meta itemprop="name" content="MySQL死锁的产生">
-<meta itemprop="description" content="原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos"><meta itemprop="datePublished" content="2021-04-05T13:00:51+08:00" />
+<meta itemprop="description" content="背景 MySQL死锁问题涉及到MySQL一系列的基础知识，比如事务，隔离级别，各种锁类型，以及各种 SQL 语句的加锁原理。很多开发人员很少会遇到死锁"><meta itemprop="datePublished" content="2021-04-05T13:00:51+08:00" />
 <meta itemprop="dateModified" content="2021-04-05T13:00:51+08:00" />
-<meta itemprop="wordCount" content="1403">
+<meta itemprop="wordCount" content="1314">
 <meta itemprop="keywords" content="MySQL," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="MySQL死锁的产生"/>
-<meta name="twitter:description" content="原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos"/>
+<meta name="twitter:description" content="背景 MySQL死锁问题涉及到MySQL一系列的基础知识，比如事务，隔离级别，各种锁类型，以及各种 SQL 语句的加锁原理。很多开发人员很少会遇到死锁"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/mysql/"> MySQL </a>
             </div>
-          <span class="more-meta"> 约 1403 字 </span>
+          <span class="more-meta"> 约 1314 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -167,10 +167,7 @@
   </div>
 </div>
     <div class="post-content">
-      <div style='display: none'>
-原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/post/mysql/dead_lock/)
-</div>
-<h1 id="背景">背景</h1>
+      <h1 id="背景">背景</h1>
 <p>MySQL死锁问题涉及到MySQL一系列的基础知识，比如事务，隔离级别，各种锁类型，以及各种 SQL 语句的加锁原理。很多开发人员很少会遇到死锁的问题。但是死锁却是一个很考验MySQL基本功的技术点。
 这篇文章我们就从零分析死锁的方方面面。</p>
 <h1 id="基础知识">基础知识</h1>

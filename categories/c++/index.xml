@@ -13,7 +13,7 @@
       <pubDate>Mon, 22 Nov 2021 15:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/cpp/do_while/</guid>
-      <description>​​ 原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/p</description>
+      <description>​​ 零.导引 第一次见到 do{...}while(0) 是在学习 libevent 的时候，看到里面有很多类似 1 2 3 4 5 6 7 #define TT_URI(want) do { \ char *ret = evhttp_uri_join(uri, url_tmp, sizeof(url_tmp)); \ tt_want(ret != NULL); \ tt_want(ret == url_tmp); \ if (strcmp(ret,want) != 0) \ TT_FAIL((&amp;#34;\&amp;#34;%s\&amp;#34; != \&amp;#34;%s\&amp;#34;&amp;#34;,ret,want)); \ } while(0) 当时</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Mon, 22 Nov 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/cpp/static/</guid>
-      <description>​ 原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/po</description>
+      <description>​ 背景 static 是 C/C++ 中很常用的修饰符，它被用来控制变量的存储方式和可见性。而 static 在 C 语言和 C++ 语言中各有多个用途，下面我就分类讲解： C语言中static</description>
     </item>
     
     <item>
@@ -31,7 +31,7 @@
       <pubDate>Sun, 21 Nov 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/cpp/secondary_pointer/</guid>
-      <description>原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos</description>
+      <description>一、概念 在如下的A指向B、B指向C的指向关系中： 首先 C是&amp;quot;一段内容&amp;quot;,比如你用malloc或者new分配了一块内存，然后</description>
     </item>
     
   </channel>

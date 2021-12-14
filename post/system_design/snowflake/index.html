@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos" /><meta name="keywords" content="snowflake" />
+<meta name="author" content="码农在新加坡" /><meta name="description" content="背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一。我们称之为分布式ID，分布式ID需要满足 唯一性、趋势递增性、高可用" /><meta name="keywords" content="snowflake" />
 
 
 <meta name="baidu-site-verification" content="code-swx03nFBNS" />
@@ -44,19 +44,19 @@
 
 
 <meta property="og:title" content="分布式ID生成方案-snowflake算法" />
-<meta property="og:description" content="原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos" />
+<meta property="og:description" content="背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一。我们称之为分布式ID，分布式ID需要满足 唯一性、趋势递增性、高可用" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://left-pocket.github.io/post/system_design/snowflake/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-11-24T13:00:51+08:00" />
 <meta property="article:modified_time" content="2020-11-24T13:00:51+08:00" />
 
 <meta itemprop="name" content="分布式ID生成方案-snowflake算法">
-<meta itemprop="description" content="原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos"><meta itemprop="datePublished" content="2020-11-24T13:00:51+08:00" />
+<meta itemprop="description" content="背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一。我们称之为分布式ID，分布式ID需要满足 唯一性、趋势递增性、高可用"><meta itemprop="datePublished" content="2020-11-24T13:00:51+08:00" />
 <meta itemprop="dateModified" content="2020-11-24T13:00:51+08:00" />
-<meta itemprop="wordCount" content="2278">
+<meta itemprop="wordCount" content="2181">
 <meta itemprop="keywords" content="系统设计," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="分布式ID生成方案-snowflake算法"/>
-<meta name="twitter:description" content="原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos"/>
+<meta name="twitter:description" content="背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一。我们称之为分布式ID，分布式ID需要满足 唯一性、趋势递增性、高可用"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/"> 系统设计 </a>
             </div>
-          <span class="more-meta"> 约 2278 字 </span>
+          <span class="more-meta"> 约 2181 字 </span>
           <span class="more-meta"> 预计阅读 5 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -173,10 +173,7 @@
   </div>
 </div>
     <div class="post-content">
-      <div style='display: none'>
-原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/post/system_design/snowflake/)
-</div>
-<h1 id="背景">背景</h1>
+      <h1 id="背景">背景</h1>
 <p>在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一。我们称之为分布式ID，分布式ID需要满足 唯一性、趋势递增性、高可用性、高性能等特点。</p>
 <p>snowflake算法，也叫雪花算法，是其中的一种分布式ID生成方案。是twitter公司内部分布式项目采用的ID生成算法，开源后广受国内大厂的好评，在该算法影响下各大公司相继开发出各具特色的分布式生成器。</p>
 <p>讲解雪花算法前，我们先概述一下分布式ID有哪些生成方案。</p>

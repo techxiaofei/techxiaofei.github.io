@@ -13,7 +13,7 @@
       <pubDate>Tue, 23 Nov 2021 18:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/lru/</guid>
-      <description>​​ 原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/p</description>
+      <description>​​ 概述 LRU是Least Recently Used的缩写，译为最近最少使用。它的理论基础为 “最近使用的数据会在未来一段时期内仍然被使用，已经很久没有使用的</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Wed, 03 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/bloom_filter/</guid>
-      <description>原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos</description>
+      <description>布隆过滤器是什么 本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入</description>
     </item>
     
     <item>
@@ -31,7 +31,7 @@
       <pubDate>Fri, 22 Jan 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/friends_comment_like/</guid>
-      <description>原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos</description>
+      <description>上篇文章介绍了朋友圈的技术设计，这篇将介绍朋友圈点赞和评论的实现方式。 需求介绍 对某条状态实现点赞与取消点赞的功能。 点赞列表按时间从小到大排序</description>
     </item>
     
     <item>
@@ -40,7 +40,7 @@
       <pubDate>Tue, 24 Nov 2020 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/snowflake/</guid>
-      <description>原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos</description>
+      <description>背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一。我们称之为分布式ID，分布式ID需要满足 唯一性、趋势递增性、高可用</description>
     </item>
     
   </channel>

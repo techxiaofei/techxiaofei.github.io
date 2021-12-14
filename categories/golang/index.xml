@@ -13,7 +13,7 @@
       <pubDate>Sun, 18 Apr 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/golang/goroutine_implementation/</guid>
-      <description>原文地址：[https://left-pocket.github.io/](https://left-pocket.github.io/po</description>
+      <description>协程基础知识 1.Goroutine是Go语言的协程（Coroutine），Groutine从语言层面上实现了并发，和线程一样共享堆，不共享栈</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Sat, 20 Mar 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/golang/append/</guid>
-      <description>原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos</description>
+      <description>背景 最近开发的时候写了下面这段类似的代码。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 func TestAppend() (result []int) { var wg sync.WaitGroup for i := 0; i &amp;lt; 100; i++ { v := i wg.Add(1) go func() { // other logic result = append(result, v) wg.Done() }()</description>
     </item>
     
     <item>
@@ -31,7 +31,7 @@
       <pubDate>Thu, 18 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/golang/functional_options/</guid>
-      <description>原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos</description>
+      <description>概览 最近阅读源码的时候看到一段不错的代码，但是当时却不是非常理解为什么这么写。 我们先来看一下源代码： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20</description>
     </item>
     
     <item>
@@ -40,7 +40,7 @@
       <pubDate>Thu, 18 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/golang/decorator/</guid>
-      <description>原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos</description>
+      <description>今天我们来介绍decorator这个经典的设计模式。 定义：装饰器模式主要对现有的类对象进行包裹和封装，以期望在不改变类对象及其类定义的情况下</description>
     </item>
     
   </channel>

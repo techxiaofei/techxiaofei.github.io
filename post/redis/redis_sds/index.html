@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：[https://left-pocket.github.io/](https://left-pocket.github.io/po" /><meta name="keywords" content="Redis, SDS" />
+<meta name="author" content="码农在新加坡" /><meta name="description" content="SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串表示， 几乎所有的 Redis 模块中都用了 sds。 本章将对 SDS 的实现、性能和功能等方" /><meta name="keywords" content="Redis, SDS" />
 
 
 <meta name="baidu-site-verification" content="code-swx03nFBNS" />
@@ -44,19 +44,19 @@
 
 
 <meta property="og:title" content="Redis SDS简单动态字符串" />
-<meta property="og:description" content="原文地址：[https://left-pocket.github.io/](https://left-pocket.github.io/po" />
+<meta property="og:description" content="SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串表示， 几乎所有的 Redis 模块中都用了 sds。 本章将对 SDS 的实现、性能和功能等方" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://left-pocket.github.io/post/redis/redis_sds/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-02-17T13:00:51+08:00" />
 <meta property="article:modified_time" content="2021-02-17T13:00:51+08:00" />
 
 <meta itemprop="name" content="Redis SDS简单动态字符串">
-<meta itemprop="description" content="原文地址：[https://left-pocket.github.io/](https://left-pocket.github.io/po"><meta itemprop="datePublished" content="2021-02-17T13:00:51+08:00" />
+<meta itemprop="description" content="SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串表示， 几乎所有的 Redis 模块中都用了 sds。 本章将对 SDS 的实现、性能和功能等方"><meta itemprop="datePublished" content="2021-02-17T13:00:51+08:00" />
 <meta itemprop="dateModified" content="2021-02-17T13:00:51+08:00" />
-<meta itemprop="wordCount" content="2151">
+<meta itemprop="wordCount" content="2061">
 <meta itemprop="keywords" content="Redis," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Redis SDS简单动态字符串"/>
-<meta name="twitter:description" content="原文地址：[https://left-pocket.github.io/](https://left-pocket.github.io/po"/>
+<meta name="twitter:description" content="SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串表示， 几乎所有的 Redis 模块中都用了 sds。 本章将对 SDS 的实现、性能和功能等方"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/redis/"> Redis </a>
             </div>
-          <span class="more-meta"> 约 2151 字 </span>
+          <span class="more-meta"> 约 2061 字 </span>
           <span class="more-meta"> 预计阅读 5 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -159,10 +159,7 @@
   </div>
 </div>
     <div class="post-content">
-      <div style='display: none'>
-原文地址：[https://left-pocket.github.io/](https://left-pocket.github.io/post/redis/redis_sds/)
-</div>
-<p>SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串表示， 几乎所有的 Redis 模块中都用了 sds。</p>
+      <p>SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串表示， 几乎所有的 Redis 模块中都用了 sds。</p>
 <p>本章将对 SDS 的实现、性能和功能等方面进行介绍， 并说明 Redis 使用 SDS 而不是传统 C 字符串的原因。</p>
 <h1 id="简单动态字符串sds">简单动态字符串(SDS)</h1>
 <h2 id="什么是sds">什么是SDS</h2>
