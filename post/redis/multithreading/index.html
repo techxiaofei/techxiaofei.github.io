@@ -266,8 +266,7 @@ Redis 在处理客户端的请求时，包括<code>接收</code>(socket读)、<c
 <p>比起单线程模型，它是将Reactor分成两部分：</p>
 <ul>
 <li><code>mainReactor</code> 负责监听server socket，用来处理网络IO连接建立操作，将建立的socketChannel指定注册给subReactor。 <strong>（只负责监听）</strong></li>
-<li><code>subReactor</code> 主要做和建立起来的socket做数据交互和事件业务处理操作。通常，subReactor个数上可与CPU个数等同。一般是多个，这样的话，就可以充分利用多核的优势。
-<strong>（负责IO读写和命令的执行）</strong></li>
+<li><code>subReactor</code> 主要做和建立起来的socket做数据交互和事件业务处理操作。通常，subReactor个数上可与CPU个数等同。一般是多个，这样的话，就可以充分利用多核的优势。 <strong>（负责IO读写和命令的执行）</strong></li>
 </ul>
 <p>区别于<code>单线程Reactor模式</code>，这种模式不再是单线程的事件循环，而是有多个线程<code>subReactors</code>各自维护一个独立的事件循环，由 <code>mainReactor</code> 负责接收新连接并分发给 <code>subReactors</code> 去独立处理，最后 <code>subReactors</code> 回写响应给客户端。</p>
 <p>优点：</p>

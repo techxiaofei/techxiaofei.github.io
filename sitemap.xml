@@ -429,20 +429,6 @@
   </url>
   
   <url>
-    <loc>https://left-pocket.github.io/post/others/ssr_centos7/</loc>
-    <lastmod>2020-08-06T13:00:51+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://left-pocket.github.io/tags/ssr/</loc>
-    <lastmod>2020-08-06T13:00:51+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://left-pocket.github.io/post/mysql/db_tidb_write_conflict/</loc>
     <lastmod>2020-08-06T13:00:51+08:00</lastmod>
     <changefreq>weekly</changefreq>

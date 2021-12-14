@@ -287,15 +287,6 @@
     </item>
     
     <item>
-      <title>Centos7安装SSR教程</title>
-      <link>https://left-pocket.github.io/post/others/ssr_centos7/</link>
-      <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/others/ssr_centos7/</guid>
-      <description>原文地址：https://left-pocket.github.io 记录一下在centos7下安装ssr(shadowsocksr)的教程。</description>
-    </item>
-    
-    <item>
       <title>TiDB Write Conflict问题分析</title>
       <link>https://left-pocket.github.io/post/mysql/db_tidb_write_conflict/</link>
       <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
