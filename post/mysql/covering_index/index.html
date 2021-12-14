@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：https://left-pocket.github.io 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈" /><meta name="keywords" content="MySQL, 回表查询" />
+<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos" /><meta name="keywords" content="MySQL, 回表查询" />
 
 
 <meta name="baidu-site-verification" content="code-swx03nFBNS" />
@@ -44,19 +44,19 @@
 
 
 <meta property="og:title" content="后端面试之MySQL-什么是回表查询和覆盖索引" />
-<meta property="og:description" content="原文地址：https://left-pocket.github.io 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈" />
+<meta property="og:description" content="原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://left-pocket.github.io/post/mysql/covering_index/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-11-26T00:00:00+08:00" />
 <meta property="article:modified_time" content="2021-11-26T00:00:00+08:00" />
 
 <meta itemprop="name" content="后端面试之MySQL-什么是回表查询和覆盖索引">
-<meta itemprop="description" content="原文地址：https://left-pocket.github.io 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈"><meta itemprop="datePublished" content="2021-11-26T00:00:00+08:00" />
+<meta itemprop="description" content="原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos"><meta itemprop="datePublished" content="2021-11-26T00:00:00+08:00" />
 <meta itemprop="dateModified" content="2021-11-26T00:00:00+08:00" />
-<meta itemprop="wordCount" content="1302">
+<meta itemprop="wordCount" content="1362">
 <meta itemprop="keywords" content="MySQL," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="后端面试之MySQL-什么是回表查询和覆盖索引"/>
-<meta name="twitter:description" content="原文地址：https://left-pocket.github.io 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈"/>
+<meta name="twitter:description" content="原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/mysql/"> MySQL </a>
             </div>
-          <span class="more-meta"> 约 1302 字 </span>
+          <span class="more-meta"> 约 1362 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -166,7 +166,9 @@
   </div>
 </div>
     <div class="post-content">
-      <p>原文地址：<a href="https://left-pocket.github.io/post/mysql/covering_index/">https://left-pocket.github.io</a></p>
+      <div style='display: none'>
+原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/post/mysql/covering_index/)
+</div>
 <p><strong>后端面试</strong>系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。</p>
 <h1 id="背景">背景</h1>
 <p>关于回表查询，是MySQL里面一个非常重要的知识点。理解回表查询，让你在实际项目中操作数据库的时候会有更好的性能考虑。<br>

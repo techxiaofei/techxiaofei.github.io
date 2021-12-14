@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：https://left-pocket.github.io ​ 一、概念 在如下的A指向B、B指向C的指向关系中： 首先 C是&amp;quot;一" /><meta name="keywords" content="c&#43;&#43;, 二级指针" />
+<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos" /><meta name="keywords" content="c&#43;&#43;, 二级指针" />
 
 
 <meta name="baidu-site-verification" content="code-swx03nFBNS" />
@@ -44,19 +44,19 @@
 
 
 <meta property="og:title" content="二级指针的作用详解" />
-<meta property="og:description" content="原文地址：https://left-pocket.github.io ​ 一、概念 在如下的A指向B、B指向C的指向关系中： 首先 C是&quot;一" />
+<meta property="og:description" content="原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://left-pocket.github.io/post/cpp/secondary_pointer/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-11-21T13:00:51+08:00" />
 <meta property="article:modified_time" content="2021-11-21T13:00:51+08:00" />
 
 <meta itemprop="name" content="二级指针的作用详解">
-<meta itemprop="description" content="原文地址：https://left-pocket.github.io ​ 一、概念 在如下的A指向B、B指向C的指向关系中： 首先 C是&quot;一"><meta itemprop="datePublished" content="2021-11-21T13:00:51+08:00" />
+<meta itemprop="description" content="原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos"><meta itemprop="datePublished" content="2021-11-21T13:00:51+08:00" />
 <meta itemprop="dateModified" content="2021-11-21T13:00:51+08:00" />
-<meta itemprop="wordCount" content="1624">
+<meta itemprop="wordCount" content="1686">
 <meta itemprop="keywords" content="c&#43;&#43;," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="二级指针的作用详解"/>
-<meta name="twitter:description" content="原文地址：https://left-pocket.github.io ​ 一、概念 在如下的A指向B、B指向C的指向关系中： 首先 C是&quot;一"/>
+<meta name="twitter:description" content="原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/pos"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/c&#43;&#43;/"> c&#43;&#43; </a>
             </div>
-          <span class="more-meta"> 约 1624 字 </span>
+          <span class="more-meta"> 约 1686 字 </span>
           <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -147,7 +147,6 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#一概念">一、概念</a></li>
     <li><a href="#二使用">二、使用</a>
       <ul>
         <li><a href="#1先看看一级指针的实现">1.先看看一级指针的实现</a></li>
@@ -159,9 +158,11 @@
   </div>
 </div>
     <div class="post-content">
-      <p>原文地址：<a href="https://left-pocket.github.io/post/cpp/secondary_pointer/">https://left-pocket.github.io</a>
-​</p>
-<h1 id="一概念">一、概念</h1>
+      <div style='display: none'>
+原文地址：[https://left-pocket.github.io](https://left-pocket.github.io/post/cpp/secondary_pointer/)
+</div>
+​
+# 一、概念
 <p>在如下的A指向B、B指向C的指向关系中：</p>
 <p>首先</p>
 <p>C是&quot;一段内容&quot;,比如你用malloc或者new分配了一块内存，然后塞进去&quot;一段内容&quot;,那就是C了。C的起始地址是 <strong>0x00000008</strong>。</p>

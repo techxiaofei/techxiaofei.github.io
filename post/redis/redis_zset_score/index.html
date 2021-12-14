@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：https://left-pocket.github.io/ 背景 最近使用Redis的SortedSet，使用int64作为scor" /><meta name="keywords" content="Redis, ZSet" />
+<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：[https://left-pocket.github.io/](https://left-pocket.github.io/po" /><meta name="keywords" content="Redis, ZSet" />
 
 
 <meta name="baidu-site-verification" content="code-swx03nFBNS" />
@@ -44,19 +44,19 @@
 
 
 <meta property="og:title" content="Redis Zset的精度问题分析及解决方案" />
-<meta property="og:description" content="原文地址：https://left-pocket.github.io/ 背景 最近使用Redis的SortedSet，使用int64作为scor" />
+<meta property="og:description" content="原文地址：[https://left-pocket.github.io/](https://left-pocket.github.io/po" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://left-pocket.github.io/post/redis/redis_zset_score/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-12-04T13:00:51+08:00" />
 <meta property="article:modified_time" content="2020-12-04T13:00:51+08:00" />
 
 <meta itemprop="name" content="Redis Zset的精度问题分析及解决方案">
-<meta itemprop="description" content="原文地址：https://left-pocket.github.io/ 背景 最近使用Redis的SortedSet，使用int64作为scor"><meta itemprop="datePublished" content="2020-12-04T13:00:51+08:00" />
+<meta itemprop="description" content="原文地址：[https://left-pocket.github.io/](https://left-pocket.github.io/po"><meta itemprop="datePublished" content="2020-12-04T13:00:51+08:00" />
 <meta itemprop="dateModified" content="2020-12-04T13:00:51+08:00" />
-<meta itemprop="wordCount" content="1143">
+<meta itemprop="wordCount" content="1205">
 <meta itemprop="keywords" content="Redis," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Redis Zset的精度问题分析及解决方案"/>
-<meta name="twitter:description" content="原文地址：https://left-pocket.github.io/ 背景 最近使用Redis的SortedSet，使用int64作为scor"/>
+<meta name="twitter:description" content="原文地址：[https://left-pocket.github.io/](https://left-pocket.github.io/po"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/redis/"> Redis </a>
             </div>
-          <span class="more-meta"> 约 1143 字 </span>
+          <span class="more-meta"> 约 1205 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -164,7 +164,9 @@
   </div>
 </div>
     <div class="post-content">
-      <p>原文地址：<a href="https://left-pocket.github.io/post/redis/redis_zset_score/">https://left-pocket.github.io/</a></p>
+      <div style='display: none'>
+原文地址：[https://left-pocket.github.io/](https://left-pocket.github.io/post/redis/redis_zset_score/)
+</div>
 <h3 id="背景">背景</h3>
 <p>最近使用Redis的SortedSet，使用int64作为score时遇到了一些预料之外的情况，在此总结一下。</p>
 <h2 id="介绍">介绍</h2>

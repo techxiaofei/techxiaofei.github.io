@@ -13,7 +13,7 @@
       <pubDate>Thu, 09 Dec 2021 00:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/redis/multithreading/</guid>
-      <description>原文地址：https://left-pocket.github.io/ Redis基础 Redis是什么 Redis是一个基于BSD开源的项目，是</description>
+      <description>原文地址：[https://left-pocket.github.io/](https://left-pocket.github.io/po</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Wed, 17 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/redis/redis_sds/</guid>
-      <description>原文地址：https://left-pocket.github.io/ SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串</description>
+      <description>原文地址：[https://left-pocket.github.io/](https://left-pocket.github.io/po</description>
     </item>
     
     <item>
@@ -31,7 +31,7 @@
       <pubDate>Fri, 04 Dec 2020 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/redis/redis_zset_score/</guid>
-      <description>原文地址：https://left-pocket.github.io/ 背景 最近使用Redis的SortedSet，使用int64作为scor</description>
+      <description>原文地址：[https://left-pocket.github.io/](https://left-pocket.github.io/po</description>
     </item>
     
   </channel>
