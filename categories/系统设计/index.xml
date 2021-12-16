@@ -17,12 +17,12 @@
     </item>
     
     <item>
-      <title>布隆过滤器(Bloom Filter)详解</title>
+      <title>5分钟搞懂布隆过滤器，掌握亿级数据过滤算法</title>
       <link>https://left-pocket.github.io/post/system_design/bloom_filter/</link>
       <pubDate>Wed, 03 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/bloom_filter/</guid>
-      <description>布隆过滤器是什么 本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入</description>
+      <description>布隆过滤器是什么 本质上布隆过滤器(Bloom Filter)是一种数据结构，比较巧妙的概率型数据结构（probabilistic data struct</description>
     </item>
     
     <item>

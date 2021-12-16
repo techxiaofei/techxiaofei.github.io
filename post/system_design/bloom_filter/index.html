@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>布隆过滤器(Bloom Filter)详解 - Leftpocket的个人博客</title>
+  <title>5分钟搞懂布隆过滤器，掌握亿级数据过滤算法 - Leftpocket的个人博客</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="码农在新加坡" /><meta name="description" content="布隆过滤器是什么 本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入" /><meta name="keywords" content="Redis, 布隆过滤器" />
+<meta name="author" content="码农在新加坡" /><meta name="description" content="布隆过滤器是什么 本质上布隆过滤器(Bloom Filter)是一种数据结构，比较巧妙的概率型数据结构（probabilistic data struct" /><meta name="keywords" content="Redis, 布隆过滤器" />
 
 
 <meta name="baidu-site-verification" content="code-swx03nFBNS" />
@@ -44,20 +44,20 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="布隆过滤器(Bloom Filter)详解" />
-<meta property="og:description" content="布隆过滤器是什么 本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入" />
+<meta property="og:title" content="5分钟搞懂布隆过滤器，掌握亿级数据过滤算法" />
+<meta property="og:description" content="布隆过滤器是什么 本质上布隆过滤器(Bloom Filter)是一种数据结构，比较巧妙的概率型数据结构（probabilistic data struct" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://left-pocket.github.io/post/system_design/bloom_filter/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-02-03T13:00:51+08:00" />
 <meta property="article:modified_time" content="2021-02-03T13:00:51+08:00" />
 
-<meta itemprop="name" content="布隆过滤器(Bloom Filter)详解">
-<meta itemprop="description" content="布隆过滤器是什么 本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入"><meta itemprop="datePublished" content="2021-02-03T13:00:51+08:00" />
+<meta itemprop="name" content="5分钟搞懂布隆过滤器，掌握亿级数据过滤算法">
+<meta itemprop="description" content="布隆过滤器是什么 本质上布隆过滤器(Bloom Filter)是一种数据结构，比较巧妙的概率型数据结构（probabilistic data struct"><meta itemprop="datePublished" content="2021-02-03T13:00:51+08:00" />
 <meta itemprop="dateModified" content="2021-02-03T13:00:51+08:00" />
-<meta itemprop="wordCount" content="3188">
+<meta itemprop="wordCount" content="3208">
 <meta itemprop="keywords" content="系统设计," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="布隆过滤器(Bloom Filter)详解"/>
-<meta name="twitter:description" content="布隆过滤器是什么 本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入"/>
+<meta name="twitter:title" content="5分钟搞懂布隆过滤器，掌握亿级数据过滤算法"/>
+<meta name="twitter:description" content="布隆过滤器是什么 本质上布隆过滤器(Bloom Filter)是一种数据结构，比较巧妙的概率型数据结构（probabilistic data struct"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -130,14 +130,14 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">布隆过滤器(Bloom Filter)详解</h1>
+      <h1 class="post-title">5分钟搞懂布隆过滤器，掌握亿级数据过滤算法</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2021-02-03 </span>
         <div class="post-category">
             <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/"> 系统设计 </a>
             </div>
-          <span class="more-meta"> 约 3188 字 </span>
+          <span class="more-meta"> 约 3208 字 </span>
           <span class="more-meta"> 预计阅读 7 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -149,17 +149,25 @@
     <nav id="TableOfContents">
   <ul>
     <li><a href="#布隆过滤器是什么">布隆过滤器是什么</a></li>
-    <li><a href="#问题">问题</a>
+    <li><a href="#实际场景">实际场景</a>
       <ul>
-        <li><a href="#内存预估">内存预估</a></li>
+        <li>
+          <ul>
+            <li><a href="#内存预估">内存预估</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#详解">详解</a>
       <ul>
-        <li><a href="#图解理论">图解理论</a></li>
-        <li><a href="#流程">流程</a></li>
-        <li><a href="#布隆过滤器计算器">布隆过滤器计算器</a></li>
-        <li><a href="#误判率">误判率</a></li>
+        <li>
+          <ul>
+            <li><a href="#图解理论">图解理论</a></li>
+            <li><a href="#流程">流程</a></li>
+            <li><a href="#布隆过滤器计算器">布隆过滤器计算器</a></li>
+            <li><a href="#误判率">误判率</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#实现">实现</a>
@@ -167,10 +175,7 @@
         <li><a href="#redis内实现">Redis内实现</a>
           <ul>
             <li><a href="#redisbloom-安装">RedisBloom 安装</a></li>
-          </ul>
-        </li>
-        <li><a href="#go语言bloom-filter实现">go语言Bloom Filter实现</a>
-          <ul>
+            <li><a href="#go语言bloom-filter实现">go语言Bloom Filter实现</a></li>
             <li><a href="#实现详解">实现详解</a></li>
           </ul>
         </li>
@@ -178,8 +183,12 @@
     </li>
     <li><a href="#总结">总结</a>
       <ul>
-        <li><a href="#优点">优点</a></li>
-        <li><a href="#缺点">缺点</a></li>
+        <li>
+          <ul>
+            <li><a href="#优点">优点</a></li>
+            <li><a href="#缺点">缺点</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -188,19 +197,19 @@
 </div>
     <div class="post-content">
       <h1 id="布隆过滤器是什么">布隆过滤器是什么</h1>
-<p>本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入和查询，可以用来告诉你 “某样东西一定不存在或者可能存在”。</p>
-<p>相比于传统的 List、Set、Map 等数据结构，它更高效、占用空间更少，但是缺点是其返回的结果是概率性的，而不是确切的。<br>
-可以一句话总结：</p>
+<p>本质上<code>布隆过滤器</code>(Bloom Filter)是一种数据结构，比较巧妙的<code>概率型数据结构</code>（probabilistic data structure），特点是高效地插入和查询，可以用来告诉你 <code>某样东西一定不存在或者可能存在</code>。</p>
+<p>相比于传统的 List、Set、Map 等数据结构，它更高效、占用空间更少，但是缺点是其返回的结果是概率性的，而不是确切的。</p>
+<p>可以一句话总结：</p>
 <ul>
 <li>如果Bloom Filter告诉你某个数据不存在，那么它一定不存在。</li>
 <li>如果Bloom Filter告诉你某个数据存在，那么它不一定存在。</li>
 </ul>
 <p>然后你可能要问了，他都不一定存在了，那它有什么用。
-它虽然不保证100%存在，但是这个<strong>误判率</strong>却是可以控制的，一般根据场景你可以设置一个可以接受的错误率，比如 0.0001(万分之一)，0.00001(十万分之一)。在很多场景下，这个概率是可以接受的。在这些场景下，它就有用武之地了。
-而它的优点非常明显，就是极少的空间占用，一般比正常存所有数据可以节省90%左右的内存。
-如果有人对具体的<strong>误判率</strong>怎么用数学公式推算出来的算法感兴趣。下面的<strong>详解</strong>部分会给出推导的链接，我这里就不推导了。</p>
-<h1 id="问题">问题</h1>
-<p><strong>大概描述了一下什么是布隆过滤器，我根据实际场景来让大家了解一下在什么场景下需要布隆过滤器，它又解决了什么问题。</strong></p>
+它虽然不保证100%存在，但是这个<code>误判率</code>却是可以控制的，一般根据场景你可以设置一个可以接受的错误率，比如 0.0001(万分之一)，0.00001(十万分之一)。在很多场景下，这个概率是可以接受的。在这些场景下，它就有用武之地了。</p>
+<p>而它的优点非常明显，就是极少的空间占用，一般比正常存所有数据可以<code>节省90%左右以上的内存。</code></p>
+<p>如果有人对具体的<code>误判率</code>怎么用数学公式推算出来的算法感兴趣。下面的<code>详解</code>部分会给出推导的链接。</p>
+<h1 id="实际场景">实际场景</h1>
+<p>根据实际场景来让大家了解一下在什么场景下需要布隆过滤器，它又解决了什么问题。</p>
 <p>我们有一个需求，是判断任意的两个userid有没有聊过天。即(useridA, useridB)是否聊过天，来决定前端场景是否展示对方的username。
 我们最初的设计是放在Redis里面，存放的格式是：</p>
 <div class="highlight"><div class="chroma">
@@ -215,10 +224,10 @@ Key: {prefix}{useridA},{useridB}
 Value: &#34;1&#34;
 </code></pre></td></tr></table>
 </div>
-</div><p>我们的Userid是int32的递增值，现在已经有10位整数。（eg: 1212341234）。所以这个key至少有22bytes.
-但是最终统计出来，我们的userid聊天的unique pair (useridA, useridB) 有4 Billion(40亿)的数据。
-也就是我们至少需要存40亿的数据到Redis。</p>
-<h2 id="内存预估">内存预估</h2>
+</div><p>我们的Userid是int32的递增值，现在已经有10位整数。（eg: 1212341234）。所以这个key至少有22字节。</p>
+<p>但是最终统计出来，我们的userid聊天的唯一Key：(useridA, useridB) 有4 Billion(40亿)的数据。</p>
+<p>也就是我们至少需要存40亿的数据到Redis。</p>
+<h3 id="内存预估">内存预估</h3>
 <p>Redis使用SDS的数据结构来储存字符串。
 格式简化后如下图所示：
 <img src="/img/redis/string_sds.png" alt="SDS"></p>
@@ -226,20 +235,20 @@ Value: &#34;1&#34;
 <li>Key占用储存空间：Key(22)+SDS(9)=31;</li>
 <li>Value占用储存空间：Value(1)+SDS(9)+redisObject(16)=26;</li>
 </ul>
-<p>总内存占用：(31+26) * 4 billion = 228G.
-我们预估未来还有10倍的增长空间，那就是2.28T.</p>
-<p>当然这只是粗略的估计，Redis有更加复杂详细的规则来优化内存占用。
-我自己尝试过插入1billion的数据到Redis，实际内存占用跟我的计算公式差不多。
+<p>总内存占用：(31+26) * 4 billion = 228G。</p>
+<p>我们预估未来还有10倍的增长空间，那就是2.28T。</p>
+<p>当然这只是粗略的估计，Redis有更加复杂详细的规则来优化内存占用。<br>
+我自己尝试过插入一百万的数据到Redis，实际内存占用跟我的计算公式差不多。<br>
 所以这个内存占用是非常夸张的，我们需要用技术方案来优化这个内存占用。</p>
-<p>布隆过滤器(Bloom Filter)闪耀登场。</p>
+<p>这个时候我们就需要解决内存的占用过多的问题，布隆过滤器(Bloom Filter)闪耀登场。</p>
 <h1 id="详解">详解</h1>
-<h2 id="图解理论">图解理论</h2>
+<h3 id="图解理论">图解理论</h3>
 <p>布隆过滤器实际上是一个很长的二进制向量和一系列随机映射函数，二进制大家应该都清楚，存储的数据不是0就是1，默认是0。</p>
 <p>主要用于判断一个元素是否在一个集合中，0代表不存在某个数据，1代表存在某个数据。
 布隆过滤器使用k个hash函数，每个哈希函数映射到Bit位的某一位，这样当k个位都为1的时候，我们认为这个元素存在。
 如图所示：
 <img src="/img/algorithm/bloom.png" alt="Bloom"></p>
-<h2 id="流程">流程</h2>
+<h3 id="流程">流程</h3>
 <p><strong>Set流程</strong></p>
 <ol>
 <li>设置K个hash函数. (f1, f2, f3, &hellip; fk).</li>
@@ -253,7 +262,7 @@ Value: &#34;1&#34;
 <li>任何一个值为0，则此元素不存在。</li>
 <li>所有的值都为0，则我们认为此元素存在。</li>
 </ol>
-<h2 id="布隆过滤器计算器">布隆过滤器计算器</h2>
+<h3 id="布隆过滤器计算器">布隆过滤器计算器</h3>
 <p><strong>我们首先定义以下布隆过滤器的相关变量。</strong></p>
 <ul>
 <li>n: 总的数据量的数量大小。</li>
@@ -266,9 +275,9 @@ Value: &#34;1&#34;
 <p>这里是在线布隆过滤器计算器 <a href="https://hur.st/bloomfilter/">布隆过滤器计算器</a></p>
 <p>下图是我计算出来的值。
 <img src="/img/algorithm/bloom_calculator.png" alt="Bloom"></p>
-<p>可以对比最初的设计方案，4 billion的数据， 0.001的错误率。只需要7GB的内存。
+<p>可以对比最初的设计方案，4 Billion的数据， 0.001的错误率。只需要7GB的内存。
 7/228=3%， 差不多节省了97的内存空间。</p>
-<h2 id="误判率">误判率</h2>
+<h3 id="误判率">误判率</h3>
 <p>你可能会好奇，误判率是什么。
 因为我们使用的是hash映射。不同的数据经过不同的hash函数是有几率映射到同一个位置的。
 例如：</p>
@@ -290,13 +299,15 @@ f2(java)=11
 f3(cpp)=2
 </code></pre></td></tr></table>
 </div>
-</div><p>当我们把 <strong>python, jave, cpp</strong> 插入到Bit Array后，位置(2,6,11)的值都为1.
-这个时候我们检查 <strong>golang</strong> 是否存在，由于这几个位置的值都为1， 所以系统会告诉我们 golang 存在。
-实际上我们并没有插入 golang。</p>
-<p>所以我们回到最初的定义：
-本质上<strong>布隆过滤器</strong>是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入和查询，可以用来告诉你 “<strong>某样东西一定不存在或者可能存在</strong>”。</p>
-<p>如果布隆过滤器告诉你个数据不存在，那么它<strong>一定不存在</strong>。
-如果布隆过滤器告诉你某个数据存在，那么它<strong>可能存在</strong>。（也可能不存在，误判）。</p>
+</div><p>当我们把 <strong>python, jave, cpp</strong> 插入到Bit Array后，位置(2,6,11)的值都为1。<br>
+这个时候我们检查 <strong>golang</strong> 是否存在，由于这几个位置的值都为1， 所以系统会告诉我们 golang 存在。<br>
+实际上我们并没有插入 <strong>golang</strong>， 这就产生了误判。</p>
+<p>所以我们回到最初的定义：<br>
+本质上<code>布隆过滤器</code>是一种数据结构，比较巧妙的<code>概率型数据结构</code>（probabilistic data structure），特点是高效地插入和查询，可以用来告诉你 <code>某样东西一定不存在或者可能存在</code>。</p>
+<ul>
+<li>如果布隆过滤器告诉你个数据不存在，那么它<code>一定不存在</code>。</li>
+<li>如果布隆过滤器告诉你某个数据存在，那么它<code>可能存在</code>。（也可能不存在，误判）。</li>
+</ul>
 <h1 id="实现">实现</h1>
 <h2 id="redis内实现">Redis内实现</h2>
 <p>Redis在4.0版本推出了 module 的形式，可以将 module 作为插件额外实现Redis的一些功能。官网推荐了一个 <a href="https://github.com/RedisBloom/RedisBloom">RedisBloom</a> 作为 Redis 布隆过滤器的 Module。
@@ -352,17 +363,17 @@ docker exec -it redis-redisbloom bash
 (integer) 0
 </code></pre></td></tr></table>
 </div>
-</div><p>Redis的Bloom Filter内部使用Redis的Bitmap来实现。
-Bitmap基于最小的单位bit进行存储，所以非常省空间。
-redis中bit映射被限制在512MB之内。
+</div><p>Redis的Bloom Filter内部使用Redis的Bitmap来实现。<br>
+Bitmap基于最小的单位bit进行存储，所以非常省空间。<br>
+redis中bit映射被限制在512MB之内。<br>
 有兴趣可以看一下Redis的官方文档。<a href="https://redislabs.com/redis-best-practices/bloom-filter-pattern/">Redis BloomFilter</a></p>
-<h2 id="go语言bloom-filter实现">go语言Bloom Filter实现</h2>
-<p>由于Redis的Bloom Filter并非Redis原生自带的功能，需要安装module才能使用，很多时候生产环境使用的云服务并不一定完美支持，所以一般开发过程中都是自己实现Bloom Filter并储存储存介质中。(比如：使用Redis的setbit/getbit储存在Bitmap中)。
-我们项目使用Golang，所以我自己实现了一个Golang的Bloom Filter并储存在Redis中，也可以选择储存在其他介质中，只需要实现<strong>BitmapProvider</strong> interface就可以。Bloom Filter和具体储存完全解耦。
-源代码如下：<a href="https://github.com/left-pocket/go-bloom">Go-bloom</a></p>
+<h3 id="go语言bloom-filter实现">go语言Bloom Filter实现</h3>
+<p>由于Redis的Bloom Filter并非Redis原生自带的功能，需要安装module才能使用，很多时候生产环境使用的云服务并不一定完美支持，所以一般开发过程中都是自己实现Bloom Filter并储存储存介质中。(比如：使用Redis的setbit/getbit储存在Bitmap中)。</p>
+<p>我们项目使用Golang，所以我自己实现了一个Golang的Bloom Filter并储存在Redis中，也可以选择储存在其他介质中，只需要实现<code>BitmapProvider</code> interface就可以。Bloom Filter和具体储存完全解耦。</p>
+<p>源代码如下：<a href="https://github.com/left-pocket/go-bloom">Go-bloom</a></p>
 <h3 id="实现详解">实现详解</h3>
-<p>我们的实现中，使用了Redis的Bitmap， Bitmap有 <strong>GETBIT和SETBIT</strong> 命令来操作Bit。
-在Redis中，一个字符串最多可以为512MB.</p>
+<p>我们的实现中，使用了Redis的Bitmap， Bitmap有 <strong>GETBIT和SETBIT</strong> 命令来操作Bit。<br>
+在Redis中，一个字符串最多可以为512MB。</p>
 <p>所以需要把数据分片到多个string中。
 <img src="/img/algorithm/bloom_redis.png" alt="Bloom"></p>
 <p>核心代码如下：</p>
@@ -398,7 +409,7 @@ redis中bit映射被限制在512MB之内。
 </span><span class="c1"></span><span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p><em>使用案例</em></p>
+</div><p><strong>使用案例</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -442,12 +453,12 @@ redis中bit映射被限制在512MB之内。
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="总结">总结</h1>
-<h2 id="优点">优点</h2>
+<h3 id="优点">优点</h3>
 <ul>
 <li>布隆过滤器告诉我们一个元素是否在一个集合里</li>
 <li>布隆过滤器非常省内存空间</li>
 </ul>
-<h2 id="缺点">缺点</h2>
+<h3 id="缺点">缺点</h3>
 <ul>
 <li>不支持删除 因为布隆过滤器是通过多个哈希函数把数据映射到多个bit中，那么不同的value可能映射到其中相同的bit中，所以如果删除某一个value，会影响所有其他映射到同样的bit中的value。</li>
 <li>误判率 由于是hash映射，所以多个value可能映射到同样的bit位中，可以通过增大hash的数量来减少误判率，但是无法完全避免。</li>

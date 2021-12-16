@@ -54,7 +54,7 @@
 <meta itemprop="name" content="Golang append是并发安全的吗">
 <meta itemprop="description" content="背景 最近开发的时候写了下面这段类似的代码。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 func TestAppend() (result []int) { var wg sync.WaitGroup for i := 0; i &lt; 100; i&#43;&#43; { v := i wg.Add(1) go func() { // other logic result = append(result, v) wg.Done() }()"><meta itemprop="datePublished" content="2021-03-20T13:00:51+08:00" />
 <meta itemprop="dateModified" content="2021-03-20T13:00:51+08:00" />
-<meta itemprop="wordCount" content="1369">
+<meta itemprop="wordCount" content="1597">
 <meta itemprop="keywords" content="Golang," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Golang append是并发安全的吗"/>
 <meta name="twitter:description" content="背景 最近开发的时候写了下面这段类似的代码。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 func TestAppend() (result []int) { var wg sync.WaitGroup for i := 0; i &lt; 100; i&#43;&#43; { v := i wg.Add(1) go func() { // other logic result = append(result, v) wg.Done() }()"/>
@@ -137,8 +137,8 @@
         <div class="post-category">
             <a href="/categories/golang/"> Golang </a>
             </div>
-          <span class="more-meta"> 约 1369 字 </span>
-          <span class="more-meta"> 预计阅读 3 分钟 </span>
+          <span class="more-meta"> 约 1597 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -152,11 +152,16 @@
     <li><a href="#原因分析">原因分析</a></li>
     <li><a href="#问题解决">问题解决</a>
       <ul>
-        <li><a href="#方案1">方案1</a></li>
-        <li><a href="#方案2">方案2</a></li>
+        <li>
+          <ul>
+            <li><a href="#方案1">方案1</a></li>
+            <li><a href="#方案2">方案2</a></li>
+            <li><a href="#panic原因">panic原因</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
-    <li><a href="#后记">后记</a></li>
+    <li><a href="#总结">总结</a></li>
   </ul>
 </nav>
   </div>
@@ -184,7 +189,7 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">func</span> <span class="nf">TestAppend</span><span class="p">()</span> <span class="p">(</span><span class="nx">result</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">TestAppend</span><span class="p">()</span> <span class="p">(</span><span class="nx">result</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
 	<span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
 	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
 		<span class="nx">v</span> <span class="o">:=</span> <span class="nx">i</span>
@@ -203,9 +208,11 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>就像这样，然后顺利通过测试到达生产环境。然后就出问题了。</p>
-<p>预期情况下，len(result) = 100, 但是大多数情况下，这个数据会&lt;=100。因为append这个函数不是并发安全的。也就是不能在多个goroutine里面对同一个slice使用append进行追加。
-<em>那么问题出在哪呢？</em>
-我们都知道slice是对数组一个连续片段的引用，当slice长度增加的时候，可能底层的数组会被换掉。当出在换底层数组之前，切片同时被多个goroutine拿到，并执行append操作。那么很多goroutine的append结果会被覆盖，导致n个gouroutine append后，长度小于n。</p>
+<p>预期情况下，len(result) = 100, 但是大多数情况下，这个数据会&lt;=100。因为append这个函数不是并发安全的。也就是不能在多个goroutine里面对同一个slice使用append进行追加。</p>
+<p>那么问题出在哪呢？</p>
+<p>我们都知道slice是对数组一个连续片段的引用，当slice长度增加的时候，可能底层的数组会被换掉。在换底层数组之前，切片同时被多个goroutine拿到，并执行append操作。那么很多goroutine的append结果会被覆盖，导致n个gouroutine append后，长度小于n。</p>
+<p>你以为这是最坏的影响吗，并不是的。数据出bug了是小事，最坏的影响是直接服务直接<code>panic</code>。<br>
+append咋还导致服务panic呢？且往下看。</p>
 <h1 id="原因分析">原因分析</h1>
 <p>要分析这个原因，我们需要了解slice的底层结构。</p>
 <div class="highlight"><div class="chroma">
@@ -217,7 +224,7 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">type</span> <span class="nx">slice</span> <span class="kd">struct</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">slice</span> <span class="kd">struct</span> <span class="p">{</span>
     <span class="nx">array</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span>
     <span class="nx">len</span>   <span class="kt">int</span>
     <span class="nx">cap</span>   <span class="kt">int</span>
@@ -228,7 +235,7 @@
 <p>可以看到，array是一个指向具体数组的指针，len是当前已经使用的长度，使用append的时候会再下一个位置填充数据并且把len加1。不加锁的情况下，由于操作并非原子的，可能两个goroutine同时往同一个位置写数据，就会导致数据覆盖。最终的长度小于实际期待的长度。</p>
 <h1 id="问题解决">问题解决</h1>
 <p>有两种方案解决这个问题。</p>
-<h2 id="方案1">方案1</h2>
+<h3 id="方案1">方案1</h3>
 <p>可以给append操作加锁，这样就会保证操作操作的原子性。不会被另一个goroutine打断。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -253,7 +260,7 @@
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">func</span> <span class="nf">TestAppendWithLock</span><span class="p">()</span> <span class="p">(</span><span class="nx">result</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">TestAppendWithLock</span><span class="p">()</span> <span class="p">(</span><span class="nx">result</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
 	<span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
 	<span class="kd">var</span> <span class="nx">lock</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">Mutex</span>
 	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
@@ -274,7 +281,7 @@
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="方案2">方案2</h2>
+</div><h3 id="方案2">方案2</h3>
 <p>如果slice的长度固定的情况下。可以直接使用make初始化固定长度，并使用下标赋值。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -295,7 +302,7 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">func</span> <span class="nf">TestSliceAppend</span><span class="p">()</span> <span class="p">(</span><span class="nx">result</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">TestSliceAppend</span><span class="p">()</span> <span class="p">(</span><span class="nx">result</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
 	<span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
 	<span class="nx">result</span> <span class="p">=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
@@ -312,19 +319,54 @@
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="后记">后记</h1>
-<p>你以为这就完了吗，其实并没有。在并发场景下，append导致的问题并不只是导致数据不一致的问题，有小概率会导致service crash.</p>
+</div><h3 id="panic原因">panic原因</h3>
+<p>这个panic是概率性的，有非常小的概率会发生，但是在高并发场景下，是必定会发生的。</p>
+<p>我们写个循环不停的执行并发append的函数：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">TestAppend</span><span class="p">()</span> <span class="p">(</span><span class="nx">result</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="nx">v</span> <span class="o">:=</span> <span class="nx">i</span>
+		<span class="nx">wg</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+		<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+			<span class="c1">// other logic
+</span><span class="c1"></span>			<span class="nx">result</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
+			<span class="nx">wg</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
+		<span class="p">}()</span>
+	<span class="p">}</span>
+
+	<span class="nx">wg</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
+	<span class="c1">//fmt.Printf(&#34;%v\n&#34;, len(result))
+</span><span class="c1"></span>	<span class="k">return</span> <span class="nx">result</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
 	<span class="k">for</span> <span class="nx">a</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">a</span> <span class="p">&lt;</span> <span class="mi">100000</span><span class="p">;</span> <span class="nx">a</span><span class="o">++</span> <span class="p">{</span>
 		<span class="nx">res</span> <span class="o">:=</span> <span class="nf">TestAppend</span><span class="p">()</span>
 		<span class="nb">println</span><span class="p">(</span><span class="s">&#34;len(res):&#34;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nx">res</span><span class="p">))</span>
@@ -366,7 +408,7 @@ Process finished with exit code 2
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-golang" data-lang="golang"><span class="nx">result</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">result</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>这一行。</p>
@@ -380,7 +422,7 @@ Process finished with exit code 2
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">go run -race main.go
 </code></pre></td></tr></table>
 </div>
-</div><p>可以看到<em>DATA RACE</em>的报错。</p>
+</div><p>可以看到<code>DATA RACE</code>的报错。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -397,27 +439,29 @@ Process finished with exit code 2
 WARNING: DATA RACE
 Read at 0x00c000100000 by goroutine 8:
   runtime.growslice()
-      /Users/coreserver/go1.14/src/runtime/slice.go:76 +0x0
+      /Users/left_pocket/go1.14/src/runtime/slice.go:76 +0x0
   main.TestAppend.func1()
-      /Users/coreserver/src/github.com/left-pocket/go-practice/concurrency_append/main.go:20 +0x179
+      /Users/left_pocket/src/github.com/left-pocket/go-practice/concurrency_append/main.go:20 +0x179
 
 </code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><p>找到go语言库的代码。</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">func</span> <span class="nf">growslice</span><span class="p">(</span><span class="nx">et</span> <span class="o">*</span><span class="nx">_type</span><span class="p">,</span> <span class="nx">old</span> <span class="nx">slice</span><span class="p">,</span> <span class="nx">cap</span> <span class="kt">int</span><span class="p">)</span> <span class="nx">slice</span> <span class="p">{</span>  <span class="c1">//line 76
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">growslice</span><span class="p">(</span><span class="nx">et</span> <span class="o">*</span><span class="nx">_type</span><span class="p">,</span> <span class="nx">old</span> <span class="nx">slice</span><span class="p">,</span> <span class="nx">cap</span> <span class="kt">int</span><span class="p">)</span> <span class="nx">slice</span> <span class="p">{</span>  <span class="c1">//line 76
 </span><span class="c1"></span><span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>发现了RACE CONDITION。
 使用goland的debug模式继续分析。
 <img src="/img/golang/debug_append.png" alt="debug_append"></p>
-<p>发现是在growslice函数里面调用memmove的时候发生了panic。基本可以确认是在slice扩容的过程中panic。
-可以在TestAppend里面加一行代码，来间接验证是扩容会产生panic。</p>
+<p>发现是在growslice函数里面调用memmove的时候发生了panic。可以确认是在slice扩容的过程中panic。<br>
+也就是恰好在append扩容的时候，两个goroutine同时进行memmove。</p>
+<p>可以在TestAppend里面加一行代码，预先分配容量，来间接验证是扩容会产生panic。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -437,7 +481,7 @@ Read at 0x00c000100000 by goroutine 8:
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">func</span> <span class="nf">TestAppend</span><span class="p">()</span> <span class="p">(</span><span class="nx">result</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">TestAppend</span><span class="p">()</span> <span class="p">(</span><span class="nx">result</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
 	<span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
 	<span class="nx">result</span> <span class="p">=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="c1">//set capacity first, will not add capacity anymore
 </span><span class="c1"></span>	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
@@ -455,7 +499,11 @@ Read at 0x00c000100000 by goroutine 8:
 </code></pre></td></tr></table>
 </div>
 </div><p>如果调用前初始化了capacity，就不会导致panic。</p>
-<p>但是golang goroutine中使用append是有可能导致service crash的。不仅仅是数据异常那么简单。使用的时候一定要谨慎。</p>
+<h1 id="总结">总结</h1>
+<p>Golang append并不是并发安全的，我相信使用过Golang的同学大部分都是知道的，但是他有概率会导致服务直接Crash，这才是最严重的。</p>
+<p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+<img src="/img/personal/qrcode_2.png" alt="pic"></p>
 
     </div>
 
