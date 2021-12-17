@@ -23,9 +23,9 @@
 <meta name="google-site-verification" content="sGfWBA2Wby1_gxJO3xmOtvpAOU2cCyhwXuU-2m4u75Y" />
 
 
+<script data-ad-client="ca-pub-8922621224955535" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8922621224955535"
-     crossorigin="anonymous"></script>
+
 
 
 <meta name="generator" content="Hugo 0.89.4 with theme even" />
@@ -54,7 +54,7 @@
 <meta itemprop="name" content="Golang append是并发安全的吗">
 <meta itemprop="description" content="背景 最近开发的时候写了下面这段类似的代码。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 func TestAppend() (result []int) { var wg sync.WaitGroup for i := 0; i &lt; 100; i&#43;&#43; { v := i wg.Add(1) go func() { // other logic result = append(result, v) wg.Done() }()"><meta itemprop="datePublished" content="2021-03-20T13:00:51+08:00" />
 <meta itemprop="dateModified" content="2021-03-20T13:00:51+08:00" />
-<meta itemprop="wordCount" content="1597">
+<meta itemprop="wordCount" content="1596">
 <meta itemprop="keywords" content="Golang," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Golang append是并发安全的吗"/>
 <meta name="twitter:description" content="背景 最近开发的时候写了下面这段类似的代码。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 func TestAppend() (result []int) { var wg sync.WaitGroup for i := 0; i &lt; 100; i&#43;&#43; { v := i wg.Add(1) go func() { // other logic result = append(result, v) wg.Done() }()"/>
@@ -137,7 +137,7 @@
         <div class="post-category">
             <a href="/categories/golang/"> Golang </a>
             </div>
-          <span class="more-meta"> 约 1597 字 </span>
+          <span class="more-meta"> 约 1596 字 </span>
           <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -500,7 +500,7 @@ Read at 0x00c000100000 by goroutine 8:
 </div>
 </div><p>如果调用前初始化了capacity，就不会导致panic。</p>
 <h1 id="总结">总结</h1>
-<p>Golang append并不是并发安全的，我相信使用过Golang的同学大部分都是知道的，但是他有概率会导致服务直接Crash，这才是最严重的。</p>
+<p>Golang append并不是并发安全的，我相信使用过Golang的同学大部分都是知道的，但是他有概率会导致服务crash，这才是更大的风险。</p>
 <p>&lt;全文完&gt;</p>
 <p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
 <img src="/img/personal/qrcode_2.png" alt="pic"></p>
