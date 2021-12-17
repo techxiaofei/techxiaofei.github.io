@@ -5,7 +5,7 @@
     <link>https://left-pocket.github.io/tags/redis/</link>
     <description>Recent content in Redis on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>zh-CN</language>
     <lastBuildDate>Thu, 09 Dec 2021 00:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>一文看懂Redis 6.0多线程IO</title>
