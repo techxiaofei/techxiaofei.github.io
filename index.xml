@@ -5,7 +5,7 @@
     <link>https://left-pocket.github.io/</link>
     <description>Recent content on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>zh-CN</language>
     <lastBuildDate>Thu, 09 Dec 2021 00:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>一文看懂Redis 6.0多线程IO</title>
@@ -13,7 +13,7 @@
       <pubDate>Thu, 09 Dec 2021 00:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/redis/multithreading/</guid>
-      <description>Redis基础 Redis是什么 Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储系统。 你可以把它作为数据库，缓存</description>
+      <description>Redis基础 Redis是什么 Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储系统。 你可以把它作为数据库，缓存和消息中间件来使用。同时支持strings，lists，hashes，sets，sorted sets，bitmaps，hyperloglog</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Tue, 07 Dec 2021 00:00:00 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/linux/cp/</guid>
-      <description>背景 如果你突然被面试官问：cp和mv这两个linux的命令有什么区别？ 你会不会一脸懵逼，cp不就是复制，mv不就是移动吗，还能有什么区别？ 如</description>
+      <description>背景 如果你突然被面试官问：cp和mv这两个linux的命令有什么区别？ 你会不会一脸懵逼，cp不就是复制，mv不就是移动吗，还能有什么区别？ 如果你也是这么想，那么这篇文章适合你。 inode 了解文件操作命令例如cp、mv、rm的底层原理时，需要先了解 linux 中文件系统的基本原理。 在linux系统中</description>
     </item>
     
     <item>
@@ -31,7 +31,7 @@
       <pubDate>Sat, 04 Dec 2021 00:00:00 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/mysql/table/</guid>
-      <description>背景 目前做电商后台开发，经历了数据从零到百万到百亿级别的增长。在这个增长的过程中，我们做了很多的优化。 这里分享一下我们的优化经验，仅供参考。</description>
+      <description>背景 目前做电商后台开发，经历了数据从零到百万到百亿级别的增长。在这个增长的过程中，我们做了很多的优化。 这里分享一下我们的优化经验，仅供参考。 优化策略： 不要过度优化，优化的过程一定是跟随着业务量的增长来慢慢调整优化策略的，比如说，没人就在一开始数据为0的时候就开始畅想10亿的数据的</description>
     </item>
     
     <item>
@@ -40,7 +40,7 @@
       <pubDate>Fri, 03 Dec 2021 14:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/backend/game_server/</guid>
-      <description>背景 我做过六年游戏服务端开发，后来想换个方向，转做电商后端开发，做了两年之后感悟很多，也体会到了游戏服务器和普通的服务器的区别。 我所说的游戏</description>
+      <description>背景 我做过六年游戏服务端开发，后来想换个方向，转做电商后端开发，做了两年之后感悟很多，也体会到了游戏服务器和普通的服务器的区别。 我所说的游戏是大众的游戏，它要有常见游戏的一些元素，比如交互，比如场景，比如对战。举几个例子：魔兽世界，梦幻西游，王者荣耀。 当然也有很多游戏是弱交互的游</description>
     </item>
     
     <item>
@@ -49,7 +49,7 @@
       <pubDate>Thu, 02 Dec 2021 10:00:00 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/mysql/innodb/</guid>
-      <description>背景 MySQL的InnoDB引擎一棵B+树可以存放多少行数据？这是一个很有趣的面试题。 也许你会猜1千万，2千万，或者上亿条数据？ 当你看完这篇</description>
+      <description>背景 MySQL的InnoDB引擎一棵B+树可以存放多少行数据？这是一个很有趣的面试题。 也许你会猜1千万，2千万，或者上亿条数据？ 当你看完这篇文章，你就心中有数了。 最重要的是，这篇文章能让你更深入的理解InnoDB的B+树索引的方方面面。 看完这篇文章，你可以同时回答以下几个关于In</description>
     </item>
     
     <item>
@@ -58,7 +58,7 @@
       <pubDate>Thu, 02 Dec 2021 01:04:55 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/hugo/hugo_dns/</guid>
-      <description>背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始搭建个人博客，把我的经验分享在这</description>
+      <description>背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始搭建个人博客，把我的经验分享在这里。 系列地址：https://left-pocket.github.io 从零开始搭建个人博客（五）- 申请免费域名并绑定到个人博客 申请域名 如果</description>
     </item>
     
     <item>
@@ -67,7 +67,7 @@
       <pubDate>Thu, 02 Dec 2021 01:03:55 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/hugo/hugo_vercel/</guid>
-      <description>背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始搭建个人博客，把我的经验分享在这</description>
+      <description>背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始搭建个人博客，把我的经验分享在这里。 系列地址：https://left-pocket.github.io 从零开始搭建个人博客（四）- hugo自动部署到vercel 我们当前已</description>
     </item>
     
     <item>
@@ -76,7 +76,7 @@
       <pubDate>Thu, 02 Dec 2021 01:02:55 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/hugo/hugo_advanced/</guid>
-      <description>背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始搭建个人博客，把我的经验分享在这</description>
+      <description>背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始搭建个人博客，把我的经验分享在这里。 系列地址：https://left-pocket.github.io 从零开始搭建个人博客（三）- hugo高级配置，让你的博客更亮眼 当前我</description>
     </item>
     
     <item>
@@ -85,7 +85,7 @@
       <pubDate>Thu, 02 Dec 2021 01:01:55 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/hugo/hugo_github/</guid>
-      <description>背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始搭建个人博客，把我的经验分享在这</description>
+      <description>背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始搭建个人博客，把我的经验分享在这里。 系列地址：https://left-pocket.github.io 从零开始搭建个人博客（二）- 把hugo博客托管到github上 上一篇</description>
     </item>
     
     <item>
@@ -94,7 +94,7 @@
       <pubDate>Thu, 02 Dec 2021 01:00:55 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/hugo/hugo_creation/</guid>
-      <description>背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始搭建个人博客，把我的经验分享在这</description>
+      <description>背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始搭建个人博客，把我的经验分享在这里。 系列地址：https://left-pocket.github.io 从零开始搭建个人博客（一）- 使用hugo搭建个人博客 介绍 很多人都想搭</description>
     </item>
     
     <item>
@@ -103,7 +103,7 @@
       <pubDate>Thu, 02 Dec 2021 01:00:50 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/hugo/hugo_0/</guid>
-      <description>背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始搭建个人博客，把我的经验分享在这</description>
+      <description>背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始搭建个人博客，把我的经验分享在这里。 我会介绍怎么使用 Hugo搭建一个博客 Hugo的高级配置 阅读数 评论 RSS订阅 主题选择 更多&amp;hellip; 发布到Github Pages 申请免费域名并</description>
     </item>
     
     <item>
@@ -112,7 +112,7 @@
       <pubDate>Fri, 26 Nov 2021 00:00:00 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/mysql/covering_index/</guid>
-      <description>后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 背景 关于回表查询，是MySQL里面一个非常重要的知识点。理解</description>
+      <description>后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 背景 关于回表查询，是MySQL里面一个非常重要的知识点。理解回表查询，让你在实际项目中操作数据库的时候会有更好的性能考虑。 回表查询也是我面试必考的一个基础知识。 什么是回表查询？ 这先要从InnoDB的索</description>
     </item>
     
     <item>
@@ -121,7 +121,7 @@
       <pubDate>Thu, 25 Nov 2021 00:00:00 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/tcpip/socket_read_write/</guid>
-      <description>​ 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 我们编写所谓的高性能高并发网络服务器时，不免使用各种IO多</description>
+      <description>​ 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 我们编写所谓的高性能高并发网络服务器时，不免使用各种IO多路复用技术，比如select, poll, epoll等。那这种技术的关键是什么呢？没错，就是得到就绪的描述符。然后我们的服务器就可以从休眠状态或者其他</description>
     </item>
     
     <item>
@@ -130,7 +130,7 @@
       <pubDate>Tue, 23 Nov 2021 18:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/lru/</guid>
-      <description>​​ 概述 LRU是Least Recently Used的缩写，译为最近最少使用。它的理论基础为 “最近使用的数据会在未来一段时期内仍然被使用，已经很久没有使用的</description>
+      <description>​​ 概述 LRU是Least Recently Used的缩写，译为最近最少使用。它的理论基础为 “最近使用的数据会在未来一段时期内仍然被使用，已经很久没有使用的数据大概率在未来很长一段时间仍然不会被使用” 由于该思想非常契合业务场景 ，并且可以解决很多实际开发中的问题，所以我们经常通过LRU的思想来作缓</description>
     </item>
     
     <item>
@@ -139,7 +139,7 @@
       <pubDate>Mon, 22 Nov 2021 15:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/cpp/do_while/</guid>
-      <description>​​ 零.导引 第一次见到 do{...}while(0) 是在学习 libevent 的时候，看到里面有很多类似 1 2 3 4 5 6 7 #define TT_URI(want) do { \ char *ret = evhttp_uri_join(uri, url_tmp, sizeof(url_tmp)); \ tt_want(ret != NULL); \ tt_want(ret == url_tmp); \ if (strcmp(ret,want) != 0) \ TT_FAIL((&amp;#34;\&amp;#34;%s\&amp;#34; != \&amp;#34;%s\&amp;#34;&amp;#34;,ret,want)); \ } while(0) 当时</description>
+      <description>​​ 零.导引 第一次见到 do{...}while(0) 是在学习 libevent 的时候，看到里面有很多类似 1 2 3 4 5 6 7 #define TT_URI(want) do { \ char *ret = evhttp_uri_join(uri, url_tmp, sizeof(url_tmp)); \ tt_want(ret != NULL); \ tt_want(ret == url_tmp); \ if (strcmp(ret,want) != 0) \ TT_FAIL((&amp;#34;\&amp;#34;%s\&amp;#34; != \&amp;#34;%s\&amp;#34;&amp;#34;,ret,want)); \ } while(0) 当时特别疑惑，do{...}while() 不是做循环的吗，类似 for,while 的语法，不过现实开发中，用 for 和 while 的比较多，do{...}while() 比较少了，</description>
     </item>
     
     <item>
@@ -148,7 +148,7 @@
       <pubDate>Mon, 22 Nov 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/cpp/static/</guid>
-      <description>​ 背景 static 是 C/C++ 中很常用的修饰符，它被用来控制变量的存储方式和可见性。而 static 在 C 语言和 C++ 语言中各有多个用途，下面我就分类讲解： C语言中static</description>
+      <description>​ 背景 static 是 C/C++ 中很常用的修饰符，它被用来控制变量的存储方式和可见性。而 static 在 C 语言和 C++ 语言中各有多个用途，下面我就分类讲解： C语言中static的三种用途 C++语言中static的两种用途 C语言中static的用法 C 语言的 static 关键字有三种（具体来说是两种）用途： 1. 静态局部变量 用于函数体</description>
     </item>
     
     <item>
@@ -157,7 +157,7 @@
       <pubDate>Sun, 21 Nov 2021 14:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/backend/game_development/</guid>
-      <description>回顾我的码农生涯，在做互联网电商后端开发之前做过大概6年的游戏后端开发，想总结一下手游后端开发技术的方方面面。 之前从事游戏服务器开发期间参与</description>
+      <description>回顾我的码农生涯，在做互联网电商后端开发之前做过大概6年的游戏后端开发，想总结一下手游后端开发技术的方方面面。 之前从事游戏服务器开发期间参与了不少项目，学到了很多游戏服务器开发技术，参与过几个不同架构的服务器开发，就此聊聊游戏服务器开发需要的技术，给刚进入游戏后端开发的同学一些指</description>
     </item>
     
     <item>
@@ -166,7 +166,7 @@
       <pubDate>Sun, 21 Nov 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/cpp/secondary_pointer/</guid>
-      <description>一、概念 在如下的A指向B、B指向C的指向关系中： 首先 C是&amp;quot;一段内容&amp;quot;,比如你用malloc或者new分配了一块内存，然后</description>
+      <description>一、概念 在如下的A指向B、B指向C的指向关系中： 首先 C是&amp;quot;一段内容&amp;quot;,比如你用malloc或者new分配了一块内存，然后塞进去&amp;quot;一段内容&amp;quot;,那就是C了。C的起始地址是 0x00000008。 B是一个指针变量,其中存放着C的地址，但是B也要占空</description>
     </item>
     
     <item>
@@ -175,7 +175,7 @@
       <pubDate>Sun, 21 Nov 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/about/</guid>
-      <description>目前在东南亚最大的电商平台 Shopee 当码农，坐标在 新加坡，主要负责后端开发工作。 个人擅长C++, Golang, 网络编程, Redis, MySQL, TiDB等技术栈。有多年面试官经验，</description>
+      <description>目前在东南亚最大的电商平台 Shopee 当码农，坐标在 新加坡，主要负责后端开发工作。 个人擅长C++, Golang, 网络编程, Redis, MySQL, TiDB等技术栈。有多年面试官经验，在这里分享各种后端技术与面试等专业知识。同步更新 微信公众号 和 知乎。 副业： 内推，如果你想要来 新加坡Shopee 工作，或者想要推荐你的朋友来 新加</description>
     </item>
     
     <item>
@@ -184,7 +184,7 @@
       <pubDate>Sat, 20 Nov 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/git/git_rebase/</guid>
-      <description>背景 刚开始接触git的时候只会一些简单的指令，pull, add, commit, merge, push 等几个基础命令就可以了。但是经常使用git后，还是需要了解一些相对高端的常用</description>
+      <description>背景 刚开始接触git的时候只会一些简单的指令，pull, add, commit, merge, push 等几个基础命令就可以了。但是经常使用git后，还是需要了解一些相对高端的常用指令。 像 rebase/reset/revert 等，也是需要常用到的指令。这一篇文章我们先讲 git rebase 命令的常见用法。 理解Rebase命令 概念 git rebase 命令的文档描述是： Reapply commits on top of another base tip 从字</description>
     </item>
     
     <item>
@@ -193,7 +193,7 @@
       <pubDate>Sun, 18 Apr 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/golang/goroutine_implementation/</guid>
-      <description>协程基础知识 1.Goroutine是Go语言的协程（Coroutine），Groutine从语言层面上实现了并发，和线程一样共享堆，不共享栈</description>
+      <description>协程基础知识 1.Goroutine是Go语言的协程（Coroutine），Groutine从语言层面上实现了并发，和线程一样共享堆，不共享栈，但是避免了切换上下文的额外开销。 2.Go语言使用CSP（Communicating sequential processes）并发模型，讲究“以通信的方式共享内</description>
     </item>
     
     <item>
@@ -202,7 +202,7 @@
       <pubDate>Mon, 05 Apr 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/mysql/dead_lock/</guid>
-      <description>背景 MySQL死锁问题涉及到MySQL一系列的基础知识，比如事务，隔离级别，各种锁类型，以及各种 SQL 语句的加锁原理。很多开发人员很少会遇到死锁</description>
+      <description>背景 MySQL死锁问题涉及到MySQL一系列的基础知识，比如事务，隔离级别，各种锁类型，以及各种 SQL 语句的加锁原理。很多开发人员很少会遇到死锁的问题。但是死锁却是一个很考验MySQL基本功的技术点。 这篇文章我们就从零分析死锁的方方面面。 基础知识 隔离级别 首先，我们需要了解MySQL I</description>
     </item>
     
     <item>
@@ -211,7 +211,7 @@
       <pubDate>Sat, 20 Mar 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/golang/append/</guid>
-      <description>背景 最近开发的时候写了下面这段类似的代码。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 func TestAppend() (result []int) { var wg sync.WaitGroup for i := 0; i &amp;lt; 100; i++ { v := i wg.Add(1) go func() { // other logic result = append(result, v) wg.Done() }()</description>
+      <description>背景 最近开发的时候写了下面这段类似的代码。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 func TestAppend() (result []int) { var wg sync.WaitGroup for i := 0; i &amp;lt; 100; i++ { v := i wg.Add(1) go func() { // other logic result = append(result, v) wg.Done() }() } wg.Wait() //fmt.Printf(&amp;#34;%v\n&amp;#34;, len(result)) return result } 就像这样，然后顺利通过测试到达生产环境。然后就出问题了。 预期情况下，len(result) = 100, 但是大多数情况下，这个数据会&amp;l</description>
     </item>
     
     <item>
@@ -220,7 +220,7 @@
       <pubDate>Thu, 18 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/golang/functional_options/</guid>
-      <description>概览 最近阅读源码的时候看到一段不错的代码，但是当时却不是非常理解为什么这么写。 我们先来看一下源代码： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20</description>
+      <description>概览 最近阅读源码的时候看到一段不错的代码，但是当时却不是非常理解为什么这么写。 我们先来看一下源代码： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 type User struct { ID string Name string Age int Email string Phone string Gender string } type Option func(*User) func WithAge(age int) Option { return func(u *User) { u.Age = age</description>
     </item>
     
     <item>
@@ -229,7 +229,7 @@
       <pubDate>Thu, 18 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/golang/decorator/</guid>
-      <description>今天我们来介绍decorator这个经典的设计模式。 定义：装饰器模式主要对现有的类对象进行包裹和封装，以期望在不改变类对象及其类定义的情况下</description>
+      <description>今天我们来介绍decorator这个经典的设计模式。 定义：装饰器模式主要对现有的类对象进行包裹和封装，以期望在不改变类对象及其类定义的情况下，为对象添加额外功能。是一种对象结构型模式。 Python装饰器模式 如果你熟悉Python，对装饰器模式应该不陌生。 1 2 3 4 5 6 7 8 9 10 11 12 13</description>
     </item>
     
     <item>
@@ -238,7 +238,7 @@
       <pubDate>Wed, 17 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/redis/redis_sds/</guid>
-      <description>SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串表示， 几乎所有的 Redis 模块中都用了 sds。 本章将对 SDS 的实现、性能和功能等方</description>
+      <description>SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串表示， 几乎所有的 Redis 模块中都用了 sds。 本章将对 SDS 的实现、性能和功能等方面进行介绍， 并说明 Redis 使用 SDS 而不是传统 C 字符串的原因。 简单动态字符串(SDS) 什么是SDS 举一个例子， 当我们set一个值时： redis&amp;gt; SET msg &amp;quot;Redis&amp;quot; OK 那么Re</description>
     </item>
     
     <item>
@@ -247,7 +247,7 @@
       <pubDate>Wed, 03 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/bloom_filter/</guid>
-      <description>布隆过滤器是什么 本质上布隆过滤器(Bloom Filter)是一种数据结构，比较巧妙的概率型数据结构（probabilistic data struct</description>
+      <description>布隆过滤器是什么 本质上布隆过滤器(Bloom Filter)是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入和查询，可以用来告诉你 某样东西一定不存在或者可能存在。 相比于传统的 List、Set、Map 等数据结构，它更高效、占</description>
     </item>
     
     <item>
@@ -256,7 +256,7 @@
       <pubDate>Fri, 22 Jan 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/friends_comment_like/</guid>
-      <description>上篇文章介绍了朋友圈的技术设计，这篇将介绍朋友圈点赞和评论的实现方式。 需求介绍 对某条状态实现点赞与取消点赞的功能。 点赞列表按时间从小到大排序</description>
+      <description>上篇文章介绍了朋友圈的技术设计，这篇将介绍朋友圈点赞和评论的实现方式。 需求介绍 对某条状态实现点赞与取消点赞的功能。 点赞列表按时间从小到大排序。 点赞列表支持分页查询。 对某条状态实现评论和删除评论的功能。 评论列表按时间从小到大排序。 评论列表支持分页查询。 技术分析 原始方案 由于评论和点赞</description>
     </item>
     
     <item>
@@ -265,7 +265,7 @@
       <pubDate>Sat, 12 Dec 2020 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/others/vscode_leetcode/</guid>
-      <description>作为一名合格的程序猿，大家找工作的时候经常需要刷leetcode, leetcode官网上面写代码没有IDE上面写代码那么方便，更重要的是，可</description>
+      <description>作为一名合格的程序猿，大家找工作的时候经常需要刷leetcode, leetcode官网上面写代码没有IDE上面写代码那么方便，更重要的是，可以上班打开IDE假装写代码，实则是刷题。VSCode+leetcode插件就是来解决在IDE上刷leetcode的问题而产生的。 安装 VSCode NodeJS le</description>
     </item>
     
     <item>
@@ -274,7 +274,7 @@
       <pubDate>Fri, 04 Dec 2020 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/redis/redis_zset_score/</guid>
-      <description>背景 最近使用Redis的SortedSet，使用int64作为score时遇到了一些预料之外的情况，在此总结一下。 介绍 项目中采用Redis S</description>
+      <description>背景 最近使用Redis的SortedSet，使用int64作为score时遇到了一些预料之外的情况，在此总结一下。 介绍 项目中采用Redis SortedSet存储用户一些信息，score值存储的msgid（消息ID）。msgid采用snowflake算法生成，按照时间有序。 Snow</description>
     </item>
     
     <item>
@@ -283,7 +283,7 @@
       <pubDate>Tue, 24 Nov 2020 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/snowflake/</guid>
-      <description>背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一。我们称之为分布式ID，分布式ID需要满足 唯一性、趋势递增性、高可用</description>
+      <description>背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一。我们称之为分布式ID，分布式ID需要满足 唯一性、趋势递增性、高可用性、高性能等特点。 snowflake算法，也叫雪花算法，是其中的一种分布式ID生成方案。是twitter公司内部分布式项目采用的ID生成算法</description>
     </item>
     
     <item>
@@ -292,7 +292,7 @@
       <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/mysql/db_tidb_write_conflict/</guid>
-      <description>背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了write conflict. 1 2 3 4 5 [2020/08/2506:01:44.781+08:00][WARN][session.go:623][retrying][conn=26799778][schemaVersion=194][retryCnt=0][queryNum=0][sql=&amp;#34;UPDATE user_tab SET `region` = ?, `status` = ?, `update_time` = ? WHERE `from_userid` = ? AND `to_userid` = ? AND `type` = ? [arguments: (ID, 0,</description>
+      <description>背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了write conflict. [2020/08/25 06:01:44.781 +08:00] [WARN] [session.go:623] [retrying] [conn=26799778] [schemaVersion=194] [retryCnt=0] [queryNum=0] [sql=&amp;quot;UPDATE user_tab SET `region` = ?, `status` = ?, `update_time` = ? WHERE `from_userid` = ? AND `to_userid` = ? AND `type` = ? [arguments: (ID, 0, 1598306504, 118049824, 8572364, 1)]&amp;quot;] [2020/08/25 06:01:44.782 +08:00] [WARN] [session.go:644] [&amp;quot;transaction association&amp;quot;] [conn=26799778] [&amp;quot;retrying txnStartTS&amp;quot;=418986460378563450] [&amp;quot;original txnStartTS&amp;quot;=418986460352348716] [2020/08/25 06:01:44.783 +08:00] [INFO] [2pc.go:1104] [&amp;quot;2PC clean up done&amp;quot;] [conn=26799778] [txnStartTS=418986460352348716] [2020/08/25 06:01:45.612 +08:00] [WARN] [client_batch.go:577] [&amp;quot;send request is cancelled&amp;quot;] [to=10.65.234.201:20160] [cause=&amp;quot;context canceled&amp;quot;] [2020/08/25 06:01:45.612 +08:00] [WARN] [session.go:425] [sql] [conn=26799680] [label=general] [error=&amp;quot;[kv:9007]Write conflict, txnStartTS=418986459434844923, conflictStartTS=418986459434844925, conflictCommitTS=418986460457205920, key={tableID=89, handle=8646911292299313507} primary={tableID=89, handle=1729382264526793474} [try again later]&amp;quot;] [txn=&amp;quot;Txn{state=invalid}&amp;quot;] 以下就针对</description>
     </item>
     
     <item>

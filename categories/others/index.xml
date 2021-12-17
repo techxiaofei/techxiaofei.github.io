@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Others on Leftpocket的个人博客</title>
-    <link>https://left-pocket.github.io/categories/others/</link>
+    <link>https://left-pocket.github.io/categories/Others/</link>
     <description>Recent content in Others on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Sat, 12 Dec 2020 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/others/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 12 Dec 2020 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/Others/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>vscode配置leetcode插件</title>
       <link>https://left-pocket.github.io/post/others/vscode_leetcode/</link>
       <pubDate>Sat, 12 Dec 2020 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/others/vscode_leetcode/</guid>
-      <description>作为一名合格的程序猿，大家找工作的时候经常需要刷leetcode, leetcode官网上面写代码没有IDE上面写代码那么方便，更重要的是，可</description>
+      <description>作为一名合格的程序猿，大家找工作的时候经常需要刷leetcode, leetcode官网上面写代码没有IDE上面写代码那么方便，更重要的是，可以上班打开IDE假装写代码，实则是刷题。VSCode+leetcode插件就是来解决在IDE上刷leetcode的问题而产生的。 安装 VSCode NodeJS le</description>
     </item>
     
   </channel>

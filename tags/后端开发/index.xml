@@ -5,7 +5,7 @@
     <link>https://left-pocket.github.io/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/</link>
     <description>Recent content in 后端开发 on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>zh-CN</language>
     <lastBuildDate>Fri, 03 Dec 2021 14:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>游戏服务器和普通服务器的区别</title>
@@ -13,7 +13,7 @@
       <pubDate>Fri, 03 Dec 2021 14:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/backend/game_server/</guid>
-      <description>背景 我做过六年游戏服务端开发，后来想换个方向，转做电商后端开发，做了两年之后感悟很多，也体会到了游戏服务器和普通的服务器的区别。 我所说的游戏</description>
+      <description>背景 我做过六年游戏服务端开发，后来想换个方向，转做电商后端开发，做了两年之后感悟很多，也体会到了游戏服务器和普通的服务器的区别。 我所说的游戏是大众的游戏，它要有常见游戏的一些元素，比如交互，比如场景，比如对战。举几个例子：魔兽世界，梦幻西游，王者荣耀。 当然也有很多游戏是弱交互的游</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Sun, 21 Nov 2021 14:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/backend/game_development/</guid>
-      <description>回顾我的码农生涯，在做互联网电商后端开发之前做过大概6年的游戏后端开发，想总结一下手游后端开发技术的方方面面。 之前从事游戏服务器开发期间参与</description>
+      <description>回顾我的码农生涯，在做互联网电商后端开发之前做过大概6年的游戏后端开发，想总结一下手游后端开发技术的方方面面。 之前从事游戏服务器开发期间参与了不少项目，学到了很多游戏服务器开发技术，参与过几个不同架构的服务器开发，就此聊聊游戏服务器开发需要的技术，给刚进入游戏后端开发的同学一些指</description>
     </item>
     
   </channel>

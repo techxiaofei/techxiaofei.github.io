@@ -1,178 +1,117 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
+<!doctype html>
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>从零开始搭建个人博客（一）- 使用hugo搭建个人博客 - Leftpocket的个人博客</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="码农在新加坡" /><meta name="description" content="背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始搭建个人博客，把我的经验分享在这" /><meta name="keywords" content="hugo" />
-
-
-<meta name="baidu-site-verification" content="code-swx03nFBNS" />
-<meta name="google-site-verification" content="sGfWBA2Wby1_gxJO3xmOtvpAOU2cCyhwXuU-2m4u75Y" />
-
-
-<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
-     crossorigin="anonymous"></script>
-
-
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
-
-
-<link rel="canonical" href="https://left-pocket.github.io/post/hugo/hugo_creation/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
-<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
-
-
-<meta property="og:title" content="从零开始搭建个人博客（一）- 使用hugo搭建个人博客" />
-<meta property="og:description" content="背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始搭建个人博客，把我的经验分享在这" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://left-pocket.github.io/post/hugo/hugo_creation/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-12-02T01:00:55+08:00" />
-<meta property="article:modified_time" content="2021-12-02T01:00:55+08:00" />
-
-<meta itemprop="name" content="从零开始搭建个人博客（一）- 使用hugo搭建个人博客">
-<meta itemprop="description" content="背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始搭建个人博客，把我的经验分享在这"><meta itemprop="datePublished" content="2021-12-02T01:00:55+08:00" />
-<meta itemprop="dateModified" content="2021-12-02T01:00:55+08:00" />
-<meta itemprop="wordCount" content="2440">
-<meta itemprop="keywords" content="hugo," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="从零开始搭建个人博客（一）- 使用hugo搭建个人博客"/>
-<meta name="twitter:description" content="背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始搭建个人博客，把我的经验分享在这"/>
-
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
-</head>
-<body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">Leftpocket的个人博客</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/">
-        <li class="mobile-menu-item">首页</li>
-      </a><a href="/post/">
-        <li class="mobile-menu-item">归档</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">标签</li>
-      </a><a href="/about/">
-        <li class="mobile-menu-item">关于</li>
-      </a>
-  </ul>
-
-  
-
-
-</nav>
-
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">Leftpocket的个人博客</a>
-</div>
-
-
-
-
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/">首页</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">归档</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">标签</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/about/">关于</a>
-      </li>
-  </ul>
-</nav>
-
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <header class="post-header">
-      <h1 class="post-title">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</h1>
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
 
-      <div class="post-meta">
-        <span class="post-time"> 2021-12-02 </span>
-        <div class="post-category">
-            <a href="/categories/hugo/"> hugo </a>
+    <title>从零开始搭建个人博客（一）- 使用hugo搭建个人博客 | Leftpocket的个人博客</title>
+    <meta property="og:title" content="从零开始搭建个人博客（一）- 使用hugo搭建个人博客 - Leftpocket的个人博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-12-02T01:00:55&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-12-02T01:00:55&#43;08:00'>
+        
+    <meta name="Keywords" content="[hugo]">
+    <meta name="description" content="从零开始搭建个人博客（一）- 使用hugo搭建个人博客">
+        
+    <meta name="author" content="leftpocket">
+    <meta property="og:url" content="https://left-pocket.github.io/post/hugo/hugo_creation/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <meta name="baidu-site-verification" content="code-swx03nFBNS" />
+    <meta name="google-site-verification" content="sGfWBA2Wby1_gxJO3xmOtvpAOU2cCyhwXuU-2m4u75Y" />
+
+    
+    <script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+
+    
+    <meta name="baidu-site-verification" content="code-swx03nFBNS" />
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://left-pocket.github.io">
+                        Leftpocket的个人博客
+                    </a>
+                
+                <p class="description">码农在新加坡</p>
             </div>
-          <span class="more-meta"> 约 2440 字 </span>
-          <span class="more-meta"> 预计阅读 5 分钟 </span>
-        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
-      </div>
-    </header>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://left-pocket.github.io">首页</a>
+                    
+                    <a  href="https://left-pocket.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://left-pocket.github.io/about/" title="关于我">关于我</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
 
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#背景">背景</a></li>
-    <li><a href="#从零开始搭建个人博客一--使用hugo搭建个人博客">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</a>
-      <ul>
-        <li>
-          <ul>
-            <li><a href="#介绍">介绍</a></li>
-            <li><a href="#hugo">hugo</a></li>
-            <li><a href="#安装">安装</a></li>
-            <li><a href="#创建站点">创建站点</a></li>
-            <li><a href="#主题">主题</a></li>
-            <li><a href="#配置">配置</a></li>
-            <li><a href="#发布第一篇文章">发布第一篇文章</a></li>
-            <li><a href="#执行命令">执行命令</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-  </div>
-</div>
-    <div class="post-content">
-      <h1 id="背景">背景</h1>
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年12月2日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/hugo'>hugo</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <h1 id="背景">背景</h1>
 <p>使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。<br>
 这里分享一个系列教程：<strong>从零开始搭建个人博客</strong>，把我的经验分享在这里。<br>
 系列地址：<a href="https://left-pocket.github.io/post/hugo/hugo_0/">https://left-pocket.github.io</a></p>
@@ -190,38 +129,18 @@
 <p>hugo 是由Go语言实现的静态网站生成器。简单，易用，高效，易扩展。</p>
 <h3 id="安装">安装</h3>
 <p>我这边介绍在macOS上的安装教程。其他环境（Windows/linux）类似。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&gt;&gt;&gt; brew install hugo
+<pre tabindex="0"><code>&gt;&gt;&gt; brew install hugo
 &gt;&gt;&gt; hugo version
 hugo v0.89.4+extended darwin/arm64 BuildDate=unknown
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="创建站点">创建站点</h3>
+</code></pre><h3 id="创建站点">创建站点</h3>
 <p>创建一个站点 <strong>left-pocket-test</strong>， 并进入到站点根目录。
 这个站点命名没那么重要，可以随意取名。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&gt;&gt;&gt; hugo new site left-pocket-test
+<pre tabindex="0"><code>&gt;&gt;&gt; hugo new site left-pocket-test
 &gt;&gt;&gt; cd left-pocket-test
 &gt;&gt;&gt; ls
 archetypes  content     layouts     resources   themes
 config.toml data        public      static
-</code></pre></td></tr></table>
-</div>
-</div><ul>
+</code></pre><ul>
 <li><strong>config.toml</strong> 是配置文件，在里面可以定义博客地址，构建配置，标题，导航栏等等。</li>
 <li><strong>themes</strong>是主题目录，可以下载喜欢的主题，然后配置在<strong>config.toml</strong>里面。</li>
 <li><strong>content</strong>是博客文章的目录。</li>
@@ -237,287 +156,124 @@ config.toml data        public      static
 挑选你喜欢的主题。</p>
 <p>我们选择一款比较活跃的主题：<a href="https://github.com/olOwOlo/hugo-theme-even">Even</a></p>
 <p>安装主题：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git clone https://github.com/olOwOlo/hugo-theme-even themes/even
-</code></pre></td></tr></table>
-</div>
-</div><p>这个时候even这个主题就被下载到<strong>themes</strong>目录下。</p>
+<pre tabindex="0"><code>git clone https://github.com/olOwOlo/hugo-theme-even themes/even
+</code></pre><p>这个时候even这个主题就被下载到<strong>themes</strong>目录下。</p>
 <p><strong>注</strong>：如果是从其他地方copy过来的站点，有可能遇到:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">WARN 2021/02/03 10:56:17 found no layout file for &#34;HTML&#34; for kind &#34;home&#34;: You should create a template file which matches Hugo Layouts Lookup Rules for this combination.
-</code></pre></td></tr></table>
-</div>
-</div><p>这个时候需要重新<strong>git clone</strong>一下主题。</p>
+<pre tabindex="0"><code>WARN 2021/02/03 10:56:17 found no layout file for &quot;HTML&quot; for kind &quot;home&quot;: You should create a template file which matches Hugo Layouts Lookup Rules for this combination.
+</code></pre><p>这个时候需要重新<strong>git clone</strong>一下主题。</p>
 <h3 id="配置">配置</h3>
 <p>下载好主题后，主题的<strong>exampleSite</strong>目录一般会有一个<strong>config.toml</strong>配置文件。复制到你的根目录下的<strong>config.tmol</strong>文件，然后根据注释做一些基本的修改。</p>
 <p>这是我复制下来的配置做的一些简单的修改：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span><span class="lnt">66
-</span><span class="lnt">67
-</span><span class="lnt">68
-</span><span class="lnt">69
-</span><span class="lnt">70
-</span><span class="lnt">71
-</span><span class="lnt">72
-</span><span class="lnt">73
-</span><span class="lnt">74
-</span><span class="lnt">75
-</span><span class="lnt">76
-</span><span class="lnt">77
-</span><span class="lnt">78
-</span><span class="lnt">79
-</span><span class="lnt">80
-</span><span class="lnt">81
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="n">baseURL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;http://localhost:1313/&#34;</span><span class="w">
-</span><span class="w"></span><span class="n">languageCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;en&#34;</span><span class="w">
-</span><span class="w"></span><span class="n">defaultContentLanguage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;en&#34;</span><span class="w">                             </span><span class="c1"># en / zh-cn / ... (This field determines which i18n file to use)
-</span><span class="c1"></span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Leftpocket的个人博客&#34;</span><span class="w">
-</span><span class="w"></span><span class="n">preserveTaxonomyNames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w">
-</span><span class="w"></span><span class="n">enableRobotsTXT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w">
-</span><span class="w"></span><span class="n">enableEmoji</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w">
-</span><span class="w"></span><span class="n">theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;even&#34;</span><span class="w">
-</span><span class="w"></span><span class="n">enableGitInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="w"> </span><span class="c1"># use git commit log to generate lastmod record # 可根据 Git 中的提交生成最近更新记录。
-</span><span class="c1"></span><span class="w">
-</span><span class="w"></span><span class="c1"># Syntax highlighting by Chroma. NOTE: Don&#39;t enable `highlightInClient` and `chroma` at the same time!
-</span><span class="c1"></span><span class="n">pygmentsOptions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;linenos=table&#34;</span><span class="w">
-</span><span class="w"></span><span class="n">pygmentsCodefences</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w">
-</span><span class="w"></span><span class="n">pygmentsUseClasses</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w">
-</span><span class="w"></span><span class="n">pygmentsCodefencesGuessSyntax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="n">hasCJKLanguage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w">     </span><span class="c1"># has chinese/japanese/korean ? # 自动检测是否包含 中文\日文\韩文
-</span><span class="c1"></span><span class="n">paginate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w">                                              </span><span class="c1"># 首页每页显示的文章数
-</span><span class="c1"></span><span class="n">disqusShortname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;&#34;</span><span class="w">      </span><span class="c1"># disqus_shortname
-</span><span class="c1"></span><span class="n">googleAnalytics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;&#34;</span><span class="w">      </span><span class="c1"># UA-XXXXXXXX-X
-</span><span class="c1"></span><span class="n">copyright</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;&#34;</span><span class="w">            </span><span class="c1"># default: author.name ↓        # 默认为下面配置的author.name ↓
-</span><span class="c1"></span><span class="w">
-</span><span class="w"></span><span class="p">[</span><span class="n">author</span><span class="p">]</span><span class="w">                  </span><span class="c1"># essential                     # 必需
-</span><span class="c1"></span><span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Leftpocket&#34;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="p">[</span><span class="n">sitemap</span><span class="p">]</span><span class="w">                 </span><span class="c1"># essential                     # 必需
-</span><span class="c1"></span><span class="w">  </span><span class="n">changefreq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;weekly&#34;</span><span class="w">
-</span><span class="w">  </span><span class="n">priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="w">
-</span><span class="w">  </span><span class="n">filename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;sitemap.xml&#34;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="p">[[</span><span class="n">menu</span><span class="p">.</span><span class="n">main</span><span class="p">]]</span><span class="w">             </span><span class="c1"># config your menu              # 配置目录
-</span><span class="c1"></span><span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Home&#34;</span><span class="w">
-</span><span class="w">  </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="w">  </span><span class="n">identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;home&#34;</span><span class="w">
-</span><span class="w">  </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;/&#34;</span><span class="w">
-</span><span class="w"></span><span class="p">[[</span><span class="n">menu</span><span class="p">.</span><span class="n">main</span><span class="p">]]</span><span class="w">
-</span><span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Archives&#34;</span><span class="w">
-</span><span class="w">  </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="w">
-</span><span class="w">  </span><span class="n">identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;archives&#34;</span><span class="w">
-</span><span class="w">  </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;/post/&#34;</span><span class="w">
-</span><span class="w"></span><span class="p">[[</span><span class="n">menu</span><span class="p">.</span><span class="n">main</span><span class="p">]]</span><span class="w">
-</span><span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Tags&#34;</span><span class="w">
-</span><span class="w">  </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="w">
-</span><span class="w">  </span><span class="n">identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;tags&#34;</span><span class="w">
-</span><span class="w">  </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;/tags/&#34;</span><span class="w">
-</span><span class="w"></span><span class="p">[[</span><span class="n">menu</span><span class="p">.</span><span class="n">main</span><span class="p">]]</span><span class="w">
-</span><span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Categories&#34;</span><span class="w">
-</span><span class="w">  </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="w">
-</span><span class="w">  </span><span class="n">identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;categories&#34;</span><span class="w">
-</span><span class="w">  </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;/categories/&#34;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="p">[</span><span class="n">params</span><span class="p">]</span><span class="w">
-</span><span class="w">  </span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;4.x&#34;</span><span class="w">           </span><span class="c1"># Used to give a friendly message when you have an incompatible update
-</span><span class="c1"></span><span class="w">  </span><span class="n">debug</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="w">             </span><span class="c1"># If true, load `eruda.min.js`. See https://github.com/liriliri/eruda
-</span><span class="c1"></span><span class="w">
-</span><span class="w">  </span><span class="n">since</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;2017&#34;</span><span class="w">            </span><span class="c1"># Site creation time          # 站点建立时间
-</span><span class="c1"></span><span class="w">  </span><span class="c1"># use public git repo url to link lastmod git commit, enableGitInfo should be true.
-</span><span class="c1"></span><span class="w">  </span><span class="c1"># 指定 git 仓库地址，可以生成指向最近更新的 git commit 的链接，需要将 enableGitInfo 设置成 true.
-</span><span class="c1"></span><span class="w">  </span><span class="n">gitRepo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;&#34;</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="c1"># site info (optional)                                  # 站点信息（可选，不需要的可以直接注释掉）
-</span><span class="c1"></span><span class="w">  </span><span class="n">logoTitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Leftpocket的个人博客&#34;</span><span class="w">        </span><span class="c1"># default: the title value    # 默认值: 上面设置的title值
-</span><span class="c1"></span><span class="w">  </span><span class="n">keywords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;Hugo&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;theme&#34;</span><span class="p">,</span><span class="s2">&#34;even&#34;</span><span class="p">]</span><span class="w">
-</span><span class="w">  </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Hugo theme even example site.&#34;</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="c1"># paginate of archives, tags and categories             # 归档、标签、分类每页显示的文章数目，建议修改为一个较大的值
-</span><span class="c1"></span><span class="w">  </span><span class="n">archivePaginate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="c1"># show &#39;xx Posts In Total&#39; in archive page ?            # 是否在归档页显示文章的总数
-</span><span class="c1"></span><span class="w">  </span><span class="n">showArchiveCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="c1"># The date format to use; for a list of valid formats, see https://gohugo.io/functions/format/
-</span><span class="c1"></span><span class="w">  </span><span class="n">dateFormatToUse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;2006-01-02&#34;</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="c1"># show word count and read time ?                       # 是否显示字数统计与阅读时间
-</span><span class="c1"></span><span class="w">  </span><span class="n">moreMeta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="c1"># Syntax highlighting by highlight.js
-</span><span class="c1"></span><span class="w">  </span><span class="n">highlightInClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="w">
-</span><span class="w">
-</span><span class="w"> </span><span class="c1"># 后续省略，可直接从 **themes/exampleSite/config.toml** 下复制到跟目录下进行修改。
-</span></code></pre></td></tr></table>
-</div>
-</div><p>具体的高级配置，会在后续的高级配置详细介绍，我们这一篇主要讲解基础配置。
-暂时只需要修改 <strong>title</strong> 和 <strong>autohr</strong> 相关的内容就可以了。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">title = &#34;Leftpocket的个人博客&#34;
+<pre tabindex="0"><code>baseURL = &quot;http://localhost:1313/&quot;
+languageCode = &quot;en&quot;
+defaultContentLanguage = &quot;en&quot;                             # en / zh-cn / ... (This field determines which i18n file to use)
+title = &quot;Leftpocket的个人博客&quot;
+preserveTaxonomyNames = true
+enableRobotsTXT = true
+enableEmoji = true
+theme = &quot;even&quot;
+enableGitInfo = false # use git commit log to generate lastmod record # 可根据 Git 中的提交生成最近更新记录。
+
+# Syntax highlighting by Chroma. NOTE: Don't enable `highlightInClient` and `chroma` at the same time!
+pygmentsOptions = &quot;linenos=table&quot;
+pygmentsCodefences = true
+pygmentsUseClasses = true
+pygmentsCodefencesGuessSyntax = true
+
+hasCJKLanguage = true     # has chinese/japanese/korean ? # 自动检测是否包含 中文\日文\韩文
+paginate = 5                                              # 首页每页显示的文章数
+disqusShortname = &quot;&quot;      # disqus_shortname
+googleAnalytics = &quot;&quot;      # UA-XXXXXXXX-X
+copyright = &quot;&quot;            # default: author.name ↓        # 默认为下面配置的author.name ↓
 
 [author]                  # essential                     # 必需
-  name = &#34;Leftpocket&#34;
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="发布第一篇文章">发布第一篇文章</h3>
+  name = &quot;Leftpocket&quot;
+
+[sitemap]                 # essential                     # 必需
+  changefreq = &quot;weekly&quot;
+  priority = 0.5
+  filename = &quot;sitemap.xml&quot;
+
+[[menu.main]]             # config your menu              # 配置目录
+  name = &quot;Home&quot;
+  weight = 10
+  identifier = &quot;home&quot;
+  url = &quot;/&quot;
+[[menu.main]]
+  name = &quot;Archives&quot;
+  weight = 20
+  identifier = &quot;archives&quot;
+  url = &quot;/post/&quot;
+[[menu.main]]
+  name = &quot;Tags&quot;
+  weight = 30
+  identifier = &quot;tags&quot;
+  url = &quot;/tags/&quot;
+[[menu.main]]
+  name = &quot;Categories&quot;
+  weight = 40
+  identifier = &quot;categories&quot;
+  url = &quot;/categories/&quot;
+
+[params]
+  version = &quot;4.x&quot;           # Used to give a friendly message when you have an incompatible update
+  debug = false             # If true, load `eruda.min.js`. See https://github.com/liriliri/eruda
+
+  since = &quot;2017&quot;            # Site creation time          # 站点建立时间
+  # use public git repo url to link lastmod git commit, enableGitInfo should be true.
+  # 指定 git 仓库地址，可以生成指向最近更新的 git commit 的链接，需要将 enableGitInfo 设置成 true.
+  gitRepo = &quot;&quot;
+
+  # site info (optional)                                  # 站点信息（可选，不需要的可以直接注释掉）
+  logoTitle = &quot;Leftpocket的个人博客&quot;        # default: the title value    # 默认值: 上面设置的title值
+  keywords = [&quot;Hugo&quot;, &quot;theme&quot;,&quot;even&quot;]
+  description = &quot;Hugo theme even example site.&quot;
+
+  # paginate of archives, tags and categories             # 归档、标签、分类每页显示的文章数目，建议修改为一个较大的值
+  archivePaginate = 50
+
+  # show 'xx Posts In Total' in archive page ?            # 是否在归档页显示文章的总数
+  showArchiveCount = false
+
+  # The date format to use; for a list of valid formats, see https://gohugo.io/functions/format/
+  dateFormatToUse = &quot;2006-01-02&quot;
+
+  # show word count and read time ?                       # 是否显示字数统计与阅读时间
+  moreMeta = false
+
+  # Syntax highlighting by highlight.js
+  highlightInClient = false
+
+ # 后续省略，可直接从 **themes/exampleSite/config.toml** 下复制到跟目录下进行修改。
+</code></pre><p>具体的高级配置，会在后续的高级配置详细介绍，我们这一篇主要讲解基础配置。
+暂时只需要修改 <strong>title</strong> 和 <strong>autohr</strong> 相关的内容就可以了。</p>
+<pre tabindex="0"><code>title = &quot;Leftpocket的个人博客&quot;
+
+[author]                  # essential                     # 必需
+  name = &quot;Leftpocket&quot;
+</code></pre><h3 id="发布第一篇文章">发布第一篇文章</h3>
 <p>配置完成后，发布第一篇文章。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">hugo new post/my-first-post.md
-</code></pre></td></tr></table>
-</div>
-</div><p>其中有着 draft 选项。当 draft 为 true 的时候，默认是不会渲染的，渲染 draft 需要加 <strong>-D</strong> 的启动参数。 我们可以将 draft 改为 false，这样默认就可以渲染了。<br>
+<pre tabindex="0"><code>hugo new post/my-first-post.md
+</code></pre><p>其中有着 draft 选项。当 draft 为 true 的时候，默认是不会渲染的，渲染 draft 需要加 <strong>-D</strong> 的启动参数。 我们可以将 draft 改为 false，这样默认就可以渲染了。<br>
 一般来说，把<strong>draft: true</strong>去掉，加一些markdown语法的内容就可以了。<br>
 后续可以直接自己直接在编辑器里面 **content/post/**目录下创建 <strong>md</strong> 文件来写博客，比较方便。也可以在post里面创建多层目录，方便归类。</p>
 <p>这是我的文章配置。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">---
-title: &#34;My First Post&#34;
+<pre tabindex="0"><code>---
+title: &quot;My First Post&quot;
 date: 2021-11-28T16:46:27+08:00
 tags : [
-&#34;hugo&#34;,
+&quot;hugo&quot;,
 ]
 categories : [
-&#34;hugo&#34;,
+&quot;hugo&quot;,
 ]
 keywords : [
-&#34;hugo&#34;,
+&quot;hugo&quot;,
 ]
 ---
 This is the first post.
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="执行命令">执行命令</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&gt;&gt;&gt; hugo server
+</code></pre><h3 id="执行命令">执行命令</h3>
+<pre tabindex="0"><code>&gt;&gt;&gt; hugo server
 
                    | EN  
 -------------------+-----
@@ -533,140 +289,269 @@ This is the first post.
 Built in 21 ms
 Watching for changes in /Users/hugo/iwtbabc/{archetypes,content,data,layouts,static,themes}
 Watching for config changes in /Users/hugo/iwtbabc/config.toml
-Environment: &#34;development&#34;
+Environment: &quot;development&quot;
 Serving pages from memory
 Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
 Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
 Press Ctrl+C to stop
-</code></pre></td></tr></table>
-</div>
-</div><p>在浏览器输入 <a href="http://localhost:1313/">http://localhost:1313/</a>  即可看到具体效果。<br>
+</code></pre><p>在浏览器输入 <a href="http://localhost:1313/">http://localhost:1313/</a>  即可看到具体效果。<br>
 其中文章中，可以设置 <code>tag</code>, <code>categories</code>, <code>keywords</code>等属性。</p>
-<p><img src="/img/hugo/hugo_create.png" alt="Settings"></p>
+<p>
+        <img class="mx-auto" alt="Settings" src="/img/hugo/hugo_create.png" />   
+    </p>
 <p>Demo完成，我们现在可以在本地浏览器上浏览你的hugo博客。<br>
 你也可以查看配置的描述，自己尝试修改配置的一些参数，看一下浏览器的效果。比如说你可以把页面里面的英文标签改为中文的，直接在配置里面修改就行。<br>
 hugo是立即生效的，不需要重新启动。</p>
 <p>如果需要插入图片，需要放在static目录下：
 比如我们添加一张图片 <code>static/img/test.png</code>
 那么在md文章里面插入：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">![test图片](/img/test.png)
-</code></pre></td></tr></table>
-</div>
-</div><p>即可正常显示。</p>
+<pre tabindex="0"><code>![test图片](/img/test.png)
+</code></pre><p>即可正常显示。</p>
 <p>下一篇将具体讲如何把hugo博客托管到github Pages上。就相当于部署到了服务器上，这样你就可以随时随地查看你的博客了。</p>
 <p>&lt;全文完&gt;</p>
 <p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
-<img src="/img/personal/qrcode_2.png" alt="pic"></p>
 
-    </div>
+        <img class="mx-auto" alt="pic" src="/img/personal/qrcode_2.png" />   
+    </p>
 
-    <div class="post-copyright">
-  <p class="copyright-item">
-    <span class="item-title">文章作者</span>
-    <span class="item-content">码农在新加坡</span>
-  </p>
-  <p class="copyright-item">
-    <span class="item-title">上次更新</span>
-    <span class="item-content">
-        2021-12-02
-        
-    </span>
-  </p>
-  
-  
-</div>
-<footer class="post-footer">
-      <div class="post-tags">
-          <a href="/tags/hugo/">hugo</a>
-          </div>
-      <nav class="post-nav">
-        <a class="prev" href="/post/hugo/hugo_github/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">从零开始搭建个人博客（二）- 把hugo博客托管到github上</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        <a class="next" href="/post/hugo/hugo_0/">
-            <span class="next-text nav-default">从零开始搭建个人博客（零）- 序章</span>
-            <span class="next-text nav-mobile">下一篇</span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
         </div>
+
         
 
-  
 
-  
-    <script src="https://utteranc.es/client.js"
-            repo="left-pocket/left-pocket.github.io"
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/hugo/hugo_0/">从零开始搭建个人博客（零）- 序章</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/hugo'>hugo</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "left-pocket.github.io"
             issue-term="pathname"
             theme="github-light"
             crossorigin="anonymous"
             async>
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
-
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-      <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
-      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
-      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
-  <a href="https://left-pocket.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
-</div>
-
-<div class="copyright">
-  <span class="power-by">
-    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-    主题 - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
-
-  <div class="busuanzi-footer">
-    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
-      <span class="division">|</span>
-    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
-  </div>
-
-  <span class="copyright-year">
-    &copy; 
-    2020 - 
-    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
-  </span>
-</div>
-
-    </footer>
-
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
+      </script>
     </div>
-  </div>
-  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://left-pocket.github.io">Leftpocket的个人博客 By leftpocket</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://left-pocket.github.io/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">Leftpocket</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
 
 
 
 
+    <script src='/js/douban.js'></script>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://left-pocket.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://left-pocket.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/redis/multithreading/" title="一文看懂Redis 6.0多线程IO">一文看懂Redis 6.0多线程IO</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/linux/cp/" title="后端面试之Linux-cp和mv命令的区别">后端面试之Linux-cp和mv命令的区别</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/mysql/table/" title="MySQL对于千万级的大表要怎么优化？">MySQL对于千万级的大表要怎么优化？</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/backend/game_server/" title="游戏服务器和普通服务器的区别">游戏服务器和普通服务器的区别</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/mysql/innodb/" title="后端面试之MySQL-InnoDB一颗B&#43;树可以存放多少行数据？">后端面试之MySQL-InnoDB一颗B&#43;树可以存放多少行数据？</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/hugo/hugo_dns/" title="从零开始搭建个人博客（五）- 申请免费域名并绑定到个人博客">从零开始搭建个人博客（五）- 申请免费域名并绑定到个人博客</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/hugo/hugo_vercel/" title="从零开始搭建个人博客（四）- hugo自动部署到vercel">从零开始搭建个人博客（四）- hugo自动部署到vercel</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/hugo/hugo_advanced/" title="从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼">从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/hugo/hugo_github/" title="从零开始搭建个人博客（二）- 把hugo博客托管到github上">从零开始搭建个人博客（二）- 把hugo博客托管到github上</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/hugo/hugo_creation/" title="从零开始搭建个人博客（一）- 使用hugo搭建个人博客">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://left-pocket.github.io/categories/Golang/">Golang (4)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/Linux/">Linux (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/MySQL/">MySQL (5)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/Others/">Others (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/Redis/">Redis (3)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/c&#43;&#43;/">c&#43;&#43; (3)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/git/">git (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/hugo/">hugo (6)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/leetcode/">leetcode (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发 (2)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计 (4)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (1)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/">面试 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://left-pocket.github.io/tags/Golang/">Golang</a>
+    
+    <a href="https://left-pocket.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://left-pocket.github.io/tags/MySQL/">MySQL</a>
+    
+    <a href="https://left-pocket.github.io/tags/Redis/">Redis</a>
+    
+    <a href="https://left-pocket.github.io/tags/c&#43;&#43;/">c&#43;&#43;</a>
+    
+    <a href="https://left-pocket.github.io/tags/git/">git</a>
+    
+    <a href="https://left-pocket.github.io/tags/hugo/">hugo</a>
+    
+    <a href="https://left-pocket.github.io/tags/leetcode/">leetcode</a>
+    
+    <a href="https://left-pocket.github.io/tags/vscode/">vscode</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://left-pocket.github.io/about/" title="关于我" style="color:#0000FF;">关于我-微信及公众号</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/left-pocket" title="Leftpocket的知乎" style="color:#0000FF;">Leftpocket的知乎</a>
+        </li>
+        
+    </ul>
+</section>
 
 
-
-
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://left-pocket.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

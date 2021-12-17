@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linux on Leftpocket的个人博客</title>
-    <link>https://left-pocket.github.io/tags/linux/</link>
+    <link>https://left-pocket.github.io/tags/Linux/</link>
     <description>Recent content in Linux on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Tue, 07 Dec 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 07 Dec 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/Linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>后端面试之Linux-cp和mv命令的区别</title>
       <link>https://left-pocket.github.io/post/linux/cp/</link>
       <pubDate>Tue, 07 Dec 2021 00:00:00 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/linux/cp/</guid>
-      <description>背景 如果你突然被面试官问：cp和mv这两个linux的命令有什么区别？ 你会不会一脸懵逼，cp不就是复制，mv不就是移动吗，还能有什么区别？ 如</description>
+      <description>背景 如果你突然被面试官问：cp和mv这两个linux的命令有什么区别？ 你会不会一脸懵逼，cp不就是复制，mv不就是移动吗，还能有什么区别？ 如果你也是这么想，那么这篇文章适合你。 inode 了解文件操作命令例如cp、mv、rm的底层原理时，需要先了解 linux 中文件系统的基本原理。 在linux系统中</description>
     </item>
     
   </channel>

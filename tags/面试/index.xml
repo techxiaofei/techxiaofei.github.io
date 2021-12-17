@@ -5,7 +5,7 @@
     <link>https://left-pocket.github.io/tags/%E9%9D%A2%E8%AF%95/</link>
     <description>Recent content in 面试 on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>zh-CN</language>
     <lastBuildDate>Thu, 25 Nov 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/%E9%9D%A2%E8%AF%95/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>后端面试之网络编程-socket可读可写条件</title>
@@ -13,7 +13,7 @@
       <pubDate>Thu, 25 Nov 2021 00:00:00 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/tcpip/socket_read_write/</guid>
-      <description>​ 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 我们编写所谓的高性能高并发网络服务器时，不免使用各种IO多</description>
+      <description>​ 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 我们编写所谓的高性能高并发网络服务器时，不免使用各种IO多路复用技术，比如select, poll, epoll等。那这种技术的关键是什么呢？没错，就是得到就绪的描述符。然后我们的服务器就可以从休眠状态或者其他</description>
     </item>
     
   </channel>
