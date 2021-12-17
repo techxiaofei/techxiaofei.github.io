@@ -53,6 +53,12 @@
     <loc>https://left-pocket.github.io/post/mysql/innodb/</loc>
     <lastmod>2021-12-02T10:00:00+08:00</lastmod>
   </url><url>
+    <loc>https://left-pocket.github.io/tags/%E9%9D%A2%E8%AF%95/</loc>
+    <lastmod>2021-12-02T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/</loc>
+    <lastmod>2021-12-02T10:00:00+08:00</lastmod>
+  </url><url>
     <loc>https://left-pocket.github.io/tags/hugo/</loc>
     <lastmod>2021-12-02T01:04:55+08:00</lastmod>
   </url><url>
@@ -87,12 +93,6 @@
     <lastmod>2021-11-25T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2021-11-25T00:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/tags/%E9%9D%A2%E8%AF%95/</loc>
-    <lastmod>2021-11-25T00:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/</loc>
     <lastmod>2021-11-25T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/post/system_design/lru/</loc>

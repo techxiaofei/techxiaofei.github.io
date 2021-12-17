@@ -6,7 +6,16 @@
     <description>Recent content in 面试 on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 25 Nov 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/%E9%9D%A2%E8%AF%95/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 02 Dec 2021 10:00:00 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/%E9%9D%A2%E8%AF%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>后端面试之MySQL-InnoDB一颗B&#43;树可以存放多少行数据？</title>
+      <link>https://left-pocket.github.io/post/mysql/innodb/</link>
+      <pubDate>Thu, 02 Dec 2021 10:00:00 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/mysql/innodb/</guid>
+      <description>背景 MySQL的InnoDB引擎一棵B+树可以存放多少行数据？这是一个很有趣的面试题。 也许你会猜1千万，2千万，或者上亿条数据？ 当你看完这篇文章，你就心中有数了。 最重要的是，这篇文章能让你更深入的理解InnoDB的B+树索引的方方面面。 看完这篇文章，你可以同时回答以下几个关于In</description>
+    </item>
+    
     <item>
       <title>后端面试之网络编程-socket可读可写条件</title>
       <link>https://left-pocket.github.io/post/tcpip/socket_read_write/</link>
