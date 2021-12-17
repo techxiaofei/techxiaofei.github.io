@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>MySQL on Leftpocket的个人博客</title>
-    <link>https://left-pocket.github.io/tags/MySQL/</link>
+    <link>https://left-pocket.github.io/tags/mysql/</link>
     <description>Recent content in MySQL on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 04 Dec 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/MySQL/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 04 Dec 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>MySQL对于千万级的大表要怎么优化？</title>
       <link>https://left-pocket.github.io/post/mysql/table/</link>

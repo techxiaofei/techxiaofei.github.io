@@ -9,28 +9,28 @@
     <lastBuildDate>Thu, 09 Dec 2021 00:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Redis</title>
-      <link>https://left-pocket.github.io/tags/Redis/</link>
+      <link>https://left-pocket.github.io/tags/redis/</link>
       <pubDate>Thu, 09 Dec 2021 00:00:51 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/tags/Redis/</guid>
+      <guid>https://left-pocket.github.io/tags/redis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Linux</title>
-      <link>https://left-pocket.github.io/tags/Linux/</link>
+      <link>https://left-pocket.github.io/tags/linux/</link>
       <pubDate>Tue, 07 Dec 2021 00:00:00 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/tags/Linux/</guid>
+      <guid>https://left-pocket.github.io/tags/linux/</guid>
       <description></description>
     </item>
     
     <item>
       <title>MySQL</title>
-      <link>https://left-pocket.github.io/tags/MySQL/</link>
+      <link>https://left-pocket.github.io/tags/mysql/</link>
       <pubDate>Sat, 04 Dec 2021 00:00:00 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/tags/MySQL/</guid>
+      <guid>https://left-pocket.github.io/tags/mysql/</guid>
       <description></description>
     </item>
     
@@ -99,10 +99,10 @@
     
     <item>
       <title>Golang</title>
-      <link>https://left-pocket.github.io/tags/Golang/</link>
+      <link>https://left-pocket.github.io/tags/golang/</link>
       <pubDate>Sun, 18 Apr 2021 13:00:51 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/tags/Golang/</guid>
+      <guid>https://left-pocket.github.io/tags/golang/</guid>
       <description></description>
     </item>
     

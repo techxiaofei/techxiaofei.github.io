@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linux on Leftpocket的个人博客</title>
-    <link>https://left-pocket.github.io/categories/Linux/</link>
+    <link>https://left-pocket.github.io/categories/linux/</link>
     <description>Recent content in Linux on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 Dec 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/Linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 07 Dec 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>后端面试之Linux-cp和mv命令的区别</title>
       <link>https://left-pocket.github.io/post/linux/cp/</link>

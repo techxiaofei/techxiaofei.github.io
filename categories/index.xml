@@ -9,28 +9,28 @@
     <lastBuildDate>Thu, 09 Dec 2021 00:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Redis</title>
-      <link>https://left-pocket.github.io/categories/Redis/</link>
+      <link>https://left-pocket.github.io/categories/redis/</link>
       <pubDate>Thu, 09 Dec 2021 00:00:51 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/categories/Redis/</guid>
+      <guid>https://left-pocket.github.io/categories/redis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Linux</title>
-      <link>https://left-pocket.github.io/categories/Linux/</link>
+      <link>https://left-pocket.github.io/categories/linux/</link>
       <pubDate>Tue, 07 Dec 2021 00:00:00 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/categories/Linux/</guid>
+      <guid>https://left-pocket.github.io/categories/linux/</guid>
       <description></description>
     </item>
     
     <item>
       <title>MySQL</title>
-      <link>https://left-pocket.github.io/categories/MySQL/</link>
+      <link>https://left-pocket.github.io/categories/mysql/</link>
       <pubDate>Sat, 04 Dec 2021 00:00:00 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/categories/MySQL/</guid>
+      <guid>https://left-pocket.github.io/categories/mysql/</guid>
       <description></description>
     </item>
     
@@ -99,10 +99,10 @@
     
     <item>
       <title>Golang</title>
-      <link>https://left-pocket.github.io/categories/Golang/</link>
+      <link>https://left-pocket.github.io/categories/golang/</link>
       <pubDate>Sun, 18 Apr 2021 13:00:51 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/categories/Golang/</guid>
+      <guid>https://left-pocket.github.io/categories/golang/</guid>
       <description></description>
     </item>
     
@@ -117,10 +117,10 @@
     
     <item>
       <title>Others</title>
-      <link>https://left-pocket.github.io/categories/Others/</link>
+      <link>https://left-pocket.github.io/categories/others/</link>
       <pubDate>Sat, 12 Dec 2020 13:00:51 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/categories/Others/</guid>
+      <guid>https://left-pocket.github.io/categories/others/</guid>
       <description></description>
     </item>
     

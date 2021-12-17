@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Golang on Leftpocket的个人博客</title>
-    <link>https://left-pocket.github.io/tags/Golang/</link>
+    <link>https://left-pocket.github.io/tags/golang/</link>
     <description>Recent content in Golang on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 18 Apr 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/Golang/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 18 Apr 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>goroutine的实现原理</title>
       <link>https://left-pocket.github.io/post/golang/goroutine_implementation/</link>
