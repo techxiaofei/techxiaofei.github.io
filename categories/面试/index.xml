@@ -25,14 +25,5 @@
       <description>​ 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 我们编写所谓的高性能高并发网络服务器时，不免使用各种IO多路复用技术，比如select, poll, epoll等。那这种技术的关键是什么呢？没错，就是得到就绪的描述符。然后我们的服务器就可以从休眠状态或者其他</description>
     </item>
     
-    <item>
-      <title>后端面试之-无锁队列和CAS</title>
-      <link>https://left-pocket.github.io/post/system_design/cas/</link>
-      <pubDate>Wed, 03 Feb 2021 13:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/system_design/cas/</guid>
-      <description></description>
-    </item>
-    
   </channel>
 </rss>

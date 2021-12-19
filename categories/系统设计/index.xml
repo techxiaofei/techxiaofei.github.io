@@ -26,15 +26,6 @@
     </item>
     
     <item>
-      <title>后端面试之-无锁队列和CAS</title>
-      <link>https://left-pocket.github.io/post/system_design/cas/</link>
-      <pubDate>Wed, 03 Feb 2021 13:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/system_design/cas/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>点赞和评论 技术设计与实现</title>
       <link>https://left-pocket.github.io/post/system_design/friends_comment_like/</link>
       <pubDate>Fri, 22 Jan 2021 13:00:51 +0800</pubDate>
