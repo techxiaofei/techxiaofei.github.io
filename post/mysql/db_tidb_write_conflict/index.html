@@ -157,7 +157,12 @@
 <h2 id="总结">总结</h2>
 <p>TiDB的乐观锁，会导致使用普通的SQL语句更新的时候。</p>
 <pre tabindex="0"><code>UPDATE user_tab set name = `***` where userid = `a`
-</code></pre><p>TiDB中当有并发请求对同一个unique key进行update操作的时候，由于乐观锁的机制，会出现Write Conflict. 而MySQL使用的是悲观锁，不会出现Write Conflict.</p>
+</code></pre><p>TiDB中当有并发请求对同一个unique key进行update操作的时候，由于乐观锁的机制，会出现Write Conflict. 而MySQL使用的是悲观锁，不会出现Write Conflict。</p>
+<p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+
+        <img class="mx-auto" alt="pic" src="/img/personal/qrcode_2.png" />   
+    </p>
 
         </div>
 
