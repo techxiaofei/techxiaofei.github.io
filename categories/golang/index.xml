@@ -8,12 +8,12 @@
     <language>zh-CN</language>
     <lastBuildDate>Sun, 18 Apr 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/golang/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>一文看懂Go语言协程的前世今生</title>
+      <title>一文看懂Go语言协程是如何实现的</title>
       <link>https://left-pocket.github.io/post/golang/goroutine_implementation/</link>
       <pubDate>Sun, 18 Apr 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/golang/goroutine_implementation/</guid>
-      <description>调度器的由来 单进程时代 早期的操作系统每个程序就是一个进程，但是操作系统在一段时间只能运行一个进程，直到这个进程运行完，才能运行下一个进程，这个时期可以成为单进程时代——串行时代。 如图：进程之间串行执行，A、B、C 三个进程按顺序执行。 单进程时代的两个问题： 单一执行流程、计算机只能一</description>
+      <description>背景 Go语言最大的特色就是从语言层面支持并发（Goroutine），Goroutine是Go中最基本的执行单元。事实上每一个Go程序至少有一个Goroutine：主Goroutine。当程序启动时，它会自动创建。 为了了解Go语言这么设计的原因，我们从历史背景来看，Go语言的并发调</description>
     </item>
     
     <item>
