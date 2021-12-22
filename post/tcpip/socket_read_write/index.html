@@ -9,8 +9,8 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>后端面试之网络编程-socket可读可写条件 | Leftpocket的个人博客</title>
-    <meta property="og:title" content="后端面试之网络编程-socket可读可写条件 - Leftpocket的个人博客">
+    <title>后端面试之网络编程-socket返回可读，read返回0是什么情况？ | Leftpocket的个人博客</title>
+    <meta property="og:title" content="后端面试之网络编程-socket返回可读，read返回0是什么情况？ - Leftpocket的个人博客">
     <meta property="og:type" content="article">
         
     <meta property="article:published_time" content='2021-11-25T00:00:00&#43;08:00'>
@@ -19,7 +19,7 @@
     <meta property="article:modified_time" content='2021-11-25T00:00:00&#43;08:00'>
         
     <meta name="Keywords" content="[网络编程 socket]">
-    <meta name="description" content="后端面试之网络编程-socket可读可写条件">
+    <meta name="description" content="后端面试之网络编程-socket返回可读，read返回0是什么情况？">
         
     <meta name="author" content="leftpocket">
     <meta property="og:url" content="https://left-pocket.github.io/post/tcpip/socket_read_write/">
@@ -90,7 +90,7 @@
     
     <article class="post">
         <header>
-            <h1 class="post-title">后端面试之网络编程-socket可读可写条件</h1>
+            <h1 class="post-title">后端面试之网络编程-socket返回可读，read返回0是什么情况？</h1>
         </header>
         <date class="post-meta meta-date">
             2021年11月25日
@@ -115,9 +115,15 @@
         <div class="post-content">
             <p>​
 <strong>后端面试</strong>系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。</p>
-<p>我们编写所谓的高性能高并发网络服务器时，不免使用各种IO多路复用技术，比如select,  poll, epoll等。那这种技术的关键是什么呢？没错，就是得到就绪的描述符。然后我们的服务器就可以从休眠状态或者其他状态醒来，处理这些就绪的描述符（比如socket，管道，socketpair等）。
-​
-socket可读可写条件，经常做为面试题被问，因为它考察被面试者对网络编程的基础了解的是不是够深入。据说腾讯后台C/C++面试都会问类似的问题，所以深入了解一些技术细节，还是很必要的。</p>
+<h1 id="结论">结论</h1>
+<p>如果面试官问你，如果一个socket返回可读，read返回0是什么情况？</p>
+<p>其实这是一个很简单的问题，它就是考察<code>socket的可读可写条件</code>这个知识点。</p>
+<p>面试官也可能直接问你：socket的可读可写条件是什么？</p>
+<p><strong>这里先说答案：</strong><br>
+如果一个socket返回可读，read返回0，就是socket可读条件的一种，也就是对端关闭。<br>
+详细来说就是：该连接的读这一半关闭(也就是接收了FIN的TCP连接)。对这样的socket的读操作将不阻塞并返回0。</p>
+<p>下面详细来讲解，socket可读可写条件。</p>
+<h1 id="socket可读可写条件">socket可读可写条件</h1>
 <p>要了解socket可读可写条件，我们先了解几个概念：</p>
 <p>1.<strong>接收缓存区</strong>低水位标记（用于读）和<strong>发送缓存区</strong>低水位标记（用于写）：<br>
 每个套接字有一个接收低水位和一个发送低水位。他们由select函数使用。<br>
@@ -132,13 +138,9 @@ socket可读可写条件，经常做为面试题被问，因为它考察被面�
 <ol>
 <li>socket的接收缓冲区中的数据字节大于等于该socket的接收缓冲区低水位标记的当前大小。对这样的socket的读操作将不阻塞并返回一个大于0的值(也就是返回准备好读入的数据)。我们可以用 <strong>SO_RCVLOWAT</strong> socket选项来设置该socket的低水位标记。对于TCP和UDP的socket而言，其缺省值为1。</li>
 <li>该连接的读这一半关闭(也就是接收了FIN的TCP连接)。对这样的socket的读操作将不阻塞并返回0。<strong>（注：面试点之一）</strong></li>
-<li>socket是一个用于监听的socket,并且已经完成的连接数为非0。这样的soocket处于可读状态，是因为socket收到了对方的connect请求，执行了三次握手的第一步 （对方发送SYN请求过来,使监听socket处于可读状态）正常情况下，这样的socket上的accept操作不会阻塞。</li>
+<li>socket是一个用于监听的socket，并且已经完成的连接数为非0。这样的soocket处于可读状态，是因为socket收到了对方的connect请求，执行了三次握手的第一步 （对方发送SYN请求过来,使监听socket处于可读状态）正常情况下，这样的socket上的accept操作不会阻塞。</li>
 <li>有一个socket有异常错误条件待处理。对于这样的socket的读操作将不会阻塞,并且返回一个错误(-1)，errno则设置成明确的错误条件。这些待处理的错误也可通过指定socket选项SO_ERROR调用getsockopt来取得并清除。</li>
 </ol>
-<p><strong>&lt;注&gt;</strong><br>
-面试官可能换种问法：<br>
-如果select返回可读/返回不为0，结果只读到0字节是什么情况？<br>
-你是否能转换的过来呢？就为了考察你是不是真的掌握了，还是只是死记硬背的。</p>
 <h3 id="可写">可写</h3>
 <p>下列三个条件中的任何一个满足时,socket准备好写: </p>
 <ol>
@@ -152,10 +154,10 @@ socket可读可写条件，经常做为面试题被问，因为它考察被面�
 
         <img class="mx-auto" alt="socket" src="/img/tcpip/socket_read_write.png" />   
     </p>
-<h4 id="读半关闭">读半关闭：</h4>
-<p>四次挥手的第一步，client调用close发送FIN到server，server接收到FIN后，知道client已经关闭了写，也就是server不会再读到任何数据了，也就是读这一半关闭，这个时候server的这一端一定可读，且返回0(read returns 0)。</p>
-<h4 id="写半关闭">写半关闭：</h4>
-<p>四次挥手的第三步，server调用close发送FIN到client，这个时候server已经关闭了写，这个时候server端不会再写数据到client，也就是写这一半关闭，这个时候server的这一端再对该socket进行写会产生SIGPIPE信号（异常）。</p>
+<p><strong>读半关闭：</strong>
+四次挥手的第一步，client调用close发送FIN到server，server接收到FIN后，知道client已经关闭了写，也就是server不会再读到任何数据了，也就是读这一半关闭，这个时候server的这一端一定可读，且返回0(read returns 0)。</p>
+<p><strong>写半关闭：</strong>
+四次挥手的第三步，server调用close发送FIN到client，这个时候server已经关闭了写，这个时候server端不会再写数据到client，也就是写这一半关闭，这个时候server的这一端再对该socket进行写会产生SIGPIPE信号（异常）。</p>
 <p>&lt;全文完&gt;</p>
 <p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
 

@@ -8,12 +8,12 @@
     <language>zh-CN</language>
     <lastBuildDate>Thu, 25 Nov 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>后端面试之网络编程-socket可读可写条件</title>
+      <title>后端面试之网络编程-socket返回可读，read返回0是什么情况？</title>
       <link>https://left-pocket.github.io/post/tcpip/socket_read_write/</link>
       <pubDate>Thu, 25 Nov 2021 00:00:00 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/tcpip/socket_read_write/</guid>
-      <description>​ 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 我们编写所谓的高性能高并发网络服务器时，不免使用各种IO多路复用技术，比如select, poll, epoll等。那这种技术的关键是什么呢？没错，就是得到就绪的描述符。然后我们的服务器就可以从休眠状态或者其他</description>
+      <description>​ 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 结论 如果面试官问你，如果一个socket返回可读，read返回0是什么情况？ 其实这是一个很简单的问题，它就是考察socket的可读可写条件这个知识点。 面试官也可能直接问你：socket的可读可写条件</description>
     </item>
     
   </channel>
