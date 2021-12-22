@@ -8,12 +8,12 @@
     <language>zh-CN</language>
     <lastBuildDate>Sun, 18 Apr 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>一文看懂Go语言协程是如何实现的</title>
+      <title>一文看懂Go语言协程的设计与原理</title>
       <link>https://left-pocket.github.io/post/golang/goroutine_implementation/</link>
       <pubDate>Sun, 18 Apr 2021 13:00:51 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/golang/goroutine_implementation/</guid>
-      <description>背景 Go语言最大的特色就是从语言层面支持并发（Goroutine），Goroutine是Go中最基本的执行单元。事实上每一个Go程序至少有一个Goroutine：主Goroutine。当程序启动时，它会自动创建。 为了了解Go语言这么设计的原因，我们从历史背景来看，Go语言的并发调</description>
+      <description>背景 Go语言最大的特色就是从语言层面支持并发（Goroutine），Goroutine是Go中最基本的执行单元。事实上每一个Go程序至少有一个Goroutine：主Goroutine。当程序启动时，它会自动创建。 为了了解Go语言协程的设计，我们从历史背景出发，来看看最终Gorou</description>
     </item>
     
     <item>
