@@ -176,7 +176,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#000;font-weight:bold">type</span> User <span style="color:#000;font-weight:bold">struct</span> {
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">type</span> User <span style="color:#000;font-weight:bold">struct</span> {
 	ID     <span style="color:#458;font-weight:bold">string</span>
 	Name   <span style="color:#458;font-weight:bold">string</span>
 	Age    <span style="color:#458;font-weight:bold">int</span>
@@ -260,7 +260,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">NewUserDefault</span>(id <span style="color:#458;font-weight:bold">string</span>, name <span style="color:#458;font-weight:bold">string</span>) (<span style="color:#000;font-weight:bold">*</span>User, <span style="color:#458;font-weight:bold">error</span>) {
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">NewUserDefault</span>(id <span style="color:#458;font-weight:bold">string</span>, name <span style="color:#458;font-weight:bold">string</span>) (<span style="color:#000;font-weight:bold">*</span>User, <span style="color:#458;font-weight:bold">error</span>) {
   <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">&amp;</span>User{ID: id, Name: name}, <span style="color:#000;font-weight:bold">nil</span>
 }
 
@@ -287,7 +287,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#000;font-weight:bold">type</span> Config <span style="color:#000;font-weight:bold">struct</span> {
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">type</span> Config <span style="color:#000;font-weight:bold">struct</span> {
     Age    <span style="color:#458;font-weight:bold">int</span>
     Email  <span style="color:#458;font-weight:bold">string</span>
     Phone  <span style="color:#458;font-weight:bold">string</span>
@@ -305,7 +305,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#000;font-weight:bold">type</span> User <span style="color:#000;font-weight:bold">struct</span> {
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">type</span> User <span style="color:#000;font-weight:bold">struct</span> {
     ID   <span style="color:#458;font-weight:bold">string</span>
     Name <span style="color:#458;font-weight:bold">string</span>
     Conf <span style="color:#000;font-weight:bold">*</span>Config
@@ -325,7 +325,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">NewUser</span>(id <span style="color:#458;font-weight:bold">string</span>, name <span style="color:#458;font-weight:bold">string</span>, conf <span style="color:#000;font-weight:bold">*</span>Config) (<span style="color:#000;font-weight:bold">*</span>User, <span style="color:#458;font-weight:bold">error</span>) {
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">NewUser</span>(id <span style="color:#458;font-weight:bold">string</span>, name <span style="color:#458;font-weight:bold">string</span>, conf <span style="color:#000;font-weight:bold">*</span>Config) (<span style="color:#000;font-weight:bold">*</span>User, <span style="color:#458;font-weight:bold">error</span>) {
     <span style="color:#998;font-style:italic">//...
 </span><span style="color:#998;font-style:italic"></span>}
 <span style="color:#998;font-style:italic">//Using the default configuratrion
@@ -348,7 +348,7 @@ user2, _ <span style="color:#000;font-weight:bold">:=</span> <span style="color:
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">user <span style="color:#000;font-weight:bold">:=</span> <span style="color:#0086b3">new</span>(UserBuilder).<span style="color:#900;font-weight:bold">Create</span>(<span style="color:#d14">&#34;1&#34;</span>, <span style="color:#d14">&#34;Ada&#34;</span>).
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">user <span style="color:#000;font-weight:bold">:=</span> <span style="color:#0086b3">new</span>(UserBuilder).<span style="color:#900;font-weight:bold">Create</span>(<span style="color:#d14">&#34;1&#34;</span>, <span style="color:#d14">&#34;Ada&#34;</span>).
   <span style="color:#900;font-weight:bold">age</span>(<span style="color:#099">18</span>).
   <span style="color:#900;font-weight:bold">phone</span>(<span style="color:#d14">&#34;123456&#34;</span>).
   <span style="color:#900;font-weight:bold">gender</span>(<span style="color:#d14">&#34;female&#34;</span>).
@@ -363,7 +363,7 @@ user2, _ <span style="color:#000;font-weight:bold">:=</span> <span style="color:
 <pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#000;font-weight:bold">type</span> Option <span style="color:#000;font-weight:bold">func</span>(<span style="color:#000;font-weight:bold">*</span>User)
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">type</span> Option <span style="color:#000;font-weight:bold">func</span>(<span style="color:#000;font-weight:bold">*</span>User)
 </code></pre></td></tr></table>
 </div>
 </div><p>然后，我们定义一组返回函数的函数：</p>
@@ -394,7 +394,7 @@ user2, _ <span style="color:#000;font-weight:bold">:=</span> <span style="color:
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">WithAge</span>(age <span style="color:#458;font-weight:bold">int</span>) Option {
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">WithAge</span>(age <span style="color:#458;font-weight:bold">int</span>) Option {
 	<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">func</span>(u <span style="color:#000;font-weight:bold">*</span>User) {
 		u.Age = age
 	}
@@ -441,7 +441,7 @@ user2, _ <span style="color:#000;font-weight:bold">:=</span> <span style="color:
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">NewUser</span>(id <span style="color:#458;font-weight:bold">string</span>, name <span style="color:#458;font-weight:bold">string</span>, options <span style="color:#000;font-weight:bold">...</span><span style="color:#000;font-weight:bold">func</span>(<span style="color:#000;font-weight:bold">*</span>User)) (<span style="color:#000;font-weight:bold">*</span>User, <span style="color:#458;font-weight:bold">error</span>) {
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">NewUser</span>(id <span style="color:#458;font-weight:bold">string</span>, name <span style="color:#458;font-weight:bold">string</span>, options <span style="color:#000;font-weight:bold">...</span><span style="color:#000;font-weight:bold">func</span>(<span style="color:#000;font-weight:bold">*</span>User)) (<span style="color:#000;font-weight:bold">*</span>User, <span style="color:#458;font-weight:bold">error</span>) {
 	user <span style="color:#000;font-weight:bold">:=</span> User{
 		ID:     id,
 		Name:   name,
@@ -465,7 +465,7 @@ user2, _ <span style="color:#000;font-weight:bold">:=</span> <span style="color:
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">user1, err <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">NewUser</span>(<span style="color:#d14">&#34;1&#34;</span>, <span style="color:#d14">&#34;Ada&#34;</span>)
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">user1, err <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">NewUser</span>(<span style="color:#d14">&#34;1&#34;</span>, <span style="color:#d14">&#34;Ada&#34;</span>)
 user2, err <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">NewUser</span>(<span style="color:#d14">&#34;2&#34;</span>, <span style="color:#d14">&#34;Bob&#34;</span>, <span style="color:#900;font-weight:bold">WithPhone</span>(<span style="color:#d14">&#34;123456&#34;</span>), <span style="color:#900;font-weight:bold">WithGender</span>(<span style="color:#d14">&#34;male&#34;</span>))
 </code></pre></td></tr></table>
 </div>
