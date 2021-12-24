@@ -6,7 +6,16 @@
     <description>Recent content in 系统设计 on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 23 Nov 2021 18:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 23 Dec 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>面试之系统设计-短网址（Short Url）服务设计</title>
+      <link>https://left-pocket.github.io/post/system_design/short_url/</link>
+      <pubDate>Thu, 23 Dec 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/system_design/short_url/</guid>
+      <description>​ 背景 短链接（short url），通俗来说，就是把普通的网址，通过程序计算等方式，转换为简短的网址字符串。 可能你会问了，短链接有哪些使用场景呢？ 事实上你一定见到过短链接，比如短信里面的链接，微博里面的链接。 短链接可以减少文本字数，隐藏链接参数等，有利于短信推广的作用。 比如：短信里</description>
+    </item>
+    
     <item>
       <title>LRU缓存机制，你想知道的这里都有</title>
       <link>https://left-pocket.github.io/post/system_design/lru/</link>
