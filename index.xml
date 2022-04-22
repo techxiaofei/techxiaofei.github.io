@@ -6,14 +6,41 @@
     <description>Recent content on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 23 Dec 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Apr 2022 13:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>面试之系统设计-短网址（Short Url）服务设计</title>
+      <title>我们放弃了snowflake算法，重新设计了分布式ID生成方案</title>
+      <link>https://left-pocket.github.io/post/system_design/leaf/</link>
+      <pubDate>Fri, 22 Apr 2022 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/system_design/leaf/</guid>
+      <description>背景 在之前的文章中，我们讲了分布式ID生成方案-snowflake算法。这也是我们系统的业务过去几年一直使用的方案。 分布式ID生成方案-snowflake算法 为了避免你不了解snowflake算法，这里简单描述下： snowflake算法 雪花算法（Snowflake）是twitte</description>
+    </item>
+    
+    <item>
+      <title>元宇宙，是炒作还是机遇？</title>
+      <link>https://left-pocket.github.io/post/popularization/metaverse/</link>
+      <pubDate>Tue, 04 Jan 2022 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/popularization/metaverse/</guid>
+      <description>相信每个人都已经听过元宇宙这个概念名词，元宇宙仿佛一夜之间，在互联网病毒式发酵，以各种方式进入到我们的视线。 元宇宙到底是个什么概念，它又什么核心技术，对我们来说，到底是骗局，还是机遇呢？ 元宇宙元年 很多人觉得2021年是元宇宙元年。的确，元宇宙这个概念2021年才火。 我们查看谷歌搜</description>
+    </item>
+    
+    <item>
+      <title>KCP传输协议，快速可靠的UDP，和TCP比有什么优势？</title>
+      <link>https://left-pocket.github.io/post/tcpip/kcp/</link>
+      <pubDate>Sat, 01 Jan 2022 00:00:02 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/tcpip/kcp/</guid>
+      <description>​ 背景 可能你从来没有听说过KCP是什么，但是你肯定知道TCP和UDP。 这里我们通过KCP来剖析TCP和UDP的区别是什么，并理解为什么有了TCP还需要KCP，以及KCP/UDP具体的使用场景。 KCP是什么 我们都知道： TCP保证数据准确交付，UDP保证数据快速到达，KCP则是两种协</description>
+    </item>
+    
+    <item>
+      <title>后端面试之系统设计-短网址（Short URL）服务怎么设计？</title>
       <link>https://left-pocket.github.io/post/system_design/short_url/</link>
       <pubDate>Thu, 23 Dec 2021 00:00:00 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/system_design/short_url/</guid>
-      <description>​ 背景 短链接（short url），通俗来说，就是把普通的网址，通过程序计算等方式，转换为简短的网址字符串。 可能你会问了，短链接有哪些使用场景呢？ 事实上你一定见到过短链接，比如短信里面的链接，微博里面的链接。 短链接可以减少文本字数，隐藏链接参数等，有利于短信推广的作用。 比如：短信里</description>
+      <description>​ 背景 短网址（short url），就是将长网址缩短为一个很短的网址，用户访问这个短网址可以重定向到原本的长网址（还原）。 可能你会问了，短链接有哪些使用场景呢？ 事实上你一定见到过短网址，比如短信里面的网址，微博里面的链接。 短网址可以减少文本字数，隐藏链接参数等，有利于短信推广的作用</description>
     </item>
     
     <item>
@@ -116,12 +143,30 @@
     </item>
     
     <item>
+      <title>后端开发除了增删改查还有什么？</title>
+      <link>https://left-pocket.github.io/post/backend/backend_development/</link>
+      <pubDate>Tue, 30 Nov 2021 14:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/backend/backend_development/</guid>
+      <description>背景 很多刚接触后端开发的同学，会发现，后端开发不就是增删改查吗？的确，如果你做的东西只是一个很小的流量的一个网站/平台的后端，用户量低，每秒钟访问量低，对数据的一致性和服务的稳定性要求也没那么高。那就是简单的增删改查，一台服务器连接数据库，API直接读写数据库。 可是日子久了，你发</description>
+    </item>
+    
+    <item>
       <title>后端面试之MySQL-什么是回表查询和覆盖索引</title>
       <link>https://left-pocket.github.io/post/mysql/covering_index/</link>
       <pubDate>Fri, 26 Nov 2021 00:00:00 +0800</pubDate>
       
       <guid>https://left-pocket.github.io/post/mysql/covering_index/</guid>
       <description>后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 背景 关于回表查询，是MySQL里面一个非常重要的知识点。理解回表查询，让你在实际项目中操作数据库的时候会有更好的性能考虑。 回表查询也是我面试必考的一个基础知识。 什么是回表查询？ 这先要从InnoDB的索</description>
+    </item>
+    
+    <item>
+      <title>后端面试之网络编程-close和shutdown的区别</title>
+      <link>https://left-pocket.github.io/post/tcpip/close_shutdown/</link>
+      <pubDate>Thu, 25 Nov 2021 00:00:02 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/tcpip/close_shutdown/</guid>
+      <description>​ 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 shutdown()函数可以选择关闭全双工连接的读通道或者写通道，如果两个通道同时关闭，则这个连接不能再继续通信。close()函数会同时关闭全双工连接的读写通道，除了关闭连接外，还会释放套接字占用</description>
     </item>
     
     <item>
@@ -257,6 +302,15 @@
       
       <guid>https://left-pocket.github.io/post/system_design/bloom_filter/</guid>
       <description>布隆过滤器是什么 本质上布隆过滤器(Bloom Filter)是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入和查询，可以用来告诉你 某样东西一定不存在或者可能存在。 相比于传统的 List、Set、Map 等数据结构，它更高效、占</description>
+    </item>
+    
+    <item>
+      <title>后端面试之-分布式锁的几种实现方式</title>
+      <link>https://left-pocket.github.io/post/system_design/distributed_lock/</link>
+      <pubDate>Wed, 03 Feb 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/system_design/distributed_lock/</guid>
+      <description>分布式锁一般有三种实现方式： 数据库乐观锁； 基于Redis的分布式锁； 基于ZooKeeper的分布式锁； 数据库 排它锁 实现方式： 获取锁可以通过，在select语句后增加for update，数据库会在查询过程中给数据库表增加排他锁。当某条记录被加上排他锁之后，其他线程无法再在该行记录上</description>
     </item>
     
     <item>

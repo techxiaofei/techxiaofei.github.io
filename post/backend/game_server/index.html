@@ -132,8 +132,6 @@
 <p>很多游戏是多人游戏，需要玩家交互，场景中移动，聊天，组队，击杀BOSS等等，都需要反馈给场景中的所有可视玩家。这个时候需要保持任何玩家之间都能及时的互动或者沟通，对服务器架构上的设计就有一定的要求。</p>
 <h3 id="复杂度高">复杂度高</h3>
 <p>游戏的核心是玩法，更是由于多人在线的游戏的玩法可以设计的很复杂，所以做游戏后端开发的业务复杂度比互联网高的，比如实现一个多人战斗系统，一个副本玩法等等。比如梦幻西游的回合制战斗，或者王者荣耀的战斗等等。而互联网的业务就相对简单的多了。</p>
-<h3 id="io密集型">IO密集型</h3>
-<p>这个并不是所有的游戏都这样，但是大多数多人在线游戏是IO密集型的，它的主要瓶颈在网络/磁盘IO，而不是CPU。因为游戏很多多人在线，相互之间同步的数据导致整体的IO非常高。因为CPU并不高，导致很多时候都不需要多线程。</p>
 <h2 id="互联网特有的">互联网特有的</h2>
 <h3 id="请求响应">请求响应</h3>
 <p>互联网应用一般只需要支持请求响应式的通信，最常用的协议是HTTP来做客户端和服务端的通信。互联网应用一般来说只用关心自己的行为，而不太关注其他用户的行为（即使关注，也没有实时的响应需求），请求响应模式是最适合普通的互联网服务器的一种通信模式。</p>
@@ -147,8 +145,6 @@
 <p>可以容忍一定的延迟，用户感知不明显。20毫秒还是200毫秒，用户是感觉不到的，但是如果是玩王者荣耀这类游戏，基本上你都感觉得到。</p>
 <h3 id="业务简单">业务简单</h3>
 <p>互联网的业务说到底就是增删改查。（当然1000用户的增删改查和10亿用户的增删改查不一样）。高并发不属于业务的范畴，我现在处理百亿级数据和千万级QPS的服务，主要考虑高并发下的服务的拆分，架构的设计，微服务化，数据分库分表，缓存设计，异步存储，热点处理等等一系列高并发下的性能考虑。但是仅仅业务本身的复杂度相对游戏真的低很多。</p>
-<h3 id="cpu密集型">CPU密集型</h3>
-<p>互联网的服务器大多是CPU密集型的。业务层涉及到大量的数据计算。</p>
 <h1 id="总结">总结</h1>
 <p>以上就是一个同时做过游戏开发和互联网开发的程序对这两个的区别的一些总结。</p>
 <p>我做游戏的时候主要关注的是业务的玩法方面设计一个复杂的玩法需要考虑很多，需要了解的是玩法的设计。<br>
@@ -169,6 +165,8 @@
 <div class="post-archive">
     <h2>See Also</h2>
     <ul class="listing">
+        
+        <li><a href="/post/backend/backend_development/">后端开发除了增删改查还有什么？</a></li>
         
         <li><a href="/post/backend/game_development/">手游服务器开发技术详解</a></li>
         
@@ -205,7 +203,7 @@
 
                     <footer id="footer">
     <div>
-        &copy; 2021 <a href="https://left-pocket.github.io">Leftpocket的个人博客 By leftpocket</a>
+        &copy; 2022 <a href="https://left-pocket.github.io">Leftpocket的个人博客 By leftpocket</a>
         
     </div>
     <br />
@@ -253,7 +251,19 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://left-pocket.github.io/post/system_design/short_url/" title="面试之系统设计-短网址（Short Url）服务设计">面试之系统设计-短网址（Short Url）服务设计</a>
+        <a href="https://left-pocket.github.io/post/system_design/leaf/" title="我们放弃了snowflake算法，重新设计了分布式ID生成方案">我们放弃了snowflake算法，重新设计了分布式ID生成方案</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/popularization/metaverse/" title="元宇宙，是炒作还是机遇？">元宇宙，是炒作还是机遇？</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/tcpip/kcp/" title="KCP传输协议，快速可靠的UDP，和TCP比有什么优势？">KCP传输协议，快速可靠的UDP，和TCP比有什么优势？</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/system_design/short_url/" title="后端面试之系统设计-短网址（Short URL）服务怎么设计？">后端面试之系统设计-短网址（Short URL）服务怎么设计？</a>
     </li>
     
     <li>
@@ -278,18 +288,6 @@
     
     <li>
         <a href="https://left-pocket.github.io/post/hugo/hugo_dns/" title="从零开始搭建个人博客（五）- 申请免费域名并绑定到个人博客">从零开始搭建个人博客（五）- 申请免费域名并绑定到个人博客</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/hugo/hugo_vercel/" title="从零开始搭建个人博客（四）- hugo自动部署到vercel">从零开始搭建个人博客（四）- hugo自动部署到vercel</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/hugo/hugo_advanced/" title="从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼">从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/hugo/hugo_github/" title="从零开始搭建个人博客（二）- 把hugo博客托管到github上">从零开始搭建个人博客（二）- 把hugo博客托管到github上</a>
     </li>
     
 </ul>
@@ -321,13 +319,15 @@
     
     <li><a href="https://left-pocket.github.io/categories/redis/">Redis (3)</a></li>
     
-    <li><a href="https://left-pocket.github.io/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发 (2)</a></li>
+    <li><a href="https://left-pocket.github.io/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发 (3)</a></li>
     
-    <li><a href="https://left-pocket.github.io/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计 (5)</a></li>
+    <li><a href="https://left-pocket.github.io/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://left-pocket.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (1)</a></li>
+    <li><a href="https://left-pocket.github.io/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计 (7)</a></li>
     
-    <li><a href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/">面试 (3)</a></li>
+    <li><a href="https://left-pocket.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (3)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/">面试 (5)</a></li>
     
 </ul>
     </section>
@@ -355,6 +355,8 @@
     <a href="https://left-pocket.github.io/tags/vscode/">vscode</a>
     
     <a href="https://left-pocket.github.io/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E7%A7%91%E6%99%AE/">科普</a>
     
     <a href="https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计</a>
     

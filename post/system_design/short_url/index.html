@@ -9,8 +9,8 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>面试之系统设计-短网址（Short Url）服务设计 | Leftpocket的个人博客</title>
-    <meta property="og:title" content="面试之系统设计-短网址（Short Url）服务设计 - Leftpocket的个人博客">
+    <title>后端面试之系统设计-短网址（Short URL）服务怎么设计？ | Leftpocket的个人博客</title>
+    <meta property="og:title" content="后端面试之系统设计-短网址（Short URL）服务怎么设计？ - Leftpocket的个人博客">
     <meta property="og:type" content="article">
         
     <meta property="article:published_time" content='2021-12-23T00:00:00&#43;08:00'>
@@ -19,7 +19,7 @@
     <meta property="article:modified_time" content='2021-12-23T00:00:00&#43;08:00'>
         
     <meta name="Keywords" content="[短URL 系统设计]">
-    <meta name="description" content="面试之系统设计-短网址（Short Url）服务设计">
+    <meta name="description" content="后端面试之系统设计-短网址（Short URL）服务怎么设计？">
         
     <meta name="author" content="leftpocket">
     <meta property="og:url" content="https://left-pocket.github.io/post/system_design/short_url/">
@@ -90,7 +90,7 @@
     
     <article class="post">
         <header>
-            <h1 class="post-title">面试之系统设计-短网址（Short Url）服务设计</h1>
+            <h1 class="post-title">后端面试之系统设计-短网址（Short URL）服务怎么设计？</h1>
         </header>
         <date class="post-meta meta-date">
             2021年12月23日
@@ -115,54 +115,47 @@
         <div class="post-content">
             <p>​</p>
 <h1 id="背景">背景</h1>
-<p>短链接（short url），通俗来说，就是把普通的网址，通过程序计算等方式，转换为简短的网址字符串。</p>
+<p>短网址（short url），就是将长网址缩短为一个很短的网址，用户访问这个短网址可以重定向到原本的长网址（还原）。</p>
 <p>可能你会问了，短链接有哪些使用场景呢？<br>
-事实上你一定见到过短链接，比如短信里面的链接，微博里面的链接。
-短链接可以减少文本字数，隐藏链接参数等，有利于短信推广的作用。</p>
+事实上你一定见到过短网址，比如短信里面的网址，微博里面的链接。
+短网址可以减少文本字数，隐藏链接参数等，有利于短信推广的作用，常用于有字数限制的短信、微博、二维码等场景。</p>
+<p>比如我收到以下的短信：</p>
 <p>
         <img class="mx-auto" alt="阿里云" src="/img/system_design/aliyun.png" />   
     </p>
-<p>比如：短信里面的： <a href="http://tb.cn/9GLkgHx">http://tb.cn/9GLkgHx</a></p>
+<p>点开短信链接：http://tb.cn/9GLkgHx</p>
 <p>对应的实际的网址就是：</p>
 <pre tabindex="0"><code>http://huodong.m.aliyun.com/act/v3jtax.html?gotoUrl=aliyun%3A%2F%2Fforward%2Ff6b8f0a4fa8cfd25da51a182807d5c25%3Ftarget_%3D%2Fapp%2Fhome%26tab_%3Dconsole
-</code></pre><p>短信里面的那个url就是短链接。</p>
-<p>一个短链接服务一般包含以下几点：</p>
-<ul>
-<li>有一个短域名；</li>
-<li>将普通网址转换成短链；</li>
-<li>用户访问短链接，会跳转到正确的网址上去；</li>
-<li>后端管理服务来控制哪些服务可以调用短链接服务生成短链；（可选）</li>
-<li>定时任务删除过期的短链接；（可选）</li>
-</ul>
-<p>我们长见的短网址：</p>
+</code></pre><p>短信里面的那个url就是短网址，而实际的网址却又非常长。我们就需要一个服务去接收短网址，并转换成长网址访问。</p>
+<p>我们常见的短网址如下，可以看到，短网址的域名都很短。</p>
 <ul>
 <li>微博 <a href="http://t.cn/">http://t.cn/</a></li>
-<li>谷歌短网址服务 <a href="https://goo.gl/">https://goo.gl/</a></li>
+<li>谷歌 <a href="https://goo.gl/">https://goo.gl/</a></li>
+<li>淘宝 <a href="http://tb.cn/">http://tb.cn/</a></li>
+<li>等等。。。</li>
 </ul>
 <h1 id="原理">原理</h1>
-<p>实践是最好的老师，这边我们自己实践一下，看一下短链接的流程。</p>
+<p>实践是最好的老师，我们自己实践一下，看一下浏览器输入短网址转换成具体的长网址的流程。</p>
 <h3 id="生成">生成</h3>
-<p>我们随便选择一个开放的短网址转换服务商：</p>
+<p>我们随便选择一个开放的短网址转换服务：</p>
 <ol>
 <li><a href="https://sina.lt">https://sina.lt</a></li>
 <li><a href="https://tinyurl.com/app">https://tinyurl.com/app</a></li>
 </ol>
-<p>把我的长链接（微信公众号链接）转换成短链接。</p>
+<p>把我的长链接（微信公众号链接）转换成短网址。</p>
 <pre tabindex="0"><code>https://mp.weixin.qq.com/s?__biz=MzkwNzMwNzI1Ng==&amp;mid=2247483810&amp;idx=1&amp;sn=e252816ee1d5fc1358bf77b8146f3dba&amp;chksm=c0da7035f7adf923ce0beef38a729f305e0d1cc8cc3c18cc491b1c37bffc0786962eaac41772&amp;token=2107487666&amp;lang=zh_CN#rd) 
 </code></pre><p>如图可以看到：
-生成了 <a href="https://t.hk.uy/aBpj">https://t.hk.uy/aBpj</a> 的短链接。</p>
+生成了 <a href="https://t.hk.uy/aBpj">https://t.hk.uy/aBpj</a> 的短网址。</p>
 <p>
         <img class="mx-auto" alt="short_url_1" src="/img/system_design/short_url_1.png" />   
     </p>
 <h3 id="访问">访问</h3>
-<p>浏览器打开这个短链接（同时打开开发者模式）：</p>
+<p>浏览器打开这个短网址（同时打开开发者模式）：</p>
 <p>
         <img class="mx-auto" alt="short_url_2" src="/img/system_design/short_url_2.png" />   
     </p>
 <p>一图胜千言，我想你就能明白它的运行原理了。</p>
-<p><strong>301 HTTP状态码</strong><br>
-301表示永久重定向，就是说浏览器在拿到服务器返回的这个状态码后会自动跳转到一个新的URL地址，这个地址可以从响应的Location首部中获取。</p>
-<h3 id="原理-1">原理</h3>
+<p><strong>原理</strong></p>
 <p>当我们在浏览器里输入 <a href="https://t.hk.uy/aBpj">https://t.hk.uy/aBpj</a> 时</p>
 <ol>
 <li>DNS首先解析获得 <a href="https://t.hk.uy/aBpj">https://t.hk.uy/aBpj</a> 的 IP 地址</li>
@@ -170,14 +163,16 @@
 <li><a href="https://t.hk.uy">https://t.hk.uy</a> 服务器会通过短码 aBpj 获取对应的普通网址</li>
 <li>请求通过 HTTP 301 转到对应的普通网址</li>
 </ol>
+<p><strong>301 HTTP状态码</strong><br>
+301表示永久重定向，就是说浏览器在拿到服务器返回的这个状态码后会自动跳转到一个新的URL地址，这个地址可以从响应的Location首部中获取。</p>
 <h1 id="设计">设计</h1>
-<p>现在的互联网公司，基本上都会有自己的短网址服务（short url service），来解决类似的业务需求。</p>
-<p>我们就来设计一个完整的适合生产环境使用的短链接服务，看看这个服务到底应该怎么实现。</p>
+<p>现在的互联网公司，基本上都会有自己的短网址服务，来解决类似的业务需求，短网址服务一般为公司内部的其他业务提供服务。</p>
+<p>我们就来设计一个完整的适合生产环境使用的短网址服务，看一下这个短网址服务的实现需要考虑哪些方面。</p>
 <h3 id="短域名">短域名</h3>
-<p>首先会有一个短域名。</p>
+<p>首先会有一个短域名，一般域名也会非常短，为公司普通的域名的一些缩写。</p>
 <p>比如: <a href="https://ab.cd/">https://ab.cd/</a></p>
 <p>然后生成一个短码， abCD12 映射到 正常的网址：https://www.leftpocket.cn/post/redis/multithreading/</p>
-<p>那么 https:/ab.cd/abCD12 就是你的短链接。当用户点击这个短链接就自动跳转到正常的网站。</p>
+<p>那么 https:/ab.cd/abCD12 就是你的短网址。当用户点击这个短链接就自动跳转到正常的网站。</p>
 <h3 id="短码设计">短码设计</h3>
 <p>首先我们需要设计一个短码，要能负责把长链接转成短码。不同的长链接要能转成不同的短码。
 短码一般是由 [a - z, A - Z, 0 - 9] 这62 个字母或数字组成，短码的长度也可以自定义，但一般不超过8位。</p>
@@ -190,7 +185,8 @@
 <p>以上只是让大家对生成的数量有一个大概的概念。其实6位短码已经足够大部分场景了，我司的线上的短地址服务器使用的是7位。</p>
 <p>目前比较流行的生成短码的方式有以下几种：<code>自增ID</code>，<code>摘要算法</code>，<code>随机数</code>，<code>雪花算法</code>。</p>
 <p><strong>一、自增ID</strong></p>
-<p>利用MySQL数据库的自增ID属性，每增加一个短码，就在上次添加的短码ID上加1，然后把10进制的id值，转化成一个62进制的字符串。</p>
+<p>利用MySQL数据库的自增ID属性，每增加一个短码，就在上次添加的短码ID上加1，然后把10进制的id值，转化成一个62进制的字符串。这样就可以减少长度的目的。</p>
+<p>比如 十进制的数字 <code>10000000000</code> 转换成62进制就是 <code>aUKYOA</code>， 只需要6位就足够了。</p>
 <p><strong>二、摘要算法</strong></p>
 <p>摘要算法又称哈希算法，它表示输入任意长度的数据，输出固定长度的数据。相同的输入数据始终得到相同的输出，不同的输入数据尽量得到不同的输出。</p>
 <p>算法过程：</p>
@@ -207,8 +203,8 @@
 <p>该方法是最简单的一种实现，不过由于Math.round()方法生成的随机数属于伪随机数，碰撞的可能性也不小。在数据比较多的情况下，可能会循环很多次，才能生成一个不冲突的短码。</p>
 <p><strong>四、雪花算法</strong></p>
 <p>雪花算法作为分布式ID生成方案，在分布式服务场景下使用方便，生成的ID区间递增。一直被广泛使用。</p>
-<p>我们就是使用雪花算法的变种算法（修改位数来控制总长度）生成的唯一ID。</p>
-<p>然后根据ID生成62进制的短码，为了避免生成的短码有规律，我们先反转ID，然后再转换成62进制。最终生成的短码是无序的。</p>
+<p>我们就是使用雪花算法生成的唯一ID。它相比于自增ID不依赖于数据库，同时方便支持分布式，性能更好。</p>
+<p>然后根据ID生成62进制的短码，为了避免生成的短码有规律，我们先反转ID，然后再转换成62进制。最终生成的短码是无规律的。避免被恶意识别。</p>
 <h3 id="储存方案">储存方案</h3>
 <p>我们使用了MySQL作为短码的储存方案。</p>
 <table>
@@ -281,11 +277,15 @@
 <li>后台服务负责控制权限，只有特定的服务可以生成短网址。</li>
 <li>CronJob负责定时清理过期数据，防止数据库数据量过大。</li>
 </ul>
-<h3 id="缓存方案">缓存方案</h3>
-<p>如果业务量增大，数据库存在性能瓶颈，我们可以使用缓存。</p>
+<h3 id="高并发">高并发</h3>
+<p>如果业务量增大，数据库读写存在性能瓶颈，我们可以进行优化。</p>
+<p><strong>分库分表</strong></p>
+<p>为了支持写优化，可以进行分库分表。</p>
+<p><strong>缓存</strong></p>
+<p>读优化，我们就可以给数据库加一层缓存。</p>
 <ol>
-<li>Redis/Memcached分布式缓存。 -设置过期时间，避免占用过多内存。</li>
-<li>内存缓存。 -使用LRU缓存来淘汰不经常访问的网址。</li>
+<li>Redis/Memcached分布式缓存。 设置过期时间，避免占用过多内存。</li>
+<li>内存缓存。 使用LRU缓存来淘汰不经常访问的网址。</li>
 </ol>
 <h1 id="总结">总结</h1>
 <p>一个短网址服务的设计相对还是比较简单的，主要是考察一些细节：</p>
@@ -317,11 +317,11 @@
         
         <li><a href="/post/system_design/friends_comment_like/">点赞和评论 技术设计与实现</a></li>
         
+        <li><a href="/post/system_design/distributed_lock/">后端面试之-分布式锁的几种实现方式</a></li>
+        
         <li><a href="/post/mysql/innodb/">后端面试之MySQL-InnoDB一颗B&#43;树可以存放多少行数据？</a></li>
         
-        <li><a href="/post/tcpip/socket_read_write/">后端面试之网络编程-socket返回可读，read返回0是什么情况？</a></li>
-        
-        <li><a href="/post/system_design/bloom_filter/">5分钟搞懂布隆过滤器，掌握亿级数据过滤算法</a></li>
+        <li><a href="/post/tcpip/close_shutdown/">后端面试之网络编程-close和shutdown的区别</a></li>
         
     </ul>
 </div>
@@ -358,7 +358,7 @@
 
                     <footer id="footer">
     <div>
-        &copy; 2021 <a href="https://left-pocket.github.io">Leftpocket的个人博客 By leftpocket</a>
+        &copy; 2022 <a href="https://left-pocket.github.io">Leftpocket的个人博客 By leftpocket</a>
         
     </div>
     <br />
@@ -406,7 +406,19 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://left-pocket.github.io/post/system_design/short_url/" title="面试之系统设计-短网址（Short Url）服务设计">面试之系统设计-短网址（Short Url）服务设计</a>
+        <a href="https://left-pocket.github.io/post/system_design/leaf/" title="我们放弃了snowflake算法，重新设计了分布式ID生成方案">我们放弃了snowflake算法，重新设计了分布式ID生成方案</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/popularization/metaverse/" title="元宇宙，是炒作还是机遇？">元宇宙，是炒作还是机遇？</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/tcpip/kcp/" title="KCP传输协议，快速可靠的UDP，和TCP比有什么优势？">KCP传输协议，快速可靠的UDP，和TCP比有什么优势？</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/system_design/short_url/" title="后端面试之系统设计-短网址（Short URL）服务怎么设计？">后端面试之系统设计-短网址（Short URL）服务怎么设计？</a>
     </li>
     
     <li>
@@ -431,18 +443,6 @@
     
     <li>
         <a href="https://left-pocket.github.io/post/hugo/hugo_dns/" title="从零开始搭建个人博客（五）- 申请免费域名并绑定到个人博客">从零开始搭建个人博客（五）- 申请免费域名并绑定到个人博客</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/hugo/hugo_vercel/" title="从零开始搭建个人博客（四）- hugo自动部署到vercel">从零开始搭建个人博客（四）- hugo自动部署到vercel</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/hugo/hugo_advanced/" title="从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼">从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/hugo/hugo_github/" title="从零开始搭建个人博客（二）- 把hugo博客托管到github上">从零开始搭建个人博客（二）- 把hugo博客托管到github上</a>
     </li>
     
 </ul>
@@ -474,13 +474,15 @@
     
     <li><a href="https://left-pocket.github.io/categories/redis/">Redis (3)</a></li>
     
-    <li><a href="https://left-pocket.github.io/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发 (2)</a></li>
+    <li><a href="https://left-pocket.github.io/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发 (3)</a></li>
     
-    <li><a href="https://left-pocket.github.io/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计 (5)</a></li>
+    <li><a href="https://left-pocket.github.io/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://left-pocket.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (1)</a></li>
+    <li><a href="https://left-pocket.github.io/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计 (7)</a></li>
     
-    <li><a href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/">面试 (3)</a></li>
+    <li><a href="https://left-pocket.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (3)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/">面试 (5)</a></li>
     
 </ul>
     </section>
@@ -508,6 +510,8 @@
     <a href="https://left-pocket.github.io/tags/vscode/">vscode</a>
     
     <a href="https://left-pocket.github.io/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E7%A7%91%E6%99%AE/">科普</a>
     
     <a href="https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计</a>
     

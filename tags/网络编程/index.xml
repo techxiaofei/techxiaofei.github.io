@@ -6,7 +6,25 @@
     <description>Recent content in 网络编程 on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 25 Nov 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 01 Jan 2022 00:00:02 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>KCP传输协议，快速可靠的UDP，和TCP比有什么优势？</title>
+      <link>https://left-pocket.github.io/post/tcpip/kcp/</link>
+      <pubDate>Sat, 01 Jan 2022 00:00:02 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/tcpip/kcp/</guid>
+      <description>​ 背景 可能你从来没有听说过KCP是什么，但是你肯定知道TCP和UDP。 这里我们通过KCP来剖析TCP和UDP的区别是什么，并理解为什么有了TCP还需要KCP，以及KCP/UDP具体的使用场景。 KCP是什么 我们都知道： TCP保证数据准确交付，UDP保证数据快速到达，KCP则是两种协</description>
+    </item>
+    
+    <item>
+      <title>后端面试之网络编程-close和shutdown的区别</title>
+      <link>https://left-pocket.github.io/post/tcpip/close_shutdown/</link>
+      <pubDate>Thu, 25 Nov 2021 00:00:02 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/tcpip/close_shutdown/</guid>
+      <description>​ 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 shutdown()函数可以选择关闭全双工连接的读通道或者写通道，如果两个通道同时关闭，则这个连接不能再继续通信。close()函数会同时关闭全双工连接的读写通道，除了关闭连接外，还会释放套接字占用</description>
+    </item>
+    
     <item>
       <title>后端面试之网络编程-socket返回可读，read返回0是什么情况？</title>
       <link>https://left-pocket.github.io/post/tcpip/socket_read_write/</link>

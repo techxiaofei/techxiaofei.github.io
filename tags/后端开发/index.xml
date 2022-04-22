@@ -17,6 +17,15 @@
     </item>
     
     <item>
+      <title>后端开发除了增删改查还有什么？</title>
+      <link>https://left-pocket.github.io/post/backend/backend_development/</link>
+      <pubDate>Tue, 30 Nov 2021 14:00:51 +0800</pubDate>
+      
+      <guid>https://left-pocket.github.io/post/backend/backend_development/</guid>
+      <description>背景 很多刚接触后端开发的同学，会发现，后端开发不就是增删改查吗？的确，如果你做的东西只是一个很小的流量的一个网站/平台的后端，用户量低，每秒钟访问量低，对数据的一致性和服务的稳定性要求也没那么高。那就是简单的增删改查，一台服务器连接数据库，API直接读写数据库。 可是日子久了，你发</description>
+    </item>
+    
+    <item>
       <title>手游服务器开发技术详解</title>
       <link>https://left-pocket.github.io/post/backend/game_development/</link>
       <pubDate>Sun, 21 Nov 2021 14:00:51 +0800</pubDate>

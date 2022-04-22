@@ -96,7 +96,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://left-pocket.github.io/post/system_design/short_url/">面试之系统设计-短网址（Short Url）服务设计</a>
+                <a href="https://left-pocket.github.io/post/system_design/short_url/">后端面试之系统设计-短网址（Short URL）服务怎么设计？</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -113,7 +113,7 @@
         </div>
         
         <div class="post-content">
-            ​ 背景 短链接（short url），通俗来说，就是把普通的网址，通过程序计算等方式，转换为简短的网址字符串。 可能你会问了，短链接有哪些使用场景呢？ 事实上你一定见到过短链接，比如短信里面的链接，微博里面的链接。 短链接可以减少文本字数，隐藏链接参数等，有利于短信推广的作用。 比如：短信里……
+            ​ 背景 短网址（short url），就是将长网址缩短为一个很短的网址，用户访问这个短网址可以重定向到原本的长网址（还原）。 可能你会问了，短链接有哪些使用场景呢？ 事实上你一定见到过短网址，比如短信里面的网址，微博里面的链接。 短网址可以减少文本字数，隐藏链接参数等，有利于短信推广的作用……
             <p class="readmore"><a href="https://left-pocket.github.io/post/system_design/short_url/">阅读全文</a></p>
         </div>
     </article>
@@ -146,6 +146,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://left-pocket.github.io/post/tcpip/close_shutdown/">后端面试之网络编程-close和shutdown的区别</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年11月25日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B'>网络编程</a>
+            
+            <a href='/categories/%E9%9D%A2%E8%AF%95'>面试</a>
+            
+        </div>
+        
+        <div class="post-content">
+            ​ 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 shutdown()函数可以选择关闭全双工连接的读通道或者写通道，如果两个通道同时关闭，则这个连接不能再继续通信。close()函数会同时关闭全双工连接的读写通道，除了关闭连接外，还会释放套接字占用……
+            <p class="readmore"><a href="https://left-pocket.github.io/post/tcpip/close_shutdown/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://left-pocket.github.io/post/tcpip/socket_read_write/">后端面试之网络编程-socket返回可读，read返回0是什么情况？</a>
             </h1>
         </header>
@@ -168,6 +193,31 @@
         </div>
     </article>
     
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://left-pocket.github.io/post/system_design/distributed_lock/">后端面试之-分布式锁的几种实现方式</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年2月3日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1'>系统设计</a>
+            
+            <a href='/categories/%E9%9D%A2%E8%AF%95'>面试</a>
+            
+        </div>
+        
+        <div class="post-content">
+            分布式锁一般有三种实现方式： 数据库乐观锁； 基于Redis的分布式锁； 基于ZooKeeper的分布式锁； 数据库 排它锁 实现方式： 获取锁可以通过，在select语句后增加for update，数据库会在查询过程中给数据库表增加排他锁。当某条记录被加上排他锁之后，其他线程无法再在该行记录上……
+            <p class="readmore"><a href="https://left-pocket.github.io/post/system_design/distributed_lock/">阅读全文</a></p>
+        </div>
+    </article>
+    
 
     
 
@@ -179,7 +229,7 @@
 
                     <footer id="footer">
     <div>
-        &copy; 2021 <a href="https://left-pocket.github.io">Leftpocket的个人博客 By leftpocket</a>
+        &copy; 2022 <a href="https://left-pocket.github.io">Leftpocket的个人博客 By leftpocket</a>
         
     </div>
     <br />
@@ -217,7 +267,19 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://left-pocket.github.io/post/system_design/short_url/" title="面试之系统设计-短网址（Short Url）服务设计">面试之系统设计-短网址（Short Url）服务设计</a>
+        <a href="https://left-pocket.github.io/post/system_design/leaf/" title="我们放弃了snowflake算法，重新设计了分布式ID生成方案">我们放弃了snowflake算法，重新设计了分布式ID生成方案</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/popularization/metaverse/" title="元宇宙，是炒作还是机遇？">元宇宙，是炒作还是机遇？</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/tcpip/kcp/" title="KCP传输协议，快速可靠的UDP，和TCP比有什么优势？">KCP传输协议，快速可靠的UDP，和TCP比有什么优势？</a>
+    </li>
+    
+    <li>
+        <a href="https://left-pocket.github.io/post/system_design/short_url/" title="后端面试之系统设计-短网址（Short URL）服务怎么设计？">后端面试之系统设计-短网址（Short URL）服务怎么设计？</a>
     </li>
     
     <li>
@@ -242,18 +304,6 @@
     
     <li>
         <a href="https://left-pocket.github.io/post/hugo/hugo_dns/" title="从零开始搭建个人博客（五）- 申请免费域名并绑定到个人博客">从零开始搭建个人博客（五）- 申请免费域名并绑定到个人博客</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/hugo/hugo_vercel/" title="从零开始搭建个人博客（四）- hugo自动部署到vercel">从零开始搭建个人博客（四）- hugo自动部署到vercel</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/hugo/hugo_advanced/" title="从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼">从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼</a>
-    </li>
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/hugo/hugo_github/" title="从零开始搭建个人博客（二）- 把hugo博客托管到github上">从零开始搭建个人博客（二）- 把hugo博客托管到github上</a>
     </li>
     
 </ul>
@@ -285,13 +335,15 @@
     
     <li><a href="https://left-pocket.github.io/categories/redis/">Redis (3)</a></li>
     
-    <li><a href="https://left-pocket.github.io/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发 (2)</a></li>
+    <li><a href="https://left-pocket.github.io/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发 (3)</a></li>
     
-    <li><a href="https://left-pocket.github.io/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计 (5)</a></li>
+    <li><a href="https://left-pocket.github.io/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://left-pocket.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (1)</a></li>
+    <li><a href="https://left-pocket.github.io/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计 (7)</a></li>
     
-    <li><a href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/">面试 (3)</a></li>
+    <li><a href="https://left-pocket.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (3)</a></li>
+    
+    <li><a href="https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/">面试 (5)</a></li>
     
 </ul>
     </section>
@@ -319,6 +371,8 @@
     <a href="https://left-pocket.github.io/tags/vscode/">vscode</a>
     
     <a href="https://left-pocket.github.io/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a>
+    
+    <a href="https://left-pocket.github.io/tags/%E7%A7%91%E6%99%AE/">科普</a>
     
     <a href="https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计</a>
     
