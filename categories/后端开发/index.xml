@@ -6,25 +6,7 @@
     <description>Recent content in 后端开发 on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 03 Dec 2021 14:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>游戏服务器和普通服务器的区别</title>
-      <link>https://left-pocket.github.io/post/backend/game_server/</link>
-      <pubDate>Fri, 03 Dec 2021 14:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/backend/game_server/</guid>
-      <description>背景 我做过六年游戏服务端开发，后来想换个方向，转做电商后端开发，做了两年之后感悟很多，也体会到了游戏服务器和普通的服务器的区别。 我所说的游戏是大众的游戏，它要有常见游戏的一些元素，比如交互，比如场景，比如对战。举几个例子：魔兽世界，梦幻西游，王者荣耀。 当然也有很多游戏是弱交互的游</description>
-    </item>
-    
-    <item>
-      <title>后端开发除了增删改查还有什么？</title>
-      <link>https://left-pocket.github.io/post/backend/backend_development/</link>
-      <pubDate>Tue, 30 Nov 2021 14:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/backend/backend_development/</guid>
-      <description>背景 很多刚接触后端开发的同学，会发现，后端开发不就是增删改查吗？的确，如果你做的东西只是一个很小的流量的一个网站/平台的后端，用户量低，每秒钟访问量低，对数据的一致性和服务的稳定性要求也没那么高。那就是简单的增删改查，一台服务器连接数据库，API直接读写数据库。 可是日子久了，你发</description>
-    </item>
-    
+    <lastBuildDate>Sun, 21 Nov 2021 14:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>手游服务器开发技术详解</title>
       <link>https://left-pocket.github.io/post/backend/game_development/</link>

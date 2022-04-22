@@ -6,25 +6,7 @@
     <description>Recent content in hugo on Leftpocket的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 02 Dec 2021 01:04:55 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>从零开始搭建个人博客（五）- 申请免费域名并绑定到个人博客</title>
-      <link>https://left-pocket.github.io/post/hugo/hugo_dns/</link>
-      <pubDate>Thu, 02 Dec 2021 01:04:55 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/hugo/hugo_dns/</guid>
-      <description>背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始搭建个人博客，把我的经验分享在这里。 系列地址：https://left-pocket.github.io 从零开始搭建个人博客（五）- 申请免费域名并绑定到个人博客 申请域名 如果</description>
-    </item>
-    
-    <item>
-      <title>从零开始搭建个人博客（四）- hugo自动部署到vercel</title>
-      <link>https://left-pocket.github.io/post/hugo/hugo_vercel/</link>
-      <pubDate>Thu, 02 Dec 2021 01:03:55 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/hugo/hugo_vercel/</guid>
-      <description>背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始搭建个人博客，把我的经验分享在这里。 系列地址：https://left-pocket.github.io 从零开始搭建个人博客（四）- hugo自动部署到vercel 我们当前已</description>
-    </item>
-    
+    <lastBuildDate>Thu, 02 Dec 2021 01:02:55 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼</title>
       <link>https://left-pocket.github.io/post/hugo/hugo_advanced/</link>
@@ -32,33 +14,6 @@
       
       <guid>https://left-pocket.github.io/post/hugo/hugo_advanced/</guid>
       <description>背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始搭建个人博客，把我的经验分享在这里。 系列地址：https://left-pocket.github.io 从零开始搭建个人博客（三）- hugo高级配置，让你的博客更亮眼 当前我</description>
-    </item>
-    
-    <item>
-      <title>从零开始搭建个人博客（二）- 把hugo博客托管到github上</title>
-      <link>https://left-pocket.github.io/post/hugo/hugo_github/</link>
-      <pubDate>Thu, 02 Dec 2021 01:01:55 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/hugo/hugo_github/</guid>
-      <description>背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始搭建个人博客，把我的经验分享在这里。 系列地址：https://left-pocket.github.io 从零开始搭建个人博客（二）- 把hugo博客托管到github上 上一篇</description>
-    </item>
-    
-    <item>
-      <title>从零开始搭建个人博客（一）- 使用hugo搭建个人博客</title>
-      <link>https://left-pocket.github.io/post/hugo/hugo_creation/</link>
-      <pubDate>Thu, 02 Dec 2021 01:00:55 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/hugo/hugo_creation/</guid>
-      <description>背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始搭建个人博客，把我的经验分享在这里。 系列地址：https://left-pocket.github.io 从零开始搭建个人博客（一）- 使用hugo搭建个人博客 介绍 很多人都想搭</description>
-    </item>
-    
-    <item>
-      <title>从零开始搭建个人博客（零）- 序章</title>
-      <link>https://left-pocket.github.io/post/hugo/hugo_0/</link>
-      <pubDate>Thu, 02 Dec 2021 01:00:50 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/hugo/hugo_0/</guid>
-      <description>背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始搭建个人博客，把我的经验分享在这里。 我会介绍怎么使用 Hugo搭建一个博客 Hugo的高级配置 阅读数 评论 RSS订阅 主题选择 更多&amp;hellip; 发布到Github Pages 申请免费域名并</description>
     </item>
     
   </channel>
