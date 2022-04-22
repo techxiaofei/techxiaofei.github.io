@@ -17,15 +17,6 @@
     </item>
     
     <item>
-      <title>后端面试之系统设计-短网址（Short URL）服务怎么设计？</title>
-      <link>https://left-pocket.github.io/post/system_design/short_url/</link>
-      <pubDate>Thu, 23 Dec 2021 00:00:00 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/system_design/short_url/</guid>
-      <description>​ 背景 短网址（short url），就是将长网址缩短为一个很短的网址，用户访问这个短网址可以重定向到原本的长网址（还原）。 可能你会问了，短链接有哪些使用场景呢？ 事实上你一定见到过短网址，比如短信里面的网址，微博里面的链接。 短网址可以减少文本字数，隐藏链接参数等，有利于短信推广的作用</description>
-    </item>
-    
-    <item>
       <title>从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼</title>
       <link>https://left-pocket.github.io/post/hugo/hugo_advanced/</link>
       <pubDate>Thu, 02 Dec 2021 01:02:55 +0800</pubDate>
@@ -50,15 +41,6 @@
       
       <guid>https://left-pocket.github.io/post/tcpip/socket_read_write/</guid>
       <description>​ 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 结论 如果面试官问你，如果一个socket返回可读，read返回0是什么情况？ 其实这是一个很简单的问题，它就是考察socket的可读可写条件这个知识点。 面试官也可能直接问你：socket的可读可写条件</description>
-    </item>
-    
-    <item>
-      <title>LRU缓存机制，你想知道的这里都有</title>
-      <link>https://left-pocket.github.io/post/system_design/lru/</link>
-      <pubDate>Tue, 23 Nov 2021 18:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/system_design/lru/</guid>
-      <description>​​ 概述 LRU是Least Recently Used的缩写，译为最近最少使用。它的理论基础为 “最近使用的数据会在未来一段时期内仍然被使用，已经很久没有使用的数据大概率在未来很长一段时间仍然不会被使用” 由于该思想非常契合业务场景 ，并且可以解决很多实际开发中的问题，所以我们经常通过LRU的思想来作缓</description>
     </item>
     
     <item>
@@ -104,33 +86,6 @@
       
       <guid>https://left-pocket.github.io/about/</guid>
       <description>个人介绍： 目前在东南亚最大的电商平台 Shopee 当码农，坐标在 新加坡，主要负责后端开发工作。 个人擅长C++, Golang, 网络编程, Redis, MySQL, TiDB等技术栈。有多年高并发开发和面试官经验，在这里分享各种后端技术与面试等专业知识。同步更新 微信公众号。 副业： 内推，如果你想要来 新加坡Shopee 工作，或者想要推</description>
-    </item>
-    
-    <item>
-      <title>5分钟搞懂布隆过滤器，掌握亿级数据过滤算法</title>
-      <link>https://left-pocket.github.io/post/system_design/bloom_filter/</link>
-      <pubDate>Wed, 03 Feb 2021 13:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/system_design/bloom_filter/</guid>
-      <description>布隆过滤器是什么 本质上布隆过滤器(Bloom Filter)是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入和查询，可以用来告诉你 某样东西一定不存在或者可能存在。 相比于传统的 List、Set、Map 等数据结构，它更高效、占</description>
-    </item>
-    
-    <item>
-      <title>后端面试之-分布式锁的几种实现方式</title>
-      <link>https://left-pocket.github.io/post/system_design/distributed_lock/</link>
-      <pubDate>Wed, 03 Feb 2021 13:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/system_design/distributed_lock/</guid>
-      <description>分布式锁一般有三种实现方式： 数据库乐观锁； 基于Redis的分布式锁； 基于ZooKeeper的分布式锁； 数据库 排它锁 实现方式： 获取锁可以通过，在select语句后增加for update，数据库会在查询过程中给数据库表增加排他锁。当某条记录被加上排他锁之后，其他线程无法再在该行记录上</description>
-    </item>
-    
-    <item>
-      <title>分布式ID生成方案-snowflake算法</title>
-      <link>https://left-pocket.github.io/post/system_design/snowflake/</link>
-      <pubDate>Tue, 24 Nov 2020 13:00:51 +0800</pubDate>
-      
-      <guid>https://left-pocket.github.io/post/system_design/snowflake/</guid>
-      <description>背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一。我们称之为分布式ID，分布式ID需要满足 唯一性、趋势递增性、高可用性、高性能等特点。 snowflake算法，也叫雪花算法，是其中的一种分布式ID生成方案。是twitter公司内部分布式项目采用的ID生成算法</description>
     </item>
     
     <item>

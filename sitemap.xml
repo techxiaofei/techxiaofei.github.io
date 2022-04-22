@@ -23,21 +23,6 @@
     <loc>https://left-pocket.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2022-01-01T00:00:02+08:00</lastmod>
   </url><url>
-    <loc>https://left-pocket.github.io/post/system_design/short_url/</loc>
-    <lastmod>2021-12-23T00:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</loc>
-    <lastmod>2021-12-23T00:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</loc>
-    <lastmod>2021-12-23T00:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/tags/%E9%9D%A2%E8%AF%95/</loc>
-    <lastmod>2021-12-23T00:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/</loc>
-    <lastmod>2021-12-23T00:00:00+08:00</lastmod>
-  </url><url>
     <loc>https://left-pocket.github.io/tags/hugo/</loc>
     <lastmod>2021-12-02T01:02:55+08:00</lastmod>
   </url><url>
@@ -50,11 +35,14 @@
     <loc>https://left-pocket.github.io/post/tcpip/close_shutdown/</loc>
     <lastmod>2021-11-25T00:00:02+08:00</lastmod>
   </url><url>
+    <loc>https://left-pocket.github.io/tags/%E9%9D%A2%E8%AF%95/</loc>
+    <lastmod>2021-11-25T00:00:02+08:00</lastmod>
+  </url><url>
+    <loc>https://left-pocket.github.io/categories/%E9%9D%A2%E8%AF%95/</loc>
+    <lastmod>2021-11-25T00:00:02+08:00</lastmod>
+  </url><url>
     <loc>https://left-pocket.github.io/post/tcpip/socket_read_write/</loc>
     <lastmod>2021-11-25T00:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/post/system_design/lru/</loc>
-    <lastmod>2021-11-23T18:00:51+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/tags/c&#43;&#43;/</loc>
     <lastmod>2021-11-22T15:00:51+08:00</lastmod>
@@ -82,15 +70,6 @@
   </url><url>
     <loc>https://left-pocket.github.io/about/</loc>
     <lastmod>2021-11-21T13:00:51+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/post/system_design/bloom_filter/</loc>
-    <lastmod>2021-02-03T13:00:51+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/post/system_design/distributed_lock/</loc>
-    <lastmod>2021-02-03T13:00:51+08:00</lastmod>
-  </url><url>
-    <loc>https://left-pocket.github.io/post/system_design/snowflake/</loc>
-    <lastmod>2020-11-24T13:00:51+08:00</lastmod>
   </url><url>
     <loc>https://left-pocket.github.io/archives/</loc>
   </url>
