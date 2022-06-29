@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>后端面试之系统设计-短网址（Short URL）服务怎么设计？ - 码农在新加坡的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="码农在新加坡" /><meta name="description" content="​ 原文地址：码农在新加坡的个人博客 背景 短网址（short url），就是将长网址缩短为一个很短的网址，用户访问这个短网址可以重定向到原本的长网" /><meta name="keywords" content="短URL, 系统设计" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/system_design/short_url/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="后端面试之系统设计-短网址（Short URL）服务怎么设计？" />
+<meta property="og:description" content="​ 原文地址：码农在新加坡的个人博客 背景 短网址（short url），就是将长网址缩短为一个很短的网址，用户访问这个短网址可以重定向到原本的长网" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/system_design/short_url/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-23T00:00:00+08:00" />
+<meta property="article:modified_time" content="2021-12-23T00:00:00+08:00" />
+
+<meta itemprop="name" content="后端面试之系统设计-短网址（Short URL）服务怎么设计？">
+<meta itemprop="description" content="​ 原文地址：码农在新加坡的个人博客 背景 短网址（short url），就是将长网址缩短为一个很短的网址，用户访问这个短网址可以重定向到原本的长网"><meta itemprop="datePublished" content="2021-12-23T00:00:00+08:00" />
+<meta itemprop="dateModified" content="2021-12-23T00:00:00+08:00" />
+<meta itemprop="wordCount" content="2833">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="后端面试之系统设计-短网址（Short URL）服务怎么设计？"/>
+<meta name="twitter:description" content="​ 原文地址：码农在新加坡的个人博客 背景 短网址（short url），就是将长网址缩短为一个很短的网址，用户访问这个短网址可以重定向到原本的长网"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">码农在新加坡的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">码农在新加坡的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">后端面试之系统设计-短网址（Short URL）服务怎么设计？</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-12-23 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/"> 系统设计 </a>
+            <a href="/categories/%E9%9D%A2%E8%AF%95/"> 面试 </a>
+            </div>
+          <span class="more-meta"> 约 2833 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#原理">原理</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#生成">生成</a></li>
+            <li><a href="#访问">访问</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#设计">设计</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#短域名">短域名</a></li>
+            <li><a href="#短码设计">短码设计</a></li>
+            <li><a href="#储存方案">储存方案</a></li>
+            <li><a href="#系统架构图">系统架构图</a></li>
+            <li><a href="#高并发">高并发</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>​
+原文地址：<a href="https://leftpocket.cn/post/system_design/short_url/">码农在新加坡的个人博客</a></p>
+<h1 id="背景">背景</h1>
+<p>短网址（short url），就是将长网址缩短为一个很短的网址，用户访问这个短网址可以重定向到原本的长网址（还原）。</p>
+<p>可能你会问了，短链接有哪些使用场景呢？<br>
+事实上你一定见到过短网址，比如短信里面的网址，微博里面的链接。
+短网址可以减少文本字数，隐藏链接参数等，有利于短信推广的作用，常用于有字数限制的短信、微博、二维码等场景。</p>
+<p>比如我收到以下的短信：</p>
+<p><img src="/img/system_design/aliyun.png" alt="阿里云"></p>
+<p>点开短信链接：http://tb.cn/9GLkgHx</p>
+<p>对应的实际的网址就是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">http://huodong.m.aliyun.com/act/v3jtax.html?gotoUrl=aliyun%3A%2F%2Fforward%2Ff6b8f0a4fa8cfd25da51a182807d5c25%3Ftarget_%3D%2Fapp%2Fhome%26tab_%3Dconsole
+</code></pre></td></tr></table>
+</div>
+</div><p>短信里面的那个url就是短网址，而实际的网址却又非常长。我们就需要一个服务去接收短网址，并转换成长网址访问。</p>
+<p>我们常见的短网址如下，可以看到，短网址的域名都很短。</p>
+<ul>
+<li>微博 <a href="http://t.cn/">http://t.cn/</a></li>
+<li>谷歌 <a href="https://goo.gl/">https://goo.gl/</a></li>
+<li>淘宝 <a href="http://tb.cn/">http://tb.cn/</a></li>
+<li>等等。。。</li>
+</ul>
+<h1 id="原理">原理</h1>
+<p>实践是最好的老师，我们自己实践一下，看一下浏览器输入短网址转换成具体的长网址的流程。</p>
+<h3 id="生成">生成</h3>
+<p>我们随便选择一个开放的短网址转换服务：</p>
+<ol>
+<li><a href="https://sina.lt">https://sina.lt</a></li>
+<li><a href="https://tinyurl.com/app">https://tinyurl.com/app</a></li>
+</ol>
+<p>把我的长链接（微信公众号链接）转换成短网址。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">https://mp.weixin.qq.com/s?__biz=MzkwNzMwNzI1Ng==&amp;mid=2247483810&amp;idx=1&amp;sn=e252816ee1d5fc1358bf77b8146f3dba&amp;chksm=c0da7035f7adf923ce0beef38a729f305e0d1cc8cc3c18cc491b1c37bffc0786962eaac41772&amp;token=2107487666&amp;lang=zh_CN#rd) 
+</code></pre></td></tr></table>
+</div>
+</div><p>如图可以看到：
+生成了 <a href="https://t.hk.uy/aBpj">https://t.hk.uy/aBpj</a> 的短网址。</p>
+<p><img src="/img/system_design/short_url_1.png" alt="short_url_1"></p>
+<h3 id="访问">访问</h3>
+<p>浏览器打开这个短网址（同时打开开发者模式）：</p>
+<p><img src="/img/system_design/short_url_2.png" alt="short_url_2"></p>
+<p>一图胜千言，我想你就能明白它的运行原理了。</p>
+<p><strong>原理</strong></p>
+<p>当我们在浏览器里输入 <a href="https://t.hk.uy/aBpj">https://t.hk.uy/aBpj</a> 时</p>
+<ol>
+<li>DNS首先解析获得 <a href="https://t.hk.uy/aBpj">https://t.hk.uy/aBpj</a> 的 IP 地址</li>
+<li>当 DNS 获得 IP 地址以后（比如：1.2.3.4），会向这个地址发送 HTTP GET 请求，查询短码 aBpj</li>
+<li><a href="https://t.hk.uy">https://t.hk.uy</a> 服务器会通过短码 aBpj 获取对应的普通网址</li>
+<li>请求通过 HTTP 301 转到对应的普通网址</li>
+</ol>
+<p><strong>301 HTTP状态码</strong><br>
+301表示永久重定向，就是说浏览器在拿到服务器返回的这个状态码后会自动跳转到一个新的URL地址，这个地址可以从响应的Location首部中获取。</p>
+<h1 id="设计">设计</h1>
+<p>现在的互联网公司，基本上都会有自己的短网址服务，来解决类似的业务需求，短网址服务一般为公司内部的其他业务提供服务。</p>
+<p>我们就来设计一个完整的适合生产环境使用的短网址服务，看一下这个短网址服务的实现需要考虑哪些方面。</p>
+<h3 id="短域名">短域名</h3>
+<p>首先会有一个短域名，一般域名也会非常短，为公司普通的域名的一些缩写。</p>
+<p>比如: <a href="https://ab.cd/">https://ab.cd/</a></p>
+<p>然后生成一个短码， abCD12 映射到 正常的网址：https://www.leftpocket.cn/post/redis/multithreading/</p>
+<p>那么 https:/ab.cd/abCD12 就是你的短网址。当用户点击这个短链接就自动跳转到正常的网站。</p>
+<h3 id="短码设计">短码设计</h3>
+<p>首先我们需要设计一个短码，要能负责把长链接转成短码。不同的长链接要能转成不同的短码。
+短码一般是由 [a - z, A - Z, 0 - 9] 这62 个字母或数字组成，短码的长度也可以自定义，但一般不超过8位。</p>
+<ul>
+<li>我上面生成的是4位短码：有 1440万。 (26+26+10)^4 = 14776336</li>
+<li>5位短码：有91亿。(26+26+10)^5 = 916132832</li>
+<li>6位短码：568亿。(26+26+10)^6 = 56800235584</li>
+<li>7位短码：35216亿。(26+26+10)^6 = 35216亿</li>
+</ul>
+<p>以上只是让大家对生成的数量有一个大概的概念。其实6位短码已经足够大部分场景了，我司的线上的短地址服务器使用的是7位。</p>
+<p>目前比较流行的生成短码的方式有以下几种：<code>自增ID</code>，<code>摘要算法</code>，<code>随机数</code>，<code>雪花算法</code>。</p>
+<p><strong>一、自增ID</strong></p>
+<p>利用MySQL数据库的自增ID属性，每增加一个短码，就在上次添加的短码ID上加1，然后把10进制的id值，转化成一个62进制的字符串。这样就可以减少长度的目的。</p>
+<p>比如 十进制的数字 <code>10000000000</code> 转换成62进制就是 <code>aUKYOA</code>， 只需要6位就足够了。</p>
+<p><strong>二、摘要算法</strong></p>
+<p>摘要算法又称哈希算法，它表示输入任意长度的数据，输出固定长度的数据。相同的输入数据始终得到相同的输出，不同的输入数据尽量得到不同的输出。</p>
+<p>算法过程：</p>
+<ol>
+<li>将长网址md5生成32位签名串,分为4段, 每段8个字节；</li>
+<li>对这四段循环处理, 取8个字节, 将他看成16进制串与0x3fffffff(30位1)与操作, 即超过30位的忽略处理；</li>
+<li>这30位分成6段, 每5位的数字作为字母表的索引取得特定字符, 依次进行获得6位字符串；</li>
+<li>总的md5串可以获得4个6位串；取里面的任意一个就可作为这个长url的短url地址；</li>
+</ol>
+<p>这种算法,虽然会生成4个,但是仍然存在重复几率。
+虽然几率很小，但是该方法依然存在碰撞的可能性，解决冲突会比较麻烦。不过该方法生成的短码位数是固定的，也不存在连续生成的短码有序的情况。</p>
+<p><strong>三、普通随机数</strong></p>
+<p>该方法是从62个字符串中随机取出一个6位短码的组合，然后去数据库中查询该短码是否已存在。如果已存在，就继续循环该方法重新获取短码，否则就直接返回。</p>
+<p>该方法是最简单的一种实现，不过由于Math.round()方法生成的随机数属于伪随机数，碰撞的可能性也不小。在数据比较多的情况下，可能会循环很多次，才能生成一个不冲突的短码。</p>
+<p><strong>四、雪花算法</strong></p>
+<p>雪花算法作为分布式ID生成方案，在分布式服务场景下使用方便，生成的ID区间递增。一直被广泛使用。</p>
+<p>我们就是使用雪花算法生成的唯一ID。它相比于自增ID不依赖于数据库，同时方便支持分布式，性能更好。</p>
+<p>然后根据ID生成62进制的短码，为了避免生成的短码有规律，我们先反转ID，然后再转换成62进制。最终生成的短码是无规律的。避免被恶意识别。</p>
+<h3 id="储存方案">储存方案</h3>
+<p>我们使用了MySQL作为短码的储存方案。</p>
+<table>
+<thead>
+<tr>
+<th>列名</th>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>主键ID</td>
+<td>1230567012213</td>
+</tr>
+<tr>
+<td>short_url</td>
+<td>短码，根据雪花算法生成并进行62进制转换</td>
+<td>lFdzM7H</td>
+</tr>
+<tr>
+<td>original_url</td>
+<td>普通网址（原始网址）</td>
+<td><a href="https://www.leftpocket.cn/post/redis/multithreading/">https://www.leftpocket.cn/post/redis/multithreading/</a></td>
+</tr>
+<tr>
+<td>url_hash</td>
+<td>原始网址的MD5哈希值，方便加索引进行条件查询。查看原始网址是否有存在的短码映射</td>
+<td>ABCDEFGH</td>
+</tr>
+<tr>
+<td>create_time</td>
+<td>创建时间戳</td>
+<td>1234567890</td>
+</tr>
+<tr>
+<td>expire_time</td>
+<td>过期时间戳，可选，可以用定时的脚本来清理过期的数据，降低数据库总体数据量</td>
+<td>1234567891</td>
+</tr>
+</tbody>
+</table>
+<p>我们针对这个DB有两个主要的需求：</p>
+<ol>
+<li>根据原始网址生成短码，可以根据url_hash查询数据库，如果有存在的，更新过期时间，直接返回。</li>
+<li>用户点击短码，查询数据库，有记录，返回301重定向到实际的网址。</li>
+</ol>
+<p><strong>生成流程</strong></p>
+<ul>
+<li>指定的服务器调用 <strong>短网址服务</strong> 对普通网址生成一个短网址；</li>
+<li>根据普通网址进行MD5 Hash生成一个MD5码；</li>
+<li>根据MD5码（索引）和网址从数据库里面查询短网址记录；</li>
+<li>有记录就把更新过期时间，并直接返回；</li>
+<li>无记录则使用雪花算法生成一个分布式唯一ID，反转ID，并转换成62进制；</li>
+<li>完整映射记录写入数据库并返回；</li>
+</ul>
+<p><img src="/img/system_design/short_url_0.png" alt="short_url_1"></p>
+<h3 id="系统架构图">系统架构图</h3>
+<p><img src="/img/system_design/short_url.png" alt="short_url_1"></p>
+<p>我们的服务有以下功能：</p>
+<ul>
+<li>一个短网址服务，负责接收其他服务的 <strong>短网址生成</strong> 请求，同时接收用户的 <strong>短网址查询</strong> 请求。</li>
+<li>其他服务根据业务需求向短网址服务申请生成短网址，并通过通知服务发送给用户。</li>
+<li>DB负责查询和生成短网址记录，Cache负责高并发情况下降低DB压力。</li>
+<li>后台服务负责控制权限，只有特定的服务可以生成短网址。</li>
+<li>CronJob负责定时清理过期数据，防止数据库数据量过大。</li>
+</ul>
+<h3 id="高并发">高并发</h3>
+<p>如果业务量增大，数据库读写存在性能瓶颈，我们可以进行优化。</p>
+<p><strong>分库分表</strong></p>
+<p>为了支持写优化，可以进行分库分表。</p>
+<p><strong>缓存</strong></p>
+<p>读优化，我们就可以给数据库加一层缓存。</p>
+<ol>
+<li>Redis/Memcached分布式缓存。 设置过期时间，避免占用过多内存。</li>
+<li>内存缓存。 使用LRU缓存来淘汰不经常访问的网址。</li>
+</ol>
+<h1 id="总结">总结</h1>
+<p>一个短网址服务的设计相对还是比较简单的，主要是考察一些细节：</p>
+<ul>
+<li>短网址生成算法</li>
+<li>数据库怎么设计</li>
+<li>怎么重定向</li>
+<li>高并发情况下的高可用</li>
+<li>数据量过大怎么处理</li>
+</ul>
+<p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+<img src="/img/personal/qrcode_2.png" alt="pic"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-12-23
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/tcpip/kcp/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">KCP传输协议，快速可靠的UDP，和TCP比有什么优势？</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/redis/multithreading/">
+            <span class="next-text nav-default">一文看懂Redis 6.0多线程IO</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

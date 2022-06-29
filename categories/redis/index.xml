@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Redis on 码农在新加坡的个人博客</title>
+    <link>https://leftpocket.cn/categories/redis/</link>
+    <description>Recent content in Redis on 码农在新加坡的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 09 Dec 2021 00:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/redis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>一文看懂Redis 6.0多线程IO</title>
+      <link>https://leftpocket.cn/post/redis/multithreading/</link>
+      <pubDate>Thu, 09 Dec 2021 00:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/redis/multithreading/</guid>
+      <description>原文地址：码农在新加坡的个人博客 Redis基础 Redis是什么 Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储</description>
+    </item>
+    
+    <item>
+      <title>Redis SDS简单动态字符串</title>
+      <link>https://leftpocket.cn/post/redis/redis_sds/</link>
+      <pubDate>Wed, 17 Feb 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/redis/redis_sds/</guid>
+      <description>原文地址：码农在新加坡的个人博客 SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串表示， 几乎所有的 Redis 模块中都用了 sds。</description>
+    </item>
+    
+    <item>
+      <title>Redis Zset的精度问题分析及解决方案</title>
+      <link>https://leftpocket.cn/post/redis/redis_zset_score/</link>
+      <pubDate>Fri, 04 Dec 2020 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/redis/redis_zset_score/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 最近使用Redis的SortedSet，使用int64作为score时遇到了一些预料之外的情况，在此总结</description>
+    </item>
+    
+  </channel>
+</rss>

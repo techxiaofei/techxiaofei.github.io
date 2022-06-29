@@ -1,120 +1,181 @@
-<!doctype html>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>手游服务器开发技术详解 - 码农在新加坡的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <title>手游服务器开发技术详解 | Leftpocket的个人博客</title>
-    <meta property="og:title" content="手游服务器开发技术详解 - Leftpocket的个人博客">
-    <meta property="og:type" content="article">
-        
-    <meta property="article:published_time" content='2021-11-21T14:00:51&#43;08:00'>
-        
-        
-    <meta property="article:modified_time" content='2021-11-21T14:00:51&#43;08:00'>
-        
-    <meta name="Keywords" content="[游戏开发]">
-    <meta name="description" content="手游服务器开发技术详解">
-        
-    <meta name="author" content="leftpocket">
-    <meta property="og:url" content="https://left-pocket.github.io/post/backend/game_development/">
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-    <meta name="robots" content="noindex">
 
-    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：码农在新加坡的个人博客 背景 回顾我的码农生涯，在做互联网电商后端开发之前做过大概6年的游戏后端开发，想总结一下手游后端开发技术的方方" /><meta name="keywords" content="游戏开发" />
 
-    <link rel="stylesheet" href='/css/normalize.css'>
-    <link rel="stylesheet" href='/css/style.css'>
-    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    
-    <meta name="baidu-site-verification" content="code-BpnvQH5I1I" />
-    <meta name="google-site-verification" content="sGfWBA2Wby1_gxJO3xmOtvpAOU2cCyhwXuU-2m4u75Y" />
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
 
-    
-    <script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
      crossorigin="anonymous"></script>
-    
-    
-    
-    
-    
-        <link rel="stylesheet" href='/css/douban.css'>
-    
-        <link rel="stylesheet" href='/css/other.css'>
-    
 
-    
-    <meta name="baidu-site-verification" content="code-swx03nFBNS" />
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/backend/game_development/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="手游服务器开发技术详解" />
+<meta property="og:description" content="原文地址：码农在新加坡的个人博客 背景 回顾我的码农生涯，在做互联网电商后端开发之前做过大概6年的游戏后端开发，想总结一下手游后端开发技术的方方" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/backend/game_development/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-11-21T14:00:51+08:00" />
+<meta property="article:modified_time" content="2021-11-21T14:00:51+08:00" />
+
+<meta itemprop="name" content="手游服务器开发技术详解">
+<meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 回顾我的码农生涯，在做互联网电商后端开发之前做过大概6年的游戏后端开发，想总结一下手游后端开发技术的方方"><meta itemprop="datePublished" content="2021-11-21T14:00:51+08:00" />
+<meta itemprop="dateModified" content="2021-11-21T14:00:51+08:00" />
+<meta itemprop="wordCount" content="2728">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="手游服务器开发技术详解"/>
+<meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 背景 回顾我的码农生涯，在做互联网电商后端开发之前做过大概6年的游戏后端开发，想总结一下手游后端开发技术的方方"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
-
-
 <body>
-    <header id="header" class="clearfix">
-    <div class="container">
-        <div class="col-group">
-            <div class="site-name ">
-                
-                    <a id="logo" href="https://left-pocket.github.io">
-                        Leftpocket的个人博客
-                    </a>
-                
-                <p class="description">请访问：https://www.leftpocket.cn</p>
-            </div>
-            <div>
-                <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://left-pocket.github.io">首页</a>
-                    
-                    <a  href="https://left-pocket.github.io/archives/" title="归档">归档</a>
-                    
-                    <a  href="https://left-pocket.github.io/about/" title="关于我">关于我</a>
-                    
-                </nav>
-            </div>
-        </div>
-    </div>
-</header>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">码农在新加坡的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
 
-    <div id="body">
-        <div class="container">
-            <div class="col-group">
+  
 
-                <div class="col-8" id="main">
-                    
-<div class="res-cons">
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">码农在新加坡的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">手游服务器开发技术详解</h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年11月21日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91'>后端开发</a></span>
-            
-        </div>
-        
-        
-        <div class="post-meta">
-            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
-                    阅读</span></span>
-        </div>
-        
-        
-        <div class="post-content">
-            <p>回顾我的码农生涯，在做互联网电商后端开发之前做过大概6年的游戏后端开发，想总结一下手游后端开发技术的方方面面。</p>
+    <header class="post-header">
+      <h1 class="post-title">手游服务器开发技术详解</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-11-21 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"> 后端开发 </a>
+            </div>
+          <span class="more-meta"> 约 2728 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#一聊聊服务器开发有哪些东西要考虑">一.聊聊服务器开发有哪些东西要考虑</a>
+      <ul>
+        <li><a href="#1开发语言的选择">1.开发语言的选择</a></li>
+        <li><a href="#2数据库">2.数据库</a></li>
+        <li><a href="#3服务端架构">3.服务端架构</a></li>
+        <li><a href="#4协议">4.协议</a></li>
+        <li><a href="#5存盘">5.存盘</a></li>
+      </ul>
+    </li>
+    <li><a href="#二开发一个游戏服务器需要掌握的开源技术">二.开发一个游戏服务器需要掌握的开源技术</a>
+      <ul>
+        <li><a href="#网络库">网络库</a></li>
+        <li><a href="#协议解析">协议解析</a></li>
+        <li><a href="#缓存">缓存</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>原文地址：<a href="https://leftpocket.cn/post/backend/game_development/">码农在新加坡的个人博客</a></p>
+<h1 id="背景">背景</h1>
+<p>回顾我的码农生涯，在做互联网电商后端开发之前做过大概6年的游戏后端开发，想总结一下手游后端开发技术的方方面面。</p>
 <p>之前从事游戏服务器开发期间参与了不少项目，学到了很多游戏服务器开发技术，参与过几个不同架构的服务器开发，就此聊聊游戏服务器开发需要的技术，给刚进入游戏后端开发的同学一些指导。</p>
 <p>这边文章我先说一下我理解的互联网和游戏后端开发的主要区别，然后着重讲一下游戏服务器开发需要的技术栈。</p>
 <p>如果你想自己写一个服务器开发框架，那么希望这篇文章对你有一定的帮助。</p>
@@ -146,9 +207,7 @@
 <p><strong>GameManager</strong>: 负责管理所有的GameServer，GameServer之间消息转发，提供广播到所有Game的功能。</p>
 </li>
 </ol>
-<p>
-        <img class="mx-auto" alt="pic" src="/img/game/game_server.png" />   
-    </p>
+<p><img src="/img/game/game_server.png" alt="pic"></p>
 <h2 id="4协议">4.协议</h2>
 <ul>
 <li>
@@ -207,145 +266,110 @@ protobuf与XML和JSON不同在于，protobuf是基于二进制的。主要用于
 </ul>
 <p>&lt;全文完&gt;</p>
 <p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+<img src="/img/personal/qrcode_2.png" alt="pic"></p>
 
-        <img class="mx-auto" alt="pic" src="/img/personal/qrcode_2.png" />   
-    </p>
+    </div>
 
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-11-21
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/cpp/static/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">c&#43;&#43;中static的用法详解</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/cpp/secondary_pointer/">
+            <span class="next-text nav-default">二级指针的作用详解</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
         </div>
-
         
 
+  
 
-        
-
-
-        <div class="post-meta meta-tags">
-            
-            <ul class="clearfix">
-                
-                <li><a href='/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91'>后端开发</a></li>
-                
-            </ul>
-            
-        </div>
-    </article>
-    
-    
-
-    
-    
-    <div class="post bg-white">
-      <script src="https://utteranc.es/client.js"
-            repo= "left-pocket/left-pocket.github.io"
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
             issue-term="pathname"
             theme="github-light"
             crossorigin="anonymous"
             async>
-      </script>
-    </div>
-    
-</div>
-
-                    <footer id="footer">
-    <div>
-        &copy; 2022 <a href="https://left-pocket.github.io">Leftpocket的个人博客 By leftpocket</a>
-        
-    </div>
-    <br />
-    <div>
-        <div class="github-badge">
-            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
-        </div>
-        <div class="github-badge">
-            <a href="https://left-pocket.github.io/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">Leftpocket</span></a>
-        </div>
-    </div>
-</footer>
-
-
-    
-    <script type="text/javascript">
-        window.MathJax = {
-            tex2jax: {
-                inlineMath: [['$', '$']],
-                processEscapes: true
-                }
-            };
     </script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
 
-<a id="rocket" href="#top"></a>
-<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+      </div>
+    </main>
 
-
-
-    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
-
-
-
-
-    <script src='/js/douban.js'></script>
-
-                </div>
-
-                <div id="secondary">
-    
-    
-    <section class="widget">
-        <h3 class="widget-title">最近文章</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://left-pocket.github.io/post/backend/game_development/" title="手游服务器开发技术详解">手游服务器开发技术详解</a>
-    </li>
-    
-</ul>
-    </section>
-
-    
-
-    
-
-    <section class="widget">
-        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
-<ul class="widget-list">
-    
-    <li><a href="https://left-pocket.github.io/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发 (1)</a></li>
-    
-</ul>
-    </section>
-
-    <section class="widget">
-        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
-<div class="tagcloud">
-    
-    <a href="https://left-pocket.github.io/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a>
-    
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-    </section>
 
-    
-<section class="widget">
-    <h3 class="widget-title">友情链接</h3>
-    <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://left-pocket.github.io/about/" title="关于我" style="color:#0000FF;">关于我-微信及公众号</a>
-        </li>
-        
-        <li>
-            <a target="_blank" href="https://www.zhihu.com/people/left-pocket" title="Leftpocket的知乎" style="color:#0000FF;">Leftpocket的知乎</a>
-        </li>
-        
-    </ul>
-</section>
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
 
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
 
-    
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
 </div>
-            </div>
-        </div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
     </div>
-</body>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
 
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
 </html>

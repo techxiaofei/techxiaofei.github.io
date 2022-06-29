@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Golang time.After内存泄漏分析 - 码农在新加坡的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：码农在新加坡的个人博客 背景 我刚转做go语言开发开始写入职小程序的时候，写下了如下的代码： 1 2 3 4 5 6 7 8 9 10 for { select { case conn := &amp;lt;- conns: ... //do" /><meta name="keywords" content="Golang" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/golang/time_after/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Golang time.After内存泄漏分析" />
+<meta property="og:description" content="原文地址：码农在新加坡的个人博客 背景 我刚转做go语言开发开始写入职小程序的时候，写下了如下的代码： 1 2 3 4 5 6 7 8 9 10 for { select { case conn := &lt;- conns: ... //do" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/golang/time_after/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-05-06T00:00:51+08:00" />
+<meta property="article:modified_time" content="2022-05-06T00:00:51+08:00" />
+
+<meta itemprop="name" content="Golang time.After内存泄漏分析">
+<meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 我刚转做go语言开发开始写入职小程序的时候，写下了如下的代码： 1 2 3 4 5 6 7 8 9 10 for { select { case conn := &lt;- conns: ... //do"><meta itemprop="datePublished" content="2022-05-06T00:00:51+08:00" />
+<meta itemprop="dateModified" content="2022-05-06T00:00:51+08:00" />
+<meta itemprop="wordCount" content="1722">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Golang time.After内存泄漏分析"/>
+<meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 背景 我刚转做go语言开发开始写入职小程序的时候，写下了如下的代码： 1 2 3 4 5 6 7 8 9 10 for { select { case conn := &lt;- conns: ... //do"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">码农在新加坡的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">码农在新加坡的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Golang time.After内存泄漏分析</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-05-06 </span>
+        <div class="post-category">
+            <a href="/categories/golang/"> Golang </a>
+            </div>
+          <span class="more-meta"> 约 1722 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#原理分析">原理分析</a></li>
+    <li><a href="#解决方案">解决方案</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>原文地址：<a href="https://leftpocket.cn/post/golang/time_after/">码农在新加坡的个人博客</a></p>
+<h1 id="背景">背景</h1>
+<p>我刚转做go语言开发开始写入职小程序的时候，写下了如下的代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="k">for</span> <span class="p">{</span>
+    <span class="k">select</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="nx">conn</span> <span class="o">:=</span> <span class="o">&lt;-</span> <span class="nx">conns</span><span class="p">:</span>
+            <span class="o">...</span> <span class="c1">//do someting
+</span><span class="c1"></span>            <span class="k">return</span> <span class="nx">conn</span>
+        <span class="k">case</span> <span class="o">&lt;-</span> <span class="nx">time</span><span class="p">.</span><span class="nf">After</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Timeouot</span><span class="p">):</span>
+            <span class="o">...</span> <span class="c1">//do something
+</span><span class="c1"></span>            <span class="k">return</span> <span class="nx">xxx</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这只是一个简单的<code>从连接池取连接</code>的代码，如果连接池没有可用连接，就在超时后创建一个新的连接使用。</p>
+<p>说实话，我觉得我的代码可优雅了，后来对go语言有了更深入的了解之后，发现我写的代码有着明显的内存泄漏的问题。</p>
+<p>熟悉go语言的朋友可能已经看出来了，内存泄漏的代码就是<code>time.After</code>。
+这是go语言经典的<code>坑</code>，或者说是对go语言机制不了解的初学者经常会踩的坑，稍不留神就会掉到坑里去。</p>
+<p>今天我们就来分析一下这个<code>time.After</code>内存泄漏之谜。</p>
+<p>我们来用最简单的例子模拟一下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;time&#34;</span>
+<span class="p">)</span>
+<span class="c1">//define a channel
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">chs</span> <span class="kd">chan</span> <span class="kt">int</span>
+
+<span class="kd">func</span> <span class="nf">Get</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">for</span> <span class="p">{</span>
+		<span class="k">select</span> <span class="p">{</span>
+			<span class="k">case</span> <span class="nx">v</span> <span class="o">:=</span> <span class="o">&lt;-</span> <span class="nx">chs</span><span class="p">:</span>
+				<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;print:%v\n&#34;</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
+			<span class="k">case</span> <span class="o">&lt;-</span> <span class="nx">time</span><span class="p">.</span><span class="nf">After</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">):</span>
+				<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;time.After:%v&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Unix</span><span class="p">())</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">Put</span><span class="p">()</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">i</span> <span class="p">=</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="p">{</span>
+		<span class="nx">i</span><span class="o">++</span>
+		<span class="nx">chs</span> <span class="o">&lt;-</span> <span class="nx">i</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">chs</span> <span class="p">=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+	<span class="k">go</span> <span class="nf">Put</span><span class="p">()</span>
+	<span class="nf">Get</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>咱也别管代码优不优雅，就很简单的逻辑，先往channel里面存数据，然后不停的使用<code>for select case</code>语法从channel里面取数据。</p>
+<p>我相信大家一眼就能看懂。就是这么简单的代码却会导致内存泄漏。</p>
+<p>那么我们使用<code>top</code>指令看看:
+<img src="/img/golang/time_after.png" alt="top"></p>
+<p>发现我们的进程<code>MEM</code>这一列的值迅速增加，不到一分钟就占用了6G的内存，明显产生了内存泄漏。</p>
+<h1 id="原理分析">原理分析</h1>
+<p>要了解为什么会产生内存泄漏，我们需要看看<code>time package</code>里面<code>time.After</code>函数的的定义。<a href="https://pkg.go.dev/time">https://pkg.go.dev/time</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">func After(d Duration) &lt;-chan Time
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>After waits for the duration to elapse and then sends the current time on the returned channel. It is equivalent to NewTimer(d).C. The underlying Timer is not recovered by the garbage collector until the timer fires. If efficiency is a concern, use NewTimer instead and call Timer.Stop if the timer is no longer needed.</p>
+</blockquote>
+<p>该方法可以在一定时间（根据所传入的 Duration）后主动返回 time.Time 类型的 channel 消息。</p>
+<p><strong>注意：</strong> 描述里面写的很清楚:</p>
+<ul>
+<li><code>在计时器触发之前，垃圾收集器不会回收Timer</code></li>
+<li><code>如果考虑效率，需要使用NewTimer替代</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="k">for</span> <span class="p">{</span>
+		<span class="k">select</span> <span class="p">{</span>
+			<span class="k">case</span> <span class="nx">v</span> <span class="o">:=</span> <span class="o">&lt;-</span> <span class="nx">chs</span><span class="p">:</span>
+				<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;print:%v\n&#34;</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
+			<span class="k">case</span> <span class="o">&lt;-</span> <span class="nx">time</span><span class="p">.</span><span class="nf">After</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">):</span>
+				<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;time.After:%v&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Unix</span><span class="p">())</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>回过头来看我们的代码，这里我们的定时时间设置的是3分钟， 在for循环内每次select的时候，都会实例化一个一个新的定时器。该定时器在3分钟后，才会被激活，但是激活后已经跟select无引用关系，被gc给清理掉。</p>
+<p><strong>重点是：</strong> 在select里面虽然我们没有执行到time.After，但是这个对象已经初始化了，依然在时间堆里面，定时任务未到期之前，是不会被gc清理的。</p>
+<h1 id="解决方案">解决方案</h1>
+<p>根据<code>time.After</code>的解释，我们知道，<code>for select case</code>里面最好不要用<code>time.After</code>，go语言对这个方法的设计决定了它不能这么用，否则会有内存泄漏的风险。</p>
+<p>至于解决方案，<code>time package</code>的文档也说明了，使用<code>NewTimer</code>来做定时器，不需要每次都创建定时器对象。</p>
+<p><code>time.After</code>虽然调用的是timer定时器，但是他没有使用<code>time.Reset()</code>方法再次激活定时器，所以每一次都是新创建的实例，才会造成的内存泄漏。</p>
+<p>而我们使用<code>NewTimer</code>创建定时器，再加上<code>time.Reset</code>每次重新激活定时器，即可完美解决问题。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">NewTimer</span><span class="p">(</span><span class="nx">d</span> <span class="nx">Duration</span><span class="p">)</span> <span class="o">*</span><span class="nx">Timer</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>NewTimer creates a new Timer that will send the current time on its channel after at least duration d.</p>
+</blockquote>
+<p>而<code>Timer</code>的指针里面封装了：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Timer</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">C</span> <span class="o">&lt;-</span><span class="kd">chan</span> <span class="nx">Time</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>The Timer type represents a single event. When the Timer expires, the current time will be sent on C, unless the Timer was created by AfterFunc. A Timer must be created with NewTimer or AfterFunc.</p>
+</blockquote>
+<p>我们改造一下上面的Get函数，使用<code>time.NewTimer</code>来初始化<code>Timer</code>的指针，并用<code>Reset</code>来重置定时器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">Get</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">delay</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">NewTimer</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">)</span>
+
+	<span class="k">defer</span> <span class="nx">delay</span><span class="p">.</span><span class="nf">Stop</span><span class="p">()</span>
+
+	<span class="k">for</span> <span class="p">{</span>
+		<span class="nx">delay</span><span class="p">.</span><span class="nf">Reset</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">)</span>
+
+		<span class="k">select</span> <span class="p">{</span>
+			<span class="k">case</span> <span class="nx">v</span> <span class="o">:=</span> <span class="o">&lt;-</span> <span class="nx">chs</span><span class="p">:</span>
+				<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;print:%v\n&#34;</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
+			<span class="k">case</span> <span class="o">&lt;-</span> <span class="nx">delay</span><span class="p">.</span><span class="nx">C</span><span class="p">:</span>
+				<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;time.After:%v&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Unix</span><span class="p">())</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>记得一定要使用Reset重置定时器，如果不重置，那么定时器还是从创建的时候开始计算时间流逝。使用了Reset之后，每次都从当前Reset的时间开始算。</p>
+<p>这么改之后，再次测试代码，发现内存一直稳定。</p>
+<h1 id="总结">总结</h1>
+<p>在<code>for select case</code>里面使用定时器一定要小心，定时器只有等到计时器触发之后才会被垃圾回收器回收，而<code>time.After</code>是单次触发且无法Reset。</p>
+<p>这种需要循环内触发定时器的用例，还是要使用<code>time.NewTimer</code>并手动<code>Reset</code>。</p>
+<p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+<img src="/img/personal/qrcode_2.png" alt="pic"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-05-06
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/protobuf/protobuf/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">protobuf是怎么序列化的</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/singapore_life/pr/">
+            <span class="next-text nav-default">终于拿到新加坡PR-2022</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

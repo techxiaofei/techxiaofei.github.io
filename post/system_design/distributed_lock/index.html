@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>后端面试之-分布式锁的几种实现方式 - 码农在新加坡的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="码农在新加坡" /><meta name="description" content="分布式锁一般有三种实现方式： 数据库乐观锁； 基于Redis的分布式锁； 基于ZooKeeper的分布式锁； 数据库 排它锁 实现方式： 获取锁可以通过，" /><meta name="keywords" content="分布式锁" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="sGfWBA2Wby1_gxJO3xmOtvpAOU2cCyhwXuU-2m4u75Y" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/system_design/distributed_lock/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="后端面试之-分布式锁的几种实现方式" />
+<meta property="og:description" content="分布式锁一般有三种实现方式： 数据库乐观锁； 基于Redis的分布式锁； 基于ZooKeeper的分布式锁； 数据库 排它锁 实现方式： 获取锁可以通过，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/system_design/distributed_lock/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-02-03T13:00:51+08:00" />
+<meta property="article:modified_time" content="2021-02-03T13:00:51+08:00" />
+
+<meta itemprop="name" content="后端面试之-分布式锁的几种实现方式">
+<meta itemprop="description" content="分布式锁一般有三种实现方式： 数据库乐观锁； 基于Redis的分布式锁； 基于ZooKeeper的分布式锁； 数据库 排它锁 实现方式： 获取锁可以通过，"><meta itemprop="datePublished" content="2021-02-03T13:00:51+08:00" />
+<meta itemprop="dateModified" content="2021-02-03T13:00:51+08:00" />
+<meta itemprop="wordCount" content="1217">
+<meta itemprop="keywords" content="系统设计,面试," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="后端面试之-分布式锁的几种实现方式"/>
+<meta name="twitter:description" content="分布式锁一般有三种实现方式： 数据库乐观锁； 基于Redis的分布式锁； 基于ZooKeeper的分布式锁； 数据库 排它锁 实现方式： 获取锁可以通过，"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">码农在新加坡的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">码农在新加坡的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">后端面试之-分布式锁的几种实现方式</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-02-03 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/"> 系统设计 </a>
+            <a href="/categories/%E9%9D%A2%E8%AF%95/"> 面试 </a>
+            </div>
+          <span class="more-meta"> 约 1217 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#数据库">数据库</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#排它锁">排它锁</a></li>
+            <li><a href="#乐观锁">乐观锁</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#基于redis的分布式锁">基于Redis的分布式锁</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#setnx-和-expire-非原子性">SETNX 和 EXPIRE 非原子性</a></li>
+            <li><a href="#锁误解除">锁误解除</a></li>
+            <li><a href="#超时解锁导致并发">超时解锁导致并发</a></li>
+            <li><a href="#不可重入">不可重入</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#基于zookeeper的分布式锁">基于ZooKeeper的分布式锁</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>分布式锁一般有三种实现方式：</p>
+<ol>
+<li>数据库乐观锁；</li>
+<li>基于Redis的分布式锁；</li>
+<li>基于ZooKeeper的分布式锁；</li>
+</ol>
+<h1 id="数据库">数据库</h1>
+<h3 id="排它锁">排它锁</h3>
+<p>实现方式：
+获取锁可以通过，在select语句后增加for update，数据库会在查询过程中给数据库表增加排他锁。当某条记录被加上排他锁之后，其他线程无法再在该行记录上增加排他锁，我们可以认为获得排它锁的线程即可获得分布式锁；
+其余实现与使用唯一索引相同；
+优点：</p>
+<ul>
+<li>实现简单、易于理解。
+缺点</li>
+<li>排他锁会占用连接，产生连接爆满的问题；</li>
+<li>如果表不大，可能并不会使用行锁；</li>
+<li>同样存在单点问题、并发量问题。</li>
+</ul>
+<p>具体使用场景：</p>
+<h3 id="乐观锁">乐观锁</h3>
+<p>一般是通过为数据库表添加一个 version 字段来实现读取出数据时，将此版本号一同读出.</p>
+<p>之后更新时，对此版本号加1，在更新过程中，会对版本号进行比较，如果是一致的，没有发生改变，则会成功执行本次操作；如果版本号不一致，则会更新失败。</p>
+<p>实际就是个CAS过程。</p>
+<h1 id="基于redis的分布式锁">基于Redis的分布式锁</h1>
+<p>Redis 锁主要利用 Redis 的 setnx 命令。</p>
+<ul>
+<li>加锁命令：SETNX key value，当键不存在时，对键进行设置操作并返回成功，否则返回失败。KEY 是锁的唯一标识，一般按业务来决定命名。</li>
+<li>解锁命令：DEL key，通过删除键值对释放锁，以便其他线程可以通过 SETNX 命令来获取锁。</li>
+<li>锁超时：EXPIRE key timeout, 设置 key 的超时时间，以保证即使锁没有被显式释放，锁也可以在一定时间后自动释放，避免资源被永远锁住。</li>
+</ul>
+<p>上述实现方式存在一些问题：</p>
+<h3 id="setnx-和-expire-非原子性">SETNX 和 EXPIRE 非原子性</h3>
+<p>如果 SETNX 成功，在设置锁超时时间后，服务器挂掉、重启或网络问题等，导致 EXPIRE 命令没有执行，锁没有设置超时时间变成死锁。</p>
+<h3 id="锁误解除">锁误解除</h3>
+<p>如果线程 A 成功获取到了锁，并且设置了过期时间 30 秒，但线程 A 执行时间超过了 30 秒，锁过期自动释放，此时线程 B 获取到了锁；随后 A 执行完成，线程 A 使用 DEL 命令来释放锁，但此时线程 B 加的锁还没有执行完成，线程 A 实际释放的线程 B 加的锁。
+通过在 value 中设置当前线程加锁的标识，在删除之前验证 key 对应的 value 判断锁是否是当前线程持有。可生成一个 UUID 标识当前线程，使用 lua 脚本做验证标识和解锁操作。</p>
+<h3 id="超时解锁导致并发">超时解锁导致并发</h3>
+<p>如果线程 A 成功获取锁并设置过期时间 30 秒，但线程 A 执行时间超过了 30 秒，锁过期自动释放，此时线程 B 获取到了锁，线程 A 和线程 B 并发执行。</p>
+<p>A、B 两个线程发生并发显然是不被允许的，一般有两种方式解决该问题：</p>
+<p>将过期时间设置足够长，确保代码逻辑在锁释放之前能够执行完成。
+为获取锁的线程增加守护线程，为将要过期但未释放的锁增加有效时间。</p>
+<h3 id="不可重入">不可重入</h3>
+<p>当线程在持有锁的情况下再次请求加锁，如果一个锁支持一个线程多次加锁，那么这个锁就是可重入的。如果一个不可重入锁被再次加锁，由于该锁已经被持有，再次加锁会失败。Redis 可通过对锁进行重入计数，加锁时加 1，解锁时减 1，当计数归 0 时释放锁。</p>
+<p>Redis 以其高性能著称，但使用其实现分布式锁来解决并发仍存在一些困难。Redis 分布式锁只能作为一种缓解并发的手段，如果要完全解决并发问题，仍需要数据库的防并发手段。</p>
+<h1 id="基于zookeeper的分布式锁">基于ZooKeeper的分布式锁</h1>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-02-03
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计</a>
+          <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/system_design/bloom_filter/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">5分钟搞懂布隆过滤器，掌握亿级数据过滤算法</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/system_design/friends_comment_like/">
+            <span class="next-text nav-default">点赞和评论 技术设计与实现</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

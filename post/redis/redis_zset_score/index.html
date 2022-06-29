@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Redis Zset的精度问题分析及解决方案 - 码农在新加坡的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：码农在新加坡的个人博客 背景 最近使用Redis的SortedSet，使用int64作为score时遇到了一些预料之外的情况，在此总结" /><meta name="keywords" content="Redis, ZSet" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/redis/redis_zset_score/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Redis Zset的精度问题分析及解决方案" />
+<meta property="og:description" content="原文地址：码农在新加坡的个人博客 背景 最近使用Redis的SortedSet，使用int64作为score时遇到了一些预料之外的情况，在此总结" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/redis/redis_zset_score/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-12-04T13:00:51+08:00" />
+<meta property="article:modified_time" content="2020-12-04T13:00:51+08:00" />
+
+<meta itemprop="name" content="Redis Zset的精度问题分析及解决方案">
+<meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 最近使用Redis的SortedSet，使用int64作为score时遇到了一些预料之外的情况，在此总结"><meta itemprop="datePublished" content="2020-12-04T13:00:51+08:00" />
+<meta itemprop="dateModified" content="2020-12-04T13:00:51+08:00" />
+<meta itemprop="wordCount" content="1370">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Redis Zset的精度问题分析及解决方案"/>
+<meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 背景 最近使用Redis的SortedSet，使用int64作为score时遇到了一些预料之外的情况，在此总结"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">码农在新加坡的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">码农在新加坡的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Redis Zset的精度问题分析及解决方案</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-12-04 </span>
+        <div class="post-category">
+            <a href="/categories/redis/"> Redis </a>
+            </div>
+          <span class="more-meta"> 约 1370 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#介绍">介绍</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#问题描述">问题描述</a></li>
+    <li><a href="#解决方案">解决方案</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>原文地址：<a href="https://leftpocket.cn/post/redis/redis_zset_score/">码农在新加坡的个人博客</a></p>
+<h1 id="背景">背景</h1>
+<p>最近使用Redis的SortedSet，使用int64作为score时遇到了一些预料之外的情况，在此总结一下。</p>
+<h3 id="介绍">介绍</h3>
+<p>项目中采用Redis SortedSet存储用户一些信息，score值存储的msgid（消息ID）。msgid采用snowflake算法生成，按照时间有序。</p>
+<p>Snowflake的算法在我之前的博客里面有讲解：
+<a href="https://www.leftpocket.cn/post/system_design/snowflake/">Snowflake算法</a></p>
+<p>我们这边生成的msgid是根据snowflake算法生成的int64位整数。例如：215857550229364734</p>
+<p>我们发现数值很接近的msgid，在redis中无法通过score进行区分。</p>
+<p>举个列子，在redis中tzset结构里存入如下几条数据。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ZADD tzset 215857550229364734 test1
+ZADD tzset 215857550229364735 test2
+ZADD tzset 215857550229364736 test3
+ZADD tzset 215857550229364737 test4
+ZADD tzset 215857550229375123 test5
+</code></pre></td></tr></table>
+</div>
+</div><p>查询看一下结果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">127.0.0.1:6379&gt; zrange tzset 0 -1 WITHSCORES
+ 1) &#34;test1&#34;
+ 2) &#34;2.1585755022936474e+17&#34;
+ 3) &#34;test2&#34;
+ 4) &#34;2.1585755022936474e+17&#34;
+ 5) &#34;test3&#34;
+ 6) &#34;2.1585755022936474e+17&#34;
+ 7) &#34;test4&#34;
+ 8) &#34;2.1585755022936474e+17&#34;
+ 9) &#34;test5&#34;
+10) &#34;2.1585755022937514e+17&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>我们发现score值采用科学计数法表示，test1,test2,test3,test4几个元素的score值显示是一样的。</p>
+<p>使用<code>score=215857550229364735</code>执行查询，结果如下:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">127.0.0.1:6379&gt; zrangebyscore tzset 215857550229364735 215857550229364735
+1) &#34;test1&#34;
+2) &#34;test2&#34;
+3) &#34;test3&#34;
+4) &#34;test4&#34;
+
+127.0.0.1:6379&gt; zrangebyscore tzset (215857550229364735 215857550229375123
+1) &#34;test5&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>发现与预期不符。</p>
+<h1 id="问题描述">问题描述</h1>
+<p>这导致了我们使用socre做分页查找的时候，（一页10个，下一页使用上一页最后一个socre来继续查找）。会导致其中的一些数据丢失。
+这些都是因为SortedSet的类型是double64的浮点数，存在精度问题。</p>
+<p>贴上Redis官方文档ZADD指令的描述里面的一段话。
+<a href="https://redis.io/commands/zadd">Redis ZAdd</a></p>
+<p><strong>Range of integer scores that can be expressed precisely</strong></p>
+<blockquote>
+<p>Redis sorted sets use a double 64-bit floating point number to represent the score. In all the architectures we support, this is represented as an IEEE 754 floating point number, that is able to represent precisely integer numbers between -(2^53) and +(2^53) included. In more practical terms, all the integers between -9007199254740992 and 9007199254740992 are perfectly representable. Larger integers, or fractions, are internally represented in exponential form, so it is possible that you get only an approximation of the decimal number, or of the very big integer, that you set as score.</p>
+</blockquote>
+<p>简单来说，double64位的浮点数只有<code>53bit</code>的精度。所以使用int64的大整数是需要注意，这个大整数的值不能大于这个最大值。
+对于snowflake算法，之前的文章中有讲过。它是使用<code>41+10+12=63</code>位的大整数。在此场景下是有精度问题的。</p>
+<p>注：使用js也会有53bit的精度问题，几乎所有的编程语言都采用了 <code>IEEE-754</code> 双精度64 位浮点数表示法，任何使用二进制浮点数的编程语言都会有这个问题.</p>
+<p><img src="/img/redis/double64.png" alt="double64"></p>
+<ul>
+<li>sign bit（符号）: 用来表示正负号</li>
+<li>exponent（指数）: 用来表示次方数</li>
+<li>mantissa（尾数）: 用来表示精确度</li>
+</ul>
+<p>也就是说一个数字的范围只能在 -(2^53 -1) 至 2^53 -1 之间。</p>
+<p>这个精度问题在很多业务上都会出现，很多时候前后端交互的时候作为web数据传输，大多数都会需要用到json传输数据。所以设计的数字类型就需要保证在<code>53bit</code>之内。不然就会导致丢失精度。</p>
+<h1 id="解决方案">解决方案</h1>
+<p>可以改造一下score的生成规则，比如我就修改了各个部分的长度。</p>
+<ol>
+<li>修改timestamp的精度，由millionseconds改为seconds.</li>
+<li>修改node的长度，由10位改为9位。（1024-&gt;512).</li>
+</ol>
+<p>这样总长度就变为 32+9+12=53位。
+当然也可以根据需求随机组合。比如把timestamp改为10millionseconds级别，或者100millionseconds级别。然后把step的精度变小一点。</p>
+<p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+<img src="/img/personal/qrcode_2.png" alt="pic"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-12-04
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/others/vscode_leetcode/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">vscode配置leetcode插件</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/system_design/snowflake/">
+            <span class="next-text nav-default">分布式ID生成方案-snowflake算法</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

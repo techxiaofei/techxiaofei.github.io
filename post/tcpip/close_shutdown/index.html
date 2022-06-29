@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>后端面试之网络编程-close和shutdown的区别 - 码农在新加坡的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="码农在新加坡" /><meta name="description" content="​ 原文地址：码农在新加坡的个人博客 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 shutdown()函数可" /><meta name="keywords" content="网络编程, socket" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/tcpip/close_shutdown/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="后端面试之网络编程-close和shutdown的区别" />
+<meta property="og:description" content="​ 原文地址：码农在新加坡的个人博客 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 shutdown()函数可" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/tcpip/close_shutdown/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-11-25T00:00:02+08:00" />
+<meta property="article:modified_time" content="2021-11-25T00:00:02+08:00" />
+
+<meta itemprop="name" content="后端面试之网络编程-close和shutdown的区别">
+<meta itemprop="description" content="​ 原文地址：码农在新加坡的个人博客 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 shutdown()函数可"><meta itemprop="datePublished" content="2021-11-25T00:00:02+08:00" />
+<meta itemprop="dateModified" content="2021-11-25T00:00:02+08:00" />
+<meta itemprop="wordCount" content="1349">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="后端面试之网络编程-close和shutdown的区别"/>
+<meta name="twitter:description" content="​ 原文地址：码农在新加坡的个人博客 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 shutdown()函数可"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">码农在新加坡的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">码农在新加坡的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">后端面试之网络编程-close和shutdown的区别</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-11-25 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"> 网络编程 </a>
+            <a href="/categories/%E9%9D%A2%E8%AF%95/"> 面试 </a>
+            </div>
+          <span class="more-meta"> 约 1349 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>​
+原文地址：<a href="https://leftpocket.cn/post/tcpip/close_shutdown/">码农在新加坡的个人博客</a></p>
+<p><strong>后端面试</strong>系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。</p>
+<p>shutdown()函数可以选择关闭全双工连接的读通道或者写通道，如果两个通道同时关闭，则这个连接不能再继续通信。close()函数会同时关闭全双工连接的读写通道，除了关闭连接外，还会释放套接字占用的文件描述符。而shutdown()只会关闭连接，但是不会释放占用的文件描述符。所以即使使用了SHUT_RDWR类型调用shutdown()关闭连接，也仍然要调用close()来释放连接占用的文件描述符。</p>
+<p>close一个套接字的默认行为是把套接字标记为已关闭，然后立即返回到调用进程，该套接字描述符不能再由调用进程使用，然而TCP将尝试发送已经排队等待发送到对端的任何数据，发送完毕后发生的是正常的TCP连接终止序列。</p>
+<p>该函数行为依赖how的值。</p>
+<p> 1.SHUT_RD：值为0，关闭连接的读这一半，套接字中不再有数据接收，且套接字接收缓冲区中的现有数据全都被丢弃，该套接字描述符不能再被进程调用，对端发送的数据会被确认，然后丢弃。</p>
+<p> 2.SHUT_WR：值为1，关闭连接的写这一半。这称为半关闭，当前在套接字发送缓冲区数据被发送，然后连接终止序列。不论套接字描述符引用技术是否等于0，写半部都会被关闭。</p>
+<p> 3.SHUT_RDWR：值为2，连接的读和写都关闭。相当于先调用SHUT_RD，再调用SHUT_WR。</p>
+<p>close与shutdown的区别:</p>
+<p>①：close函数函数会关闭套接字，如果由其他进程共享着这个套接字，那么它仍然是打开的，这个连接仍然可以用来读和写。</p>
+<p>②：shutdown会切断进程共享的套接字的所有连接，不管引用计数是否为0，由第二个参数选择断连的方式。</p>
+<p>终止网络连接的通常方法是调用close函数。不过close有两个限制，却可以使用shutdown来避免。</p>
+<p>1  close把描述字的引用计数减1，仅在该计数变为0的时候才关闭套接口。而使用shutdown可以不管引用计数的值是多少就激发TCP的正常连接终止序列，也即是发送FIN节。</p>
+<p>2  close终止数据传送的两个方向：读和写。而有的时候只是想关闭读或写，那么此时就使用shutdown函数进行关闭套接口描述字某一方向的操作。</p>
+<p>在有父子进程的服务器程序中，套接口描述字是在父子进程之间共享的，因此它的引用计数为2。要是父进程调用close，那么这只是把该引用计数由2减为1，而且既然它仍然大于，FIN就不发送。这就是为什么在shutdown函数的原因，不管套接口的计数值为多少，FIN都必须被近发送出去。   当shutdown函数中的第2个参数为SHUT_WR 的时候，称为半关闭，此操作后，当前留在套接口发送缓冲中的数据将被发送掉，后跟TCP的正常连接终止序列。</p>
+<p>现在总结一下shutdown()和close()的主要区别：
+1)对应的系统调用不同
+2)shutdown()只能用于套接字文件，close()可以用于所有文件类型
+3)shutdown()只是关闭连接，并没有释放文件描述符，close()可以
+4)shutdown()不能用于TCP_CLOSE状态的套接字，否则会返回 ENOTCONN 错误
+5)shutdown()可以选择关闭读通道或写通道，close()不能。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-11-25
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/mysql/covering_index/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">后端面试之MySQL-什么是回表查询和覆盖索引</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/tcpip/socket_read_write/">
+            <span class="next-text nav-default">后端面试之网络编程-socket返回可读，read返回0是什么情况？</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

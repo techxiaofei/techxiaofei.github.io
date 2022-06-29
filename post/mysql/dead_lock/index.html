@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>MySQL死锁的产生 - 码农在新加坡的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="码农在新加坡" /><meta name="description" content="背景 MySQL死锁问题涉及到MySQL一系列的基础知识，比如事务，隔离级别，各种锁类型，以及各种 SQL 语句的加锁原理。很多开发人员很少会遇到死锁" /><meta name="keywords" content="MySQL" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="sGfWBA2Wby1_gxJO3xmOtvpAOU2cCyhwXuU-2m4u75Y" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/mysql/dead_lock/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="MySQL死锁的产生" />
+<meta property="og:description" content="背景 MySQL死锁问题涉及到MySQL一系列的基础知识，比如事务，隔离级别，各种锁类型，以及各种 SQL 语句的加锁原理。很多开发人员很少会遇到死锁" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/mysql/dead_lock/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-04-05T13:00:51+08:00" />
+<meta property="article:modified_time" content="2021-04-05T13:00:51+08:00" />
+
+<meta itemprop="name" content="MySQL死锁的产生">
+<meta itemprop="description" content="背景 MySQL死锁问题涉及到MySQL一系列的基础知识，比如事务，隔离级别，各种锁类型，以及各种 SQL 语句的加锁原理。很多开发人员很少会遇到死锁"><meta itemprop="datePublished" content="2021-04-05T13:00:51+08:00" />
+<meta itemprop="dateModified" content="2021-04-05T13:00:51+08:00" />
+<meta itemprop="wordCount" content="1314">
+<meta itemprop="keywords" content="MySQL," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MySQL死锁的产生"/>
+<meta name="twitter:description" content="背景 MySQL死锁问题涉及到MySQL一系列的基础知识，比如事务，隔离级别，各种锁类型，以及各种 SQL 语句的加锁原理。很多开发人员很少会遇到死锁"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">码农在新加坡的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">码农在新加坡的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">MySQL死锁的产生</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-04-05 </span>
+        <div class="post-category">
+            <a href="/categories/mysql/"> MySQL </a>
+            </div>
+          <span class="more-meta"> 约 1314 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#基础知识">基础知识</a>
+      <ul>
+        <li><a href="#隔离级别">隔离级别</a></li>
+        <li><a href="#行锁的知识">行锁的知识</a></li>
+      </ul>
+    </li>
+    <li><a href="#准备工作">准备工作</a></li>
+    <li><a href="#模拟并发">模拟并发</a></li>
+    <li><a href="#死锁案例">死锁案例</a>
+      <ul>
+        <li><a href="#案例1">案例1</a></li>
+        <li><a href="#案例2">案例2</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="背景">背景</h1>
+<p>MySQL死锁问题涉及到MySQL一系列的基础知识，比如事务，隔离级别，各种锁类型，以及各种 SQL 语句的加锁原理。很多开发人员很少会遇到死锁的问题。但是死锁却是一个很考验MySQL基本功的技术点。
+这篇文章我们就从零分析死锁的方方面面。</p>
+<h1 id="基础知识">基础知识</h1>
+<h2 id="隔离级别">隔离级别</h2>
+<p>首先，我们需要了解MySQL InnoDB的隔离级别，默认是RR隔离级别。
+如果不了解隔离级别，建议先了解一下基础知识。
+这里只给一个表格，不详细介绍。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">隔离级别</th>
+<th style="text-align:left">脏读(Dirty Read)</th>
+<th style="text-align:center">不可重复读(Nonrepeatable Read)</th>
+<th style="text-align:left">幻读(Phantom Read)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">未提交读（Read uncommitted）</td>
+<td style="text-align:left">可能</td>
+<td style="text-align:center">可能</td>
+<td style="text-align:left">可能</td>
+</tr>
+<tr>
+<td style="text-align:left">已提交读（Read committed）</td>
+<td style="text-align:left">不可能</td>
+<td style="text-align:center">可能</td>
+<td style="text-align:left">可能</td>
+</tr>
+<tr>
+<td style="text-align:left">可重复读（Repeatable read）</td>
+<td style="text-align:left">不可能</td>
+<td style="text-align:center">不可能</td>
+<td style="text-align:left">可能</td>
+</tr>
+<tr>
+<td style="text-align:left">可串行化（Serializable ）</td>
+<td style="text-align:left">不可能</td>
+<td style="text-align:center">不可能</td>
+<td style="text-align:left">不可能</td>
+</tr>
+</tbody>
+</table>
+<h2 id="行锁的知识">行锁的知识</h2>
+<p>一共有四种类型的行锁：记录锁，间隙锁，Next-key 锁和插入意向锁。这四种锁对应的死锁日志各不相同，如下：</p>
+<ul>
+<li>记录锁（LOCK_REC_NOT_GAP）: lock_mode X locks rec but not gap</li>
+<li>间隙锁（LOCK_GAP）: lock_mode X locks gap before rec</li>
+<li>Next-key 锁（LOCK_ORNIDARY）: lock_mode X</li>
+<li>插入意向锁（LOCK_INSERT_INTENTION）: lock_mode X locks gap before rec insert intention</li>
+</ul>
+<p><a href="https://www.aneasystone.com/archives/2017/11/solving-dead-locks-two.html">引用|锁类型</a></p>
+<h1 id="准备工作">准备工作</h1>
+<p>查看MySQL事务隔离级别：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">@@</span><span class="n">tx_isolation</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="o">+</span><span class="c1">-----------------+
+</span><span class="c1"></span><span class="o">|</span><span class="w"> </span><span class="o">@@</span><span class="n">tx_isolation</span><span class="w">  </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">+</span><span class="c1">-----------------+
+</span><span class="c1"></span><span class="o">|</span><span class="w"> </span><span class="k">REPEATABLE</span><span class="o">-</span><span class="k">READ</span><span class="w"> </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">+</span><span class="c1">-----------------+
+</span><span class="c1"></span><span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">set</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">warning</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">01</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>为了测试，我们需要关闭自动提交：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">autocommit</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="n">Query</span><span class="w"> </span><span class="n">OK</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">rows</span><span class="w"> </span><span class="n">affected</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">@@</span><span class="n">autocommit</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="o">+</span><span class="c1">--------------+
+</span><span class="c1"></span><span class="o">|</span><span class="w"> </span><span class="o">@@</span><span class="n">autocommit</span><span class="w"> </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">+</span><span class="c1">--------------+
+</span><span class="c1"></span><span class="o">|</span><span class="w">            </span><span class="mi">0</span><span class="w"> </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">+</span><span class="c1">--------------+
+</span><span class="c1"></span><span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>我们创建一个表：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="o">//</span><span class="n">id是自增主键</span><span class="err">，</span><span class="n">name是非唯一索引</span><span class="err">，</span><span class="n">balance普通字段</span><span class="w">
+</span><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="o">`</span><span class="n">account</span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span><span class="w">  </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="o">`</span><span class="n">name</span><span class="o">`</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="o">`</span><span class="n">balance</span><span class="o">`</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="p">),</span><span class="w">
+</span><span class="w">  </span><span class="k">KEY</span><span class="w"> </span><span class="o">`</span><span class="n">idx_name</span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="o">`</span><span class="n">name</span><span class="o">`</span><span class="p">)</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">BTREE</span><span class="w">
+</span><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="o">=</span><span class="mi">1</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>然后插入一些数据：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="k">values</span><span class="p">(</span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;A&#34;</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span><span class="w">
+</span><span class="w"></span><span class="n">Query</span><span class="w"> </span><span class="n">OK</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="n">affected</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="k">values</span><span class="p">(</span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;B&#34;</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span><span class="w">
+</span><span class="w"></span><span class="n">Query</span><span class="w"> </span><span class="n">OK</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="n">affected</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">account</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="o">+</span><span class="c1">----+------+---------+
+</span><span class="c1"></span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">+</span><span class="c1">----+------+---------+
+</span><span class="c1"></span><span class="o">|</span><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">A</span><span class="w">    </span><span class="o">|</span><span class="w">     </span><span class="mi">100</span><span class="w"> </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">|</span><span class="w">  </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">B</span><span class="w">    </span><span class="o">|</span><span class="w">     </span><span class="mi">100</span><span class="w"> </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">+</span><span class="c1">----+------+---------+
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="模拟并发">模拟并发</h1>
+<p>开启两个终端模拟并发情况，执行顺序如下：
+<strong>事务1</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">begin</span><span class="p">;</span><span class="w">  </span><span class="c1">-- 1
+</span><span class="c1"></span><span class="n">Query</span><span class="w"> </span><span class="n">OK</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">rows</span><span class="w"> </span><span class="n">affected</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;A&#39;</span><span class="p">;</span><span class="w">  </span><span class="c1">-- 3
+</span><span class="c1"></span><span class="n">Query</span><span class="w"> </span><span class="n">OK</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="n">affected</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="k">Rows</span><span class="w"> </span><span class="n">matched</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="n">Changed</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="n">Warnings</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;B&#39;</span><span class="p">;</span><span class="w">   </span><span class="c1">-- 5 block here, until transaction 2 release the lock.
+</span><span class="c1"></span><span class="n">Query</span><span class="w"> </span><span class="n">OK</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="n">affected</span><span class="w"> </span><span class="p">(</span><span class="mi">4</span><span class="p">.</span><span class="mi">00</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="k">Rows</span><span class="w"> </span><span class="n">matched</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="n">Changed</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="n">Warnings</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p><strong>事务2</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">begin</span><span class="p">;</span><span class="w">  </span><span class="c1">-- 2
+</span><span class="c1"></span><span class="n">Query</span><span class="w"> </span><span class="n">OK</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">rows</span><span class="w"> </span><span class="n">affected</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;B&#39;</span><span class="p">;</span><span class="w">  </span><span class="c1">-- 4
+</span><span class="c1"></span><span class="n">Query</span><span class="w"> </span><span class="n">OK</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="n">affected</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="k">Rows</span><span class="w"> </span><span class="n">matched</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="n">Changed</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="n">Warnings</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;A&#39;</span><span class="p">;</span><span class="w">  </span><span class="c1">-- 6
+</span><span class="c1"></span><span class="n">ERROR</span><span class="w"> </span><span class="mi">1213</span><span class="w"> </span><span class="p">(</span><span class="mi">40001</span><span class="p">):</span><span class="w"> </span><span class="n">Deadlock</span><span class="w"> </span><span class="k">found</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="n">trying</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">get</span><span class="w"> </span><span class="k">lock</span><span class="p">;</span><span class="w"> </span><span class="n">try</span><span class="w"> </span><span class="n">restarting</span><span class="w"> </span><span class="k">transaction</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>按照1，2，3，4，5，6的顺序来执行。
+发现，执行到6的时候会产生DeadLock。</p>
+<ol>
+<li>因为事务1，锁住A，然后事务2，锁住B。</li>
+<li>事务1，尝试锁住B，会阻塞，等其他事务释放锁。</li>
+<li>事务2准备锁A，这个时候就会产生死锁，事务2就restarting transaction，释放锁。</li>
+<li>事务1的锁住B的操作就能成功。但是事务2就失败了。</li>
+</ol>
+<p>怎么查看这个死锁呢。
+使用 <strong>show engine innodb status</strong> 的命令，可以查看最近一次的死锁日志。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="n">engine</span><span class="w"> </span><span class="n">innodb</span><span class="w"> </span><span class="n">status</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="o">=====================================</span><span class="w">
+</span><span class="w"></span><span class="mi">2021</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">06</span><span class="w"> </span><span class="mi">17</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">50</span><span class="w"> </span><span class="mi">0</span><span class="n">x70000c707000</span><span class="w"> </span><span class="n">INNODB</span><span class="w"> </span><span class="n">MONITOR</span><span class="w"> </span><span class="k">OUTPUT</span><span class="w">
+</span><span class="w"></span><span class="o">=====================================</span><span class="w">
+</span><span class="w"></span><span class="c1">------------------------
+</span><span class="c1"></span><span class="n">LATEST</span><span class="w"> </span><span class="n">DETECTED</span><span class="w"> </span><span class="n">DEADLOCK</span><span class="w">
+</span><span class="w"></span><span class="c1">------------------------
+</span><span class="c1"></span><span class="mi">2021</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">06</span><span class="w"> </span><span class="mi">17</span><span class="p">:</span><span class="mi">18</span><span class="p">:</span><span class="mi">49</span><span class="w"> </span><span class="mi">0</span><span class="n">x70000c707000</span><span class="w">
+</span><span class="w"></span><span class="o">***</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="k">TRANSACTION</span><span class="w"> </span><span class="mi">10046512</span><span class="p">,</span><span class="w"> </span><span class="n">ACTIVE</span><span class="w"> </span><span class="mi">22</span><span class="w"> </span><span class="n">sec</span><span class="w"> </span><span class="n">starting</span><span class="w"> </span><span class="k">index</span><span class="w"> </span><span class="k">read</span><span class="w">
+</span><span class="w"></span><span class="n">mysql</span><span class="w"> </span><span class="n">tables</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">locked</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="w"></span><span class="k">LOCK</span><span class="w"> </span><span class="n">WAIT</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="k">lock</span><span class="w"> </span><span class="n">struct</span><span class="p">(</span><span class="n">s</span><span class="p">),</span><span class="w"> </span><span class="n">heap</span><span class="w"> </span><span class="k">size</span><span class="w"> </span><span class="mi">1136</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">lock</span><span class="p">(</span><span class="n">s</span><span class="p">),</span><span class="w"> </span><span class="n">undo</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="n">entries</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="w"></span><span class="n">MySQL</span><span class="w"> </span><span class="n">thread</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="n">OS</span><span class="w"> </span><span class="n">thread</span><span class="w"> </span><span class="n">handle</span><span class="w"> </span><span class="mi">123145511284736</span><span class="p">,</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="mi">240</span><span class="w"> </span><span class="n">localhost</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="n">updating</span><span class="w">
+</span><span class="w"></span><span class="k">update</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;B&#39;</span><span class="w">
+</span><span class="w"></span><span class="o">***</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">WAITING</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="n">THIS</span><span class="w"> </span><span class="k">LOCK</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">BE</span><span class="w"> </span><span class="k">GRANTED</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="n">RECORD</span><span class="w"> </span><span class="n">LOCKS</span><span class="w"> </span><span class="k">space</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="mi">132</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="n">bits</span><span class="w"> </span><span class="mi">80</span><span class="w"> </span><span class="k">index</span><span class="w"> </span><span class="n">idx_name</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">`</span><span class="n">test</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">account</span><span class="o">`</span><span class="w"> </span><span class="n">trx</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="mi">10046512</span><span class="w"> </span><span class="n">lock_mode</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="n">waiting</span><span class="w">
+</span><span class="w"></span><span class="n">Record</span><span class="w"> </span><span class="k">lock</span><span class="p">,</span><span class="w"> </span><span class="n">heap</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="n">PHYSICAL</span><span class="w"> </span><span class="n">RECORD</span><span class="p">:</span><span class="w"> </span><span class="n">n_fields</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">compact</span><span class="w"> </span><span class="n">format</span><span class="p">;</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="n">bits</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">hex</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span><span class="w"> </span><span class="k">asc</span><span class="w"> </span><span class="n">B</span><span class="p">;;</span><span class="w">
+</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">hex</span><span class="w"> </span><span class="mi">80000002</span><span class="p">;</span><span class="w"> </span><span class="k">asc</span><span class="w">     </span><span class="p">;;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="o">***</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="k">TRANSACTION</span><span class="w"> </span><span class="mi">10046513</span><span class="p">,</span><span class="w"> </span><span class="n">ACTIVE</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="n">sec</span><span class="w"> </span><span class="n">starting</span><span class="w"> </span><span class="k">index</span><span class="w"> </span><span class="k">read</span><span class="w">
+</span><span class="w"></span><span class="n">mysql</span><span class="w"> </span><span class="n">tables</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">locked</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="w"></span><span class="mi">5</span><span class="w"> </span><span class="k">lock</span><span class="w"> </span><span class="n">struct</span><span class="p">(</span><span class="n">s</span><span class="p">),</span><span class="w"> </span><span class="n">heap</span><span class="w"> </span><span class="k">size</span><span class="w"> </span><span class="mi">1136</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">lock</span><span class="p">(</span><span class="n">s</span><span class="p">),</span><span class="w"> </span><span class="n">undo</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="n">entries</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="w"></span><span class="n">MySQL</span><span class="w"> </span><span class="n">thread</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">OS</span><span class="w"> </span><span class="n">thread</span><span class="w"> </span><span class="n">handle</span><span class="w"> </span><span class="mi">123145511006208</span><span class="p">,</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="mi">241</span><span class="w"> </span><span class="n">localhost</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="n">updating</span><span class="w">
+</span><span class="w"></span><span class="k">update</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;A&#39;</span><span class="w">
+</span><span class="w"></span><span class="o">***</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="n">HOLDS</span><span class="w"> </span><span class="n">THE</span><span class="w"> </span><span class="k">LOCK</span><span class="p">(</span><span class="n">S</span><span class="p">):</span><span class="w">
+</span><span class="w"></span><span class="n">RECORD</span><span class="w"> </span><span class="n">LOCKS</span><span class="w"> </span><span class="k">space</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="mi">132</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="n">bits</span><span class="w"> </span><span class="mi">80</span><span class="w"> </span><span class="k">index</span><span class="w"> </span><span class="n">idx_name</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">`</span><span class="n">test</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">account</span><span class="o">`</span><span class="w"> </span><span class="n">trx</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="mi">10046513</span><span class="w"> </span><span class="n">lock_mode</span><span class="w"> </span><span class="n">X</span><span class="w">
+</span><span class="w"></span><span class="n">Record</span><span class="w"> </span><span class="k">lock</span><span class="p">,</span><span class="w"> </span><span class="n">heap</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="n">PHYSICAL</span><span class="w"> </span><span class="n">RECORD</span><span class="p">:</span><span class="w"> </span><span class="n">n_fields</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">compact</span><span class="w"> </span><span class="n">format</span><span class="p">;</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="n">bits</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">hex</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span><span class="w"> </span><span class="k">asc</span><span class="w"> </span><span class="n">B</span><span class="p">;;</span><span class="w">
+</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">hex</span><span class="w"> </span><span class="mi">80000002</span><span class="p">;</span><span class="w"> </span><span class="k">asc</span><span class="w">     </span><span class="p">;;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="o">***</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="n">WAITING</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="n">THIS</span><span class="w"> </span><span class="k">LOCK</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">BE</span><span class="w"> </span><span class="k">GRANTED</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="n">RECORD</span><span class="w"> </span><span class="n">LOCKS</span><span class="w"> </span><span class="k">space</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="mi">132</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="n">bits</span><span class="w"> </span><span class="mi">80</span><span class="w"> </span><span class="k">index</span><span class="w"> </span><span class="n">idx_name</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">`</span><span class="n">test</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">account</span><span class="o">`</span><span class="w"> </span><span class="n">trx</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="mi">10046513</span><span class="w"> </span><span class="n">lock_mode</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="n">waiting</span><span class="w">
+</span><span class="w"></span><span class="n">Record</span><span class="w"> </span><span class="k">lock</span><span class="p">,</span><span class="w"> </span><span class="n">heap</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="n">PHYSICAL</span><span class="w"> </span><span class="n">RECORD</span><span class="p">:</span><span class="w"> </span><span class="n">n_fields</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">compact</span><span class="w"> </span><span class="n">format</span><span class="p">;</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="n">bits</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">hex</span><span class="w"> </span><span class="mi">41</span><span class="p">;</span><span class="w"> </span><span class="k">asc</span><span class="w"> </span><span class="n">A</span><span class="p">;;</span><span class="w">
+</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">hex</span><span class="w"> </span><span class="mi">80000001</span><span class="p">;</span><span class="w"> </span><span class="k">asc</span><span class="w">     </span><span class="p">;;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="o">***</span><span class="w"> </span><span class="n">WE</span><span class="w"> </span><span class="n">ROLL</span><span class="w"> </span><span class="n">BACK</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="c1">------------
+</span><span class="c1"></span><span class="n">TRANSACTIONS</span><span class="w">
+</span><span class="w"></span><span class="c1">------------
+</span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到事务1尝试锁住 <strong>name=&lsquo;B&rsquo;</strong> 的时候发现已经被锁住了，于是等待。
+事务2尝试锁住 <strong>name=&lsquo;A&rsquo;</strong> 的时候发现了这个也被锁住了，于是相互等待产生了死锁，开始执行 <strong>ROLL BACK TRANSACTION</strong>。</p>
+<p>根据
+<code>lock_mode A</code>
+可以看出，这是一个<strong>next-key</strong>的锁。</p>
+<h1 id="死锁案例">死锁案例</h1>
+<h2 id="案例1">案例1</h2>
+<p><img src="/img/mysql/dead_lock_1.png" alt="dead_lock_1"></p>
+<p>这个案例就是上面分析的案例，也是最简单的死锁案例。</p>
+<h2 id="案例2">案例2</h2>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-04-05
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/mysql/">MySQL</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/golang/goroutine_implementation/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">一文看懂Go语言协程的设计与原理</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/golang/append/">
+            <span class="next-text nav-default">Golang append是并发安全的吗</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>后端开发除了增删改查还有什么？ - 码农在新加坡的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="码农在新加坡" /><meta name="description" content="背景 很多刚接触后端开发的同学，会发现，后端开发不就是增删改查吗？的确，如果你做的东西只是一个很小的流量的一个网站/平台的后端，用户量低，每秒" /><meta name="keywords" content="后端开发" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="sGfWBA2Wby1_gxJO3xmOtvpAOU2cCyhwXuU-2m4u75Y" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/backend/backend_development/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="后端开发除了增删改查还有什么？" />
+<meta property="og:description" content="背景 很多刚接触后端开发的同学，会发现，后端开发不就是增删改查吗？的确，如果你做的东西只是一个很小的流量的一个网站/平台的后端，用户量低，每秒" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/backend/backend_development/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-11-30T14:00:51+08:00" />
+<meta property="article:modified_time" content="2021-11-30T14:00:51+08:00" />
+
+<meta itemprop="name" content="后端开发除了增删改查还有什么？">
+<meta itemprop="description" content="背景 很多刚接触后端开发的同学，会发现，后端开发不就是增删改查吗？的确，如果你做的东西只是一个很小的流量的一个网站/平台的后端，用户量低，每秒"><meta itemprop="datePublished" content="2021-11-30T14:00:51+08:00" />
+<meta itemprop="dateModified" content="2021-11-30T14:00:51+08:00" />
+<meta itemprop="wordCount" content="1759">
+<meta itemprop="keywords" content="后端开发," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="后端开发除了增删改查还有什么？"/>
+<meta name="twitter:description" content="背景 很多刚接触后端开发的同学，会发现，后端开发不就是增删改查吗？的确，如果你做的东西只是一个很小的流量的一个网站/平台的后端，用户量低，每秒"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">码农在新加坡的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">码农在新加坡的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">后端开发除了增删改查还有什么？</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-11-30 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"> 后端开发 </a>
+            </div>
+          <span class="more-meta"> 约 1759 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#后端开发">后端开发</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#起步">起步</a></li>
+            <li><a href="#分布式">分布式</a></li>
+            <li><a href="#负载均衡">负载均衡</a></li>
+            <li><a href="#数据库">数据库</a></li>
+            <li><a href="#部署">部署</a></li>
+            <li><a href="#容器技术">容器技术</a></li>
+            <li><a href="#性能监控报警">性能监控/报警</a></li>
+            <li><a href="#日志平台">日志平台</a></li>
+            <li><a href="#微服务">微服务</a></li>
+            <li><a href="#数据拆分">数据拆分</a></li>
+            <li><a href="#数据库性能优化">数据库性能优化</a></li>
+            <li><a href="#缓存设计">缓存设计</a></li>
+            <li><a href="#消息队列设计">消息队列设计</a></li>
+            <li><a href="#数据实时性">数据实时性</a></li>
+            <li><a href="#热点数据">热点数据</a></li>
+            <li><a href="#服务限流">服务限流</a></li>
+            <li><a href="#最终保证">最终保证</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="背景">背景</h1>
+<p>很多刚接触后端开发的同学，会发现，后端开发不就是增删改查吗？的确，如果你做的东西只是一个很小的流量的一个网站/平台的后端，用户量低，每秒钟访问量低，对数据的一致性和服务的稳定性要求也没那么高。那就是简单的增删改查，一台服务器连接数据库，API直接读写数据库。
+可是日子久了，你发现你的网站/平台用户量和流量都上来了，代码越来越复杂，这就涉及到服务扩展，业务拆分，架构设计。</p>
+<p>很多人找工作，公司会要求，高并发工作经验者优先，可是只做过几千几万人的服务，只是简单的增删改查，根本没接触过高并发。怎么办？</p>
+<p>本人目前在新加坡 某电商平台 做后端开发，服务十亿级别用户，数据量百亿级别，QPS 千万级别，说一下我的经验。</p>
+<p>后端开发，说到底，就是增删改查。但是一千用户的小网站的增删改查，和10亿用户的增删改查，是两件事情。</p>
+<h1 id="后端开发">后端开发</h1>
+<h3 id="起步">起步</h3>
+<p>比如很多计算机专业的学生，大学的时候做过 图书馆管理系统，我们当那是最简单的增删改查。
+这个有多简单呢，网页连接一台服务器连接数据库查询。
+这就是最简单的后端，性能，一致性，扩展性，并发性都不需要考虑。数据正确就行了。</p>
+<h3 id="分布式">分布式</h3>
+<p>一台机器不够用了，需要多台服务器，需要分布式集群吧。</p>
+<h3 id="负载均衡">负载均衡</h3>
+<h3 id="数据库">数据库</h3>
+<p>使用什么数据库，MySQL， TiDB， Redis等等。</p>
+<h3 id="部署">部署</h3>
+<p>Jenkins</p>
+<h3 id="容器技术">容器技术</h3>
+<p>Docker/K8s</p>
+<h3 id="性能监控报警">性能监控/报警</h3>
+<p>需要监控很多东西，服务的内存/CPU/带宽使用，QPS，错误率，延迟等等。Prometheus+Grafana</p>
+<h3 id="日志平台">日志平台</h3>
+<p>当我们的分布式部署之后，怎么统一的查看日志来定位问题。怎么把日志收集在一起，用什么储存方便搜索。ES？</p>
+<h3 id="微服务">微服务</h3>
+<p>业务解耦，比如登陆注册业务和订单业务就可以解耦，通过调用来获取数据。
+服务注册与发现</p>
+<h3 id="数据拆分">数据拆分</h3>
+<p>服务拆分隔离了，那么数据库也要开始拆分了。
+怎么拆分，分库分表，水平切分，垂直切分。</p>
+<h3 id="数据库性能优化">数据库性能优化</h3>
+<p>数据库性能瓶颈了，需要怎么优化，读的瓶颈怎么优化，写的瓶颈怎么优化。</p>
+<h3 id="缓存设计">缓存设计</h3>
+<p>当DB有读写性能压力的时候，需要加缓存，怎么保存缓存的一致性。</p>
+<h3 id="消息队列设计">消息队列设计</h3>
+<p>同时使用人数过多，是不是有些地方可以异步，比如异步DB存储。有很多消息队列，RabbitMQ/RocketMQ/ActiveMQ/Kafka，各自怎么实现的，用哪种。</p>
+<h3 id="数据实时性">数据实时性</h3>
+<p>websocket/netty了解下。</p>
+<h3 id="热点数据">热点数据</h3>
+<p>比如微博热点新闻，双十一0点流量。这种热点数据，你用缓存一样的解决不了，怎么办。上内存缓存吧。数据分散，担心内存太大，LRU吧。</p>
+<h3 id="服务限流">服务限流</h3>
+<p>上游某个业务突然流量增大，影响了其他核心业务的调用，</p>
+<h3 id="最终保证">最终保证</h3>
+<p>作为后端人员，不仅仅停留在用户端侧体验以及交互形式，更重要的是从用户的数据模型、业务场景、业务模型、系统架构设计、领域建模、业务流程以及高并发、高可靠、规模化等稳定性角度，去提升产品整体的体验和价值，解决用户的诉求。</p>
+<p>我们只需要写好SQL语句，去数据库查到数据，返回到页面中展示就可以。</p>
+<p>如果你经历从0到亿级别的数据增长，你一定会面临很多挑战，重构和优化，因为当我们从0开始的时候，一定不会考虑一亿的时候怎么设计。考虑的太远，严重浪费资源和增加复杂度，一定是业务量带动需求。随着系统承载的瓶颈，来带动我们对增删改查的优化。</p>
+<p>比如如何设计？</p>
+<p>如何设计表结构。
+用户增长之后，读的瓶颈如何解决，写的瓶颈如何解决。
+怎么提升缓存命中率，分库分表的原则是什么，读写分离怎么设计。
+热点数据怎么储存。
+数据不一致怎么保证。
+服务怎么拆分，数据怎么拆分。
+大促的时候更新QPS超出DB的性能瓶颈，怎么处理。流量削峰怎么设计，MQ怎么使用。
+1千用户增长到1百万用户，你的数据怎么处理。DB查询速度会不会变慢，10个亿的用户呢。
+为什么我明明设置了索引，却没生效？
+怎么处理高并发？</p>
+<p>1万QPS的时候怎么处理。
+1百万QPS的时候怎么处理。
+1千万QPS的时候怎么处理。
+大促期间（双十一）的流量增长怎么解决？
+微博突发热点（明星出轨）怎么保证服务器不挂？
+在你增删改查的过程中，怎么去实现一些方案：</p>
+<p>实现一个分布式ID生成方案。ID需要保证全剧唯一。
+实现一个在亿级数据里面支持分页查询。（最简单的例子，朋友圈分页去查看好友动态）。
+如何实现高可用？一台机器宕机之后不影响其他机器和的运行和整个服务的可用性。
+如何实现服务降级和服务限流。
+写增删改查简单，写好增删改查却不容易。作为后端程序员，你我要学的都还有很多。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-11-30
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/hugo/hugo_0/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">从零开始搭建个人博客（零）- 序章</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/mysql/covering_index/">
+            <span class="next-text nav-default">后端面试之MySQL-什么是回表查询和覆盖索引</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

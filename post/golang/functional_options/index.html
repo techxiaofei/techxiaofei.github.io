@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Golang函数式选项(Functional Options)模式 - 码农在新加坡的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：码农在新加坡的个人博客 概览 最近阅读源码的时候看到一段不错的代码，但是当时却不是非常理解为什么这么写。 我们先来看一下源代码： 1 2 3 4" /><meta name="keywords" content="Golang, Functional Options" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/golang/functional_options/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Golang函数式选项(Functional Options)模式" />
+<meta property="og:description" content="原文地址：码农在新加坡的个人博客 概览 最近阅读源码的时候看到一段不错的代码，但是当时却不是非常理解为什么这么写。 我们先来看一下源代码： 1 2 3 4" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/golang/functional_options/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-02-18T13:00:51+08:00" />
+<meta property="article:modified_time" content="2021-02-18T13:00:51+08:00" />
+
+<meta itemprop="name" content="Golang函数式选项(Functional Options)模式">
+<meta itemprop="description" content="原文地址：码农在新加坡的个人博客 概览 最近阅读源码的时候看到一段不错的代码，但是当时却不是非常理解为什么这么写。 我们先来看一下源代码： 1 2 3 4"><meta itemprop="datePublished" content="2021-02-18T13:00:51+08:00" />
+<meta itemprop="dateModified" content="2021-02-18T13:00:51+08:00" />
+<meta itemprop="wordCount" content="1753">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Golang函数式选项(Functional Options)模式"/>
+<meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 概览 最近阅读源码的时候看到一段不错的代码，但是当时却不是非常理解为什么这么写。 我们先来看一下源代码： 1 2 3 4"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">码农在新加坡的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">码农在新加坡的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Golang函数式选项(Functional Options)模式</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-02-18 </span>
+        <div class="post-category">
+            <a href="/categories/golang/"> Golang </a>
+            </div>
+          <span class="more-meta"> 约 1753 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#概览">概览</a></li>
+            <li><a href="#重载函数">重载函数</a></li>
+            <li><a href="#配置化">配置化</a></li>
+            <li><a href="#builder模式">Builder模式</a></li>
+            <li><a href="#函数式选项模式">函数式选项模式</a></li>
+            <li><a href="#总结">总结</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>原文地址：<a href="https://leftpocket.cn/post/golang/functional_options/">码农在新加坡的个人博客</a></p>
+<h3 id="概览">概览</h3>
+<p>最近阅读源码的时候看到一段不错的代码，但是当时却不是非常理解为什么这么写。
+我们先来看一下源代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">User</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">ID</span>     <span class="kt">string</span>
+	<span class="nx">Name</span>   <span class="kt">string</span>
+	<span class="nx">Age</span>    <span class="kt">int</span>
+	<span class="nx">Email</span>  <span class="kt">string</span>
+	<span class="nx">Phone</span>  <span class="kt">string</span>
+	<span class="nx">Gender</span> <span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">Option</span> <span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">WithAge</span><span class="p">(</span><span class="nx">age</span> <span class="kt">int</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">u</span><span class="p">.</span><span class="nx">Age</span> <span class="p">=</span> <span class="nx">age</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">WithEmail</span><span class="p">(</span><span class="nx">email</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">u</span><span class="p">.</span><span class="nx">Email</span> <span class="p">=</span> <span class="nx">email</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">WithPhone</span><span class="p">(</span><span class="nx">phone</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">u</span><span class="p">.</span><span class="nx">Phone</span> <span class="p">=</span> <span class="nx">phone</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">WithGender</span><span class="p">(</span><span class="nx">gender</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">u</span><span class="p">.</span><span class="nx">Gender</span> <span class="p">=</span> <span class="nx">gender</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">NewUser</span><span class="p">(</span><span class="nx">id</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">options</span> <span class="o">...</span><span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">))</span> <span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">user</span> <span class="o">:=</span> <span class="nx">User</span><span class="p">{</span>
+		<span class="nx">ID</span><span class="p">:</span>     <span class="nx">id</span><span class="p">,</span>
+		<span class="nx">Name</span><span class="p">:</span>   <span class="nx">name</span><span class="p">,</span>
+		<span class="nx">Age</span><span class="p">:</span>    <span class="mi">0</span><span class="p">,</span>
+		<span class="nx">Email</span><span class="p">:</span>  <span class="s">&#34;&#34;</span><span class="p">,</span>
+		<span class="nx">Phone</span><span class="p">:</span>  <span class="s">&#34;&#34;</span><span class="p">,</span>
+		<span class="nx">Gender</span><span class="p">:</span> <span class="s">&#34;female&#34;</span><span class="p">,</span>
+	<span class="p">}</span>
+	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">option</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">options</span> <span class="p">{</span>
+		<span class="nf">option</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">user</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="c1">//...
+</span><span class="c1"></span>	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">user</span><span class="p">,</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">user</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">NewUser</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;Ada&#34;</span><span class="p">,</span> <span class="nf">WithAge</span><span class="p">(</span><span class="mi">18</span><span class="p">),</span> <span class="nf">WithPhone</span><span class="p">(</span><span class="s">&#34;123456&#34;</span><span class="p">))</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;NewUser: err:%v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;NewUser Success&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>当时呢，也不是很明白 <strong>NewUser</strong> 这个构造函数为什么要这么写，后来查看了资料才知道了这是一种设计模式–<strong>函数式选项(functional options)模式</strong>。</p>
+<p>什么是函数式选项模式，为什么要这么写，这个编程模式解决了什么问题呢？</p>
+<p>其实就是为了解决动态灵活的配置不同的参数的问题。</p>
+<p>假如我们有一个需求：
+在网站注册账号，有很多可选的选项，可填可不填。会根据你填的信息初始化你的 <strong>User</strong> 对象。</p>
+<h3 id="重载函数">重载函数</h3>
+<p>如果你有 <strong>C++</strong> 或者 <strong>Java</strong> 的编程基础，你的第一反应应该是函数重载。</p>
+<p>但是因为 <strong>Golang</strong> 语言不像 <strong>C++</strong> 一样支持重载函数，所以，你得用不同的函数名来应对不同的配置选项。</p>
+<p>像这样：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">NewUserDefault</span><span class="p">(</span><span class="nx">id</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span><span class="nx">ID</span><span class="p">:</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">Name</span><span class="p">:</span> <span class="nx">name</span><span class="p">},</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">NewUserWithPhone</span><span class="p">(</span><span class="nx">id</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">phone</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span><span class="nx">ID</span><span class="p">:</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">Name</span><span class="p">:</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">Phone</span><span class="p">:</span> <span class="nx">phone</span><span class="p">},</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">NewUserWithEmail</span><span class="p">(</span><span class="nx">id</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">email</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span><span class="nx">ID</span><span class="p">:</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">Name</span><span class="p">:</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">Email</span><span class="p">:</span> <span class="nx">email</span><span class="p">},</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果一共只有两三个参数的情况下，比较简单，但是更多的选项的组合就代码看起来很乱了。</p>
+<h3 id="配置化">配置化</h3>
+<p>这个时候我们可能会想到，配置化。
+把所有可选的参数放到一个Config的struct中。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Config</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">Age</span>    <span class="kt">int</span>
+    <span class="nx">Email</span>  <span class="kt">string</span>
+    <span class="nx">Phone</span>  <span class="kt">string</span>
+    <span class="nx">Gender</span> <span class="kt">string</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>然后把Config放到User的struct中。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">User</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">ID</span>   <span class="kt">string</span>
+    <span class="nx">Name</span> <span class="kt">string</span>
+    <span class="nx">Conf</span> <span class="o">*</span><span class="nx">Config</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>于是，我们只需要一个 NewUser() 的函数了，在使用前需要构造 Config 对象。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">NewUser</span><span class="p">(</span><span class="nx">id</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">conf</span> <span class="o">*</span><span class="nx">Config</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//...
+</span><span class="c1"></span><span class="p">}</span>
+<span class="c1">//Using the default configuratrion
+</span><span class="c1"></span><span class="nx">user</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nf">NewUser</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;Ada&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+
+<span class="nx">conf</span> <span class="o">:=</span> <span class="nx">Config</span><span class="p">{</span><span class="nx">Age</span><span class="p">:</span><span class="mi">18</span><span class="p">,</span> <span class="nx">Phone</span><span class="p">:</span> <span class="s">&#34;123456&#34;</span><span class="p">}</span>
+<span class="nx">user2</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nf">NewUser</span><span class="p">(</span><span class="s">&#34;2&#34;</span><span class="p">,</span> <span class="s">&#34;Bob&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">conf</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这段代码看起来算是不错了，很多时候我使用的一些开源库也是这么写的。通过引入一个Config对象来解决多个参数的组合的问题。</p>
+<h3 id="builder模式">Builder模式</h3>
+<p>有些经常使用Java的同学会想到Builder模式。</p>
+<p>于是就可以以如下的方式来使用了:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">user</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">UserBuilder</span><span class="p">).</span><span class="nf">Create</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;Ada&#34;</span><span class="p">).</span>
+  <span class="nf">age</span><span class="p">(</span><span class="mi">18</span><span class="p">).</span>
+  <span class="nf">phone</span><span class="p">(</span><span class="s">&#34;123456&#34;</span><span class="p">).</span>
+  <span class="nf">gender</span><span class="p">(</span><span class="s">&#34;female&#34;</span><span class="p">).</span>
+  <span class="nf">Build</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>需要引入一个抽象的UserBuilder对象，来包装User对象，最终Build一个User对象返回。</p>
+<h3 id="函数式选项模式">函数式选项模式</h3>
+<p><strong>函数式选项模式</strong> 首先需要定义一个函数类型：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Option</span> <span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>然后，我们定义一组返回函数的函数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">WithAge</span><span class="p">(</span><span class="nx">age</span> <span class="kt">int</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">u</span><span class="p">.</span><span class="nx">Age</span> <span class="p">=</span> <span class="nx">age</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">WithEmail</span><span class="p">(</span><span class="nx">email</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">u</span><span class="p">.</span><span class="nx">Email</span> <span class="p">=</span> <span class="nx">email</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">WithPhone</span><span class="p">(</span><span class="nx">phone</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">u</span><span class="p">.</span><span class="nx">Phone</span> <span class="p">=</span> <span class="nx">phone</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">WithGender</span><span class="p">(</span><span class="nx">gender</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">u</span><span class="p">.</span><span class="nx">Gender</span> <span class="p">=</span> <span class="nx">gender</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这个模式和Builder模式的区别是，Builder模式返回的是 <strong>* User</strong> 对象，<strong>Functional Options</strong> 返回的是函数类型 <strong>func(* User)</strong>。</p>
+<p>上面这组代码传入一个参数，然后返回一个函数，返回的这个函数会设置自己的 <strong>User</strong> 参数。</p>
+<p>这样我们就方便在 <strong>NewUser</strong> 里面统一初始化。循环对我们的函数类型执行调用操作。 <code>option(&amp;user)</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">NewUser</span><span class="p">(</span><span class="nx">id</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">options</span> <span class="o">...</span><span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">))</span> <span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">user</span> <span class="o">:=</span> <span class="nx">User</span><span class="p">{</span>
+		<span class="nx">ID</span><span class="p">:</span>     <span class="nx">id</span><span class="p">,</span>
+		<span class="nx">Name</span><span class="p">:</span>   <span class="nx">name</span><span class="p">,</span>
+		<span class="nx">Age</span><span class="p">:</span>    <span class="mi">0</span><span class="p">,</span>
+		<span class="nx">Email</span><span class="p">:</span>  <span class="s">&#34;&#34;</span><span class="p">,</span>
+		<span class="nx">Phone</span><span class="p">:</span>  <span class="s">&#34;&#34;</span><span class="p">,</span>
+		<span class="nx">Gender</span><span class="p">:</span> <span class="s">&#34;female&#34;</span><span class="p">,</span>
+	<span class="p">}</span>
+	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">option</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">options</span> <span class="p">{</span>
+		<span class="nf">option</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">user</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="c1">//...
+</span><span class="c1"></span>	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">user</span><span class="p">,</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>调用方式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">user1</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">NewUser</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;Ada&#34;</span><span class="p">)</span>
+<span class="nx">user2</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">NewUser</span><span class="p">(</span><span class="s">&#34;2&#34;</span><span class="p">,</span> <span class="s">&#34;Bob&#34;</span><span class="p">,</span> <span class="nf">WithPhone</span><span class="p">(</span><span class="s">&#34;123456&#34;</span><span class="p">),</span> <span class="nf">WithGender</span><span class="p">(</span><span class="s">&#34;male&#34;</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这个看起来比较整洁和优雅，对外的接口只有一个NewUser。</p>
+<p>相比于Builder模式，不需要引入一个Builder对象。</p>
+<p>对比配置化的模式，也不需要引入一个新的Config。</p>
+<h3 id="总结">总结</h3>
+<p><strong>Golang</strong> 由于语言本身的特性，不支持函数重载，<strong>函数式选项</strong> 的编程模式在一定程度上解决了其他语言需要通过函数重载解决的问题。
+<strong>函数式选项</strong> 编程有以下优点：</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>任意顺序传递参数</li>
+<li>支持默认值</li>
+<li>向后兼容性</li>
+<li>很容易维护和扩展</li>
+</ul>
+<p>看了这么多，是不是想马上上手重构你之前的代码了。</p>
+<p>虽然 <strong>函数式选项</strong> 编程模式有很多优点，但是设计模式的存在都是为了弥补语言特性的缺陷的一种手段。它是为了解决代码扩展性的问题，往往是通过增加抽象牺牲了简单性，切勿过度使用。有些简单的配置，就不需要设计的这么通用了。</p>
+<p><strong>函数式选项模式的使用场景有哪些呢：</strong>
+我们一般用来配置一些基础的服务配置，比如MySQL，Redis，Kafka的配置，很多可选参数，可以方便动态灵活的配置想要配置的参数。</p>
+<p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+<img src="/img/personal/qrcode_2.png" alt="pic"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-02-18
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/golang/append/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Golang append是并发安全的吗</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/golang/decorator/">
+            <span class="next-text nav-default">Golang装饰器(Decorator)设计模式</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

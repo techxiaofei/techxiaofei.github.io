@@ -1,19 +1,379 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Leftpocket的个人博客</title>
-    <link>https://left-pocket.github.io/post/</link>
-    <description>Recent content in Posts on Leftpocket的个人博客</description>
+    <title>Posts on 码农在新加坡的个人博客</title>
+    <link>https://leftpocket.cn/post/</link>
+    <description>Recent content in Posts on 码农在新加坡的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Sun, 21 Nov 2021 14:00:51 +0800</lastBuildDate><atom:link href="https://left-pocket.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 10 May 2022 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>protobuf是怎么序列化的</title>
+      <link>https://leftpocket.cn/post/protobuf/protobuf/</link>
+      <pubDate>Tue, 10 May 2022 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/protobuf/protobuf/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 目前主流的几种数据交互的格式主要有xml、json、protobuf等等。xml和json我相信大家都很</description>
+    </item>
+    
+    <item>
+      <title>Golang time.After内存泄漏分析</title>
+      <link>https://leftpocket.cn/post/golang/time_after/</link>
+      <pubDate>Fri, 06 May 2022 00:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/golang/time_after/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 我刚转做go语言开发开始写入职小程序的时候，写下了如下的代码： 1 2 3 4 5 6 7 8 9 10 for { select { case conn := &amp;lt;- conns: ... //do</description>
+    </item>
+    
+    <item>
+      <title>终于拿到新加坡PR-2022</title>
+      <link>https://leftpocket.cn/post/singapore_life/pr/</link>
+      <pubDate>Sat, 30 Apr 2022 00:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/singapore_life/pr/</guid>
+      <description>原文地址：码农在新加坡的个人博客 终于拿到新加坡PR啦，也算是2022的一个欣慰。 介绍一下基本情况，给想要申请PR的朋友们一个参考。 我是201</description>
+    </item>
+    
+    <item>
+      <title>MySQL更新优化的几个阶段</title>
+      <link>https://leftpocket.cn/post/mysql/update_optimization/</link>
+      <pubDate>Fri, 29 Apr 2022 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/mysql/update_optimization/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 现在的互联网大厂，都经历了数据量和访问量从零到亿级别的飞速增长。在这业务增长的过程中，也会面临很多技术的</description>
+    </item>
+    
+    <item>
+      <title>谈一谈热点Key解决方案</title>
+      <link>https://leftpocket.cn/post/system_design/hotspot/</link>
+      <pubDate>Wed, 27 Apr 2022 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/system_design/hotspot/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 最近不少人问我，怎么解决热点Key问题。我说，你提到这个我可就不困了。因为刚好，我手上的两个业务都有实现</description>
+    </item>
+    
+    <item>
+      <title>放弃snowflake-我们重新设计了新的分布式ID生成方案</title>
+      <link>https://leftpocket.cn/post/system_design/unique_id_buffer/</link>
+      <pubDate>Fri, 22 Apr 2022 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/system_design/unique_id_buffer/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 在之前的文章中，我们讲了分布式ID生成方案-snowflake算法。这也是我们的生产系统过去几年一直使用</description>
+    </item>
+    
+    <item>
+      <title>元宇宙，是炒作还是机遇？</title>
+      <link>https://leftpocket.cn/post/popularization/metaverse/</link>
+      <pubDate>Tue, 04 Jan 2022 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/popularization/metaverse/</guid>
+      <description>原文地址：码农在新加坡的个人博客 相信每个人都已经听过元宇宙这个概念名词，元宇宙仿佛一夜之间，在互联网病毒式发酵，以各种方式进入到我们的视线。</description>
+    </item>
+    
+    <item>
+      <title>KCP传输协议，快速可靠的UDP，和TCP比有什么优势？</title>
+      <link>https://leftpocket.cn/post/tcpip/kcp/</link>
+      <pubDate>Sat, 01 Jan 2022 00:00:02 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/tcpip/kcp/</guid>
+      <description>​ 原文地址：码农在新加坡的个人博客 背景 可能你从来没有听说过KCP是什么，但是你肯定知道TCP和UDP。 这里我们通过KCP来剖析TCP和UDP</description>
+    </item>
+    
+    <item>
+      <title>后端面试之系统设计-短网址（Short URL）服务怎么设计？</title>
+      <link>https://leftpocket.cn/post/system_design/short_url/</link>
+      <pubDate>Thu, 23 Dec 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/system_design/short_url/</guid>
+      <description>​ 原文地址：码农在新加坡的个人博客 背景 短网址（short url），就是将长网址缩短为一个很短的网址，用户访问这个短网址可以重定向到原本的长网</description>
+    </item>
+    
+    <item>
+      <title>一文看懂Redis 6.0多线程IO</title>
+      <link>https://leftpocket.cn/post/redis/multithreading/</link>
+      <pubDate>Thu, 09 Dec 2021 00:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/redis/multithreading/</guid>
+      <description>原文地址：码农在新加坡的个人博客 Redis基础 Redis是什么 Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储</description>
+    </item>
+    
+    <item>
+      <title>后端面试之Linux-cp和mv命令的区别</title>
+      <link>https://leftpocket.cn/post/linux/cp/</link>
+      <pubDate>Tue, 07 Dec 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/linux/cp/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 如果你突然被面试官问：cp和mv这两个linux的命令有什么区别？ 你会不会一脸懵逼，cp不就是复制，mv</description>
+    </item>
+    
+    <item>
+      <title>MySQL对于千万级的大表要怎么优化？</title>
+      <link>https://leftpocket.cn/post/mysql/table/</link>
+      <pubDate>Sat, 04 Dec 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/mysql/table/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 目前做电商后台开发，经历了数据从零到百万到百亿级别的增长。在这个增长的过程中，我们做了很多的优化。 这里分</description>
+    </item>
+    
+    <item>
+      <title>游戏服务器和普通服务器的区别</title>
+      <link>https://leftpocket.cn/post/backend/game_server/</link>
+      <pubDate>Fri, 03 Dec 2021 14:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/backend/game_server/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 我做过六年游戏服务端开发，后来想换个方向，转做电商后端开发，做了两年之后感悟很多，也体会到了游戏服务器和</description>
+    </item>
+    
+    <item>
+      <title>后端面试之MySQL-InnoDB一颗B&#43;树可以存放多少行数据？</title>
+      <link>https://leftpocket.cn/post/mysql/innodb/</link>
+      <pubDate>Thu, 02 Dec 2021 10:00:00 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/mysql/innodb/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 MySQL的InnoDB引擎一棵B+树可以存放多少行数据？这是一个很有趣的面试题。 也许你会猜1千万，2千</description>
+    </item>
+    
+    <item>
+      <title>从零开始搭建个人博客（五）- 申请免费域名并绑定到个人博客</title>
+      <link>https://leftpocket.cn/post/hugo/hugo_dns/</link>
+      <pubDate>Thu, 02 Dec 2021 01:04:55 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/hugo/hugo_dns/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始</description>
+    </item>
+    
+    <item>
+      <title>从零开始搭建个人博客（四）- hugo自动部署到vercel</title>
+      <link>https://leftpocket.cn/post/hugo/hugo_vercel/</link>
+      <pubDate>Thu, 02 Dec 2021 01:03:55 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/hugo/hugo_vercel/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始</description>
+    </item>
+    
+    <item>
+      <title>从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼</title>
+      <link>https://leftpocket.cn/post/hugo/hugo_advanced/</link>
+      <pubDate>Thu, 02 Dec 2021 01:02:55 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/hugo/hugo_advanced/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始</description>
+    </item>
+    
+    <item>
+      <title>从零开始搭建个人博客（二）- 把hugo博客托管到github上</title>
+      <link>https://leftpocket.cn/post/hugo/hugo_github/</link>
+      <pubDate>Thu, 02 Dec 2021 01:01:55 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/hugo/hugo_github/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始</description>
+    </item>
+    
+    <item>
+      <title>从零开始搭建个人博客（一）- 使用hugo搭建个人博客</title>
+      <link>https://leftpocket.cn/post/hugo/hugo_creation/</link>
+      <pubDate>Thu, 02 Dec 2021 01:00:55 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/hugo/hugo_creation/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始</description>
+    </item>
+    
+    <item>
+      <title>从零开始搭建个人博客（零）- 序章</title>
+      <link>https://leftpocket.cn/post/hugo/hugo_0/</link>
+      <pubDate>Thu, 02 Dec 2021 01:00:50 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/hugo/hugo_0/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始</description>
+    </item>
+    
+    <item>
+      <title>后端面试之MySQL-什么是回表查询和覆盖索引</title>
+      <link>https://leftpocket.cn/post/mysql/covering_index/</link>
+      <pubDate>Fri, 26 Nov 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/mysql/covering_index/</guid>
+      <description>原文地址：码农在新加坡的个人博客 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 背景 关于回表查询，是MySQ</description>
+    </item>
+    
+    <item>
+      <title>后端面试之网络编程-close和shutdown的区别</title>
+      <link>https://leftpocket.cn/post/tcpip/close_shutdown/</link>
+      <pubDate>Thu, 25 Nov 2021 00:00:02 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/tcpip/close_shutdown/</guid>
+      <description>​ 原文地址：码农在新加坡的个人博客 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 shutdown()函数可</description>
+    </item>
+    
+    <item>
+      <title>后端面试之网络编程-socket返回可读，read返回0是什么情况？</title>
+      <link>https://leftpocket.cn/post/tcpip/socket_read_write/</link>
+      <pubDate>Thu, 25 Nov 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/tcpip/socket_read_write/</guid>
+      <description>​ 原文地址：码农在新加坡的个人博客 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 结论 如果面试官问你，如果一</description>
+    </item>
+    
+    <item>
+      <title>LRU缓存机制，你想知道的这里都有</title>
+      <link>https://leftpocket.cn/post/system_design/lru/</link>
+      <pubDate>Tue, 23 Nov 2021 18:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/system_design/lru/</guid>
+      <description>​​ 原文地址：码农在新加坡的个人博客 概述 LRU是Least Recently Used的缩写，译为最近最少使用。它的理论基础为 “最近使用的数据会在未来一段时期</description>
+    </item>
+    
+    <item>
+      <title>do{...}while(0)的用法</title>
+      <link>https://leftpocket.cn/post/cpp/do_while/</link>
+      <pubDate>Mon, 22 Nov 2021 15:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/cpp/do_while/</guid>
+      <description>​​ 原文地址：码农在新加坡的个人博客 零.导引 第一次见到 do{...}while(0) 是在学习 libevent 的时候，看到里面有很多类似 1 2 3 4 5 6 7 #define TT_URI(want) do { \ char *ret = evhttp_uri_join(uri, url_tmp, sizeof(url_tmp)); \ tt_want(ret != NULL); \ tt_want(ret</description>
+    </item>
+    
+    <item>
+      <title>c&#43;&#43;中static的用法详解</title>
+      <link>https://leftpocket.cn/post/cpp/static/</link>
+      <pubDate>Mon, 22 Nov 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/cpp/static/</guid>
+      <description>​ 原文地址：码农在新加坡的个人博客 背景 static 是 C/C++ 中很常用的修饰符，它被用来控制变量的存储方式和可见性。而 static 在 C 语言和 C++ 语言中各有多个用途，下面我</description>
+    </item>
+    
     <item>
       <title>手游服务器开发技术详解</title>
-      <link>https://left-pocket.github.io/post/backend/game_development/</link>
+      <link>https://leftpocket.cn/post/backend/game_development/</link>
       <pubDate>Sun, 21 Nov 2021 14:00:51 +0800</pubDate>
       
-      <guid>https://left-pocket.github.io/post/backend/game_development/</guid>
-      <description>回顾我的码农生涯，在做互联网电商后端开发之前做过大概6年的游戏后端开发，想总结一下手游后端开发技术的方方面面。 之前从事游戏服务器开发期间参与了不少项目，学到了很多游戏服务器开发技术，参与过几个不同架构的服务器开发，就此聊聊游戏服务器开发需要的技术，给刚进入游戏后端开发的同学一些指</description>
+      <guid>https://leftpocket.cn/post/backend/game_development/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 回顾我的码农生涯，在做互联网电商后端开发之前做过大概6年的游戏后端开发，想总结一下手游后端开发技术的方方</description>
+    </item>
+    
+    <item>
+      <title>二级指针的作用详解</title>
+      <link>https://leftpocket.cn/post/cpp/secondary_pointer/</link>
+      <pubDate>Sun, 21 Nov 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/cpp/secondary_pointer/</guid>
+      <description>原文地址：码农在新加坡的个人博客 一、概念 在如下的A指向B、B指向C的指向关系中： 首先 C是&amp;quot;一段内容&amp;quot;,比如你用mallo</description>
+    </item>
+    
+    <item>
+      <title>git rebase使用详解</title>
+      <link>https://leftpocket.cn/post/git/git_rebase/</link>
+      <pubDate>Sat, 20 Nov 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/git/git_rebase/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 在你看这篇文章之前，我假设你已经至少会git的一些基本指令，能进行简单的git repo的操作。比如：pu</description>
+    </item>
+    
+    <item>
+      <title>一文看懂Go语言协程的设计与原理</title>
+      <link>https://leftpocket.cn/post/golang/goroutine_implementation/</link>
+      <pubDate>Sun, 18 Apr 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/golang/goroutine_implementation/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 Go语言最大的特色就是从语言层面支持并发（Goroutine），Goroutine是Go中最基本的执行单</description>
+    </item>
+    
+    <item>
+      <title>Golang append是并发安全的吗</title>
+      <link>https://leftpocket.cn/post/golang/append/</link>
+      <pubDate>Sat, 20 Mar 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/golang/append/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 最近开发的时候写了下面这段类似的代码。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 func TestAppend() (result []int) { var wg sync.WaitGroup for i := 0; i &amp;lt; 100; i++ {</description>
+    </item>
+    
+    <item>
+      <title>Golang函数式选项(Functional Options)模式</title>
+      <link>https://leftpocket.cn/post/golang/functional_options/</link>
+      <pubDate>Thu, 18 Feb 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/golang/functional_options/</guid>
+      <description>原文地址：码农在新加坡的个人博客 概览 最近阅读源码的时候看到一段不错的代码，但是当时却不是非常理解为什么这么写。 我们先来看一下源代码： 1 2 3 4</description>
+    </item>
+    
+    <item>
+      <title>Golang装饰器(Decorator)设计模式</title>
+      <link>https://leftpocket.cn/post/golang/decorator/</link>
+      <pubDate>Thu, 18 Feb 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/golang/decorator/</guid>
+      <description>原文地址：码农在新加坡的个人博客 今天我们来介绍decorator这个经典的设计模式。 定义：装饰器模式主要对现有的类对象进行包裹和封装，以期望</description>
+    </item>
+    
+    <item>
+      <title>Redis SDS简单动态字符串</title>
+      <link>https://leftpocket.cn/post/redis/redis_sds/</link>
+      <pubDate>Wed, 17 Feb 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/redis/redis_sds/</guid>
+      <description>原文地址：码农在新加坡的个人博客 SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串表示， 几乎所有的 Redis 模块中都用了 sds。</description>
+    </item>
+    
+    <item>
+      <title>5分钟搞懂布隆过滤器，掌握亿级数据过滤算法</title>
+      <link>https://leftpocket.cn/post/system_design/bloom_filter/</link>
+      <pubDate>Wed, 03 Feb 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/system_design/bloom_filter/</guid>
+      <description>原文地址：码农在新加坡的个人博客 布隆过滤器是什么 本质上布隆过滤器(Bloom Filter)是一种数据结构，比较巧妙的概率型数据结构（prob</description>
+    </item>
+    
+    <item>
+      <title>点赞和评论 技术设计与实现</title>
+      <link>https://leftpocket.cn/post/system_design/friends_comment_like/</link>
+      <pubDate>Fri, 22 Jan 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/system_design/friends_comment_like/</guid>
+      <description>原文地址：码农在新加坡的个人博客 上篇文章介绍了朋友圈的技术设计，这篇将介绍朋友圈点赞和评论的实现方式。 需求介绍 对某条状态实现点赞与取消点赞的</description>
+    </item>
+    
+    <item>
+      <title>vscode配置leetcode插件</title>
+      <link>https://leftpocket.cn/post/others/vscode_leetcode/</link>
+      <pubDate>Sat, 12 Dec 2020 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/others/vscode_leetcode/</guid>
+      <description>原文地址：码农在新加坡的个人博客 作为一名合格的程序猿，大家找工作的时候经常需要刷leetcode, leetcode官网上面写代码没有IDE上</description>
+    </item>
+    
+    <item>
+      <title>Redis Zset的精度问题分析及解决方案</title>
+      <link>https://leftpocket.cn/post/redis/redis_zset_score/</link>
+      <pubDate>Fri, 04 Dec 2020 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/redis/redis_zset_score/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 最近使用Redis的SortedSet，使用int64作为score时遇到了一些预料之外的情况，在此总结</description>
+    </item>
+    
+    <item>
+      <title>分布式ID生成方案-snowflake算法</title>
+      <link>https://leftpocket.cn/post/system_design/snowflake/</link>
+      <pubDate>Tue, 24 Nov 2020 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/system_design/snowflake/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一。我们称之为分布式ID，分布式ID需</description>
+    </item>
+    
+    <item>
+      <title>Centos7安装SSR教程</title>
+      <link>https://leftpocket.cn/post/others/ssr_centos7/</link>
+      <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/others/ssr_centos7/</guid>
+      <description>原文地址：码农在新加坡的个人博客 记录一下在centos7下安装ssr(shadowsocksr)的教程。 安装必要依赖包 1 2 3 4 5 yum install git -y yum install</description>
+    </item>
+    
+    <item>
+      <title>TiDB Write Conflict问题分析</title>
+      <link>https://leftpocket.cn/post/mysql/db_tidb_write_conflict/</link>
+      <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/mysql/db_tidb_write_conflict/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了write conflict. 1 2 3 4 5 [2020/08/2506:01:44.781+08:00][WARN][session.go:623][retrying][conn=26799778][schemaVersion=194][retryCnt=0][queryNum=0][sql=&amp;#34;UPDATE user_tab SET `region` = ?, `status` = ?, `update_time` =</description>
     </item>
     
   </channel>

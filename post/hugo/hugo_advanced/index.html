@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼 - 码农在新加坡的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始" /><meta name="keywords" content="hugo" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/hugo/hugo_advanced/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼" />
+<meta property="og:description" content="原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/hugo/hugo_advanced/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-02T01:02:55+08:00" />
+<meta property="article:modified_time" content="2021-12-02T01:02:55+08:00" />
+
+<meta itemprop="name" content="从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼">
+<meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始"><meta itemprop="datePublished" content="2021-12-02T01:02:55+08:00" />
+<meta itemprop="dateModified" content="2021-12-02T01:02:55+08:00" />
+<meta itemprop="wordCount" content="1022">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼"/>
+<meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">码农在新加坡的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">码农在新加坡的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-12-02 </span>
+        <div class="post-category">
+            <a href="/categories/hugo/"> hugo </a>
+            </div>
+          <span class="more-meta"> 约 1022 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#从零开始搭建个人博客三--hugo高级配置让你的博客更亮眼">从零开始搭建个人博客（三）- hugo高级配置，让你的博客更亮眼</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#url和语言">URL和语言</a></li>
+            <li><a href="#每页展示数量">每页展示数量</a></li>
+            <li><a href="#开启目录">开启目录</a></li>
+            <li><a href="#菜单栏语言">菜单栏语言</a></li>
+            <li><a href="#添加关于页面">添加关于页面</a></li>
+            <li><a href="#站点创建时间">站点创建时间</a></li>
+            <li><a href="#归档页显示文章总数">归档页显示文章总数</a></li>
+            <li><a href="#显示字数统计和阅读时间">显示字数统计和阅读时间</a></li>
+            <li><a href="#支持评论">支持评论</a></li>
+            <li><a href="#站点访问量统计">站点访问量统计</a></li>
+            <li><a href="#社交媒体外链">社交媒体外链</a></li>
+            <li><a href="#百度谷歌收录">百度谷歌收录</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>原文地址：<a href="https://leftpocket.cn/post/hugo/hugo_advanced/">码农在新加坡的个人博客</a></p>
+<h1 id="背景">背景</h1>
+<p>使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。<br>
+这里分享一个系列教程：<strong>从零开始搭建个人博客</strong>，把我的经验分享在这里。<br>
+系列地址：<a href="https://left-pocket.github.io/post/hugo/hugo_0/">https://left-pocket.github.io</a></p>
+<h1 id="从零开始搭建个人博客三--hugo高级配置让你的博客更亮眼">从零开始搭建个人博客（三）- hugo高级配置，让你的博客更亮眼</h1>
+<p>当前我们已经把个人博客托管到了Github Pages里面了，也能使用浏览器访问我们的个人博客了。<br>
+我们需要修改一些主题配置，让我们的博客看起来更完善。</p>
+<h3 id="url和语言">URL和语言</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">baseURL = &#34;https://left-pocket.github.io&#34;  // 你的博客主页
+languageCode = &#34;zh-cn&#34;                     // 语言
+defaultContentLanguage = &#34;zh-cn&#34;  
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="每页展示数量">每页展示数量</h3>
+<p>根据自己想要展示的数量修改</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">paginate = 10  # 首页每页显示的文章数
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="开启目录">开启目录</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">toc = true               # 是否开启目录
+autoCollapseToc = false  # 目录自动展开/折叠
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/img/hugo/hugo_toc.png" alt="toc"></p>
+<h3 id="菜单栏语言">菜单栏语言</h3>
+<p>把name改成中文</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">menu.main]]             # config your menu              # 配置目录
+  name = &#34;首页&#34;
+  weight = 10
+  identifier = &#34;home&#34;
+  url = &#34;/&#34;
+[[menu.main]]
+  name = &#34;归档&#34;
+  weight = 20
+  identifier = &#34;archives&#34;
+  url = &#34;/post/&#34;
+[[menu.main]]
+  name = &#34;标签&#34;
+  weight = 30
+  identifier = &#34;tags&#34;
+  url = &#34;/tags/&#34;
+[[menu.main]]
+  name = &#34;分类&#34;
+  weight = 40
+  identifier = &#34;categories&#34;
+  url = &#34;/categories/&#34;
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="添加关于页面">添加关于页面</h3>
+<p>在<code>content</code>目录下创建一个<code>about</code>子目录，和<code>post</code>同目录。
+添加index.md</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">---
+title: &#34;关于我&#34;
+date: 2021-11-21T13:00:51+08:00
+description: &#34;码农在新加坡&#34;
+---
+这里是内容
+</code></pre></td></tr></table>
+</div>
+</div><p>在<code>config.toml</code>里面配置：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[[menu.main]]
+  name = &#34;关于&#34;
+  weight = 50
+  identifier = &#34;about&#34;
+  url = &#34;/about/&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看到：
+<img src="/img/hugo/about.png" alt="about"></p>
+<h3 id="站点创建时间">站点创建时间</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">since = &#34;2020&#34;            # Site creation time          # 站点建立时间
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="归档页显示文章总数">归档页显示文章总数</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># show &#39;xx Posts In Total&#39; in archive page ?            # 是否在归档页显示文章的总数
+showArchiveCount = true
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="显示字数统计和阅读时间">显示字数统计和阅读时间</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># show word count and read time ?                       # 是否显示字数统计与阅读时间
+moreMeta = true
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/img/hugo/statistic.png" alt="statistic"></p>
+<h3 id="支持评论">支持评论</h3>
+<p><strong>[params.utteranc]</strong> 是用来支持评论系统的。<strong>utterances</strong> 本来是一款基于 <code>GitHub issues</code> 的评论工具</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[params.utterances]       # https://utteranc.es/
+owner = &#34;left-pocket&#34;              # Your GitHub ID
+repo = &#34;left-pocket.github.io&#34;               # The repo to store comments
+</code></pre></td></tr></table>
+</div>
+</div><p>一开始需要安装：
+<img src="/img/hugo/hugo_utterances.png" alt="utterances"></p>
+<p>安装成功后：
+<img src="/img/hugo/hugo_utterances2.png" alt="utterances"></p>
+<h3 id="站点访问量统计">站点访问量统计</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[params.busuanzi]         # count web traffic by busuanzi                             # 是否使用不蒜子统计站点访问量
+  enable = true
+  siteUV = true
+  sitePV = true
+  pagePV = true
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/img/hugo/hugo_busuanzi.png" alt="busuanzi"></p>
+<h3 id="社交媒体外链">社交媒体外链</h3>
+<p>不需要的直接注释掉就可以，会自动在网站上隐藏图标。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">  [params.social]                                         # 社交链接
+    a-email = &#34;leftpocket12@gmail.com&#34;
+    g-github = &#34;https://github.com/left-pocket&#34;
+    i-zhihu = &#34;https://www.zhihu.com/people/left-pocket&#34;
+    
+    # b-stack-overflow = &#34;http://localhost:1313&#34;
+    # c-twitter = &#34;http://localhost:1313&#34;
+    # d-facebook = &#34;http://localhost:1313&#34;
+    # e-linkedin = &#34;http://localhost:1313&#34;
+    # f-google = &#34;http://localhost:1313&#34;
+    # h-weibo = &#34;http://localhost:1313&#34;
+    # j-douban = &#34;http://localhost:1313&#34;
+    # k-pocket = &#34;http://localhost:1313&#34;
+    # l-tumblr = &#34;http://localhost:1313&#34;
+    # m-instagram = &#34;http://localhost:1313&#34;
+    # n-gitlab = &#34;http://localhost:1313&#34;
+    # o-bilibili = &#34;http://localhost:1313&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/img/hugo/hugo_social.png" alt="hugo_social"></p>
+<h3 id="百度谷歌收录">百度谷歌收录</h3>
+<p>这个是用来让你的网站被百度谷歌收录的，在后续章节介绍</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">baiduVerification = &#34;code-xxxxxxxx&#34;      # Baidu Verification
+googleVerification = &#34;xxxxxxxxxxxxxxxx&#34;  # Google Verification         # 谷歌
+</code></pre></td></tr></table>
+</div>
+</div><p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+<img src="/img/personal/qrcode_2.png" alt="pic"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-12-02
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/hugo/hugo_vercel/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">从零开始搭建个人博客（四）- hugo自动部署到vercel</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/hugo/hugo_github/">
+            <span class="next-text nav-default">从零开始搭建个人博客（二）- 把hugo博客托管到github上</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

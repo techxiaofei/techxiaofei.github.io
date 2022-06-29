@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MySQL on 码农在新加坡的个人博客</title>
+    <link>https://leftpocket.cn/categories/mysql/</link>
+    <description>Recent content in MySQL on 码农在新加坡的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 29 Apr 2022 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MySQL更新优化的几个阶段</title>
+      <link>https://leftpocket.cn/post/mysql/update_optimization/</link>
+      <pubDate>Fri, 29 Apr 2022 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/mysql/update_optimization/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 现在的互联网大厂，都经历了数据量和访问量从零到亿级别的飞速增长。在这业务增长的过程中，也会面临很多技术的</description>
+    </item>
+    
+    <item>
+      <title>MySQL对于千万级的大表要怎么优化？</title>
+      <link>https://leftpocket.cn/post/mysql/table/</link>
+      <pubDate>Sat, 04 Dec 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/mysql/table/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 目前做电商后台开发，经历了数据从零到百万到百亿级别的增长。在这个增长的过程中，我们做了很多的优化。 这里分</description>
+    </item>
+    
+    <item>
+      <title>后端面试之MySQL-InnoDB一颗B&#43;树可以存放多少行数据？</title>
+      <link>https://leftpocket.cn/post/mysql/innodb/</link>
+      <pubDate>Thu, 02 Dec 2021 10:00:00 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/mysql/innodb/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 MySQL的InnoDB引擎一棵B+树可以存放多少行数据？这是一个很有趣的面试题。 也许你会猜1千万，2千</description>
+    </item>
+    
+    <item>
+      <title>后端面试之MySQL-什么是回表查询和覆盖索引</title>
+      <link>https://leftpocket.cn/post/mysql/covering_index/</link>
+      <pubDate>Fri, 26 Nov 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/mysql/covering_index/</guid>
+      <description>原文地址：码农在新加坡的个人博客 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 背景 关于回表查询，是MySQ</description>
+    </item>
+    
+    <item>
+      <title>TiDB Write Conflict问题分析</title>
+      <link>https://leftpocket.cn/post/mysql/db_tidb_write_conflict/</link>
+      <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/mysql/db_tidb_write_conflict/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了write conflict. 1 2 3 4 5 [2020/08/2506:01:44.781+08:00][WARN][session.go:623][retrying][conn=26799778][schemaVersion=194][retryCnt=0][queryNum=0][sql=&amp;#34;UPDATE user_tab SET `region` = ?, `status` = ?, `update_time` =</description>
+    </item>
+    
+  </channel>
+</rss>

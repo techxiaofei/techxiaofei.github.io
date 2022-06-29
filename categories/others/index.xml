@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Others on 码农在新加坡的个人博客</title>
+    <link>https://leftpocket.cn/categories/others/</link>
+    <description>Recent content in Others on 码农在新加坡的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 12 Dec 2020 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/others/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>vscode配置leetcode插件</title>
+      <link>https://leftpocket.cn/post/others/vscode_leetcode/</link>
+      <pubDate>Sat, 12 Dec 2020 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/others/vscode_leetcode/</guid>
+      <description>原文地址：码农在新加坡的个人博客 作为一名合格的程序猿，大家找工作的时候经常需要刷leetcode, leetcode官网上面写代码没有IDE上</description>
+    </item>
+    
+    <item>
+      <title>Centos7安装SSR教程</title>
+      <link>https://leftpocket.cn/post/others/ssr_centos7/</link>
+      <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/others/ssr_centos7/</guid>
+      <description>原文地址：码农在新加坡的个人博客 记录一下在centos7下安装ssr(shadowsocksr)的教程。 安装必要依赖包 1 2 3 4 5 yum install git -y yum install</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>从零开始搭建个人博客（二）- 把hugo博客托管到github上 - 码农在新加坡的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始" /><meta name="keywords" content="hugo" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/hugo/hugo_github/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="从零开始搭建个人博客（二）- 把hugo博客托管到github上" />
+<meta property="og:description" content="原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/hugo/hugo_github/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-02T01:01:55+08:00" />
+<meta property="article:modified_time" content="2021-12-02T01:01:55+08:00" />
+
+<meta itemprop="name" content="从零开始搭建个人博客（二）- 把hugo博客托管到github上">
+<meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始"><meta itemprop="datePublished" content="2021-12-02T01:01:55+08:00" />
+<meta itemprop="dateModified" content="2021-12-02T01:01:55+08:00" />
+<meta itemprop="wordCount" content="2012">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="从零开始搭建个人博客（二）- 把hugo博客托管到github上"/>
+<meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">码农在新加坡的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">码农在新加坡的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">从零开始搭建个人博客（二）- 把hugo博客托管到github上</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-12-02 </span>
+        <div class="post-category">
+            <a href="/categories/hugo/"> hugo </a>
+            </div>
+          <span class="more-meta"> 约 2012 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#从零开始搭建个人博客二--把hugo博客托管到github上">从零开始搭建个人博客（二）- 把hugo博客托管到github上</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#创建github-pages">创建Github Pages</a></li>
+            <li><a href="#初始化hugo博客">初始化hugo博客</a></li>
+            <li><a href="#hugo站点和目标文件">hugo站点和目标文件</a></li>
+            <li><a href="#发布博客到github-pages">发布博客到Github Pages</a></li>
+            <li><a href="#发布源文件到github">发布源文件到Github</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>原文地址：<a href="https://leftpocket.cn/post/hugo/hugo_github/">码农在新加坡的个人博客</a></p>
+<h1 id="背景">背景</h1>
+<p>使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。<br>
+这里分享一个系列教程：<strong>从零开始搭建个人博客</strong>，把我的经验分享在这里。<br>
+系列地址：<a href="https://left-pocket.github.io/post/hugo/hugo_0/">https://left-pocket.github.io</a></p>
+<h1 id="从零开始搭建个人博客二--把hugo博客托管到github上">从零开始搭建个人博客（二）- 把hugo博客托管到github上</h1>
+<p>上一篇文章，我们学习了怎么搭建个人博客，但是只是在局域网内运行，现在我们要把博客部署到互联网中。<br>
+如果你没有自己的云服务器，不要慌，我们可以把个人博客搭建在<code>Github Pages</code>中，就跟搭建在自己的服务器一样。<br>
+<code>Github Pages</code>是Github提供的一个静态网站托管服务，可以用于存放静态网页，包括博客，项目文档甚至整本书。非常适合我们搭建个人博客。</p>
+<h3 id="创建github-pages">创建Github Pages</h3>
+<p>要想把个人博客托管在Github Pages上，首先你需要有一个Github账号，作为程序员，应该每个人都有自己的Github账号。<br>
+下面我介绍下怎么部署在Github Pages上：<br>
+假设你需要部署在 GitHub Pages 上，首先在GitHub上创建一个Repository，命名为：<code>{your_username}.github.io</code>. 比如我的Repo就叫 <code>left-pocket-test.github.io</code>。<br>
+如果你对你的username不满意，需要先在<code>Setting-&gt;Account-&gt;Change username</code>修改一个你满意的username。<br>
+<strong>注：</strong> Repository的前缀一定要跟你的username保持一致。</p>
+<p><img src="/img/hugo/github_create.png" alt="Settings"></p>
+<p>Repo的权限需要选择Public, 否则无法访问。<br>
+勾选<code>Add a README.md</code>，主要是为了自动创建main分支。</p>
+<p>然后在你的Repo里面点击Settings, 下拉，找到Github Pages。</p>
+<p><img src="/img/hugo/github_setting.png" alt="Settings">
+<img src="/img/hugo/github_pages.png" alt="Github Pages"></p>
+<p>点击<strong>Change Theme</strong> 选择一款主题，保存。<br>
+这里随便选择一款，因为后续托管Hugo博客之后现在的设置就覆盖了，选择后会提示：<code>Your site is published at https://left-pocket-test.github.io/</code>。</p>
+<p><img src="/img/hugo/github_page2.png" alt="Github Pages"></p>
+<p>过几分钟之后，通过访问
+<a href="https://left-pocket-test.github.io/">https://left-pocket-test.github.io/</a> 能正常打开，说明github Page设置正常。
+<img src="/img/hugo/github_page3.png" alt="Github Pages"></p>
+<h3 id="初始化hugo博客">初始化hugo博客</h3>
+<p>这个在上一篇文章里面有讲解：如果有疑问可以回顾上一篇文章。
+<a href="https://left-pocket.github.io/post/hugo/hugo_creation/">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</a></p>
+<h3 id="hugo站点和目标文件">hugo站点和目标文件</h3>
+<p>现在我们有了Hugo博客，有了Github Pages，那么下一步就是把hugo博客发布到github。这样我们才能在互联网的任何地方访问我们的博客。<br>
+在我们本地的hugo根目录中执行 <strong>hugo</strong> 指令。会生成一个public文件夹，我们只需要把public的文件夹上传到github上刚才创建的Repo里面, 一分钟左右，就能正常查看博客内容。</p>
+<p><strong>这里解释一下</strong></p>
+<ul>
+<li>hugo站点：这个是原始内容，可以不用提交到github，也可以选择在github上创建一个新的repo，并提交。</li>
+<li>hugo站点内的public目录：这个是使用<strong>hugo</strong>指令生成的发布内容，需要发布到Github Pages上。</li>
+</ul>
+<p>我们的hugo站点是<strong>源文件</strong> （带主题，图片，markdown源文件），public是<strong>目标文件</strong>（最终生成的css/js/html文件）。我们最终网页上展示的是目标文件，所以需要使用<strong>hugo</strong>指令生成目标文件。</p>
+<h3 id="发布博客到github-pages">发布博客到Github Pages</h3>
+<p>这种方式更简单一点，推荐使用这一种方式：
+在任意hugo站点外，直接用git clone把创建好的github pages Repo克隆下来。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git clone git@github.com:left-pocket-test/left-pocket-test.github.io.git
+</code></pre></td></tr></table>
+</div>
+</div><p>然后创建把这个<code>git Repo目录</code>和hugo站点的根目录的<code>public</code>创建软链接：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ln -s /Users/hugo/left-pocket-test.github.io /Users/hugo/left-pocket-test/public
+</code></pre></td></tr></table>
+</div>
+</div><p>然后在<code>hugo站点</code>使用<strong>hugo</strong>指令，就会自动在public软链接也就是git repo下生成目标文件。<br>
+最终执行git add/commit/push之后，打开<br>
+<a href="https://left-pocket-test.github.io/">https://left-pocket-test.github.io/</a><br>
+就能看到博客内容。 (可能有几分钟延迟，耐心等待)。</p>
+<p><img src="/img/hugo/github_hugo.png" alt="Github Pages"></p>
+<p>如果git push提示没有权限：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ERROR: Permission to left-pocket-test/left-pocket-test.github.io.git denied to left-pocket.
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+</code></pre></td></tr></table>
+</div>
+</div><p>那就在Github上添加一下ssh key就好了。</p>
+<h3 id="发布源文件到github">发布源文件到Github</h3>
+<p>现在我们<code>left-pocket-test.github.io</code>存放的是目标文件，有些人也想把hugo站点文件，也就是源文件也上传到github保存。<br>
+那么在Github上另创一个Repo来保存源文件也是可以的，源文件对最终的展示效果没有影响，只是为了方便保存。我个人创建了一个单独的hugo仓库来保存源文件。</p>
+<ol>
+<li>在Github创建一个空的Repo
+创建完会提示你怎么使用指令把本地内容上传到Github</li>
+<li>在源文件目录下执行指令</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">echo &#34;# left-pocket-test&#34; &gt;&gt; README.md
+git init
+git add *
+git commit -m &#34;first commit&#34;
+git branch -M main
+git remote add origin git@github.com:left-pocket-test/left-pocket-test.git
+git push -u origin main
+</code></pre></td></tr></table>
+</div>
+</div><p>这个时候你的源文件就上传到Github的一个新的仓库<code>left-pocket-test</code>了。这是用来保存源文件的。而<code>left-pocket-test.github.io</code>是用来保存网站的目标文件的。</p>
+<p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+<img src="/img/personal/qrcode_2.png" alt="pic"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-12-02
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/hugo/hugo_advanced/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/hugo/hugo_creation/">
+            <span class="next-text nav-default">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

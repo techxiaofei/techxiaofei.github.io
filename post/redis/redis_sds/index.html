@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Redis SDS简单动态字符串 - 码农在新加坡的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：码农在新加坡的个人博客 SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串表示， 几乎所有的 Redis 模块中都用了 sds。" /><meta name="keywords" content="Redis, SDS" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/redis/redis_sds/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Redis SDS简单动态字符串" />
+<meta property="og:description" content="原文地址：码农在新加坡的个人博客 SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串表示， 几乎所有的 Redis 模块中都用了 sds。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/redis/redis_sds/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-02-17T13:00:51+08:00" />
+<meta property="article:modified_time" content="2021-02-17T13:00:51+08:00" />
+
+<meta itemprop="name" content="Redis SDS简单动态字符串">
+<meta itemprop="description" content="原文地址：码农在新加坡的个人博客 SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串表示， 几乎所有的 Redis 模块中都用了 sds。"><meta itemprop="datePublished" content="2021-02-17T13:00:51+08:00" />
+<meta itemprop="dateModified" content="2021-02-17T13:00:51+08:00" />
+<meta itemprop="wordCount" content="2077">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Redis SDS简单动态字符串"/>
+<meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串表示， 几乎所有的 Redis 模块中都用了 sds。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">码农在新加坡的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">码农在新加坡的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Redis SDS简单动态字符串</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-02-17 </span>
+        <div class="post-category">
+            <a href="/categories/redis/"> Redis </a>
+            </div>
+          <span class="more-meta"> 约 2077 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#简单动态字符串sds">简单动态字符串(SDS)</a>
+      <ul>
+        <li><a href="#什么是sds">什么是SDS</a></li>
+        <li><a href="#sds相对于c字符串有什么好处呢">SDS相对于C字符串有什么好处呢？</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>原文地址：<a href="https://leftpocket.cn/post/redis/redis_sds/">码农在新加坡的个人博客</a></p>
+<p>SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串表示， 几乎所有的 Redis 模块中都用了 sds。</p>
+<p>本章将对 SDS 的实现、性能和功能等方面进行介绍， 并说明 Redis 使用 SDS 而不是传统 C 字符串的原因。</p>
+<h1 id="简单动态字符串sds">简单动态字符串(SDS)</h1>
+<h2 id="什么是sds">什么是SDS</h2>
+<p>举一个例子， 当我们set一个值时：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">redis&gt; SET msg &#34;Redis&#34;
+OK
+</code></pre></td></tr></table>
+</div>
+</div><p>那么Redis将在数据库创建一个新的键值对，其中：</p>
+<ul>
+<li>键值对的键是一个字符串对象， 对象的底层实现是一个保存着字符串 “msg” 的 SDS 。</li>
+<li>键值对的值也是一个字符串对象， 对象的底层实现是一个保存着字符串 “hello world” 的 SDS 。</li>
+</ul>
+<p>我们来查看一下SDS的数据结构：
+每个 sds.h/sdshdr 结构表示一个 SDS 值：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="k">struct</span> <span class="n">sdshdr</span> <span class="p">{</span>
+
+    <span class="c1">// 记录 buf 数组中已使用字节的数量
+</span><span class="c1"></span>    <span class="c1">// 等于 SDS 所保存字符串的长度
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">len</span><span class="p">;</span>
+
+    <span class="c1">// 记录 buf 数组中未使用字节的数量
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">free</span><span class="p">;</span>
+
+    <span class="c1">// 字节数组，用于保存字符串
+</span><span class="c1"></span>    <span class="kt">char</span> <span class="n">buf</span><span class="p">[];</span>
+
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/img/redis/redis_sdshdr.png" alt="SDS"></p>
+<p>上图展示了一个SDS示例：</p>
+<ul>
+<li>free 属性的值为 0 ， 表示这个 SDS 没有分配任何未使用空间。</li>
+<li>len 属性的值为 5 ， 表示这个 SDS 保存了一个五字节长的字符串。</li>
+<li>buf 属性是一个 char 类型的数组， 数组的前五个字节分别保存了 &lsquo;R&rsquo; 、 &lsquo;e&rsquo; 、 &rsquo;d' 、 &lsquo;i&rsquo; 、 &rsquo;s' 五个字符， 而最后一个字节则保存了空字符 &lsquo;\0&rsquo; 。</li>
+</ul>
+<p>SDS 遵循 C 字符串以空字符结尾的惯例， 保存空字符的 1 字节空间不计算在 SDS 的 len 属性里面， 并且为空字符分配额外的 1 字节空间， 以及添加空字符到字符串末尾等操作都是由 SDS 函数自动完成的， 所以这个空字符对于 SDS 的使用者来说是完全透明的。
+遵循空字符结尾这一惯例的好处是， SDS 可以直接重用一部分 C 字符串函数库里面的函数。</p>
+<p>这个时候我想大家应该对SDS有了一个大致的了解。</p>
+<h2 id="sds相对于c字符串有什么好处呢">SDS相对于C字符串有什么好处呢？</h2>
+<p><strong>1.获取字符串长度复杂度为O(1)</strong></p>
+<p>传统的C字符串并没有记录字符串长度，而想获取字符串长度时就需要遍历一遍字符串，复杂度为O(N),导致随着字符串长度变长，获取字符串长度的操作复杂度也会增加。
+和C字符串不同，因为SDS在len属性中记录了SDS 身的长度，写代码时只要直接获取len属性值，就可以知道字符串长度，所以获取一个SDS长度的复杂度仅为 O(1) 。</p>
+<p><strong>2.防止缓冲区溢出(buffer overflow)</strong></p>
+<p>传统C字符串由于不记录自身长度，在对字符串进行操作的时候容易带来缓冲区溢出。
+比如 strcpy()函数：strcpy()函数将源字符串复制到缓冲区。如果源字符串碰巧来自用户输入，且没有专门限制其大小，则有可能会造成缓冲区溢出。</p>
+<p>再比如/strcat函数，将src字符串拼接到dest字符串后面。strcat假定用户在执行这个函数时， 已经为dest分配了足够多的内存， 可以容纳src字符串中的所有内容，而一旦这个假定不成立时，就会产生缓冲区溢出。</p>
+<p><img src="/img/redis/strcat.png" alt="strcat"></p>
+<p>如果过程中，用户想对s1进行扩展</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="n">strcat</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="s">&#34;Cluster&#34;</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>由于没有注意到s预分配的空间大小，执行以后会导致s1的内容缓冲到s2，以至于s2的内容被意外修改成Cluster，这种错误对数据库的使用过程致命的。</p>
+<p>而SDS在sdscat时会预先检查空间是否足够，不够的话会通过sdsMakeRoomFor自动为要拼接的字符串扩展空间.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="n">sds</span> <span class="nf">sdscatlen</span><span class="p">(</span><span class="n">sds</span> <span class="n">s</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">size_t</span> <span class="n">curlen</span> <span class="o">=</span> <span class="n">sdslen</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">sdsMakeRoomFor</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">len</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">memcpy</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="n">curlen</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+    <span class="n">sdssetlen</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">curlen</span><span class="o">+</span><span class="n">len</span><span class="p">);</span>
+    <span class="n">s</span><span class="p">[</span><span class="n">curlen</span><span class="o">+</span><span class="n">len</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>3.减少因修改字符串带来的内存重分配次数</strong>
+因为 C 字符串的长度和底层数组的长度之间存在着这种关联性， 所以每次增长或者缩短一个 C 字符串， 程序都总要对保存这个 C 字符串的数组进行一次内存重分配操作</p>
+<p>SDS对于内存操作实现了空间预分配和惰性空间释放两种优化策略。
+1.空间预分配
+我们上面提到过，在对字符串进行增长操作时，会使用一个sdsMakeRoomFor函数来扩展字符串。</p>
+<p>2.惰性空间释放
+惰性空间释放用于优化 SDS 的字符串缩短操作： 当 SDS 的 API 需要缩短 SDS 保存的字符串时，程序并不立即使用内存重分配来回收缩短后多出来的字节，而是把缩短后的长度记录在len属性中，剩余空间用于未来扩展字符串用。</p>
+<p><strong>4.可以存放二进制数据</strong>
+C 字符串中的字符必须符合某种编码（比如 ASCII）， 并且除了字符串的末尾之外， 字符串里面不能包含空字符， 否则最先被程序读入的空字符将被误认为是字符串结尾 —— 这些限制使得 C 字符串只能保存文本数据， 而不能保存像图片、音频、视频、压缩文件这样的二进制数据。
+因此， 为了确保 Redis 可以适用于各种不同的使用场景， SDS 的 API 都是二进制安全的（binary-safe）： 所有 SDS API 都会以处理二进制的方式来处理 SDS 存放在 buf 数组里的数据， 程序不会对其中的数据做任何限制、过滤、或者假设 —— 数据在写入时是什么样的， 它被读取时就是什么样。</p>
+<p>这也是我们将 SDS 的 buf 属性称为字节数组的原因 —— Redis 不是用这个数组来保存字符， 而是用它来保存一系列二进制数据。</p>
+<h2 id="总结">总结</h2>
+<table>
+<thead>
+<tr>
+<th>C字符串</th>
+<th>SDS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>获取字符串长度的复杂度为 O(N)</td>
+<td>获取字符串长度的复杂度为 O(1)</td>
+</tr>
+<tr>
+<td>操作字符串函数不安全，可能造成缓冲区溢出</td>
+<td>安全的操作字符串API，避免缓冲区溢出</td>
+</tr>
+<tr>
+<td>修改字符串长度 N 次必然需要执行 N 次内存重分配</td>
+<td>修改字符串长度 N 次最多需要执行 N 次内存重分配</td>
+</tr>
+<tr>
+<td>只能保存文本数据</td>
+<td>可以保存文本以及图片、音频、视频、压缩文件这样的二进制数据。</td>
+</tr>
+</tbody>
+</table>
+<p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+<img src="/img/personal/qrcode_2.png" alt="pic"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-02-17
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/golang/decorator/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Golang装饰器(Decorator)设计模式</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/system_design/bloom_filter/">
+            <span class="next-text nav-default">5分钟搞懂布隆过滤器，掌握亿级数据过滤算法</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

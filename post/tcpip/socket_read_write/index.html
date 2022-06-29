@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>后端面试之网络编程-socket返回可读，read返回0是什么情况？ - 码农在新加坡的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="码农在新加坡" /><meta name="description" content="​ 原文地址：码农在新加坡的个人博客 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 结论 如果面试官问你，如果一" /><meta name="keywords" content="网络编程, socket" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/tcpip/socket_read_write/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="后端面试之网络编程-socket返回可读，read返回0是什么情况？" />
+<meta property="og:description" content="​ 原文地址：码农在新加坡的个人博客 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 结论 如果面试官问你，如果一" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/tcpip/socket_read_write/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-11-25T00:00:00+08:00" />
+<meta property="article:modified_time" content="2021-11-25T00:00:00+08:00" />
+
+<meta itemprop="name" content="后端面试之网络编程-socket返回可读，read返回0是什么情况？">
+<meta itemprop="description" content="​ 原文地址：码农在新加坡的个人博客 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 结论 如果面试官问你，如果一"><meta itemprop="datePublished" content="2021-11-25T00:00:00+08:00" />
+<meta itemprop="dateModified" content="2021-11-25T00:00:00+08:00" />
+<meta itemprop="wordCount" content="1995">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="后端面试之网络编程-socket返回可读，read返回0是什么情况？"/>
+<meta name="twitter:description" content="​ 原文地址：码农在新加坡的个人博客 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 结论 如果面试官问你，如果一"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">码农在新加坡的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">码农在新加坡的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">后端面试之网络编程-socket返回可读，read返回0是什么情况？</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-11-25 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"> 网络编程 </a>
+            <a href="/categories/%E9%9D%A2%E8%AF%95/"> 面试 </a>
+            </div>
+          <span class="more-meta"> 约 1995 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#结论">结论</a></li>
+    <li><a href="#socket可读可写条件">socket可读可写条件</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#可读">可读</a></li>
+            <li><a href="#可写">可写</a></li>
+            <li><a href="#关闭">关闭</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>​
+原文地址：<a href="https://leftpocket.cn/post/tcpip/socket_read_write/">码农在新加坡的个人博客</a></p>
+<p><strong>后端面试</strong>系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。</p>
+<h1 id="结论">结论</h1>
+<p>如果面试官问你，如果一个socket返回可读，read返回0是什么情况？</p>
+<p>其实这是一个很简单的问题，它就是考察<code>socket的可读可写条件</code>这个知识点。</p>
+<p>面试官也可能直接问你：socket的可读可写条件是什么？</p>
+<p><strong>这里先说答案：</strong><br>
+如果一个socket返回可读，read返回0，就是socket可读条件的一种，也就是对端关闭。<br>
+详细来说就是：该连接的读这一半关闭(也就是接收了FIN的TCP连接)。对这样的socket的读操作将不阻塞并返回0。</p>
+<p>下面详细来讲解，socket可读可写条件。</p>
+<h1 id="socket可读可写条件">socket可读可写条件</h1>
+<p>要了解socket可读可写条件，我们先了解几个概念：</p>
+<p>1.<strong>接收缓存区</strong>低水位标记（用于读）和<strong>发送缓存区</strong>低水位标记（用于写）：<br>
+每个套接字有一个接收低水位和一个发送低水位。他们由select函数使用。<br>
+接收低水位标记是让select返回&quot;可读&quot;时套接字接收缓冲区中所需的数据量。对于TCP,其默认值为1。<br>
+发送低水位标记是让select返回&quot;可写&quot;时套接字发送缓冲区中所需的可用空间。对于TCP，其默认值常为2048。<strong>（注：面试点之一）</strong></p>
+<p>通俗的解释一下，缓存区我们当成一个大小为 n bytes的空间，那么：</p>
+<p>接收区缓存的作用就是，接收对面的数据放在缓存区，供应用程序读。当然了，只有当缓存区可读的数据量(接收低水位标记)到达一定程度（eg:1）的时候，我们才能读到数据，不然不就读不到数据了吗。<br>
+发送区缓存的作用就是，发送应用程序的数据到缓存区，然后一起发给对面。当然了，只有当缓存区剩余一定空间(发送低水位标记)（eg:2048）,你才能写数据进去，不然可能导致空间不够。</p>
+<p>2.FIN: (结束标志,Finish)用来结束一个TCP回话，但对应端口仍处于开放状态,准备接收后续数据。</p>
+<h3 id="可读">可读</h3>
+<p>下列四个条件中的任何一个满足时,socket准备好读: </p>
+<ol>
+<li>socket的接收缓冲区中的数据字节大于等于该socket的接收缓冲区低水位标记的当前大小。对这样的socket的读操作将不阻塞并返回一个大于0的值(也就是返回准备好读入的数据)。我们可以用 <strong>SO_RCVLOWAT</strong> socket选项来设置该socket的低水位标记。对于TCP和UDP的socket而言，其缺省值为1。</li>
+<li>该连接的读这一半关闭(也就是接收了FIN的TCP连接)。对这样的socket的读操作将不阻塞并返回0。<strong>（注：面试点之一）</strong></li>
+<li>socket是一个用于监听的socket，并且已经完成的连接数为非0。这样的soocket处于可读状态，是因为socket收到了对方的connect请求，执行了三次握手的第一步 （对方发送SYN请求过来,使监听socket处于可读状态）正常情况下，这样的socket上的accept操作不会阻塞。</li>
+<li>有一个socket有异常错误条件待处理。对于这样的socket的读操作将不会阻塞,并且返回一个错误(-1)，errno则设置成明确的错误条件。这些待处理的错误也可通过指定socket选项SO_ERROR调用getsockopt来取得并清除。</li>
+</ol>
+<h3 id="可写">可写</h3>
+<p>下列三个条件中的任何一个满足时,socket准备好写: </p>
+<ol>
+<li>socket的发送缓冲区中的数据字节大于等于该socket的发送缓冲区低水位标记的当前大小。对这样的socket的写操作将不阻塞并返回一个大于0的值(也就是返回准备好写入的数据)。我们可以用<strong>SO_SNDLOWAT</strong> socket选项来设置该socket的低水位标记。对于TCP和UDP的socket而言，其缺省值为2048。</li>
+<li>该连接的写这一半关闭。对这样的socket的写操作将产生SIGPIPE信号，该信号的缺省行为是终止进程。</li>
+<li>有一个socket异常错误条件待处理。对于这样的socket的写操作将不会阻塞并且返回一个错误(-1)，errno则设置成明确的错误条件。这些待处理的错误也可以通过指定socket选项SO_ERROR调用getsockopt函数来取得并清除。</li>
+</ol>
+<h3 id="关闭">关闭</h3>
+<p>解释一下连接的读/写这一半关闭：</p>
+<p><strong>如图所示：</strong>
+<img src="/img/tcpip/socket_read_write.png" alt="socket"></p>
+<p><strong>读半关闭：</strong>
+四次挥手的第一步，client调用close发送FIN到server，server接收到FIN后，知道client已经关闭了写，也就是server不会再读到任何数据了，也就是读这一半关闭，这个时候server的这一端一定可读，且返回0(read returns 0)。</p>
+<p><strong>写半关闭：</strong>
+四次挥手的第三步，server调用close发送FIN到client，这个时候server已经关闭了写，这个时候server端不会再写数据到client，也就是写这一半关闭，这个时候server的这一端再对该socket进行写会产生SIGPIPE信号（异常）。</p>
+<p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+<img src="/img/personal/qrcode_2.png" alt="pic">
+​</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-11-25
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/tcpip/close_shutdown/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">后端面试之网络编程-close和shutdown的区别</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/system_design/lru/">
+            <span class="next-text nav-default">LRU缓存机制，你想知道的这里都有</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

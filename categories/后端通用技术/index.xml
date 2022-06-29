@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>后端通用技术 on 码农在新加坡的个人博客</title>
+    <link>https://leftpocket.cn/categories/%E5%90%8E%E7%AB%AF%E9%80%9A%E7%94%A8%E6%8A%80%E6%9C%AF/</link>
+    <description>Recent content in 后端通用技术 on 码农在新加坡的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 10 May 2022 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/%E5%90%8E%E7%AB%AF%E9%80%9A%E7%94%A8%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>protobuf是怎么序列化的</title>
+      <link>https://leftpocket.cn/post/protobuf/protobuf/</link>
+      <pubDate>Tue, 10 May 2022 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/protobuf/protobuf/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 目前主流的几种数据交互的格式主要有xml、json、protobuf等等。xml和json我相信大家都很</description>
+    </item>
+    
+    <item>
+      <title>git rebase使用详解</title>
+      <link>https://leftpocket.cn/post/git/git_rebase/</link>
+      <pubDate>Sat, 20 Nov 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/git/git_rebase/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 在你看这篇文章之前，我假设你已经至少会git的一些基本指令，能进行简单的git repo的操作。比如：pu</description>
+    </item>
+    
+  </channel>
+</rss>

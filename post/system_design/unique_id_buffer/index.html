@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>放弃snowflake-我们重新设计了新的分布式ID生成方案 - 码农在新加坡的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：码农在新加坡的个人博客 背景 在之前的文章中，我们讲了分布式ID生成方案-snowflake算法。这也是我们的生产系统过去几年一直使用" /><meta name="keywords" content="系统设计" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/system_design/unique_id_buffer/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="放弃snowflake-我们重新设计了新的分布式ID生成方案" />
+<meta property="og:description" content="原文地址：码农在新加坡的个人博客 背景 在之前的文章中，我们讲了分布式ID生成方案-snowflake算法。这也是我们的生产系统过去几年一直使用" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/system_design/unique_id_buffer/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-22T13:00:51+08:00" />
+<meta property="article:modified_time" content="2022-04-22T13:00:51+08:00" />
+
+<meta itemprop="name" content="放弃snowflake-我们重新设计了新的分布式ID生成方案">
+<meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 在之前的文章中，我们讲了分布式ID生成方案-snowflake算法。这也是我们的生产系统过去几年一直使用"><meta itemprop="datePublished" content="2022-04-22T13:00:51+08:00" />
+<meta itemprop="dateModified" content="2022-04-22T13:00:51+08:00" />
+<meta itemprop="wordCount" content="4485">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="放弃snowflake-我们重新设计了新的分布式ID生成方案"/>
+<meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 背景 在之前的文章中，我们讲了分布式ID生成方案-snowflake算法。这也是我们的生产系统过去几年一直使用"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">码农在新加坡的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">码农在新加坡的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">放弃snowflake-我们重新设计了新的分布式ID生成方案</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-04-22 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/"> 系统设计 </a>
+            <a href="/categories//"> 　 </a>
+            </div>
+          <span class="more-meta"> 约 4485 字 </span>
+          <span class="more-meta"> 预计阅读 9 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#snowflake算法">snowflake算法</a></li>
+            <li><a href="#snowflake算法对我们业务的限制">snowflake算法对我们业务的限制</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#数据库方案">数据库方案</a></li>
+    <li><a href="#多台数据库方案">多台数据库方案</a></li>
+    <li><a href="#dbbuffer方案">DB+Buffer方案</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#双buffer优化">双buffer优化</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#后续">后续</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>原文地址：<a href="https://leftpocket.cn/post/system_design/unique_id_buffer/">码农在新加坡的个人博客</a></p>
+<h1 id="背景">背景</h1>
+<p>在之前的文章中，我们讲了<code>分布式ID生成方案-snowflake算法</code>。这也是我们的生产系统过去几年一直使用的分布式ID生成方案。</p>
+<p><code>雪花算法（Snowflake）</code>有着很多的优点，适用于大多数的业务场景。</p>
+<p>有兴趣的可以查看我之前的文章。 <a href="https://www.leftpocket.cn/post/system_design/snowflake/">https://www.leftpocket.cn/</a></p>
+<p>可是随着我们业务的发展壮大，这个分布式ID生成方案对我们的业务来说已经有了一定的限制，所以我们在考虑一种新的方案来替代<code>snowlfake算法</code>。</p>
+<p>避免有些人不是很了解snowflake算法，这里简单描述下：</p>
+<h3 id="snowflake算法">snowflake算法</h3>
+<p>雪花算法（Snowflake）是twitter公司内部分布式项目采用的ID生成算法，开源后广受国内大厂的好评，在该算法影响下各大公司相继开发出各具特色的分布式生成器。</p>
+<p>Twitter的snowflake分布式ID的算法是目前广泛使用的分布式ID算法，尽管有很多变种，比如位数的不同，时间片大小不同、node bit数放在最后等各种变种，但是主要思想还是来自于snowflake的思想。</p>
+<p><img src="/img/server/snowflake.png" alt="snowflake"></p>
+<p>snowflake算法采用64bit存储ID, 最高位备用，暂时不使用。接下来的<code>41 bit做时间戳</code>，最小时间单位为<code>毫秒</code>。再接下来的<code>10 bit做机器ID</code>(worker id)，然后最后<code>12 bit</code>在单位时间(毫秒)递增。</p>
+<ul>
+<li>
+<p><code>41 bit表示时间戳</code> 大约可以使用69年(2^41 -1), 为了尽可能的表示时间，时间戳可以从第一次部署的时候开始计算，比如2020-02-02 00:00:00, 这样可以使用69年。</p>
+</li>
+<li>
+<p><code>10 bit区分机器</code> 所以可以支持1024台机器。 你也可以把10bit分成两部分，一部分做数据中心的ID,一部分做机器的ID，比如55分的话，可以支持32个数据中心，每个数据中心最多可以支持32台机器。</p>
+</li>
+<li>
+<p><code>12 bit自增值</code> 可以表示4096的ID,也就是说每台机器每毫秒最多产生4096个ID,这是它的最大性能。</p>
+</li>
+</ul>
+<h3 id="snowflake算法对我们业务的限制">snowflake算法对我们业务的限制</h3>
+<p>对我们来说，限制就是<code>10 bit-工作机器id</code>，也就是每个服务只能支持1024台工作机器。在服务规模不大的情况下，snowflake算法是一个相当优秀的算法，但是我们的业务规模发展太快，导致1024台机器成了我们的限制。</p>
+<p>可能你要问了：<strong>1024台机器都成了限制，你们得有多大的流量啊？</strong></p>
+<p>这不是snowflake算法的问题，是因为我们的服务（Service）是最底层的服务，不允许依赖任何外部服务，所以我们的<code>分布式ID生成算法</code>就在我们的Service里面生成。就是它是我们服务的一部分，也就是我们服务的机器数量，取决于整个服务业务的规模。</p>
+<p>我们当时就想了两种方案：</p>
+<ol>
+<li>把ID生成拆分成独立的服务。</li>
+<li>调整<code>工作机器id</code>的bit数量。</li>
+</ol>
+<p>作为最底层的服务，我们并不想依赖任何外部服务，所以<code>方案1</code>被我们排除了。
+<code>方案2</code>的话，由于<code>41位时间戳</code>本身是一个有意义的数据，为了兼容性和数据本身的意义考虑，我们不想动它，所以只能动最右边的<code>12bit-序列号</code>。但是考虑到下次可能继续增长，我们最终决定一劳永逸，直接废除<code>机器id</code>的设定。</p>
+<p>这就是我们需要找一些替代方案的原因。</p>
+<p>但是我不否认，上述的方案是可行的。</p>
+<h1 id="数据库方案">数据库方案</h1>
+<p>数据库的方案是最简单也是最容易想到的唯一ID生成方案。</p>
+<p>数据库本身生成的ID是自增唯一的，用来做分布式唯一ID很合适。但是我们为了与之前的snowflake方案保持一致，同时也为了让生成的唯一ID不容易被算出来。我们保留前面<code>41位时间戳</code>不变，数据库的自增ID只做为后边的22位，来代替<code>10bit-工作机器id</code>+<code>12bit-序列号</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">`</span><span class="n">unique_id_tab</span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span><span class="w">   </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span><span class="w">
+</span><span class="w">   </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="p">)</span><span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>这样每次我们插入ID的时候</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="n">last_insert_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="o">`</span><span class="n">unique_id_tab</span><span class="o">`</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="no">NULL</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">unique_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ms</span><span class="o">&lt;&lt;</span><span class="mi">22</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">last_insert_id</span><span class="o">%</span><span class="mi">2</span><span class="o">^</span><span class="mi">22</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>这种ID的实现完全不依赖于服务器的节点数量。每次需要生成ID，就INSERT一次获得<code>LAST_INSERT_ID</code>即可。</p>
+<p><strong>这种方案的优缺点都很明显。</strong></p>
+<p>优点：</p>
+<ul>
+<li>非常简单，利用现有数据库系统的功能实现，成本小。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>强依赖DB，当DB异常时整个系统不可用，属于致命问题。</li>
+<li>ID生成的性能瓶颈限制在单台MySQL的读写性能。在我们的测试机器上测试大概有<strong>20K的QPS</strong>, 对于小业务还可以，但是对于高并发的业务来说，完全不够。</li>
+</ul>
+<h1 id="多台数据库方案">多台数据库方案</h1>
+<p>对于单台MySQL性能问题，很容易想到可用如下方案解决</p>
+<p>在分布式系统中我们可以多部署几台数据库的实例，每台实例设置不同的初始值，且步长和数据库实例数相等。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">`</span><span class="n">unique_id_1_tab</span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span><span class="w">   </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span><span class="w">
+</span><span class="w">   </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="p">)</span><span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">`</span><span class="n">unique_id_2_tab</span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span><span class="w">   </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span><span class="w">
+</span><span class="w">   </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="p">)</span><span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="p">...</span><span class="w">
+</span><span class="w"></span><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">`</span><span class="n">unique_id_10_tab</span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span><span class="w">   </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span><span class="w">
+</span><span class="w">   </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="p">)</span><span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="o">=</span><span class="mi">10</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">set</span><span class="w"> </span><span class="k">session</span><span class="w"> </span><span class="n">auto_increment_increment</span><span class="o">=</span><span class="mi">10</span><span class="p">;</span><span class="w">  </span><span class="o">//</span><span class="err">设置步长为</span><span class="mi">10</span><span class="err">，和数据库实例的数据相等。</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SHOW</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;auto_inc%&#39;</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="o">+</span><span class="c1">--------------------------+-------+
+</span><span class="c1"></span><span class="o">|</span><span class="w"> </span><span class="n">Variable_name</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">+</span><span class="c1">--------------------------+-------+
+</span><span class="c1"></span><span class="o">|</span><span class="w"> </span><span class="n">auto_increment_increment</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">10</span><span class="w">    </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">auto_increment_offset</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="mi">1</span><span class="w">     </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">+</span><span class="c1">--------------------------+-------+
+</span></code></pre></td></tr></table>
+</div>
+</div><p>我们设置10台MySQL来进行ID生成，那么整体的QPS就可以增加10倍。</p>
+<p>这个时候我们测试一下插入数据：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="o">`</span><span class="n">unique_id_1_tab</span><span class="o">`</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="k">NULL</span><span class="p">);</span><span class="w">
+</span><span class="w"></span><span class="n">Query</span><span class="w"> </span><span class="n">OK</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="n">affected</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="o">`</span><span class="n">unique_id_1_tab</span><span class="o">`</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="k">NULL</span><span class="p">);</span><span class="w">
+</span><span class="w"></span><span class="n">Query</span><span class="w"> </span><span class="n">OK</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="n">affected</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="o">`</span><span class="n">unique_id_1_tab</span><span class="o">`</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="k">NULL</span><span class="p">);</span><span class="w">
+</span><span class="w"></span><span class="n">Query</span><span class="w"> </span><span class="n">OK</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="n">affected</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">unique_id_1_tab</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="o">+</span><span class="c1">----+
+</span><span class="c1"></span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">+</span><span class="c1">----+
+</span><span class="c1"></span><span class="o">|</span><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="mi">11</span><span class="w"> </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="mi">21</span><span class="w"> </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">+</span><span class="c1">----+
+</span><span class="c1"></span><span class="mi">3</span><span class="w"> </span><span class="k">rows</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>这样假设我们的服务器有M台，数据库有N台，那么就是<strong>M*N</strong>的连接。每次要生成ID的时候就随机访问其中的一台数据库实例，就把所有流量分散。能支撑更多的QPS了。</p>
+<p>这种架构的确可以支撑更多的ID生成的QPS，但是也有一些缺点：</p>
+<ul>
+<li>系统水平扩展比较困难，比如定义好了步长和机器台数之后，如果要添加机器该怎么做？假设现在是10台数据库实例，这个时候需要扩容机器一台就比较复杂了。</li>
+<li>随着业务的增长，数据库压力还是很大，每次获取ID都得读写一次数据库，只能靠堆机器来提高性能。</li>
+</ul>
+<p>由于过于复杂的设计，我们就排除了这种方案，就考虑是否有其他方案。</p>
+<h1 id="dbbuffer方案">DB+Buffer方案</h1>
+<p>综合对比上述几种方案，每种方案都不完全符合我们的要求。于是我们最终考虑了一种方案</p>
+<p>首先我们依旧使用DB的方案，只是不是每次生成ID都需要访问DB，比如我们把ID分成</p>
+<p><img src="/img/system_design/unique_id/db_buffer.png" alt="db_buffer"></p>
+<p>是不是跟snowflake算法有点类似，只不过我们不用<code>固定的机器ID</code>，因为会限制服务器机器的数量。而是用了数据库自增ID，不与机器相绑定，每台机器自己去申请自增的ID。</p>
+<p>Buffer的作用是什么呢，就是为了不要每次都去数据库申请ID，每一次申请ID都可以产生一个buffer以供下次使用的时候递增buffer的值，下次生成ID的时候就不需要访问DB了。</p>
+<p>问题：</p>
+<ol>
+<li>数据库自增ID不会超过16位吗？ &ndash; 当然会，我们是使用<code>auto_increment_id%2^16</code>。这样用完之后就可以重新生成。</li>
+<li>这样不会导致生成的唯一ID重复吗？&ndash; 我们最前面有一个毫秒级别的时间戳，如果一毫秒能走完一圈的话是可能重复的。<code>QPS=2^16*2^6*1000 = 4 Billion</code>。我们整个系统的QPS也才10M左右，更何况需要生成ID的QPS就更低了。大概100K。我们假设他不会重复。</li>
+</ol>
+<p>我们继续使用最简单的<code>unique_id_tab</code>作为数据库的自增ID表。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">`</span><span class="n">unique_id_tab</span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span><span class="w">   </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span><span class="w">
+</span><span class="w">   </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="p">)</span><span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>6位的Buffer是在内存中递增的，不依赖DB。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">type BufferPool struct {
+    inited         bool   // 初始化
+    ms             int64  // 当前的获取ID的时间戳
+    last_insert_id int64  // 上次从数据库取出的值
+    buffer         int64  // buffer的值，[0, 2^6-1]
+}
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>流程：</strong></p>
+<ol>
+<li>第一次需要生成ID的时候，DB中拿出一个值后，我们就把buffer置为0。</li>
+<li>每次需要生成ID的时候，把buffer加1。</li>
+<li>当<code>buffer == 2^6-1</code>的时候，用完当前的buffer。</li>
+<li>下次继续从DB拿出一个值，把buffer重置为0。</li>
+</ol>
+<p>这样我们的ID就为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">unique_id = ms&lt;&lt;22 + last_insert_id%2^16 + buffer
+</code></pre></td></tr></table>
+</div>
+</div><p>ms是为了与之前的snowflake算法的timestamp保持一致 （ms的初始值时第一次部署服务器的时间，所以可以使用69年）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">// 可以设置成系统第一次上线的时间，单位:毫秒。占用41位，可以使用69年。
+var minTS int64 = 1288834974657
+// 从设定的时间戳到现在经历的毫秒数
+ms := time.Since(minTS).Nanoseconds() / 1000000
+</code></pre></td></tr></table>
+</div>
+</div><p>如果你从其他的算法中迁移过来，可以取出之前的算法的max_id值，
+初始的时间戳可以设置为<code>minTS = current_timestamp - max_id&gt;&gt;22 + 1</code>。这样的话，随着current_timestamp一直在增大，你新生成的最小值一定比之前的最大值大。</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>可以很方便的线性扩展，性能完全能够支撑大多数业务场景。</li>
+<li>生成的ID满足上述数据库存储的主键要求。（我们需求特殊加上时间戳，保证趋势递增以及带有有用的时间戳信息）。</li>
+<li>容灾性高：服务内部有缓存，即使DB宕机，短时间内ID生成器仍能正常对外提供服务。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>每次DB访问的时候可能产生TP999数据波动大，当缓存使用完时，TP999数据会出现偶尔的尖刺。</li>
+<li>DB宕机会造成整个系统不可用。</li>
+</ul>
+<h3 id="双buffer优化">双buffer优化</h3>
+<p>对于第一个缺点，我们做了一些优化，简单的说就是：</p>
+<p>不要每次都用完Buffer再去数据库取下一个<code>自增ID</code>,二是在Buffer用到一定程度就开始异步取下一个<code>自增ID</code>, 提前缓存，做到ID生成完全在内存中操作，避免中途因为访问数据库导致的延迟抖动。</p>
+<p><img src="/img/system_design/unique_id/double_buffer.png" alt="db_buffer"></p>
+<ul>
+<li>初始化的时候的确只有一个<code>BufferPool current</code></li>
+<li>当buffer指针走到一半(31)的时候，异步执行DB写入操作，拿到新的last_insert_id，把数据写入<code>BufferPool next</code></li>
+<li>当buffer指针走完的时候，内存切换buffer，使 <code>BuffferPool current = next</code></li>
+<li>当buffer指针走到一半的时候，继续上述DB写入操作，创建新的<code>BufferPool next</code></li>
+</ul>
+<p>采用双buffer的方式，每个服务的实例内部有两个号段缓存区<code>BufferPool</code>。我们初始启动时会初始化一个缓存区，在第一个缓存区使用一半时候，会异步生成第二个缓存区。当前缓存区数据用完之后，把第二个缓存区挪到第一个缓存区继续使用，循环往复，这样保证DB的操作一直都是异步的，平时生成ID的时候都是内存操作，极大提升了性能。</p>
+<h1 id="后续">后续</h1>
+<p>当然了，分布式ID生成方案有很多，各个大厂都有自己设计的方案：<code>美团（Leaf）</code>、<code>滴滴（Tinyid）</code>、<code>百度（uid-generator）</code>等等。</p>
+<p>我们新设计的方案也不一定是最好的，但是极大的解决了我们当前服务的一些限制。</p>
+<p>当然另一种解决方案就是把ID生成器独立成服务，这样使用<code>snowflake算法</code>的1024台实例也足够绝大多数的场景使用了。</p>
+<p>不过双buffer的异步方案，尽可能的降低了DB的访问导致的生成过慢的问题，也算是一个比较好的解决方案。</p>
+<p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+<img src="/img/personal/qrcode_2.png" alt="pic"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-04-22
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/system_design/hotspot/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">谈一谈热点Key解决方案</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/popularization/metaverse/">
+            <span class="next-text nav-default">元宇宙，是炒作还是机遇？</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>KCP传输协议，快速可靠的UDP，和TCP比有什么优势？ - 码农在新加坡的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="码农在新加坡" /><meta name="description" content="​ 原文地址：码农在新加坡的个人博客 背景 可能你从来没有听说过KCP是什么，但是你肯定知道TCP和UDP。 这里我们通过KCP来剖析TCP和UDP" /><meta name="keywords" content="网络编程" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/tcpip/kcp/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="KCP传输协议，快速可靠的UDP，和TCP比有什么优势？" />
+<meta property="og:description" content="​ 原文地址：码农在新加坡的个人博客 背景 可能你从来没有听说过KCP是什么，但是你肯定知道TCP和UDP。 这里我们通过KCP来剖析TCP和UDP" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/tcpip/kcp/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-01-01T00:00:02+08:00" />
+<meta property="article:modified_time" content="2022-01-01T00:00:02+08:00" />
+
+<meta itemprop="name" content="KCP传输协议，快速可靠的UDP，和TCP比有什么优势？">
+<meta itemprop="description" content="​ 原文地址：码农在新加坡的个人博客 背景 可能你从来没有听说过KCP是什么，但是你肯定知道TCP和UDP。 这里我们通过KCP来剖析TCP和UDP"><meta itemprop="datePublished" content="2022-01-01T00:00:02+08:00" />
+<meta itemprop="dateModified" content="2022-01-01T00:00:02+08:00" />
+<meta itemprop="wordCount" content="4596">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="KCP传输协议，快速可靠的UDP，和TCP比有什么优势？"/>
+<meta name="twitter:description" content="​ 原文地址：码农在新加坡的个人博客 背景 可能你从来没有听说过KCP是什么，但是你肯定知道TCP和UDP。 这里我们通过KCP来剖析TCP和UDP"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">码农在新加坡的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">码农在新加坡的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">KCP传输协议，快速可靠的UDP，和TCP比有什么优势？</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-01-01 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"> 网络编程 </a>
+            </div>
+          <span class="more-meta"> 约 4596 字 </span>
+          <span class="more-meta"> 预计阅读 10 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#kcp是什么">KCP是什么</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#传输协议">传输协议</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#arq协议">ARQ协议</a></li>
+            <li><a href="#窗口协议">窗口协议</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#kcp协议的特征">KCP协议的特征</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#协议头">协议头</a></li>
+            <li><a href="#技术特性">技术特性</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#使用场景">使用场景</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#为什么moba游戏中不使用tcp呢">为什么Moba游戏中不使用TCP呢？</a></li>
+            <li><a href="#其他的可靠udp解决方案">其他的可靠UDP解决方案</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>​
+原文地址：<a href="https://leftpocket.cn/post/tcpip/kcp/">码农在新加坡的个人博客</a></p>
+<h1 id="背景">背景</h1>
+<p>可能你从来没有听说过KCP是什么，但是你肯定知道TCP和UDP。</p>
+<p>这里我们通过KCP来剖析TCP和UDP的区别是什么，并理解为什么有了TCP还需要KCP，以及KCP/UDP具体的使用场景。</p>
+<h3 id="kcp是什么">KCP是什么</h3>
+<p>我们都知道：<br>
+TCP保证数据准确交付，UDP保证数据快速到达，KCP则是两种协议的一个折中，在力求在<code>保证可靠性的情况下提高传输速度</code>。</p>
+<p>KCP的设计目标是为了解决在网络拥堵的情况下<code>TCP传输速度慢</code>的问题。</p>
+<blockquote>
+<p>KCP是一个<code>快速可靠协议</code>，能以比 TCP浪费10%-20%的带宽的代价，换取平均延迟降低 30%-40%，且最大延迟降低三倍的传输效果。纯算法实现，并不负责底层协议（如UDP）的收发，需要使用者自己定义下层数据的发送方式，以 callback的方式提供给 KCP。连时钟都需要外部传递进来，内部不会有任何一次系统调用。<br>
+TCP是为流量设计的（每秒内可以传输多少KB的数据），讲究的是充分利用带宽。而 KCP是为流速设计的（单个数据从一端发送到一端需要多少时间），以10%-20%带宽浪费的代价换取了比 TCP快30%-40%的传输速度。</p>
+</blockquote>
+<p>KCP没有规定下层传输协议，它只是一个纯算法的实现，但通常使用UDP作为底层协议。所以一般来说可以说KCP是快速可靠的UDP。</p>
+<p>我们都知道，TCP是可靠的传输协议。那么KCP的特点就是：快速可靠。</p>
+<p>那你可能又有疑问，那么TCP为什么不设计成快速可靠的。看完这篇文章，你的疑惑全部都能解开。</p>
+<p>有兴趣可以看KCP的源代码：<a href="https://github.com/skywind3000/kcp">https://github.com/skywind3000/kcp</a>。</p>
+<p>原作者写的<code>README.md</code>关于KCP的技术特性和使用案例解释的非常详细。同时KCP只有两个文件<code>ikcp.h</code>, <code>ikcp.c</code>, 总代码量只有一千多行，非常适合深入学习。更能加深自己对传输层协议的理解。</p>
+<h1 id="传输协议">传输协议</h1>
+<p>在TCP/IP五层模型协议中，传输协议处在第四层，提供端到端的接口，所以不论是TCP还是UDP，其数据段中都包含了端口号。</p>
+<p>在网络中，我们认为传输是不可靠的，而在很多场景下我们需要的是可靠的数据，所谓的可靠，指的是数据能够正常收到，且能够顺序收到，于是就有了ARQ协议，TCP之所以可靠就是基于此。</p>
+<p>TCP保证可靠传输的手段：<code>校验和</code>，<code>流量控制(滑动窗口协议)</code>，<code>拥塞控制</code>，<code>ARQ协议</code>，<code>超时重传</code>。</p>
+<h3 id="arq协议">ARQ协议</h3>
+<p>ARQ协议，即<code>自动重传请求（Automatic Repeat-reQuest）</code>，是传输层的错误纠正协议之一。它通过使用确认和超时这两个机制，在不可靠服务的基础上实现可靠的信息传输。<br>
+如果发送方在发送后一段时间之内没有收到确认帧，它通常会重新发送。ARQ包括<code>停止等待ARQ协议</code>和<code>连续ARQ协议</code>。</p>
+<p>ARQ协议拥有<code>错误检测</code>（Error Detection）、<code>正面确认</code>（Positive Acknowledgment）、<code>超时重传</code>（Retransmission after Timeout）和 <code>负面确认及重传</code>（Negative Acknowledgment and Retransmission）等机制。</p>
+<p>ARQ协议有两种模式：</p>
+<p><strong>1.停等ARQ协议</strong></p>
+<p>停等ARQ协议相当于发送窗口和接收窗口大小均为1的滑动窗口协议。即发送方发送一个帧后，必须接收到一个确认帧（ACK）才能发送下一个。</p>
+<p>很显然。这种等停ARQ协议其信道的利用率很低。</p>
+<p><strong>2.连续ARQ协议</strong></p>
+<p>可以连续发送多个分组，而不必每发完一个分组就停下来等待对方确认。</p>
+<p>有了连续ARQ，现在已经能够在不可靠的网络中传输可靠的数据，但这不意味着可以随意发送数据，带宽是有限的，接收方的负载也是有限的，所以引入了窗口协议，做流量控制。</p>
+<h3 id="窗口协议">窗口协议</h3>
+<p>窗口协议中有两种：</p>
+<ol>
+<li>拥塞窗口</li>
+</ol>
+<p>防止过多的数据注入到网络中，这样可以使网络中的路由器 和链路不至于过载。与拥塞控制相关的有<code>慢启动</code>、<code>退半避让</code>、<code>快重传</code>、<code>快恢复</code>等。慢启动是在刚开始发送数据时让窗口缓慢扩张，退半避让是在网络拥堵时窗口大小减半，快重传是在网络恢复时及时给予响应，与之配合的就是快恢复。</p>
+<ol start="2">
+<li>滑动窗口</li>
+</ol>
+<p>TCP连接的每一方都有固定大小的缓冲空间，TCP的接收端只允许发送端发送接受端缓冲区能接纳的数据。当接收方来不及处理发送方的数据，能提示发送方降低发送的速率，防止包丢失。TCP使用的流量控制协议是可变大小的滑动窗口协议。</p>
+<h1 id="kcp协议的特征">KCP协议的特征</h1>
+<p>KCP协议是一个纯粹的ARQ协议，通过重传机制实现UDP数据包的可靠传输。</p>
+<p>在谈KCP协议的特征前，还是先贴一下KCP协议的数据段格式。</p>
+<h3 id="协议头">协议头</h3>
+<p><img src="/img/tcpip/kcp.png" alt="kcp"></p>
+<p>可以看到有这么几个字段:</p>
+<ul>
+<li><strong>conv</strong>: 连接标识。</li>
+<li><strong>cmd</strong>: Command。</li>
+<li><strong>frg</strong>: 分片数量，表示随后还有多少个报文属于同一个包。</li>
+<li><strong>wnd</strong>: 发送方剩余接收窗口的大小。</li>
+<li><strong>ts</strong>: 时间戳。</li>
+<li><strong>sn</strong>: 报文编号。</li>
+<li><strong>una</strong>: 发送方的接收缓冲区中最小还未收到的报文段的编号。也就是说, 编号比它小的报文段都已全部接收。</li>
+<li><strong>len</strong>: 数据段长度。</li>
+<li><strong>data</strong>: 数据段. 只有数据报文会有这个字段。</li>
+</ul>
+<h3 id="技术特性">技术特性</h3>
+<p>TCP是为流量设计的（每秒内可以传输多少KB的数据），讲究的是充分利用带宽。而 KCP是为流速设计的（单个数据包从一端发送到一端需要多少时间），以10%-20%带宽浪费的代价换取了比 TCP快30%-40%的传输速度。TCP信道是一条流速很慢，但每秒流量很大的大运河，而KCP是水流湍急的小激流。KCP有正常模式和快速模式两种，通过以下策略达到提高流速的结果：</p>
+<p><strong>TCP vs KCP</strong></p>
+<ol>
+<li>
+<p><code>RTO翻倍vs不翻倍：</code>
+TCP超时计算是RTOx2，这样连续丢三次包就变成RTOx8了，十分恐怖，而KCP启动快速模式后不x2，只是x1.5（实验证明1.5这个值相对比较好），提高了传输速度。</p>
+</li>
+<li>
+<p><code>选择性重传 vs 全部重传：</code>
+TCP丢包时会全部重传从丢的那个包开始以后的数据，KCP是选择性重传，只重传真正丢失的数据包。</p>
+</li>
+<li>
+<p><code>快速重传：</code>
+发送端发送了1,2,3,4,5几个包，然后收到远端的ACK: 1, 3, 4, 5，当收到ACK3时，KCP知道2被跳过1次，收到ACK4时，知道2被跳过了2次，此时可以认为2号丢失，不用等超时，直接重传2号包，大大改善了丢包时的传输速度。</p>
+</li>
+<li>
+<p><code>延迟ACK vs 非延迟ACK：</code>
+TCP为了充分利用带宽，延迟发送ACK（NODELAY都没用），这样超时计算会算出较大 RTT时间，延长了丢包时的判断过程。KCP的ACK是否延迟发送可以调节。</p>
+</li>
+<li>
+<p><code>UNA vs ACK+UNA：</code>
+ARQ模型响应有两种，UNA（此编号前所有包已收到，如TCP）和ACK（该编号包已收到），光用UNA将导致全部重传，光用ACK则丢失成本太高，以往协议都是二选其一，而 KCP协议中，除去单独的 ACK包外，所有包都有UNA信息。</p>
+</li>
+<li>
+<p><code>非退让流控：</code>
+KCP正常模式同TCP一样使用公平退让法则，即发送窗口大小由：发送缓存大小、接收端剩余接收缓存大小、丢包退让及慢启动这四要素决定。但传送及时性要求很高的小数据时，可选择通过配置跳过后两步，仅用前两项来控制发送频率。以牺牲部分公平性及带宽利用率之代价，换取了开着BT都能流畅传输的效果。</p>
+</li>
+</ol>
+<p>可以看出，TCP是一个<strong>公平</strong>的网络协议，它保证使用TCP的各方能合理的利用带宽，避免造成网络拥塞。<br>
+而KCP是一个<strong>自私</strong>的网络协议，它首先保证自己的快速到达。而不考虑网络中的其他数据的拥塞情况。是一种通过增加宽带来换取低延迟的协议。</p>
+<h1 id="使用场景">使用场景</h1>
+<p>看到以上的对比，相比你已经清楚了KCP和TCP的的区别。</p>
+<p>那么疑问是不是来了，既然KCP那么好，那么TCP为什么不这么设计呢？KCP有哪些使用场景呢。</p>
+<p>KCP使用的场景一般是对延迟要求更高的场景。</p>
+<ul>
+<li><strong>视频播放/直播</strong> 如果使用TCP，一旦发生丢包，TCP会讲后续的包缓存起来，等前面的包重传后再继续发送，延迟会越来越大。基于UDP上做一些重传校验是最好的选择。网易BOBO使用KCP加速主播推流。</li>
+<li><strong>代理软件</strong>     比如v2ray，著名代理软件，Shadowsocks的代替者，集成了KCP协议，使用UDP传输。 还有kcptun等。</li>
+<li><strong>加速器</strong>       比如商业软件 <code>网易CC</code> 和 <code>云帆加速</code>，使用KCP加速文件传输和视频推流。</li>
+<li><strong>网络游戏</strong>     尤其是MOBA游戏和FPS游戏，这类游戏对延迟的要求极高。30ms以内为最好效果。超过100ms基本就无法正常玩游戏。TCP的超时重传是灾难。</li>
+</ul>
+<h3 id="为什么moba游戏中不使用tcp呢">为什么Moba游戏中不使用TCP呢？</h3>
+<p>我们知道，不同类型的游戏因为玩法、竞技程度不一样，采用的同步算法不一样，对网络延迟的要求也不一样。</p>
+<p>MOBA/FPS作为竞技类的游戏，游戏中实时高精度同步，或者说延迟容错率的要求还算是比较高的一种。</p>
+<p>通过上面对KCP和TCP的比较我们知道，tcp追求的是完全可靠性和顺序性，丢包后会持续重传直至该包被确认，否则后续包也不会被上层接收，且重传采用指数避让策略，决定重传时间间隔的RTO(retransmission timeout)不可控制，linux内核实现中最低值为200ms，这样的机制导致丢包率短暂升高的情况下应用层消息响应延迟急剧提高，并不适合实时性高、网络环境复杂的游戏。</p>
+<p>基于udp定制传输层协议，引入顺序性和适当程度或者可调节程度的可靠性，修改流控算法。适当放弃重传，如：设置最大重传次数，即使重传失败，也不需要重新建立连接。kcp的作者是国内优秀开发者，社区也发展良好，KCP也是是目前比较火的UDP快速可靠的解决方案。</p>
+<p><strong>哪些游戏使用了UDP</strong></p>
+<p>基本上所有的Moba游戏和FPS游戏都采用了UDP+应用层可靠性保证来实现的。</p>
+<p>我了解的有这些（当然还有很多其他的游戏）：</p>
+<ul>
+<li>《王者荣耀》 王者荣耀的PVP通信协议确实是基于udp封装的。</li>
+<li>《和平精英》 现在非常火的吃鸡手游，也是基于udp的。</li>
+<li>《乱斗西游》</li>
+</ul>
+<p>《乱斗西游》的技术发展过程我比较熟悉一点，因为之前我就在网易，同时使用了和乱斗西游同样的服务端游戏引擎：<code>MobileServer</code>。乱斗西游是国内最早一批的Moba游戏，公测主打从PVE，后来加入PVP玩法，由于是PVE起家，最开始使用和PVE同样的主客机方式，在主客机基础上加了一个中转服务器。左边为主机，右边为客机，通过服务器转发请求。所以当时《乱斗西游》的比赛胜负，主要靠抽签，谁抽到左边谁就赢了，因为右边的延迟太高。</p>
+<p>后来乱斗西游更换了UDP协议，在应用层做了<code>尽量的</code>可靠性保证，允许一定的丢包的情况下保证数据尽快的到达。解决了网络延迟的问题。</p>
+<h3 id="其他的可靠udp解决方案">其他的可靠UDP解决方案</h3>
+<p>实际上，除了KCP，市面上还有很多出名的基于UDP实现的可靠协议，都有各自领域很高的实用场景。</p>
+<p>其他解决方案也包括：</p>
+<ul>
+<li>QUIC：（Quick UDP Internet Connections），google出品，HTTP3就是运行在QUIC之上，现主要使用在Google Chrome，Google Search，Youtube上。整体性能提升30%以上。</li>
+<li>RakNet: 像CS，Quake等FPS游戏都是采用的这个。</li>
+<li>Enet：可靠的UDP网络库，在UDP上实现了ARQ协议。</li>
+<li>UDT：UDP-based Data Transfer Protocol, 是一种互联网数据传输协议。主要目的是支持告诉广域网上的海量数据传输。</li>
+</ul>
+<p>后面我会专门用一整篇文章介绍QUIC协议。</p>
+<h1 id="总结">总结</h1>
+<p>我相信关于KCP的基础概念我已经说的很清楚了，希望这篇文章让你学到了不一样的知识。</p>
+<p>那么什么时候需要使用TCP，什么时候使用UDP呢？</p>
+<p>答案很简单：</p>
+<ul>
+<li>当有疑问时，就使用TCP。（when in doubt, use tcp）</li>
+<li>只有你非常确定你要干什么的时候，才需要使用UDP以及基于UDP封装的协议。</li>
+</ul>
+<p>但是无论你是否使用，学习KCP一定能让你对网络协议有更深入的理解，赶快学习吧。</p>
+<p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+<img src="/img/personal/qrcode_2.png" alt="pic"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-01-01
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/popularization/metaverse/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">元宇宙，是炒作还是机遇？</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/system_design/short_url/">
+            <span class="next-text nav-default">后端面试之系统设计-短网址（Short URL）服务怎么设计？</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

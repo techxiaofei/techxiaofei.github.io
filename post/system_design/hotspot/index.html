@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>谈一谈热点Key解决方案 - 码农在新加坡的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：码农在新加坡的个人博客 背景 最近不少人问我，怎么解决热点Key问题。我说，你提到这个我可就不困了。因为刚好，我手上的两个业务都有实现" /><meta name="keywords" content="系统设计" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/system_design/hotspot/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="谈一谈热点Key解决方案" />
+<meta property="og:description" content="原文地址：码农在新加坡的个人博客 背景 最近不少人问我，怎么解决热点Key问题。我说，你提到这个我可就不困了。因为刚好，我手上的两个业务都有实现" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/system_design/hotspot/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-27T13:00:51+08:00" />
+<meta property="article:modified_time" content="2022-04-27T13:00:51+08:00" />
+
+<meta itemprop="name" content="谈一谈热点Key解决方案">
+<meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 最近不少人问我，怎么解决热点Key问题。我说，你提到这个我可就不困了。因为刚好，我手上的两个业务都有实现"><meta itemprop="datePublished" content="2022-04-27T13:00:51+08:00" />
+<meta itemprop="dateModified" content="2022-04-27T13:00:51+08:00" />
+<meta itemprop="wordCount" content="3011">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="谈一谈热点Key解决方案"/>
+<meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 背景 最近不少人问我，怎么解决热点Key问题。我说，你提到这个我可就不困了。因为刚好，我手上的两个业务都有实现"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">码农在新加坡的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">码农在新加坡的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">谈一谈热点Key解决方案</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-04-27 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/"> 系统设计 </a>
+            <a href="/categories//"> 　 </a>
+            </div>
+          <span class="more-meta"> 约 3011 字 </span>
+          <span class="more-meta"> 预计阅读 7 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a>
+      <ul>
+        <li><a href="#什么是热点key">什么是热点Key？</a></li>
+        <li><a href="#热点key问题的危害">热点Key问题的危害</a></li>
+      </ul>
+    </li>
+    <li><a href="#解决方案">解决方案</a>
+      <ul>
+        <li><a href="#方案一内存lru缓存">方案一：内存LRU缓存</a>
+          <ul>
+            <li><a href="#电商大促">电商大促</a></li>
+            <li><a href="#微博热搜">微博热搜</a></li>
+          </ul>
+        </li>
+        <li><a href="#方案二热点数据分片">方案二：热点数据分片</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>原文地址：<a href="https://leftpocket.cn/post/system_design/hotspot/">码农在新加坡的个人博客</a></p>
+<h1 id="背景">背景</h1>
+<p>最近不少人问我，怎么解决热点Key问题。我说，你提到这个我可就不困了。因为刚好，我手上的两个业务都有实现热点Key解决方案并且使用了不同的方案。</p>
+<p>我们的这两个服务都是支持百万级别QPS的服务，对热点Key的处理也算是经得起高并发的考验。</p>
+<p>所以我就通过我们这两个服务，来谈谈热点Key的解决方案。</p>
+<h2 id="什么是热点key">什么是热点Key？</h2>
+<p>就是对后端业务来说我们储存了有很多的数据量，但是单个数据的访问突然变大，导致后端的缓存/储存等无法承载，从而拖垮整个系统。</p>
+<p>常见的一些热点事件，例如：双十一期间某些热门商品的降价促销，当这其中的某一件商品被数万次点击浏览或者购买时，会形成一个较大的需求量，这种情况下就会造成热点问题。</p>
+<p>还比如：热卖商品、热点新闻、热点评论、明星直播，微博爆炸新闻等。像微博某个明星出了某个瓜，立刻就形成热点事件，然后微博服务直接宕机，无法访问。这就是热点数据没有处理好导致的问题。</p>
+<h2 id="热点key问题的危害">热点Key问题的危害</h2>
+<ul>
+<li>流量集中，达到物理网卡上限。</li>
+<li>请求过多，缓存分片服务被打垮。</li>
+<li>DB击穿，引起业务雪崩。</li>
+</ul>
+<p>当某一热点Key 的请求在某一主机上超过该主机网卡上限时，由于流量的过度集中，会导致服务器中其它服务无法进行。</p>
+<p>如果热点过于集中，热点Key 的请求过多，超过上限时，就会导致缓存分片服务被打垮现象的产生。</p>
+<p>当缓存服务崩溃后，此时再有请求产生，会缓存到后台 DB 上，由于DB 本身性能较弱，在面临大请求时很容易发生请求穿透现象，会进一步导致雪崩现象，严重影响设备的性能。</p>
+<h1 id="解决方案">解决方案</h1>
+<h2 id="方案一内存lru缓存">方案一：内存LRU缓存</h2>
+<p>这个方案可以看我的另外一篇文章：<a href="https://www.leftpocket.cn/post/system_design/lru/">LRU缓存机制，你想知道的这里都有</a></p>
+<h3 id="电商大促">电商大促</h3>
+<p>大促期间秒杀促销或者人气店铺</p>
+<p>我们在实际业务中使用了LRU缓存，主要是为了解决热点数据的访问问题。</p>
+<p>我们的服务储存了买家/卖家的一些属性，比如卖家的优惠券就算一种。</p>
+<p>但是在一些大促活动期间（双11等），有些热门卖家店铺的访问量就非常高，就导致了一些热点数据，其中几个Redis节点的CPU就直接100%使用率。</p>
+<p>于是我们针对这类的热点数据，我们让它通过LRU缓存，来极大的缓解Redis和MySQL的压力。</p>
+<p><img src="/img/system_design/hot_key/lru_structure.png" alt="LRU1"></p>
+<p>如图：</p>
+<ul>
+<li>我们主要数据储存在DB，并缓存在Redis里面。使用Redis集群来分散储存数据。</li>
+<li>当有一个热点Key落在Redis集群的某个节点上。在活动期间，用户都来访问这个key，导致某个Redis单节点CPU瞬间飙升，这个节点的访问就会极其缓慢，导致所有落到这个节点的请求都变慢。最坏情况可能会导致缓存服务崩溃，请求直接落在DB上，DB崩溃，整个服务崩溃。</li>
+</ul>
+<p>在双十一的零点，我们发现Redis某一个节点瞬间CPU到达100%，然后通过log分析，是一家卖苹果商品的店铺产生了热点数据。</p>
+<p>所以我们加了个优化。加入内存LRU缓存。把所有的卖家都经过内存LRU缓存。通过LRU的机制，过滤出最频繁使用的数据常驻内存。</p>
+<p>难点在于怎么区分热点数据，有两种方式：</p>
+<ul>
+<li>我们可以在服务端设置一些规则区分热点，比如我们的数据区分卖家和买家，热点数据基本都在卖家上，所以我们把卖家数据都认为是热点数据。因为我们使用了LRU，他会再次过滤真正的热点。</li>
+<li>也可以在API请求中加入一个标记来告诉服务端这个请求的数据当作热点数据来处理，比如我们的促销页面，秒杀页面的请求就可以自动带有这个标记。服务端收到这个标记，就把对应的数据放入LRU中。</li>
+<li>其他数据不会经过LRU。</li>
+</ul>
+<p>当请求到达的时候，就看是否匹配热点标记（服务端标记+客户端标记），如果是热点数据，查询LRU缓存，如果命中直接返回。
+不命中就继续向Redis读取，并写入LRU，Redis如果也不命中就向MySQL读取，写入Redis。这样层层的方式，可以极大的减轻Redis和MySQL的压力。</p>
+<p><img src="/img/algorithm/lru_4.png" alt="LRU1"></p>
+<p>我们优化之后，Redis非常稳定，再也没出现过单节点CPU过高的情况。</p>
+<h3 id="微博热搜">微博热搜</h3>
+<p>还有一种类似的场景就是微博热搜。
+微博热搜也是一种瞬间大流量的热点数据，经常听到明星的大事件导致微博服务直接宕机，就是热点数据没有处理好的会导致的风险。<br>
+一般可以对从热点页面进入的请求或者被服务器标记为热点的事件，都当做是热点数据，经过LRU缓存。</p>
+<p>当然了，具体的案例具体问题，热点储存本身不难，主要是你怎么预先识别哪些数据是热点数据。</p>
+<h2 id="方案二热点数据分片">方案二：热点数据分片</h2>
+<p>我们还有一个服务使用了不一样的做法，使用了热点数据分片。</p>
+<p>比如我们有一个<code>分布式的服务</code>，使用了<code>Redis集群</code>作为后端储存/缓存。同时我们有一个admin复制设置哪些实体是热点数据。</p>
+<p>这个场景的热点数据是固定的，比如给某个商家配置了一个促销活动。在促销活动期间，这个商家就是热点的商家。这种热点非常明确。</p>
+<p>比如正常的key是<code>user_info_123456</code>，那么对于热点数据，我们就给他分片：<code>user_info_123456_01</code>~<code>user_info_123456_20</code></p>
+<p>不同的Key就通过路由规则分散储存在不同的Redis节点上。</p>
+<p>我们的Redis节点储存了三类数据。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Key: user_info_{id} // 1. 非热点数据
+Key: user_info_{id}_[1,20]  // 2. 热点数据，会分散在不同的Redis节点上。
+Key: hot_key_list  // 3. 具体的热点key的列表，分布式服务器会定时拉取这个列表，以便服务器知道哪些Key是热点数据，可以做不同的访问处理。
+
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/img/system_design/hot_key/hot_key_2.png" alt="LRU1"></p>
+<p>一、关于热点Key列表同步。</p>
+<p><strong>问题一</strong>：set_hot_key可能访问任何一台Service，分布式的其他Service怎么知道哪些是hot_key呢？</p>
+<p>数据是储存在Redis里面的，然后每台服务器会<code>定时拉取Redis的数据</code>来保持同步。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Redis:
+key: hot_key_list
+value: &#34;id1:expire_time,id2:expire_time,id3: expire_time,...&#34;
+
+Service:
+hot_key_list = {id1: expire_time, id2: expire_time, id3: expire_time, ...}
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>我们的设置热点数据<code>API:set_hot_key</code>在Service负责从Redis取出热点数据，把新的热点数据放进去并过滤掉过期的数据，然后再写入Redis <code>hot_key_list</code>。</li>
+<li>同时从Redis里面取出具体的数据<code>user_info_{id}</code>，复制多份并对Key使用不同的后缀<code>user_info_{id}_01</code>~<code>user_info_{id}_20</code>，重新写入Redis，此时热点数据就分散储存在不同的节点上了。</li>
+<li>同时我们每一台Service会有一个定时器去Redis读取最新的热点数据的列表 <code>hot_key_list</code>，保存在本服务器内存中。这样就保证了每台Serivce都知道哪些key是热点数据的Key了。</li>
+</ul>
+<p><strong>问题二</strong>：客户端访问数据的时候是怎么处理的？</p>
+<ul>
+<li>如果非热点数据，直接就访问Key: <code>user_info_{id}</code></li>
+<li>如果在内存中查到是热点数据，就对后缀做随机 Key: <code>user_info_{id}_{1~20}</code>, 这样就可以保证每次对热点数据都是随机访问任意一个Key。大大的降低了热点的可能。</li>
+</ul>
+<p>这就需要客户端/管理者知道哪些是热点数据，可以是提前后台配置的，也可以是某个活动事件触发的。我们标记上热点数据和过期时间。就可以在特定的时间把数据当作热点数据储存。防止热点数据导致的单点故障。</p>
+<h1 id="总结">总结</h1>
+<p>在高并发场景下，热点数据是一个很常见的问题，热点数据的解决方案有多种，难点还是要怎么识别哪些数据是热点数据，这样我们才能在热点出现的瞬间，服务器能稳定的处理热点事件。</p>
+<p>而热点数据的难点就是怎么识别哪些数据是热点数据，这种要具体案例具体分析。我们的案例就相对简单，卖家数据是热点，促销界面是热点，秒杀界面是热点，活动界面是热点 等等。</p>
+<p>所以当你遇到热点数据的时候，也要找到一个合适的方式去识别和储存，才能让我们的服务器稳定的服务。</p>
+<p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+<img src="/img/personal/qrcode_2.png" alt="pic"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-04-27
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/mysql/update_optimization/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">MySQL更新优化的几个阶段</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/system_design/unique_id_buffer/">
+            <span class="next-text nav-default">放弃snowflake-我们重新设计了新的分布式ID生成方案</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

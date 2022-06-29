@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git on 码农在新加坡的个人博客</title>
+    <link>https://leftpocket.cn/tags/git/</link>
+    <description>Recent content in git on 码农在新加坡的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 20 Nov 2021 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>git rebase使用详解</title>
+      <link>https://leftpocket.cn/post/git/git_rebase/</link>
+      <pubDate>Sat, 20 Nov 2021 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/git/git_rebase/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 刚开始接触git的时候只会一些简单的指令，pull, add, commit, merge, push 等几个基础命令就可以了。但是经常使用git后</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>点赞和评论 技术设计与实现 - 码农在新加坡的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：码农在新加坡的个人博客 上篇文章介绍了朋友圈的技术设计，这篇将介绍朋友圈点赞和评论的实现方式。 需求介绍 对某条状态实现点赞与取消点赞的" /><meta name="keywords" content="系统设计" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.89.4 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/system_design/friends_comment_like/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="点赞和评论 技术设计与实现" />
+<meta property="og:description" content="原文地址：码农在新加坡的个人博客 上篇文章介绍了朋友圈的技术设计，这篇将介绍朋友圈点赞和评论的实现方式。 需求介绍 对某条状态实现点赞与取消点赞的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/system_design/friends_comment_like/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-01-22T13:00:51+08:00" />
+<meta property="article:modified_time" content="2021-01-22T13:00:51+08:00" />
+
+<meta itemprop="name" content="点赞和评论 技术设计与实现">
+<meta itemprop="description" content="原文地址：码农在新加坡的个人博客 上篇文章介绍了朋友圈的技术设计，这篇将介绍朋友圈点赞和评论的实现方式。 需求介绍 对某条状态实现点赞与取消点赞的"><meta itemprop="datePublished" content="2021-01-22T13:00:51+08:00" />
+<meta itemprop="dateModified" content="2021-01-22T13:00:51+08:00" />
+<meta itemprop="wordCount" content="2674">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="点赞和评论 技术设计与实现"/>
+<meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 上篇文章介绍了朋友圈的技术设计，这篇将介绍朋友圈点赞和评论的实现方式。 需求介绍 对某条状态实现点赞与取消点赞的"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">码农在新加坡的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">码农在新加坡的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">点赞和评论 技术设计与实现</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-01-22 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/"> 系统设计 </a>
+            </div>
+          <span class="more-meta"> 约 2674 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#需求介绍">需求介绍</a></li>
+    <li><a href="#技术分析">技术分析</a>
+      <ul>
+        <li><a href="#原始方案">原始方案</a>
+          <ul>
+            <li><a href="#定义结构">定义结构</a></li>
+            <li><a href="#需求分析">需求分析</a></li>
+          </ul>
+        </li>
+        <li><a href="#进阶方案">进阶方案</a>
+          <ul>
+            <li><a href="#redis-string">Redis String</a></li>
+            <li><a href="#redis-zset">Redis ZSet</a></li>
+          </ul>
+        </li>
+        <li><a href="#问题总结">问题总结</a></li>
+        <li><a href="#数据一致性">数据一致性</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>原文地址：<a href="https://leftpocket.cn/post/system_design/friends_comment_like/">码农在新加坡的个人博客</a></p>
+<p>上篇文章介绍了朋友圈的技术设计，这篇将介绍朋友圈点赞和评论的实现方式。</p>
+<h1 id="需求介绍">需求介绍</h1>
+<ul>
+<li>对某条状态实现点赞与取消点赞的功能。</li>
+<li>点赞列表按时间从小到大排序。</li>
+<li>点赞列表支持分页查询。</li>
+<li>对某条状态实现评论和删除评论的功能。</li>
+<li>评论列表按时间从小到大排序。</li>
+<li>评论列表支持分页查询。</li>
+</ul>
+<h1 id="技术分析">技术分析</h1>
+<h2 id="原始方案">原始方案</h2>
+<p>由于评论和点赞的数据量可能非常大，所以一开始用了缓存来降低DB的查询频率。
+Cache更新策略采用了监听MySQL的Binlog来更新Cache的方式，而不是应用层在写DB的时候同步写Cache的方式。
+因为这样可以把DB写入和Cache写入解耦，应用层只用关注DB的写入，把Cache当作DB的一个Slave一样同步更新。</p>
+<p>由于点赞和评论系统基本一致，评论会稍微略复杂，因为多了一个评论内容。这里就以评论系统为例，看一下整个系统如何设计。</p>
+<h3 id="定义结构">定义结构</h3>
+<p>首先看一下数据储存格式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="o">`</span><span class="n">comment_tab</span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span><span class="w">  </span><span class="o">`</span><span class="n">comment_id</span><span class="o">`</span><span class="w"> </span><span class="nb">bigint</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="n">unsigned</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="o">`</span><span class="n">userid</span><span class="o">`</span><span class="w"> </span><span class="nb">bigint</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="n">unsigned</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="o">`</span><span class="n">activity_id</span><span class="o">`</span><span class="w"> </span><span class="nb">bigint</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="n">unsigned</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="o">`</span><span class="k">comment</span><span class="o">`</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="o">`</span><span class="n">update_time</span><span class="o">`</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="s1">&#39;update time&#39;</span><span class="p">,</span><span class="w">
+</span><span class="w">  </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="o">`</span><span class="n">comment_id</span><span class="o">`</span><span class="p">),</span><span class="w">
+</span><span class="w">  </span><span class="k">KEY</span><span class="w"> </span><span class="o">`</span><span class="n">idx_activity_id</span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="o">`</span><span class="n">activity_id</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">update_time</span><span class="o">`</span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8mb4</span><span class="w"> </span><span class="k">COLLATE</span><span class="o">=</span><span class="n">utf8mb4_unicode_ci</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>并定义了protobuf映射comment_tab的一行数据。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">//protobuf类型，序列化
+</span><span class="c1"></span><span class="nx">message</span> <span class="nx">CommentData</span> <span class="p">{</span>
+    <span class="nx">optional</span> <span class="kt">int64</span> <span class="nx">comment_id</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">//unique id
+</span><span class="c1"></span>    <span class="nx">optional</span> <span class="kt">int64</span> <span class="nx">userid</span> <span class="p">=</span> <span class="mi">2</span><span class="p">;</span>  <span class="c1">//the userid who comment to this activity
+</span><span class="c1"></span>    <span class="nx">optional</span> <span class="kt">int64</span> <span class="nx">activity_id</span> <span class="p">=</span> <span class="mi">3</span><span class="p">;</span>  <span class="c1">// the activity id you comment
+</span><span class="c1"></span>    <span class="nx">optional</span> <span class="kt">string</span> <span class="nx">comment</span> <span class="p">=</span> <span class="mi">4</span><span class="p">;</span>  <span class="c1">//the real comment text
+</span><span class="c1"></span>    <span class="nx">optional</span> <span class="kt">int32</span> <span class="nx">update_time</span> <span class="p">=</span> <span class="mi">5</span><span class="p">;</span>  <span class="c1">// the comment timestamp(second)
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="需求分析">需求分析</h3>
+<ol>
+<li>获取评论列表，支持分页。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Request:
+    activity_id,
+    cursor,  //cursor默认为0，下次请求的cursor为上次返回的cursor以便可以分页向后查找。
+    limit,  //每次查询的次数。
+
+Response:
+    Array of CommentData
+    cursor
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>增加评论。</li>
+<li>删除评论。</li>
+</ol>
+<p>设计图如下：
+<img src="/img/system_design/get_comment_v1.png" alt="原始方案"></p>
+<p>解释一下上图的缓存设计，这里设计了两层Cache。</p>
+<p><strong>Memcached</strong></p>
+<pre><code>Key: comment_id
+Value: Marshal(CommentData)
+</code></pre>
+<p>代表的是某一条Comment数据的序列化。</p>
+<p><strong>Redis ZSet</strong></p>
+<pre><code>Key: activity_id
+-- member: comment_id
+-- score: update_time
+</code></pre>
+<p>代表的是某一条activity_id所有的comment，按score(update_time)排序。可以很方便的支持分页。</p>
+<p>我们的DB使用了TiDB，兼容绝大部分MySQL语法，是分布式的数据库，数据量大的时候使用TiDB更加高校，可以支持方便扩容。
+但是跟DBA讨论之后，DBA不赞同这种实现方式，他们认为社交场景下流量峰值是不可控的，比如微博热门事件经常会导致服务不可用。</p>
+<ol>
+<li>直接同步写DB会导致DB压力会非常大，他们建议我们使用内存数据库作为真实数据源，并且异步备份存到TiDB上，这样DB的写入QPS可控。所有读的流量只经过内存数据库(Redis)而不经过TiDB。</li>
+<li>TiDB的Binlog不稳定，不建议使用。（原因?  <a href="https://pingcap.com/blog/tidb-binlog-architecture-evolution-and-implementation-principles">TiDB binglog</a>  ）。</li>
+</ol>
+<h2 id="进阶方案">进阶方案</h2>
+<p>此方案下我们使用Redis的持久化模式作为数据源，然后异步备份到TiDB。
+<img src="/img/system_design/get_comment_v2.png" alt="进阶方案"></p>
+<p>此方案使用了异步写入DB的方式，可以流量消峰，应用层使用Redis来服务用户，并使用Redis的String类型代替Memcached(因为Memcached不支持持久化)， Redis作为内存数据库，查询速度非常快。
+只是在数据量非常大的情况下，需要申请非常多的内存资源。</p>
+<p>在这里我们需要两种类型的数据来储存评论的数据。</p>
+<h3 id="redis-string">Redis String</h3>
+<p>Key: comment_id;
+Value: proto.Marshal(CommentData)</p>
+<h3 id="redis-zset">Redis ZSet</h3>
+<p>Key: activity_id;
+&ndash; member: userid;
+&ndash; score: update_time;</p>
+<p><a href="https://redis.io/commands/zrevrangebyscore">ZRevRangeByScore</a></p>
+<p>比如每次查询limit=100, 那我想要查询下100个怎么办呢，需要把上次返回的最后一个的score作为cursor返回，这样下次查询带着这个cursor查找。
+因为ZRevRangeByScore以及其他类似的Cmd都是支持Max,Min,Limit等查询参数的。
+在这里，Max: &ldquo;(curosr&rdquo;, Limit: &ldquo;100&rdquo;.</p>
+<h2 id="问题总结">问题总结</h2>
+<p>到这里已经有一个相对完整的技术方案了，但是这个方案还有一些问题。</p>
+<ol>
+<li>使用update_time作为score, 由于update_time是second级别，有很大的概率重复(多个用户同时评论同一个activity_id).
+这会导致分页查询的时候会导致数据数据重复或者遗漏。（因为我们比较的时候是用大小比较的）。
+这有人就问了，为什么不直接用Offset和Limit呢，这样每次直接从指定位置查询。不用管score的大小，重复也没关系。
+这种方案会有两种问题：</li>
+<li>如果你分页向下查找的过程中，有了一条新的评论。比如你第一次取了1-100，第二次取101-200，在你第一二次之间有一个新的评论进来，由于它是最新的，会变成1号评论，所有其他的评论都会下降1位，导致你第二次取101-200中的101是上次的100. 导致重复。使用cursor使用score比较的，不会出现这个问题。</li>
+<li>拉取列表的时候，有可能有一些过滤条件，比如，只有你的好友的评论才能展示，那有些评论可能就需要过滤掉。你只显示了100条，但是实际上可能在Redis里面查询了351条。下次需要从352条开始查。你怎么把offset=101根352映射起来呢。</li>
+</ol>
+<p>所以我们才用了cursor的方式，无论是查询DB还是查询Redis都是一种比Offset更好的解决方案。可能他的缺点就是规则要固定，不能这次我用update_time排序，下次我用userid排序这种情况。</p>
+<p>使用cursor怎么解决这种情况呢，有人可能会说，可以把timestamp改为int64的nanosecond啊，这种方案跟我们下面的方案有着同样的问题。</p>
+<p>我根据snowflake算法把update_time变成一个int64的唯一的随update_time递增的ID。
+snowflake算法介绍如下：
+<a href="http://leftpocket.tk/post/snowflake/">snowflake</a>
+心想，这样终于能解决问题了吧，cursor变成了唯一的值，每次使用上次返回的最后一个cursor来查询下次的分页数据，应该不会重复了吧。
+然后问题又出现了，依然出现了重复。
+查看Redis ZSet数据如图：
+<img src="/img/system_design/redis_zset_float.png" alt="Redis ZSet精度">
+最后在Redis的官方文档上发现了以下的话。</p>
+<pre><code>Range of integer scores that can be expressed precisely
+Redis sorted sets use a double 64-bit floating point number to represent the score. In all the architectures we support, this is represented as an IEEE 754 floating point number, that is able to represent precisely integer numbers between -(2^53) and +(2^53) included. In more practical terms, all the integers between -9007199254740992 and 9007199254740992 are perfectly representable. Larger integers, or fractions, are internally represented in exponential form, so it is possible that you get only an approximation of the decimal number, or of the very big integer, that you set as score
+</code></pre>
+<p>是的，score采用了 double 64-bit floating point number. 支持的int最大值是(2^53-1)
+所以我改造了以下snowflake算法。
+<a href="http://leftpocket.tk/post/redis-zset-score/">Redis ZSET问题分析及解决方案</a></p>
+<ol start="2">
+<li>另外，由于前端调用我们的借口使用了json的序列化方式。
+可以看到JavaScript同样使用了IEEE 754，也就是说也只是支持到(2^53-1)的最大值。</li>
+</ol>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER">Javascript Number.MAX_SAFE_INTEGER</a>
+所以大于(2^53-1)的数是不能正常的序列化和反序列化的。</p>
+<h2 id="数据一致性">数据一致性</h2>
+<p>我们先保证了Redis数据更新成功，然后使用MQ异步写入TiDB，怎么保证Redis数据和TiDB的数据的一致性呢。
+进阶方案好像并没有使用TiDB，那把数据写入TiDB有什么用呢。</p>
+<ol>
+<li>以防Redis故障可以从TiDB导入数据。</li>
+<li>TiDB数据方便做数据分析和统计。</li>
+</ol>
+<p>&lt;全文完&gt;</p>
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+<img src="/img/personal/qrcode_2.png" alt="pic"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-01-22
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/system_design/bloom_filter/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">5分钟搞懂布隆过滤器，掌握亿级数据过滤算法</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/others/vscode_leetcode/">
+            <span class="next-text nav-default">vscode配置leetcode插件</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="left-pocket/left-pocket.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
