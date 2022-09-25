@@ -6,22 +6,40 @@
     <description>Recent content in Categories on 码农在新加坡的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 10 May 2022 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 06 Jul 2022 00:00:00 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>后端通用技术</title>
-      <link>https://leftpocket.cn/categories/%E5%90%8E%E7%AB%AF%E9%80%9A%E7%94%A8%E6%8A%80%E6%9C%AF/</link>
-      <pubDate>Tue, 10 May 2022 13:00:51 +0800</pubDate>
+      <title>面试</title>
+      <link>https://leftpocket.cn/categories/%E9%9D%A2%E8%AF%95/</link>
+      <pubDate>Wed, 06 Jul 2022 00:00:00 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/categories/%E5%90%8E%E7%AB%AF%E9%80%9A%E7%94%A8%E6%8A%80%E6%9C%AF/</guid>
+      <guid>https://leftpocket.cn/categories/%E9%9D%A2%E8%AF%95/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Golang</title>
       <link>https://leftpocket.cn/categories/golang/</link>
-      <pubDate>Fri, 06 May 2022 00:00:51 +0800</pubDate>
+      <pubDate>Sat, 02 Jul 2022 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/categories/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>https://leftpocket.cn/categories/hugo/</link>
+      <pubDate>Fri, 01 Jul 2022 01:01:55 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/categories/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>后端通用技术</title>
+      <link>https://leftpocket.cn/categories/%E5%90%8E%E7%AB%AF%E9%80%9A%E7%94%A8%E6%8A%80%E6%9C%AF/</link>
+      <pubDate>Tue, 10 May 2022 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/categories/%E5%90%8E%E7%AB%AF%E9%80%9A%E7%94%A8%E6%8A%80%E6%9C%AF/</guid>
       <description></description>
     </item>
     
@@ -71,15 +89,6 @@
     </item>
     
     <item>
-      <title>面试</title>
-      <link>https://leftpocket.cn/categories/%E9%9D%A2%E8%AF%95/</link>
-      <pubDate>Thu, 23 Dec 2021 00:00:00 +0800</pubDate>
-      
-      <guid>https://leftpocket.cn/categories/%E9%9D%A2%E8%AF%95/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Redis</title>
       <link>https://leftpocket.cn/categories/redis/</link>
       <pubDate>Thu, 09 Dec 2021 00:00:51 +0800</pubDate>
@@ -103,15 +112,6 @@
       <pubDate>Fri, 03 Dec 2021 14:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>hugo</title>
-      <link>https://leftpocket.cn/categories/hugo/</link>
-      <pubDate>Thu, 02 Dec 2021 01:04:55 +0800</pubDate>
-      
-      <guid>https://leftpocket.cn/categories/hugo/</guid>
       <description></description>
     </item>
     

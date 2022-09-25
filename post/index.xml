@@ -6,7 +6,34 @@
     <description>Recent content in Posts on 码农在新加坡的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 10 May 2022 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 06 Jul 2022 00:00:00 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>关于面试中经常出现的根据一个随机数构造另外的随机数的解法</title>
+      <link>https://leftpocket.cn/post/interview/rand/</link>
+      <pubDate>Wed, 06 Jul 2022 00:00:00 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/interview/rand/</guid>
+      <description>背景 之前做了一些Tencent及几家公司的面试题，发现有一种关于产生随机数的类型的题目。看到多有大牛们做出来，而且效率很高，也有不知道怎么做</description>
+    </item>
+    
+    <item>
+      <title>Golang参数值传递还是引用传递</title>
+      <link>https://leftpocket.cn/post/golang/pass_by_value/</link>
+      <pubDate>Sat, 02 Jul 2022 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/golang/pass_by_value/</guid>
+      <description>背景 先说结论，Go里面没有引用传递，Go语言是值传递。对这个有不同意见的，请往下看。 值传递 形参是实参的拷贝，改变形参的值并不会影响外部实参的</description>
+    </item>
+    
+    <item>
+      <title>从零开始搭建个人博客（六）- 接入google adsense广告</title>
+      <link>https://leftpocket.cn/post/hugo/hugo_adsense/</link>
+      <pubDate>Fri, 01 Jul 2022 01:01:55 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/hugo/hugo_adsense/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 网站建好了，也小有流量了，下一步就可以申请Google Adsense了，简单来说就是允许谷歌在你的网站上</description>
+    </item>
+    
     <item>
       <title>protobuf是怎么序列化的</title>
       <link>https://leftpocket.cn/post/protobuf/protobuf/</link>
@@ -26,7 +53,7 @@
     </item>
     
     <item>
-      <title>终于拿到新加坡PR-2022</title>
+      <title>[2022] 终于拿到新加坡PR，记录一下</title>
       <link>https://leftpocket.cn/post/singapore_life/pr/</link>
       <pubDate>Sat, 30 Apr 2022 00:00:51 +0800</pubDate>
       
@@ -356,15 +383,6 @@
       
       <guid>https://leftpocket.cn/post/system_design/snowflake/</guid>
       <description>原文地址：码农在新加坡的个人博客 背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一。我们称之为分布式ID，分布式ID需</description>
-    </item>
-    
-    <item>
-      <title>Centos7安装SSR教程</title>
-      <link>https://leftpocket.cn/post/others/ssr_centos7/</link>
-      <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
-      
-      <guid>https://leftpocket.cn/post/others/ssr_centos7/</guid>
-      <description>原文地址：码农在新加坡的个人博客 记录一下在centos7下安装ssr(shadowsocksr)的教程。 安装必要依赖包 1 2 3 4 5 yum install git -y yum install</description>
     </item>
     
     <item>

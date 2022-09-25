@@ -6,7 +6,16 @@
     <description>Recent content in Golang on 码农在新加坡的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 06 May 2022 00:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/golang/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Jul 2022 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/golang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Golang参数值传递还是引用传递</title>
+      <link>https://leftpocket.cn/post/golang/pass_by_value/</link>
+      <pubDate>Sat, 02 Jul 2022 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/golang/pass_by_value/</guid>
+      <description>背景 先说结论，Go里面没有引用传递，Go语言是值传递。对这个有不同意见的，请往下看。 值传递 形参是实参的拷贝，改变形参的值并不会影响外部实参的</description>
+    </item>
+    
     <item>
       <title>Golang time.After内存泄漏分析</title>
       <link>https://leftpocket.cn/post/golang/time_after/</link>

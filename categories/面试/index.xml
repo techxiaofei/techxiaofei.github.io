@@ -6,7 +6,16 @@
     <description>Recent content in 面试 on 码农在新加坡的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 23 Dec 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/%E9%9D%A2%E8%AF%95/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 06 Jul 2022 00:00:00 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/%E9%9D%A2%E8%AF%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>关于面试中经常出现的根据一个随机数构造另外的随机数的解法</title>
+      <link>https://leftpocket.cn/post/interview/rand/</link>
+      <pubDate>Wed, 06 Jul 2022 00:00:00 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/interview/rand/</guid>
+      <description>背景 之前做了一些Tencent及几家公司的面试题，发现有一种关于产生随机数的类型的题目。看到多有大牛们做出来，而且效率很高，也有不知道怎么做</description>
+    </item>
+    
     <item>
       <title>后端面试之系统设计-短网址（Short URL）服务怎么设计？</title>
       <link>https://leftpocket.cn/post/system_design/short_url/</link>

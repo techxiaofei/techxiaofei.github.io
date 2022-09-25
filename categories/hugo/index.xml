@@ -6,7 +6,16 @@
     <description>Recent content in hugo on 码农在新加坡的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 02 Dec 2021 01:04:55 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Jul 2022 01:01:55 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>从零开始搭建个人博客（六）- 接入google adsense广告</title>
+      <link>https://leftpocket.cn/post/hugo/hugo_adsense/</link>
+      <pubDate>Fri, 01 Jul 2022 01:01:55 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/hugo/hugo_adsense/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 网站建好了，也小有流量了，下一步就可以申请Google Adsense了，简单来说就是允许谷歌在你的网站上</description>
+    </item>
+    
     <item>
       <title>从零开始搭建个人博客（五）- 申请免费域名并绑定到个人博客</title>
       <link>https://leftpocket.cn/post/hugo/hugo_dns/</link>
