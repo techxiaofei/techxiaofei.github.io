@@ -49,7 +49,7 @@
       <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/mysql/db_tidb_write_conflict/</guid>
-      <description>原文地址：码农在新加坡的个人博客 背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了write conflict. 1 2 3 4 5 [2020/08/2506:01:44.781+08:00][WARN][session.go:623][retrying][conn=26799778][schemaVersion=194][retryCnt=0][queryNum=0][sql=&amp;#34;UPDATE user_tab SET `region` = ?, `status` = ?, `update_time` =</description>
+      <description>原文地址：码农在新加坡的个人博客 背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了write conflict. 1 2 3 4 5 [2020/08/25 06:01:44.781 +08:00] [WARN] [session.go:623] [retrying] [conn=26799778] [schemaVersion=194] [retryCnt=0] [queryNum=0] [sql=&amp;#34;UPDATE</description>
     </item>
     
   </channel>

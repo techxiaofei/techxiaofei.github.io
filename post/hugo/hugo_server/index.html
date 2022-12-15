@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>从零开始搭建个人博客（六）- hugo静态博客搭建到腾讯云 - 码农在新加坡的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：码农在新加坡的个人博客 背景 之前讲解了把hugo静态博客部署到Github Pages和Vercel上。由于最近活动腾讯云服务器打折，" /><meta name="keywords" content="hugo" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+<meta name="msvalidate.01" content="9CB8E7A6AD8ADF22F9ED93166445E5B9" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ3LW65VYR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QZ3LW65VYR');
+</script>
+
+
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/hugo/hugo_server/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="从零开始搭建个人博客（六）- hugo静态博客搭建到腾讯云" />
+<meta property="og:description" content="原文地址：码农在新加坡的个人博客 背景 之前讲解了把hugo静态博客部署到Github Pages和Vercel上。由于最近活动腾讯云服务器打折，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/hugo/hugo_server/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-09-24T01:01:55+08:00" />
+<meta property="article:modified_time" content="2022-09-24T01:01:55+08:00" />
+<meta itemprop="name" content="从零开始搭建个人博客（六）- hugo静态博客搭建到腾讯云">
+<meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 之前讲解了把hugo静态博客部署到Github Pages和Vercel上。由于最近活动腾讯云服务器打折，"><meta itemprop="datePublished" content="2022-09-24T01:01:55+08:00" />
+<meta itemprop="dateModified" content="2022-09-24T01:01:55+08:00" />
+<meta itemprop="wordCount" content="909">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="从零开始搭建个人博客（六）- hugo静态博客搭建到腾讯云"/>
+<meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 背景 之前讲解了把hugo静态博客部署到Github Pages和Vercel上。由于最近活动腾讯云服务器打折，"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">码农在新加坡的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">码农在新加坡的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">从零开始搭建个人博客（六）- hugo静态博客搭建到腾讯云</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-09-24 </span>
+        <div class="post-category">
+            <a href="/categories/hugo/"> hugo </a>
+            </div>
+          <span class="more-meta"> 约 909 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#软件安装">软件安装</a>
+      <ul>
+        <li><a href="#安装hugo-不需要">安装hugo (不需要)</a></li>
+        <li><a href="#安装nginx">安装nginx</a></li>
+        <li><a href="#上传网站html">上传网站HTML</a></li>
+        <li><a href="#配置网站根目录">配置网站根目录</a></li>
+        <li><a href="#安装证书">安装证书</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>原文地址：<a href="https://leftpocket.cn/post/hugo/hugo_server/">码农在新加坡的个人博客</a></p>
+<h1 id="背景">背景</h1>
+<p>之前讲解了把hugo静态博客部署到Github Pages和Vercel上。由于最近活动腾讯云服务器打折，所以我花了58元买了一年的轻量级服务器，并准备把服务器部署到我的腾讯云上。</p>
+<h1 id="软件安装">软件安装</h1>
+<h2 id="安装hugo-不需要">安装hugo (不需要)</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://github.com/gohugoio/hugo/releases   // 下载最新版本的hugo
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">wget https://github.com/gohugoio/hugo/releases/download/v0.81.0/hugo_0.81.0_Linux-64bit.tar.gz
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">tar -zxvf hugo_0.81.0_Linux-64bit.tar.gz  // 解压下来就是hugo的可执行程序
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cp ../lighthouse/hugo /usr/local/bin     // 复制到/user/local/bin 目录，这样可以在任意目录执行hugo
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">hugo version  //查看hugo 版本
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="安装nginx">安装nginx</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo yum install -y nginx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">systemctl start nginx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">http://a.b.c.d  // 浏览器输入IP
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以打开说明安装成功了。</p>
+<h2 id="上传网站html">上传网站HTML</h2>
+<p>我们可以手动上传，也可以通过git从github下载。我这边使用的hugo搭建的个人博客，内容都有上川岛github，直接git clone即可</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git clone git@github.com:left-pocket/left-pocket.github.io.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="配置网站根目录">配置网站根目录</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">vim /etc/nginx/nginx.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>配置网站根目录
+修改root为你的hugo的根目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">user root;  //改为root避免权限问题，不然会可能无权限。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">root  /home/mjf/blog/left-pocket.github.io;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">systemctl start nginx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此时输入上面的<code>http://a.b.c.d</code>就可以看到你的博客了。</p>
+<p>但是现在还不够，因为我们目前只能通过HTTP访问，如果通过https+域名访问，需要安装证书。</p>
+<h2 id="安装证书">安装证书</h2>
+<p>安装SSL证书
+<a href="https://cloud.tencent.com/document/product/1207/47027">https://cloud.tencent.com/document/product/1207/47027</a></p>
+<p>申请免费证书：https://console.cloud.tencent.com/ssl/dsc/apply</p>
+<p>需要给你的域名添加<code>手动DNS验证</code>，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">请前往域名 leftpocket.cn 对应的DNS服务商为域名添加如下解析记录
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我的域名在阿里云买的，服务器在腾讯云买的。我去阿里云那边给域名添加CNAME记录。
+<img src="/img/hugo/hugo_verification.png" alt="Ver"></p>
+<p>填写你的域名等信息，就可以下载证书了。</p>
+<p>然后上传到服务器上。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scp -r ~/Downloads/leftpocket.cn_nginx mjf@ip:/tmp/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cp leftpocket.cn_bundle.crt /etc/nginx/
+</span></span><span class="line"><span class="cl">cp leftpocket.cn.key /etc/nginx/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>配置nginx.conf</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ssl_certificate leftpocket.cn_bundle.crt;   #填写您的证书文件名称，例如：cloud.tencent.com_bundle.crt
+</span></span><span class="line"><span class="cl">ssl_certificate_key leftpocket.cn.key;    #填写您的私钥文件名称，例如：cloud.tencent.com.key
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>重启nginx</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">systemctl restart nginx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果还是解析不到，需要把这个域名添加到<code>/etc/hosts</code>文件里面</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">127.0.0.1 leftpocket.cn
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>根据腾讯云文档来放在指定的目录和配置nginx配置
+<a href="https://cloud.tencent.com/document/product/1207/47027">https://cloud.tencent.com/document/product/1207/47027</a></p>
+<p>安装git
+yum install git</p>
+<p>生成密钥对，添加到github上，然后clone项目
+ssh-keygen -t rsa</p>
+<p>git clone <a href="mailto:git@github.com">git@github.com</a>:left-pocket/left-pocket.github.io.git</p>
+<p>每次pull最新的下来就行</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-09-24
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/personal/wechat_pay.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/personal/alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/others/smtp/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">各大型邮箱smtp服务器及端口</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/interview/rand/">
+            <span class="next-text nav-default">如何用一个1-7随机数生成器制作一个1-8随机数生成器？</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

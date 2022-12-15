@@ -42,7 +42,7 @@
 </script>
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="https://leftpocket.cn/post/cpp/secondary_pointer/" />
@@ -64,7 +64,6 @@
 <meta property="og:url" content="https://leftpocket.cn/post/cpp/secondary_pointer/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-11-21T13:00:51+08:00" />
 <meta property="article:modified_time" content="2021-11-21T13:00:51+08:00" />
-
 <meta itemprop="name" content="二级指针的作用详解">
 <meta itemprop="description" content="原文地址：码农在新加坡的个人博客 一、概念 在如下的A指向B、B指向C的指向关系中： 首先 C是&quot;一段内容&quot;,比如你用mallo"><meta itemprop="datePublished" content="2021-11-21T13:00:51+08:00" />
 <meta itemprop="dateModified" content="2021-11-21T13:00:51+08:00" />
@@ -188,10 +187,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="n">B</span><span class="o">=</span> <span class="mh">0x00000008</span><span class="p">;</span>  <span class="c1">//B的内容 
-</span><span class="c1"></span><span class="o">*</span><span class="n">B</span> <span class="o">=</span> <span class="s">&#34;一段内容&#34;</span><span class="p">;</span>  <span class="c1">//B解引用，也就是B指针指向的C的值
-</span><span class="c1"></span><span class="o">&amp;</span><span class="n">B</span> <span class="o">=</span> <span class="mh">0x00000004</span><span class="p">;</span>  <span class="c1">//B取地址，B的地址是0x00000004
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">B</span><span class="o">=</span> <span class="mh">0x00000008</span><span class="p">;</span>  <span class="c1">//B的内容 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">*</span><span class="n">B</span> <span class="o">=</span> <span class="s">&#34;一段内容&#34;</span><span class="p">;</span>  <span class="c1">//B解引用，也就是B指针指向的C的值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">&amp;</span><span class="n">B</span> <span class="o">=</span> <span class="mh">0x00000004</span><span class="p">;</span>  <span class="c1">//B取地址，B的地址是0x00000004
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><img src="/img/cpp/secondary_pointer.png" alt="pic"></p>
 <p>那么，再来看A：</p>
@@ -204,11 +203,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="o">*</span><span class="n">A</span> <span class="o">=</span> <span class="n">B</span><span class="o">=</span> <span class="mh">0x00000008</span><span class="p">;</span>  <span class="c1">//A解引用也就是B的内容 
-</span><span class="c1"></span><span class="o">**</span><span class="n">A</span> <span class="o">=</span> <span class="o">*</span><span class="n">B</span> <span class="o">=</span> <span class="s">&#34;一段内容&#34;</span><span class="p">;</span>  <span class="c1">//B解引用，也就是B指针指向的C的值
-</span><span class="c1"></span><span class="n">A</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">B</span> <span class="o">=</span> <span class="mh">0x00000004</span><span class="p">;</span>  <span class="c1">//A存的是B的地址，B的地址是0x00000004
-</span><span class="c1"></span><span class="o">&amp;</span><span class="n">A</span> <span class="o">=</span> <span class="mh">0x00000000</span><span class="p">;</span>  <span class="c1">//A取地址
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="o">*</span><span class="n">A</span> <span class="o">=</span> <span class="n">B</span><span class="o">=</span> <span class="mh">0x00000008</span><span class="p">;</span>  <span class="c1">//A解引用也就是B的内容 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">**</span><span class="n">A</span> <span class="o">=</span> <span class="o">*</span><span class="n">B</span> <span class="o">=</span> <span class="s">&#34;一段内容&#34;</span><span class="p">;</span>  <span class="c1">//B解引用，也就是B指针指向的C的值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">A</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">B</span> <span class="o">=</span> <span class="mh">0x00000004</span><span class="p">;</span>  <span class="c1">//A存的是B的地址，B的地址是0x00000004
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">&amp;</span><span class="n">A</span> <span class="o">=</span> <span class="mh">0x00000000</span><span class="p">;</span>  <span class="c1">//A取地址
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="二使用">二、使用</h1>
 <p>二级指针作为函数参数的作用:在函数外部定义一个指针p，在函数内给指针赋值，函数结束后对指针p生效，那么我们就需要二级指针。</p>
@@ -245,34 +244,34 @@
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-
-<span class="kt">int</span> <span class="n">a</span><span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
-<span class="kt">int</span> <span class="o">*</span><span class="n">q</span><span class="p">;</span>
-
-<span class="kt">void</span> <span class="nf">func</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="p">)</span>
-<span class="p">{</span>
-	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;func:&amp;p=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="s">&#34;,p=&#34;</span><span class="o">&lt;&lt;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>  <span class="c1">//note:3
-</span><span class="c1"></span>	<span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span>
-	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;func:&amp;p=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="s">&#34;,p=&#34;</span><span class="o">&lt;&lt;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>  <span class="c1">//note:4
-</span><span class="c1"></span><span class="p">}</span>
-
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-<span class="p">{</span>
-	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;&amp;a=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">a</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;b=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">b</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;q=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>  <span class="c1">//note:1
-</span><span class="c1"></span>	<span class="n">q</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>
-	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;*q=&#34;</span><span class="o">&lt;&lt;*</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,q=&#34;</span><span class="o">&lt;&lt;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;q=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>  <span class="c1">//note:2
-</span><span class="c1"></span>	<span class="n">func</span><span class="p">(</span><span class="n">q</span><span class="p">);</span>
-	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;*q=&#34;</span><span class="o">&lt;&lt;*</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,q=&#34;</span><span class="o">&lt;&lt;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;q=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>  <span class="c1">//note:5
-</span><span class="c1"></span>
-	<span class="n">system</span><span class="p">(</span><span class="s">&#34;pause&#34;</span><span class="p">);</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">a</span><span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="o">*</span><span class="n">q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">func</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;func:&amp;p=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="s">&#34;,p=&#34;</span><span class="o">&lt;&lt;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>  <span class="c1">//note:3
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;func:&amp;p=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="s">&#34;,p=&#34;</span><span class="o">&lt;&lt;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>  <span class="c1">//note:4
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;&amp;a=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">a</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;b=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">b</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;q=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>  <span class="c1">//note:1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">q</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;*q=&#34;</span><span class="o">&lt;&lt;*</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,q=&#34;</span><span class="o">&lt;&lt;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;q=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>  <span class="c1">//note:2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">func</span><span class="p">(</span><span class="n">q</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;*q=&#34;</span><span class="o">&lt;&lt;*</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,q=&#34;</span><span class="o">&lt;&lt;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;q=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>  <span class="c1">//note:5
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="n">system</span><span class="p">(</span><span class="s">&#34;pause&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这么写有什么问题？为什么*q不等于100？我们看一下输出便知：</p>
 <div class="highlight"><div class="chroma">
@@ -284,12 +283,12 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="o">&amp;</span><span class="n">a</span><span class="o">=</span><span class="mf">0032F</span><span class="mo">000</span><span class="p">,</span><span class="o">&amp;</span><span class="n">b</span><span class="o">=</span><span class="mf">0032F</span><span class="mo">004</span><span class="p">,</span><span class="o">&amp;</span><span class="n">q</span><span class="o">=</span><span class="mf">0032F</span><span class="mi">228</span>
-<span class="o">*</span><span class="n">q</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mf">0032F</span><span class="mo">000</span><span class="p">,</span><span class="o">&amp;</span><span class="n">q</span><span class="o">=</span><span class="mf">0032F</span><span class="mi">228</span>
-<span class="nl">func</span><span class="p">:</span><span class="o">&amp;</span><span class="n">p</span><span class="o">=</span><span class="mf">0018F</span><span class="n">D24</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="mf">0032F</span><span class="mo">000</span>
-<span class="nl">func</span><span class="p">:</span><span class="o">&amp;</span><span class="n">p</span><span class="o">=</span><span class="mf">0018F</span><span class="n">D24</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="mf">0032F</span><span class="mo">004</span>
-<span class="o">*</span><span class="n">q</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mf">0032F</span><span class="mo">000</span><span class="p">,</span><span class="o">&amp;</span><span class="n">q</span><span class="o">=</span><span class="mf">0032F</span><span class="mi">228</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="o">&amp;</span><span class="n">a</span><span class="o">=</span><span class="mf">0032F</span><span class="mo">000</span><span class="p">,</span><span class="o">&amp;</span><span class="n">b</span><span class="o">=</span><span class="mf">0032F</span><span class="mo">004</span><span class="p">,</span><span class="o">&amp;</span><span class="n">q</span><span class="o">=</span><span class="mf">0032F</span><span class="mi">228</span>
+</span></span><span class="line"><span class="cl"><span class="o">*</span><span class="n">q</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mf">0032F</span><span class="mo">000</span><span class="p">,</span><span class="o">&amp;</span><span class="n">q</span><span class="o">=</span><span class="mf">0032F</span><span class="mi">228</span>
+</span></span><span class="line"><span class="cl"><span class="nl">func</span><span class="p">:</span><span class="o">&amp;</span><span class="n">p</span><span class="o">=</span><span class="mf">0018F</span><span class="n">D24</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="mf">0032F</span><span class="mo">000</span>
+</span></span><span class="line"><span class="cl"><span class="nl">func</span><span class="p">:</span><span class="o">&amp;</span><span class="n">p</span><span class="o">=</span><span class="mf">0018F</span><span class="n">D24</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="mf">0032F</span><span class="mo">004</span>
+</span></span><span class="line"><span class="cl"><span class="o">*</span><span class="n">q</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mf">0032F</span><span class="mo">000</span><span class="p">,</span><span class="o">&amp;</span><span class="n">q</span><span class="o">=</span><span class="mf">0032F</span><span class="mi">228</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>我们看输出:</p>
 <p>note:1-&gt;a,b,q都有一个地址.</p>
@@ -332,34 +331,34 @@
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-
-<span class="kt">int</span> <span class="n">a</span><span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
-<span class="kt">int</span> <span class="o">*</span><span class="n">q</span><span class="p">;</span>
-
-<span class="kt">void</span> <span class="nf">func</span><span class="p">(</span><span class="kt">int</span> <span class="o">**</span><span class="n">p</span><span class="p">)</span>  <span class="c1">//2
-</span><span class="c1"></span><span class="p">{</span>
-	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;func:&amp;p=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="s">&#34;,p=&#34;</span><span class="o">&lt;&lt;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-	<span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span>  <span class="c1">//3
-</span><span class="c1"></span>	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;func:&amp;p=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="s">&#34;,p=&#34;</span><span class="o">&lt;&lt;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-<span class="p">{</span>
-	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;&amp;a=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">a</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;b=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">b</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;q=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-	<span class="n">q</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>
-	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;*q=&#34;</span><span class="o">&lt;&lt;*</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,q=&#34;</span><span class="o">&lt;&lt;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;q=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-	<span class="n">func</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">);</span>  <span class="c1">//1
-</span><span class="c1"></span>	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;*q=&#34;</span><span class="o">&lt;&lt;*</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,q=&#34;</span><span class="o">&lt;&lt;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;q=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-
-	<span class="n">system</span><span class="p">(</span><span class="s">&#34;pause&#34;</span><span class="p">);</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">a</span><span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="o">*</span><span class="n">q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">func</span><span class="p">(</span><span class="kt">int</span> <span class="o">**</span><span class="n">p</span><span class="p">)</span>  <span class="c1">//2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;func:&amp;p=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="s">&#34;,p=&#34;</span><span class="o">&lt;&lt;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span>  <span class="c1">//3
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;func:&amp;p=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="s">&#34;,p=&#34;</span><span class="o">&lt;&lt;</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;&amp;a=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">a</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;b=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">b</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;q=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">q</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;*q=&#34;</span><span class="o">&lt;&lt;*</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,q=&#34;</span><span class="o">&lt;&lt;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;q=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">func</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">);</span>  <span class="c1">//1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;*q=&#34;</span><span class="o">&lt;&lt;*</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,q=&#34;</span><span class="o">&lt;&lt;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="s">&#34;,&amp;q=&#34;</span><span class="o">&lt;&lt;&amp;</span><span class="n">q</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">system</span><span class="p">(</span><span class="s">&#34;pause&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里只改了三个地方，变成传二级指针。我们再看:</p>
 <p>因为传了指针q的地址(二级指针**p)到函数,所以二级指针拷贝(拷贝的是p,一级指针中拷贝的是q所以才有问题),（拷贝了指针但是指针内容也就是指针所指向的地址是不变的）所以它还是指向一级指针q(*p = q)。在这里无论拷贝多少次，它依然指向q，那么 *p = &amp;b;自然的就是 q = &amp;b;了。</p>
@@ -382,20 +381,20 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span>  <span class="nf">my_malloc</span><span class="p">(</span><span class="kt">char</span> <span class="o">**</span><span class="n">s</span><span class="p">)</span>  
-<span class="p">{</span>  
-	<span class="o">*</span><span class="n">s</span><span class="o">=</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>  
-<span class="p">}</span>  
- 
-<span class="kt">void</span>  <span class="nf">main</span><span class="p">()</span>  
-<span class="p">{</span>  
-	<span class="kt">char</span>  <span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>  
-	<span class="n">my_malloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="p">);</span>
-	<span class="c1">//do something
-</span><span class="c1"></span>	<span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-		<span class="n">free</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>  
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="kt">void</span>  <span class="nf">my_malloc</span><span class="p">(</span><span class="kt">char</span> <span class="o">**</span><span class="n">s</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{</span>  
+</span></span><span class="line"><span class="cl">	<span class="o">*</span><span class="n">s</span><span class="o">=</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>  
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="kt">void</span>  <span class="nf">main</span><span class="p">()</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{</span>  
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span>  <span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">	<span class="n">my_malloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//do something
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="n">free</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里给指针p分配内存，<strong>do something</strong>，然后 <strong>free(p)</strong>，如果用一级指针，那么就相当于给一个p的拷贝s分配内存，p依然没分配内存，用二级指针之后，才对p分配了内存。</p>
 <p>&lt;全文完&gt;</p>
@@ -502,7 +501,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 

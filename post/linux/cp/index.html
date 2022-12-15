@@ -42,7 +42,7 @@
 </script>
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="https://leftpocket.cn/post/linux/cp/" />
@@ -64,7 +64,6 @@
 <meta property="og:url" content="https://leftpocket.cn/post/linux/cp/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-12-07T00:00:00+08:00" />
 <meta property="article:modified_time" content="2021-12-07T00:00:00+08:00" />
-
 <meta itemprop="name" content="后端面试之Linux-cp和mv命令的区别">
 <meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 如果你突然被面试官问：cp和mv这两个linux的命令有什么区别？ 你会不会一脸懵逼，cp不就是复制，mv"><meta itemprop="datePublished" content="2021-12-07T00:00:00+08:00" />
 <meta itemprop="dateModified" content="2021-12-07T00:00:00+08:00" />
@@ -241,14 +240,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[root@instance-1 blog]# strace cp source.txt destination.txt 2&gt;&amp;1 | egrep &#39;source.txt|destination.txt&#39;
-execve(&#34;/bin/cp&#34;, [&#34;cp&#34;, &#34;source.txt&#34;, &#34;destination.txt&#34;], 0x7ffd8f1f3ea0 /* 23 vars */) = 0
-stat(&#34;destination.txt&#34;, 0x7fff021b0040) = -1 ENOENT (No such file or directory)
-stat(&#34;source.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
-stat(&#34;destination.txt&#34;, 0x7fff021afda0) = -1 ENOENT (No such file or directory)
-open(&#34;source.txt&#34;, O_RDONLY)            = 3
-open(&#34;destination.txt&#34;, O_WRONLY|O_CREAT|O_EXCL, 0644) = 4
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@instance-1 blog]# strace cp source.txt destination.txt 2&gt;&amp;1 | egrep &#39;source.txt|destination.txt&#39;
+</span></span><span class="line"><span class="cl">execve(&#34;/bin/cp&#34;, [&#34;cp&#34;, &#34;source.txt&#34;, &#34;destination.txt&#34;], 0x7ffd8f1f3ea0 /* 23 vars */) = 0
+</span></span><span class="line"><span class="cl">stat(&#34;destination.txt&#34;, 0x7fff021b0040) = -1 ENOENT (No such file or directory)
+</span></span><span class="line"><span class="cl">stat(&#34;source.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
+</span></span><span class="line"><span class="cl">stat(&#34;destination.txt&#34;, 0x7fff021afda0) = -1 ENOENT (No such file or directory)
+</span></span><span class="line"><span class="cl">open(&#34;source.txt&#34;, O_RDONLY)            = 3
+</span></span><span class="line"><span class="cl">open(&#34;destination.txt&#34;, O_WRONLY|O_CREAT|O_EXCL, 0644) = 4
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="目标文件存在时">目标文件存在时</h3>
 <p>此时<code>dest.txt</code>已经存在，再次执行<code>cp src.txt dest.txt</code>。<br>
@@ -273,14 +272,14 @@ open(&#34;destination.txt&#34;, O_WRONLY|O_CREAT|O_EXCL, 0644) = 4
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[root@instance-1 blog]# strace cp source.txt destination.txt 2&gt;&amp;1 | egrep &#39;source.txt|destination.txt&#39;
-execve(&#34;/bin/cp&#34;, [&#34;cp&#34;, &#34;source.txt&#34;, &#34;destination.txt&#34;], 0x7ffd4bfd93e0 /* 23 vars */) = 0
-stat(&#34;destination.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
-stat(&#34;source.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
-stat(&#34;destination.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
-open(&#34;source.txt&#34;, O_RDONLY)            = 3
-open(&#34;destination.txt&#34;, O_WRONLY|O_TRUNC) = 4
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@instance-1 blog]# strace cp source.txt destination.txt 2&gt;&amp;1 | egrep &#39;source.txt|destination.txt&#39;
+</span></span><span class="line"><span class="cl">execve(&#34;/bin/cp&#34;, [&#34;cp&#34;, &#34;source.txt&#34;, &#34;destination.txt&#34;], 0x7ffd4bfd93e0 /* 23 vars */) = 0
+</span></span><span class="line"><span class="cl">stat(&#34;destination.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
+</span></span><span class="line"><span class="cl">stat(&#34;source.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
+</span></span><span class="line"><span class="cl">stat(&#34;destination.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
+</span></span><span class="line"><span class="cl">open(&#34;source.txt&#34;, O_RDONLY)            = 3
+</span></span><span class="line"><span class="cl">open(&#34;destination.txt&#34;, O_WRONLY|O_TRUNC) = 4
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="结论">结论</h3>
 <ul>
@@ -309,13 +308,13 @@ open(&#34;destination.txt&#34;, O_WRONLY|O_TRUNC) = 4
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[root@instance-1 blog]# strace mv src.txt dest.txt 2&gt;&amp;1 | egrep &#39;src.txt|dest.txt&#39;
-execve(&#34;/bin/mv&#34;, [&#34;mv&#34;, &#34;src.txt&#34;, &#34;dest.txt&#34;], 0x7ffd71529810 /* 23 vars */) = 0
-stat(&#34;dest.txt&#34;, 0x7ffdb24b0fe0)        = -1 ENOENT (No such file or directory)
-lstat(&#34;src.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
-lstat(&#34;dest.txt&#34;, 0x7ffdb24b0c90)       = -1 ENOENT (No such file or directory)
-renameat2(AT_FDCWD, &#34;src.txt&#34;, AT_FDCWD, &#34;dest.txt&#34;, 0) = 0
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@instance-1 blog]# strace mv src.txt dest.txt 2&gt;&amp;1 | egrep &#39;src.txt|dest.txt&#39;
+</span></span><span class="line"><span class="cl">execve(&#34;/bin/mv&#34;, [&#34;mv&#34;, &#34;src.txt&#34;, &#34;dest.txt&#34;], 0x7ffd71529810 /* 23 vars */) = 0
+</span></span><span class="line"><span class="cl">stat(&#34;dest.txt&#34;, 0x7ffdb24b0fe0)        = -1 ENOENT (No such file or directory)
+</span></span><span class="line"><span class="cl">lstat(&#34;src.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
+</span></span><span class="line"><span class="cl">lstat(&#34;dest.txt&#34;, 0x7ffdb24b0c90)       = -1 ENOENT (No such file or directory)
+</span></span><span class="line"><span class="cl">renameat2(AT_FDCWD, &#34;src.txt&#34;, AT_FDCWD, &#34;dest.txt&#34;, 0) = 0
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="目标文件存在时-1">目标文件存在时</h3>
 <p>当目标文件<code>dest.txt</code>存在时，执行<code>mv src.txt dest.txt</code>。<br>
@@ -339,13 +338,13 @@ renameat2(AT_FDCWD, &#34;src.txt&#34;, AT_FDCWD, &#34;dest.txt&#34;, 0) = 0
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[root@instance-1 blog]# strace mv src.txt dest.txt 2&gt;&amp;1 | egrep &#39;src.txt|dest.txt&#39;
-execve(&#34;/bin/mv&#34;, [&#34;mv&#34;, &#34;src.txt&#34;, &#34;dest.txt&#34;], 0x7ffeef1ed240 /* 23 vars */) = 0
-stat(&#34;dest.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
-lstat(&#34;src.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
-lstat(&#34;dest.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
-renameat2(AT_FDCWD, &#34;src.txt&#34;, AT_FDCWD, &#34;dest.txt&#34;, 0) = 0
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@instance-1 blog]# strace mv src.txt dest.txt 2&gt;&amp;1 | egrep &#39;src.txt|dest.txt&#39;
+</span></span><span class="line"><span class="cl">execve(&#34;/bin/mv&#34;, [&#34;mv&#34;, &#34;src.txt&#34;, &#34;dest.txt&#34;], 0x7ffeef1ed240 /* 23 vars */) = 0
+</span></span><span class="line"><span class="cl">stat(&#34;dest.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
+</span></span><span class="line"><span class="cl">lstat(&#34;src.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
+</span></span><span class="line"><span class="cl">lstat(&#34;dest.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
+</span></span><span class="line"><span class="cl">renameat2(AT_FDCWD, &#34;src.txt&#34;, AT_FDCWD, &#34;dest.txt&#34;, 0) = 0
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="结论-1">结论</h3>
 <ul>
@@ -366,11 +365,11 @@ renameat2(AT_FDCWD, &#34;src.txt&#34;, AT_FDCWD, &#34;dest.txt&#34;, 0) = 0
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[root@instance-1 blog]# strace rm src.txt 2&gt;&amp;1 | egrep &#39;src.txt&#39;
-execve(&#34;/bin/rm&#34;, [&#34;rm&#34;, &#34;src.txt&#34;], 0x7fffbf900e58 /* 23 vars */) = 0
-newfstatat(AT_FDCWD, &#34;src.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}, AT_SYMLINK_NOFOLLOW) = 0
-unlinkat(AT_FDCWD, &#34;src.txt&#34;, 0)        = 0
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@instance-1 blog]# strace rm src.txt 2&gt;&amp;1 | egrep &#39;src.txt&#39;
+</span></span><span class="line"><span class="cl">execve(&#34;/bin/rm&#34;, [&#34;rm&#34;, &#34;src.txt&#34;], 0x7fffbf900e58 /* 23 vars */) = 0
+</span></span><span class="line"><span class="cl">newfstatat(AT_FDCWD, &#34;src.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}, AT_SYMLINK_NOFOLLOW) = 0
+</span></span><span class="line"><span class="cl">unlinkat(AT_FDCWD, &#34;src.txt&#34;, 0)        = 0
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="unlink系统调用">unlink系统调用</h3>
 <p>从文件系统中删除一个名称。如果名称是文件的最后一个连接，并且没有其它进程将文件打开，名称对应的文件会实际被删除。<br>
@@ -389,8 +388,8 @@ unlinkat(AT_FDCWD, &#34;src.txt&#34;, 0)        = 0
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">cp new_backend_server backend_server
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cp new_backend_server backend_server
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>的时候，提示<code>Text file busy</code>。
 为什么呢，因为你这个文件正在被使用，当你清空并写入的时候，它能感知到修改，修改文件内容很可能导致程序逻辑错误甚至崩溃。所以禁止你对正在使用的文件执行cp替换。</p>
@@ -402,10 +401,10 @@ unlinkat(AT_FDCWD, &#34;src.txt&#34;, 0)        = 0
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">rm backend_server
-mv new_backend_server backend_server
-service restart backend_server
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">rm backend_server
+</span></span><span class="line"><span class="cl">mv new_backend_server backend_server
+</span></span><span class="line"><span class="cl">service restart backend_server
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>就可以成功替换新的文件。<br>
 这又是为什么呢，因为当你使用<code>rm&amp;mv</code>的时候是直接unlink旧的文件，由于文件被进程占用，实际上并没有删除，当你把新的文件mv到当前文件的时候，直接进行rename。并不会影响当前被进程占用的那个文件（新旧的inode不同，只是名字一样）。当你重启的时候，才会释放旧的文件，使用新的文件。</p>
@@ -520,7 +519,7 @@ service restart backend_server
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 

@@ -42,7 +42,7 @@
 </script>
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="https://leftpocket.cn/post/git/git_rebase/" />
@@ -64,11 +64,10 @@
 <meta property="og:url" content="https://leftpocket.cn/post/git/git_rebase/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-11-20T13:00:51+08:00" />
 <meta property="article:modified_time" content="2021-11-20T13:00:51+08:00" />
-
 <meta itemprop="name" content="git rebase使用详解">
 <meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 在你看这篇文章之前，我假设你已经至少会git的一些基本指令，能进行简单的git repo的操作。比如：pu"><meta itemprop="datePublished" content="2021-11-20T13:00:51+08:00" />
 <meta itemprop="dateModified" content="2021-11-20T13:00:51+08:00" />
-<meta itemprop="wordCount" content="2958">
+<meta itemprop="wordCount" content="2957">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="git rebase使用详解"/>
 <meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 背景 在你看这篇文章之前，我假设你已经至少会git的一些基本指令，能进行简单的git repo的操作。比如：pu"/>
@@ -151,7 +150,7 @@
         <div class="post-category">
             <a href="/categories/%E5%90%8E%E7%AB%AF%E9%80%9A%E7%94%A8%E6%8A%80%E6%9C%AF/"> 后端通用技术 </a>
             </div>
-          <span class="more-meta"> 约 2958 字 </span>
+          <span class="more-meta"> 约 2957 字 </span>
           <span class="more-meta"> 预计阅读 6 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -221,8 +220,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Reapply commits on top of another base tip
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Reapply commits on top of another base tip
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>从字面上理解是<code>在另一个基端之上重新应用提交</code>，这个定义听起来有点抽象，换个角度可以理解为<code>将分支的基础从一个提交改成另一个提交，使其看起来就像是从另一个提交中创建了分支一样</code>。</p>
 <p>下面我来详细讲解一下<code>git rebase</code>命令最常用的两个用法，让大家更深入的理解 <strong>在另一个基端之上重新应用提交</strong> 的概念。</p>
@@ -244,8 +243,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git rebase -i HEAD~3
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git rebase -i HEAD~3
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>或者</p>
 <div class="highlight"><div class="chroma">
@@ -253,8 +252,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git rebase -i commit_id
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git rebase -i commit_id
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里的commit_id是你要合并的第一条commit的<strong>前一条</strong>。可以通过 <code>git log</code>查看 commmit id。</p>
 <p>会自动进入vi编辑模式。
@@ -278,21 +277,21 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">pick 3ae8e31 fix 1
-pick c2828fb fix 2
-pick 6077ab1 fix 3
-
-# Rebase c0933b9..6077ab1 onto c0933b9 (3 commands)
-#
-# Commands:
-# p, pick &lt;commit&gt; = use commit
-# r, reword &lt;commit&gt; = use commit, but edit the commit message
-# e, edit &lt;commit&gt; = use commit, but stop for amending
-# s, squash &lt;commit&gt; = use commit, but meld into previous commit
-# f, fixup &lt;commit&gt; = like &#34;squash&#34;, but discard this commit&#39;s log message
-# x, exec &lt;command&gt; = run command (the rest of the line) using shell
-# b, break = stop here (continue rebase later with &#39;git rebase --continue&#39;)
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pick 3ae8e31 fix 1
+</span></span><span class="line"><span class="cl">pick c2828fb fix 2
+</span></span><span class="line"><span class="cl">pick 6077ab1 fix 3
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Rebase c0933b9..6077ab1 onto c0933b9 (3 commands)
+</span></span><span class="line"><span class="cl">#
+</span></span><span class="line"><span class="cl"># Commands:
+</span></span><span class="line"><span class="cl"># p, pick &lt;commit&gt; = use commit
+</span></span><span class="line"><span class="cl"># r, reword &lt;commit&gt; = use commit, but edit the commit message
+</span></span><span class="line"><span class="cl"># e, edit &lt;commit&gt; = use commit, but stop for amending
+</span></span><span class="line"><span class="cl"># s, squash &lt;commit&gt; = use commit, but meld into previous commit
+</span></span><span class="line"><span class="cl"># f, fixup &lt;commit&gt; = like &#34;squash&#34;, but discard this commit&#39;s log message
+</span></span><span class="line"><span class="cl"># x, exec &lt;command&gt; = run command (the rest of the line) using shell
+</span></span><span class="line"><span class="cl"># b, break = stop here (continue rebase later with &#39;git rebase --continue&#39;)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里有一些<code>Commands</code>，每个有不同的作用，上面都有详细的解释。</p>
 <p>我们暂时只需要关注两个，一个是 <strong>p(pick)</strong>, 一个是 <strong>s(squash)</strong>。</p>
@@ -309,10 +308,10 @@ pick 6077ab1 fix 3
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">pick 3ae8e31 fix 1
-s c2828fb fix 2
-s 6077ab1 fix 3
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pick 3ae8e31 fix 1
+</span></span><span class="line"><span class="cl">s c2828fb fix 2
+</span></span><span class="line"><span class="cl">s 6077ab1 fix 3
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>像以上这样，把除了第一条提交之外的所有提交的 <strong>pick</strong> 改成 <strong>s(squash)</strong>。
 然后使用 <strong>:wq</strong> 退出编辑。</p>
@@ -325,8 +324,8 @@ s 6077ab1 fix 3
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">fix 1
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fix 1
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>直接编辑 修改为</p>
 <div class="highlight"><div class="chroma">
@@ -334,8 +333,8 @@ s 6077ab1 fix 3
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">feature 1 development
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">feature 1 development
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后 <strong>:wq</strong> 退出。</p>
 <h3 id="4-git-log查看commit记录">4、 git log查看commit记录。</h3>
@@ -364,8 +363,8 @@ s 6077ab1 fix 3
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git:(master) git checkout -b feature1
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git:(master) git checkout -b feature1
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><img src="/img/git/git_feature.png" alt="git"></p>
 <h3 id="2这个时候你的同事可能开发了-feature2-并合并到了-master此时master-已经领先于你的-feature1-分支了">2、这个时候你的同事可能开发了 <strong>feature2</strong> 并合并到了 <strong>master</strong>，此时<strong>master</strong> 已经领先于你的 <strong>feature1</strong> 分支了。</h3>
@@ -377,8 +376,8 @@ s 6077ab1 fix 3
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git merge master
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git merge master
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><img src="/img/git/git_merge.png" alt="git"></p>
 <p>使用过git命令的人都了解这个命令。
@@ -388,8 +387,8 @@ s 6077ab1 fix 3
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git log
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git log
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>就会发现多了一些 <strong>merge</strong> 的commit信息。如果你的feature的开发周期很长，经常需要定期merge master，就会发现多了很多的 commit 信息。想要保持一份干净的 <strong>commit</strong>， 这个时候 <strong>git rebase</strong> 就派上用场了。</p>
 <h3 id="4使用-git-rebase-master-代替-git-merge-master">4、使用 <strong>git rebase master</strong> 代替 <strong>git merge master</strong></h3>
@@ -399,8 +398,8 @@ s 6077ab1 fix 3
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git rebase master
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git rebase master
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里 <strong>git rebase</strong> 的原理是什么呢？</p>
 <ol>
@@ -418,8 +417,8 @@ s 6077ab1 fix 3
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git rebase --continue
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git rebase --continue
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>在任何时候，我们都可以用 &ndash;abort 参数来终止 rebase 的行动，并且分支会回到 rebase 开始前的状态。</p>
 <div class="highlight"><div class="chroma">
@@ -427,8 +426,8 @@ s 6077ab1 fix 3
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git rebase —abort
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git rebase —abort
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>总结：</p>
 <ul>
@@ -449,16 +448,14 @@ Git 在最近的某个版本起，直接运行 git pull 会有如下提示消息
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
-</span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">warning: 不建议在没有为偏离分支指定合并策略时执行 pull 操作。 您可以在执行下一次 pull 操作之前执行下面一条命令来抑制本消息：
-
-  git config pull.rebase false  # 合并（缺省策略）
-  git config pull.rebase true   # 变基
-  git config pull.ff only       # 仅快进
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">warning: 不建议在没有为偏离分支指定合并策略时执行 pull 操作。 您可以在执行下一次 pull 操作之前执行下面一条命令来抑制本消息：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  git config pull.rebase false  # 合并（缺省策略）
+</span></span><span class="line"><span class="cl">  git config pull.rebase true   # 变基
+</span></span><span class="line"><span class="cl">  git config pull.ff only       # 仅快进
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>原来 git pull 时也可以通过 rebase 来进行合并，这是因为 git pull 实际上等于 git fetch + git merge ，我们可以修改git配置直接使用 git rebase 替换 git merge来合并 fetch 取得的变更，作用同样是避免额外的 merge 提交以保持线性的提交历史。</p>
 <p>具体的使用方式有多种：</p>
@@ -577,7 +574,7 @@ Git 在最近的某个版本起，直接运行 git pull 会有如下提示消息
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 

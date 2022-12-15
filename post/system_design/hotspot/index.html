@@ -42,7 +42,7 @@
 </script>
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="https://leftpocket.cn/post/system_design/hotspot/" />
@@ -64,11 +64,10 @@
 <meta property="og:url" content="https://leftpocket.cn/post/system_design/hotspot/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-04-27T13:00:51+08:00" />
 <meta property="article:modified_time" content="2022-04-27T13:00:51+08:00" />
-
 <meta itemprop="name" content="谈一谈热点Key解决方案">
 <meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 最近不少人问我，怎么解决热点Key问题。我说，你提到这个我可就不困了。因为刚好，我手上的两个业务都有实现"><meta itemprop="datePublished" content="2022-04-27T13:00:51+08:00" />
 <meta itemprop="dateModified" content="2022-04-27T13:00:51+08:00" />
-<meta itemprop="wordCount" content="3011">
+<meta itemprop="wordCount" content="3010">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="谈一谈热点Key解决方案"/>
 <meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 背景 最近不少人问我，怎么解决热点Key问题。我说，你提到这个我可就不困了。因为刚好，我手上的两个业务都有实现"/>
@@ -152,7 +151,7 @@
             <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/"> 系统设计 </a>
             <a href="/categories//"> 　 </a>
             </div>
-          <span class="more-meta"> 约 3011 字 </span>
+          <span class="more-meta"> 约 3010 字 </span>
           <span class="more-meta"> 预计阅读 7 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -248,14 +247,12 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Key: user_info_{id} // 1. 非热点数据
-Key: user_info_{id}_[1,20]  // 2. 热点数据，会分散在不同的Redis节点上。
-Key: hot_key_list  // 3. 具体的热点key的列表，分布式服务器会定时拉取这个列表，以便服务器知道哪些Key是热点数据，可以做不同的访问处理。
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Key: user_info_{id} // 1. 非热点数据
+</span></span><span class="line"><span class="cl">Key: user_info_{id}_[1,20]  // 2. 热点数据，会分散在不同的Redis节点上。
+</span></span><span class="line"><span class="cl">Key: hot_key_list  // 3. 具体的热点key的列表，分布式服务器会定时拉取这个列表，以便服务器知道哪些Key是热点数据，可以做不同的访问处理。
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><img src="/img/system_design/hot_key/hot_key_2.png" alt="LRU1"></p>
 <p>一、关于热点Key列表同步。</p>
@@ -271,13 +268,13 @@ Key: hot_key_list  // 3. 具体的热点key的列表，分布式服务器会定�
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Redis:
-key: hot_key_list
-value: &#34;id1:expire_time,id2:expire_time,id3: expire_time,...&#34;
-
-Service:
-hot_key_list = {id1: expire_time, id2: expire_time, id3: expire_time, ...}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Redis:
+</span></span><span class="line"><span class="cl">key: hot_key_list
+</span></span><span class="line"><span class="cl">value: &#34;id1:expire_time,id2:expire_time,id3: expire_time,...&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Service:
+</span></span><span class="line"><span class="cl">hot_key_list = {id1: expire_time, id2: expire_time, id3: expire_time, ...}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>我们的设置热点数据<code>API:set_hot_key</code>在Service负责从Redis取出热点数据，把新的热点数据放进去并过滤掉过期的数据，然后再写入Redis <code>hot_key_list</code>。</li>
@@ -398,7 +395,7 @@ hot_key_list = {id1: expire_time, id2: expire_time, id3: expire_time, ...}
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 

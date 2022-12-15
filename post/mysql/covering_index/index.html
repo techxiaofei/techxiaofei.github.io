@@ -42,7 +42,7 @@
 </script>
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="https://leftpocket.cn/post/mysql/covering_index/" />
@@ -64,11 +64,10 @@
 <meta property="og:url" content="https://leftpocket.cn/post/mysql/covering_index/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-11-26T00:00:00+08:00" />
 <meta property="article:modified_time" content="2021-11-26T00:00:00+08:00" />
-
 <meta itemprop="name" content="后端面试之MySQL-什么是回表查询和覆盖索引">
 <meta itemprop="description" content="原文地址：码农在新加坡的个人博客 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 背景 关于回表查询，是MySQ"><meta itemprop="datePublished" content="2021-11-26T00:00:00+08:00" />
 <meta itemprop="dateModified" content="2021-11-26T00:00:00+08:00" />
-<meta itemprop="wordCount" content="1284">
+<meta itemprop="wordCount" content="1391">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="后端面试之MySQL-什么是回表查询和覆盖索引"/>
 <meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 背景 关于回表查询，是MySQ"/>
@@ -151,7 +150,7 @@
         <div class="post-category">
             <a href="/categories/mysql/"> MySQL </a>
             </div>
-          <span class="more-meta"> 约 1284 字 </span>
+          <span class="more-meta"> 约 1391 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -211,14 +210,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="o">`</span><span class="n">student_tab</span><span class="o">`</span><span class="p">(</span><span class="w">
-</span><span class="w">   </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="n">UNSIGNED</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span><span class="w">
-</span><span class="w">   </span><span class="o">`</span><span class="n">name</span><span class="o">`</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
-</span><span class="w">   </span><span class="o">`</span><span class="n">age</span><span class="o">`</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="n">UNSIGNED</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
-</span><span class="w">   </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="p">),</span><span class="w">
-</span><span class="w">   </span><span class="k">INDEX</span><span class="w"> </span><span class="o">`</span><span class="n">idx_name</span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="o">`</span><span class="n">name</span><span class="o">`</span><span class="p">)</span><span class="w">
-</span><span class="w"></span><span class="p">)</span><span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="p">;</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="o">`</span><span class="n">student_tab</span><span class="o">`</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="n">UNSIGNED</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="o">`</span><span class="n">name</span><span class="o">`</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="o">`</span><span class="n">age</span><span class="o">`</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="n">UNSIGNED</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="k">INDEX</span><span class="w"> </span><span class="o">`</span><span class="n">idx_name</span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="o">`</span><span class="n">name</span><span class="o">`</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>注：</p>
 <ul>
@@ -232,8 +231,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">student_tab</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">`</span><span class="n">Bob</span><span class="o">`</span><span class="p">;</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">student_tab</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">`</span><span class="n">Bob</span><span class="o">`</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>的时候，就会出现 <strong>回表查询</strong>。</p>
 <p>为什么呢？<br>
@@ -248,8 +247,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">student_tab</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">`</span><span class="n">Bob</span><span class="o">`</span><span class="p">;</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">student_tab</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">`</span><span class="n">Bob</span><span class="o">`</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>需要的数据 <code>id, name</code> 通过普通索引都可以得到，就不会回表。</p>
 <h3 id="怎么避免回表查询呢">怎么避免回表查询呢？</h3>
@@ -260,8 +259,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">INDEX</span><span class="w"> </span><span class="o">`</span><span class="n">idx_name_age</span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="o">`</span><span class="n">name</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">age</span><span class="o">`</span><span class="p">)</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">INDEX</span><span class="w"> </span><span class="o">`</span><span class="n">idx_name_age</span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="o">`</span><span class="n">name</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">age</span><span class="o">`</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>当使用</p>
 <div class="highlight"><div class="chroma">
@@ -269,8 +268,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">student_tab</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">`</span><span class="n">Bob</span><span class="o">`</span><span class="p">;</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">student_tab</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">`</span><span class="n">Bob</span><span class="o">`</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>查询的时候，name和age在一个联合索引上，所以在普通索引上是有age的信息的，这个时候就不需要回表。<br>
 这就引入了下个问题，什么是覆盖索引。</p>
@@ -285,11 +284,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">student_tab</span><span class="w"> </span><span class="k">DROP</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_name</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">student_tab</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_name_age</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">);</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">student_tab</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">`</span><span class="n">Bob</span><span class="o">`</span><span class="p">;</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">student_tab</span><span class="w"> </span><span class="k">DROP</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_name</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">student_tab</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_name_age</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">student_tab</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">`</span><span class="n">Bob</span><span class="o">`</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>流程为：</p>
 <ul>
@@ -310,9 +309,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">explain</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">student_tab</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">`</span><span class="n">Bob</span><span class="o">`</span><span class="p">;</span><span class="w">
-</span><span class="w"></span><span class="n">explian</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">student_tab</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">`</span><span class="n">Bob</span><span class="o">`</span><span class="p">;</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">explain</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">student_tab</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">`</span><span class="n">Bob</span><span class="o">`</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">explian</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">student_tab</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">`</span><span class="n">Bob</span><span class="o">`</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><img src="/img/mysql/mysql_index.png" alt="覆盖索引"></p>
 <p>发现如果查询 <code>age</code>的时候是无法使用覆盖索引的。</p>
@@ -322,8 +321,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="n">explian</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">student_tab</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">`</span><span class="n">Bob</span><span class="o">`</span><span class="p">;</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="n">explian</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">student_tab</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">`</span><span class="n">Bob</span><span class="o">`</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><img src="/img/mysql/mysql_index2.png" alt="覆盖索引"></p>
 <p>可以看到，<code>Extra = Using index</code>，这个时候就可以使用覆盖索引。</p>
@@ -431,7 +430,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 

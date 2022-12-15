@@ -42,7 +42,7 @@
 </script>
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="https://leftpocket.cn/post/mysql/update_optimization/" />
@@ -64,11 +64,10 @@
 <meta property="og:url" content="https://leftpocket.cn/post/mysql/update_optimization/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-04-29T13:00:51+08:00" />
 <meta property="article:modified_time" content="2022-04-29T13:00:51+08:00" />
-
 <meta itemprop="name" content="MySQL更新优化的几个阶段">
 <meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 现在的互联网大厂，都经历了数据量和访问量从零到亿级别的飞速增长。在这业务增长的过程中，也会面临很多技术的"><meta itemprop="datePublished" content="2022-04-29T13:00:51+08:00" />
 <meta itemprop="dateModified" content="2022-04-29T13:00:51+08:00" />
-<meta itemprop="wordCount" content="5082">
+<meta itemprop="wordCount" content="5090">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="MySQL更新优化的几个阶段"/>
 <meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 背景 现在的互联网大厂，都经历了数据量和访问量从零到亿级别的飞速增长。在这业务增长的过程中，也会面临很多技术的"/>
@@ -151,7 +150,7 @@
         <div class="post-category">
             <a href="/categories/mysql/"> MySQL </a>
             </div>
-          <span class="more-meta"> 约 5082 字 </span>
+          <span class="more-meta"> 约 5090 字 </span>
           <span class="more-meta"> 预计阅读 11 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -324,11 +323,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">Key</span><span class="p">:</span><span class="w"> </span><span class="err">{</span><span class="n">prefix</span><span class="err">}</span><span class="n">_userid</span><span class="w">
-</span><span class="w"></span><span class="n">Value</span><span class="p">:</span><span class="w"> </span><span class="o">`</span><span class="n">login_time</span><span class="o">`</span><span class="p">:</span><span class="w"> </span><span class="kt">timestamp</span><span class="w">
-</span><span class="w">       </span><span class="o">`</span><span class="n">logout_time</span><span class="o">`</span><span class="p">:</span><span class="w"> </span><span class="kt">timestamp</span><span class="w">
-</span><span class="w">       </span><span class="o">`</span><span class="p">...</span><span class="o">`</span><span class="p">:</span><span class="w"> </span><span class="p">...</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="k">Key</span><span class="p">:</span><span class="w"> </span><span class="err">{</span><span class="n">prefix</span><span class="err">}</span><span class="n">_userid</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Value</span><span class="p">:</span><span class="w"> </span><span class="o">`</span><span class="n">login_time</span><span class="o">`</span><span class="p">:</span><span class="w"> </span><span class="kt">timestamp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">       </span><span class="o">`</span><span class="n">logout_time</span><span class="o">`</span><span class="p">:</span><span class="w"> </span><span class="kt">timestamp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">       </span><span class="o">`</span><span class="p">...</span><span class="o">`</span><span class="p">:</span><span class="w"> </span><span class="p">...</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>有了Cache之后，我们想要批量更新，还需要一个把我们需要更新的列表列出来。</p>
 <p>这里我使用了 <code>Redis的ZSET</code>来储存需要批量更新的数据。由于上面我们已经分了1000个表，所以我们需要1000个ZSET，每个ZSET负责单一的表。</p>
@@ -339,10 +338,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Key: {prefix}_[0,999]
-Member: userid
-score: timestamp
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Key: {prefix}_[0,999]
+</span></span><span class="line"><span class="cl">Member: userid
+</span></span><span class="line"><span class="cl">score: timestamp
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这样，每次我们需要把数据写入Cache的时候，把userid插入ZSET中，这样我们就知道哪些userid的数据需要批量写入DB中。我们的调度器就能通过ZSET知道哪些userid的数据需要更新，再通过Cache找到需要更新的具体数据，进行批量更新。</p>
 <h3 id="批量更新语法">批量更新语法</h3>
@@ -369,25 +368,25 @@ score: timestamp
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">UPDATE user_ext_tab_00000000
-SET login_time = (
-    CASE
-    WHEN userid = 11000 AND login_time &lt; 1234567890 THEN 1234567890
-    WHEN userid = 12000 AND login_time &lt; 1234567890 THEN 1234567890
-    WHEN userid = 13000 AND login_time &lt; 1234567890 THEN 1234567890
-    ELSE login_time
-    END
-),
-login_out = (
-    CASE
-    WHEN userid = 11000 AND logout_time &lt; 1234567890 THEN 1234567890
-    WHEN userid = 12000 AND logout_time &lt; 1234567890 THEN 1234567890
-    WHEN userid = 13000 AND logout_time &lt; 1234567890 THEN 1234567890
-    ELSE logout_time
-    END
-)
-WHEN userid IN (11000, 12000, 13000);
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">UPDATE user_ext_tab_00000000
+</span></span><span class="line"><span class="cl">SET login_time = (
+</span></span><span class="line"><span class="cl">    CASE
+</span></span><span class="line"><span class="cl">    WHEN userid = 11000 AND login_time &lt; 1234567890 THEN 1234567890
+</span></span><span class="line"><span class="cl">    WHEN userid = 12000 AND login_time &lt; 1234567890 THEN 1234567890
+</span></span><span class="line"><span class="cl">    WHEN userid = 13000 AND login_time &lt; 1234567890 THEN 1234567890
+</span></span><span class="line"><span class="cl">    ELSE login_time
+</span></span><span class="line"><span class="cl">    END
+</span></span><span class="line"><span class="cl">),
+</span></span><span class="line"><span class="cl">login_out = (
+</span></span><span class="line"><span class="cl">    CASE
+</span></span><span class="line"><span class="cl">    WHEN userid = 11000 AND logout_time &lt; 1234567890 THEN 1234567890
+</span></span><span class="line"><span class="cl">    WHEN userid = 12000 AND logout_time &lt; 1234567890 THEN 1234567890
+</span></span><span class="line"><span class="cl">    WHEN userid = 13000 AND logout_time &lt; 1234567890 THEN 1234567890
+</span></span><span class="line"><span class="cl">    ELSE logout_time
+</span></span><span class="line"><span class="cl">    END
+</span></span><span class="line"><span class="cl">)
+</span></span><span class="line"><span class="cl">WHEN userid IN (11000, 12000, 13000);
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里需要注意：</p>
 <ul>
@@ -526,7 +525,7 @@ WHEN userid IN (11000, 12000, 13000);
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 

@@ -42,7 +42,7 @@
 </script>
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="https://leftpocket.cn/post/system_design/short_url/" />
@@ -64,7 +64,6 @@
 <meta property="og:url" content="https://leftpocket.cn/post/system_design/short_url/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-12-23T00:00:00+08:00" />
 <meta property="article:modified_time" content="2021-12-23T00:00:00+08:00" />
-
 <meta itemprop="name" content="后端面试之系统设计-短网址（Short URL）服务怎么设计？">
 <meta itemprop="description" content="​ 原文地址：码农在新加坡的个人博客 背景 短网址（short url），就是将长网址缩短为一个很短的网址，用户访问这个短网址可以重定向到原本的长网"><meta itemprop="datePublished" content="2021-12-23T00:00:00+08:00" />
 <meta itemprop="dateModified" content="2021-12-23T00:00:00+08:00" />
@@ -209,8 +208,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">http://huodong.m.aliyun.com/act/v3jtax.html?gotoUrl=aliyun%3A%2F%2Fforward%2Ff6b8f0a4fa8cfd25da51a182807d5c25%3Ftarget_%3D%2Fapp%2Fhome%26tab_%3Dconsole
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">http://huodong.m.aliyun.com/act/v3jtax.html?gotoUrl=aliyun%3A%2F%2Fforward%2Ff6b8f0a4fa8cfd25da51a182807d5c25%3Ftarget_%3D%2Fapp%2Fhome%26tab_%3Dconsole
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>短信里面的那个url就是短网址，而实际的网址却又非常长。我们就需要一个服务去接收短网址，并转换成长网址访问。</p>
 <p>我们常见的短网址如下，可以看到，短网址的域名都很短。</p>
@@ -234,8 +233,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">https://mp.weixin.qq.com/s?__biz=MzkwNzMwNzI1Ng==&amp;mid=2247483810&amp;idx=1&amp;sn=e252816ee1d5fc1358bf77b8146f3dba&amp;chksm=c0da7035f7adf923ce0beef38a729f305e0d1cc8cc3c18cc491b1c37bffc0786962eaac41772&amp;token=2107487666&amp;lang=zh_CN#rd) 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://mp.weixin.qq.com/s?__biz=MzkwNzMwNzI1Ng==&amp;mid=2247483810&amp;idx=1&amp;sn=e252816ee1d5fc1358bf77b8146f3dba&amp;chksm=c0da7035f7adf923ce0beef38a729f305e0d1cc8cc3c18cc491b1c37bffc0786962eaac41772&amp;token=2107487666&amp;lang=zh_CN#rd) 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如图可以看到：
 生成了 <a href="https://t.hk.uy/aBpj">https://t.hk.uy/aBpj</a> 的短网址。</p>
@@ -485,7 +484,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 

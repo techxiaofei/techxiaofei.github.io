@@ -42,7 +42,7 @@
 </script>
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="https://leftpocket.cn/post/golang/append/" />
@@ -64,11 +64,10 @@
 <meta property="og:url" content="https://leftpocket.cn/post/golang/append/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-03-20T13:00:51+08:00" />
 <meta property="article:modified_time" content="2021-03-20T13:00:51+08:00" />
-
 <meta itemprop="name" content="Golang append是并发安全的吗">
 <meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 最近开发的时候写了下面这段类似的代码。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 func TestAppend() (result []int) { var wg sync.WaitGroup for i := 0; i &lt; 100; i&#43;&#43; {"><meta itemprop="datePublished" content="2021-03-20T13:00:51+08:00" />
 <meta itemprop="dateModified" content="2021-03-20T13:00:51+08:00" />
-<meta itemprop="wordCount" content="1612">
+<meta itemprop="wordCount" content="1611">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Golang append是并发安全的吗"/>
 <meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 背景 最近开发的时候写了下面这段类似的代码。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 func TestAppend() (result []int) { var wg sync.WaitGroup for i := 0; i &lt; 100; i&#43;&#43; {"/>
@@ -151,7 +150,7 @@
         <div class="post-category">
             <a href="/categories/golang/"> Golang </a>
             </div>
-          <span class="more-meta"> 约 1612 字 </span>
+          <span class="more-meta"> 约 1611 字 </span>
           <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -204,23 +203,23 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">TestAppend</span><span class="p">()</span> <span class="p">(</span><span class="nx">result</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
-	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-		<span class="nx">v</span> <span class="o">:=</span> <span class="nx">i</span>
-		<span class="nx">wg</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-		<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
-			<span class="c1">// other logic
-</span><span class="c1"></span>			<span class="nx">result</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
-			<span class="nx">wg</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
-		<span class="p">}()</span>
-	<span class="p">}</span>
-
-	<span class="nx">wg</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
-	<span class="c1">//fmt.Printf(&#34;%v\n&#34;, len(result))
-</span><span class="c1"></span>	<span class="k">return</span> <span class="nx">result</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">TestAppend</span><span class="p">()</span> <span class="p">(</span><span class="nx">result</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">v</span> <span class="o">:=</span> <span class="nx">i</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">wg</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">// other logic
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="nx">result</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">wg</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}()</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">wg</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//fmt.Printf(&#34;%v\n&#34;, len(result))
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="nx">result</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>就像这样，然后顺利通过测试到达生产环境。然后就出问题了。</p>
 <p>预期情况下，len(result) = 100, 但是大多数情况下，这个数据会&lt;=100。因为append这个函数不是并发安全的。也就是不能在多个goroutine里面对同一个slice使用append进行追加。</p>
@@ -239,12 +238,12 @@ append咋还导致服务panic呢？且往下看。</p>
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">slice</span> <span class="kd">struct</span> <span class="p">{</span>
-    <span class="nx">array</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span>
-    <span class="nx">len</span>   <span class="kt">int</span>
-    <span class="nx">cap</span>   <span class="kt">int</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">slice</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">array</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">len</span>   <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">cap</span>   <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><img src="/img/golang/slice.png" alt="slice"></p>
 <p>可以看到，array是一个指向具体数组的指针，len是当前已经使用的长度，使用append的时候会再下一个位置填充数据并且把len加1。不加锁的情况下，由于操作并非原子的，可能两个goroutine同时往同一个位置写数据，就会导致数据覆盖。最终的长度小于实际期待的长度。</p>
@@ -275,26 +274,26 @@ append咋还导致服务panic呢？且往下看。</p>
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">TestAppendWithLock</span><span class="p">()</span> <span class="p">(</span><span class="nx">result</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
-	<span class="kd">var</span> <span class="nx">lock</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">Mutex</span>
-	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-		<span class="nx">v</span> <span class="o">:=</span> <span class="nx">i</span>
-		<span class="nx">wg</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-		<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
-			<span class="k">defer</span> <span class="nx">wg</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
-			<span class="nx">lock</span><span class="p">.</span><span class="nf">Lock</span><span class="p">()</span>
-			<span class="nx">result</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
-			<span class="nx">lock</span><span class="p">.</span><span class="nf">Unlock</span><span class="p">()</span>
-
-		<span class="p">}()</span>
-	<span class="p">}</span>
-
-	<span class="nx">wg</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
-	<span class="c1">//fmt.Printf(&#34;%v\n&#34;, len(result))
-</span><span class="c1"></span>	<span class="k">return</span> <span class="nx">result</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">TestAppendWithLock</span><span class="p">()</span> <span class="p">(</span><span class="nx">result</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">lock</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">Mutex</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">v</span> <span class="o">:=</span> <span class="nx">i</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">wg</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">defer</span> <span class="nx">wg</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">lock</span><span class="p">.</span><span class="nf">Lock</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">result</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">lock</span><span class="p">.</span><span class="nf">Unlock</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">}()</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">wg</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//fmt.Printf(&#34;%v\n&#34;, len(result))
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="nx">result</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="方案2">方案2</h3>
 <p>如果slice的长度固定的情况下。可以直接使用make初始化固定长度，并使用下标赋值。</p>
@@ -317,22 +316,22 @@ append咋还导致服务panic呢？且往下看。</p>
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">TestSliceAppend</span><span class="p">()</span> <span class="p">(</span><span class="nx">result</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
-	<span class="nx">result</span> <span class="p">=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-		<span class="nx">wg</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-		<span class="k">go</span> <span class="kd">func</span><span class="p">(</span><span class="nx">index</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-			<span class="k">defer</span> <span class="nx">wg</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
-			<span class="nx">result</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="p">=</span> <span class="nx">index</span>
-		<span class="p">}(</span><span class="nx">i</span><span class="p">)</span>
-	<span class="p">}</span>
-
-	<span class="nx">wg</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
-	<span class="c1">//fmt.Printf(&#34;%v\n&#34;, len(result))
-</span><span class="c1"></span>	<span class="k">return</span> <span class="nx">result</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">TestSliceAppend</span><span class="p">()</span> <span class="p">(</span><span class="nx">result</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">result</span> <span class="p">=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">wg</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">go</span> <span class="kd">func</span><span class="p">(</span><span class="nx">index</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">defer</span> <span class="nx">wg</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">result</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="p">=</span> <span class="nx">index</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}(</span><span class="nx">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">wg</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//fmt.Printf(&#34;%v\n&#34;, len(result))
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="nx">result</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="panic原因">panic原因</h3>
 <p>这个panic是概率性的，有非常小的概率会发生，但是在高并发场景下，是必定会发生的。</p>
@@ -364,30 +363,30 @@ append咋还导致服务panic呢？且往下看。</p>
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">TestAppend</span><span class="p">()</span> <span class="p">(</span><span class="nx">result</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
-	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-		<span class="nx">v</span> <span class="o">:=</span> <span class="nx">i</span>
-		<span class="nx">wg</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-		<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
-			<span class="c1">// other logic
-</span><span class="c1"></span>			<span class="nx">result</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
-			<span class="nx">wg</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
-		<span class="p">}()</span>
-	<span class="p">}</span>
-
-	<span class="nx">wg</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
-	<span class="c1">//fmt.Printf(&#34;%v\n&#34;, len(result))
-</span><span class="c1"></span>	<span class="k">return</span> <span class="nx">result</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">for</span> <span class="nx">a</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">a</span> <span class="p">&lt;</span> <span class="mi">100000</span><span class="p">;</span> <span class="nx">a</span><span class="o">++</span> <span class="p">{</span>
-		<span class="nx">res</span> <span class="o">:=</span> <span class="nf">TestAppend</span><span class="p">()</span>
-		<span class="nb">println</span><span class="p">(</span><span class="s">&#34;len(res):&#34;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nx">res</span><span class="p">))</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">TestAppend</span><span class="p">()</span> <span class="p">(</span><span class="nx">result</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">v</span> <span class="o">:=</span> <span class="nx">i</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">wg</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">// other logic
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="nx">result</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">wg</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}()</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">wg</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//fmt.Printf(&#34;%v\n&#34;, len(result))
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="nx">result</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">a</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">a</span> <span class="p">&lt;</span> <span class="mi">100000</span><span class="p">;</span> <span class="nx">a</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">res</span> <span class="o">:=</span> <span class="nf">TestAppend</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">println</span><span class="p">(</span><span class="s">&#34;len(res):&#34;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nx">res</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>使用循环不停的执行并发append操作。过一段时间你就会发现：</p>
 <div class="highlight"><div class="chroma">
@@ -404,17 +403,17 @@ append咋还导致服务panic呢？且往下看。</p>
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">panic: runtime error: invalid memory address or nil pointer dereference
-[signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x108933f]
-
-goroutine 9278997 [running]:
-main.TestAppend.func1(0xc00020e050, 0xc0005da040, 0x3)
-        /Users/left_pocket/concurrency_append/main.go:20 +0x6f
-created by main.TestAppend
-        /Users/left_pocket/concurrency_append/main.go:18 +0xa6
-
-Process finished with exit code 2
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">panic: runtime error: invalid memory address or nil pointer dereference
+</span></span><span class="line"><span class="cl">[signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x108933f]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">goroutine 9278997 [running]:
+</span></span><span class="line"><span class="cl">main.TestAppend.func1(0xc00020e050, 0xc0005da040, 0x3)
+</span></span><span class="line"><span class="cl">        /Users/left_pocket/concurrency_append/main.go:20 +0x6f
+</span></span><span class="line"><span class="cl">created by main.TestAppend
+</span></span><span class="line"><span class="cl">        /Users/left_pocket/concurrency_append/main.go:18 +0xa6
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Process finished with exit code 2
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>的报错。
 正是</p>
@@ -423,8 +422,8 @@ Process finished with exit code 2
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">result</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">result</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这一行。</p>
 <p>这个报错曾经导致生产环境的service偶尔crash，这个概率非常低。
@@ -434,8 +433,8 @@ Process finished with exit code 2
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">go run -race main.go
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">go run -race main.go
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到<code>DATA RACE</code>的报错。</p>
 <div class="highlight"><div class="chroma">
@@ -447,18 +446,16 @@ Process finished with exit code 2
 </span><span class="lnt">5
 </span><span class="lnt">6
 </span><span class="lnt">7
-</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">==================
-WARNING: DATA RACE
-Read at 0x00c000100000 by goroutine 8:
-  runtime.growslice()
-      /Users/left_pocket/go1.14/src/runtime/slice.go:76 +0x0
-  main.TestAppend.func1()
-      /Users/left_pocket/src/github.com/left-pocket/go-practice/concurrency_append/main.go:20 +0x179
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">==================
+</span></span><span class="line"><span class="cl">WARNING: DATA RACE
+</span></span><span class="line"><span class="cl">Read at 0x00c000100000 by goroutine 8:
+</span></span><span class="line"><span class="cl">  runtime.growslice()
+</span></span><span class="line"><span class="cl">      /Users/left_pocket/go1.14/src/runtime/slice.go:76 +0x0
+</span></span><span class="line"><span class="cl">  main.TestAppend.func1()
+</span></span><span class="line"><span class="cl">      /Users/left_pocket/src/github.com/left-pocket/go-practice/concurrency_append/main.go:20 +0x179
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>找到go语言库的代码。</p>
 <div class="highlight"><div class="chroma">
@@ -467,9 +464,9 @@ Read at 0x00c000100000 by goroutine 8:
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">growslice</span><span class="p">(</span><span class="nx">et</span> <span class="o">*</span><span class="nx">_type</span><span class="p">,</span> <span class="nx">old</span> <span class="nx">slice</span><span class="p">,</span> <span class="nx">cap</span> <span class="kt">int</span><span class="p">)</span> <span class="nx">slice</span> <span class="p">{</span>  <span class="c1">//line 76
-</span><span class="c1"></span><span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">growslice</span><span class="p">(</span><span class="nx">et</span> <span class="o">*</span><span class="nx">_type</span><span class="p">,</span> <span class="nx">old</span> <span class="nx">slice</span><span class="p">,</span> <span class="nx">cap</span> <span class="kt">int</span><span class="p">)</span> <span class="nx">slice</span> <span class="p">{</span>  <span class="c1">//line 76
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>发现了RACE CONDITION。
 使用goland的debug模式继续分析。
@@ -496,22 +493,22 @@ Read at 0x00c000100000 by goroutine 8:
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">TestAppend</span><span class="p">()</span> <span class="p">(</span><span class="nx">result</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
-	<span class="nx">result</span> <span class="p">=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="c1">//set capacity first, will not add capacity anymore
-</span><span class="c1"></span>	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-		<span class="nx">v</span> <span class="o">:=</span> <span class="nx">i</span>
-		<span class="nx">wg</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-		<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
-			<span class="k">defer</span> <span class="nx">wg</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
-			<span class="nx">result</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
-		<span class="p">}()</span>
-	<span class="p">}</span>
-
-	<span class="nx">wg</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
-	<span class="k">return</span> <span class="nx">result</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">TestAppend</span><span class="p">()</span> <span class="p">(</span><span class="nx">result</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">result</span> <span class="p">=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="c1">//set capacity first, will not add capacity anymore
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">v</span> <span class="o">:=</span> <span class="nx">i</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">wg</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">defer</span> <span class="nx">wg</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">result</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}()</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">wg</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">result</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果调用前初始化了capacity，就不会导致panic。</p>
 <h1 id="总结">总结</h1>
@@ -620,7 +617,7 @@ Read at 0x00c000100000 by goroutine 8:
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 

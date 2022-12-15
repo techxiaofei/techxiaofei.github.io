@@ -42,7 +42,7 @@
 </script>
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="https://leftpocket.cn/post/golang/functional_options/" />
@@ -64,7 +64,6 @@
 <meta property="og:url" content="https://leftpocket.cn/post/golang/functional_options/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-02-18T13:00:51+08:00" />
 <meta property="article:modified_time" content="2021-02-18T13:00:51+08:00" />
-
 <meta itemprop="name" content="Golang函数式选项(Functional Options)模式">
 <meta itemprop="description" content="原文地址：码农在新加坡的个人博客 概览 最近阅读源码的时候看到一段不错的代码，但是当时却不是非常理解为什么这么写。 我们先来看一下源代码： 1 2 3 4"><meta itemprop="datePublished" content="2021-02-18T13:00:51+08:00" />
 <meta itemprop="dateModified" content="2021-02-18T13:00:51+08:00" />
@@ -247,65 +246,65 @@
 </span><span class="lnt">58
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">User</span> <span class="kd">struct</span> <span class="p">{</span>
-	<span class="nx">ID</span>     <span class="kt">string</span>
-	<span class="nx">Name</span>   <span class="kt">string</span>
-	<span class="nx">Age</span>    <span class="kt">int</span>
-	<span class="nx">Email</span>  <span class="kt">string</span>
-	<span class="nx">Phone</span>  <span class="kt">string</span>
-	<span class="nx">Gender</span> <span class="kt">string</span>
-<span class="p">}</span>
-
-<span class="kd">type</span> <span class="nx">Option</span> <span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">)</span>
-
-<span class="kd">func</span> <span class="nf">WithAge</span><span class="p">(</span><span class="nx">age</span> <span class="kt">int</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
-		<span class="nx">u</span><span class="p">.</span><span class="nx">Age</span> <span class="p">=</span> <span class="nx">age</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">WithEmail</span><span class="p">(</span><span class="nx">email</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
-		<span class="nx">u</span><span class="p">.</span><span class="nx">Email</span> <span class="p">=</span> <span class="nx">email</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">WithPhone</span><span class="p">(</span><span class="nx">phone</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
-		<span class="nx">u</span><span class="p">.</span><span class="nx">Phone</span> <span class="p">=</span> <span class="nx">phone</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">WithGender</span><span class="p">(</span><span class="nx">gender</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
-		<span class="nx">u</span><span class="p">.</span><span class="nx">Gender</span> <span class="p">=</span> <span class="nx">gender</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">NewUser</span><span class="p">(</span><span class="nx">id</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">options</span> <span class="o">...</span><span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">))</span> <span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">user</span> <span class="o">:=</span> <span class="nx">User</span><span class="p">{</span>
-		<span class="nx">ID</span><span class="p">:</span>     <span class="nx">id</span><span class="p">,</span>
-		<span class="nx">Name</span><span class="p">:</span>   <span class="nx">name</span><span class="p">,</span>
-		<span class="nx">Age</span><span class="p">:</span>    <span class="mi">0</span><span class="p">,</span>
-		<span class="nx">Email</span><span class="p">:</span>  <span class="s">&#34;&#34;</span><span class="p">,</span>
-		<span class="nx">Phone</span><span class="p">:</span>  <span class="s">&#34;&#34;</span><span class="p">,</span>
-		<span class="nx">Gender</span><span class="p">:</span> <span class="s">&#34;female&#34;</span><span class="p">,</span>
-	<span class="p">}</span>
-	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">option</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">options</span> <span class="p">{</span>
-		<span class="nf">option</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">user</span><span class="p">)</span>
-	<span class="p">}</span>
-	<span class="c1">//...
-</span><span class="c1"></span>	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">user</span><span class="p">,</span> <span class="kc">nil</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">user</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">NewUser</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;Ada&#34;</span><span class="p">,</span> <span class="nf">WithAge</span><span class="p">(</span><span class="mi">18</span><span class="p">),</span> <span class="nf">WithPhone</span><span class="p">(</span><span class="s">&#34;123456&#34;</span><span class="p">))</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;NewUser: err:%v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
-	<span class="p">}</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;NewUser Success&#34;</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">User</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ID</span>     <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Name</span>   <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Age</span>    <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Email</span>  <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Phone</span>  <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Gender</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Option</span> <span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">WithAge</span><span class="p">(</span><span class="nx">age</span> <span class="kt">int</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">u</span><span class="p">.</span><span class="nx">Age</span> <span class="p">=</span> <span class="nx">age</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">WithEmail</span><span class="p">(</span><span class="nx">email</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">u</span><span class="p">.</span><span class="nx">Email</span> <span class="p">=</span> <span class="nx">email</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">WithPhone</span><span class="p">(</span><span class="nx">phone</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">u</span><span class="p">.</span><span class="nx">Phone</span> <span class="p">=</span> <span class="nx">phone</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">WithGender</span><span class="p">(</span><span class="nx">gender</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">u</span><span class="p">.</span><span class="nx">Gender</span> <span class="p">=</span> <span class="nx">gender</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewUser</span><span class="p">(</span><span class="nx">id</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">options</span> <span class="o">...</span><span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">))</span> <span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">user</span> <span class="o">:=</span> <span class="nx">User</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ID</span><span class="p">:</span>     <span class="nx">id</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Name</span><span class="p">:</span>   <span class="nx">name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Age</span><span class="p">:</span>    <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Email</span><span class="p">:</span>  <span class="s">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Phone</span><span class="p">:</span>  <span class="s">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Gender</span><span class="p">:</span> <span class="s">&#34;female&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">option</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">options</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">option</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">user</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">user</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">user</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">NewUser</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;Ada&#34;</span><span class="p">,</span> <span class="nf">WithAge</span><span class="p">(</span><span class="mi">18</span><span class="p">),</span> <span class="nf">WithPhone</span><span class="p">(</span><span class="s">&#34;123456&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;NewUser: err:%v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;NewUser Success&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>当时呢，也不是很明白 <strong>NewUser</strong> 这个构造函数为什么要这么写，后来查看了资料才知道了这是一种设计模式–<strong>函数式选项(functional options)模式</strong>。</p>
 <p>什么是函数式选项模式，为什么要这么写，这个编程模式解决了什么问题呢？</p>
@@ -331,18 +330,18 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">NewUserDefault</span><span class="p">(</span><span class="nx">id</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span><span class="nx">ID</span><span class="p">:</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">Name</span><span class="p">:</span> <span class="nx">name</span><span class="p">},</span> <span class="kc">nil</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">NewUserWithPhone</span><span class="p">(</span><span class="nx">id</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">phone</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span><span class="nx">ID</span><span class="p">:</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">Name</span><span class="p">:</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">Phone</span><span class="p">:</span> <span class="nx">phone</span><span class="p">},</span> <span class="kc">nil</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">NewUserWithEmail</span><span class="p">(</span><span class="nx">id</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">email</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span><span class="nx">ID</span><span class="p">:</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">Name</span><span class="p">:</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">Email</span><span class="p">:</span> <span class="nx">email</span><span class="p">},</span> <span class="kc">nil</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewUserDefault</span><span class="p">(</span><span class="nx">id</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span><span class="nx">ID</span><span class="p">:</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">Name</span><span class="p">:</span> <span class="nx">name</span><span class="p">},</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewUserWithPhone</span><span class="p">(</span><span class="nx">id</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">phone</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span><span class="nx">ID</span><span class="p">:</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">Name</span><span class="p">:</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">Phone</span><span class="p">:</span> <span class="nx">phone</span><span class="p">},</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewUserWithEmail</span><span class="p">(</span><span class="nx">id</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">email</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span><span class="nx">ID</span><span class="p">:</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">Name</span><span class="p">:</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">Email</span><span class="p">:</span> <span class="nx">email</span><span class="p">},</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果一共只有两三个参数的情况下，比较简单，但是更多的选项的组合就代码看起来很乱了。</p>
 <h3 id="配置化">配置化</h3>
@@ -358,13 +357,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Config</span> <span class="kd">struct</span> <span class="p">{</span>
-    <span class="nx">Age</span>    <span class="kt">int</span>
-    <span class="nx">Email</span>  <span class="kt">string</span>
-    <span class="nx">Phone</span>  <span class="kt">string</span>
-    <span class="nx">Gender</span> <span class="kt">string</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Config</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Age</span>    <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Email</span>  <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Phone</span>  <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Gender</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后把Config放到User的struct中。</p>
 <div class="highlight"><div class="chroma">
@@ -376,12 +375,12 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">User</span> <span class="kd">struct</span> <span class="p">{</span>
-    <span class="nx">ID</span>   <span class="kt">string</span>
-    <span class="nx">Name</span> <span class="kt">string</span>
-    <span class="nx">Conf</span> <span class="o">*</span><span class="nx">Config</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">User</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">ID</span>   <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Name</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Conf</span> <span class="o">*</span><span class="nx">Config</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>于是，我们只需要一个 NewUser() 的函数了，在使用前需要构造 Config 对象。</p>
 <div class="highlight"><div class="chroma">
@@ -396,15 +395,15 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">NewUser</span><span class="p">(</span><span class="nx">id</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">conf</span> <span class="o">*</span><span class="nx">Config</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">//...
-</span><span class="c1"></span><span class="p">}</span>
-<span class="c1">//Using the default configuratrion
-</span><span class="c1"></span><span class="nx">user</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nf">NewUser</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;Ada&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
-
-<span class="nx">conf</span> <span class="o">:=</span> <span class="nx">Config</span><span class="p">{</span><span class="nx">Age</span><span class="p">:</span><span class="mi">18</span><span class="p">,</span> <span class="nx">Phone</span><span class="p">:</span> <span class="s">&#34;123456&#34;</span><span class="p">}</span>
-<span class="nx">user2</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nf">NewUser</span><span class="p">(</span><span class="s">&#34;2&#34;</span><span class="p">,</span> <span class="s">&#34;Bob&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">conf</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewUser</span><span class="p">(</span><span class="nx">id</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">conf</span> <span class="o">*</span><span class="nx">Config</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//Using the default configuratrion
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">user</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nf">NewUser</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;Ada&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">conf</span> <span class="o">:=</span> <span class="nx">Config</span><span class="p">{</span><span class="nx">Age</span><span class="p">:</span><span class="mi">18</span><span class="p">,</span> <span class="nx">Phone</span><span class="p">:</span> <span class="s">&#34;123456&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">user2</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nf">NewUser</span><span class="p">(</span><span class="s">&#34;2&#34;</span><span class="p">,</span> <span class="s">&#34;Bob&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">conf</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这段代码看起来算是不错了，很多时候我使用的一些开源库也是这么写的。通过引入一个Config对象来解决多个参数的组合的问题。</p>
 <h3 id="builder模式">Builder模式</h3>
@@ -419,12 +418,12 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">user</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">UserBuilder</span><span class="p">).</span><span class="nf">Create</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;Ada&#34;</span><span class="p">).</span>
-  <span class="nf">age</span><span class="p">(</span><span class="mi">18</span><span class="p">).</span>
-  <span class="nf">phone</span><span class="p">(</span><span class="s">&#34;123456&#34;</span><span class="p">).</span>
-  <span class="nf">gender</span><span class="p">(</span><span class="s">&#34;female&#34;</span><span class="p">).</span>
-  <span class="nf">Build</span><span class="p">()</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">user</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">UserBuilder</span><span class="p">).</span><span class="nf">Create</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;Ada&#34;</span><span class="p">).</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">age</span><span class="p">(</span><span class="mi">18</span><span class="p">).</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">phone</span><span class="p">(</span><span class="s">&#34;123456&#34;</span><span class="p">).</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">gender</span><span class="p">(</span><span class="s">&#34;female&#34;</span><span class="p">).</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">Build</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>需要引入一个抽象的UserBuilder对象，来包装User对象，最终Build一个User对象返回。</p>
 <h3 id="函数式选项模式">函数式选项模式</h3>
@@ -434,8 +433,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Option</span> <span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Option</span> <span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后，我们定义一组返回函数的函数：</p>
 <div class="highlight"><div class="chroma">
@@ -465,30 +464,30 @@
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">WithAge</span><span class="p">(</span><span class="nx">age</span> <span class="kt">int</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
-		<span class="nx">u</span><span class="p">.</span><span class="nx">Age</span> <span class="p">=</span> <span class="nx">age</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">WithEmail</span><span class="p">(</span><span class="nx">email</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
-		<span class="nx">u</span><span class="p">.</span><span class="nx">Email</span> <span class="p">=</span> <span class="nx">email</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">WithPhone</span><span class="p">(</span><span class="nx">phone</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
-		<span class="nx">u</span><span class="p">.</span><span class="nx">Phone</span> <span class="p">=</span> <span class="nx">phone</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">WithGender</span><span class="p">(</span><span class="nx">gender</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
-		<span class="nx">u</span><span class="p">.</span><span class="nx">Gender</span> <span class="p">=</span> <span class="nx">gender</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">WithAge</span><span class="p">(</span><span class="nx">age</span> <span class="kt">int</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">u</span><span class="p">.</span><span class="nx">Age</span> <span class="p">=</span> <span class="nx">age</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">WithEmail</span><span class="p">(</span><span class="nx">email</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">u</span><span class="p">.</span><span class="nx">Email</span> <span class="p">=</span> <span class="nx">email</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">WithPhone</span><span class="p">(</span><span class="nx">phone</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">u</span><span class="p">.</span><span class="nx">Phone</span> <span class="p">=</span> <span class="nx">phone</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">WithGender</span><span class="p">(</span><span class="nx">gender</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">Option</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">u</span><span class="p">.</span><span class="nx">Gender</span> <span class="p">=</span> <span class="nx">gender</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这个模式和Builder模式的区别是，Builder模式返回的是 <strong>* User</strong> 对象，<strong>Functional Options</strong> 返回的是函数类型 <strong>func(* User)</strong>。</p>
 <p>上面这组代码传入一个参数，然后返回一个函数，返回的这个函数会设置自己的 <strong>User</strong> 参数。</p>
@@ -512,22 +511,22 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">NewUser</span><span class="p">(</span><span class="nx">id</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">options</span> <span class="o">...</span><span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">))</span> <span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">user</span> <span class="o">:=</span> <span class="nx">User</span><span class="p">{</span>
-		<span class="nx">ID</span><span class="p">:</span>     <span class="nx">id</span><span class="p">,</span>
-		<span class="nx">Name</span><span class="p">:</span>   <span class="nx">name</span><span class="p">,</span>
-		<span class="nx">Age</span><span class="p">:</span>    <span class="mi">0</span><span class="p">,</span>
-		<span class="nx">Email</span><span class="p">:</span>  <span class="s">&#34;&#34;</span><span class="p">,</span>
-		<span class="nx">Phone</span><span class="p">:</span>  <span class="s">&#34;&#34;</span><span class="p">,</span>
-		<span class="nx">Gender</span><span class="p">:</span> <span class="s">&#34;female&#34;</span><span class="p">,</span>
-	<span class="p">}</span>
-	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">option</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">options</span> <span class="p">{</span>
-		<span class="nf">option</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">user</span><span class="p">)</span>
-	<span class="p">}</span>
-	<span class="c1">//...
-</span><span class="c1"></span>	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">user</span><span class="p">,</span> <span class="kc">nil</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewUser</span><span class="p">(</span><span class="nx">id</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">options</span> <span class="o">...</span><span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">))</span> <span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">user</span> <span class="o">:=</span> <span class="nx">User</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ID</span><span class="p">:</span>     <span class="nx">id</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Name</span><span class="p">:</span>   <span class="nx">name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Age</span><span class="p">:</span>    <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Email</span><span class="p">:</span>  <span class="s">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Phone</span><span class="p">:</span>  <span class="s">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Gender</span><span class="p">:</span> <span class="s">&#34;female&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">option</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">options</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">option</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">user</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">user</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>调用方式如下：</p>
 <div class="highlight"><div class="chroma">
@@ -536,9 +535,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">user1</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">NewUser</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;Ada&#34;</span><span class="p">)</span>
-<span class="nx">user2</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">NewUser</span><span class="p">(</span><span class="s">&#34;2&#34;</span><span class="p">,</span> <span class="s">&#34;Bob&#34;</span><span class="p">,</span> <span class="nf">WithPhone</span><span class="p">(</span><span class="s">&#34;123456&#34;</span><span class="p">),</span> <span class="nf">WithGender</span><span class="p">(</span><span class="s">&#34;male&#34;</span><span class="p">))</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">user1</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">NewUser</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;Ada&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">user2</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">NewUser</span><span class="p">(</span><span class="s">&#34;2&#34;</span><span class="p">,</span> <span class="s">&#34;Bob&#34;</span><span class="p">,</span> <span class="nf">WithPhone</span><span class="p">(</span><span class="s">&#34;123456&#34;</span><span class="p">),</span> <span class="nf">WithGender</span><span class="p">(</span><span class="s">&#34;male&#34;</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这个看起来比较整洁和优雅，对外的接口只有一个NewUser。</p>
 <p>相比于Builder模式，不需要引入一个Builder对象。</p>
@@ -661,7 +660,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 

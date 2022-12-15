@@ -42,7 +42,7 @@
 </script>
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="https://leftpocket.cn/post/redis/redis_sds/" />
@@ -64,7 +64,6 @@
 <meta property="og:url" content="https://leftpocket.cn/post/redis/redis_sds/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-02-17T13:00:51+08:00" />
 <meta property="article:modified_time" content="2021-02-17T13:00:51+08:00" />
-
 <meta itemprop="name" content="Redis SDS简单动态字符串">
 <meta itemprop="description" content="原文地址：码农在新加坡的个人博客 SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串表示， 几乎所有的 Redis 模块中都用了 sds。"><meta itemprop="datePublished" content="2021-02-17T13:00:51+08:00" />
 <meta itemprop="dateModified" content="2021-02-17T13:00:51+08:00" />
@@ -186,9 +185,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">redis&gt; SET msg &#34;Redis&#34;
-OK
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">redis&gt; SET msg &#34;Redis&#34;
+</span></span><span class="line"><span class="cl">OK
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>那么Redis将在数据库创建一个新的键值对，其中：</p>
 <ul>
@@ -214,27 +213,27 @@ OK
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="k">struct</span> <span class="n">sdshdr</span> <span class="p">{</span>
-
-    <span class="c1">// 记录 buf 数组中已使用字节的数量
-</span><span class="c1"></span>    <span class="c1">// 等于 SDS 所保存字符串的长度
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">len</span><span class="p">;</span>
-
-    <span class="c1">// 记录 buf 数组中未使用字节的数量
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">free</span><span class="p">;</span>
-
-    <span class="c1">// 字节数组，用于保存字符串
-</span><span class="c1"></span>    <span class="kt">char</span> <span class="n">buf</span><span class="p">[];</span>
-
-<span class="p">};</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">sdshdr</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 记录 buf 数组中已使用字节的数量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 等于 SDS 所保存字符串的长度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">len</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 记录 buf 数组中未使用字节的数量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">free</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 字节数组，用于保存字符串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">char</span> <span class="n">buf</span><span class="p">[];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><img src="/img/redis/redis_sdshdr.png" alt="SDS"></p>
 <p>上图展示了一个SDS示例：</p>
 <ul>
 <li>free 属性的值为 0 ， 表示这个 SDS 没有分配任何未使用空间。</li>
 <li>len 属性的值为 5 ， 表示这个 SDS 保存了一个五字节长的字符串。</li>
-<li>buf 属性是一个 char 类型的数组， 数组的前五个字节分别保存了 &lsquo;R&rsquo; 、 &lsquo;e&rsquo; 、 &rsquo;d' 、 &lsquo;i&rsquo; 、 &rsquo;s' 五个字符， 而最后一个字节则保存了空字符 &lsquo;\0&rsquo; 。</li>
+<li>buf 属性是一个 char 类型的数组， 数组的前五个字节分别保存了 &lsquo;R&rsquo; 、 &rsquo;e&rsquo; 、 &rsquo;d&rsquo; 、 &lsquo;i&rsquo; 、 &rsquo;s&rsquo; 五个字符， 而最后一个字节则保存了空字符 &lsquo;\0&rsquo; 。</li>
 </ul>
 <p>SDS 遵循 C 字符串以空字符结尾的惯例， 保存空字符的 1 字节空间不计算在 SDS 的 len 属性里面， 并且为空字符分配额外的 1 字节空间， 以及添加空字符到字符串末尾等操作都是由 SDS 函数自动完成的， 所以这个空字符对于 SDS 的使用者来说是完全透明的。
 遵循空字符结尾这一惯例的好处是， SDS 可以直接重用一部分 C 字符串函数库里面的函数。</p>
@@ -254,8 +253,8 @@ OK
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="n">strcat</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="s">&#34;Cluster&#34;</span><span class="p">);</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">strcat</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="s">&#34;Cluster&#34;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>由于没有注意到s预分配的空间大小，执行以后会导致s1的内容缓冲到s2，以至于s2的内容被意外修改成Cluster，这种错误对数据库的使用过程致命的。</p>
 <p>而SDS在sdscat时会预先检查空间是否足够，不够的话会通过sdsMakeRoomFor自动为要拼接的字符串扩展空间.</p>
@@ -272,16 +271,16 @@ OK
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="n">sds</span> <span class="nf">sdscatlen</span><span class="p">(</span><span class="n">sds</span> <span class="n">s</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">size_t</span> <span class="n">curlen</span> <span class="o">=</span> <span class="n">sdslen</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">sdsMakeRoomFor</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">len</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
-    <span class="n">memcpy</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="n">curlen</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
-    <span class="n">sdssetlen</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">curlen</span><span class="o">+</span><span class="n">len</span><span class="p">);</span>
-    <span class="n">s</span><span class="p">[</span><span class="n">curlen</span><span class="o">+</span><span class="n">len</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
-    <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">sds</span> <span class="nf">sdscatlen</span><span class="p">(</span><span class="n">sds</span> <span class="n">s</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">size_t</span> <span class="n">curlen</span> <span class="o">=</span> <span class="nf">sdslen</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">s</span> <span class="o">=</span> <span class="nf">sdsMakeRoomFor</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">len</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">memcpy</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="n">curlen</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">sdssetlen</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">curlen</span><span class="o">+</span><span class="n">len</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">s</span><span class="p">[</span><span class="n">curlen</span><span class="o">+</span><span class="n">len</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>3.减少因修改字符串带来的内存重分配次数</strong>
 因为 C 字符串的长度和底层数组的长度之间存在着这种关联性， 所以每次增长或者缩短一个 C 字符串， 程序都总要对保存这个 C 字符串的数组进行一次内存重分配操作</p>
@@ -425,7 +424,7 @@ C 字符串中的字符必须符合某种编码（比如 ASCII）， 并且除�
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 

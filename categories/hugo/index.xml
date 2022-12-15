@@ -6,7 +6,16 @@
     <description>Recent content in hugo on 码农在新加坡的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 01 Jul 2022 01:01:55 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 Sep 2022 01:01:55 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>从零开始搭建个人博客（六）- hugo静态博客搭建到腾讯云</title>
+      <link>https://leftpocket.cn/post/hugo/hugo_server/</link>
+      <pubDate>Sat, 24 Sep 2022 01:01:55 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/hugo/hugo_server/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 之前讲解了把hugo静态博客部署到Github Pages和Vercel上。由于最近活动腾讯云服务器打折，</description>
+    </item>
+    
     <item>
       <title>从零开始搭建个人博客（六）- 接入google adsense广告</title>
       <link>https://leftpocket.cn/post/hugo/hugo_adsense/</link>

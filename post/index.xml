@@ -6,23 +6,41 @@
     <description>Recent content in Posts on 码农在新加坡的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 06 Jul 2022 00:00:00 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 14 Oct 2022 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>关于面试中经常出现的根据一个随机数构造另外的随机数的解法</title>
+      <title>各大型邮箱smtp服务器及端口</title>
+      <link>https://leftpocket.cn/post/others/smtp/</link>
+      <pubDate>Fri, 14 Oct 2022 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/others/smtp/</guid>
+      <description>背景 SMTP的全称是Simple Mail Transfer Protocol，即简单邮件传输协议。它是一组用于从源地址到目的地址传输邮件的规范，通过它来控制邮件的中</description>
+    </item>
+    
+    <item>
+      <title>从零开始搭建个人博客（六）- hugo静态博客搭建到腾讯云</title>
+      <link>https://leftpocket.cn/post/hugo/hugo_server/</link>
+      <pubDate>Sat, 24 Sep 2022 01:01:55 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/hugo/hugo_server/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 之前讲解了把hugo静态博客部署到Github Pages和Vercel上。由于最近活动腾讯云服务器打折，</description>
+    </item>
+    
+    <item>
+      <title>如何用一个1-7随机数生成器制作一个1-8随机数生成器？</title>
       <link>https://leftpocket.cn/post/interview/rand/</link>
       <pubDate>Wed, 06 Jul 2022 00:00:00 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/interview/rand/</guid>
-      <description>背景 之前做了一些Tencent及几家公司的面试题，发现有一种关于产生随机数的类型的题目。看到多有大牛们做出来，而且效率很高，也有不知道怎么做</description>
+      <description>原文地址：码农在新加坡的个人博客 背景 这要追溯到大四找工作的时候，做面试题，然后有一类关于产生随机数的类型的题目。感觉题目很巧妙，这里整理一下</description>
     </item>
     
     <item>
-      <title>Golang参数值传递还是引用传递</title>
+      <title>Golang是值传递还是引用传递</title>
       <link>https://leftpocket.cn/post/golang/pass_by_value/</link>
       <pubDate>Sat, 02 Jul 2022 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/golang/pass_by_value/</guid>
-      <description>背景 先说结论，Go里面没有引用传递，Go语言是值传递。对这个有不同意见的，请往下看。 值传递 形参是实参的拷贝，改变形参的值并不会影响外部实参的</description>
+      <description>背景 先说结论，Go里面没有引用传递，Go语言是值传递。很多技术博客说Go语言有引用传递，都是没真的理解Go语言。 值传递 指在调用函数时将实际参</description>
     </item>
     
     <item>
@@ -391,7 +409,7 @@
       <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/mysql/db_tidb_write_conflict/</guid>
-      <description>原文地址：码农在新加坡的个人博客 背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了write conflict. 1 2 3 4 5 [2020/08/2506:01:44.781+08:00][WARN][session.go:623][retrying][conn=26799778][schemaVersion=194][retryCnt=0][queryNum=0][sql=&amp;#34;UPDATE user_tab SET `region` = ?, `status` = ?, `update_time` =</description>
+      <description>原文地址：码农在新加坡的个人博客 背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了write conflict. 1 2 3 4 5 [2020/08/25 06:01:44.781 +08:00] [WARN] [session.go:623] [retrying] [conn=26799778] [schemaVersion=194] [retryCnt=0] [queryNum=0] [sql=&amp;#34;UPDATE</description>
     </item>
     
   </channel>

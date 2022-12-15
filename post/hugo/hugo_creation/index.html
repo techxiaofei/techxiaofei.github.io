@@ -42,7 +42,7 @@
 </script>
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="https://leftpocket.cn/post/hugo/hugo_creation/" />
@@ -64,11 +64,10 @@
 <meta property="og:url" content="https://leftpocket.cn/post/hugo/hugo_creation/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-12-02T01:00:55+08:00" />
 <meta property="article:modified_time" content="2021-12-02T01:00:55+08:00" />
-
 <meta itemprop="name" content="从零开始搭建个人博客（一）- 使用hugo搭建个人博客">
 <meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始"><meta itemprop="datePublished" content="2021-12-02T01:00:55+08:00" />
 <meta itemprop="dateModified" content="2021-12-02T01:00:55+08:00" />
-<meta itemprop="wordCount" content="2456">
+<meta itemprop="wordCount" content="2495">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="从零开始搭建个人博客（一）- 使用hugo搭建个人博客"/>
 <meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始"/>
@@ -151,7 +150,7 @@
         <div class="post-category">
             <a href="/categories/hugo/"> hugo </a>
             </div>
-          <span class="more-meta"> 约 2456 字 </span>
+          <span class="more-meta"> 约 2495 字 </span>
           <span class="more-meta"> 预计阅读 5 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -186,7 +185,7 @@
     <div class="post-content">
       <p>原文地址：<a href="https://leftpocket.cn/post/hugo/hugo_creation/">码农在新加坡的个人博客</a></p>
 <h1 id="背景">背景</h1>
-<p>使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。<br>
+<p>使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。
 这里分享一个系列教程：<strong>从零开始搭建个人博客</strong>，把我的经验分享在这里。<br>
 系列地址：<a href="https://left-pocket.github.io/post/hugo/hugo_0/">https://left-pocket.github.io</a></p>
 <h1 id="从零开始搭建个人博客一--使用hugo搭建个人博客">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</h1>
@@ -210,10 +209,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&gt;&gt;&gt; brew install hugo
-&gt;&gt;&gt; hugo version
-hugo v0.89.4+extended darwin/arm64 BuildDate=unknown
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&gt;&gt;&gt; brew install hugo
+</span></span><span class="line"><span class="cl">&gt;&gt;&gt; hugo version
+</span></span><span class="line"><span class="cl">hugo v0.89.4+extended darwin/arm64 BuildDate=unknown
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="创建站点">创建站点</h3>
 <p>创建一个站点 <strong>left-pocket-test</strong>， 并进入到站点根目录。
@@ -227,12 +226,12 @@ hugo v0.89.4+extended darwin/arm64 BuildDate=unknown
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&gt;&gt;&gt; hugo new site left-pocket-test
-&gt;&gt;&gt; cd left-pocket-test
-&gt;&gt;&gt; ls
-archetypes  content     layouts     resources   themes
-config.toml data        public      static
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&gt;&gt;&gt; hugo new site left-pocket-test
+</span></span><span class="line"><span class="cl">&gt;&gt;&gt; cd left-pocket-test
+</span></span><span class="line"><span class="cl">&gt;&gt;&gt; ls
+</span></span><span class="line"><span class="cl">archetypes  content     layouts     resources   themes
+</span></span><span class="line"><span class="cl">config.toml data        public      static
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li><strong>config.toml</strong> 是配置文件，在里面可以定义博客地址，构建配置，标题，导航栏等等。</li>
@@ -255,8 +254,8 @@ config.toml data        public      static
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git clone https://github.com/olOwOlo/hugo-theme-even themes/even
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git clone https://github.com/olOwOlo/hugo-theme-even themes/even
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这个时候even这个主题就被下载到<strong>themes</strong>目录下。</p>
 <p><strong>注</strong>：如果是从其他地方copy过来的站点，有可能遇到:</p>
@@ -265,8 +264,8 @@ config.toml data        public      static
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">WARN 2021/02/03 10:56:17 found no layout file for &#34;HTML&#34; for kind &#34;home&#34;: You should create a template file which matches Hugo Layouts Lookup Rules for this combination.
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">WARN 2021/02/03 10:56:17 found no layout file for &#34;HTML&#34; for kind &#34;home&#34;: You should create a template file which matches Hugo Layouts Lookup Rules for this combination.
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这个时候需要重新<strong>git clone</strong>一下主题。</p>
 <h3 id="配置">配置</h3>
@@ -357,88 +356,88 @@ config.toml data        public      static
 </span><span class="lnt">81
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="n">baseURL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;http://localhost:1313/&#34;</span><span class="w">
-</span><span class="w"></span><span class="n">languageCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;en&#34;</span><span class="w">
-</span><span class="w"></span><span class="n">defaultContentLanguage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;en&#34;</span><span class="w">                             </span><span class="c1"># en / zh-cn / ... (This field determines which i18n file to use)
-</span><span class="c1"></span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Leftpocket的个人博客&#34;</span><span class="w">
-</span><span class="w"></span><span class="n">preserveTaxonomyNames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w">
-</span><span class="w"></span><span class="n">enableRobotsTXT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w">
-</span><span class="w"></span><span class="n">enableEmoji</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w">
-</span><span class="w"></span><span class="n">theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;even&#34;</span><span class="w">
-</span><span class="w"></span><span class="n">enableGitInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="w"> </span><span class="c1"># use git commit log to generate lastmod record # 可根据 Git 中的提交生成最近更新记录。
-</span><span class="c1"></span><span class="w">
-</span><span class="w"></span><span class="c1"># Syntax highlighting by Chroma. NOTE: Don&#39;t enable `highlightInClient` and `chroma` at the same time!
-</span><span class="c1"></span><span class="n">pygmentsOptions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;linenos=table&#34;</span><span class="w">
-</span><span class="w"></span><span class="n">pygmentsCodefences</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w">
-</span><span class="w"></span><span class="n">pygmentsUseClasses</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w">
-</span><span class="w"></span><span class="n">pygmentsCodefencesGuessSyntax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="n">hasCJKLanguage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w">     </span><span class="c1"># has chinese/japanese/korean ? # 自动检测是否包含 中文\日文\韩文
-</span><span class="c1"></span><span class="n">paginate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w">                                              </span><span class="c1"># 首页每页显示的文章数
-</span><span class="c1"></span><span class="n">disqusShortname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;&#34;</span><span class="w">      </span><span class="c1"># disqus_shortname
-</span><span class="c1"></span><span class="n">googleAnalytics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;&#34;</span><span class="w">      </span><span class="c1"># UA-XXXXXXXX-X
-</span><span class="c1"></span><span class="n">copyright</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;&#34;</span><span class="w">            </span><span class="c1"># default: author.name ↓        # 默认为下面配置的author.name ↓
-</span><span class="c1"></span><span class="w">
-</span><span class="w"></span><span class="p">[</span><span class="n">author</span><span class="p">]</span><span class="w">                  </span><span class="c1"># essential                     # 必需
-</span><span class="c1"></span><span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Leftpocket&#34;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="p">[</span><span class="n">sitemap</span><span class="p">]</span><span class="w">                 </span><span class="c1"># essential                     # 必需
-</span><span class="c1"></span><span class="w">  </span><span class="n">changefreq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;weekly&#34;</span><span class="w">
-</span><span class="w">  </span><span class="n">priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="w">
-</span><span class="w">  </span><span class="n">filename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;sitemap.xml&#34;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="p">[[</span><span class="n">menu</span><span class="p">.</span><span class="n">main</span><span class="p">]]</span><span class="w">             </span><span class="c1"># config your menu              # 配置目录
-</span><span class="c1"></span><span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Home&#34;</span><span class="w">
-</span><span class="w">  </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="w">  </span><span class="n">identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;home&#34;</span><span class="w">
-</span><span class="w">  </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;/&#34;</span><span class="w">
-</span><span class="w"></span><span class="p">[[</span><span class="n">menu</span><span class="p">.</span><span class="n">main</span><span class="p">]]</span><span class="w">
-</span><span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Archives&#34;</span><span class="w">
-</span><span class="w">  </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="w">
-</span><span class="w">  </span><span class="n">identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;archives&#34;</span><span class="w">
-</span><span class="w">  </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;/post/&#34;</span><span class="w">
-</span><span class="w"></span><span class="p">[[</span><span class="n">menu</span><span class="p">.</span><span class="n">main</span><span class="p">]]</span><span class="w">
-</span><span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Tags&#34;</span><span class="w">
-</span><span class="w">  </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="w">
-</span><span class="w">  </span><span class="n">identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;tags&#34;</span><span class="w">
-</span><span class="w">  </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;/tags/&#34;</span><span class="w">
-</span><span class="w"></span><span class="p">[[</span><span class="n">menu</span><span class="p">.</span><span class="n">main</span><span class="p">]]</span><span class="w">
-</span><span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Categories&#34;</span><span class="w">
-</span><span class="w">  </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="w">
-</span><span class="w">  </span><span class="n">identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;categories&#34;</span><span class="w">
-</span><span class="w">  </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;/categories/&#34;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="p">[</span><span class="n">params</span><span class="p">]</span><span class="w">
-</span><span class="w">  </span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;4.x&#34;</span><span class="w">           </span><span class="c1"># Used to give a friendly message when you have an incompatible update
-</span><span class="c1"></span><span class="w">  </span><span class="n">debug</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="w">             </span><span class="c1"># If true, load `eruda.min.js`. See https://github.com/liriliri/eruda
-</span><span class="c1"></span><span class="w">
-</span><span class="w">  </span><span class="n">since</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;2017&#34;</span><span class="w">            </span><span class="c1"># Site creation time          # 站点建立时间
-</span><span class="c1"></span><span class="w">  </span><span class="c1"># use public git repo url to link lastmod git commit, enableGitInfo should be true.
-</span><span class="c1"></span><span class="w">  </span><span class="c1"># 指定 git 仓库地址，可以生成指向最近更新的 git commit 的链接，需要将 enableGitInfo 设置成 true.
-</span><span class="c1"></span><span class="w">  </span><span class="n">gitRepo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;&#34;</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="c1"># site info (optional)                                  # 站点信息（可选，不需要的可以直接注释掉）
-</span><span class="c1"></span><span class="w">  </span><span class="n">logoTitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Leftpocket的个人博客&#34;</span><span class="w">        </span><span class="c1"># default: the title value    # 默认值: 上面设置的title值
-</span><span class="c1"></span><span class="w">  </span><span class="n">keywords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;Hugo&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;theme&#34;</span><span class="p">,</span><span class="s2">&#34;even&#34;</span><span class="p">]</span><span class="w">
-</span><span class="w">  </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Hugo theme even example site.&#34;</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="c1"># paginate of archives, tags and categories             # 归档、标签、分类每页显示的文章数目，建议修改为一个较大的值
-</span><span class="c1"></span><span class="w">  </span><span class="n">archivePaginate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="c1"># show &#39;xx Posts In Total&#39; in archive page ?            # 是否在归档页显示文章的总数
-</span><span class="c1"></span><span class="w">  </span><span class="n">showArchiveCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="c1"># The date format to use; for a list of valid formats, see https://gohugo.io/functions/format/
-</span><span class="c1"></span><span class="w">  </span><span class="n">dateFormatToUse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;2006-01-02&#34;</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="c1"># show word count and read time ?                       # 是否显示字数统计与阅读时间
-</span><span class="c1"></span><span class="w">  </span><span class="n">moreMeta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="c1"># Syntax highlighting by highlight.js
-</span><span class="c1"></span><span class="w">  </span><span class="n">highlightInClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="w">
-</span><span class="w">
-</span><span class="w"> </span><span class="c1"># 后续省略，可直接从 **themes/exampleSite/config.toml** 下复制到跟目录下进行修改。
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="n">baseURL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;http://localhost:1313/&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">languageCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;en&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">defaultContentLanguage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;en&#34;</span><span class="w">                             </span><span class="c1"># en / zh-cn / ... (This field determines which i18n file to use)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Leftpocket的个人博客&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">preserveTaxonomyNames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">enableRobotsTXT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">enableEmoji</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;even&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">enableGitInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="w"> </span><span class="c1"># use git commit log to generate lastmod record # 可根据 Git 中的提交生成最近更新记录。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1"># Syntax highlighting by Chroma. NOTE: Don&#39;t enable `highlightInClient` and `chroma` at the same time!
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">pygmentsOptions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;linenos=table&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">pygmentsCodefences</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">pygmentsUseClasses</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">pygmentsCodefencesGuessSyntax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">hasCJKLanguage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w">     </span><span class="c1"># has chinese/japanese/korean ? # 自动检测是否包含 中文\日文\韩文
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">paginate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w">                                              </span><span class="c1"># 首页每页显示的文章数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">disqusShortname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;&#34;</span><span class="w">      </span><span class="c1"># disqus_shortname
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">googleAnalytics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;&#34;</span><span class="w">      </span><span class="c1"># UA-XXXXXXXX-X
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">copyright</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;&#34;</span><span class="w">            </span><span class="c1"># default: author.name ↓        # 默认为下面配置的author.name ↓
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[</span><span class="n">author</span><span class="p">]</span><span class="w">                  </span><span class="c1"># essential                     # 必需
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Leftpocket&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[</span><span class="n">sitemap</span><span class="p">]</span><span class="w">                 </span><span class="c1"># essential                     # 必需
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">changefreq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;weekly&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">filename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;sitemap.xml&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[[</span><span class="n">menu</span><span class="p">.</span><span class="n">main</span><span class="p">]]</span><span class="w">             </span><span class="c1"># config your menu              # 配置目录
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Home&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;home&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;/&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[[</span><span class="n">menu</span><span class="p">.</span><span class="n">main</span><span class="p">]]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Archives&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;archives&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;/post/&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[[</span><span class="n">menu</span><span class="p">.</span><span class="n">main</span><span class="p">]]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Tags&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;tags&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;/tags/&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[[</span><span class="n">menu</span><span class="p">.</span><span class="n">main</span><span class="p">]]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Categories&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;categories&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;/categories/&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[</span><span class="n">params</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;4.x&#34;</span><span class="w">           </span><span class="c1"># Used to give a friendly message when you have an incompatible update
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">debug</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="w">             </span><span class="c1"># If true, load `eruda.min.js`. See https://github.com/liriliri/eruda
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">since</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;2017&#34;</span><span class="w">            </span><span class="c1"># Site creation time          # 站点建立时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="c1"># use public git repo url to link lastmod git commit, enableGitInfo should be true.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="c1"># 指定 git 仓库地址，可以生成指向最近更新的 git commit 的链接，需要将 enableGitInfo 设置成 true.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">gitRepo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1"># site info (optional)                                  # 站点信息（可选，不需要的可以直接注释掉）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">logoTitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Leftpocket的个人博客&#34;</span><span class="w">        </span><span class="c1"># default: the title value    # 默认值: 上面设置的title值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">keywords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;Hugo&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;theme&#34;</span><span class="p">,</span><span class="s2">&#34;even&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;Hugo theme even example site.&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1"># paginate of archives, tags and categories             # 归档、标签、分类每页显示的文章数目，建议修改为一个较大的值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">archivePaginate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1"># show &#39;xx Posts In Total&#39; in archive page ?            # 是否在归档页显示文章的总数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">showArchiveCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1"># The date format to use; for a list of valid formats, see https://gohugo.io/functions/format/
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">dateFormatToUse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;2006-01-02&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1"># show word count and read time ?                       # 是否显示字数统计与阅读时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">moreMeta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1"># Syntax highlighting by highlight.js
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">highlightInClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="c1"># 后续省略，可直接从 **themes/exampleSite/config.toml** 下复制到跟目录下进行修改。
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>具体的高级配置，会在后续的高级配置详细介绍，我们这一篇主要讲解基础配置。
 暂时只需要修改 <strong>title</strong> 和 <strong>autohr</strong> 相关的内容就可以了。</p>
@@ -450,11 +449,11 @@ config.toml data        public      static
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">title = &#34;Leftpocket的个人博客&#34;
-
-[author]                  # essential                     # 必需
-  name = &#34;Leftpocket&#34;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">title = &#34;Leftpocket的个人博客&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[author]                  # essential                     # 必需
+</span></span><span class="line"><span class="cl">  name = &#34;Leftpocket&#34;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="发布第一篇文章">发布第一篇文章</h3>
 <p>配置完成后，发布第一篇文章。</p>
@@ -463,8 +462,8 @@ config.toml data        public      static
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">hugo new post/my-first-post.md
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hugo new post/my-first-post.md
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>其中有着 draft 选项。当 draft 为 true 的时候，默认是不会渲染的，渲染 draft 需要加 <strong>-D</strong> 的启动参数。 我们可以将 draft 改为 false，这样默认就可以渲染了。<br>
 一般来说，把<strong>draft: true</strong>去掉，加一些markdown语法的内容就可以了。<br>
@@ -488,21 +487,21 @@ config.toml data        public      static
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">---
-title: &#34;My First Post&#34;
-date: 2021-11-28T16:46:27+08:00
-tags : [
-&#34;hugo&#34;,
-]
-categories : [
-&#34;hugo&#34;,
-]
-keywords : [
-&#34;hugo&#34;,
-]
----
-This is the first post.
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">title: &#34;My First Post&#34;
+</span></span><span class="line"><span class="cl">date: 2021-11-28T16:46:27+08:00
+</span></span><span class="line"><span class="cl">tags : [
+</span></span><span class="line"><span class="cl">&#34;hugo&#34;,
+</span></span><span class="line"><span class="cl">]
+</span></span><span class="line"><span class="cl">categories : [
+</span></span><span class="line"><span class="cl">&#34;hugo&#34;,
+</span></span><span class="line"><span class="cl">]
+</span></span><span class="line"><span class="cl">keywords : [
+</span></span><span class="line"><span class="cl">&#34;hugo&#34;,
+</span></span><span class="line"><span class="cl">]
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">This is the first post.
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="执行命令">执行命令</h3>
 <div class="highlight"><div class="chroma">
@@ -530,28 +529,28 @@ This is the first post.
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&gt;&gt;&gt; hugo server
-
-                   | EN  
--------------------+-----
-  Pages            | 11  
-  Paginator pages  |  0  
-  Non-page files   |  0  
-  Static files     |  5  
-  Processed images |  0  
-  Aliases          |  2  
-  Sitemaps         |  1  
-  Cleaned          |  0  
-
-Built in 21 ms
-Watching for changes in /Users/hugo/iwtbabc/{archetypes,content,data,layouts,static,themes}
-Watching for config changes in /Users/hugo/iwtbabc/config.toml
-Environment: &#34;development&#34;
-Serving pages from memory
-Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
-Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
-Press Ctrl+C to stop
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&gt;&gt;&gt; hugo server
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                   | EN  
+</span></span><span class="line"><span class="cl">-------------------+-----
+</span></span><span class="line"><span class="cl">  Pages            | 11  
+</span></span><span class="line"><span class="cl">  Paginator pages  |  0  
+</span></span><span class="line"><span class="cl">  Non-page files   |  0  
+</span></span><span class="line"><span class="cl">  Static files     |  5  
+</span></span><span class="line"><span class="cl">  Processed images |  0  
+</span></span><span class="line"><span class="cl">  Aliases          |  2  
+</span></span><span class="line"><span class="cl">  Sitemaps         |  1  
+</span></span><span class="line"><span class="cl">  Cleaned          |  0  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Built in 21 ms
+</span></span><span class="line"><span class="cl">Watching for changes in /Users/hugo/iwtbabc/{archetypes,content,data,layouts,static,themes}
+</span></span><span class="line"><span class="cl">Watching for config changes in /Users/hugo/iwtbabc/config.toml
+</span></span><span class="line"><span class="cl">Environment: &#34;development&#34;
+</span></span><span class="line"><span class="cl">Serving pages from memory
+</span></span><span class="line"><span class="cl">Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+</span></span><span class="line"><span class="cl">Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
+</span></span><span class="line"><span class="cl">Press Ctrl+C to stop
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>在浏览器输入 <a href="http://localhost:1313/">http://localhost:1313/</a>  即可看到具体效果。<br>
 其中文章中，可以设置 <code>tag</code>, <code>categories</code>, <code>keywords</code>等属性。</p>
@@ -567,8 +566,8 @@ hugo是立即生效的，不需要重新启动。</p>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">![test图片](/img/test.png)
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">![test图片](/img/test.png)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>即可正常显示。</p>
 <p>下一篇将具体讲如何把hugo博客托管到github Pages上。就相当于部署到了服务器上，这样你就可以随时随地查看你的博客了。</p>
@@ -676,7 +675,7 @@ hugo是立即生效的，不需要重新启动。</p>
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 

@@ -42,7 +42,7 @@
 </script>
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="https://leftpocket.cn/post/protobuf/protobuf/" />
@@ -64,7 +64,6 @@
 <meta property="og:url" content="https://leftpocket.cn/post/protobuf/protobuf/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-05-10T13:00:51+08:00" />
 <meta property="article:modified_time" content="2022-05-10T13:00:51+08:00" />
-
 <meta itemprop="name" content="protobuf是怎么序列化的">
 <meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 目前主流的几种数据交互的格式主要有xml、json、protobuf等等。xml和json我相信大家都很"><meta itemprop="datePublished" content="2022-05-10T13:00:51+08:00" />
 <meta itemprop="dateModified" content="2022-05-10T13:00:51+08:00" />
@@ -239,13 +238,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">syntax = &#34;proto3&#34;;
-
-message Student {
-    optional int32 id = 1;
-    optional string name = 2;
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">syntax = &#34;proto3&#34;;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">message Student {
+</span></span><span class="line"><span class="cl">    optional int32 id = 1;
+</span></span><span class="line"><span class="cl">    optional string name = 2;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>注意：</strong> protobuf语法有<code>proto2</code>和<code>proto3</code>，现在一般用<code>proto3</code>。支持更多语言且更简洁。</p>
 <p>定义好proto文件后，通过protobuf提供的protoc编译器对其进行编译。它支持主流的编程语言：<code>C++, C#, Dart, Go, Java, Kotlin, Python</code>等。</p>
@@ -288,8 +287,8 @@ message Student {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[0]000 0001
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[0]000 0001
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>例二：数字300</strong></p>
 <p>这里是数字<code>300</code>，这有点复杂。单字节最大只能储存<code>2^7-1</code>, 也就是 <code>0111 1111</code>, 肯定是不够的。[<strong>注：最高位是特殊含义的标识符</strong>]</p>
@@ -298,8 +297,8 @@ message Student {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">300 = 256 + 32 + 8 + 4 = 0000 0001 0010 1100
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">300 = 256 + 32 + 8 + 4 = 0000 0001 0010 1100
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>到这一步我相信都能看懂。</p>
 <p>我们继续一步推到底。</p>
@@ -313,13 +312,13 @@ message Student {
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">300 
-= 256 + 32 + 8 + 4 
-= 0000 0001 0010 1100 (二进制)
-=  0000010  0101100 （每7位代表一个字节）
-=  0101100  0000010 （小端储存，低位在前）
-= 10101100 00000010 （高位补1/0）
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">300 
+</span></span><span class="line"><span class="cl">= 256 + 32 + 8 + 4 
+</span></span><span class="line"><span class="cl">= 0000 0001 0010 1100 (二进制)
+</span></span><span class="line"><span class="cl">=  0000010  0101100 （每7位代表一个字节）
+</span></span><span class="line"><span class="cl">=  0101100  0000010 （小端储存，低位在前）
+</span></span><span class="line"><span class="cl">= 10101100 00000010 （高位补1/0）
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>所以300需要两个字节储存。</p>
 <p>更大的数据都是类似的方式转换，对于很大的整数，32/7=4.57，向上取整是5，所以我们最大需要5字节来表示一个大的32位整数。</p>
@@ -338,8 +337,8 @@ message Student {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(n &lt;&lt; 1) ^ (n &gt;&gt; 31)
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">(n &lt;&lt; 1) ^ (n &gt;&gt; 31)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>sint64类型的数字<code>n</code>:</p>
 <div class="highlight"><div class="chroma">
@@ -347,8 +346,8 @@ message Student {
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(n &lt;&lt; 1) ^ (n &gt;&gt; 63)
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">(n &lt;&lt; 1) ^ (n &gt;&gt; 63)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><table>
 <thead>
@@ -410,15 +409,15 @@ message Student {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">enum WireType { 
-      WIRETYPE_VARINT = 0, 
-      WIRETYPE_FIXED64 = 1, 
-      WIRETYPE_LENGTH_DELIMITED = 2, 
-      WIRETYPE_START_GROUP = 3,   //deprecated
-      WIRETYPE_END_GROUP = 4,     //deprecated
-      WIRETYPE_FIXED32 = 5
-   };
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">enum WireType { 
+</span></span><span class="line"><span class="cl">      WIRETYPE_VARINT = 0, 
+</span></span><span class="line"><span class="cl">      WIRETYPE_FIXED64 = 1, 
+</span></span><span class="line"><span class="cl">      WIRETYPE_LENGTH_DELIMITED = 2, 
+</span></span><span class="line"><span class="cl">      WIRETYPE_START_GROUP = 3,   //deprecated
+</span></span><span class="line"><span class="cl">      WIRETYPE_END_GROUP = 4,     //deprecated
+</span></span><span class="line"><span class="cl">      WIRETYPE_FIXED32 = 5
+</span></span><span class="line"><span class="cl">   };
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><img src="/img/protobuf/wire_type.png" alt="Wire Type"></p>
 <p>这是各个<code>Wire Type</code>对应的具体类型。</p>
@@ -452,9 +451,9 @@ message Student {
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Wire Type只有六种类型，所以用三位二进制数完全足够表示。
-Tag = (字段标识号 &lt;&lt; 3) | WireType
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Wire Type只有六种类型，所以用三位二进制数完全足够表示。
+</span></span><span class="line"><span class="cl">Tag = (字段标识号 &lt;&lt; 3) | WireType
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>也就是如果如果<code>字段标识号</code> &lt;= 15 (4bit)，那么Tag就只需要一字节。</p>
 <p><strong>Length 长度</strong></p>
@@ -499,19 +498,19 @@ Tag = (字段标识号 &lt;&lt; 3) | WireType
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">message Test
-{
-    ...
-    optional string str = 4;
-    ...
-}
-
-// 将str设置为：testing
-Test.setStr（“testing”）
-
-// 经过protobuf编码序列化后的数据以二进制的方式输出
-// 输出为：18, 7, 116, 101, 115, 116, 105, 110, 103
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">message Test
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    ...
+</span></span><span class="line"><span class="cl">    optional string str = 4;
+</span></span><span class="line"><span class="cl">    ...
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 将str设置为：testing
+</span></span><span class="line"><span class="cl">Test.setStr（“testing”）
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 经过protobuf编码序列化后的数据以二进制的方式输出
+</span></span><span class="line"><span class="cl">// 输出为：18, 7, 116, 101, 115, 116, 105, 110, 103
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出为二进制数据流，展示为数字，方便可读。</p>
 <div class="highlight"><div class="chroma">
@@ -521,10 +520,10 @@ Test.setStr（“testing”）
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Tag = 4 &lt;&lt; 3 | 2 = 34
-Length = 7
-Value = UTF8(&#34;testing&#34;) = 116, 101, 115, 116, 105, 110, 103
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Tag = 4 &lt;&lt; 3 | 2 = 34
+</span></span><span class="line"><span class="cl">Length = 7
+</span></span><span class="line"><span class="cl">Value = UTF8(&#34;testing&#34;) = 116, 101, 115, 116, 105, 110, 103
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>嵌套消息类型</strong></p>
 <p><img src="/img/protobuf/nest.png" alt="nest"></p>
@@ -544,19 +543,19 @@ Value = UTF8(&#34;testing&#34;) = 116, 101, 115, 116, 105, 110, 103
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">message Test
-{
-    ...
-    optional Internal internal = 5;
-    ...
-}
-
-message Internal
-{
-    optional string a = 1;
-    optional string b = 2;
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">message Test
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    ...
+</span></span><span class="line"><span class="cl">    optional Internal internal = 5;
+</span></span><span class="line"><span class="cl">    ...
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">message Internal
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    optional string a = 1;
+</span></span><span class="line"><span class="cl">    optional string b = 2;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>嵌套消息类型，就是message里面套一个message，其实就是把内层的消息的<code>T-L-V</code>数据储存作为外层数据的<code>Value</code>。</p>
 <p>外部的Length代表整个Value的长度，也就是内部的message的长度。</p>
@@ -576,13 +575,13 @@ message Internal
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">message Test
-{
-    ...
-    repeated int32 lists = 6;                // 表达方式1：不带packed=true
-    repeated int32 lists = 7 [packed=true];  // 表达方式2：带packed=true
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">message Test
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    ...
+</span></span><span class="line"><span class="cl">    repeated int32 lists = 6;                // 表达方式1：不带packed=true
+</span></span><span class="line"><span class="cl">    repeated int32 lists = 7 [packed=true];  // 表达方式2：带packed=true
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>也就是说<code>packed=true</code>是专门针对标量数字类型做的一个编码空间优化策略。对于<code>proto3</code>而言，它是默认使用的，对于<code>proto2</code>而言，由于历史原因，它默认没有使用，需要手动使用。</p>
 <p><img src="/img/protobuf/packed_false.png" alt="not packed"></p>
@@ -719,7 +718,7 @@ Tag是需要占字节空间的。如果<code>字段标识号&gt;15</code>时，<
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 

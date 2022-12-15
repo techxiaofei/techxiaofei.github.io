@@ -42,7 +42,7 @@
 </script>
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="https://leftpocket.cn/post/hugo/hugo_github/" />
@@ -64,7 +64,6 @@
 <meta property="og:url" content="https://leftpocket.cn/post/hugo/hugo_github/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-12-02T01:01:55+08:00" />
 <meta property="article:modified_time" content="2021-12-02T01:01:55+08:00" />
-
 <meta itemprop="name" content="从零开始搭建个人博客（二）- 把hugo博客托管到github上">
 <meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始"><meta itemprop="datePublished" content="2021-12-02T01:01:55+08:00" />
 <meta itemprop="dateModified" content="2021-12-02T01:01:55+08:00" />
@@ -228,8 +227,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git clone git@github.com:left-pocket-test/left-pocket-test.github.io.git
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git clone git@github.com:left-pocket-test/left-pocket-test.github.io.git
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后创建把这个<code>git Repo目录</code>和hugo站点的根目录的<code>public</code>创建软链接：</p>
 <div class="highlight"><div class="chroma">
@@ -237,8 +236,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ln -s /Users/hugo/left-pocket-test.github.io /Users/hugo/left-pocket-test/public
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ln -s /Users/hugo/left-pocket-test.github.io /Users/hugo/left-pocket-test/public
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后在<code>hugo站点</code>使用<strong>hugo</strong>指令，就会自动在public软链接也就是git repo下生成目标文件。<br>
 最终执行git add/commit/push之后，打开<br>
@@ -254,11 +253,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ERROR: Permission to left-pocket-test/left-pocket-test.github.io.git denied to left-pocket.
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ERROR: Permission to left-pocket-test/left-pocket-test.github.io.git denied to left-pocket.
+</span></span><span class="line"><span class="cl">fatal: Could not read from remote repository.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Please make sure you have the correct access rights
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>那就在Github上添加一下ssh key就好了。</p>
 <h3 id="发布源文件到github">发布源文件到Github</h3>
@@ -280,14 +279,14 @@ Please make sure you have the correct access rights
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">echo &#34;# left-pocket-test&#34; &gt;&gt; README.md
-git init
-git add *
-git commit -m &#34;first commit&#34;
-git branch -M main
-git remote add origin git@github.com:left-pocket-test/left-pocket-test.git
-git push -u origin main
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">echo &#34;# left-pocket-test&#34; &gt;&gt; README.md
+</span></span><span class="line"><span class="cl">git init
+</span></span><span class="line"><span class="cl">git add *
+</span></span><span class="line"><span class="cl">git commit -m &#34;first commit&#34;
+</span></span><span class="line"><span class="cl">git branch -M main
+</span></span><span class="line"><span class="cl">git remote add origin git@github.com:left-pocket-test/left-pocket-test.git
+</span></span><span class="line"><span class="cl">git push -u origin main
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这个时候你的源文件就上传到Github的一个新的仓库<code>left-pocket-test</code>了。这是用来保存源文件的。而<code>left-pocket-test.github.io</code>是用来保存网站的目标文件的。</p>
 <p>&lt;全文完&gt;</p>
@@ -394,7 +393,7 @@ git push -u origin main
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 

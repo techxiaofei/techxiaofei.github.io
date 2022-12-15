@@ -42,7 +42,7 @@
 </script>
 
 
-<meta name="generator" content="Hugo 0.89.4 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="https://leftpocket.cn/post/golang/time_after/" />
@@ -64,7 +64,6 @@
 <meta property="og:url" content="https://leftpocket.cn/post/golang/time_after/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-05-06T00:00:51+08:00" />
 <meta property="article:modified_time" content="2022-05-06T00:00:51+08:00" />
-
 <meta itemprop="name" content="Golang time.After内存泄漏分析">
 <meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 我刚转做go语言开发开始写入职小程序的时候，写下了如下的代码： 1 2 3 4 5 6 7 8 9 10 for { select { case conn := &lt;- conns: ... //do"><meta itemprop="datePublished" content="2022-05-06T00:00:51+08:00" />
 <meta itemprop="dateModified" content="2022-05-06T00:00:51+08:00" />
@@ -188,17 +187,17 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="k">for</span> <span class="p">{</span>
-    <span class="k">select</span> <span class="p">{</span>
-        <span class="k">case</span> <span class="nx">conn</span> <span class="o">:=</span> <span class="o">&lt;-</span> <span class="nx">conns</span><span class="p">:</span>
-            <span class="o">...</span> <span class="c1">//do someting
-</span><span class="c1"></span>            <span class="k">return</span> <span class="nx">conn</span>
-        <span class="k">case</span> <span class="o">&lt;-</span> <span class="nx">time</span><span class="p">.</span><span class="nf">After</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Timeouot</span><span class="p">):</span>
-            <span class="o">...</span> <span class="c1">//do something
-</span><span class="c1"></span>            <span class="k">return</span> <span class="nx">xxx</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">select</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="nx">conn</span> <span class="o">:=</span> <span class="o">&lt;-</span> <span class="nx">conns</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="o">...</span> <span class="c1">//do someting
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">return</span> <span class="nx">conn</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="o">&lt;-</span> <span class="nx">time</span><span class="p">.</span><span class="nf">After</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Timeouot</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="o">...</span> <span class="c1">//do something
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">return</span> <span class="nx">xxx</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这只是一个简单的<code>从连接池取连接</code>的代码，如果连接池没有可用连接，就在超时后创建一个新的连接使用。</p>
 <p>说实话，我觉得我的代码可优雅了，后来对go语言有了更深入的了解之后，发现我写的代码有着明显的内存泄漏的问题。</p>
@@ -243,40 +242,40 @@
 </span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
-
-<span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;fmt&#34;</span>
-	<span class="s">&#34;time&#34;</span>
-<span class="p">)</span>
-<span class="c1">//define a channel
-</span><span class="c1"></span><span class="kd">var</span> <span class="nx">chs</span> <span class="kd">chan</span> <span class="kt">int</span>
-
-<span class="kd">func</span> <span class="nf">Get</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">for</span> <span class="p">{</span>
-		<span class="k">select</span> <span class="p">{</span>
-			<span class="k">case</span> <span class="nx">v</span> <span class="o">:=</span> <span class="o">&lt;-</span> <span class="nx">chs</span><span class="p">:</span>
-				<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;print:%v\n&#34;</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
-			<span class="k">case</span> <span class="o">&lt;-</span> <span class="nx">time</span><span class="p">.</span><span class="nf">After</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">):</span>
-				<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;time.After:%v&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Unix</span><span class="p">())</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">Put</span><span class="p">()</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">i</span> <span class="p">=</span> <span class="mi">0</span>
-	<span class="k">for</span> <span class="p">{</span>
-		<span class="nx">i</span><span class="o">++</span>
-		<span class="nx">chs</span> <span class="o">&lt;-</span> <span class="nx">i</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">chs</span> <span class="p">=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-	<span class="k">go</span> <span class="nf">Put</span><span class="p">()</span>
-	<span class="nf">Get</span><span class="p">()</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;time&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//define a channel
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">chs</span> <span class="kd">chan</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">Get</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">select</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">case</span> <span class="nx">v</span> <span class="o">:=</span> <span class="o">&lt;-</span> <span class="nx">chs</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;print:%v\n&#34;</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">case</span> <span class="o">&lt;-</span> <span class="nx">time</span><span class="p">.</span><span class="nf">After</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;time.After:%v&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Unix</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">Put</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">i</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">i</span><span class="o">++</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">chs</span> <span class="o">&lt;-</span> <span class="nx">i</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">chs</span> <span class="p">=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">go</span> <span class="nf">Put</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">Get</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>咱也别管代码优不优雅，就很简单的逻辑，先往channel里面存数据，然后不停的使用<code>for select case</code>语法从channel里面取数据。</p>
 <p>我相信大家一眼就能看懂。就是这么简单的代码却会导致内存泄漏。</p>
@@ -290,8 +289,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">func After(d Duration) &lt;-chan Time
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">func After(d Duration) &lt;-chan Time
+</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>After waits for the duration to elapse and then sends the current time on the returned channel. It is equivalent to NewTimer(d).C. The underlying Timer is not recovered by the garbage collector until the timer fires. If efficiency is a concern, use NewTimer instead and call Timer.Stop if the timer is no longer needed.</p>
@@ -314,15 +313,15 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="k">for</span> <span class="p">{</span>
-		<span class="k">select</span> <span class="p">{</span>
-			<span class="k">case</span> <span class="nx">v</span> <span class="o">:=</span> <span class="o">&lt;-</span> <span class="nx">chs</span><span class="p">:</span>
-				<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;print:%v\n&#34;</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
-			<span class="k">case</span> <span class="o">&lt;-</span> <span class="nx">time</span><span class="p">.</span><span class="nf">After</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">):</span>
-				<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;time.After:%v&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Unix</span><span class="p">())</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">select</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">case</span> <span class="nx">v</span> <span class="o">:=</span> <span class="o">&lt;-</span> <span class="nx">chs</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;print:%v\n&#34;</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">case</span> <span class="o">&lt;-</span> <span class="nx">time</span><span class="p">.</span><span class="nf">After</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;time.After:%v&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Unix</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>回过头来看我们的代码，这里我们的定时时间设置的是3分钟， 在for循环内每次select的时候，都会实例化一个一个新的定时器。该定时器在3分钟后，才会被激活，但是激活后已经跟select无引用关系，被gc给清理掉。</p>
 <p><strong>重点是：</strong> 在select里面虽然我们没有执行到time.After，但是这个对象已经初始化了，依然在时间堆里面，定时任务未到期之前，是不会被gc清理的。</p>
@@ -336,8 +335,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">NewTimer</span><span class="p">(</span><span class="nx">d</span> <span class="nx">Duration</span><span class="p">)</span> <span class="o">*</span><span class="nx">Timer</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewTimer</span><span class="p">(</span><span class="nx">d</span> <span class="nx">Duration</span><span class="p">)</span> <span class="o">*</span><span class="nx">Timer</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>NewTimer creates a new Timer that will send the current time on its channel after at least duration d.</p>
@@ -350,10 +349,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Timer</span> <span class="kd">struct</span> <span class="p">{</span>
-	<span class="nx">C</span> <span class="o">&lt;-</span><span class="kd">chan</span> <span class="nx">Time</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Timer</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">C</span> <span class="o">&lt;-</span><span class="kd">chan</span> <span class="nx">Time</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>The Timer type represents a single event. When the Timer expires, the current time will be sent on C, unless the Timer was created by AfterFunc. A Timer must be created with NewTimer or AfterFunc.</p>
@@ -379,23 +378,23 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">Get</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">delay</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">NewTimer</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">)</span>
-
-	<span class="k">defer</span> <span class="nx">delay</span><span class="p">.</span><span class="nf">Stop</span><span class="p">()</span>
-
-	<span class="k">for</span> <span class="p">{</span>
-		<span class="nx">delay</span><span class="p">.</span><span class="nf">Reset</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">)</span>
-
-		<span class="k">select</span> <span class="p">{</span>
-			<span class="k">case</span> <span class="nx">v</span> <span class="o">:=</span> <span class="o">&lt;-</span> <span class="nx">chs</span><span class="p">:</span>
-				<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;print:%v\n&#34;</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
-			<span class="k">case</span> <span class="o">&lt;-</span> <span class="nx">delay</span><span class="p">.</span><span class="nx">C</span><span class="p">:</span>
-				<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;time.After:%v&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Unix</span><span class="p">())</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">Get</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">delay</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">NewTimer</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">defer</span> <span class="nx">delay</span><span class="p">.</span><span class="nf">Stop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">delay</span><span class="p">.</span><span class="nf">Reset</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">select</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">case</span> <span class="nx">v</span> <span class="o">:=</span> <span class="o">&lt;-</span> <span class="nx">chs</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;print:%v\n&#34;</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">case</span> <span class="o">&lt;-</span> <span class="nx">delay</span><span class="p">.</span><span class="nx">C</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;time.After:%v&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Unix</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>记得一定要使用Reset重置定时器，如果不重置，那么定时器还是从创建的时候开始计算时间流逝。使用了Reset之后，每次都从当前Reset的时间开始算。</p>
 <p>这么改之后，再次测试代码，发现内存一直稳定。</p>
@@ -506,7 +505,7 @@
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 
