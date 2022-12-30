@@ -67,7 +67,7 @@
 <meta itemprop="name" content="从零开始搭建个人博客网站系列 二、把Hugo个人站点托管到Github Pages上">
 <meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始"><meta itemprop="datePublished" content="2021-12-02T01:01:55+08:00" />
 <meta itemprop="dateModified" content="2021-12-02T01:01:55+08:00" />
-<meta itemprop="wordCount" content="2492">
+<meta itemprop="wordCount" content="2566">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="从零开始搭建个人博客网站系列 二、把Hugo个人站点托管到Github Pages上"/>
 <meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始"/>
@@ -150,8 +150,8 @@
         <div class="post-category">
             <a href="/categories/hugo/"> hugo </a>
             </div>
-          <span class="more-meta"> 约 2492 字 </span>
-          <span class="more-meta"> 预计阅读 5 分钟 </span>
+          <span class="more-meta"> 约 2566 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -313,7 +313,36 @@
 <li><code>cat ~/.ssh/id_rsa.pub</code> 并复制</li>
 <li>登录github，Settings-&gt;SSH and GPG Keys-&gt;add SSH Key.</li>
 </ol>
-<h3 id="发布源文件到github">发布源文件到Github</h3>
+<p>shell脚本一件编译并提交到github</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="cp">#!/bin/sh
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 去hugo站点根目录执行hugo指令编译</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /Users/hugo/hugo <span class="o">&amp;&amp;</span> hugo
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 跳转到</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /Users/hugo/xiaoma-coding.github.io
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">git add *
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;first commit&#34;</span>
+</span></span><span class="line"><span class="cl">git push
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="发布源文件到github">发布源文件到Github</h3>
 <p>注意：
 如果只是发布到<code>github pages</code>上，源文件没必要上传，public也就是<code>目标文件</code>放在github上的<code>codingxiaoma.github.io</code>仓库即可。</p>
 <p>但是考虑到本机电脑里面的硬盘损坏或者丢失等风险，可以考虑把源文件也上传到github的另一个新的仓库。</p>
