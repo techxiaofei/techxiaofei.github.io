@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>后端面试之系统设计 - 用户密码如何储存在DB里 - 码农在新加坡的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="码农在新加坡" /><meta name="description" content="​​ 原文地址：码农在新加坡的个人博客 背景 现在很多网站都因为爆库导致密码泄漏，要设计怎么样的密码储存机制，才能保证最大限度的不被盗取，即使数据" /><meta name="keywords" content="密码, 加密, 系统设计" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+<meta name="msvalidate.01" content="9CB8E7A6AD8ADF22F9ED93166445E5B9" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ3LW65VYR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QZ3LW65VYR');
+</script>
+
+
+<meta name="generator" content="Hugo 0.109.0 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/system_design/password/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="后端面试之系统设计 - 用户密码如何储存在DB里" />
+<meta property="og:description" content="​​ 原文地址：码农在新加坡的个人博客 背景 现在很多网站都因为爆库导致密码泄漏，要设计怎么样的密码储存机制，才能保证最大限度的不被盗取，即使数据" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/system_design/password/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-12-22T18:00:51+08:00" />
+<meta property="article:modified_time" content="2022-12-22T18:00:51+08:00" />
+<meta itemprop="name" content="后端面试之系统设计 - 用户密码如何储存在DB里">
+<meta itemprop="description" content="​​ 原文地址：码农在新加坡的个人博客 背景 现在很多网站都因为爆库导致密码泄漏，要设计怎么样的密码储存机制，才能保证最大限度的不被盗取，即使数据"><meta itemprop="datePublished" content="2022-12-22T18:00:51+08:00" />
+<meta itemprop="dateModified" content="2022-12-22T18:00:51+08:00" />
+<meta itemprop="wordCount" content="4714">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="后端面试之系统设计 - 用户密码如何储存在DB里"/>
+<meta name="twitter:description" content="​​ 原文地址：码农在新加坡的个人博客 背景 现在很多网站都因为爆库导致密码泄漏，要设计怎么样的密码储存机制，才能保证最大限度的不被盗取，即使数据"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">码农在新加坡的个人博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">码农在新加坡的个人博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">后端面试之系统设计 - 用户密码如何储存在DB里</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-12-22 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/"> 系统设计 </a>
+            </div>
+          <span class="more-meta"> 约 4714 字 </span>
+          <span class="more-meta"> 预计阅读 10 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#明文储存密码">明文储存密码</a></li>
+    <li><a href="#用对称加密或者非对称加密函数加密储存密码">用对称加密或者非对称加密函数加密储存密码</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#对称加密">对称加密</a></li>
+            <li><a href="#非对称加密">非对称加密</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#用md5等hash函数进行密码加密">用MD5等Hash函数进行密码加密</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#穷举法">穷举法</a></li>
+            <li><a href="#字典攻击法">字典攻击法</a></li>
+            <li><a href="#彩虹表攻击">彩虹表攻击</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#md5加盐salt进行密码储存">MD5加盐（Salt）进行密码储存</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#预防彩虹表攻击">预防彩虹表攻击</a></li>
+            <li><a href="#密码验证流程">密码验证流程</a></li>
+            <li><a href="#四bcrypt让你的密码更安全">四、Bcrypt让你的密码更安全</a></li>
+            <li><a href="#那如果黑客使用彩虹表进行hash碰撞呢">那如果黑客使用彩虹表进行hash碰撞呢?</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#结论">结论</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>​​
+原文地址：<a href="https://leftpocket.cn/post/system_design/password/">码农在新加坡的个人博客</a></p>
+<h1 id="背景">背景</h1>
+<!-- 亲爱的小伙伴们大家好，今天的主题是：用户密码如何储存在数据库里，这是一篇帮忙程序员做系统设计和后端面试的系统设计题，也是帮忙互联网小白用户了解密码储存之原理的视频教程 -->
+<p>现在很多网站都因为爆库导致密码泄漏，要设计怎么样的密码储存机制，才能保证最大限度的不被盗取，即使数据泄漏，黑客也无法在短时间内获取对应的密码来登录用户的账号，而造成损失。</p>
+<p>这篇博客就来讲解密码储存的过程。</p>
+<h1 id="明文储存密码">明文储存密码</h1>
+<table>
+<thead>
+<tr>
+<th>username</th>
+<th>password</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>aaa</td>
+<td>123456</td>
+</tr>
+<tr>
+<td>bbb</td>
+<td>qwerty</td>
+</tr>
+<tr>
+<td>ccc</td>
+<td>password</td>
+</tr>
+<tr>
+<td>ddd</td>
+<td>111111</td>
+</tr>
+</tbody>
+</table>
+<p>假设我们有一张用户表，储存<code>username</code>和<code>password</code>，密码我们是明文储存的。为什么这么不安全呢？</p>
+<ol>
+<li>如果遭遇数据泄漏事件，明文密码将用户隐私完全暴露，任何人都可以登录暴露密码的账号，随意更改。</li>
+<li>密码容易被网站的内部人员得知并获取；也就是内部员工也可以轻易访问用户的明文密码。可能会做一些违法的事情，所以网站基本不会明文储存密码。</li>
+</ol>
+<p><strong>当然也有例外，看下这个条新闻：</strong></p>
+<blockquote>
+<p>Hundreds of millions of Facebook users had their account passwords stored in plain text and searchable by thousands of Facebook employees — in some cases going back to 2012, KrebsOnSecurity has learned. Facebook says an ongoing investigation has so far found no indication that employees have abused access to this data.</p>
+</blockquote>
+<p>Facebook 明文存储用户密码，大约有2亿～6亿的用户受到影响，预计超过2万名Facebook员工可检索这些村文本密码 <a href="https://krebsonsecurity.com/tag/plaintext-passwords/">Facebook Stored Hundreds of Millions of User Passwords in Plain Text for Years</a></p>
+<p>所以说，明文储存密码是很不安全的，正常来说现在没有人会这么用。（以前经常还会爆出来）</p>
+<h1 id="用对称加密或者非对称加密函数加密储存密码">用对称加密或者非对称加密函数加密储存密码</h1>
+<p>我想大部分人都了解对称加密和非对称加密，那么用这两种加密算法可不可行呢？</p>
+<p><img src="/img/system_design/password/encryption.png" alt="enrcyption"></p>
+<h3 id="对称加密">对称加密</h3>
+<p>在对称加密算法中，数据发信方将明文（原始数据）和<strong>加密密钥</strong>一起经过特殊加密算法处理后，使其变成复杂的加密密文发送出去。收信方收到密文后，若想解读原文，则需要使用加密用过的密钥及相同算法的逆算法对密文进行解密，才能使其恢复成可读明文。在对称加密算法中，使用的密钥只有一个，发收信双方都使用这个密钥对数据进行加密和解密，这就要求解密方事先必须知道加密密钥。</p>
+<p>密钥需要安全储存，否则就有严重的泄漏风险。</p>
+<h3 id="非对称加密">非对称加密</h3>
+<p>非对称加密是一份明文，经过公钥加密成密文，然后使用私钥解密成明文。</p>
+<p>公钥和私钥不同，公钥可以公开，这样外部（客户端）可以使用公钥加密成密文，私钥必须保密，这样内部（服务器）才能使用私钥解密成明文。</p>
+<p>用这种方式加密密码，能够降低黑客获取明文密码的概率。但密钥一旦泄露，用户的明文密码也就泄露了，不是一个好方法。</p>
+<p>而且因为密钥在公司内部，不免有内部员工有不良动机导致账号信息被盗。</p>
+<p>所以密码的储存一般不使用对称加密或者非对称加密。</p>
+<p>那我们怎么做呢？</p>
+<h1 id="用md5等hash函数进行密码加密">用MD5等Hash函数进行密码加密</h1>
+<p>首先解释一下：<strong>Hash</strong> 算法是一种消息摘要算法，不是一种加密算法，但由于其单向运算，具有一定的不可逆性，成为加密算法中的一个构成部分。所以为了通俗易懂，我们在本文中可以把MD5等Hash算法理解为加密算法。</p>
+<p>MD5是一种Hash算法，也是最常用的一种消息摘要和数字签名算法，常常用于<strong>保存密码</strong>以及<strong>生成数字签名</strong>。</p>
+<p><img src="/img/system_design/password/MD5.png" alt="MD5"></p>
+<p>MD5 算法具有以下特点：</p>
+<ul>
+<li>压缩性：任意长度的数据，算出的 MD5 值长度都是固定的（128 bit）。</li>
+<li>易计算：从原数据计算出 MD5 值很容易。</li>
+<li>抗修改：对原数据进行任何改动，哪怕只修改 1 个字节，所得到的 MD5 值都有很大区别。</li>
+<li>抗碰撞：已知原数据和其 MD5 值，想找到一个具有相同 MD5 值的数据（即伪造数据）是非常困难的（极小碰撞概率）。</li>
+</ul>
+<p>实际上很多网站都是使用<code>MD5</code>，<code>SHA-1</code>，<code>SHA-256</code>等Hash算法及其变种来进行加密的。</p>
+<p>MD5加密的优势：</p>
+<ul>
+<li>网站被攻破后，无法直接看到明文密码，相对安全性更高；</li>
+<li>即使是网站的内部人员也无法通过数据库里面的密文得到明文；</li>
+</ul>
+<p>但是MD5就安全了吗？</p>
+<p>不是的！</p>
+<!-- 翻页 -->
+<!--
+比如我上面列出的这个`123456`的MD5的值`E10ADC3949BA59ABBE56E057F20F883E`，虽然我没办法从MD5码经过算法运算得到它是的原文是123456，（因为必然有另一个原文的MD5的值也是这个，这就是哈希碰撞。），但是我可以做个表，把所有常用的原文和MD5的值映射出来。
+而且现在也有很多MD5解密网站：通过穷举法、字典表或者彩虹表能在一定的时间内通过MD5值得到明文。
+-->
+<p>虽然无法可以直接获取明文，但可以通过穷举，列表查询方式获取明文，md5的查询库是非常丰富的。</p>
+<p>下面我列出三种常用的解密方案。</p>
+<ul>
+<li>穷举法</li>
+<li>字典法攻击</li>
+<li>彩虹表攻击</li>
+</ul>
+<p>也有不少网站可以直接进行 MD5 解密。就是用上述三种方法中之一。</p>
+<p><img src="/img/system_design/password/md5_decryption.png" alt="md5_decryption"></p>
+<p><a href="https://www.somd5.com/">MD5解密链接</a></p>
+<h3 id="穷举法">穷举法</h3>
+<p>顾名思义就是穷举所有的明文生成MD5码，然后用MD5码跟泄漏的MD5对比。</p>
+<p><img src="/img/system_design/password/loop.png" alt="loop"></p>
+<p>比如我上面列出的这个<code>123456</code>的MD5的值<code>E10ADC3949BA59ABBE56E057F20F883E</code>，虽然我没办法从MD5推出它是的原文是123456，但是我可以使用很多方法来得到它的原文<code>123456</code>。</p>
+<p>第一步就是穷举法</p>
+<p>比如我们穷举6位数数字。</p>
+<ol>
+<li>计算<strong>000000</strong>的MD5值<strong>670B14728AD9902AECBA32E22FA4F6BD</strong>，不匹配，下一个。</li>
+<li>计算<strong>000001</strong>的MD5值。</li>
+<li>计算<strong>123456</strong>的MD值<strong>E10ADC3949BA59ABBE56E057F20F883E</strong>，匹配，原文为MD5。</li>
+</ol>
+<p>由于现代计算机硬件的发展，CPU每秒钟能进行上百亿次的计算，所以在给定范围内的密码使用穷举法是可行的。</p>
+<p>但是如果密码可以使用<strong>字母+数字+特殊符号</strong>，那么8位数的密码就有数百万亿个组合，16位呢？这个计算更加量庞大。</p>
+<p>这种只适合在明文很小的情况下适用。比如<code>6位数字密码</code>。</p>
+<h3 id="字典攻击法">字典攻击法</h3>
+<p>固定长度的密码是有限集，所以生成的MD5值也是有限集。如果你的密码长度很小。那么完全可以生成一个<code>字典表</code>来做一个明文和密文的映射。拿到这个密文之后匹配明文就可以得到你的密码。</p>
+<p><img src="/img/system_design/password/dict.png" alt="dict"></p>
+<p>字典表就是提前构建一个 <strong>明文 ⇨ 密文</strong> 对应关系的一个大型数据库，破解时通过密文直接反查明文。但存储一个这样的数据库，空间成本是惊人的。</p>
+<p>密码长度越大这个有限集越大，需要生成的<code>字典表</code>就越大，匹配明文的难度也就越大。所以记得设置密码的时候设置的长一点，同时多用点特殊字符。这样破解的难度会变大。你知道为什么了吧。</p>
+<p>字典攻击法很简单，但是它的限制就是：面对储了大量密码的系统时会非常乏力（储存用于逆向查找的所有选项以及搜索大型数据库十分困难）。</p>
+<h3 id="彩虹表攻击">彩虹表攻击</h3>
+<p><img src="/img/system_design/password/rainbow_table.png" alt="rainbow_table"></p>
+<p>虽然在一定长度内的密码是有限集，但是长度增加的时候那个集合所占用的空间也是不可估量的。</p>
+<p>而<strong>彩虹表</strong>是在<strong>字典法</strong>的基础上改进，以时间换空间。是现在破解哈希函数常用的办法。</p>
+<p>彩虹表是用于加密散列函数逆运算的预先计算好的表，常用于破解加密过的密码散列。彩虹表常常用于破解长度固定且包含的字符范围固定的密码（如信用卡、数字等）。这是以空间换时间的典型实践，比暴力破解（Brute-force attack）用的时间少，空间更多；但与储存密码空间中的每一个密码及其对应的哈希值（Hash）实现的查找表相比，其花费的时间更多，空间更少。使用加盐的密钥派生函数可以使这种攻击难以实现。</p>
+<p>彩虹表的核心就是</p>
+<ul>
+<li>H函数，也就是Hash函数，通过明文得到密文。</li>
+<li>R函数，归约函数，通过密文得到一个指定长度的明文。</li>
+</ul>
+<p>核心：时间换空间。</p>
+<p>有兴趣的小伙伴可以看彩虹表的Wikipedia。
+<a href="https://zh.m.wikipedia.org/zh-sg/%E5%BD%A9%E8%99%B9%E8%A1%A8">wikipedia</a></p>
+<p>黑客可以使用彩虹表将用户密码复原出，网站常用的密码一般也就 6~16 位，这个取值空间还是很好破解的。</p>
+<blockquote>
+<p>彩虹表（Rainbow Table）是一种破解哈希算法的技术，它的性能非常让人震惊，在一台普通PC上辅以NVidia CUDA技术，对于NTLM算法可以达到最高每秒103,820,000,000次明文尝试（超过一千亿次），对于广泛使用的MD5也接近一千亿次。更神奇的是，彩虹表技术并非针对某种哈希算法的漏洞进行***，而是类似暴力破解，对于任何哈希算法都有效。</p>
+</blockquote>
+<h1 id="md5加盐salt进行密码储存">MD5加盐（Salt）进行密码储存</h1>
+<p>与普通的MD5不同，把<code>MD5(password+salt)</code>进行MD5得到的密文储存在系统中，密文和<strong>Salt</strong>分别储存。</p>
+<table>
+<thead>
+<tr>
+<th>username</th>
+<th>password</th>
+<th>salt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>aaa</td>
+<td>90005CB0DAE7C8BE36B3AD50FA638928</td>
+<td>abcdefghij</td>
+</tr>
+<tr>
+<td>bbb</td>
+<td>471AE89F04C9B18B276FD7571D5402FA</td>
+<td>qweryuiop</td>
+</tr>
+</tbody>
+</table>
+<p>根据安全级别，salt可以设置为固定值或者每一个用户不同的值，这个值一般为用户数据行的某一个固定值且对用户不可见的值，千万不要用username作为salt。这种如果有人知道了加salt的算法，那就跟普通的MD5没啥区别了。</p>
+<p><img src="/img/system_design/password/md5_salt.png" alt="md5_salt"></p>
+<p>每个salt都是独一无二的，随机生成的字符串，在哈希过程中添加到每个密码中。由于salt对于每个用户而言都是唯一的，因此，即使两个用户的密码是一样的<code>123456</code>，因为每个用户都有自己独立的 <strong>salt</strong>，所以最终储存在DB里面的<code>password</code>也是不一样的。</p>
+<h3 id="预防彩虹表攻击">预防彩虹表攻击</h3>
+<p>salt还可以防止攻击者使用预先计算的彩虹表。最后，使用salt意味着无法在不破解哈希的情况下确定两个用户是否具有相同的密码，因为即使密码相同，不同的salt也会导致不同的哈希结果。</p>
+<p>当然随着计算机硬件的飞速发展，现代CPU的运算速度越来越快，这种破解只会越来越容易。</p>
+<h3 id="密码验证流程">密码验证流程</h3>
+<p><img src="/img/system_design/password/pwd_verification.png" alt="pwd_verification"></p>
+<p>用户使用电脑输入账号密码（username+pwd），发送HTTPS网络请求，服务器收到请求后根据username查询数据库，匹配到一条数据，然后使用<strong>pwd</strong>和数据库里的独有的<strong>salt</strong> 进行<strong>MD5</strong>运算，得到的结果和数据库里面的<strong>password</strong>进行对比，匹配则密码正确，返回登录成功。</p>
+<p>不匹配则密码错误，返回登录失败。</p>
+<p>这个流程还有一个问题，虽然我们数据库里面储存的数据已经是MD5进行Hash之后的字符串，但是接收到的HTTPS的网络请求的<strong>pwd</strong>还是明文的，这样服务端的人员或者黑客也一样有机会能截取到密码明文，同样有安全隐患。</p>
+<p>一般在发送网络请求之前，客户端/浏览器也需要对密码进行加密，一般来说客户端会用类似的MD5哈希算法。
+可以使用多层Hash。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pwd = sha256(md5(&#34;123456&#34;)) //对密码进行md5然后sha256
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样通过网络发送的<code>pwd</code>就是加密之后的字符串。就有更强的安全性。</p>
+<p><strong>MD5+salt</strong>其实是很多互联网公司的比较普遍的密码加密算法了。基本上目前大部分互联网公司都是使用的这种加密，可以抵挡大部分的数据泄漏。</p>
+<h3 id="四bcrypt让你的密码更安全">四、Bcrypt让你的密码更安全</h3>
+<p>即使是加了盐，密码仍有可能被暴力破解。因此，我们可以采取更「慢一点」的算法，让黑客破解密码付出更大的代价，甚至迫使他们放弃。提升密码存储安全的利器<strong>Bcrypt</strong>，应运而生。</p>
+<p>bcrypt 是基于 eksblowfish 算法设计的加密哈希函数，它最大的特点是：可以动态调整工作因子（迭代次数）来调整计算速度，因此就算以后计算机能力不断增加，它仍然可以抵抗暴力攻击。</p>
+<p><strong>相对于MD5，Bcrypt加密算法的特点：</strong></p>
+<ol>
+<li>相同明文通过Bcrypt生成的密文每次都是不一样的，MD5则相同。这样就无法通过直接比对密文来反推明文。</li>
+<li>Bcrypt是种<strong>慢哈希</strong>算法，执行时间较长。有文章指出，针对某一字符串，Bcrypt执行一次加密约0.3秒，MD5加密约1微秒（百万分之一秒）。使得暴力破解Bcrypt的时间成本很高。</li>
+<li>Bcrypt加密长度60位，MD5是32位，提高穷举难度。</li>
+</ol>
+<p>如图所示：</p>
+<p><img src="/img/system_design/password/bcrypt.png" alt="bcrypt"></p>
+<p>我们明文字符串<code>123456</code>经过10轮加密之后的密文如下：
+其中：</p>
+<ul>
+<li><code>2a</code>是Brcypt加密的版本号，有 2，2a，2b，2y等，有些因为安全原因已经废弃不用了。</li>
+<li><code>Rounds</code>是一个可选的随机数，默认为12，取值[4,31]，同一个字符串由于Rounds不同得到的密文也会不同。</li>
+<li><code>Salt</code> 加盐字符串，如果未指定，则会自动生成一个加盐字符。</li>
+<li><code>Hash</code>生成的Hash值
+。</li>
+</ul>
+<h3 id="那如果黑客使用彩虹表进行hash碰撞呢">那如果黑客使用彩虹表进行hash碰撞呢?</h3>
+<p><code>BCrypt</code>算法最大的特点是我们可以通过参数设置重复计算的次数，重复计算的次数越多耗时越长。如果计算一个哈希值需要耗时1秒甚至更多，那么黑客们采用暴利法破解密码将几乎不再可能。破解一个6位纯数字密码需要耗时11.5天，更不要说高安全级别的密码了。</p>
+<p><strong>Scrypt</strong>和<strong>PBKDF2</strong> 也是类似的，有兴趣的小伙伴可以自己学习下。</p>
+<h1 id="结论">结论</h1>
+<ol>
+<li>大部分公司使用MD5+Salt的方式进行密码加密，Salt要每个用户都不一样，可以增大彩虹表攻击的难度。</li>
+<li>如果有更高的密码安全性要求，可以使用Bcrypt等算法进行密码加密，破解难度更高。</li>
+</ol>
+<p>所以你知道为什么你忘记密码之后只能重置密码吗，因为网站也不知道你的密码原文，他们只知道你的密码经过一系列哈希之后的密文，密码校验的时候也是通过同样的哈希函数进行校验是否正确。所以当用户忘记密码的时候，提供的是重置密码而非找回密码。</p>
+<!-- 今天的视频到这里就要结束了，如果你觉得我的视频对你有所帮助，麻烦给个一键三连哦，谢谢大家。如果喜欢我的视频，可以使用bilibili，微信公众号，知乎，youtubue 搜索码农在新加坡点击关注哦。再见 -->
+<p>&lt;全文完&gt;</p>
+<!-- 
+本文已发布**视频**版本 [bilibili.com](https://www.bilibili.com/video/BV1WD4y1E7iQ/?vd_source=adec61d169fe18e7682f66c984380921)，如果你觉得我的博客对你有所帮助，麻烦给个一键三连吧，谢谢。
+-->
+<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
+<img src="/img/personal/qrcode_2.png" alt="pic"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码农在新加坡</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-12-22
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/personal/wechat_pay.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/personal/alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/others/auto_booking/">
+            <span class="next-text nav-default">使用go语言开发自动化脚本 - 一键定场、抢购、预约、捡漏</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="xiaoma-coding/xiaoma-coding.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

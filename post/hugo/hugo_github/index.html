@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>从零开始搭建个人博客（二）- 把hugo博客托管到github上 - 码农在新加坡的个人博客</title>
+  <title>从零开始搭建个人博客网站系列 二、把Hugo个人站点托管到Github Pages上 - 码农在新加坡的个人博客</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -42,7 +42,7 @@
 </script>
 
 
-<meta name="generator" content="Hugo 0.108.0 with theme even" />
+<meta name="generator" content="Hugo 0.109.0 with theme even" />
 
 
 <link rel="canonical" href="https://leftpocket.cn/post/hugo/hugo_github/" />
@@ -58,18 +58,18 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="从零开始搭建个人博客（二）- 把hugo博客托管到github上" />
+<meta property="og:title" content="从零开始搭建个人博客网站系列 二、把Hugo个人站点托管到Github Pages上" />
 <meta property="og:description" content="原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://leftpocket.cn/post/hugo/hugo_github/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-12-02T01:01:55+08:00" />
 <meta property="article:modified_time" content="2021-12-02T01:01:55+08:00" />
-<meta itemprop="name" content="从零开始搭建个人博客（二）- 把hugo博客托管到github上">
+<meta itemprop="name" content="从零开始搭建个人博客网站系列 二、把Hugo个人站点托管到Github Pages上">
 <meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始"><meta itemprop="datePublished" content="2021-12-02T01:01:55+08:00" />
 <meta itemprop="dateModified" content="2021-12-02T01:01:55+08:00" />
-<meta itemprop="wordCount" content="2012">
+<meta itemprop="wordCount" content="2492">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="从零开始搭建个人博客（二）- 把hugo博客托管到github上"/>
+<meta name="twitter:title" content="从零开始搭建个人博客网站系列 二、把Hugo个人站点托管到Github Pages上"/>
 <meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始"/>
 
 <!--[if lte IE 9]>
@@ -143,14 +143,14 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">从零开始搭建个人博客（二）- 把hugo博客托管到github上</h1>
+      <h1 class="post-title">从零开始搭建个人博客网站系列 二、把Hugo个人站点托管到Github Pages上</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2021-12-02 </span>
         <div class="post-category">
             <a href="/categories/hugo/"> hugo </a>
             </div>
-          <span class="more-meta"> 约 2012 字 </span>
+          <span class="more-meta"> 约 2492 字 </span>
           <span class="more-meta"> 预计阅读 5 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -162,12 +162,12 @@
     <nav id="TableOfContents">
   <ul>
     <li><a href="#背景">背景</a></li>
-    <li><a href="#从零开始搭建个人博客二--把hugo博客托管到github上">从零开始搭建个人博客（二）- 把hugo博客托管到github上</a>
+    <li><a href="#把hugo个人站点托管到github-pages上">把Hugo个人站点托管到Github Pages上</a>
       <ul>
         <li>
           <ul>
             <li><a href="#创建github-pages">创建Github Pages</a></li>
-            <li><a href="#初始化hugo博客">初始化hugo博客</a></li>
+            <li><a href="#搭建hugo站点">搭建Hugo站点</a></li>
             <li><a href="#hugo站点和目标文件">hugo站点和目标文件</a></li>
             <li><a href="#发布博客到github-pages">发布博客到Github Pages</a></li>
             <li><a href="#发布源文件到github">发布源文件到Github</a></li>
@@ -184,66 +184,94 @@
 <h1 id="背景">背景</h1>
 <p>使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。<br>
 这里分享一个系列教程：<strong>从零开始搭建个人博客</strong>，把我的经验分享在这里。<br>
-系列地址：<a href="https://left-pocket.github.io/post/hugo/hugo_0/">https://left-pocket.github.io</a></p>
-<h1 id="从零开始搭建个人博客二--把hugo博客托管到github上">从零开始搭建个人博客（二）- 把hugo博客托管到github上</h1>
-<p>上一篇文章，我们学习了怎么搭建个人博客，但是只是在局域网内运行，现在我们要把博客部署到互联网中。<br>
+系列地址：<a href="https://leftpocket.cn/post/hugo/hugo_0/">https://leftpocket.cn</a></p>
+<h1 id="把hugo个人站点托管到github-pages上">把Hugo个人站点托管到Github Pages上</h1>
+<!-- 
+各位小伙伴大家好，今天继续从零开始搭建个人博客网站系列的第二课，把hugo个人站点托管到Github Pages上 -->
+<p>上一篇文章，我们学习了怎么搭建个人博客，但是只是在个人电脑上运行，现在我们要把博客部署到互联网上让其他的用户能够访问到你的个人博客网站。<br>
 如果你没有自己的云服务器，不要慌，我们可以把个人博客搭建在<code>Github Pages</code>中，就跟搭建在自己的服务器一样。<br>
 <code>Github Pages</code>是Github提供的一个静态网站托管服务，可以用于存放静态网页，包括博客，项目文档甚至整本书。非常适合我们搭建个人博客。</p>
 <h3 id="创建github-pages">创建Github Pages</h3>
-<p>要想把个人博客托管在Github Pages上，首先你需要有一个Github账号，作为程序员，应该每个人都有自己的Github账号。<br>
-下面我介绍下怎么部署在Github Pages上：<br>
-假设你需要部署在 GitHub Pages 上，首先在GitHub上创建一个Repository，命名为：<code>{your_username}.github.io</code>. 比如我的Repo就叫 <code>left-pocket-test.github.io</code>。<br>
+<p>要想把个人博客托管在Github Pages上，首先你需要有一个Github账号，作为程序员，应该每个人都有自己的Github账号。</p>
+<!-- 打开github 页面 点击your profile 展示浏览器的username -->
+<p>下面我介绍下怎么部署在Github Pages上：<br>
+假设你需要部署在 GitHub Pages 上，首先在GitHub上创建一个Repository，命名为：<code>{your_username}.github.io</code>. 比如我的Repo就叫 <code>codingxiaoma.github.io</code>。<br>
 如果你对你的username不满意，需要先在<code>Setting-&gt;Account-&gt;Change username</code>修改一个你满意的username。<br>
 <strong>注：</strong> Repository的前缀一定要跟你的username保持一致。</p>
-<p><img src="/img/hugo/github_create.png" alt="Settings"></p>
+<p><img src="/img/hugo/github_create.png" alt="github_create"></p>
 <p>Repo的权限需要选择Public, 否则无法访问。<br>
 勾选<code>Add a README.md</code>，主要是为了自动创建main分支。</p>
-<p>然后在你的Repo里面点击Settings, 下拉，找到Github Pages。</p>
-<p><img src="/img/hugo/github_setting.png" alt="Settings">
-<img src="/img/hugo/github_pages.png" alt="Github Pages"></p>
-<p>点击<strong>Change Theme</strong> 选择一款主题，保存。<br>
-这里随便选择一款，因为后续托管Hugo博客之后现在的设置就覆盖了，选择后会提示：<code>Your site is published at https://left-pocket-test.github.io/</code>。</p>
-<p><img src="/img/hugo/github_page2.png" alt="Github Pages"></p>
-<p>过几分钟之后，通过访问
-<a href="https://left-pocket-test.github.io/">https://left-pocket-test.github.io/</a> 能正常打开，说明github Page设置正常。
-<img src="/img/hugo/github_page3.png" alt="Github Pages"></p>
-<h3 id="初始化hugo博客">初始化hugo博客</h3>
+<p>然后在你的 仓库 <code>xx.github.io</code> 里面点击<code>Settings</code>, 左边的菜单栏找到<code>Pages</code>。</p>
+<p><img src="/img/hugo/hugo_github/setting.png" alt="setting"></p>
+<p>可以看到<code>Your site is live at https://codingxiaoma.github.io/</code></p>
+<p>你的Github Pages就自动部署好了。点击Visit Site就可以看到你的网站了。</p>
+<p>因为我们的仓库是空的，所以网站也是空的。</p>
+<p><img src="/img/hugo/hugo_github/empty_pages.png" alt="empty_pages"></p>
+<p>下面还可以改主题。但是因为我们需要绑定到hugo上，所以直接使用hugo的主题就可以了。</p>
+<h3 id="搭建hugo站点">搭建Hugo站点</h3>
 <p>这个在上一篇文章里面有讲解：如果有疑问可以回顾上一篇文章。
-<a href="https://left-pocket.github.io/post/hugo/hugo_creation/">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</a></p>
+<a href="https://leftpocket.cn/post/hugo/hugo_creation/">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</a></p>
 <h3 id="hugo站点和目标文件">hugo站点和目标文件</h3>
-<p>现在我们有了Hugo博客，有了Github Pages，那么下一步就是把hugo博客发布到github。这样我们才能在互联网的任何地方访问我们的博客。<br>
-在我们本地的hugo根目录中执行 <strong>hugo</strong> 指令。会生成一个public文件夹，我们只需要把public的文件夹上传到github上刚才创建的Repo里面, 一分钟左右，就能正常查看博客内容。</p>
+<p>现在我们有了<code>Hugo</code>个人站点，有了<code>Github Pages</code>，那么下一步就是把hugo博客发布到github。这样我们才能在互联网的任何地方访问我们的博客。<br>
+在我们本地的hugo根目录中执行 <strong>hugo</strong> 指令。会生成一个public文件夹，我们只需要把public的文件夹上传到github上刚才创建的<code>Github 仓库</code>里面, 一分钟左右，就能正常查看博客内容。</p>
 <p><strong>这里解释一下</strong></p>
 <ul>
-<li>hugo站点：这个是原始内容，可以不用提交到github，也可以选择在github上创建一个新的repo，并提交。</li>
-<li>hugo站点内的public目录：这个是使用<strong>hugo</strong>指令生成的发布内容，需要发布到Github Pages上。</li>
+<li>hugo站点（hugo根目录）：这个是源文件，也就是你写Markdown的地方，可以不用提交到github，也可以选择在github上创建一个新的repo，并提交。</li>
+<li>public文件（hugo/public）：这个是目标文件，是使用<strong>hugo</strong>指令生成的发布HTML内容，可以在浏览器浏览的格式，需要推送到Github上然后发布到Github Pages静态网站上。</li>
 </ul>
 <p>我们的hugo站点是<strong>源文件</strong> （带主题，图片，markdown源文件），public是<strong>目标文件</strong>（最终生成的css/js/html文件）。我们最终网页上展示的是目标文件，所以需要使用<strong>hugo</strong>指令生成目标文件。</p>
 <h3 id="发布博客到github-pages">发布博客到Github Pages</h3>
-<p>这种方式更简单一点，推荐使用这一种方式：
-在任意hugo站点外，直接用git clone把创建好的github pages Repo克隆下来。</p>
+<p>在任意hugo站点外（是为了以后把hugo源文件也上传到github，git是不能有层级的，所以要放在站点外），直接用git clone把创建好的<code>github仓库</code>克隆下来。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git clone git@github.com:left-pocket-test/left-pocket-test.github.io.git
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git clone git@github.com:codingxiaoma/codingxiaoma.github.io.git
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>然后创建把这个<code>git Repo目录</code>和hugo站点的根目录的<code>public</code>创建软链接：</p>
+</div><p>然后把public里面的所有内容复制到这个<code>Git仓库</code>并执行：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ln -s /Users/hugo/left-pocket-test.github.io /Users/hugo/left-pocket-test/public
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git add *
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;first commit&#34;</span>
+</span></span><span class="line"><span class="cl">git push
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>即可成功把内容<strong>push</strong>到远程仓库。</p>
+<p><strong>复杂一点但是方便的办法</strong>
+为了不要每次改动都手动复制，我们可以创建一个<code>public</code>目录和<code>github 仓库</code>的软链接。
+(需要先删除public目录)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># 进入你的hugo根目录</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 删除public文件夹</span>
+</span></span><span class="line"><span class="cl">rm -rf public
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 前面是 github.io仓库的本地目录，后面是 public文件夹的本地​目录</span>
+</span></span><span class="line"><span class="cl">ln -s /Users/hugo/codingxiaoma.github.io /Users/hugo/codingxiaoma/public
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后在<code>hugo站点</code>使用<strong>hugo</strong>指令，就会自动在public软链接也就是git repo下生成目标文件。<br>
-最终执行git add/commit/push之后，打开<br>
-<a href="https://left-pocket-test.github.io/">https://left-pocket-test.github.io/</a><br>
+最终执行<code>git add/commit/push</code>之后，打开<br>
+<a href="https://codingxiaoma.github.io/">https://codingxiaoma.github.io/</a><br>
 就能看到博客内容。 (可能有几分钟延迟，耐心等待)。</p>
-<p><img src="/img/hugo/github_hugo.png" alt="Github Pages"></p>
+<p><img src="/img/hugo/hugo_github/hugo_pages.png" alt="hugo_pages"></p>
 <p>如果git push提示没有权限：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -260,36 +288,82 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>那就在Github上添加一下ssh key就好了。</p>
-<h3 id="发布源文件到github">发布源文件到Github</h3>
-<p>现在我们<code>left-pocket-test.github.io</code>存放的是目标文件，有些人也想把hugo站点文件，也就是源文件也上传到github保存。<br>
-那么在Github上另创一个Repo来保存源文件也是可以的，源文件对最终的展示效果没有影响，只是为了方便保存。我个人创建了一个单独的hugo仓库来保存源文件。</p>
-<ol>
-<li>在Github创建一个空的Repo
-创建完会提示你怎么使用指令把本地内容上传到Github</li>
-<li>在源文件目录下执行指令</li>
-</ol>
+<p>在电脑上生成<code>ssh key</code>：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">echo &#34;# left-pocket-test&#34; &gt;&gt; README.md
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># mac command</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ~/.ssh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ssh-keygen -t rsa -C <span class="s2">&#34;xxx@xxx.com&#34;</span> <span class="c1"># 填写你的邮箱地址</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后一路 <code>Enter</code>到底（不需要填路径和密码，全部默认值就好）。就会在 <code>~/.ssh/</code> 目录生成默认的文件:</p>
+<ul>
+<li><code>id_rsa</code> 私钥</li>
+<li><code>id_rsa.pub</code> 公钥</li>
+</ul>
+<p>生成成功后，把<code>id_rsa.pub</code> 也就是<code>公钥</code>的内容copy到github上即可。</p>
+<ol>
+<li><code>cat ~/.ssh/id_rsa.pub</code> 并复制</li>
+<li>登录github，Settings-&gt;SSH and GPG Keys-&gt;add SSH Key.</li>
+</ol>
+<h3 id="发布源文件到github">发布源文件到Github</h3>
+<p>注意：
+如果只是发布到<code>github pages</code>上，源文件没必要上传，public也就是<code>目标文件</code>放在github上的<code>codingxiaoma.github.io</code>仓库即可。</p>
+<p>但是考虑到本机电脑里面的硬盘损坏或者丢失等风险，可以考虑把源文件也上传到github的另一个新的仓库。</p>
+<p>同时上传到github上也方便多人协作。</p>
+<p>源文件对最终的展示效果没有影响，只是为了方便保存。我个人创建了一个单独的hugo仓库来保存源文件。</p>
+<ol>
+<li>
+<p>在Github创建一个空的Repo（不要勾选Add README.md）
+创建完会提示你怎么使用指令把本地内容上传到Github</p>
+</li>
+<li>
+<p>在源文件目录下执行指令
+github会提示你执行哪些命令</p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;# codingxiaoma.github.io&#34;</span> &gt;&gt; README.md
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">git init
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">git add *
-</span></span><span class="line"><span class="cl">git commit -m &#34;first commit&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;first commit&#34;</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">git branch -M main
-</span></span><span class="line"><span class="cl">git remote add origin git@github.com:left-pocket-test/left-pocket-test.git
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">git remote add origin git@github.com:codingxiaoma/codingxiaoma.git
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">git push -u origin main
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>这个时候你的源文件就上传到Github的一个新的仓库<code>left-pocket-test</code>了。这是用来保存源文件的。而<code>left-pocket-test.github.io</code>是用来保存网站的目标文件的。</p>
+</div><p>这个时候你的源文件就上传到Github的一个新的仓库<code>codingxiaoma</code>了。这是用来保存源文件的。而<code>codingxiaoma.github.io</code>是用来保存网站的目标文件的。</p>
 <p>&lt;全文完&gt;</p>
+<!-- 本节课视频相关的所有命令和链接以及文字教程我都会放在评论区，需要的话可以点击评论区的链接查看 -->
 <p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
 <img src="/img/personal/qrcode_2.png" alt="pic"></p>
 
@@ -329,11 +403,11 @@
       <nav class="post-nav">
         <a class="prev" href="/post/hugo/hugo_advanced/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼</span>
+            <span class="prev-text nav-default">从零开始搭建个人博客网站系列 [附录] hugo高级配置，让博客更亮眼</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         <a class="next" href="/post/hugo/hugo_creation/">
-            <span class="next-text nav-default">从零开始搭建个人博客（一）- 使用hugo搭建个人博客</span>
+            <span class="next-text nav-default">从零开始搭建个人博客网站系列 一、使用hugo创建个人站点</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -346,6 +420,14 @@
   
 
   
+    <script src="https://utteranc.es/client.js"
+            repo="xiaoma-coding/xiaoma-coding.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
 
       </div>
     </main>

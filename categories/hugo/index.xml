@@ -8,7 +8,7 @@
     <language>zh-cn</language>
     <lastBuildDate>Sat, 24 Sep 2022 01:01:55 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>从零开始搭建个人博客（六）- hugo静态博客搭建到腾讯云</title>
+      <title>从零开始搭建个人博客网站系列 七、hugo静态博客搭建到腾讯云</title>
       <link>https://leftpocket.cn/post/hugo/hugo_server/</link>
       <pubDate>Sat, 24 Sep 2022 01:01:55 +0800</pubDate>
       
@@ -17,7 +17,7 @@
     </item>
     
     <item>
-      <title>从零开始搭建个人博客（六）- 接入google adsense广告</title>
+      <title>从零开始搭建个人博客网站系列 六、接入google adsense广告</title>
       <link>https://leftpocket.cn/post/hugo/hugo_adsense/</link>
       <pubDate>Fri, 01 Jul 2022 01:01:55 +0800</pubDate>
       
@@ -26,7 +26,7 @@
     </item>
     
     <item>
-      <title>从零开始搭建个人博客（五）- 申请免费域名并绑定到个人博客</title>
+      <title>从零开始搭建个人博客网站系列 四、申请免费域名并绑定到个人博客</title>
       <link>https://leftpocket.cn/post/hugo/hugo_dns/</link>
       <pubDate>Thu, 02 Dec 2021 01:04:55 +0800</pubDate>
       
@@ -35,7 +35,7 @@
     </item>
     
     <item>
-      <title>从零开始搭建个人博客（四）- hugo自动部署到vercel</title>
+      <title>从零开始搭建个人博客网站系列 三、hugo站点自动部署到vercel托管平台</title>
       <link>https://leftpocket.cn/post/hugo/hugo_vercel/</link>
       <pubDate>Thu, 02 Dec 2021 01:03:55 +0800</pubDate>
       
@@ -44,7 +44,7 @@
     </item>
     
     <item>
-      <title>从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼</title>
+      <title>从零开始搭建个人博客网站系列 [附录] hugo高级配置，让博客更亮眼</title>
       <link>https://leftpocket.cn/post/hugo/hugo_advanced/</link>
       <pubDate>Thu, 02 Dec 2021 01:02:55 +0800</pubDate>
       
@@ -53,7 +53,7 @@
     </item>
     
     <item>
-      <title>从零开始搭建个人博客（二）- 把hugo博客托管到github上</title>
+      <title>从零开始搭建个人博客网站系列 二、把Hugo个人站点托管到Github Pages上</title>
       <link>https://leftpocket.cn/post/hugo/hugo_github/</link>
       <pubDate>Thu, 02 Dec 2021 01:01:55 +0800</pubDate>
       
@@ -62,7 +62,7 @@
     </item>
     
     <item>
-      <title>从零开始搭建个人博客（一）- 使用hugo搭建个人博客</title>
+      <title>从零开始搭建个人博客网站系列 一、使用hugo创建个人站点</title>
       <link>https://leftpocket.cn/post/hugo/hugo_creation/</link>
       <pubDate>Thu, 02 Dec 2021 01:00:55 +0800</pubDate>
       

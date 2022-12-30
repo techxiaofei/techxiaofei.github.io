@@ -6,14 +6,23 @@
     <description>Recent content in Others on 码农在新加坡的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 14 Oct 2022 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/others/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 14 Dec 2022 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/others/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用go语言开发自动化脚本 - 一键定场、抢购、预约、捡漏</title>
+      <link>https://leftpocket.cn/post/others/auto_booking/</link>
+      <pubDate>Wed, 14 Dec 2022 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/others/auto_booking/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 不知道大家有没有这种经历，想要抢课，定场，发现抢不到，想要捡漏，又要随时刷，今天我就来讲一下我是怎么使用</description>
+    </item>
+    
     <item>
       <title>各大型邮箱smtp服务器及端口</title>
       <link>https://leftpocket.cn/post/others/smtp/</link>
       <pubDate>Fri, 14 Oct 2022 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/others/smtp/</guid>
-      <description>背景 SMTP的全称是Simple Mail Transfer Protocol，即简单邮件传输协议。它是一组用于从源地址到目的地址传输邮件的规范，通过它来控制邮件的中</description>
+      <description>原文地址：码农在新加坡的个人博客 背景 SMTP的全称是Simple Mail Transfer Protocol，即简单邮件传输协议。它是一组用于从源地址到目的地址传输</description>
     </item>
     
     <item>

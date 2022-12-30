@@ -6,18 +6,36 @@
     <description>Recent content on 码农在新加坡的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 14 Oct 2022 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 22 Dec 2022 18:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>后端面试之系统设计 - 用户密码如何储存在DB里</title>
+      <link>https://leftpocket.cn/post/system_design/password/</link>
+      <pubDate>Thu, 22 Dec 2022 18:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/system_design/password/</guid>
+      <description>​​ 原文地址：码农在新加坡的个人博客 背景 现在很多网站都因为爆库导致密码泄漏，要设计怎么样的密码储存机制，才能保证最大限度的不被盗取，即使数据</description>
+    </item>
+    
+    <item>
+      <title>使用go语言开发自动化脚本 - 一键定场、抢购、预约、捡漏</title>
+      <link>https://leftpocket.cn/post/others/auto_booking/</link>
+      <pubDate>Wed, 14 Dec 2022 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/others/auto_booking/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 不知道大家有没有这种经历，想要抢课，定场，发现抢不到，想要捡漏，又要随时刷，今天我就来讲一下我是怎么使用</description>
+    </item>
+    
     <item>
       <title>各大型邮箱smtp服务器及端口</title>
       <link>https://leftpocket.cn/post/others/smtp/</link>
       <pubDate>Fri, 14 Oct 2022 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/others/smtp/</guid>
-      <description>背景 SMTP的全称是Simple Mail Transfer Protocol，即简单邮件传输协议。它是一组用于从源地址到目的地址传输邮件的规范，通过它来控制邮件的中</description>
+      <description>原文地址：码农在新加坡的个人博客 背景 SMTP的全称是Simple Mail Transfer Protocol，即简单邮件传输协议。它是一组用于从源地址到目的地址传输</description>
     </item>
     
     <item>
-      <title>从零开始搭建个人博客（六）- hugo静态博客搭建到腾讯云</title>
+      <title>从零开始搭建个人博客网站系列 七、hugo静态博客搭建到腾讯云</title>
       <link>https://leftpocket.cn/post/hugo/hugo_server/</link>
       <pubDate>Sat, 24 Sep 2022 01:01:55 +0800</pubDate>
       
@@ -44,7 +62,7 @@
     </item>
     
     <item>
-      <title>从零开始搭建个人博客（六）- 接入google adsense广告</title>
+      <title>从零开始搭建个人博客网站系列 六、接入google adsense广告</title>
       <link>https://leftpocket.cn/post/hugo/hugo_adsense/</link>
       <pubDate>Fri, 01 Jul 2022 01:01:55 +0800</pubDate>
       
@@ -179,7 +197,7 @@
     </item>
     
     <item>
-      <title>从零开始搭建个人博客（五）- 申请免费域名并绑定到个人博客</title>
+      <title>从零开始搭建个人博客网站系列 四、申请免费域名并绑定到个人博客</title>
       <link>https://leftpocket.cn/post/hugo/hugo_dns/</link>
       <pubDate>Thu, 02 Dec 2021 01:04:55 +0800</pubDate>
       
@@ -188,7 +206,7 @@
     </item>
     
     <item>
-      <title>从零开始搭建个人博客（四）- hugo自动部署到vercel</title>
+      <title>从零开始搭建个人博客网站系列 三、hugo站点自动部署到vercel托管平台</title>
       <link>https://leftpocket.cn/post/hugo/hugo_vercel/</link>
       <pubDate>Thu, 02 Dec 2021 01:03:55 +0800</pubDate>
       
@@ -197,7 +215,7 @@
     </item>
     
     <item>
-      <title>从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼</title>
+      <title>从零开始搭建个人博客网站系列 [附录] hugo高级配置，让博客更亮眼</title>
       <link>https://leftpocket.cn/post/hugo/hugo_advanced/</link>
       <pubDate>Thu, 02 Dec 2021 01:02:55 +0800</pubDate>
       
@@ -206,7 +224,7 @@
     </item>
     
     <item>
-      <title>从零开始搭建个人博客（二）- 把hugo博客托管到github上</title>
+      <title>从零开始搭建个人博客网站系列 二、把Hugo个人站点托管到Github Pages上</title>
       <link>https://leftpocket.cn/post/hugo/hugo_github/</link>
       <pubDate>Thu, 02 Dec 2021 01:01:55 +0800</pubDate>
       
@@ -215,7 +233,7 @@
     </item>
     
     <item>
-      <title>从零开始搭建个人博客（一）- 使用hugo搭建个人博客</title>
+      <title>从零开始搭建个人博客网站系列 一、使用hugo创建个人站点</title>
       <link>https://leftpocket.cn/post/hugo/hugo_creation/</link>
       <pubDate>Thu, 02 Dec 2021 01:00:55 +0800</pubDate>
       
@@ -310,7 +328,7 @@
       <pubDate>Sun, 21 Nov 2021 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/about/</guid>
-      <description>个人介绍： 目前在东南亚最大的电商平台 Shopee 当码农，坐标在 新加坡，主要负责后端开发工作。 个人擅长C++, Golang, 网络编程, Redis, MySQL, TiDB等技术栈。有多年高</description>
+      <description>个人介绍 目前在东南亚最大的电商平台 Shopee 当码农，坐标在 新加坡，主要负责后端开发工作。 个人擅长C++, Golang, 网络编程, Redis, MySQL, TiDB等技术栈。有多年高并</description>
     </item>
     
     <item>
@@ -419,6 +437,15 @@
       
       <guid>https://leftpocket.cn/post/mysql/db_tidb_write_conflict/</guid>
       <description>原文地址：码农在新加坡的个人博客 背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了write conflict. 1 2 3 4 5 [2020/08/25 06:01:44.781 +08:00] [WARN] [session.go:623] [retrying] [conn=26799778] [schemaVersion=194] [retryCnt=0] [queryNum=0] [sql=&amp;#34;UPDATE</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://leftpocket.cn/post/hugo/hugo_search/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://leftpocket.cn/post/hugo/hugo_search/</guid>
+      <description></description>
     </item>
     
     <item>

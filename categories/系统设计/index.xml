@@ -6,7 +6,16 @@
     <description>Recent content in 系统设计 on 码农在新加坡的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 27 Apr 2022 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 22 Dec 2022 18:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>后端面试之系统设计 - 用户密码如何储存在DB里</title>
+      <link>https://leftpocket.cn/post/system_design/password/</link>
+      <pubDate>Thu, 22 Dec 2022 18:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/system_design/password/</guid>
+      <description>​​ 原文地址：码农在新加坡的个人博客 背景 现在很多网站都因为爆库导致密码泄漏，要设计怎么样的密码储存机制，才能保证最大限度的不被盗取，即使数据</description>
+    </item>
+    
     <item>
       <title>谈一谈热点Key解决方案</title>
       <link>https://leftpocket.cn/post/system_design/hotspot/</link>

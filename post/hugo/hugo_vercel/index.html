@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>从零开始搭建个人博客（四）- hugo自动部署到vercel - 码农在新加坡的个人博客</title>
+  <title>从零开始搭建个人博客网站系列 三、hugo站点自动部署到vercel托管平台 - 码农在新加坡的个人博客</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -42,7 +42,7 @@
 </script>
 
 
-<meta name="generator" content="Hugo 0.108.0 with theme even" />
+<meta name="generator" content="Hugo 0.109.0 with theme even" />
 
 
 <link rel="canonical" href="https://leftpocket.cn/post/hugo/hugo_vercel/" />
@@ -58,18 +58,18 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="从零开始搭建个人博客（四）- hugo自动部署到vercel" />
+<meta property="og:title" content="从零开始搭建个人博客网站系列 三、hugo站点自动部署到vercel托管平台" />
 <meta property="og:description" content="原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://leftpocket.cn/post/hugo/hugo_vercel/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-12-02T01:03:55+08:00" />
 <meta property="article:modified_time" content="2021-12-02T01:03:55+08:00" />
-<meta itemprop="name" content="从零开始搭建个人博客（四）- hugo自动部署到vercel">
+<meta itemprop="name" content="从零开始搭建个人博客网站系列 三、hugo站点自动部署到vercel托管平台">
 <meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始"><meta itemprop="datePublished" content="2021-12-02T01:03:55+08:00" />
 <meta itemprop="dateModified" content="2021-12-02T01:03:55+08:00" />
-<meta itemprop="wordCount" content="1550">
+<meta itemprop="wordCount" content="2159">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="从零开始搭建个人博客（四）- hugo自动部署到vercel"/>
+<meta name="twitter:title" content="从零开始搭建个人博客网站系列 三、hugo站点自动部署到vercel托管平台"/>
 <meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始"/>
 
 <!--[if lte IE 9]>
@@ -143,15 +143,15 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">从零开始搭建个人博客（四）- hugo自动部署到vercel</h1>
+      <h1 class="post-title">从零开始搭建个人博客网站系列 三、hugo站点自动部署到vercel托管平台</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2021-12-02 </span>
         <div class="post-category">
             <a href="/categories/hugo/"> hugo </a>
             </div>
-          <span class="more-meta"> 约 1550 字 </span>
-          <span class="more-meta"> 预计阅读 4 分钟 </span>
+          <span class="more-meta"> 约 2159 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -162,26 +162,28 @@
     <nav id="TableOfContents">
   <ul>
     <li><a href="#背景">背景</a></li>
-    <li><a href="#从零开始搭建个人博客四--hugo自动部署到vercel">从零开始搭建个人博客（四）- hugo自动部署到vercel</a>
+    <li><a href="#hugo站点自动部署到vercel">hugo站点自动部署到vercel</a>
       <ul>
         <li><a href="#部署到vercel">部署到Vercel</a></li>
-        <li><a href="#源码托管">源码托管</a>
-          <ul>
-            <li><a href="#一new-project">一、New Project</a></li>
-            <li><a href="#二import-git-repository-add-git-repository">二、Import Git Repository-&gt;Add Git Repository</a></li>
-            <li><a href="#三设置">三、设置</a></li>
-            <li><a href="#四点击发布">四、点击发布</a></li>
-          </ul>
-        </li>
         <li><a href="#目标代码托管">目标代码托管</a>
           <ul>
-            <li><a href="#一new-project-1">一、New Project</a></li>
-            <li><a href="#二选择left-pocket-testgithubio并import">二、选择left-pocket-test.github.io并Import</a></li>
-            <li><a href="#三设置-1">三、设置</a></li>
+            <li><a href="#一new-project">一、New Project</a></li>
+            <li><a href="#二import-git-repository">二、Import Git Repository</a></li>
+            <li><a href="#三选择codingxiaomagithubio并import">三、选择codingxiaoma.github.io并Import</a></li>
+            <li><a href="#四设置">四、设置</a></li>
+            <li><a href="#五完成">五、完成</a></li>
+          </ul>
+        </li>
+        <li><a href="#源码托管">源码托管</a>
+          <ul>
+            <li><a href="#一选择codingxiaoma并import">一、选择<code>codingxiaoma</code>并Import</a></li>
+            <li><a href="#二设置">二、设置</a></li>
+            <li><a href="#三点击发布">三、点击发布</a></li>
           </ul>
         </li>
       </ul>
     </li>
+    <li><a href="#总结">总结</a></li>
   </ul>
 </nav>
   </div>
@@ -191,22 +193,29 @@
 <h1 id="背景">背景</h1>
 <p>使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。<br>
 这里分享一个系列教程：<strong>从零开始搭建个人博客</strong>，把我的经验分享在这里。<br>
-系列地址：<a href="https://left-pocket.github.io/post/hugo/hugo_0/">https://left-pocket.github.io</a></p>
-<h1 id="从零开始搭建个人博客四--hugo自动部署到vercel">从零开始搭建个人博客（四）- hugo自动部署到vercel</h1>
+系列地址：<a href="https://leftpocket.cn/post/hugo/hugo_0/">https://leftpocket.cn</a></p>
+<h1 id="hugo站点自动部署到vercel">hugo站点自动部署到vercel</h1>
+<!-- 各位小伙伴大家好，上节课视频我们已经把hugo个人站点部署到Github Pages上 -->
 <p>我们当前已经把hugo部署到<code>Github Pages</code>上。但是<code>Github Pages</code>有两个小问题：</p>
 <ul>
 <li>国内访问慢，有些地区访问<code>Github Pages</code>可能超时</li>
 <li><code>Github</code>禁止百度抓取网页，意味着你的网站没办法在百度上搜到。</li>
 </ul>
-<p>当然你可以部署到自己的云服务器上，但是当我们没有云服务器的时候，就要找一些免费的托管商。
-Vercel就是这样一个满足我们需求的托管商。<br>
-其中大名顶顶的<code>Next.js</code>,<code>create-react-app</code>,<code>Nuxt.js</code>等就是部署在部署托管在<code>vercel</code>的。</p>
+<p>当然你可以部署到自己的云服务器上，但是当我们没有云服务器的时候，就要找一些免费的托管平台。</p>
+<p>Vercel 它是一个免费的网站托管平台，也是我目前用过最好的网站托管平台，不仅仅可以部署静态网站，而且还可以部署动态网站，所以我们可以拿 vercel 充当你免费的服务器，是非常好用的。</p>
+<p>它有以下几点好处：</p>
+<ul>
+<li>关联 github，只需要往 github 提交代码，它会自动获取最新的提交，然后自动部署</li>
+<li>提供了免费的域名，省去了申请域名的问题，如果有自己的域名，还可以做个域名解析到这个平台上</li>
+<li>提供了免费的 Https 证书，如果证书到期了，它会自动替换，完全不需要操心</li>
+<li>傻瓜式的部署方式，它的操作非常简单，Vercel 提供了两种方式：通过命令行部署、通过 Vercel 提供管理后台部署，这期视频我们主要介绍通过命令行部署，因为命令行的部署方式更加简单</li>
+</ul>
 <p>Vercel可以支持一键导入<code>Github</code>, <code>Gitlab</code>，非常方便。</p>
 <h2 id="部署到vercel">部署到Vercel</h2>
 <p>想要把自己的博客部署到Vercel，有两种方式：</p>
 <ol>
-<li>源码托管，Vercel会自动编译成目标文件。</li>
-<li>目标文件托管，把Github Pages导入Vercel。</li>
+<li>源码托管，Vercel会自动编译成目标文件。(vercel会执行hugo命令来编译成HTML文件)</li>
+<li>目标文件托管，把Github Pages （HTML文件）导入Vercel。</li>
 </ol>
 <p>经过我的实验，两种方式都可以成功，看个人喜好。
 不过目标代码托管比较简单。<br>
@@ -214,25 +223,47 @@ Vercel就是这样一个满足我们需求的托管商。<br>
 <p>无论哪种方式，都需要先注册一个Vercel账号：<br>
 <a href="https://vercel.com/">Vercel</a>
 我这边直接使用github注册，同时方便从Github导入仓库。</p>
-<h2 id="源码托管">源码托管</h2>
-<p>下面介绍下如何进行源码部署：</p>
+<h2 id="目标代码托管">目标代码托管</h2>
+<p>目标代码托管非常简单，只需要从Github导入你的 <code>xx.github.io</code> 仓库即可。</p>
 <h3 id="一new-project">一、New Project</h3>
-<p><img src="/img/hugo/hugo_vercel_new.png" alt="verccel"></p>
-<h3 id="二import-git-repository-add-git-repository">二、Import Git Repository-&gt;Add Git Repository</h3>
-<p>选择源文件仓库 <code>left-pocket-test</code>然后点击<code>Import</code></p>
-<p><img src="/img/hugo/hugo_vercel_install.png" alt="verccel"></p>
-<p><img src="/img/hugo/hugo_vercel_import.png" alt="verccel"></p>
-<h3 id="三设置">三、设置</h3>
+<p>第一步是新建项目</p>
+<p><img src="/img/hugo/hugo_vercel/new_project.png" alt="new_project"></p>
+<h3 id="二import-git-repository">二、Import Git Repository</h3>
+<p>导入Git仓库，可以选择导入所有仓库</p>
+<p><img src="/img/hugo/hugo_vercel/install.png" alt="install"></p>
+<h3 id="三选择codingxiaomagithubio并import">三、选择codingxiaoma.github.io并Import</h3>
+<p>选择目标文件仓库 <code>codingxiaoma.github.io</code>然后点击<code>Import</code></p>
+<p><img src="/img/hugo/hugo_vercel/import.png" alt="import"></p>
+<h3 id="四设置">四、设置</h3>
 <ol>
-<li>FRAMEWORK PRESET 自然是Hugo</li>
+<li>FRAMEWORK PRESET 选Other (因为目标文件是没有框架的)</li>
+<li>点击Deploy</li>
+</ol>
+<p><img src="/img/hugo/hugo_vercel/deploy_dst.png" alt="deploy_dst"></p>
+<h3 id="五完成">五、完成</h3>
+<p><img src="/img/hugo/hugo_vercel/congratulations.png" alt="congratulations"></p>
+<p>托管成功。</p>
+<h2 id="源码托管">源码托管</h2>
+<p>源码托管需要注意几点：</p>
+<ol>
+<li>源代码需要发布到Github上。</li>
+<li>public目录不能发布。（添加到 .gitignore上）</li>
+<li>主题如果是从github下载下来的，子目录里面会有 <code>.git</code> 文件，发布代码的话，内层目录是不能有<code>.git</code>的，它会识别成另一个git仓库并忽略上传，只上传一个软链接文件。所以需要删除themes主题下面的<code>.git</code>文件，否则 Vercel 无法从 github上拉取到主题，编译会失败。</li>
+</ol>
+<p>下面介绍下如何进行源码部署：</p>
+<h3 id="一选择codingxiaoma并import">一、选择<code>codingxiaoma</code>并Import</h3>
+<p><img src="/img/hugo/hugo_vercel/import_source.png" alt="import"></p>
+<h3 id="二设置">二、设置</h3>
+<ol>
+<li>FRAMEWORK PRESET 自动会识别为Hugo</li>
 <li>Build Command 是hugo</li>
 <li>Output directory是public</li>
 <li>Environment Variables 填写hugo版本。不然会默认使用很旧的版本。</li>
 </ol>
 <p>使用<code>hugo version</code>查看你的hugo版本。<br>
 <strong>NAME:</strong> <code>HUGO_VERSION</code>, <strong>VALUE:</strong> <code>0.89.4</code>
-<img src="/img/hugo/hugo_vercel_deploy.png" alt="verccel"></p>
-<h3 id="四点击发布">四、点击发布</h3>
+<img src="/img/hugo/hugo_vercel/deploy_src.png" alt="deploy_src"></p>
+<h3 id="三点击发布">三、点击发布</h3>
 <p>一、如果出现：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -300,12 +331,11 @@ Vercel就是这样一个满足我们需求的托管商。<br>
 </div><p>这样public就会忽略提交了且从Github删除。
 点击Redeploy重新部署。（要从主界面重新进入，才是main branch）
 等一会就发布成功了。</p>
-<p><img src="/img/hugo/hugo_vercel_final.png" alt="verccel"></p>
+<p><img src="/img/hugo/hugo_vercel/src_final.png" alt="src_final"></p>
 <p>如果左边的小窗口显示正常，就说明发布成功，点击Visit</p>
-<p><img src="/img/hugo/hugo_vercel_pages.png" alt="verccel"></p>
+<p><img src="/img/hugo/hugo_vercel/src_pages.png" alt="src_pages"></p>
 <p>可以看到发布成功了。</p>
-<p>可以看到Vercel自动给分配了一个域名。<br>
-下一篇将讲解申请免费域名并绑定你的博客地址。</p>
+<p>可以看到Vercel自动给分配了一个域名。</p>
 <p><strong>注意：</strong><br>
 <code>BUILD COMMAND</code>是可以支持多行命令的，如果你有定制化的需求。<br>
 比如：</p>
@@ -319,23 +349,19 @@ Vercel就是这样一个满足我们需求的托管商。<br>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sed -i &#34;s/left-pocket.github.io/www.left-pocket.tk/g&#34; config.toml; hugo; cd public; cp sitemap.xml gg_sitemap.xml; cd ../
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sed -i &#34;s/codingxiaoma.github.io/www.codingxiaoma.tk/g&#34; config.toml; hugo; cd public; cp sitemap.xml gg_sitemap.xml; cd ../
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>是不是很强大。</p>
-<h2 id="目标代码托管">目标代码托管</h2>
-<p>目标代码托管类似，只是不需要Vercel帮你编译你的源文件，而是直接托管你的目标代码：</p>
-<h3 id="一new-project-1">一、New Project</h3>
-<h3 id="二选择left-pocket-testgithubio并import">二、选择left-pocket-test.github.io并Import</h3>
-<p><img src="/img/hugo/hugo_vercel_import.png" alt="verccel"></p>
-<h3 id="三设置-1">三、设置</h3>
-<ol>
-<li>FRAMEWORK PRESET 选Other</li>
-<li>点击Deploy</li>
-</ol>
-<p><img src="/img/hugo/hugo_vercel_des.png" alt="verccel"></p>
-<p>托管成功。</p>
 <p>下一章节讲讲述申请免费域名并绑定到个人博客。</p>
+<h1 id="总结">总结</h1>
+<p>我们可以看到有两种发布方式。</p>
+<ul>
+<li>源文件发布，Vercel会帮我们使用hugo命令编译成目标文件部署。</li>
+<li>目标文件发布，Vercel直接就可以帮我们部署。</li>
+</ul>
+<p>推荐使用目标文件发布，会简单很多，但是源文件部署可以在<code>Command</code>那里做一些命令行的操作，比如一键替换配置里面的 <code>baseURL</code>，等等。</p>
+<p>Vercel是我用过最好用的免费的个人网站托管平台。推荐大家使用。</p>
 <p>&lt;全文完&gt;</p>
 <p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
 <img src="/img/personal/qrcode_2.png" alt="pic"></p>
@@ -376,11 +402,11 @@ Vercel就是这样一个满足我们需求的托管商。<br>
       <nav class="post-nav">
         <a class="prev" href="/post/hugo/hugo_dns/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">从零开始搭建个人博客（五）- 申请免费域名并绑定到个人博客</span>
+            <span class="prev-text nav-default">从零开始搭建个人博客网站系列 四、申请免费域名并绑定到个人博客</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         <a class="next" href="/post/hugo/hugo_advanced/">
-            <span class="next-text nav-default">从零开始搭建个人博客（三）- hugo高级配置，让博客更亮眼</span>
+            <span class="next-text nav-default">从零开始搭建个人博客网站系列 [附录] hugo高级配置，让博客更亮眼</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -393,6 +419,14 @@ Vercel就是这样一个满足我们需求的托管商。<br>
   
 
   
+    <script src="https://utteranc.es/client.js"
+            repo="xiaoma-coding/xiaoma-coding.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
 
       </div>
     </main>
