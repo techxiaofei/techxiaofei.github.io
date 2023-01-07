@@ -62,12 +62,12 @@
 <meta property="og:description" content="原文地址：码农在新加坡的个人博客 背景 网站建好了，也小有流量了，下一步就可以申请Google Adsense了，简单来说就是允许谷歌在你的网站上" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://leftpocket.cn/post/hugo/hugo_adsense/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-07-01T01:01:55+08:00" />
-<meta property="article:modified_time" content="2022-07-01T01:01:55+08:00" />
+<meta property="article:published_time" content="2022-12-10T01:01:55+08:00" />
+<meta property="article:modified_time" content="2022-12-10T01:01:55+08:00" />
 <meta itemprop="name" content="从零开始搭建个人博客网站系列 六、接入google adsense广告">
-<meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 网站建好了，也小有流量了，下一步就可以申请Google Adsense了，简单来说就是允许谷歌在你的网站上"><meta itemprop="datePublished" content="2022-07-01T01:01:55+08:00" />
-<meta itemprop="dateModified" content="2022-07-01T01:01:55+08:00" />
-<meta itemprop="wordCount" content="1368">
+<meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 网站建好了，也小有流量了，下一步就可以申请Google Adsense了，简单来说就是允许谷歌在你的网站上"><meta itemprop="datePublished" content="2022-12-10T01:01:55+08:00" />
+<meta itemprop="dateModified" content="2022-12-10T01:01:55+08:00" />
+<meta itemprop="wordCount" content="1387">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="从零开始搭建个人博客网站系列 六、接入google adsense广告"/>
 <meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 背景 网站建好了，也小有流量了，下一步就可以申请Google Adsense了，简单来说就是允许谷歌在你的网站上"/>
@@ -146,11 +146,11 @@
       <h1 class="post-title">从零开始搭建个人博客网站系列 六、接入google adsense广告</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2022-07-01 </span>
+        <span class="post-time"> 2022-12-10 </span>
         <div class="post-category">
             <a href="/categories/hugo/"> hugo </a>
             </div>
-          <span class="more-meta"> 约 1368 字 </span>
+          <span class="more-meta"> 约 1387 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -183,14 +183,14 @@
 <p>下面分享一下怎么申请Google Adsense来带来收益。</p>
 <h1 id="步骤">步骤</h1>
 <h2 id="在google-adsense关联你的网站">在Google Adsense关联你的网站</h2>
-<p>第一步就是登录<code>Google Adsense</code>平台来关联你的网站，官网地址是：<a href="https://www.google.com/adsense/start/">https://www.google.com/adsense/start/</a> ，点击右上角的 <code>Sign up</code> 用谷歌账号注册就可以了，</p>
+<p>第一步就是登录<code>Google Adsense</code>平台来关联你的网站，官网地址是：<a href="https://www.google.com/adsense/start/">https://www.google.com/adsense/start/</a> ，点击右上角的 <code>Sign up</code> 用你的谷歌账号登录并绑定<code>Adsense</code>账号就可以了，</p>
 <p>注册需要填写你的网站地址、邮箱、以及一些选项。</p>
 <p>关联网站的方式其实就是在每个html页面的header里面都注入同一行 javascript 脚本，这个脚本用来标明你的身份，这样谷歌才知道是谁。</p>
 <p><img src="/img/hugo/adsense.png" alt="adsense"></p>
 <p>由于我使用的是hugo静态博客模版，直接在模版的header里面就可以了。</p>
 <p>我使用的是<code>even</code>主题， 在<code>/themes/even/layouts/particals/head.html</code> 里面添加就行。</p>
 <p>其他的主题应该也是类似的目录。放在这里的话，每次执行<code>hugo</code>命令生成的所有目标html文件，的<head></head>里面就有相同的script。</p>
-<p>最简单的方式就是在上述味汁任意一个位置添加<code>Google Adsense</code>要求你添加的代码。</p>
+<p>最简单的方式就是在上述位置任意一个位置添加<code>Google Adsense</code>要求你添加的代码。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -227,7 +227,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[params]
 </span></span><span class="line"><span class="cl">//...其他的一些配置
-</span></span><span class="line"><span class="cl">googleAd = &#34;ca-pub-xxxxxxxxxxxxxxxx&#34;                                # Google Ad
+</span></span><span class="line"><span class="cl">googleAd = &#34;ca-pub-xxxxxxxxxxxxxxxx&#34;      # Google Ad
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>非常方便。</p>
@@ -251,6 +251,7 @@
 <li>页内广告</li>
 <li>锚定广告</li>
 <li>穿插广告</li>
+<li>侧边栏广告</li>
 </ul>
 <p>还可以打开自动广告，Google 将自动在您网站上的所有最佳位置展示广告。</p>
 <p>剩下的就不停的更新你的网站，增加流量，等收益吧。</p>
@@ -269,7 +270,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2022-07-01
+        2022-12-10
         
     </span>
   </p>
@@ -293,13 +294,13 @@
 </div><footer class="post-footer">
       
       <nav class="post-nav">
-        <a class="prev" href="/post/golang/pass_by_value/">
+        <a class="prev" href="/post/others/auto_booking/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Golang是值传递还是引用传递</span>
+            <span class="prev-text nav-default">使用go语言开发自动化脚本 - 一键定场、抢购、预约、捡漏</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/protobuf/protobuf/">
-            <span class="next-text nav-default">protobuf是怎么序列化的</span>
+        <a class="next" href="/post/hugo/hugo_search/">
+            <span class="next-text nav-default">从零开始搭建个人博客网站系列 五、让搜索引擎收录你的个人博客网站</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -351,7 +352,7 @@
   <span class="copyright-year">
     &copy; 
     2020 - 
-    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
   </span>
 </div>
 

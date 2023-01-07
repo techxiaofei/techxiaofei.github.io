@@ -6,7 +6,16 @@
     <description>Recent content in Posts on 码农在新加坡的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 22 Dec 2022 18:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 02 Jan 2023 00:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis为什么这么快 - 秒杀面试官系列</title>
+      <link>https://leftpocket.cn/post/redis/fast/</link>
+      <pubDate>Mon, 02 Jan 2023 00:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/redis/fast/</guid>
+      <description>原文地址：码农在新加坡的个人博客 前言 Redis作为非关系型内存数据库，只要是一个互联网公司都会使用到。Redis相关的问题可以说是面试必问的</description>
+    </item>
+    
     <item>
       <title>后端面试之系统设计 - 用户密码如何储存在DB里</title>
       <link>https://leftpocket.cn/post/system_design/password/</link>
@@ -26,21 +35,30 @@
     </item>
     
     <item>
+      <title>从零开始搭建个人博客网站系列 六、接入google adsense广告</title>
+      <link>https://leftpocket.cn/post/hugo/hugo_adsense/</link>
+      <pubDate>Sat, 10 Dec 2022 01:01:55 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/hugo/hugo_adsense/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 网站建好了，也小有流量了，下一步就可以申请Google Adsense了，简单来说就是允许谷歌在你的网站上</description>
+    </item>
+    
+    <item>
+      <title>从零开始搭建个人博客网站系列 五、让搜索引擎收录你的个人博客网站</title>
+      <link>https://leftpocket.cn/post/hugo/hugo_search/</link>
+      <pubDate>Fri, 02 Dec 2022 01:04:55 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/hugo/hugo_search/</guid>
+      <description>原文地址：码农在新加坡的个人博客 序言 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始</description>
+    </item>
+    
+    <item>
       <title>各大型邮箱smtp服务器及端口</title>
       <link>https://leftpocket.cn/post/others/smtp/</link>
       <pubDate>Fri, 14 Oct 2022 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/others/smtp/</guid>
       <description>原文地址：码农在新加坡的个人博客 背景 SMTP的全称是Simple Mail Transfer Protocol，即简单邮件传输协议。它是一组用于从源地址到目的地址传输</description>
-    </item>
-    
-    <item>
-      <title>从零开始搭建个人博客网站系列 七、hugo静态博客搭建到腾讯云</title>
-      <link>https://leftpocket.cn/post/hugo/hugo_server/</link>
-      <pubDate>Sat, 24 Sep 2022 01:01:55 +0800</pubDate>
-      
-      <guid>https://leftpocket.cn/post/hugo/hugo_server/</guid>
-      <description>原文地址：码农在新加坡的个人博客 背景 之前讲解了把hugo静态博客部署到Github Pages和Vercel上。由于最近活动腾讯云服务器打折，</description>
     </item>
     
     <item>
@@ -59,15 +77,6 @@
       
       <guid>https://leftpocket.cn/post/golang/pass_by_value/</guid>
       <description>背景 先说结论，Go里面没有引用传递，Go语言是值传递。很多技术博客说Go语言有引用传递，都是没真的理解Go语言。 值传递 指在调用函数时将实际参</description>
-    </item>
-    
-    <item>
-      <title>从零开始搭建个人博客网站系列 六、接入google adsense广告</title>
-      <link>https://leftpocket.cn/post/hugo/hugo_adsense/</link>
-      <pubDate>Fri, 01 Jul 2022 01:01:55 +0800</pubDate>
-      
-      <guid>https://leftpocket.cn/post/hugo/hugo_adsense/</guid>
-      <description>原文地址：码农在新加坡的个人博客 背景 网站建好了，也小有流量了，下一步就可以申请Google Adsense了，简单来说就是允许谷歌在你的网站上</description>
     </item>
     
     <item>
@@ -98,7 +107,7 @@
     </item>
     
     <item>
-      <title>MySQL更新优化的几个阶段</title>
+      <title>后端面试必备 - MySQL更新优化的几个阶段</title>
       <link>https://leftpocket.cn/post/mysql/update_optimization/</link>
       <pubDate>Fri, 29 Apr 2022 13:00:51 +0800</pubDate>
       
@@ -248,6 +257,15 @@
       
       <guid>https://leftpocket.cn/post/hugo/hugo_0/</guid>
       <description>原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始</description>
+    </item>
+    
+    <item>
+      <title>后端开发除了增删改查还有什么？</title>
+      <link>https://leftpocket.cn/post/backend/backend_development/</link>
+      <pubDate>Tue, 30 Nov 2021 14:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/backend/backend_development/</guid>
+      <description>原文地址：码农在新加坡的个人博客 背景 很多刚接触后端开发的同学，会发现，后端开发不就是增删改查吗？的确，如果你做的东西只是一个很小的流量的一个</description>
     </item>
     
     <item>
@@ -413,6 +431,15 @@
     </item>
     
     <item>
+      <title>秒杀面试官系列 - Redis zset底层是怎么实现的</title>
+      <link>https://leftpocket.cn/post/redis/zset/</link>
+      <pubDate>Fri, 04 Dec 2020 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/redis/zset/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>分布式ID生成方案-snowflake算法</title>
       <link>https://leftpocket.cn/post/system_design/snowflake/</link>
       <pubDate>Tue, 24 Nov 2020 13:00:51 +0800</pubDate>
@@ -428,15 +455,6 @@
       
       <guid>https://leftpocket.cn/post/mysql/db_tidb_write_conflict/</guid>
       <description>原文地址：码农在新加坡的个人博客 背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了write conflict. 1 2 3 4 5 [2020/08/25 06:01:44.781 +08:00] [WARN] [session.go:623] [retrying] [conn=26799778] [schemaVersion=194] [retryCnt=0] [queryNum=0] [sql=&amp;#34;UPDATE</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://leftpocket.cn/post/hugo/hugo_search/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://leftpocket.cn/post/hugo/hugo_search/</guid>
-      <description></description>
     </item>
     
   </channel>

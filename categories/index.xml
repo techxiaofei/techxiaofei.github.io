@@ -6,7 +6,16 @@
     <description>Recent content in Categories on 码农在新加坡的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 22 Dec 2022 18:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 02 Jan 2023 00:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis</title>
+      <link>https://leftpocket.cn/categories/redis/</link>
+      <pubDate>Mon, 02 Jan 2023 00:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/categories/redis/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>系统设计</title>
       <link>https://leftpocket.cn/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</link>
@@ -28,7 +37,7 @@
     <item>
       <title>hugo</title>
       <link>https://leftpocket.cn/categories/hugo/</link>
-      <pubDate>Sat, 24 Sep 2022 01:01:55 +0800</pubDate>
+      <pubDate>Sat, 10 Dec 2022 01:01:55 +0800</pubDate>
       
       <guid>https://leftpocket.cn/categories/hugo/</guid>
       <description></description>
@@ -94,15 +103,6 @@
       <pubDate>Sat, 01 Jan 2022 00:00:02 +0800</pubDate>
       
       <guid>https://leftpocket.cn/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Redis</title>
-      <link>https://leftpocket.cn/categories/redis/</link>
-      <pubDate>Thu, 09 Dec 2021 00:00:51 +0800</pubDate>
-      
-      <guid>https://leftpocket.cn/categories/redis/</guid>
       <description></description>
     </item>
     

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>MySQL更新优化的几个阶段 - 码农在新加坡的个人博客</title>
+  <title>后端面试必备 - MySQL更新优化的几个阶段 - 码农在新加坡的个人博客</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -58,18 +58,18 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="MySQL更新优化的几个阶段" />
+<meta property="og:title" content="后端面试必备 - MySQL更新优化的几个阶段" />
 <meta property="og:description" content="原文地址：码农在新加坡的个人博客 背景 现在的互联网大厂，都经历了数据量和访问量从零到亿级别的飞速增长。在这业务增长的过程中，也会面临很多技术的" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://leftpocket.cn/post/mysql/update_optimization/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-04-29T13:00:51+08:00" />
 <meta property="article:modified_time" content="2022-04-29T13:00:51+08:00" />
-<meta itemprop="name" content="MySQL更新优化的几个阶段">
+<meta itemprop="name" content="后端面试必备 - MySQL更新优化的几个阶段">
 <meta itemprop="description" content="原文地址：码农在新加坡的个人博客 背景 现在的互联网大厂，都经历了数据量和访问量从零到亿级别的飞速增长。在这业务增长的过程中，也会面临很多技术的"><meta itemprop="datePublished" content="2022-04-29T13:00:51+08:00" />
 <meta itemprop="dateModified" content="2022-04-29T13:00:51+08:00" />
 <meta itemprop="wordCount" content="5090">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="MySQL更新优化的几个阶段"/>
+<meta name="twitter:title" content="后端面试必备 - MySQL更新优化的几个阶段"/>
 <meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 背景 现在的互联网大厂，都经历了数据量和访问量从零到亿级别的飞速增长。在这业务增长的过程中，也会面临很多技术的"/>
 
 <!--[if lte IE 9]>
@@ -143,7 +143,7 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">MySQL更新优化的几个阶段</h1>
+      <h1 class="post-title">后端面试必备 - MySQL更新优化的几个阶段</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2022-04-29 </span>
@@ -408,12 +408,12 @@
 <p>这里我们使用了Kafka的Partition机制来进行调度。</p>
 <p><code>众所周知</code>，小学二年级我们学过，当Kafka的同一个group消费同一个topic消息的时候，每个consumer会负责1到多个partition，我们增加或者减少consumer的时候，会自动调整消费的partiton。所以我们的consumer的数量要小于等于partition的数量，否则有些consumer会无法消费消息。</p>
 <p>这里我们有10个partition，三个consumer，如果增加或者减少一个consumer，partition会自动重新分配，保证consumer和partition一对多的映射关系。</p>
-<p><img src="/img/mysql/kafka_partition.png" alt="kafka"></p>
+<p><img src="/img/mysql/kafka_partition.png" alt="kafka_partition"></p>
 <p>我们利用Consumer负责的partition自动调整的机制，来实现我们的调度器。</p>
 <p>假设，我们申请一个有10个partition的Kafka topic。我们初始化定时调度器的时候注册多个<code>Consumer</code>。</p>
 <p>那么，这几个Consumer就负责10个partition。我们设计一个映射算法，10个partition映射到1000个<code>任务分片</code>上面。这个算法是固定的，也就是Partition和任务分片一定是一对多的对应关系。</p>
 <p>我们每次调整调度器数量的时候，比如增加一个调度器，就会额外注册一个Consumer，Partition就会重新分配，依然保证了consumer和partition一对多的映射关系。这样就自动调整了调度器负责的<code>任务分片</code>的数量。</p>
-<p><img src="/img/mysql/kafka_scheduler.png" alt="kafka"></p>
+<p><img src="/img/mysql/kafka_scheduler.png" alt="kafka_scheduler"></p>
 <p>而每一个任务分片就执行上述批量更新的流程，即使某一个<code>调度器</code>宕机了，partition会自动分配到其他在线的Consumer上，导致其他的Consumer自动分配所有的Partition。最终依然会保证我们的调度器能够处理所有的任务分片。</p>
 <p>用了这个批量更新的方式，我们的MySQL的<code>CPU，磁盘IO，网络IO</code>都降低了80%以上。这也是我们更新的终极方案了。</p>
 <h1 id="结论">结论</h1>
@@ -517,7 +517,7 @@
   <span class="copyright-year">
     &copy; 
     2020 - 
-    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
   </span>
 </div>
 
