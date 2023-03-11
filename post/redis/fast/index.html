@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Redis为什么这么快 - 秒杀面试官系列 - 码农在新加坡的个人博客</title>
+  <title>Redis为什么这么快 - 秒杀面试官系列 - 科技小飞哥</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：码农在新加坡的个人博客 前言 Redis作为非关系型内存数据库，只要是一个互联网公司都会使用到。Redis相关的问题可以说是面试必问的" /><meta name="keywords" content="Redis" />
+<meta name="author" content="科技小飞哥" /><meta name="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 前言 Redis作为非关系型内存数据库，只要是一" /><meta name="keywords" content="Redis" />
 
 
 <meta name="baidu-site-verification" content="code-vlQZuedAQs" />
@@ -54,23 +54,23 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/sass/main.min.aa1142df3485c00b5c5d1e8b78e0f2e8aca73dca4514c65e2c8855f339f9fa5b.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
 <meta property="og:title" content="Redis为什么这么快 - 秒杀面试官系列" />
-<meta property="og:description" content="原文地址：码农在新加坡的个人博客 前言 Redis作为非关系型内存数据库，只要是一个互联网公司都会使用到。Redis相关的问题可以说是面试必问的" />
+<meta property="og:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 前言 Redis作为非关系型内存数据库，只要是一" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://leftpocket.cn/post/redis/fast/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2023-01-02T00:00:51+08:00" />
 <meta property="article:modified_time" content="2023-01-02T00:00:51+08:00" />
 <meta itemprop="name" content="Redis为什么这么快 - 秒杀面试官系列">
-<meta itemprop="description" content="原文地址：码农在新加坡的个人博客 前言 Redis作为非关系型内存数据库，只要是一个互联网公司都会使用到。Redis相关的问题可以说是面试必问的"><meta itemprop="datePublished" content="2023-01-02T00:00:51+08:00" />
+<meta itemprop="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 前言 Redis作为非关系型内存数据库，只要是一"><meta itemprop="datePublished" content="2023-01-02T00:00:51+08:00" />
 <meta itemprop="dateModified" content="2023-01-02T00:00:51+08:00" />
-<meta itemprop="wordCount" content="2334">
+<meta itemprop="wordCount" content="2336">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Redis为什么这么快 - 秒杀面试官系列"/>
-<meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 前言 Redis作为非关系型内存数据库，只要是一个互联网公司都会使用到。Redis相关的问题可以说是面试必问的"/>
+<meta name="twitter:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 前言 Redis作为非关系型内存数据库，只要是一"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -85,7 +85,7 @@
 <body>
   <div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
-    <a href="/" class="logo">码农在新加坡的个人博客</a>
+    <a href="/" class="logo">科技小飞哥</a>
   </div>
   <div class="mobile-navbar-icon">
     <span></span>
@@ -101,6 +101,8 @@
         <li class="mobile-menu-item">归档</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">分类</li>
+      </a><a href="/friend/">
+        <li class="mobile-menu-item">友链</li>
       </a><a href="/about/">
         <li class="mobile-menu-item">关于</li>
       </a>
@@ -114,7 +116,7 @@
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
-  <a href="/" class="logo">码农在新加坡的个人博客</a>
+  <a href="/" class="logo">科技小飞哥</a>
 </div>
 
 
@@ -129,6 +131,8 @@
         <a class="menu-item-link" href="/post/">归档</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/friend/">友链</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/about/">关于</a>
       </li>
@@ -150,7 +154,7 @@
         <div class="post-category">
             <a href="/categories/redis/"> Redis </a>
             </div>
-          <span class="more-meta"> 约 2334 字 </span>
+          <span class="more-meta"> 约 2336 字 </span>
           <span class="more-meta"> 预计阅读 5 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -175,7 +179,7 @@
   </div>
 </div>
     <div class="post-content">
-      <p>原文地址：<a href="https://leftpocket.cn/post/redis/fast/">码农在新加坡的个人博客</a></p>
+      <p>本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>，加入 <a href="https://t.me/+5OzmrG-iyJE2YzM9"><strong>电报粉丝群</strong></a> 获得最新视频更新和问题解答。</p>
 <h1 id="前言">前言</h1>
 <!-- 各位亲爱的小伙伴大家好，今天我们开始一个新的系列，Redis全面讲解，今天开始这个系列的第一讲，Redis为什么这么快 -->
 <p>Redis作为非关系型内存数据库，只要是一个互联网公司都会使用到。Redis相关的问题可以说是面试必问的。</p>
@@ -210,7 +214,7 @@
 <li>高效的自定义数据结构</li>
 </ol>
 <h1 id="基于内存">基于内存</h1>
-<p>我们来看看计算器硬件的处理速度。硬件的速度是金字塔模型，最慢的是机械硬盘，处理速度大概为1-10毫秒，最快的是寄存器，处理速度为0.3纳秒。</p>
+<p>我们来看看计算器硬件的运算速度。硬件的速度是金字塔模型，最慢的是机械硬盘，处理速度大概为1-10毫秒，最快的是寄存器，处理速度为0.3纳秒。</p>
 <p><img src="/img/redis/fast/hardware.png" alt="hardware"></p>
 <p>而Redis使用<code>RAM内存</code>储存的数据库。相对于数据存在磁盘的数据库，比如<code>MySQL</code>，就省去磁盘磁盘I/O的消耗。MySQL等磁盘数据库，需要建立索引来加快查询效率。</p>
 <p><img src="/img/redis/fast/speed.png" alt="speed"></p>
@@ -309,15 +313,14 @@ Redis使用SkipList而不是用平衡树的主要原因有：</p>
 如果你觉得我的视频对你有帮助，关注我，获得最新的更新教程
 -->
 <p>&lt;全文完&gt;</p>
-<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
-<img src="/img/personal/qrcode_2.png" alt="pic"></p>
+<p><img src="/img/personal/qrcode_2.png" alt="pic"></p>
 
     </div>
 
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">文章作者</span>
-    <span class="item-content">码农在新加坡</span>
+    <span class="item-content">科技小飞哥</span>
   </p>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
@@ -346,7 +349,11 @@ Redis使用SkipList而不是用平衡树的主要原因有：</p>
 </div><footer class="post-footer">
       
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/others/redis_pdf/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">《Redis设计与实现》pdf</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
         <a class="next" href="/post/system_design/password/">
             <span class="next-text nav-default">后端面试之系统设计 - 用户密码如何储存在DB里</span>
             <span class="next-text nav-mobile">下一篇</span>
@@ -362,7 +369,7 @@ Redis使用SkipList而不是用平衡树的主要原因有：</p>
 
   
     <script src="https://utteranc.es/client.js"
-            repo="xiaoma-coding/xiaoma-coding.github.io"
+            repo="techxiaofei/techxiaofei.github.io"
             issue-term="pathname"
             theme="github-light"
             crossorigin="anonymous"
@@ -375,10 +382,15 @@ Redis使用SkipList而不是用平衡树的主要原因有：</p>
 
     <footer id="footer" class="footer">
       <div class="social-links">
+      <a href="https://t.me/&#43;5OzmrG-iyJE2YzM9" class="iconfont icon-telegram" title="telegram"></a>
+      <a href="https://www.youtube.com/@techxiaofei" class="iconfont icon-youtube" title="youtube"></a>
+      <a href="https://space.bilibili.com/49756120" class="iconfont icon-bilibili" title="bilibili"></a>
       <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
-      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
-      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
-  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+<div class="friend-links">
+  <span class="item-content"><b>友情链接：</b></span>
+  <a href="https://www.amazonaws.cn/" title="亚马逊云科技">亚马逊云科技</a>
+  <a href="https://dev.amazoncloud.cn/" title="亚马逊开发者社区">亚马逊开发者社区</a>
 </div>
 
 <div class="copyright">
@@ -400,7 +412,7 @@ Redis使用SkipList而不是用平衡树的主要原因有：</p>
   <span class="copyright-year">
     &copy; 
     2020 - 
-    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>科技小飞哥</span>
   </span>
 </div>
 

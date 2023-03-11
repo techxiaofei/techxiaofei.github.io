@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Redis on 码农在新加坡的个人博客</title>
+    <title>Redis on 科技小飞哥</title>
     <link>https://leftpocket.cn/categories/redis/</link>
-    <description>Recent content in Redis on 码农在新加坡的个人博客</description>
+    <description>Recent content in Redis on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 02 Jan 2023 00:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/redis/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 Jan 2023 01:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/redis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>秒杀面试官系列 - Redis zset底层是怎么实现的</title>
+      <link>https://leftpocket.cn/post/redis/zset/</link>
+      <pubDate>Sun, 08 Jan 2023 01:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/redis/zset/</guid>
+      <description>前言 如果Redis面试有什么必问的面试题，那么Zset的底层原理一定是排名前三的。 在上篇文章中我们提到ZSET的底层实现是ziplist压缩</description>
+    </item>
+    
     <item>
       <title>Redis为什么这么快 - 秒杀面试官系列</title>
       <link>https://leftpocket.cn/post/redis/fast/</link>
       <pubDate>Mon, 02 Jan 2023 00:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/redis/fast/</guid>
-      <description>原文地址：码农在新加坡的个人博客 前言 Redis作为非关系型内存数据库，只要是一个互联网公司都会使用到。Redis相关的问题可以说是面试必问的</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 前言 Redis作为非关系型内存数据库，只要是一</description>
     </item>
     
     <item>
@@ -22,7 +31,7 @@
       <pubDate>Thu, 09 Dec 2021 00:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/redis/multithreading/</guid>
-      <description>原文地址：码农在新加坡的个人博客 Redis基础 Redis是什么 Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 Redis基础 Redis是什么 Redis是一个</description>
     </item>
     
     <item>
@@ -31,7 +40,7 @@
       <pubDate>Wed, 17 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/redis/redis_sds/</guid>
-      <description>原文地址：码农在新加坡的个人博客 SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串表示， 几乎所有的 Redis 模块中都用了 sds。</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 SDS （Simple Dynamic String，简单动态字符串</description>
     </item>
     
     <item>
@@ -40,16 +49,7 @@
       <pubDate>Fri, 04 Dec 2020 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/redis/redis_zset_score/</guid>
-      <description>原文地址：码农在新加坡的个人博客 背景 最近使用Redis的SortedSet，使用int64作为score时遇到了一些预料之外的情况，在此总结</description>
-    </item>
-    
-    <item>
-      <title>秒杀面试官系列 - Redis zset底层是怎么实现的</title>
-      <link>https://leftpocket.cn/post/redis/zset/</link>
-      <pubDate>Fri, 04 Dec 2020 13:00:51 +0800</pubDate>
-      
-      <guid>https://leftpocket.cn/post/redis/zset/</guid>
-      <description></description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 最近使用Redis的SortedSet，使</description>
     </item>
     
   </channel>

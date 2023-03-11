@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>一文看懂Redis 6.0多线程IO - 码农在新加坡的个人博客</title>
+  <title>一文看懂Redis 6.0多线程IO - 科技小飞哥</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="码农在新加坡" /><meta name="description" content="原文地址：码农在新加坡的个人博客 Redis基础 Redis是什么 Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储" /><meta name="keywords" content="Redis" />
+<meta name="author" content="科技小飞哥" /><meta name="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 Redis基础 Redis是什么 Redis是一个" /><meta name="keywords" content="Redis" />
 
 
 <meta name="baidu-site-verification" content="code-vlQZuedAQs" />
@@ -54,23 +54,23 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/sass/main.min.aa1142df3485c00b5c5d1e8b78e0f2e8aca73dca4514c65e2c8855f339f9fa5b.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
 <meta property="og:title" content="一文看懂Redis 6.0多线程IO" />
-<meta property="og:description" content="原文地址：码农在新加坡的个人博客 Redis基础 Redis是什么 Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储" />
+<meta property="og:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 Redis基础 Redis是什么 Redis是一个" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://leftpocket.cn/post/redis/multithreading/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-12-09T00:00:51+08:00" />
 <meta property="article:modified_time" content="2021-12-09T00:00:51+08:00" />
 <meta itemprop="name" content="一文看懂Redis 6.0多线程IO">
-<meta itemprop="description" content="原文地址：码农在新加坡的个人博客 Redis基础 Redis是什么 Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储"><meta itemprop="datePublished" content="2021-12-09T00:00:51+08:00" />
+<meta itemprop="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 Redis基础 Redis是什么 Redis是一个"><meta itemprop="datePublished" content="2021-12-09T00:00:51+08:00" />
 <meta itemprop="dateModified" content="2021-12-09T00:00:51+08:00" />
-<meta itemprop="wordCount" content="3410">
+<meta itemprop="wordCount" content="3412">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="一文看懂Redis 6.0多线程IO"/>
-<meta name="twitter:description" content="原文地址：码农在新加坡的个人博客 Redis基础 Redis是什么 Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储"/>
+<meta name="twitter:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 Redis基础 Redis是什么 Redis是一个"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -85,7 +85,7 @@
 <body>
   <div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
-    <a href="/" class="logo">码农在新加坡的个人博客</a>
+    <a href="/" class="logo">科技小飞哥</a>
   </div>
   <div class="mobile-navbar-icon">
     <span></span>
@@ -101,6 +101,8 @@
         <li class="mobile-menu-item">归档</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">分类</li>
+      </a><a href="/friend/">
+        <li class="mobile-menu-item">友链</li>
       </a><a href="/about/">
         <li class="mobile-menu-item">关于</li>
       </a>
@@ -114,7 +116,7 @@
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
-  <a href="/" class="logo">码农在新加坡的个人博客</a>
+  <a href="/" class="logo">科技小飞哥</a>
 </div>
 
 
@@ -129,6 +131,8 @@
         <a class="menu-item-link" href="/post/">归档</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/friend/">友链</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/about/">关于</a>
       </li>
@@ -150,7 +154,7 @@
         <div class="post-category">
             <a href="/categories/redis/"> Redis </a>
             </div>
-          <span class="more-meta"> 约 3410 字 </span>
+          <span class="more-meta"> 约 3412 字 </span>
           <span class="more-meta"> 预计阅读 7 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -201,7 +205,7 @@
   </div>
 </div>
     <div class="post-content">
-      <p>原文地址：<a href="https://leftpocket.cn/post/redis/multithreading/">码农在新加坡的个人博客</a></p>
+      <p>本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>，加入 <a href="https://t.me/+5OzmrG-iyJE2YzM9"><strong>电报粉丝群</strong></a> 获得最新视频更新和问题解答。</p>
 <h1 id="redis基础">Redis基础</h1>
 <h3 id="redis是什么">Redis是什么</h3>
 <p>Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储系统。</p>
@@ -242,7 +246,7 @@
 </ol>
 <h3 id="redis网络模型">Redis网络模型</h3>
 <p>一张图看懂Redis的单线程模型：</p>
-<p><img src="/img/redis/redis_io.png" alt="redis"></p>
+<p><img src="/img/redis/redis_io.png" alt="redis_io"></p>
 <p>redis的网络事件处理器是基于Reactor模式，又叫做文件事件处理器。</p>
 <p><code>文件事件处理器</code>使用<code>I/O多路复用</code>来同时监听多个套接字，并根据套接字执行的任务关联到不同的事件处理器。<br>
 文件事件以单线程方式运行，但通过使用<code>I/O多路复用</code>程序来监听多个套接字，<code>文件事件处理器</code>实现了高性能的网络通信模型。<br>
@@ -330,15 +334,14 @@ Redis 在处理客户端的请求时，包括<code>接收</code>(socket读)、<c
 <p>所有客户端命令最后还需要回到<code>主线程去执行</code>，因此对多核的利用率并不算高，而且每次主线程都必须在分配完任务之后忙轮询等待所有 I/O 线程完成任务之后才能继续执行其他逻辑。</p>
 <p>Redis 目前的多线程方案更像是一个折中的选择：既保持了原系统的兼容性，又能利用多核提升 I/O 性能，来解决网络IO的性能瓶颈。</p>
 <p>&lt;全文完&gt;</p>
-<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
-<img src="/img/personal/qrcode_2.png" alt="pic"></p>
+<p><img src="/img/personal/qrcode_2.png" alt="pic"></p>
 
     </div>
 
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">文章作者</span>
-    <span class="item-content">码农在新加坡</span>
+    <span class="item-content">科技小飞哥</span>
   </p>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
@@ -387,7 +390,7 @@ Redis 在处理客户端的请求时，包括<code>接收</code>(socket读)、<c
 
   
     <script src="https://utteranc.es/client.js"
-            repo="xiaoma-coding/xiaoma-coding.github.io"
+            repo="techxiaofei/techxiaofei.github.io"
             issue-term="pathname"
             theme="github-light"
             crossorigin="anonymous"
@@ -400,10 +403,15 @@ Redis 在处理客户端的请求时，包括<code>接收</code>(socket读)、<c
 
     <footer id="footer" class="footer">
       <div class="social-links">
+      <a href="https://t.me/&#43;5OzmrG-iyJE2YzM9" class="iconfont icon-telegram" title="telegram"></a>
+      <a href="https://www.youtube.com/@techxiaofei" class="iconfont icon-youtube" title="youtube"></a>
+      <a href="https://space.bilibili.com/49756120" class="iconfont icon-bilibili" title="bilibili"></a>
       <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
-      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
-      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
-  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+<div class="friend-links">
+  <span class="item-content"><b>友情链接：</b></span>
+  <a href="https://www.amazonaws.cn/" title="亚马逊云科技">亚马逊云科技</a>
+  <a href="https://dev.amazoncloud.cn/" title="亚马逊开发者社区">亚马逊开发者社区</a>
 </div>
 
 <div class="copyright">
@@ -425,7 +433,7 @@ Redis 在处理客户端的请求时，包括<code>接收</code>(socket读)、<c
   <span class="copyright-year">
     &copy; 
     2020 - 
-    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>科技小飞哥</span>
   </span>
 </div>
 

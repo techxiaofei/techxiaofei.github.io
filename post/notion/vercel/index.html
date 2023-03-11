@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>使用Notion搭建个人网站系列二、把Notion页面托管到Vercel平台 - 科技小飞哥</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="科技小飞哥" /><meta name="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 这个系列适合所有零基础的电脑小白用户，轻轻" /><meta name="keywords" content="notion" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+<meta name="msvalidate.01" content="9CB8E7A6AD8ADF22F9ED93166445E5B9" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ3LW65VYR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QZ3LW65VYR');
+</script>
+
+
+<meta name="generator" content="Hugo 0.109.0 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/notion/vercel/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.aa1142df3485c00b5c5d1e8b78e0f2e8aca73dca4514c65e2c8855f339f9fa5b.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="使用Notion搭建个人网站系列二、把Notion页面托管到Vercel平台" />
+<meta property="og:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 这个系列适合所有零基础的电脑小白用户，轻轻" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/notion/vercel/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-16T01:00:56+08:00" />
+<meta property="article:modified_time" content="2023-02-16T01:00:56+08:00" />
+<meta itemprop="name" content="使用Notion搭建个人网站系列二、把Notion页面托管到Vercel平台">
+<meta itemprop="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 这个系列适合所有零基础的电脑小白用户，轻轻"><meta itemprop="datePublished" content="2023-02-16T01:00:56+08:00" />
+<meta itemprop="dateModified" content="2023-02-16T01:00:56+08:00" />
+<meta itemprop="wordCount" content="1459">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用Notion搭建个人网站系列二、把Notion页面托管到Vercel平台"/>
+<meta name="twitter:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 这个系列适合所有零基础的电脑小白用户，轻轻"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">科技小飞哥</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/friend/">
+        <li class="mobile-menu-item">友链</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">科技小飞哥</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/friend/">友链</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">使用Notion搭建个人网站系列二、把Notion页面托管到Vercel平台</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-02-16 </span>
+        <div class="post-category">
+            <a href="/categories/notion/"> notion </a>
+            </div>
+          <span class="more-meta"> 约 1459 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#一github账号">一、Github账号</a>
+      <ul>
+        <li><a href="#1-创建账号">1. 创建账号</a></li>
+        <li><a href="#2-克隆项目">2. 克隆项目</a></li>
+      </ul>
+    </li>
+    <li><a href="#二vercel账号">二、Vercel账号</a>
+      <ul>
+        <li><a href="#1-new-project">1. New Project</a></li>
+        <li><a href="#2-import-git-repository">2. Import Git Repository</a></li>
+        <li><a href="#3-选择notionnext并import">3. 选择NotionNext并Import</a></li>
+        <li><a href="#4-部署">4. 部署</a></li>
+      </ul>
+    </li>
+    <li><a href="#网站配置">网站配置</a></li>
+    <li><a href="#后记">后记</a></li>
+    <li><a href="#视频教程">视频教程</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>，加入 <a href="https://t.me/+5OzmrG-iyJE2YzM9"><strong>电报粉丝群</strong></a> 获得最新视频更新和问题解答。</p>
+<h1 id="背景">背景</h1>
+<!--
+亲爱的小伙伴大家好，今天我们来讲使用Notion搭建个人网站系列的第二篇，Notion主页部署到Vercel平台
+-->
+<p>这个系列适合所有零基础的电脑小白用户，轻轻松松搭建属于自己的个人网站</p>
+<p>如果对怎么使用Notion创建一个网站页面不了解，可以看我上一篇教程：<a href="https://leftpocket.cn/post/notion/blog/">使用Notion搭建个人网站系列一、使用Notion创建个人主页</a></p>
+<p>按惯例先看下我的个人网站展示效果。我是非常喜欢这种主题的，也计划要把个人网站全部迁移到Notion上。</p>
+<p><img src="/img/notion/blog/display2.png" alt="display2"></p>
+<p>搭建这样效果的个人网站只需要两个账号即可。</p>
+<h1 id="一github账号">一、Github账号</h1>
+<h2 id="1-创建账号">1. 创建账号</h2>
+<p>如果你还没有<a href="https://github.com/">Github</a>账号，先使用email地址注册一个，非常简单。</p>
+<h2 id="2-克隆项目">2. 克隆项目</h2>
+<p>Fork <code>NotionNext</code>到你的Github账号</p>
+<p>可以在Github的搜索框直接搜索<code>NotionNext</code>，也可以直接点击链接：<a href="https://github.com/tangly1024/NotionNext">https://github.com/tangly1024/NotionNext</a></p>
+<p>然后点击点击右上角的<code>Fork</code>按钮：</p>
+<p><img src="/img/notion/blog/fork.png" alt="fork"></p>
+<p>然后就会弹出如下界面，点击<code>Create Fork</code>，就会在你的Github账号里面拷贝一份代码。</p>
+<p><img src="/img/notion/blog/fork_notionnext.png" alt="fork_notionnext"></p>
+<p>这份代码就是我们搭建个人网站的关键，这个<code>NotionNext</code>调用了Notion的API来展示Notion的页面，同时提供了一些主题和特效，可以定制化我们的网站效果。</p>
+<p>对于这个仓库，我们唯一需要关注的就是<code>blog.config.js</code>文件，我们的所有主题特效修改都只需要改这个配置文件即可，后面我会详细介绍。</p>
+<h1 id="二vercel账号">二、Vercel账号</h1>
+<p>如果你还没有 <a href="https://vercel.com/">Vercel</a> 账号，先创建一个Vercel账号，直接使用刚才的github账号注册，同时方便从<code>Github</code>导入<code>NotionNext</code>。</p>
+<h2 id="1-new-project">1. New Project</h2>
+<p>第一步是新建项目</p>
+<p><img src="/img/hugo/hugo_vercel/new_project.png" alt="new_project"></p>
+<h2 id="2-import-git-repository">2. Import Git Repository</h2>
+<p>导入Git仓库，可以选择导入所有仓库，也可以选择导入指定仓库<code>NotionNext</code></p>
+<p><img src="/img/hugo/hugo_vercel/install.png" alt="install"></p>
+<h2 id="3-选择notionnext并import">3. 选择NotionNext并Import</h2>
+<p>在仓库列表里面 <code>NotionNext</code>然后点击<code>Import</code></p>
+<p><img src="/img/notion/blog/import.png" alt="import"></p>
+<h2 id="4-部署">4. 部署</h2>
+<p>配置你的notionnext</p>
+<p>点击<code>Environment Variables</code></p>
+<p>Name: <code>NOTION_PAGE_ID</code>
+Value: <code>e4bc192eb3ac47b18c0a547fc127f542</code></p>
+<p><img src="/img/notion/blog/deploy.png" alt="deploy"></p>
+<p>注：Value是你的Notion个人主页的值，我们从我们之前的那个Notion模版里面点击<code>Share</code>-&gt;<code>Share to web</code>-&gt;<code>Copy web link</code></p>
+<p><img src="/img/notion/blog/link.png" alt="link"></p>
+<p>可以看到我们的link</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://mulberry-table-1ab.notion.site/6280b79464184604bc6872e627e9b6a3?v=2cd07ed47d834c89bc60fbfee0973b6b
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>那么中间这个部分就是你的value，填到环境变量里面。</p>
+<p>点击 Deploy，然后等两分钟，就可以部署成功了。</p>
+<p><img src="/img/notion/blog/congratulation.png" alt="congratulation"></p>
+<p>然后点击Vercel分配给你的域名直接访问，就可以访问到你的个人网站了。由于网络限制的原因，可能访问不成功，没关系，我们下一步申请域名来绑定到个人网站来访问。</p>
+<h1 id="网站配置">网站配置</h1>
+<p>我们刚才说过<code>blog.config.js</code>文件是Notion个人网站的一些配置，我们可以直接修改这个配置文件来修改展示效果。</p>
+<p>文件里面每一行的作用都有详细的注释，你可以根据需求修改。我们在Github上的修改，无需重新部署，Vercel会监听Github的修改，自动部署。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">THEME: process.env.NEXT_PUBLIC_THEME || &#39;next&#39;,
+</span></span><span class="line"><span class="cl">AUTHOR: &#39;科技小飞哥&#39;, // 您的昵称
+</span></span><span class="line"><span class="cl">BIO: &#39;科技小飞哥的个人博客&#39;, // 作者简介
+</span></span><span class="line"><span class="cl">LINK: &#39;https://leftpocket.cn&#39;, // 网站地址
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里面有着非常丰富的配置可以修改，甚至可以显示主题选项，随时一键切换主题，显示鼠标点击特效，动态特效，宠物挂件，音乐播放插件，等等。</p>
+<p>这些都等着你探索。</p>
+<h1 id="后记">后记</h1>
+<p>可以看到我们搭建一个个人网站根本不需要任何编程基础或者执行指令。</p>
+<p>到现在我们算是成功了80%，还有一步就是申请免费域名就绑定到个人网站。
+下一篇我会讲如何申请免费域名并绑定到个人网站，到这一步，你的个人网站才算完整。</p>
+<p>&lt;全文完&gt;</p>
+<h1 id="视频教程">视频教程</h1>
+<p>本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>，加入 <a href="https://t.me/+5OzmrG-iyJE2YzM9"><strong>电报粉丝群</strong></a> 获得最新视频更新和问题解答。
+<style>
+    .meta-media {
+      position: relative;
+      margin-bottom: 30px;
+      display: flex;
+      width: 100%;
+      height: 0;
+      padding-bottom: 75%;
+    }
+    .video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+    </style>
+    <div class="meta-media">
+    <iframe src="https://www.youtube.com/embed/08z9GPshpSg" frameborder="no" scrolling="yes" allowfullscreen="allowfullscreen" high_quality="1" framespacing="1" class="video" >
+    </iframe>
+    </div></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">科技小飞哥</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2023-02-16
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/personal/wechat_pay.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/personal/alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/cloud/aws/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">AWS免费云产品注册就送 - 真正12个月免费的云服务器</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/notion/blog/">
+            <span class="next-text nav-default">使用Notion搭建个人网站系列一、使用Notion创建个人主页</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="techxiaofei/techxiaofei.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://t.me/&#43;5OzmrG-iyJE2YzM9" class="iconfont icon-telegram" title="telegram"></a>
+      <a href="https://www.youtube.com/@techxiaofei" class="iconfont icon-youtube" title="youtube"></a>
+      <a href="https://space.bilibili.com/49756120" class="iconfont icon-bilibili" title="bilibili"></a>
+      <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
+</div>
+<div class="friend-links">
+  <span class="item-content"><b>友情链接：</b></span>
+  <a href="https://www.amazonaws.cn/" title="亚马逊云科技">亚马逊云科技</a>
+  <a href="https://dev.amazoncloud.cn/" title="亚马逊开发者社区">亚马逊开发者社区</a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>科技小飞哥</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

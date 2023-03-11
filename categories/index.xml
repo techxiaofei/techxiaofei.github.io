@@ -1,18 +1,81 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on 码农在新加坡的个人博客</title>
+    <title>Categories on 科技小飞哥</title>
     <link>https://leftpocket.cn/categories/</link>
-    <description>Recent content in Categories on 码农在新加坡的个人博客</description>
+    <description>Recent content in Categories on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 02 Jan 2023 00:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Mar 2023 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ChatGPT</title>
+      <link>https://leftpocket.cn/categories/chatgpt/</link>
+      <pubDate>Thu, 09 Mar 2023 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/categories/chatgpt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>https://leftpocket.cn/categories/hugo/</link>
+      <pubDate>Wed, 22 Feb 2023 01:04:55 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/categories/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>云产品</title>
+      <link>https://leftpocket.cn/categories/%E4%BA%91%E4%BA%A7%E5%93%81/</link>
+      <pubDate>Fri, 17 Feb 2023 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/categories/%E4%BA%91%E4%BA%A7%E5%93%81/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>notion</title>
+      <link>https://leftpocket.cn/categories/notion/</link>
+      <pubDate>Thu, 16 Feb 2023 01:00:56 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/categories/notion/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tools</title>
+      <link>https://leftpocket.cn/categories/tools/</link>
+      <pubDate>Fri, 27 Jan 2023 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/categories/tools/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scripts</title>
+      <link>https://leftpocket.cn/categories/scripts/</link>
+      <pubDate>Mon, 16 Jan 2023 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/categories/scripts/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Redis</title>
       <link>https://leftpocket.cn/categories/redis/</link>
-      <pubDate>Mon, 02 Jan 2023 00:00:51 +0800</pubDate>
+      <pubDate>Sun, 08 Jan 2023 01:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/categories/redis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Others</title>
+      <link>https://leftpocket.cn/categories/others/</link>
+      <pubDate>Thu, 05 Jan 2023 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/categories/others/</guid>
       <description></description>
     </item>
     
@@ -22,24 +85,6 @@
       <pubDate>Thu, 22 Dec 2022 18:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Others</title>
-      <link>https://leftpocket.cn/categories/others/</link>
-      <pubDate>Wed, 14 Dec 2022 13:00:51 +0800</pubDate>
-      
-      <guid>https://leftpocket.cn/categories/others/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>hugo</title>
-      <link>https://leftpocket.cn/categories/hugo/</link>
-      <pubDate>Sat, 10 Dec 2022 01:01:55 +0800</pubDate>
-      
-      <guid>https://leftpocket.cn/categories/hugo/</guid>
       <description></description>
     </item>
     
@@ -85,15 +130,6 @@
       <pubDate>Fri, 29 Apr 2022 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/categories/mysql/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>科普</title>
-      <link>https://leftpocket.cn/categories/%E7%A7%91%E6%99%AE/</link>
-      <pubDate>Tue, 04 Jan 2022 13:00:51 +0800</pubDate>
-      
-      <guid>https://leftpocket.cn/categories/%E7%A7%91%E6%99%AE/</guid>
       <description></description>
     </item>
     

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>ChatGPT接入到微信、WeChat保姆级教程 - 科技小飞哥</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="科技小飞哥" /><meta name="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 我之前的教程已经教了大家怎么注册ChatG" /><meta name="keywords" content="ChatGPT" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+<meta name="msvalidate.01" content="9CB8E7A6AD8ADF22F9ED93166445E5B9" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ3LW65VYR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QZ3LW65VYR');
+</script>
+
+
+<meta name="generator" content="Hugo 0.109.0 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/chatgpt/wechat/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.aa1142df3485c00b5c5d1e8b78e0f2e8aca73dca4514c65e2c8855f339f9fa5b.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="ChatGPT接入到微信、WeChat保姆级教程" />
+<meta property="og:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 我之前的教程已经教了大家怎么注册ChatG" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/chatgpt/wechat/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-03-01T13:00:51+08:00" />
+<meta property="article:modified_time" content="2023-03-01T13:00:51+08:00" />
+<meta itemprop="name" content="ChatGPT接入到微信、WeChat保姆级教程">
+<meta itemprop="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 我之前的教程已经教了大家怎么注册ChatG"><meta itemprop="datePublished" content="2023-03-01T13:00:51+08:00" />
+<meta itemprop="dateModified" content="2023-03-01T13:00:51+08:00" />
+<meta itemprop="wordCount" content="1959">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ChatGPT接入到微信、WeChat保姆级教程"/>
+<meta name="twitter:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 我之前的教程已经教了大家怎么注册ChatG"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">科技小飞哥</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/friend/">
+        <li class="mobile-menu-item">友链</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">科技小飞哥</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/friend/">友链</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">ChatGPT接入到微信、WeChat保姆级教程</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-03-01 </span>
+        <div class="post-category">
+            <a href="/categories/chatgpt/"> ChatGPT </a>
+            </div>
+          <span class="more-meta"> 约 1959 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#chatgpt绑定到微信流程">ChatGPT绑定到微信流程</a>
+      <ul>
+        <li><a href="#1-github代码">1. Github代码</a></li>
+        <li><a href="#2-openapi地址">2. OpenAPI地址</a></li>
+        <li><a href="#3-一台linux云服务器">3. 一台linux云服务器</a>
+          <ul>
+            <li><a href="#配置">配置</a></li>
+            <li><a href="#运行">运行</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#结语">结语</a></li>
+    <li><a href="#视频教程">视频教程</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <!--
+本篇视频所有的链接和命令都在个人网站：https://www.leftpocket.cn/post/chatgpt/wechat/
+-->
+<p>本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>，加入 <a href="https://t.me/+5OzmrG-iyJE2YzM9"><strong>电报粉丝群</strong></a> 获得最新视频更新和问题解答。</p>
+<h1 id="背景">背景</h1>
+<p>我之前的教程已经教了大家怎么注册ChatGPT，如果还没有注册的小伙伴可以看我之前的教程。
+这篇教程来教大家怎么把chatGPT接入到微信 - WeChat来提问交流及自动回复。</p>
+<p>可以看到我这里已经成功接入ChatGPT。我要一步一步教大家也能轻松接入ChatGPT随时随地可以和ChatGPT对话。</p>
+<p><img src="/img/chatGPT/wechat/bot.png" alt="register"></p>
+<h1 id="chatgpt绑定到微信流程">ChatGPT绑定到微信流程</h1>
+<h2 id="1-github代码">1. Github代码</h2>
+<p>首先，我们需要使用到github上的一份第三方代码，这份代码调用OpenAI的接口来生成对话内容，然后把内容通过itchat这个开源的微信机器人来实现微信消息的接收和自动回复，这份代码已经帮我们集成好了，听起来是不是非常简单。</p>
+<p><a href="https://github.com/zhayujie/chatgpt-on-wechat">https://github.com/zhayujie/chatgpt-on-wechat</a></p>
+<p><img src="/img/chatGPT/wechat/github.png" alt="github"></p>
+<h2 id="2-openapi地址">2. OpenAPI地址</h2>
+<p>需要一个chatGPT账号并生成一个API Key，这个API secret Key是为了验证你的身份。</p>
+<p>这个非常简单，我们打开openai的平台地址：https://platform.openai.com/</p>
+<p>登录之后点击右上角的头像，点击<code>Manage Account</code>-&gt;<code>API Keys</code>-&gt;<code>Create New Secret Key</code>, 然后复制下来保存备用。</p>
+<p><img src="/img/chatGPT/wechat/key.png" alt="key"></p>
+<h2 id="3-一台linux云服务器">3. 一台linux云服务器</h2>
+<p>最后我们需要一台云服务器，没有云服务器的小伙伴可以看我之前的教程。</p>
+<p>我们登录到云服务器之后执行命令。</p>
+<p>1.克隆项目代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/zhayujie/chatgpt-on-wechat
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> chatgpt-on-wechat/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>2.安装所需核心依赖：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt install python3-pip
+</span></span><span class="line"><span class="cl">pip3 install itchat-uos<span class="o">==</span>1.5.0.dev0
+</span></span><span class="line"><span class="cl">pip3 install --upgrade openai
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注：<code>itchat-uos</code>使用指定版本1.5.0.dev0，<code>openai</code>使用最新版本，需高于0.25.0。</p>
+<h3 id="配置">配置</h3>
+<p>配置文件的模板在根目录的<code>config-template.json</code>中，需复制该模板创建最终生效的 <code>config.json</code> 文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cp config-template.json config.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后在<code>config.json</code>中填入配置，以下是对默认配置的说明，可根据需要进行自定义修改：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># config.json文件内容示例</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span> 
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;open_ai_api_key&#34;</span>: <span class="s2">&#34;YOUR API KEY&#34;</span>,                          <span class="c1"># 填入上面创建的 OpenAI API KEY</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;single_chat_prefix&#34;</span>: <span class="o">[</span><span class="s2">&#34;bot&#34;</span>, <span class="s2">&#34;@bot&#34;</span><span class="o">]</span>,                      <span class="c1"># 私聊时文本需要包含该前缀才能触发机器人回复</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;single_chat_reply_prefix&#34;</span>: <span class="s2">&#34;[bot] &#34;</span>,                       <span class="c1"># 私聊时自动回复的前缀，用于区分真人</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;group_chat_prefix&#34;</span>: <span class="o">[</span><span class="s2">&#34;@bot&#34;</span><span class="o">]</span>,                              <span class="c1"># 群聊时包含该前缀则会触发机器人回复</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;group_name_white_list&#34;</span>: <span class="o">[</span><span class="s2">&#34;ChatGPT测试群&#34;</span>, <span class="s2">&#34;ChatGPT测试群2&#34;</span><span class="o">]</span>, <span class="c1"># 开启自动回复的群名称列表</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;image_create_prefix&#34;</span>: <span class="o">[</span><span class="s2">&#34;画&#34;</span>, <span class="s2">&#34;看&#34;</span>, <span class="s2">&#34;找&#34;</span><span class="o">]</span>,                   <span class="c1"># 开启图片回复的前缀</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;conversation_max_tokens&#34;</span>: 1000,                            <span class="c1"># 支持上下文记忆的最多字符数</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;character_desc&#34;</span>: <span class="s2">&#34;你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。&#34;</span>  <span class="c1"># 人格描述</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>配置说明：</strong></p>
+<p><strong>1.个人聊天</strong></p>
+<ul>
+<li>个人聊天中，需要以 &ldquo;bot&quot;或&rdquo;@bot&quot; 为开头的内容触发机器人，对应配置项 <code>single_chat_prefix</code> (如果不需要以前缀触发可以填写  <code>&quot;single_chat_prefix&quot;: [&quot;&quot;]</code>)</li>
+<li>机器人回复的内容会以 &ldquo;[bot] &quot; 作为前缀， 以区分真人，对应的配置项为 <code>single_chat_reply_prefix</code> (如果不需要前缀可以填写 <code>&quot;single_chat_reply_prefix&quot;: &quot;&quot;</code>)</li>
+</ul>
+<p><strong>2.群组聊天</strong></p>
+<ul>
+<li>群组聊天中，群名称需配置在 <code>group_name_white_list </code> 中才能开启群聊自动回复。如果想对所有群聊生效，可以直接填写 <code>&quot;group_name_white_list&quot;: [&quot;ALL_GROUP&quot;]</code></li>
+<li>默认只要被人 @ 就会触发机器人自动回复；另外群聊天中只要检测到以 &ldquo;@bot&rdquo; 开头的内容，同样会自动回复（方便自己触发），这对应配置项 <code>group_chat_prefix</code></li>
+</ul>
+<p>**update: ** 粉丝提醒，即使填了ALL_GROUP，微信群也需要设置名字，未设置名字的微信群依旧无法收到回复。</p>
+<h3 id="运行">运行</h3>
+<ol>
+<li>本地运行</li>
+</ol>
+<p>如果是开发机 <strong>本地运行</strong>，直接在项目根目录下执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python3 app.py
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行成功会输出一个二维码，使用微信扫码登录，，当输出 &ldquo;Start auto replying&rdquo; 时表示自动回复程序已经成功运行了（注意：用于登录的微信需要在支付处已完成实名认证）。扫码登录后你的账号就成为机器人了。</p>
+<p><img src="/img/chatGPT/wechat/success.png" alt="success"></p>
+<p>这个时候你就可以直接在私聊或者群聊里面 <code>@bot</code> 和ChatGPT对话。对话的内容同时会显示在以上的服务器运行窗口。</p>
+<p>如下是微信在私聊窗口 <code>@bot</code> 自动触发的机器人回复。</p>
+<p><img src="/img/chatGPT/wechat/chat.png" alt="chat"></p>
+<p>如下是服务器运行窗口的消息。</p>
+<p><img src="/img/chatGPT/wechat/message.png" alt="message"></p>
+<p>到此为止我们ChatGPT接入到微信算是完成了，你可以自由自在在微信中跟ChatGPT对话了。</p>
+<ol start="2">
+<li>服务器部署</li>
+</ol>
+<p>上面的<code>python3 app.py</code>的运行如果退出窗口，程序会自动退出。</p>
+<p>所以我们使用<code>nohup</code>命令在后台运行程序，即使窗口退出也不会退出程序：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">touch nohup.out                                   <span class="c1"># 首次运行需要新建日志文件                     </span>
+</span></span><span class="line"><span class="cl">nohup python3 app.py <span class="p">&amp;</span> tail -f nohup.out          <span class="c1"># 在后台运行程序并通过日志输出二维码</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>扫码登录后程序即可运行于服务器后台，此时可通过 <code>ctrl+c</code> 关闭日志，不会影响后台程序的运行。</p>
+<p>使用 <code>ps -ef | grep app.py | grep -v grep</code> 命令可查看运行于后台的进程，如果想要重新启动程序可以先 <code>kill</code> 掉对应的进程。日志关闭后如果想要再次打开只需输入 <code>tail -f nohup.out</code>。</p>
+<h1 id="结语">结语</h1>
+<p>今天的ChatGPT接入微信的教程就完成了，我会把所有相关的命令和链接放在评论区，有需要的小伙伴自取。下个视频我会继续教大家更多有用的教程。</p>
+<p>&lt;全文完&gt;</p>
+<h1 id="视频教程">视频教程</h1>
+<p>本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>，加入 <a href="https://t.me/+5OzmrG-iyJE2YzM9"><strong>电报粉丝群</strong></a> 获得最新视频更新和问题解答。
+<style>
+    .meta-media {
+      position: relative;
+      margin-bottom: 30px;
+      display: flex;
+      width: 100%;
+      height: 0;
+      padding-bottom: 75%;
+    }
+    .video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+    </style>
+    <div class="meta-media">
+    <iframe src="https://www.youtube.com/embed/KHvhkvP8agE" frameborder="no" scrolling="yes" allowfullscreen="allowfullscreen" high_quality="1" framespacing="1" class="video" >
+    </iframe>
+    </div></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">科技小飞哥</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2023-03-01
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/personal/wechat_pay.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/personal/alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/chatgpt/official/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">ChatGPT接入到公众号保姆级教程</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/chatgpt/register/">
+            <span class="next-text nav-default">国内注册ChatGPT完整流程，百分百成功</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="techxiaofei/techxiaofei.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://t.me/&#43;5OzmrG-iyJE2YzM9" class="iconfont icon-telegram" title="telegram"></a>
+      <a href="https://www.youtube.com/@techxiaofei" class="iconfont icon-youtube" title="youtube"></a>
+      <a href="https://space.bilibili.com/49756120" class="iconfont icon-bilibili" title="bilibili"></a>
+      <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
+</div>
+<div class="friend-links">
+  <span class="item-content"><b>友情链接：</b></span>
+  <a href="https://www.amazonaws.cn/" title="亚马逊云科技">亚马逊云科技</a>
+  <a href="https://dev.amazoncloud.cn/" title="亚马逊开发者社区">亚马逊开发者社区</a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>科技小飞哥</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

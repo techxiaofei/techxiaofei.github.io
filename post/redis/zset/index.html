@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>秒杀面试官系列 - Redis zset底层是怎么实现的 - 码农在新加坡的个人博客</title>
+  <title>秒杀面试官系列 - Redis zset底层是怎么实现的 - 科技小飞哥</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="码农在新加坡" /><meta name="description" content="" /><meta name="keywords" content="Redis, ZSet" />
+<meta name="author" content="科技小飞哥" /><meta name="description" content="前言 如果Redis面试有什么必问的面试题，那么Zset的底层原理一定是排名前三的。 在上篇文章中我们提到ZSET的底层实现是ziplist压缩" /><meta name="keywords" content="Redis, ZSet" />
 
 
 <meta name="baidu-site-verification" content="code-vlQZuedAQs" />
@@ -54,23 +54,23 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/sass/main.min.aa1142df3485c00b5c5d1e8b78e0f2e8aca73dca4514c65e2c8855f339f9fa5b.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
 <meta property="og:title" content="秒杀面试官系列 - Redis zset底层是怎么实现的" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="前言 如果Redis面试有什么必问的面试题，那么Zset的底层原理一定是排名前三的。 在上篇文章中我们提到ZSET的底层实现是ziplist压缩" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://leftpocket.cn/post/redis/zset/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-12-04T13:00:51+08:00" />
-<meta property="article:modified_time" content="2020-12-04T13:00:51+08:00" />
+<meta property="article:published_time" content="2023-01-08T01:00:51+08:00" />
+<meta property="article:modified_time" content="2023-01-08T01:00:51+08:00" />
 <meta itemprop="name" content="秒杀面试官系列 - Redis zset底层是怎么实现的">
-<meta itemprop="description" content=""><meta itemprop="datePublished" content="2020-12-04T13:00:51+08:00" />
-<meta itemprop="dateModified" content="2020-12-04T13:00:51+08:00" />
-<meta itemprop="wordCount" content="0">
+<meta itemprop="description" content="前言 如果Redis面试有什么必问的面试题，那么Zset的底层原理一定是排名前三的。 在上篇文章中我们提到ZSET的底层实现是ziplist压缩"><meta itemprop="datePublished" content="2023-01-08T01:00:51+08:00" />
+<meta itemprop="dateModified" content="2023-01-08T01:00:51+08:00" />
+<meta itemprop="wordCount" content="3013">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="秒杀面试官系列 - Redis zset底层是怎么实现的"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content="前言 如果Redis面试有什么必问的面试题，那么Zset的底层原理一定是排名前三的。 在上篇文章中我们提到ZSET的底层实现是ziplist压缩"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -85,7 +85,7 @@
 <body>
   <div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
-    <a href="/" class="logo">码农在新加坡的个人博客</a>
+    <a href="/" class="logo">科技小飞哥</a>
   </div>
   <div class="mobile-navbar-icon">
     <span></span>
@@ -101,6 +101,8 @@
         <li class="mobile-menu-item">归档</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">分类</li>
+      </a><a href="/friend/">
+        <li class="mobile-menu-item">友链</li>
       </a><a href="/about/">
         <li class="mobile-menu-item">关于</li>
       </a>
@@ -114,7 +116,7 @@
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
-  <a href="/" class="logo">码农在新加坡的个人博客</a>
+  <a href="/" class="logo">科技小飞哥</a>
 </div>
 
 
@@ -129,6 +131,8 @@
         <a class="menu-item-link" href="/post/">归档</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/friend/">友链</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/about/">关于</a>
       </li>
@@ -146,12 +150,12 @@
       <h1 class="post-title">秒杀面试官系列 - Redis zset底层是怎么实现的</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2020-12-04 </span>
+        <span class="post-time"> 2023-01-08 </span>
         <div class="post-category">
             <a href="/categories/redis/"> Redis </a>
             </div>
-          <span class="more-meta"> 约 0 字 </span>
-          <span class="more-meta"> 预计阅读 0 分钟 </span>
+          <span class="more-meta"> 约 3013 字 </span>
+          <span class="more-meta"> 预计阅读 7 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -159,22 +163,301 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#zset是什么">Zset是什么</a></li>
+    <li><a href="#zset怎么用">ZSET怎么用</a></li>
+    <li><a href="#zset底层实现">ZSET底层实现</a>
+      <ul>
+        <li><a href="#1-ziplist-压缩列表">1. ziplist 压缩列表</a>
+          <ul>
+            <li><a href="#zset中entry的添加">zset中entry的添加</a></li>
+            <li><a href="#自动转换编码格式">自动转换编码格式</a></li>
+            <li><a href="#总结">总结</a></li>
+          </ul>
+        </li>
+        <li><a href="#2-skiplist-跳跃表">2. skiplist 跳跃表</a>
+          <ul>
+            <li><a href="#概念">概念</a></li>
+            <li><a href="#为什么使用跳跃表skiplist而不使用平衡树">为什么使用跳跃表（skiplist）而不使用平衡树</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#结论">结论</a></li>
+  </ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
-      
+      <h1 id="前言">前言</h1>
+<p>如果Redis面试有什么必问的面试题，那么Zset的底层原理一定是排名前三的。</p>
+<!-- 如果你对Redis zset的底层原理不是很清楚，没关系。看完我这边视频，让你秒杀面试官，轻松通过面试，拿到满意的Offer。 -->
+<p>在上篇文章中我们提到<code>ZSET</code>的底层实现是<code>ziplist</code>压缩列表 和<code>skiplist</code> 跳跃表。</p>
+<p>这篇文章我们就详细讲解：</p>
+<ul>
+<li>zset是什么</li>
+<li>zset怎么用</li>
+<li>zset的原理是什么。</li>
+</ul>
+<p>让你轻松秒杀面试官，获得Offer。</p>
+<h1 id="zset是什么">Zset是什么</h1>
+<p>Redis ZSET(Sorted Set) <strong>有序集合</strong>，ZSET中的成员是有序排列的。</p>
+<p>它和 set 集合的相同之处在于：</p>
+<ul>
+<li>集合中的每一个成员都是字符串类型，并且不允许重复</li>
+</ul>
+<p>而它们最大区别是：</p>
+<ul>
+<li>zset 是有序的</li>
+<li>set 是无序的</li>
+</ul>
+<p>这是因为有序集合中每个成员都会关联一个 <code>double64</code>（双精度浮点数）类型的 <code>score</code> (分数值)，Redis 正是通过 score 实现了对集合成员的排序。</p>
+<p>zset 是 Redis 常用数据类型之一，它适用于排行榜类型的业务场景。</p>
+<p>Redis 使用以下命令创建一个有序集合：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; ZADD key score member <span class="o">[</span>score member ...<span class="o">]</span>  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>key：指定一个键名；</li>
+<li>score：分数值，用来描述  member，它是实现排序的关键；</li>
+<li>member：要添加的成员（元素）。</li>
+</ul>
+<p>也就是，一个ZSET里面有多个 <code>&lt;score, member&gt;</code> 的pair，通过member的score来排序，最终你就得到了一个有序的member列表。</p>
+<p>比如：member是用户ID，score是这个用户ID的战力值。那么你使用ZSET很容易得到一个排行榜，以score排好序的member列表</p>
+<!-- 例子图 -->
+<p>当 key 不存在时，将会创建一个新的有序集合，并把分数/成员（score/member）添加到有序集合中；当 key 存在时，但 key 并非 zset 类型，此时就不能完成添加成员的操作，同时会返回一个错误提示。</p>
+<blockquote>
+<p>在有序集合中，成员是唯一存在的，但是分数（score）却可以重复。有序集合的最大的成员数为 2^32 - 1 (大约 40 多亿个)。</p>
+</blockquote>
+<p>**注意：**score使用的是double64，精度只有<code>53bit</code>。所以如果使用int64作为score的请注意，不要超过53位，否则会截断，导致排序不符合你的预期。</p>
+<p>官网页面有描述精度问题：<a href="https://redis.io/commands/zadd">Redis ZAdd</a></p>
+<h1 id="zset怎么用">ZSET怎么用</h1>
+<p>最简单的增删改查，统计数量，范围查找，交集并集等等都是很方便的支持的。完成的命令可以查看官网文档：<a href="https://redis.io/commands/?group=sorted-set">sorted-set</a></p>
+<p>几个最简单的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># key: fighting_rank, member: ana, score: 100000</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; ZADD fighting_rank <span class="m">100000</span> <span class="s2">&#34;ana&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 取排行榜前三名</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; ZREVRANGE fighting_rank <span class="m">0</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;fff&#34;</span>
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;eee&#34;</span>
+</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;ddd&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># zset长度</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; ZCARD fighting_rank
+</span></span><span class="line"><span class="cl"><span class="m">4</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 取某一个member的score</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; ZSCORE fighting_rank <span class="s2">&#34;aaa&#34;</span>
+</span></span><span class="line"><span class="cl">100000.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>你也可以自己在线测试Redis的命令来熟悉。https://try.redis.io/</p>
+<h1 id="zset底层实现">ZSET底层实现</h1>
+<p>我们讲了ZSET是什么，以及ZSET怎么用，相信你已经在脑海中对Redis ZSET有了初步的概念。那下一步我们就要讲解ZSET的核心，底层是怎么实现的。让你了解这个数据结构的设计有多优秀。</p>
+<p>上面我们说过，ZSET底层使用ziplist和skiplist实现。</p>
+<p>并不是两个都会用到，而是二选一的。在满足以下条件的时候会使用ziplist：</p>
+<ul>
+<li>保存元素（member）数量小于128</li>
+<li>每个元素（member）长度小于64字节</li>
+</ul>
+<p>注意：这两个参数可以通过<code>redis.conf</code>里面的<code>zset-max-ziplist-entries</code> 选项和 <code>zset-max-ziplist-value</code> 进行修改。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-s" data-lang="s"><span class="line"><span class="cl"><span class="c1"># Similarly to hashes and lists, sorted sets are also specially encoded in</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># order to save a lot of space. This encoding is only used when the length and</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># elements of a sorted set are below the following limits:</span>
+</span></span><span class="line"><span class="cl"><span class="n">zset</span><span class="o">-</span><span class="n">max</span><span class="o">-</span><span class="n">ziplist</span><span class="o">-</span><span class="n">entries</span> <span class="m">128</span>
+</span></span><span class="line"><span class="cl"><span class="n">zset</span><span class="o">-</span><span class="n">max</span><span class="o">-</span><span class="n">ziplist</span><span class="o">-</span><span class="n">value</span> <span class="m">64</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="1-ziplist-压缩列表">1. ziplist 压缩列表</h2>
+<p>压缩列表（ziplist）是Redis为了<strong>节省内存</strong>而开发的，是由一系列特殊编码的连续内存块组成的顺序型数据结构，一个压缩列表可以包含任意多个节点（entry）。ziplist就是为了节省内存redis会用<strong>时间</strong>换<strong>空间</strong>的典型例子。</p>
+<p><strong>解决问题</strong></p>
+<ul>
+<li>内存紧凑型列表，节省内存空间、提升内存使用率</li>
+</ul>
+<p><strong>存在问题</strong></p>
+<ul>
+<li>查询效率O(n)</li>
+<li>内存重分配</li>
+<li>连锁更新</li>
+</ul>
+<p>当 <code>ziplist</code> 保存的元素过多时，查找中间数据的复杂度就增加了。更糟糕的是，如果 ziplist 里面保存的是字符串，ziplist 在查找某个元素时，还需要逐一判断元素的每个字符，这样又进一步增加了复杂度。查询效率<code>O(n)</code>。</p>
+<p>所以Redis zset使用ziplist要限制元素的总数量和每个元素的长度上限。因为超过这个值之后使用ziplist的优势就没有了，就会自动切换成skiplist。</p>
+<p>这里你应该明白了，为什么在数据量和长度比较小的时候使用ziplist了，因为Redis的瓶颈之一就是内存，所以Redis的设计极致的考虑了内存的使用。在数据量较少的时候，ziplist充分体现了它内存的优势，又不会影响整体的查询效率。</p>
+<!-- ziplist图解 -->
+<h3 id="zset中entry的添加">zset中entry的添加</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">zzlInsertAt</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">zl</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">eptr</span><span class="p">,</span> <span class="n">sds</span> <span class="n">ele</span><span class="p">,</span> <span class="kt">double</span> <span class="n">score</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// some code hide here
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Keep offset relative to zl, as it might be re-allocated. */</span>
+</span></span><span class="line"><span class="cl">    <span class="n">offset</span> <span class="o">=</span> <span class="n">eptr</span><span class="o">-</span><span class="n">zl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">zl</span> <span class="o">=</span> <span class="nf">ziplistInsert</span><span class="p">(</span><span class="n">zl</span><span class="p">,</span><span class="n">eptr</span><span class="p">,(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">ele</span><span class="p">,</span><span class="nf">sdslen</span><span class="p">(</span><span class="n">ele</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">eptr</span> <span class="o">=</span> <span class="n">zl</span><span class="o">+</span><span class="n">offset</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Insert score after the element. */</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">serverAssert</span><span class="p">((</span><span class="n">sptr</span> <span class="o">=</span> <span class="nf">ziplistNext</span><span class="p">(</span><span class="n">zl</span><span class="p">,</span><span class="n">eptr</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">zl</span> <span class="o">=</span> <span class="nf">ziplistInsert</span><span class="p">(</span><span class="n">zl</span><span class="p">,</span><span class="n">sptr</span><span class="p">,(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">scorebuf</span><span class="p">,</span><span class="n">scorelen</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">zl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="自动转换编码格式">自动转换编码格式</h3>
+<p>如果发现满足ziplist的规则（长度小于等于128且最大的元素的长度小于等于64）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/* Convert the sorted set object into a ziplist if it is not already a ziplist
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * and if the number of elements and the maximum element size is within the
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * expected ranges. */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">zsetConvertToZiplistIfNeeded</span><span class="p">(</span><span class="n">robj</span> <span class="o">*</span><span class="n">zobj</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">maxelelen</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">zobj</span><span class="o">-&gt;</span><span class="n">encoding</span> <span class="o">==</span> <span class="n">OBJ_ENCODING_ZIPLIST</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">zset</span> <span class="o">*</span><span class="n">zset</span> <span class="o">=</span> <span class="n">zobj</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">zset</span><span class="o">-&gt;</span><span class="n">zsl</span><span class="o">-&gt;</span><span class="n">length</span> <span class="o">&lt;=</span> <span class="n">server</span><span class="p">.</span><span class="n">zset_max_ziplist_entries</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">maxelelen</span> <span class="o">&lt;=</span> <span class="n">server</span><span class="p">.</span><span class="n">zset_max_ziplist_value</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">zsetConvert</span><span class="p">(</span><span class="n">zobj</span><span class="p">,</span><span class="n">OBJ_ENCODING_ZIPLIST</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到，在作为zset实现的时候，每当插入一个<code>&lt;member, score&gt;</code> pair，就insert了两个连续的entry，第一个为member，第二个为score。</p>
+<h3 id="总结">总结</h3>
+<p>ziplist是为节省内存空间而生的。
+ziplist是一个为Redis专门提供的底层数据结构之一，本身可以有序也可以无序。当作为list和hash的底层实现时，节点之间没有顺序；当作为zset的底层实现时，节点之间会按照大小顺序排列。
+如果长度变化的时候会检查是否满足规则，底层结构会在ziplist和skiplist之间转换。</p>
+<h2 id="2-skiplist-跳跃表">2. skiplist 跳跃表</h2>
+<h3 id="概念">概念</h3>
+<p>跳跃表是一种有序的数据结构，它通过在每个节点中维持多个指向其它节点的指针，从而达到快速访问节点的目的。</p>
+<p>跳跃表支持平均O(logN)复杂度的节点查找，还可以通过顺序性操作来批量处理节点。</p>
+<p>如果任意一个条件不满足，就会Convert为<code>SKIPLIST</code>底层实现。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/* Optimize: check if the element is too large or the list
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * becomes too long *before* executing zzlInsert. */</span>
+</span></span><span class="line"><span class="cl"><span class="n">zobj</span><span class="o">-&gt;</span><span class="n">ptr</span> <span class="o">=</span> <span class="nf">zzlInsert</span><span class="p">(</span><span class="n">zobj</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">,</span><span class="n">ele</span><span class="p">,</span><span class="n">score</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nf">zzlLength</span><span class="p">(</span><span class="n">zobj</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">server</span><span class="p">.</span><span class="n">zset_max_ziplist_entries</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">zsetConvert</span><span class="p">(</span><span class="n">zobj</span><span class="p">,</span><span class="n">OBJ_ENCODING_SKIPLIST</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nf">sdslen</span><span class="p">(</span><span class="n">ele</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">server</span><span class="p">.</span><span class="n">zset_max_ziplist_value</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">zsetConvert</span><span class="p">(</span><span class="n">zobj</span><span class="p">,</span><span class="n">OBJ_ENCODING_SKIPLIST</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里的<code>OBJ_ENCODING_SKIPLIST</code>，实际上是<code>skiplist</code>(跳跃表)+<code>dict</code>（字典）。</p>
+<p>为什么要这么设计呢？我们知道数据量大的时候才会使用skiplist，skiplist的查询时间复杂度为O(logN)。</p>
+<p><code>dict</code>保存着<strong>member</strong>到<strong>score</strong>的映射，这样就可以使用<code>O(1)</code>的复杂度来查找<strong>member</strong>对应的<strong>score</strong>值。虽然同时使用两种结构，但它们会通过指针来共享相同元素的 <strong>member</strong> 和 <strong>score</strong>，因此不会浪费额外的内存。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">tmp</span> <span class="o">=</span> <span class="nf">zuiNewSdsFromValue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">zval</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">znode</span> <span class="o">=</span> <span class="nf">zslInsert</span><span class="p">(</span><span class="n">dstzset</span><span class="o">-&gt;</span><span class="n">zsl</span><span class="p">,</span><span class="n">score</span><span class="p">,</span><span class="n">tmp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">dictAdd</span><span class="p">(</span><span class="n">dstzset</span><span class="o">-&gt;</span><span class="n">dict</span><span class="p">,</span><span class="n">tmp</span><span class="p">,</span><span class="o">&amp;</span><span class="n">znode</span><span class="o">-&gt;</span><span class="n">score</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>就是为了性能而做的考虑。</p>
+<h3 id="为什么使用跳跃表skiplist而不使用平衡树">为什么使用跳跃表（skiplist）而不使用平衡树</h3>
+<p>Redis使用SkipList而不是用平衡树的主要原因有：</p>
+<ol>
+<li>平衡树不适合范围查找。需要中序遍历继续寻找其它节点。而Skiplist就非常简单了，使用<code>lv1</code>的指针进行向右遍历即可。</li>
+<li>平衡树的插入和删除引发子树调整，逻辑复杂，SkipList相对简单很多</li>
+<li>平衡树每个节点包含两个指针，SkipList平均不到2个指针，内存上更有优势。</li>
+<li>从算法实现难度上来比较，Skiplist 比平衡树要简单得多。</li>
+</ol>
+<h1 id="结论">结论</h1>
+<p>看了Redis ZSET的实现，不得不感叹，Redis的设计真的优秀，每个细节都考虑到了，对内存的使用有着完美的执着。这也就是为什么Redis能火，成为互联网公司必使用的技术之一。也是程序员面试的必面类型之一。了解Redis不仅能让你轻松通过面试，也能让你掌握更多知识，轻松应付工作中的各种需求。</p>
+<p>&lt;全文完&gt;</p>
+<p><img src="/img/personal/qrcode_2.png" alt="pic"></p>
+
     </div>
 
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">文章作者</span>
-    <span class="item-content">码农在新加坡</span>
+    <span class="item-content">科技小飞哥</span>
   </p>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2020-12-04
+        2023-01-08
         
     </span>
   </p>
@@ -198,13 +481,13 @@
 </div><footer class="post-footer">
       
       <nav class="post-nav">
-        <a class="prev" href="/post/redis/redis_zset_score/">
+        <a class="prev" href="/post/hugo/hugo_shortcode/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Redis Zset的精度问题分析及解决方案</span>
+            <span class="prev-text nav-default">从零开始搭建个人博客网站系列 七、Hugo使用Shortcode插入bilibili、Youtube视频</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/system_design/snowflake/">
-            <span class="next-text nav-default">分布式ID生成方案-snowflake算法</span>
+        <a class="next" href="/post/others/redis_pdf/">
+            <span class="next-text nav-default">《Redis设计与实现》pdf</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -218,7 +501,7 @@
 
   
     <script src="https://utteranc.es/client.js"
-            repo="xiaoma-coding/xiaoma-coding.github.io"
+            repo="techxiaofei/techxiaofei.github.io"
             issue-term="pathname"
             theme="github-light"
             crossorigin="anonymous"
@@ -231,10 +514,15 @@
 
     <footer id="footer" class="footer">
       <div class="social-links">
+      <a href="https://t.me/&#43;5OzmrG-iyJE2YzM9" class="iconfont icon-telegram" title="telegram"></a>
+      <a href="https://www.youtube.com/@techxiaofei" class="iconfont icon-youtube" title="youtube"></a>
+      <a href="https://space.bilibili.com/49756120" class="iconfont icon-bilibili" title="bilibili"></a>
       <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
-      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
-      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
-  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+<div class="friend-links">
+  <span class="item-content"><b>友情链接：</b></span>
+  <a href="https://www.amazonaws.cn/" title="亚马逊云科技">亚马逊云科技</a>
+  <a href="https://dev.amazoncloud.cn/" title="亚马逊开发者社区">亚马逊开发者社区</a>
 </div>
 
 <div class="copyright">
@@ -256,7 +544,7 @@
   <span class="copyright-year">
     &copy; 
     2020 - 
-    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>科技小飞哥</span>
   </span>
 </div>
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>c&#43;&#43; on 码农在新加坡的个人博客</title>
+    <title>c&#43;&#43; on 科技小飞哥</title>
     <link>https://leftpocket.cn/categories/c&#43;&#43;/</link>
-    <description>Recent content in c&#43;&#43; on 码农在新加坡的个人博客</description>
+    <description>Recent content in c&#43;&#43; on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Mon, 22 Nov 2021 15:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/c++/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <pubDate>Mon, 22 Nov 2021 15:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/cpp/do_while/</guid>
-      <description>​​ 原文地址：码农在新加坡的个人博客 零.导引 第一次见到 do{...}while(0) 是在学习 libevent 的时候，看到里面有很多类似 1 2 3 4 5 6 7 #define TT_URI(want) do { \ char *ret = evhttp_uri_join(uri, url_tmp, sizeof(url_tmp)); \ tt_want(ret != NULL); \ tt_want(ret</description>
+      <description>​​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 零.导引 第一次见到 do{...}while(0) 是在学习 libevent 的时候，看到</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Mon, 22 Nov 2021 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/cpp/static/</guid>
-      <description>​ 原文地址：码农在新加坡的个人博客 背景 static 是 C/C++ 中很常用的修饰符，它被用来控制变量的存储方式和可见性。而 static 在 C 语言和 C++ 语言中各有多个用途，下面我</description>
+      <description>​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 static 是 C/C++ 中很常用的修饰符，它被用来控制变量</description>
     </item>
     
     <item>
@@ -31,7 +31,7 @@
       <pubDate>Sun, 21 Nov 2021 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/cpp/secondary_pointer/</guid>
-      <description>原文地址：码农在新加坡的个人博客 一、概念 在如下的A指向B、B指向C的指向关系中： 首先 C是&amp;quot;一段内容&amp;quot;,比如你用mallo</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 一、概念 在如下的A指向B、B指向C的指向关系中</description>
     </item>
     
   </channel>

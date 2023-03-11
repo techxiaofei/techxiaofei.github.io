@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>网络编程 on 码农在新加坡的个人博客</title>
+    <title>网络编程 on 科技小飞哥</title>
     <link>https://leftpocket.cn/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
-    <description>Recent content in 网络编程 on 码农在新加坡的个人博客</description>
+    <description>Recent content in 网络编程 on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 01 Jan 2022 00:00:02 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <pubDate>Sat, 01 Jan 2022 00:00:02 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/tcpip/kcp/</guid>
-      <description>​ 原文地址：码农在新加坡的个人博客 背景 可能你从来没有听说过KCP是什么，但是你肯定知道TCP和UDP。 这里我们通过KCP来剖析TCP和UDP</description>
+      <description>​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 可能你从来没有听说过KCP是什么，但是你</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Thu, 25 Nov 2021 00:00:02 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/tcpip/close_shutdown/</guid>
-      <description>​ 原文地址：码农在新加坡的个人博客 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 shutdown()函数可</description>
+      <description>​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 后端面试系列将剖析后端面试中常考技术点，用尽</description>
     </item>
     
     <item>
@@ -31,7 +31,7 @@
       <pubDate>Thu, 25 Nov 2021 00:00:00 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/tcpip/socket_read_write/</guid>
-      <description>​ 原文地址：码农在新加坡的个人博客 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 结论 如果面试官问你，如果一</description>
+      <description>​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 后端面试系列将剖析后端面试中常考技术点，用尽</description>
     </item>
     
   </channel>

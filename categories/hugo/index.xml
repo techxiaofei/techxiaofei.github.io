@@ -1,19 +1,37 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>hugo on 码农在新加坡的个人博客</title>
+    <title>hugo on 科技小飞哥</title>
     <link>https://leftpocket.cn/categories/hugo/</link>
-    <description>Recent content in hugo on 码农在新加坡的个人博客</description>
+    <description>Recent content in hugo on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 10 Dec 2022 01:01:55 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Feb 2023 01:04:55 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>从零开始搭建个人博客网站系列 六、接入google adsense广告</title>
+      <title>使用Notion搭建个人网站系列三、申请免费域名并绑定到Notion个人网站</title>
+      <link>https://leftpocket.cn/post/notion/domain/</link>
+      <pubDate>Wed, 22 Feb 2023 01:04:55 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/notion/domain/</guid>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 今天我们讲使用Notion搭建个人网站系列</description>
+    </item>
+    
+    <item>
+      <title>从零开始搭建个人博客网站系列 七、Hugo使用Shortcode插入bilibili、Youtube视频</title>
+      <link>https://leftpocket.cn/post/hugo/hugo_shortcode/</link>
+      <pubDate>Tue, 10 Jan 2023 01:01:55 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/hugo/hugo_shortcode/</guid>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 前言 使用个人博客也有一年多的时间，这一年多的时</description>
+    </item>
+    
+    <item>
+      <title>从零开始搭建个人博客网站系列 六、接入google adsense广告创收</title>
       <link>https://leftpocket.cn/post/hugo/hugo_adsense/</link>
       <pubDate>Sat, 10 Dec 2022 01:01:55 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/hugo/hugo_adsense/</guid>
-      <description>原文地址：码农在新加坡的个人博客 背景 网站建好了，也小有流量了，下一步就可以申请Google Adsense了，简单来说就是允许谷歌在你的网站上</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 前言 使用个人博客也有一年多的时间，这一年多的时</description>
     </item>
     
     <item>
@@ -22,7 +40,7 @@
       <pubDate>Fri, 02 Dec 2022 01:04:55 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/hugo/hugo_search/</guid>
-      <description>原文地址：码农在新加坡的个人博客 序言 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 序言 使用个人博客也有一年多的时间，这一年多的时</description>
     </item>
     
     <item>
@@ -31,7 +49,7 @@
       <pubDate>Thu, 02 Dec 2021 01:04:55 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/hugo/hugo_dns/</guid>
-      <description>原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 使用个人博客也有一年多的时间，这一年多的时</description>
     </item>
     
     <item>
@@ -40,7 +58,7 @@
       <pubDate>Thu, 02 Dec 2021 01:03:55 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/hugo/hugo_vercel/</guid>
-      <description>原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 使用个人博客也有一年多的时间，这一年多的时</description>
     </item>
     
     <item>
@@ -49,7 +67,7 @@
       <pubDate>Thu, 02 Dec 2021 01:02:55 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/hugo/hugo_advanced/</guid>
-      <description>原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 使用个人博客也有一年多的时间，这一年多的时</description>
     </item>
     
     <item>
@@ -58,7 +76,7 @@
       <pubDate>Thu, 02 Dec 2021 01:01:55 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/hugo/hugo_github/</guid>
-      <description>原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 使用个人博客也有一年多的时间，这一年多的时</description>
     </item>
     
     <item>
@@ -67,16 +85,16 @@
       <pubDate>Thu, 02 Dec 2021 01:00:55 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/hugo/hugo_creation/</guid>
-      <description>原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 使用个人博客也有一年多的时间，这一年多的时</description>
     </item>
     
     <item>
-      <title>从零开始搭建个人博客（零）- 序章</title>
-      <link>https://leftpocket.cn/post/hugo/hugo_0/</link>
+      <title>从零开始搭建个人博客网站系列 - 合集</title>
+      <link>https://leftpocket.cn/post/hugo/hugo_collection/</link>
       <pubDate>Thu, 02 Dec 2021 01:00:50 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/hugo/hugo_0/</guid>
-      <description>原文地址：码农在新加坡的个人博客 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一个系列教程：从零开始</description>
+      <guid>https://leftpocket.cn/post/hugo/hugo_collection/</guid>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 使用个人博客也有一年多的时间，这一年多的时</description>
     </item>
     
   </channel>

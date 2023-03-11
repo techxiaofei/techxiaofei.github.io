@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Linux on 码农在新加坡的个人博客</title>
+    <title>Linux on 科技小飞哥</title>
     <link>https://leftpocket.cn/categories/linux/</link>
-    <description>Recent content in Linux on 码农在新加坡的个人博客</description>
+    <description>Recent content in Linux on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 07 Dec 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/linux/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <pubDate>Tue, 07 Dec 2021 00:00:00 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/linux/cp/</guid>
-      <description>原文地址：码农在新加坡的个人博客 背景 如果你突然被面试官问：cp和mv这两个linux的命令有什么区别？ 你会不会一脸懵逼，cp不就是复制，mv</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 如果你突然被面试官问：cp和mv这两个li</description>
     </item>
     
   </channel>

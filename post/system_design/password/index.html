@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>后端面试之系统设计 - 用户密码如何储存在DB里 - 码农在新加坡的个人博客</title>
+  <title>后端面试之系统设计 - 用户密码如何储存在DB里 - 科技小飞哥</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="码农在新加坡" /><meta name="description" content="​​ 原文地址：码农在新加坡的个人博客 背景 现在很多网站都因为爆库导致密码泄漏，要设计怎么样的密码储存机制，才能保证最大限度的不被盗取，即使数据" /><meta name="keywords" content="密码, 加密, 系统设计" />
+<meta name="author" content="科技小飞哥" /><meta name="description" content="​​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 现在很多网站都因为爆库导致密码泄漏，要" /><meta name="keywords" content="密码, 加密, 系统设计" />
 
 
 <meta name="baidu-site-verification" content="code-vlQZuedAQs" />
@@ -54,23 +54,23 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/sass/main.min.aa1142df3485c00b5c5d1e8b78e0f2e8aca73dca4514c65e2c8855f339f9fa5b.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
 <meta property="og:title" content="后端面试之系统设计 - 用户密码如何储存在DB里" />
-<meta property="og:description" content="​​ 原文地址：码农在新加坡的个人博客 背景 现在很多网站都因为爆库导致密码泄漏，要设计怎么样的密码储存机制，才能保证最大限度的不被盗取，即使数据" />
+<meta property="og:description" content="​​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 现在很多网站都因为爆库导致密码泄漏，要" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://leftpocket.cn/post/system_design/password/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-12-22T18:00:51+08:00" />
 <meta property="article:modified_time" content="2022-12-22T18:00:51+08:00" />
 <meta itemprop="name" content="后端面试之系统设计 - 用户密码如何储存在DB里">
-<meta itemprop="description" content="​​ 原文地址：码农在新加坡的个人博客 背景 现在很多网站都因为爆库导致密码泄漏，要设计怎么样的密码储存机制，才能保证最大限度的不被盗取，即使数据"><meta itemprop="datePublished" content="2022-12-22T18:00:51+08:00" />
+<meta itemprop="description" content="​​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 现在很多网站都因为爆库导致密码泄漏，要"><meta itemprop="datePublished" content="2022-12-22T18:00:51+08:00" />
 <meta itemprop="dateModified" content="2022-12-22T18:00:51+08:00" />
-<meta itemprop="wordCount" content="4714">
+<meta itemprop="wordCount" content="4716">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="后端面试之系统设计 - 用户密码如何储存在DB里"/>
-<meta name="twitter:description" content="​​ 原文地址：码农在新加坡的个人博客 背景 现在很多网站都因为爆库导致密码泄漏，要设计怎么样的密码储存机制，才能保证最大限度的不被盗取，即使数据"/>
+<meta name="twitter:description" content="​​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 现在很多网站都因为爆库导致密码泄漏，要"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -85,7 +85,7 @@
 <body>
   <div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
-    <a href="/" class="logo">码农在新加坡的个人博客</a>
+    <a href="/" class="logo">科技小飞哥</a>
   </div>
   <div class="mobile-navbar-icon">
     <span></span>
@@ -101,6 +101,8 @@
         <li class="mobile-menu-item">归档</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">分类</li>
+      </a><a href="/friend/">
+        <li class="mobile-menu-item">友链</li>
       </a><a href="/about/">
         <li class="mobile-menu-item">关于</li>
       </a>
@@ -114,7 +116,7 @@
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
-  <a href="/" class="logo">码农在新加坡的个人博客</a>
+  <a href="/" class="logo">科技小飞哥</a>
 </div>
 
 
@@ -129,6 +131,8 @@
         <a class="menu-item-link" href="/post/">归档</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/friend/">友链</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/about/">关于</a>
       </li>
@@ -150,7 +154,7 @@
         <div class="post-category">
             <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/"> 系统设计 </a>
             </div>
-          <span class="more-meta"> 约 4714 字 </span>
+          <span class="more-meta"> 约 4716 字 </span>
           <span class="more-meta"> 预计阅读 10 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -203,7 +207,7 @@
 </div>
     <div class="post-content">
       <p>​​
-原文地址：<a href="https://leftpocket.cn/post/system_design/password/">码农在新加坡的个人博客</a></p>
+本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>，加入 <a href="https://t.me/+5OzmrG-iyJE2YzM9"><strong>电报粉丝群</strong></a> 获得最新视频更新和问题解答。</p>
 <h1 id="背景">背景</h1>
 <!-- 亲爱的小伙伴们大家好，今天的主题是：用户密码如何储存在数据库里，这是一篇帮忙程序员做系统设计和后端面试的系统设计题，也是帮忙互联网小白用户了解密码储存之原理的视频教程 -->
 <p>现在很多网站都因为爆库导致密码泄漏，要设计怎么样的密码储存机制，才能保证最大限度的不被盗取，即使数据泄漏，黑客也无法在短时间内获取对应的密码来登录用户的账号，而造成损失。</p>
@@ -405,20 +409,19 @@
 <li>如果有更高的密码安全性要求，可以使用Bcrypt等算法进行密码加密，破解难度更高。</li>
 </ol>
 <p>所以你知道为什么你忘记密码之后只能重置密码吗，因为网站也不知道你的密码原文，他们只知道你的密码经过一系列哈希之后的密文，密码校验的时候也是通过同样的哈希函数进行校验是否正确。所以当用户忘记密码的时候，提供的是重置密码而非找回密码。</p>
-<!-- 今天的视频到这里就要结束了，如果你觉得我的视频对你有所帮助，麻烦给个一键三连哦，谢谢大家。如果喜欢我的视频，可以使用bilibili，微信公众号，知乎，youtubue 搜索码农在新加坡点击关注哦。再见 -->
+<!-- 今天的视频到这里就要结束了，如果你觉得我的视频对你有所帮助，麻烦给个一键三连哦，谢谢大家。如果喜欢我的视频，可以使用bilibili，微信公众号，知乎，youtubue 搜索科技小飞哥点击关注哦。再见 -->
 <p>&lt;全文完&gt;</p>
 <!-- 
 本文已发布**视频**版本 [bilibili.com](https://www.bilibili.com/video/BV1WD4y1E7iQ/?vd_source=adec61d169fe18e7682f66c984380921)，如果你觉得我的博客对你有所帮助，麻烦给个一键三连吧，谢谢。
 -->
-<p>欢迎关注我的微信公众号：<strong>码农在新加坡</strong>，有更多好的技术分享。
-<img src="/img/personal/qrcode_2.png" alt="pic"></p>
+<p><img src="/img/personal/qrcode_2.png" alt="pic"></p>
 
     </div>
 
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">文章作者</span>
-    <span class="item-content">码农在新加坡</span>
+    <span class="item-content">科技小飞哥</span>
   </p>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
@@ -467,7 +470,7 @@
 
   
     <script src="https://utteranc.es/client.js"
-            repo="xiaoma-coding/xiaoma-coding.github.io"
+            repo="techxiaofei/techxiaofei.github.io"
             issue-term="pathname"
             theme="github-light"
             crossorigin="anonymous"
@@ -480,10 +483,15 @@
 
     <footer id="footer" class="footer">
       <div class="social-links">
+      <a href="https://t.me/&#43;5OzmrG-iyJE2YzM9" class="iconfont icon-telegram" title="telegram"></a>
+      <a href="https://www.youtube.com/@techxiaofei" class="iconfont icon-youtube" title="youtube"></a>
+      <a href="https://space.bilibili.com/49756120" class="iconfont icon-bilibili" title="bilibili"></a>
       <a href="mailto:majianfei1023@gmail.com" class="iconfont icon-email" title="email"></a>
-      <a href="https://github.com/left-pocket" class="iconfont icon-github" title="github"></a>
-      <a href="https://www.zhihu.com/people/left-pocket" class="iconfont icon-zhihu" title="zhihu"></a>
-  <a href="https://leftpocket.cn/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+<div class="friend-links">
+  <span class="item-content"><b>友情链接：</b></span>
+  <a href="https://www.amazonaws.cn/" title="亚马逊云科技">亚马逊云科技</a>
+  <a href="https://dev.amazoncloud.cn/" title="亚马逊开发者社区">亚马逊开发者社区</a>
 </div>
 
 <div class="copyright">
@@ -505,7 +513,7 @@
   <span class="copyright-year">
     &copy; 
     2020 - 
-    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>码农在新加坡</span>
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>科技小飞哥</span>
   </span>
 </div>
 

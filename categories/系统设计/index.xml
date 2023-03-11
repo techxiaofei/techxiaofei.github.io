@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>系统设计 on 码农在新加坡的个人博客</title>
+    <title>系统设计 on 科技小飞哥</title>
     <link>https://leftpocket.cn/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</link>
-    <description>Recent content in 系统设计 on 码农在新加坡的个人博客</description>
+    <description>Recent content in 系统设计 on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 22 Dec 2022 18:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <pubDate>Thu, 22 Dec 2022 18:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/system_design/password/</guid>
-      <description>​​ 原文地址：码农在新加坡的个人博客 背景 现在很多网站都因为爆库导致密码泄漏，要设计怎么样的密码储存机制，才能保证最大限度的不被盗取，即使数据</description>
+      <description>​​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 现在很多网站都因为爆库导致密码泄漏，要</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Wed, 27 Apr 2022 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/system_design/hotspot/</guid>
-      <description>原文地址：码农在新加坡的个人博客 背景 最近不少人问我，怎么解决热点Key问题。我说，你提到这个我可就不困了。因为刚好，我手上的两个业务都有实现</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 最近不少人问我，怎么解决热点Key问题。我</description>
     </item>
     
     <item>
@@ -31,7 +31,7 @@
       <pubDate>Fri, 22 Apr 2022 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/system_design/unique_id_buffer/</guid>
-      <description>原文地址：码农在新加坡的个人博客 背景 在之前的文章中，我们讲了分布式ID生成方案-snowflake算法。这也是我们的生产系统过去几年一直使用</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 在之前的文章中，我们讲了分布式ID生成方案</description>
     </item>
     
     <item>
@@ -40,7 +40,7 @@
       <pubDate>Thu, 23 Dec 2021 00:00:00 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/system_design/short_url/</guid>
-      <description>​ 原文地址：码农在新加坡的个人博客 背景 短网址（short url），就是将长网址缩短为一个很短的网址，用户访问这个短网址可以重定向到原本的长网</description>
+      <description>​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 短网址（short url），就是将长网址</description>
     </item>
     
     <item>
@@ -49,7 +49,7 @@
       <pubDate>Tue, 23 Nov 2021 18:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/system_design/lru/</guid>
-      <description>​​ 原文地址：码农在新加坡的个人博客 概述 LRU是Least Recently Used的缩写，译为最近最少使用。它的理论基础为 “最近使用的数据会在未来一段时期</description>
+      <description>​​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 概述 LRU是Least Recently Used的缩写，译</description>
     </item>
     
     <item>
@@ -58,7 +58,7 @@
       <pubDate>Wed, 03 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/system_design/bloom_filter/</guid>
-      <description>原文地址：码农在新加坡的个人博客 布隆过滤器是什么 本质上布隆过滤器(Bloom Filter)是一种数据结构，比较巧妙的概率型数据结构（prob</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 布隆过滤器是什么 本质上布隆过滤器(Bloom F</description>
     </item>
     
     <item>
@@ -67,7 +67,7 @@
       <pubDate>Fri, 22 Jan 2021 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/system_design/friends_comment_like/</guid>
-      <description>原文地址：码农在新加坡的个人博客 上篇文章介绍了朋友圈的技术设计，这篇将介绍朋友圈点赞和评论的实现方式。 需求介绍 对某条状态实现点赞与取消点赞的</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 上篇文章介绍了朋友圈的技术设计，这篇将介绍朋友</description>
     </item>
     
     <item>
@@ -76,7 +76,7 @@
       <pubDate>Tue, 24 Nov 2020 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/system_design/snowflake/</guid>
-      <description>原文地址：码农在新加坡的个人博客 背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一。我们称之为分布式ID，分布式ID需</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 在互联网的业务系统中，涉及到各种各样的ID</description>
     </item>
     
   </channel>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>leetcode on 码农在新加坡的个人博客</title>
+    <title>leetcode on 科技小飞哥</title>
     <link>https://leftpocket.cn/categories/leetcode/</link>
-    <description>Recent content in leetcode on 码农在新加坡的个人博客</description>
+    <description>Recent content in leetcode on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 12 Dec 2020 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/leetcode/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <pubDate>Sat, 12 Dec 2020 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/others/vscode_leetcode/</guid>
-      <description>原文地址：码农在新加坡的个人博客 作为一名合格的程序猿，大家找工作的时候经常需要刷leetcode, leetcode官网上面写代码没有IDE上</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 作为一名合格的程序猿，大家找工作的时候经常需要</description>
     </item>
     
   </channel>
