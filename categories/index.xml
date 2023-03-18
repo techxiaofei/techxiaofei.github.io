@@ -6,11 +6,11 @@
     <description>Recent content in Categories on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 09 Mar 2023 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 15 Mar 2023 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ChatGPT</title>
       <link>https://leftpocket.cn/categories/chatgpt/</link>
-      <pubDate>Thu, 09 Mar 2023 13:00:51 +0800</pubDate>
+      <pubDate>Wed, 15 Mar 2023 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/categories/chatgpt/</guid>
       <description></description>
@@ -26,11 +26,11 @@
     </item>
     
     <item>
-      <title>云产品</title>
-      <link>https://leftpocket.cn/categories/%E4%BA%91%E4%BA%A7%E5%93%81/</link>
+      <title>云服务器</title>
+      <link>https://leftpocket.cn/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
       <pubDate>Fri, 17 Feb 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/categories/%E4%BA%91%E4%BA%A7%E5%93%81/</guid>
+      <guid>https://leftpocket.cn/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
       <description></description>
     </item>
     
@@ -49,6 +49,15 @@
       <pubDate>Fri, 27 Jan 2023 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/categories/tools/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>科学上网</title>
+      <link>https://leftpocket.cn/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</link>
+      <pubDate>Thu, 19 Jan 2023 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</guid>
       <description></description>
     </item>
     
