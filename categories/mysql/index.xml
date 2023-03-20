@@ -2,53 +2,53 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>MySQL on 科技小飞哥</title>
-    <link>https://leftpocket.cn/categories/mysql/</link>
+    <link>https://www.leftpocket.cn/categories/mysql/</link>
     <description>Recent content in MySQL on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 29 Apr 2022 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 29 Apr 2022 13:00:51 +0800</lastBuildDate><atom:link href="https://www.leftpocket.cn/categories/mysql/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>后端面试必备 - MySQL更新优化的几个阶段</title>
-      <link>https://leftpocket.cn/post/mysql/update_optimization/</link>
+      <link>https://www.leftpocket.cn/post/mysql/update_optimization/</link>
       <pubDate>Fri, 29 Apr 2022 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/mysql/update_optimization/</guid>
+      <guid>https://www.leftpocket.cn/post/mysql/update_optimization/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 现在的互联网大厂，都经历了数据量和访问量从</description>
     </item>
     
     <item>
       <title>MySQL对于千万级的大表要怎么优化？</title>
-      <link>https://leftpocket.cn/post/mysql/table/</link>
+      <link>https://www.leftpocket.cn/post/mysql/table/</link>
       <pubDate>Sat, 04 Dec 2021 00:00:00 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/mysql/table/</guid>
+      <guid>https://www.leftpocket.cn/post/mysql/table/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 目前做电商后台开发，经历了数据从零到百万到</description>
     </item>
     
     <item>
       <title>后端面试之MySQL-InnoDB一颗B&#43;树可以存放多少行数据？</title>
-      <link>https://leftpocket.cn/post/mysql/innodb/</link>
+      <link>https://www.leftpocket.cn/post/mysql/innodb/</link>
       <pubDate>Thu, 02 Dec 2021 10:00:00 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/mysql/innodb/</guid>
+      <guid>https://www.leftpocket.cn/post/mysql/innodb/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 MySQL的InnoDB引擎一棵B+树可以</description>
     </item>
     
     <item>
       <title>后端面试之MySQL-什么是回表查询和覆盖索引</title>
-      <link>https://leftpocket.cn/post/mysql/covering_index/</link>
+      <link>https://www.leftpocket.cn/post/mysql/covering_index/</link>
       <pubDate>Fri, 26 Nov 2021 00:00:00 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/mysql/covering_index/</guid>
+      <guid>https://www.leftpocket.cn/post/mysql/covering_index/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 后端面试系列将剖析后端面试中常考技术点，用尽量</description>
     </item>
     
     <item>
       <title>TiDB Write Conflict问题分析</title>
-      <link>https://leftpocket.cn/post/mysql/db_tidb_write_conflict/</link>
+      <link>https://www.leftpocket.cn/post/mysql/db_tidb_write_conflict/</link>
       <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/mysql/db_tidb_write_conflict/</guid>
+      <guid>https://www.leftpocket.cn/post/mysql/db_tidb_write_conflict/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 我们线上使用TiDB来储存数据，最近DBA</description>
     </item>
     

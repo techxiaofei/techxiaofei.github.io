@@ -2,35 +2,35 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>后端开发 on 科技小飞哥</title>
-    <link>https://leftpocket.cn/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/</link>
+    <link>https://www.leftpocket.cn/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/</link>
     <description>Recent content in 后端开发 on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 03 Dec 2021 14:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 03 Dec 2021 14:00:51 +0800</lastBuildDate><atom:link href="https://www.leftpocket.cn/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>游戏服务器和普通服务器的区别</title>
-      <link>https://leftpocket.cn/post/backend/game_server/</link>
+      <link>https://www.leftpocket.cn/post/backend/game_server/</link>
       <pubDate>Fri, 03 Dec 2021 14:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/backend/game_server/</guid>
+      <guid>https://www.leftpocket.cn/post/backend/game_server/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 我做过六年游戏服务端开发，后来想换个方向，</description>
     </item>
     
     <item>
       <title>后端开发除了增删改查还有什么？</title>
-      <link>https://leftpocket.cn/post/backend/backend_development/</link>
+      <link>https://www.leftpocket.cn/post/backend/backend_development/</link>
       <pubDate>Tue, 30 Nov 2021 14:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/backend/backend_development/</guid>
+      <guid>https://www.leftpocket.cn/post/backend/backend_development/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 很多刚接触后端开发的同学，会发现，后端开发</description>
     </item>
     
     <item>
       <title>手游服务器开发技术详解</title>
-      <link>https://leftpocket.cn/post/backend/game_development/</link>
+      <link>https://www.leftpocket.cn/post/backend/game_development/</link>
       <pubDate>Sun, 21 Nov 2021 14:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/backend/game_development/</guid>
+      <guid>https://www.leftpocket.cn/post/backend/game_development/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 回顾我的码农生涯，在做互联网电商后端开发之</description>
     </item>
     

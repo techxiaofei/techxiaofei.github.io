@@ -2,35 +2,35 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Others on 科技小飞哥</title>
-    <link>https://leftpocket.cn/categories/others/</link>
+    <link>https://www.leftpocket.cn/categories/others/</link>
     <description>Recent content in Others on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 05 Jan 2023 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/others/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 05 Jan 2023 13:00:51 +0800</lastBuildDate><atom:link href="https://www.leftpocket.cn/categories/others/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>《Redis设计与实现》pdf</title>
-      <link>https://leftpocket.cn/post/others/redis_pdf/</link>
+      <link>https://www.leftpocket.cn/post/others/redis_pdf/</link>
       <pubDate>Thu, 05 Jan 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/others/redis_pdf/</guid>
+      <guid>https://www.leftpocket.cn/post/others/redis_pdf/</guid>
       <description>《Redis设计与实现》 链接：https://drive.google.com/file/d/17DHOacBVF-MM_K6gpGXKBS</description>
     </item>
     
     <item>
       <title>各大型邮箱smtp服务器及端口</title>
-      <link>https://leftpocket.cn/post/others/smtp/</link>
+      <link>https://www.leftpocket.cn/post/others/smtp/</link>
       <pubDate>Fri, 14 Oct 2022 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/others/smtp/</guid>
+      <guid>https://www.leftpocket.cn/post/others/smtp/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 SMTP的全称是Simple Mail Transfer Proto</description>
     </item>
     
     <item>
       <title>vscode配置leetcode插件</title>
-      <link>https://leftpocket.cn/post/others/vscode_leetcode/</link>
+      <link>https://www.leftpocket.cn/post/others/vscode_leetcode/</link>
       <pubDate>Sat, 12 Dec 2020 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/others/vscode_leetcode/</guid>
+      <guid>https://www.leftpocket.cn/post/others/vscode_leetcode/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 作为一名合格的程序猿，大家找工作的时候经常需要</description>
     </item>
     

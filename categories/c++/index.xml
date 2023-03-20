@@ -2,35 +2,35 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>c&#43;&#43; on 科技小飞哥</title>
-    <link>https://leftpocket.cn/categories/c&#43;&#43;/</link>
+    <link>https://www.leftpocket.cn/categories/c&#43;&#43;/</link>
     <description>Recent content in c&#43;&#43; on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 22 Nov 2021 15:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/c++/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 Nov 2021 15:00:51 +0800</lastBuildDate><atom:link href="https://www.leftpocket.cn/categories/c++/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>do{...}while(0)的用法</title>
-      <link>https://leftpocket.cn/post/cpp/do_while/</link>
+      <link>https://www.leftpocket.cn/post/cpp/do_while/</link>
       <pubDate>Mon, 22 Nov 2021 15:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/cpp/do_while/</guid>
+      <guid>https://www.leftpocket.cn/post/cpp/do_while/</guid>
       <description>​​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 零.导引 第一次见到 do{...}while(0) 是在学习 libevent 的时候，看到</description>
     </item>
     
     <item>
       <title>c&#43;&#43;中static的用法详解</title>
-      <link>https://leftpocket.cn/post/cpp/static/</link>
+      <link>https://www.leftpocket.cn/post/cpp/static/</link>
       <pubDate>Mon, 22 Nov 2021 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/cpp/static/</guid>
+      <guid>https://www.leftpocket.cn/post/cpp/static/</guid>
       <description>​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 static 是 C/C++ 中很常用的修饰符，它被用来控制变量</description>
     </item>
     
     <item>
       <title>二级指针的作用详解</title>
-      <link>https://leftpocket.cn/post/cpp/secondary_pointer/</link>
+      <link>https://www.leftpocket.cn/post/cpp/secondary_pointer/</link>
       <pubDate>Sun, 21 Nov 2021 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/cpp/secondary_pointer/</guid>
+      <guid>https://www.leftpocket.cn/post/cpp/secondary_pointer/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 一、概念 在如下的A指向B、B指向C的指向关系中</description>
     </item>
     
