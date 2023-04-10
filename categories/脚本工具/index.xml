@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>脚本工具 on 科技小飞哥</title>
+    <link>https://leftpocket.cn/categories/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/</link>
+    <description>Recent content in 脚本工具 on 科技小飞哥</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 16 Jan 2023 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python开发自动化抢购脚本--一键定场、抢课、预约、自动回复，它都能做</title>
+      <link>https://leftpocket.cn/post/script/py_auto/</link>
+      <pubDate>Mon, 16 Jan 2023 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/script/py_auto/</guid>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 之前制作了一篇教程： 《使用Go语言开发自动</description>
+    </item>
+    
+    <item>
+      <title>使用go语言开发自动化脚本 - 一键定场、抢购、预约、捡漏</title>
+      <link>https://leftpocket.cn/post/script/auto_booking/</link>
+      <pubDate>Wed, 14 Dec 2022 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/script/auto_booking/</guid>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 不知道大家有没有这种经历，想要抢课，定场，</description>
+    </item>
+    
+  </channel>
+</rss>

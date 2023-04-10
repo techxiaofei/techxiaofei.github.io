@@ -2,53 +2,62 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Redis on 科技小飞哥</title>
-    <link>https://www.leftpocket.cn/categories/redis/</link>
+    <link>https://leftpocket.cn/categories/redis/</link>
     <description>Recent content in Redis on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 08 Jan 2023 01:00:51 +0800</lastBuildDate><atom:link href="https://www.leftpocket.cn/categories/redis/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 Jan 2023 01:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/redis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>秒杀面试官系列 - Redis zset底层是怎么实现的</title>
-      <link>https://www.leftpocket.cn/post/redis/zset/</link>
+      <link>https://leftpocket.cn/post/redis/zset/</link>
       <pubDate>Sun, 08 Jan 2023 01:00:51 +0800</pubDate>
       
-      <guid>https://www.leftpocket.cn/post/redis/zset/</guid>
+      <guid>https://leftpocket.cn/post/redis/zset/</guid>
       <description>前言 如果Redis面试有什么必问的面试题，那么Zset的底层原理一定是排名前三的。 在上篇文章中我们提到ZSET的底层实现是ziplist压缩</description>
     </item>
     
     <item>
+      <title>《Redis设计与实现》pdf</title>
+      <link>https://leftpocket.cn/post/redis/redis_pdf/</link>
+      <pubDate>Thu, 05 Jan 2023 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/redis/redis_pdf/</guid>
+      <description>《Redis设计与实现》 链接：https://drive.google.com/file/d/17DHOacBVF-MM_K6gpGXKBS</description>
+    </item>
+    
+    <item>
       <title>Redis为什么这么快 - 秒杀面试官系列</title>
-      <link>https://www.leftpocket.cn/post/redis/fast/</link>
+      <link>https://leftpocket.cn/post/redis/fast/</link>
       <pubDate>Mon, 02 Jan 2023 00:00:51 +0800</pubDate>
       
-      <guid>https://www.leftpocket.cn/post/redis/fast/</guid>
+      <guid>https://leftpocket.cn/post/redis/fast/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 前言 Redis作为非关系型内存数据库，只要是一</description>
     </item>
     
     <item>
       <title>一文看懂Redis 6.0多线程IO</title>
-      <link>https://www.leftpocket.cn/post/redis/multithreading/</link>
+      <link>https://leftpocket.cn/post/redis/multithreading/</link>
       <pubDate>Thu, 09 Dec 2021 00:00:51 +0800</pubDate>
       
-      <guid>https://www.leftpocket.cn/post/redis/multithreading/</guid>
+      <guid>https://leftpocket.cn/post/redis/multithreading/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 Redis基础 Redis是什么 Redis是一个</description>
     </item>
     
     <item>
       <title>Redis SDS简单动态字符串</title>
-      <link>https://www.leftpocket.cn/post/redis/redis_sds/</link>
+      <link>https://leftpocket.cn/post/redis/redis_sds/</link>
       <pubDate>Wed, 17 Feb 2021 13:00:51 +0800</pubDate>
       
-      <guid>https://www.leftpocket.cn/post/redis/redis_sds/</guid>
+      <guid>https://leftpocket.cn/post/redis/redis_sds/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 SDS （Simple Dynamic String，简单动态字符串</description>
     </item>
     
     <item>
       <title>Redis Zset的精度问题分析及解决方案</title>
-      <link>https://www.leftpocket.cn/post/redis/redis_zset_score/</link>
+      <link>https://leftpocket.cn/post/redis/redis_zset_score/</link>
       <pubDate>Fri, 04 Dec 2020 13:00:51 +0800</pubDate>
       
-      <guid>https://www.leftpocket.cn/post/redis/redis_zset_score/</guid>
+      <guid>https://leftpocket.cn/post/redis/redis_zset_score/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 最近使用Redis的SortedSet，使</description>
     </item>
     

@@ -2,62 +2,62 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Golang on 科技小飞哥</title>
-    <link>https://www.leftpocket.cn/categories/golang/</link>
+    <link>https://leftpocket.cn/categories/golang/</link>
     <description>Recent content in Golang on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 02 Jul 2022 13:00:51 +0800</lastBuildDate><atom:link href="https://www.leftpocket.cn/categories/golang/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Jul 2022 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/golang/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Golang是值传递还是引用传递</title>
-      <link>https://www.leftpocket.cn/post/golang/pass_by_value/</link>
+      <link>https://leftpocket.cn/post/golang/pass_by_value/</link>
       <pubDate>Sat, 02 Jul 2022 13:00:51 +0800</pubDate>
       
-      <guid>https://www.leftpocket.cn/post/golang/pass_by_value/</guid>
+      <guid>https://leftpocket.cn/post/golang/pass_by_value/</guid>
       <description>背景 先说结论，Go里面没有引用传递，Go语言是值传递。很多技术博客说Go语言有引用传递，都是没真的理解Go语言。 值传递 指在调用函数时将实际参</description>
     </item>
     
     <item>
       <title>Golang time.After内存泄漏分析</title>
-      <link>https://www.leftpocket.cn/post/golang/time_after/</link>
+      <link>https://leftpocket.cn/post/golang/time_after/</link>
       <pubDate>Fri, 06 May 2022 00:00:51 +0800</pubDate>
       
-      <guid>https://www.leftpocket.cn/post/golang/time_after/</guid>
+      <guid>https://leftpocket.cn/post/golang/time_after/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 我刚转做go语言开发开始写入职小程序的时候</description>
     </item>
     
     <item>
       <title>一文看懂Go语言协程的设计与原理</title>
-      <link>https://www.leftpocket.cn/post/golang/goroutine_implementation/</link>
+      <link>https://leftpocket.cn/post/golang/goroutine_implementation/</link>
       <pubDate>Sun, 18 Apr 2021 13:00:51 +0800</pubDate>
       
-      <guid>https://www.leftpocket.cn/post/golang/goroutine_implementation/</guid>
+      <guid>https://leftpocket.cn/post/golang/goroutine_implementation/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 Go语言最大的特色就是从语言层面支持并发（</description>
     </item>
     
     <item>
       <title>Golang append是并发安全的吗</title>
-      <link>https://www.leftpocket.cn/post/golang/append/</link>
+      <link>https://leftpocket.cn/post/golang/append/</link>
       <pubDate>Sat, 20 Mar 2021 13:00:51 +0800</pubDate>
       
-      <guid>https://www.leftpocket.cn/post/golang/append/</guid>
+      <guid>https://leftpocket.cn/post/golang/append/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 最近开发的时候写了下面这段类似的代码。 1 2</description>
     </item>
     
     <item>
       <title>Golang函数式选项(Functional Options)模式</title>
-      <link>https://www.leftpocket.cn/post/golang/functional_options/</link>
+      <link>https://leftpocket.cn/post/golang/functional_options/</link>
       <pubDate>Thu, 18 Feb 2021 13:00:51 +0800</pubDate>
       
-      <guid>https://www.leftpocket.cn/post/golang/functional_options/</guid>
+      <guid>https://leftpocket.cn/post/golang/functional_options/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 概览 最近阅读源码的时候看到一段不错的代码，但是</description>
     </item>
     
     <item>
       <title>Golang装饰器(Decorator)设计模式</title>
-      <link>https://www.leftpocket.cn/post/golang/decorator/</link>
+      <link>https://leftpocket.cn/post/golang/decorator/</link>
       <pubDate>Thu, 18 Feb 2021 13:00:51 +0800</pubDate>
       
-      <guid>https://www.leftpocket.cn/post/golang/decorator/</guid>
+      <guid>https://leftpocket.cn/post/golang/decorator/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 今天我们来介绍decorator这个经典的设计</description>
     </item>
     
