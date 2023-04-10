@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>生花妙笔信手来 – 基于 SageMaker Notebook 快速搭建托管的 Stable Diffusion – AI 作画可视化环境 - 科技小飞哥</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="科技小飞哥" /><meta name="description" content="AWS免费试用产品链接：https://aws.amazon.com/cn/free/ 原文链接：https://aws.amazon.com" /><meta name="keywords" content="aws" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+<meta name="msvalidate.01" content="9CB8E7A6AD8ADF22F9ED93166445E5B9" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ3LW65VYR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QZ3LW65VYR');
+</script>
+
+
+<meta name="generator" content="Hugo 0.109.0 with theme even" />
+
+
+<link rel="canonical" href="https://www.techxiaofei.com/post/cloud/aws_stable_diffusion/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.04109c830719138db2a69bc19ca2dacfea60d087f438e56f49491a10cd2d6e0b.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="生花妙笔信手来 – 基于 SageMaker Notebook 快速搭建托管的 Stable Diffusion – AI 作画可视化环境" />
+<meta property="og:description" content="AWS免费试用产品链接：https://aws.amazon.com/cn/free/ 原文链接：https://aws.amazon.com" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.techxiaofei.com/post/cloud/aws_stable_diffusion/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-10T13:00:51+08:00" />
+<meta property="article:modified_time" content="2023-04-10T13:00:51+08:00" />
+<meta itemprop="name" content="生花妙笔信手来 – 基于 SageMaker Notebook 快速搭建托管的 Stable Diffusion – AI 作画可视化环境">
+<meta itemprop="description" content="AWS免费试用产品链接：https://aws.amazon.com/cn/free/ 原文链接：https://aws.amazon.com"><meta itemprop="datePublished" content="2023-04-10T13:00:51+08:00" />
+<meta itemprop="dateModified" content="2023-04-10T13:00:51+08:00" />
+<meta itemprop="wordCount" content="2789">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="生花妙笔信手来 – 基于 SageMaker Notebook 快速搭建托管的 Stable Diffusion – AI 作画可视化环境"/>
+<meta name="twitter:description" content="AWS免费试用产品链接：https://aws.amazon.com/cn/free/ 原文链接：https://aws.amazon.com"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">科技小飞哥</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/friend/">
+        <li class="mobile-menu-item">友链</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">科技小飞哥</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/friend/">友链</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">生花妙笔信手来 – 基于 SageMaker Notebook 快速搭建托管的 Stable Diffusion – AI 作画可视化环境</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-04-10 </span>
+        <div class="post-category">
+            <a href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/"> 云服务器 </a>
+            </div>
+          <span class="more-meta"> 约 2789 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-方案架构"><strong>1. 方案架构</strong></a></li>
+        <li><a href="#2-方案优势"><strong>2. 方案优势</strong></a></li>
+        <li><a href="#3-方案组件">3. 方案组件</a>
+          <ul>
+            <li><a href="#31-amazon-sagemaker-notebook"><strong>3.1 Amazon SageMaker Notebook</strong></a></li>
+            <li><a href="#32-stable-diffusion-模型"><strong>3.2 Stable Diffusion 模型</strong></a></li>
+            <li><a href="#33-用户交互界面">3.3 用户交互界面</a></li>
+            <li><a href="#34-方案部署">3.4 方案部署</a></li>
+          </ul>
+        </li>
+        <li><a href="#4-总结"><strong>4. 总结</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><strong>AWS免费试用产品链接</strong>：<a href="https://aws.amazon.com/cn/free/">https://aws.amazon.com/cn/free/</a></p>
+<p><strong>原文链接</strong>：<a href="https://aws.amazon.com/cn/blogs/china/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook/">https://aws.amazon.com/cn/blogs/china/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook/</a></p>
+<p>本文主要介绍如何使用 Amazon SageMaker Notebook 机器学习服务轻松托管 Stable Diffusion WebUI，一键部署开箱即用的 AIGC 图片方向轻量级应用。通过 Amazon CloudFormation 基础设施即代码的服务，实现底层环境、AI 模型和前端 Stable Diffusion WebUI 的快速部署，帮助用户在 15~20 分钟部署一套文生图、图生图的 AI 应用。此方案适合企业级客户对 AIGC 图片方向做前期调研和快速验证、小型团队快速搭建轻量级 AI 应用的业务场景。</p>
+<p><strong>[注]：</strong> 此方案目前提供基于 Stable Diffusion 1.5 的图片生成，基于 dreambooth 的图片训练和推理；暂不提供脚本（script）和插件（extension）的技术支持，读者可持续关注后续方案的功能迭代。</p>
+<h2 id="1-方案架构"><strong>1. 方案架构</strong></h2>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook1.png" alt=""></p>
+<h2 id="2-方案优势"><strong>2. 方案优势</strong></h2>
+<ol>
+<li>本方案使用 CloudFormation 一键部署，仅需点击几个步骤，即可快速在您的 AWS 账户中成功部署一套 AIGC 图片方向的 web 应用环境，交互界面简洁友好，帮助用户快速体验文本生成图片、图片生成图片等 AI 服务。</li>
+<li>底层使用 Amazon SageMaker Notebook Instance 托管的 Jupyter 笔记本实例，您无需关心基础环境（如存储、网络等）的构建及底层基础设施运维。</li>
+<li>方案采用全托管的 Stable Diffusion AI 模型服务（1.5 轻量版本，包含 Stable Diffusion WebUI 与 InvokeAI 两个界面），具备良好的开源项目使用体验，并支持根据您的需要安装插件以扩展使用场景（如 ControlNet）。</li>
+<li>用户可使用自带的图片数据微调模型，产出的模型可基于自动化流水线工具快速部署上线至推理节点，方便规模化的图片推理调用。</li>
+<li>本方案完全开源，用户可以在 SageMaker Notebook 中对模型和扩展（extension）定制开发，满足自身业务需求。</li>
+</ol>
+<h2 id="3-方案组件">3. 方案组件</h2>
+<h3 id="31-amazon-sagemaker-notebook"><strong>3.1 Amazon SageMaker Notebook</strong></h3>
+<p>Amazon SageMaker 笔记本实例是运行 Jupyter Notebook 应用程序的机器学习 (ML) 计算实例。 SageMaker 管理实例和相关资源的创建。在您的笔记本实例中使用 Jupyter 笔记本来准备和处理数据、编写代码来训练模型、将模型部署到 SageMaker 托管，以及测试或验证您的模型。</p>
+<h3 id="32-stable-diffusion-模型"><strong>3.2 Stable Diffusion 模型</strong></h3>
+<p>Stable Diffusion 是由 CompVis 、 Stability AI 和 LAION 共同开发的一个文本转图像模型，它通过 LAION-5B 子集大量的 512×512 图文模型进行训练，用户只要简单的输入一段文本，Stable Diffusion 就可以迅速将其转换为图像。同样，用户也可以置入图片或视频，配合文本对其进行处理。</p>
+<h3 id="33-用户交互界面">3.3 用户交互界面</h3>
+<h4 id="331-stable-diffusion-webui--使用示例参考">3.3.1 Stable Diffusion WebUI + 使用示例参考</h4>
+<p><a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">Stable Diffusion WebUI</a> 是 Stable Diffusion 的一个浏览器交互界面，它提供了多种功能，如 txt2img、img2img 等，还包含了许多模型融合改进、图片质量修复等附加升级。通过调节不同参数可以生成不同效果，用户可以根据自己的需要和喜好进行创作。它不仅支持生成图片，使用各种各样的模型来达到你想要的效果，还能训练你自己的专属模型。</p>
+<p>以文字生成图片为例，用户可在“txt2img”界面，使用提示词生成期望图片，步骤如下：</p>
+<ul>
+<li>点击“txt2img”进入文生图界面</li>
+<li>在提示词输入框内输入提示词</li>
+<li>点击“Generate”按钮即可生成图片
+<img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook2.png" alt=""></li>
+</ul>
+<ol>
+<li>生成一对 90 年代中国情侣，尺寸 512×512，一次生成 4 张图
+提示词（Prompt）：A pair of young Chinese lovers, wearing jackets and jeans, sitting on the roof, the background is Beijing in the 1990s, and the opposite building can be seen</li>
+</ol>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook3.png" alt=""></p>
+<ol start="2">
+<li>生成背景为雏菊的罗马士兵半身像，尺寸 512×512，一次生成 4 张图<br>
+提示词（Prompt）：A roman soldier with daisies in the background, bust figure
+<img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook4.png" alt=""></li>
+</ol>
+<h4 id="332-invokeai--使用示例参考">3.3.2 InvokeAI + 使用示例参考</h4>
+<p><a href="https://github.com/invoke-ai/InvokeAI">InvokeAI</a> 是 Stable Diffusion 的一个实现，它是开源文本到图像和图像到图像生成器。 它提供了一个具有各种新功能和选项的简化流程，以帮助图像生成过程。</p>
+<p>提示词（Prompt）：temple in ruines, forest, stairs, columns
+<img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook5.png" alt=""></p>
+<p>提示词（Prompt）：A pair of young Chinese lovers, wearing jackets and jeans, sitting on the roof, the background is Beijing in the 1990s, and the opposite building can be seen</p>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook6.png" alt=""></p>
+<h3 id="34-方案部署">3.4 方案部署</h3>
+<h4 id="341-方案部署操作步骤">3.4.1 方案部署操作步骤</h4>
+<ol>
+<li>
+<p>登录控制台，在控制台页面右上角切换区域至 us-east-1。
+<img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook7.png" alt=""></p>
+</li>
+<li>
+<p>在 Service 搜索框中输入 Cloudformation，点击进入。</p>
+</li>
+</ol>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook8.png" alt=""></p>
+<ol start="3">
+<li>创建堆栈 -使用新资源（标准）- Amazon S3 URL，填入 <a href="https://xiekl.s3.cn-northwest-1.amazonaws.com.cn/sd-webui.yml">https://xiekl.s3.cn-northwest-1.amazonaws.com.cn/sd-webui.yml</a>。</li>
+</ol>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook9.png" alt=""></p>
+<ol start="4">
+<li>填入堆栈名称，Instance Type 建议选择 g5.2xlarge，磁盘 Volume 大小默认为 100G，选择 WebUI Type，默认是 auto 代表 Stable Diffusion WebUI，WebUI Version 选择 0316，点击 <strong>“下一步”</strong>。</li>
+</ol>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook10.png" alt=""></p>
+<ol start="5">
+<li>设置保持默认，点击 <strong>“下一步”</strong>。</li>
+</ol>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook11.png" alt=""></p>
+<ol start="6">
+<li>确认配置（维持默认即可），勾选 <strong>“我确认…”</strong>，点击 <strong>“提交”</strong> ，等待 15-20 分钟部署完成。</li>
+</ol>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook12.png" alt=""></p>
+<h4 id="342-使用-stable-diffusion-webui-进行文生图">3.4.2 使用 Stable Diffusion WebUI 进行文生图</h4>
+<ol>
+<li>创建堆栈后等待资源陆续启动（约 20 分钟），待堆栈状态显示为“CREATE_COMPLETE”后，点击“输出”。点击“键”为“WebUI URL”相应的“值”位置的 URL。</li>
+</ol>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook13.png" alt=""></p>
+<ol start="2">
+<li>进入 WebUI 界面，输入 prompt，点击 generate 即可生成图片。</li>
+</ol>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook14.png" alt=""></p>
+<h4 id="343-使用-stable-diffusion-webui-进行训练微调">3.4.3 使用 Stable Diffusion WebUI 进行训练（微调）</h4>
+<p>下面介绍如何使用 Stable Diffusion WebUI 训练您自己的图片。</p>
+<ol>
+<li>首先要创建一个模型。导航到 DreamBooth ⻚面。</li>
+</ol>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook15.png" alt=""></p>
+<ol start="2">
+<li>创建成功后，如下图所示。</li>
+</ol>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook16.png" alt=""></p>
+<ol start="3">
+<li>设置训练参数，导航到 Select ⻚面，如图所。</li>
+</ol>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook17.png" alt=""></p>
+<ol start="4">
+<li>在 input ⻚面，设置 Setting，Basic 的参数保持默认即可，点击右侧箭。</li>
+</ol>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook18.png" alt=""></p>
+<ol start="5">
+<li>点击 Advance 右侧箭头，展开选项卡。在 Mixed Precision 选择 fp16，Memory Attention 选择 xformers，其他选项保持默认即可，如下图所示。</li>
+</ol>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook19.png" alt=""></p>
+<ol start="6">
+<li>点击 Concepts 选项卡，在 Dataset Directory 输入实例图片所在的目录。我们事先准备了示例图片 在/data/images 中，读者也可以把自己的图像文件放在该目录中。</li>
+</ol>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook20.png" alt=""></p>
+<ol start="7">
+<li>向下拉动滚动条，在 Instance Prompt 中输入“a photo of a zxw dog”，在 Class Prompt 中输入“a photo of dog”，其他保持默认。</li>
+</ol>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook21.png" alt=""></p>
+<ol start="8">
+<li>点击⻚面上方的“Train”按钮。</li>
+</ol>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook22.png" alt=""></p>
+<ol start="9">
+<li>观察右侧 Output 选项卡的训练进度，等待训练完成。</li>
+</ol>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook23.png" alt=""></p>
+<ol start="10">
+<li>训练完成后，点击刷新按钮，模型列表中将出现刚训练好的模型，选择新训练的模型。</li>
+</ol>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook24.png" alt=""></p>
+<ol start="11">
+<li>点击 txt2img，跳转到文生图⻚面。输入 Prompt，注意要带上 zwx 前缀，查看结果。</li>
+</ol>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook25.png" alt=""></p>
+<ol start="12">
+<li>下面介绍如何用自己的图片进行训练。在 Cloudfomation 的输出中，点击 NotebookURL 链接。</li>
+</ol>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook26.png" alt=""></p>
+<ol start="13">
+<li>如下图所示，点击 sd-webui 进入到 data/images/文件夹。在文件上依次点击右键，删除文件。</li>
+</ol>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook27.png" alt=""></p>
+<ol start="14">
+<li>点击 Upload files 按钮，上传您自己的图片作为训练集。上传完成后，重复上述步骤完成训练过程。</li>
+</ol>
+<p><img src="https://s3.cn-north-1.amazonaws.com.cn/awschinablog/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook28.png" alt=""></p>
+<h2 id="4-总结"><strong>4. 总结</strong></h2>
+<p>本文简单介绍了如何使用托管的笔记本服务 SageMaker Notebook 来一键部署 Stable Diffusion WebUI，轻松构建 AI 生成图片的界面化、快速验证环境。方案只需点击几次即可实现自动化部署，基于托管服务的特性让您无需忧心底层基础设施的搭建与运维，同时拥有良好的开源项目体验。您还可以使用自己的图片对模型进行微调，为定制特色的 AIGC 应用做好准备。</p>
+<p><strong>AWS免费试用产品链接</strong>：<a href="https://aws.amazon.com/cn/free/">https://aws.amazon.com/cn/free/</a></p>
+<p><strong>原文链接</strong>：<a href="https://aws.amazon.com/cn/blogs/china/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook/">https://aws.amazon.com/cn/blogs/china/quickly-build-a-hosted-stable-diffusion-ai-drawing-visualization-environment-based-on-sagemaker-notebook/</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">科技小飞哥</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2023-04-10
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/personal/wechat_pay.png">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/ai/cartoon/">
+            <span class="next-text nav-default">Midjourney - 用AI绘制你的专属迪斯尼卡通头像</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="techxiaofei/techxiaofei.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://www.techxiaofei.com" class="iconfont icon-site" title="site"></a>
+      <a href="https://t.me/&#43;5OzmrG-iyJE2YzM9" class="iconfont icon-telegram" title="telegram"></a>
+      <a href="https://www.youtube.com/@techxiaofei" class="iconfont icon-youtube" title="youtube"></a>
+      <a href="https://space.bilibili.com/49756120" class="iconfont icon-bilibili" title="bilibili"></a>
+</div>
+<div class="friend-links">
+  <span class="item-content"><b>友情链接：</b></span>
+  <a href="https://www.amazonaws.cn/" title="亚马逊云科技">亚马逊云科技</a>
+  <a href="https://dev.amazoncloud.cn/" title="亚马逊开发者社区">亚马逊开发者社区</a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>科技小飞哥</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

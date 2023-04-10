@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>ChatGPT接入到web网站保姆级教程 - 科技小飞哥</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="科技小飞哥" /><meta name="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 我之前做了怎么注册ChatGPT以及把Ch" /><meta name="keywords" content="ChatGPT" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+<meta name="msvalidate.01" content="9CB8E7A6AD8ADF22F9ED93166445E5B9" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ3LW65VYR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QZ3LW65VYR');
+</script>
+
+
+<meta name="generator" content="Hugo 0.109.0 with theme even" />
+
+
+<link rel="canonical" href="https://www.techxiaofei.com/post/chatgpt/web/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.04109c830719138db2a69bc19ca2dacfea60d087f438e56f49491a10cd2d6e0b.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="ChatGPT接入到web网站保姆级教程" />
+<meta property="og:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 我之前做了怎么注册ChatGPT以及把Ch" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.techxiaofei.com/post/chatgpt/web/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-03-23T13:00:51+08:00" />
+<meta property="article:modified_time" content="2023-03-23T13:00:51+08:00" />
+<meta itemprop="name" content="ChatGPT接入到web网站保姆级教程">
+<meta itemprop="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 我之前做了怎么注册ChatGPT以及把Ch"><meta itemprop="datePublished" content="2023-03-23T13:00:51+08:00" />
+<meta itemprop="dateModified" content="2023-03-23T13:00:51+08:00" />
+<meta itemprop="wordCount" content="1734">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ChatGPT接入到web网站保姆级教程"/>
+<meta name="twitter:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 我之前做了怎么注册ChatGPT以及把Ch"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">科技小飞哥</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/friend/">
+        <li class="mobile-menu-item">友链</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">科技小飞哥</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/friend/">友链</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">ChatGPT接入到web网站保姆级教程</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-03-23 </span>
+        <div class="post-category">
+            <a href="/categories/chatgpt/"> ChatGPT </a>
+            </div>
+          <span class="more-meta"> 约 1734 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#搭建chatgpt-web网站">搭建ChatGPT web网站</a>
+      <ul>
+        <li><a href="#api-key">API key</a></li>
+        <li><a href="#云服务器">云服务器</a>
+          <ul>
+            <li><a href="#vps云服务器">VPS/云服务器</a></li>
+          </ul>
+        </li>
+        <li><a href="#安装依赖">安装依赖</a>
+          <ul>
+            <li><a href="#安装node">安装Node</a></li>
+            <li><a href="#安装pnpm">安装PNPM</a></li>
+            <li><a href="#填写密钥">填写密钥</a></li>
+            <li><a href="#安装服务">安装服务</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#运行">运行</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#后端服务">后端服务</a></li>
+            <li><a href="#前端网页">前端网页</a></li>
+            <li><a href="#绑定域名">绑定域名</a></li>
+            <li><a href="#杀进程">杀进程</a></li>
+            <li><a href="#修改个人信息">修改个人信息</a></li>
+            <li><a href="#密码访问">密码访问</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#我的web网站">我的web网站</a></li>
+    <li><a href="#视频教程">视频教程</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>，加入 <a href="https://t.me/+5OzmrG-iyJE2YzM9"><strong>电报粉丝群</strong></a> 获得最新视频更新和问题解答。
+<img src="/img/personal/header.png" alt="header"></p>
+<h1 id="背景">背景</h1>
+<p>我之前做了怎么注册ChatGPT以及把ChatGPT接入微信、公众号、电报telegram等平台的教程。</p>
+<p>今天我就来把<strong>ChatGPT接入Web网站</strong>，供粉丝免费使用，这个网站不需要魔法上网，也不需要注册，打开就可以使用。我做这个网站的主要目的是为了让没有精力或者条件去注册ChatGPT的小伙伴也能免费体验到ChatGPT。</p>
+<p>同时我会公布我完整的搭建教程，让每一个人都能轻轻松松搭建自己的ChatGPT网站并分享给朋友使用。</p>
+<p>我先来展示一下我搭建的网站，既可以在电脑上使用，也可以在手机上使用。它接入了ChatGPT3.5的API，如果GPT 4.0的API申请通过，我也会公布4.0的网站给大家体验。喜欢的给个一键三连吧。</p>
+<p>这是我的ChatGPT web服务器在电脑和手机上的展示效果。
+<img src="/img/chatGPT/web/background.png" alt="background"></p>
+<p>我先教大家怎么自己搭建ChatGPT web网站，博客最后会公布我的网站给大家免费使用。</p>
+<p>你也可以直接拉到最后获取我的ChatGPT web网站使用。</p>
+<h1 id="搭建chatgpt-web网站">搭建ChatGPT web网站</h1>
+<h2 id="api-key">API key</h2>
+<p>需要一个chatGPT账号并生成一个API Key，这个API secret Key是为了验证你的身份。</p>
+<p>这个非常简单，我们打开openai的平台地址：https://platform.openai.com/</p>
+<p>登录之后点击右上角的头像，点击<code>Manage Account</code>-&gt;<code>API Keys</code>-&gt;<code>Create New Secret Key</code>, 然后复制下来保存备用。</p>
+<p><img src="/img/chatGPT/wechat/key.png" alt="key"></p>
+<h2 id="云服务器">云服务器</h2>
+<p>云服务器需要在境外。</p>
+<h3 id="vps云服务器">VPS/云服务器</h3>
+<p>如果你还没有云服务器或者VPS，可以点此地址购买：<a href="http://bit.ly/3GlfucW">http://bit.ly/3GlfucW</a></p>
+<p>它们的<code>VPS</code>非常便宜，可以用来搭建<code>科学上网</code>，搭建<code>个人网站</code>，也可以用来<code>接入ChatGPT</code>。如果你的预算充足，也可以直接购买<code>云服务器</code>。</p>
+<p><img src="/img/vpn/v2ray/raksmart.png" alt="raksmart"></p>
+<p>云服务器建议使用Linux Ubuntu系统</p>
+<p>如果有了云服务器我们先切换到root账户<code>sudo su</code></p>
+<p>然后执行以下命令来复制一份网站的模版：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git clone https://github.com/techxiaofei/chatgpt-web.git
+</span></span><span class="line"><span class="cl">cd chatgpt-web
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="安装依赖">安装依赖</h2>
+<h3 id="安装node">安装Node</h3>
+<p><code>node</code> 需要 <code>18</code>或以上的版本</p>
+<p>执行以下命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 安装nodejs</span>
+</span></span><span class="line"><span class="cl">apt install nodejs
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装node包管理器</span>
+</span></span><span class="line"><span class="cl">apt install npm
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 升级包管理工具upgrade</span>
+</span></span><span class="line"><span class="cl">npm install -g n
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 升级到node.js最新稳定版</span>
+</span></span><span class="line"><span class="cl">n stable <span class="c1"># latest</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">hash</span> -r
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看版本，如果是 18及以上就可以了</span>
+</span></span><span class="line"><span class="cl">node -v
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="安装pnpm">安装PNPM</h3>
+<p>如果你没有安装过 <code>pnpm</code>，这是npm的替代品</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">npm install pnpm -g
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="填写密钥">填写密钥</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 进入 service目录
+</span></span><span class="line"><span class="cl">cd service
+</span></span><span class="line"><span class="cl"># 打开 .env 文件
+</span></span><span class="line"><span class="cl">vim .env
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 填写你之前复制的API srecet key
+</span></span><span class="line"><span class="cl">OPENAI_API_KEY=abcdefgh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="安装服务">安装服务</h3>
+<h4 id="后端">后端</h4>
+<p>我们在文件夹 <code>service</code> 运行以下命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pnpm install
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="前端">前端</h4>
+<p>根目录<code>chatgpt-web</code>下运行以下命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pnpm bootstrap
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="运行">运行</h1>
+<h3 id="后端服务">后端服务</h3>
+<p>进入文件夹 <code>service</code> 运行以下命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">touch nohup.out
+</span></span><span class="line"><span class="cl">nohup pnpm start <span class="p">&amp;</span> tail -f nohup.out
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="前端网页">前端网页</h3>
+<p>默认是1002端口，记得修改云服务器的防火墙允许你使用的端口被外网访问。</p>
+<p>如果需要修改端口请打开这个文件修改。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">vim vite.config.ts
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我这里把端口改成80，因为<code>http</code>的默认端口是80，为了方便我绑定域名到这个ip上。如果你的80端口被占用，那请选择另外的端口。</p>
+<p>根目录下运行以下命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">touch nohup.out
+</span></span><span class="line"><span class="cl">nohup pnpm dev <span class="p">&amp;</span> tail -f nohup.out
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="绑定域名">绑定域名</h3>
+<p>如果你有域名，可以直接绑定到你的公网IP上，既可以绑定`顶级域名也可以绑定到二级域名。</p>
+<p>只需要加一条A记录即可。</p>
+<p><strong>顶级域名</strong></p>
+<p>使用 <a href="http://example.com">http://example.com</a> 就可以访问了。
+<img src="/img/chatGPT/web/domain1.png" alt="domain1"></p>
+<p><strong>二级域名</strong></p>
+<p>使用 <a href="http://chat.example.com">http://chat.example.com</a> 就可以访问了。
+<img src="/img/chatGPT/web/domain2.png" alt="domain2"></p>
+<h3 id="杀进程">杀进程</h3>
+<p>如果需要重启，需要执行以下命令查到所有的进程ID，然后杀掉所有进程</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">ps -ef <span class="p">|</span> grep -v grep <span class="p">|</span> grep -E <span class="s1">&#39;pnpm|node&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 所有的进程都需要kill掉</span>
+</span></span><span class="line"><span class="cl"><span class="nb">kill</span> -9 PID
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/img/chatGPT/web/kill.png" alt="kill"></p>
+<h3 id="修改个人信息">修改个人信息</h3>
+<p>如果你想修改你的个人信息：</p>
+<p><img src="/img/chatGPT/web/personal.png" alt="personal"></p>
+<p>打开helper.ts文件，<code>vim src/store/modules/user/helper.ts</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">export function defaultSetting(): UserState {
+</span></span><span class="line"><span class="cl">  return {
+</span></span><span class="line"><span class="cl">    userInfo: {
+</span></span><span class="line"><span class="cl">      avatar: &#39;https://raw.githubusercontent.com/Chanzhaoyu/chatgpt-web/main/src/assets/avatar.jpg&#39;,
+</span></span><span class="line"><span class="cl">      name: &#39;科技小飞哥&#39;,
+</span></span><span class="line"><span class="cl">      description: &#39;Youtube频道 &lt;a href=&#34;https://www.youtube.com/@techxiaofei&#34; class=&#34;text-blue-500&#34; target=&#34;_blank&#34; &gt;科技小飞哥&lt;/a&gt;&#39;,
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>userInfo的信息都可以修改。</p>
+<h3 id="密码访问">密码访问</h3>
+<p>如果需要添加密码访问：
+<img src="/img/chatGPT/web/password.png" alt="password"></p>
+<p>打开<code>.env</code>文件，<code>vim service/.env</code></p>
+<p>这个等号后面填上你的密码即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">AUTH_SECRET_KEY=
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果想修改提示文本：</p>
+<p><code>vim src/locales/zh-CN.ts</code></p>
+<p>搜索：<code>unauthorizedTips</code>并修改文本即可。
+<img src="/img/chatGPT/web/tip.png" alt="tip"></p>
+<h1 id="我的web网站">我的web网站</h1>
+<p>更新：由于使用太过火爆，我会不定期加上密码访问，关注我的公众号<code>科技小飞哥</code>回复<code>chatgpt</code>就可获得最新密码。</p>
+<h1 id="视频教程">视频教程</h1>
+<p>本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>，加入 <a href="https://t.me/+5OzmrG-iyJE2YzM9"><strong>电报粉丝群</strong></a> 获得最新视频更新和问题解答。
+<style>
+    .meta-media {
+      position: relative;
+      margin-bottom: 30px;
+      display: flex;
+      width: 100%;
+      height: 0;
+      padding-bottom: 75%;
+    }
+    .video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+    </style>
+    <div class="meta-media">
+    <iframe src="https://www.youtube.com/embed/FjvvRpMdx48" frameborder="no" scrolling="yes" allowfullscreen="allowfullscreen" high_quality="1" framespacing="1" class="video" >
+    </iframe>
+    </div></p>
+<!--
+今天的视频到这里就要结束了，如果你觉得我的视频对你有所帮助，麻烦给个一键三连哦，谢谢大家，如果你喜欢我的视频，可以使用Youtube，微信公众号，哔哩哔哩，抖音搜索科技小飞哥点击关注哦，我们下期再见。
+-->
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">科技小飞哥</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2023-03-23
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/personal/wechat_pay.png">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/chatgpt/wechatpro/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">ChatGPT接入到微信和公众号升级版教程，支持国内云服务器</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/chatgpt/plugin/">
+            <span class="next-text nav-default">推荐5个非常强大的ChatGPT浏览器插件｜你的生产力提高工具</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="techxiaofei/techxiaofei.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://www.techxiaofei.com" class="iconfont icon-site" title="site"></a>
+      <a href="https://t.me/&#43;5OzmrG-iyJE2YzM9" class="iconfont icon-telegram" title="telegram"></a>
+      <a href="https://www.youtube.com/@techxiaofei" class="iconfont icon-youtube" title="youtube"></a>
+      <a href="https://space.bilibili.com/49756120" class="iconfont icon-bilibili" title="bilibili"></a>
+</div>
+<div class="friend-links">
+  <span class="item-content"><b>友情链接：</b></span>
+  <a href="https://www.amazonaws.cn/" title="亚马逊云科技">亚马逊云科技</a>
+  <a href="https://dev.amazoncloud.cn/" title="亚马逊开发者社区">亚马逊开发者社区</a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>科技小飞哥</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

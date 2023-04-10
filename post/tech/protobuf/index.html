@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>protobuf是怎么序列化的 - 科技小飞哥</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="科技小飞哥" /><meta name="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 目前主流的几种数据交互的格式主要有xml、" /><meta name="keywords" content="protobuf" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+<meta name="msvalidate.01" content="9CB8E7A6AD8ADF22F9ED93166445E5B9" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ3LW65VYR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QZ3LW65VYR');
+</script>
+
+
+<meta name="generator" content="Hugo 0.109.0 with theme even" />
+
+
+<link rel="canonical" href="https://www.techxiaofei.com/post/tech/protobuf/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.04109c830719138db2a69bc19ca2dacfea60d087f438e56f49491a10cd2d6e0b.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="protobuf是怎么序列化的" />
+<meta property="og:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 目前主流的几种数据交互的格式主要有xml、" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.techxiaofei.com/post/tech/protobuf/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-05-10T13:00:51+08:00" />
+<meta property="article:modified_time" content="2022-05-10T13:00:51+08:00" />
+<meta itemprop="name" content="protobuf是怎么序列化的">
+<meta itemprop="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 目前主流的几种数据交互的格式主要有xml、"><meta itemprop="datePublished" content="2022-05-10T13:00:51+08:00" />
+<meta itemprop="dateModified" content="2022-05-10T13:00:51+08:00" />
+<meta itemprop="wordCount" content="6419">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="protobuf是怎么序列化的"/>
+<meta name="twitter:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 目前主流的几种数据交互的格式主要有xml、"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">科技小飞哥</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/friend/">
+        <li class="mobile-menu-item">友链</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">科技小飞哥</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/friend/">友链</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">protobuf是怎么序列化的</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-05-10 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%90%8E%E7%AB%AF%E9%80%9A%E7%94%A8%E6%8A%80%E6%9C%AF/"> 后端通用技术 </a>
+            </div>
+          <span class="more-meta"> 约 6419 字 </span>
+          <span class="more-meta"> 预计阅读 13 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#为什么要讲序列化的原理和过程呢">为什么要讲序列化的原理和过程呢？</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#储备知识">储备知识</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#varint编码">Varint编码</a></li>
+            <li><a href="#zigzag编码">Zigzag编码</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#protobuf序列化">Protobuf序列化</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#wire-type">Wire Type</a></li>
+            <li><a href="#t-l-v储存方式">T-L-V储存方式</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#不同wire-type的数据序列化方式">不同Wire Type的数据序列化方式</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#wiretype--015时">WireType = 0/1/5时</a></li>
+            <li><a href="#wiretype--2时">WireType = 2时</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#protobuf使用建议">Protobuf使用建议</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>，加入 <a href="https://t.me/+5OzmrG-iyJE2YzM9"><strong>电报粉丝群</strong></a> 获得最新视频更新和问题解答。</p>
+<h1 id="背景">背景</h1>
+<p>目前主流的几种数据交互的格式主要有<code>xml</code>、<code>json</code>、<code>protobuf</code>等等。<code>xml</code>和<code>json</code>我相信大家都很了解了。</p>
+<ul>
+<li><code>xml</code> 在webservice中应用最为广泛，但是相比于json，它的数据更加冗余，因为需要成对的闭合标签。json使用了键值对的方式，不仅压缩了一定的数据空间，同时也具有可读性。</li>
+<li><code>json</code> 一般的web项目中，最流行的主要还是json。因为浏览器对于json数据支持非常好，有很多内建的函数支持。</li>
+<li>而<code>protobuf</code>是后起之秀，是谷歌开源的一种数据格式，适合高性能，对响应速度有要求的数据传输场景。因为profobuf是<code>二进制</code>数据格式，需要编码和解码。数据本身不具有可读性。因此只能反序列化之后得到真正可读的数据。</li>
+</ul>
+<p>protobuf 是一种google发明的数据序列化机制。官网的解释是：</p>
+<blockquote>
+<p>protocol buffers（简称protobuf）是google的语言中立、平台中立、可扩展的机制，用来对结构化数据进行序列化，类似于xml，但是更小、更快、更简单。只要定义好如何结构化你的数据，就可以使用生成好的代码取写和读取各种数据流的数据，支持各种语言。</p>
+</blockquote>
+<p>现在越来越多的互联网公司选择使用<code>protobuf</code>来进行序列化，就是因为它的优势。它被广泛应用于RPC调用，数据存储。</p>
+<p>protobuf的核心就是它的<code>.proto</code>文件，定义了数据的格式，类型和顺序。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">syntax = &#34;proto3&#34;;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">message Student {
+</span></span><span class="line"><span class="cl">    optional int32 id = 1;
+</span></span><span class="line"><span class="cl">    optional string name = 2;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>注意：</strong> protobuf语法有<code>proto2</code>和<code>proto3</code>，现在一般用<code>proto3</code>。支持更多语言且更简洁。</p>
+<p>定义好proto文件后，通过protobuf提供的protoc编译器对其进行编译。它支持主流的编程语言：<code>C++, C#, Dart, Go, Java, Kotlin, Python</code>等。</p>
+<p>我们只需要定义好一份<code>.proto</code>文件，序列化和反序列化可以使用不同的语言。</p>
+<p>如果说protobuf有什么<code>缺点</code>的话，那就是序列化之后的数据是二进制的，可读性差这一点了。</p>
+<p>假设你对protobuf有基础的了解并使用过它，想深入了解一下protobuf的原理：</p>
+<ul>
+<li>protobuf的数据是怎么序列化的？</li>
+<li>protobuf是怎么保持向后兼容性的？</li>
+<li>protobuf的原理是什么？</li>
+<li>protobuf是怎么极致的利用空间来储存数据的？</li>
+</ul>
+<p>那这篇文章适合你。</p>
+<h3 id="为什么要讲序列化的原理和过程呢">为什么要讲序列化的原理和过程呢？</h3>
+<p>写这篇文章的原因是有一个同事问我可不可以在某个<code>protobuf结构</code>的中间加一个字段，然后把后面所有的<code>字段标识</code>（<strong>标签的数字，比如上面的message的id的<code>字段标识</code>是1</strong>）都加1。</p>
+<p>因为他觉得<code>protobuf</code>跟<code>json</code>类似，是用<code>字段名</code>来标识数据的<code>Key</code>的，所以顺序和<code>字段标识</code>不重要。</p>
+<p><strong>重点：</strong> 这是错的。<code>字段标识</code>很重要，为了保持兼容性，定义好之后是不能修改的。增加新的字段只能增加新的<code>字段标识</code>。</p>
+<h1 id="储备知识">储备知识</h1>
+<p>要了解Protobuf的编码和序列化，我们首先需要了解点技术的储备知识点。弄懂了储备知识点之后，才能更快的让我们理解protobuf的序列化过程。</p>
+<p>储备知识包括：</p>
+<ul>
+<li>Varint编码</li>
+<li>Zigzag编码</li>
+</ul>
+<p>如果你已经了解了这两个技术点，或者不想了解这些编码细节，可以直接跳到下个章节：<code>Protobuf序列化</code>。</p>
+<h3 id="varint编码">Varint编码</h3>
+<p>Varint编码是一种变长的编码方式，编码原理是用字节表示<code>数字</code>，值越小的数字，使用越少的字节数表示。因此，可以通过减少表示数字的字节数进行数据压缩。</p>
+<p>对int32类型的数字，一般需要<code>4个字节</code>表示。如果采用<code>Varint编码</code>，对于很小的int32类型数字，则可以用<code>1个字节</code>来表示；虽然大的数字会需要<code>5个字节</code>来表示，但大多数情况下，消息都不会有很大的数字，所以采用Varint编码方式总是可以用更少的字节数来表示数字。</p>
+<p>Varint编码后每个字节的<code>最高位</code>都有特殊含义：</p>
+<ul>
+<li>如果是1，表示后续的字节也是数字的一部分。</li>
+<li>如果是0，表示本字节是最后一个字节，且剩余7位都用来表示数字。</li>
+</ul>
+<p><strong>重点：</strong> 每个字节的最高一位只是标识位，没有具体数字含义。</p>
+<p>我们举两个例子可能说的更清楚一点：</p>
+<p><strong>例一：数字1</strong></p>
+<p>这里是数字<code>1</code>，它是一个单字节，只需要一个字节就可以表示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[0]000 0001
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>例二：数字300</strong></p>
+<p>这里是数字<code>300</code>，这有点复杂。单字节最大只能储存<code>2^7-1</code>, 也就是 <code>0111 1111</code>, 肯定是不够的。[<strong>注：最高位是特殊含义的标识符</strong>]</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">300 = 256 + 32 + 8 + 4 = 0000 0001 0010 1100
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>到这一步我相信都能看懂。</p>
+<p>我们继续一步推到底。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">300 
+</span></span><span class="line"><span class="cl">= 256 + 32 + 8 + 4 
+</span></span><span class="line"><span class="cl">= 0000 0001 0010 1100 (二进制)
+</span></span><span class="line"><span class="cl">=  0000010  0101100 （每7位代表一个字节）
+</span></span><span class="line"><span class="cl">=  0101100  0000010 （小端储存，低位在前）
+</span></span><span class="line"><span class="cl">= 10101100 00000010 （高位补1/0）
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>所以300需要两个字节储存。</p>
+<p>更大的数据都是类似的方式转换，对于很大的整数，32/7=4.57，向上取整是5，所以我们最大需要5字节来表示一个大的32位整数。</p>
+<p>所以我们使用<code>Varint编码</code>，需要1～5个字节表示。因为大部分使用的数字都比较小，所以平均下来比较省空间。这也是为什么protobuf使用Varint的原因。</p>
+<h3 id="zigzag编码">Zigzag编码</h3>
+<p>由于<code>负数</code>的补码表示很大（最高位是符号位为1），直接使用Varint编码，会占用较多的字节。</p>
+<p>这种情况使用了ZigZag编码，转换成比较小的正数，再使用Varint编码，这样最终生成的数据占用较少的字节。</p>
+<p>Zigazg编码是一种变长的编码方式，其编码原理是使用无符号数来表示有符号数字，使得绝对值小的数字都可以采用较少字节来表示，特别对表示负数的数据能更好地进行数据压缩。</p>
+<p>Zigzag编码对Varint编码在表示负数时不足的补充，从而更好的帮助Protobuf进行数据的压缩。因此，如果提前预知字段值是可能取负数的时候，需要采用<code>sint32/sint64</code>数据类型。</p>
+<p>Protobuf通过Varint和Zigzag编码后，大大减少了字段值占用字节数。</p>
+<p><strong>简单来说：</strong> 对于小的负数，比如<code>-2</code>，如果使用Varint编码，在计算机内，负数一般会被表示为很大的整数，因为计算机定义负数的符号位为数字的最高位。所以这个<code>-2</code>会占用5个字节。<code>因为负数的最高位是1，会被当做很大的整数去处理</code>。</p>
+<p>而我们使用<code>Zigzag</code>+<code>varint</code>编码的方式，（使用protobuf定义的sint32/sint64类型）就会将有符号数转换成无符号数，再采用<code>Varint</code>编码，数字较小的负数，最终占用的字节数也就更少。</p>
+<p>sint32类型的数字<code>n</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">(n &lt;&lt; 1) ^ (n &gt;&gt; 31)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>sint64类型的数字<code>n</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">(n &lt;&lt; 1) ^ (n &gt;&gt; 63)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th>原始数字</th>
+<th>编码后</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>-2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>2147483647</td>
+<td>4294967294</td>
+</tr>
+<tr>
+<td>-2147483648</td>
+<td>4294967295</td>
+</tr>
+</tbody>
+</table>
+<p>通过<code>位运算</code>算法和编码后的值的规律，我们可以看到，其实就是把<code>最高位的符号位</code>放到<code>最低位</code>，其他位左移一位。让绝对值相等的正负数，Zigzag编码后的数字相邻。</p>
+<p>绝对值小的值Zigzag编码后的值也更小。然后使用Varint编码后占用的字节数也更少。</p>
+<h1 id="protobuf序列化">Protobuf序列化</h1>
+<p>花了半天时间了解了两种编码，终于要讲文章的主题，Protobuf序列化了。</p>
+<p>要了解Protobuf序列化，我们还是需要了解两个知识点：</p>
+<ul>
+<li>Wire Type类型</li>
+<li>T-L-V储存方式。（Tag - Length — Value）</li>
+</ul>
+<p>这两个要一起讲。</p>
+<h3 id="wire-type">Wire Type</h3>
+<p><code>Wire Type</code>是google为protobuf专门定义的类型，不同的<code>Wire Type</code>最终序列化为二进制数据流的格式不一样。这样我们在序列化和反序列化的时候，很容易通过这个<code>Wire Type</code>来解析后续数据。</p>
+<p><code>Wire Type</code>是用来生成<code>Tag</code>用的，准确的来说，Tag包含了<code>字段标识</code>和<code>Wire Type</code>。这个Tag在后续讲<code>T-L-V储存</code>的时候会讲到。</p>
+<p>这是<code>WireType</code>的定义。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">enum WireType { 
+</span></span><span class="line"><span class="cl">      WIRETYPE_VARINT = 0, 
+</span></span><span class="line"><span class="cl">      WIRETYPE_FIXED64 = 1, 
+</span></span><span class="line"><span class="cl">      WIRETYPE_LENGTH_DELIMITED = 2, 
+</span></span><span class="line"><span class="cl">      WIRETYPE_START_GROUP = 3,   //deprecated
+</span></span><span class="line"><span class="cl">      WIRETYPE_END_GROUP = 4,     //deprecated
+</span></span><span class="line"><span class="cl">      WIRETYPE_FIXED32 = 5
+</span></span><span class="line"><span class="cl">   };
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/img/protobuf/wire_type.png" alt="Wire Type"></p>
+<p>这是各个<code>Wire Type</code>对应的具体类型。</p>
+<p>每个<code>Wire Type</code>可以对应多个具体的数据类型，因为我们有<code>.proto</code>文件，序列化和反序列化都是基于proto文件的，所以我们是明确知道类型的。</p>
+<p><strong>问题：</strong> 那为什么需要把<code>Wire Type</code>编码到数据里面呢，因为不同的<code>Wire Type</code>对应的<code>储存方式</code>不同,可以通过序列化的<code>Wire Type</code>知道后续的数据是怎么储存的。</p>
+<p>看上图可知，当我们从Tag里面读到：</p>
+<ul>
+<li>Wire Type=0时，T-V 储存，V是Varint编码方式，编码长度是1-10字节。</li>
+<li>Wire Type=1时，T-V 储存，V是固定的64位，编码长度是8个字节。</li>
+<li>Wire Type=5时，T-V 储存，V是固定的32位，编码长度是4个字节。</li>
+<li>Wire Type=3/4已经废弃不用。</li>
+<li>Wire Type=2时，也是最复杂的一种，T-L-V储存。需要一个Length来记录Value的长度。Value是编码后的值。</li>
+</ul>
+<p>通过不同的<code>Wire Type</code>使用不同的储存方式，来最大化的节省空间。</p>
+<h3 id="t-l-v储存方式">T-L-V储存方式</h3>
+<p>T-L-V（Tag - Length - Value），即<code>标签-长度-字段值</code>的存储方式，其原理是以<code>标签-长度-字段值</code>表示单个数据，最终将所有数据拼接成一个<code>字节流</code>，从而实现数据存储的功能。</p>
+<p>其中<code>Length可选存储</code>，如储存Varint编码数据就不需要存储Length，此时为T-V存储方式。</p>
+<p>T-L-V 存储方式的优点：</p>
+<ul>
+<li>不需要分隔符就能分隔开字段，减少了分隔符的使用。</li>
+<li>各字段存储得非常紧凑，存储空间利用率非常高。</li>
+<li>如果某个字段没有被设置字段值，那么该字段在序列化时的数据中是<code>完全不存在</code>的，即不需要编码，相应字段在解码时会被设置为默认值。</li>
+</ul>
+<p><img src="/img/protobuf/tag_length_value.png" alt="Wire Type"></p>
+<p><strong>Tag 标签</strong></p>
+<p>Tag 就是<code>字段标识号</code>+<code>Wire Type</code>的<code>Varint</code>编码格式。最少1字节。</p>
+<p>因为<code>Wire Type</code>只有这6个定义，所以使用<code>3bit</code>完全够用。 Tag的最低三位表示<code>Wire Type</code>，高位表示<code>字段标识号</code>, <code>Tag标签</code>所占用的长度，取决于<code>字段标识号</code>的大小。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Wire Type只有六种类型，所以用三位二进制数完全足够表示。
+</span></span><span class="line"><span class="cl">Tag = (字段标识号 &lt;&lt; 3) | WireType
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也就是如果如果<code>字段标识号</code> &lt;= 15 (4bit)，那么Tag就只需要一字节。</p>
+<p><strong>Length 长度</strong></p>
+<p>Length 通过上图可知，它是可选的。只有<code>Wire Type = 2</code>时，才需要Length。</p>
+<p>Value：只有WireType=2时，具体长度由Length指定。其他的<code>Wire Type</code>, 不需要Length也知道Value的长度。可以参考上面的<code>Wire Type</code>图对应的<code>编码长度</code>。</p>
+<h1 id="不同wire-type的数据序列化方式">不同Wire Type的数据序列化方式</h1>
+<p>下面我们就针对不同的Wir eType，来以一个个分析，我们的数据是怎么编码的。</p>
+<h3 id="wiretype--015时">WireType = 0/1/5时</h3>
+<p><img src="/img/protobuf/tag_value.png" alt="Wire Type"></p>
+<p>所有的Tag都是Varint，<code>Tag = (字段标识号 &lt;&lt; 3) | WireType</code>。</p>
+<ul>
+<li><strong>int32:</strong>  Wire Type = 0, Value：Varint，变长，1-10字节。（最大64位Varint）。</li>
+<li><strong>double:</strong> Wire Type = 1, Value: double，固定8字节。</li>
+<li><strong>float:</strong>  Wire Type = 5, Value: float，固定4字节。</li>
+</ul>
+<p>可以看到这几种类型，不需要指定Length，通过<code>Wire Type</code>和<code>Varint</code>极高的利用了字节空间。</p>
+<h3 id="wiretype--2时">WireType = 2时</h3>
+<p>相比较其他<code>Wire Type</code>多了一个<code>Length</code>，用于标识Value的长度。Length使用<code>Varint</code>编码。</p>
+<p><code>Value</code>：消息字段经过编码后的值。</p>
+<p>其中Value也需要区分几种类型：</p>
+<ol>
+<li>String类型。</li>
+<li>嵌套消息类型（Message）</li>
+<li>通过packed修饰的 repeat 字段（即packed repeated fields）</li>
+</ol>
+<p><strong>String类型</strong>
+其中String类型使用UTF8编码。</p>
+<p><img src="/img/protobuf/string.png" alt="Wire Type"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">message Test
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    ...
+</span></span><span class="line"><span class="cl">    optional string str = 4;
+</span></span><span class="line"><span class="cl">    ...
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 将str设置为：testing
+</span></span><span class="line"><span class="cl">Test.setStr（“testing”）
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 经过protobuf编码序列化后的数据以二进制的方式输出
+</span></span><span class="line"><span class="cl">// 输出为：18, 7, 116, 101, 115, 116, 105, 110, 103
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输出为二进制数据流，展示为数字，方便可读。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Tag = 4 &lt;&lt; 3 | 2 = 34
+</span></span><span class="line"><span class="cl">Length = 7
+</span></span><span class="line"><span class="cl">Value = UTF8(&#34;testing&#34;) = 116, 101, 115, 116, 105, 110, 103
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>嵌套消息类型</strong></p>
+<p><img src="/img/protobuf/nest.png" alt="nest"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">message Test
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    ...
+</span></span><span class="line"><span class="cl">    optional Internal internal = 5;
+</span></span><span class="line"><span class="cl">    ...
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">message Internal
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    optional string a = 1;
+</span></span><span class="line"><span class="cl">    optional string b = 2;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>嵌套消息类型，就是message里面套一个message，其实就是把内层的消息的<code>T-L-V</code>数据储存作为外层数据的<code>Value</code>。</p>
+<p>外部的Length代表整个Value的长度，也就是内部的message的长度。</p>
+<p>内部的Message就是另一个<code>T-L-V模型</code>。</p>
+<p><strong>通过packed修饰的 repeat 字段</strong></p>
+<ul>
+<li><code>proto2</code>: 由于历史原因，标量数字类型（例如 int32、int64、enum）的重复字段没有尽可能高效地编码。新代码应使用特殊选项 [packed = true] 以获得更有效的编码。</li>
+<li><code>proto3</code>: 此字段可以在格式良好的消息中重复任意次数（包括零次）。重复值的顺序将被保留。在 proto3 中，标量数字类型（例如 int32、int64、enum）的重复字段默认使用packed编码。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">message Test
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    ...
+</span></span><span class="line"><span class="cl">    repeated int32 lists = 6;                // 表达方式1：不带packed=true
+</span></span><span class="line"><span class="cl">    repeated int32 lists = 7 [packed=true];  // 表达方式2：带packed=true
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也就是说<code>packed=true</code>是专门针对标量数字类型做的一个编码空间优化策略。对于<code>proto3</code>而言，它是默认使用的，对于<code>proto2</code>而言，由于历史原因，它默认没有使用，需要手动使用。</p>
+<p><img src="/img/protobuf/packed_false.png" alt="not packed"></p>
+<p>我们看没有<code>packed</code>的repeat，这几个Tag是完全一样的，因为它们有着<code>一样的字符标识</code>和<code>Wire Type</code>，是浪费空间的。所以才引入了<code>packed=true</code>的修饰。</p>
+<p><img src="/img/protobuf/packed_true.png" alt="packed"></p>
+<p>使用Length代表Value列表的总字节长度，Value则使用Varint编码，多个Value连续储存。不需要每个Value前面放个相同的Tag，极大的节省了空间。</p>
+<h1 id="总结">总结</h1>
+<p>讲解protobuf序列化，比我想象的占用了更多的篇幅，因为它的确有不少知识点要讲解，不懂这些知识点的情况下，很难深入理解这个流程。我已经尽量简化我的描述，同时能让人一眼看懂。</p>
+<p>当然Protobuf博大精深，我们这篇博客只是针对protobuf怎么序列化的进行抽丝剥茧，理解了protobuf序列化的方式，让你使用protobuf的时候知道应该选择什么类型。有什么优缺点。</p>
+<p><strong>Protobuf如何保证向后兼容性的呢？</strong></p>
+<ul>
+<li>通过添加可选字段，不可修改已经存在的<code>字段标识</code>(标签的数字)。</li>
+<li>在序列化和反序列化的过程中，如果某个字段没有赋值，则不会序列化这个字段。</li>
+<li>反序列化的过程中，如果发现某个字段不存在，且不是<code>required</code>类型，就会忽略这个字段的反序列化，继续序列化其他字段。</li>
+<li>由于proto3已经去掉了<code>required</code>这个类型，所以没有这方面的担心，如果使用proto2的话，慎用required类型，尤其针对已有的结构增加新的字段。</li>
+</ul>
+<h3 id="protobuf使用建议">Protobuf使用建议</h3>
+<p>基于Protobuf序列化原理分析，为了有效降低序列化后数据量的大小，可以采用以下措施：</p>
+<ul>
+<li>（1）多用<code>optional</code>或<code>repeated</code>修饰符
+若optional 或 repeated 字段没有被设置字段值，那么该字段在序列化时的数据中是完全不存在的，即不需要进行编码，但相应的字段在解码时会被设置为默认值。</li>
+<li>（2）<code>字段标识号</code>尽量只使用1-15，且不要跳动使用
+Tag是需要占字节空间的。如果<code>字段标识号&gt;15</code>时，<code>Tag标签</code>的编码就会占用2个字节，如果将字段标识号定义为连续递增的数值，将获得更好的编码和解码性能。</li>
+<li>（3）若需要使用的字段值出现负数，请使用sint32/sint64，不要使用int32/int64。
+采用sint32/sint64数据类型表示负数时，会先采用Zigzag编码再采用Varint编码，从而更加有效压缩数据。</li>
+<li>（4）对于repeated字段，尽量增加packed=true修饰
+增加packed=true修饰，repeated字段会采用连续数据存储方式，即<code>T-L-V-V-V</code>方式。</li>
+</ul>
+<p><strong>好了，Protobuf的序列化的知识点我们讲完了。我作为面试官来考考你：</strong></p>
+<p><strong>面试官：</strong> Protobuf是怎么实现序列化和向后兼容性的？为什么它节省空间？</p>
+<p><strong>你 微微一笑</strong>：众所周知，小学二年级我们学过，通过Varint编码和Zigzag编码，加上protobuf定义的WireType类型，很容易的实现不同类型的二进制数据流，同时这个二进制数据流不需要像json和xml那样储存Key、标签等占用大量空间，我们通过定义好的proto结构，加上优秀的编码方式，使得我们的二进制流的每个字节的空间都是有用的，不会浪费一点空间。。。。。。</p>
+<p><strong>面试官：</strong> 好了，恭喜你通过面试，哪天可以入职？</p>
+<p>&lt;全文完&gt;</p>
+<p><img src="/img/personal/qrcode_2.png" alt="pic"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">科技小飞哥</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-05-10
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/personal/wechat_pay.png">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/golang/pass_by_value/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Golang是值传递还是引用传递</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/golang/time_after/">
+            <span class="next-text nav-default">Golang time.After内存泄漏分析</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="techxiaofei/techxiaofei.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://www.techxiaofei.com" class="iconfont icon-site" title="site"></a>
+      <a href="https://t.me/&#43;5OzmrG-iyJE2YzM9" class="iconfont icon-telegram" title="telegram"></a>
+      <a href="https://www.youtube.com/@techxiaofei" class="iconfont icon-youtube" title="youtube"></a>
+      <a href="https://space.bilibili.com/49756120" class="iconfont icon-bilibili" title="bilibili"></a>
+</div>
+<div class="friend-links">
+  <span class="item-content"><b>友情链接：</b></span>
+  <a href="https://www.amazonaws.cn/" title="亚马逊云科技">亚马逊云科技</a>
+  <a href="https://dev.amazoncloud.cn/" title="亚马逊开发者社区">亚马逊开发者社区</a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>科技小飞哥</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>后端面试之Linux-cp和mv命令的区别 - 科技小飞哥</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="科技小飞哥" /><meta name="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 如果你突然被面试官问：cp和mv这两个li" /><meta name="keywords" content="Linux" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+<meta name="msvalidate.01" content="9CB8E7A6AD8ADF22F9ED93166445E5B9" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ3LW65VYR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QZ3LW65VYR');
+</script>
+
+
+<meta name="generator" content="Hugo 0.109.0 with theme even" />
+
+
+<link rel="canonical" href="https://www.techxiaofei.com/post/tech/cp/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.04109c830719138db2a69bc19ca2dacfea60d087f438e56f49491a10cd2d6e0b.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="后端面试之Linux-cp和mv命令的区别" />
+<meta property="og:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 如果你突然被面试官问：cp和mv这两个li" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.techxiaofei.com/post/tech/cp/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-07T00:00:00+08:00" />
+<meta property="article:modified_time" content="2021-12-07T00:00:00+08:00" />
+<meta itemprop="name" content="后端面试之Linux-cp和mv命令的区别">
+<meta itemprop="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 如果你突然被面试官问：cp和mv这两个li"><meta itemprop="datePublished" content="2021-12-07T00:00:00+08:00" />
+<meta itemprop="dateModified" content="2021-12-07T00:00:00+08:00" />
+<meta itemprop="wordCount" content="2459">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="后端面试之Linux-cp和mv命令的区别"/>
+<meta name="twitter:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 如果你突然被面试官问：cp和mv这两个li"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">科技小飞哥</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/friend/">
+        <li class="mobile-menu-item">友链</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">科技小飞哥</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/friend/">友链</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">后端面试之Linux-cp和mv命令的区别</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-12-07 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%90%8E%E7%AB%AF%E9%80%9A%E7%94%A8%E6%8A%80%E6%9C%AF/"> 后端通用技术 </a>
+            </div>
+          <span class="more-meta"> 约 2459 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#inode">inode</a></li>
+    <li><a href="#cp">cp</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#目标文件不存在时">目标文件不存在时</a></li>
+            <li><a href="#目标文件存在时">目标文件存在时</a></li>
+            <li><a href="#结论">结论</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#mv">mv</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#目标文件不存在时-1">目标文件不存在时</a></li>
+            <li><a href="#目标文件存在时-1">目标文件存在时</a></li>
+            <li><a href="#结论-1">结论</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#rm">rm</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#unlink系统调用">unlink系统调用</a></li>
+            <li><a href="#结论-2">结论</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#替换可执行程序">替换可执行程序</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>，加入 <a href="https://t.me/+5OzmrG-iyJE2YzM9"><strong>电报粉丝群</strong></a> 获得最新视频更新和问题解答。</p>
+<h1 id="背景">背景</h1>
+<p>如果你突然被面试官问：cp和mv这两个linux的命令有什么区别？<br>
+你会不会一脸懵逼，cp不就是复制，mv不就是移动吗，还能有什么区别？<br>
+如果你也是这么想，那么这篇文章适合你。</p>
+<h1 id="inode">inode</h1>
+<p>了解文件操作命令例如<code>cp</code>、<code>mv</code>、<code>rm</code>的底层原理时，需要先了解 linux 中文件系统的基本原理。</p>
+<p>在linux系统中，文件系统对文件的存储和访问是通过一种被称为<code>inode</code>即i节点的机制来实现的。</p>
+<p>为什么需要inode呢？<br>
+文件数据存储在硬盘上，硬盘的最小存储单位叫做&quot;扇区&quot;（512Bytes）。OS读取硬盘的时候，为了提高效率会一次性读取一个&quot;块&quot;（8*扇区=4K）。<br>
+所以一个大文件的数据内容在磁盘上可能不是连续空间的，就需要inode来把各个<code>Block</code>串联起来。</p>
+<p>每个文件都对应一个 i 节点，i 节点存储了除<code>文件名</code>和<code>文件内容</code>之外的所有信息。</p>
+<p>inode（index node）表中包含文件系统所有文件列表，一个节点 （索引节点）是在一个表项，包含有关文件的信息（ 元数据 ），包括：文件类型，权限，UID，GID、链接数（指向这个文件名路径名称个数）、该文件的大小和不同的时间戳、指向磁盘上文件的数据块指针、有关文件的其他数据。</p>
+<p><img src="/img/linux/linux_inode.png" alt="inode"></p>
+<p>了解inode的基本信息之后，我们再看看<code>cp</code>, <code>mv</code>有什么区别。</p>
+<h1 id="cp">cp</h1>
+<h3 id="目标文件不存在时">目标文件不存在时</h3>
+<p>当<code>dest.txt</code>不存在时，执行<code>cp src.txt dest.txt</code>。<br>
+可以发现<code>dest.txt</code>和<code>src.txt</code>的inode不一样，也就是用open()新建一个文件<code>dest.txt</code>，然后读取<code>src.txt</code>的数据再写入<code>dest.txt</code>。</p>
+<p><strong>cp前：</strong></p>
+<ul>
+<li>src.txt: <code>Inode: 34643179</code></li>
+</ul>
+<p><strong>cp后：</strong></p>
+<ul>
+<li>dest.txt: <code>Inode: 34257722</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@instance-1 blog]# strace cp source.txt destination.txt 2&gt;&amp;1 | egrep &#39;source.txt|destination.txt&#39;
+</span></span><span class="line"><span class="cl">execve(&#34;/bin/cp&#34;, [&#34;cp&#34;, &#34;source.txt&#34;, &#34;destination.txt&#34;], 0x7ffd8f1f3ea0 /* 23 vars */) = 0
+</span></span><span class="line"><span class="cl">stat(&#34;destination.txt&#34;, 0x7fff021b0040) = -1 ENOENT (No such file or directory)
+</span></span><span class="line"><span class="cl">stat(&#34;source.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
+</span></span><span class="line"><span class="cl">stat(&#34;destination.txt&#34;, 0x7fff021afda0) = -1 ENOENT (No such file or directory)
+</span></span><span class="line"><span class="cl">open(&#34;source.txt&#34;, O_RDONLY)            = 3
+</span></span><span class="line"><span class="cl">open(&#34;destination.txt&#34;, O_WRONLY|O_CREAT|O_EXCL, 0644) = 4
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="目标文件存在时">目标文件存在时</h3>
+<p>此时<code>dest.txt</code>已经存在，再次执行<code>cp src.txt dest.txt</code>。<br>
+可以发现<code>dest.txt</code>跟上次执行的<code>dest.txt</code>的inode没有变化，同时看open()的参数也可以看出：先清空了<code>dest.txt</code>的内容，再把新的内容写入目标文件。没有文件的删除和创建，所以inode没有变化。</p>
+<p><strong>cp前：</strong></p>
+<ul>
+<li>src.txt: <code>Inode: 34643179</code></li>
+<li>dest.txt: <code>Inode: 34257722</code></li>
+</ul>
+<p><strong>cp后：</strong></p>
+<ul>
+<li>dest.txt: <code>Inode: 34257722</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@instance-1 blog]# strace cp source.txt destination.txt 2&gt;&amp;1 | egrep &#39;source.txt|destination.txt&#39;
+</span></span><span class="line"><span class="cl">execve(&#34;/bin/cp&#34;, [&#34;cp&#34;, &#34;source.txt&#34;, &#34;destination.txt&#34;], 0x7ffd4bfd93e0 /* 23 vars */) = 0
+</span></span><span class="line"><span class="cl">stat(&#34;destination.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
+</span></span><span class="line"><span class="cl">stat(&#34;source.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
+</span></span><span class="line"><span class="cl">stat(&#34;destination.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
+</span></span><span class="line"><span class="cl">open(&#34;source.txt&#34;, O_RDONLY)            = 3
+</span></span><span class="line"><span class="cl">open(&#34;destination.txt&#34;, O_WRONLY|O_TRUNC) = 4
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="结论">结论</h3>
+<ul>
+<li>cp调用open系统函数，只会复制文件数据，不会复制inode索引节点的元数据。</li>
+</ul>
+<h1 id="mv">mv</h1>
+<h3 id="目标文件不存在时-1">目标文件不存在时</h3>
+<p>当目标文件<code>dest.txt</code>不存在时，执行<code>mv src.txt dest.txt</code>。<br>
+可以发现<code>dest.txt</code>和<code>src.txt</code>的inode一样，底层调用了rename()，inode信息与<code>src.txt</code>的索引节点保持一致。<br>
+注：centos 7.5以上的版本，调用<code>renameat2</code>函数，7.5及以下的函数，依旧调用<code>rename</code>函数，没有本质的区别。</p>
+<p><strong>mv前：</strong></p>
+<ul>
+<li>src.txt: <code>Inode: 34643179</code></li>
+</ul>
+<p><strong>mv后：</strong></p>
+<ul>
+<li>dest.txt: <code>Inode: 34643179</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@instance-1 blog]# strace mv src.txt dest.txt 2&gt;&amp;1 | egrep &#39;src.txt|dest.txt&#39;
+</span></span><span class="line"><span class="cl">execve(&#34;/bin/mv&#34;, [&#34;mv&#34;, &#34;src.txt&#34;, &#34;dest.txt&#34;], 0x7ffd71529810 /* 23 vars */) = 0
+</span></span><span class="line"><span class="cl">stat(&#34;dest.txt&#34;, 0x7ffdb24b0fe0)        = -1 ENOENT (No such file or directory)
+</span></span><span class="line"><span class="cl">lstat(&#34;src.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
+</span></span><span class="line"><span class="cl">lstat(&#34;dest.txt&#34;, 0x7ffdb24b0c90)       = -1 ENOENT (No such file or directory)
+</span></span><span class="line"><span class="cl">renameat2(AT_FDCWD, &#34;src.txt&#34;, AT_FDCWD, &#34;dest.txt&#34;, 0) = 0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="目标文件存在时-1">目标文件存在时</h3>
+<p>当目标文件<code>dest.txt</code>存在时，执行<code>mv src.txt dest.txt</code>。<br>
+可以发现<code>dest.txt</code>和<code>src.txt</code>的inode一样（之前的<code>dest.txt</code>的inode不见了），底层调用了rename()，inode变为<code>src.txt</code>的索引节点。</p>
+<p><strong>mv前：</strong></p>
+<ul>
+<li>src.txt: <code>Inode: 34643179</code></li>
+<li>dest.txt: <code>Inode: 34257722</code></li>
+</ul>
+<p><strong>mv后：</strong></p>
+<ul>
+<li>dest.txt: <code>Inode: 34643179</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@instance-1 blog]# strace mv src.txt dest.txt 2&gt;&amp;1 | egrep &#39;src.txt|dest.txt&#39;
+</span></span><span class="line"><span class="cl">execve(&#34;/bin/mv&#34;, [&#34;mv&#34;, &#34;src.txt&#34;, &#34;dest.txt&#34;], 0x7ffeef1ed240 /* 23 vars */) = 0
+</span></span><span class="line"><span class="cl">stat(&#34;dest.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
+</span></span><span class="line"><span class="cl">lstat(&#34;src.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
+</span></span><span class="line"><span class="cl">lstat(&#34;dest.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}) = 0
+</span></span><span class="line"><span class="cl">renameat2(AT_FDCWD, &#34;src.txt&#34;, AT_FDCWD, &#34;dest.txt&#34;, 0) = 0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="结论-1">结论</h3>
+<ul>
+<li>mv调用rename系统调用，把<code>src.txt</code>重命名为目标文件，会将存储于inode索引节点上的文件元信息也移动到新文件中。</li>
+</ul>
+<h1 id="rm">rm</h1>
+<p>在Linux中，要真正删除一个文件，需要满足两个条件：</p>
+<ul>
+<li>链接数为0</li>
+<li>没有进程打开该文件</li>
+</ul>
+<p>系统调用unlink()是移除目标文件的一个链接。可以发现rm底层调用的其实就是unlink()</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@instance-1 blog]# strace rm src.txt 2&gt;&amp;1 | egrep &#39;src.txt&#39;
+</span></span><span class="line"><span class="cl">execve(&#34;/bin/rm&#34;, [&#34;rm&#34;, &#34;src.txt&#34;], 0x7fffbf900e58 /* 23 vars */) = 0
+</span></span><span class="line"><span class="cl">newfstatat(AT_FDCWD, &#34;src.txt&#34;, {st_mode=S_IFREG|0644, st_size=13, ...}, AT_SYMLINK_NOFOLLOW) = 0
+</span></span><span class="line"><span class="cl">unlinkat(AT_FDCWD, &#34;src.txt&#34;, 0)        = 0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="unlink系统调用">unlink系统调用</h3>
+<p>从文件系统中删除一个名称。如果名称是文件的最后一个连接，并且没有其它进程将文件打开，名称对应的文件会实际被删除。<br>
+如果文件仍旧是打开的，或者是被进程占用，其内容不会被删除。只有当进程关闭该文件或终止时(这种情况下，内核关闭该进程所打开的全部文件)，该文件的内容才会被删除。</p>
+<p>所以你可能会遇到，一个进程在读写文件时，你发现磁盘空间不足，使用rm删除文件，却发现磁盘空间却没有释放的情况。
+使用<code>lsof | grep deleted</code>可以查看占用的进程。kill进程之后，文件才能真正的被删除。</p>
+<h3 id="结论-2">结论</h3>
+<ul>
+<li>rm调用unlink系统调用，只有当所有的进程都不占用此文件的时候，才会真正的从磁盘删除。</li>
+</ul>
+<h1 id="替换可执行程序">替换可执行程序</h1>
+<p>不知道你还记不记得你是怎么替换可执行文件的，一般来说：</p>
+<p>可当你使用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cp new_backend_server backend_server
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>的时候，提示<code>Text file busy</code>。
+为什么呢，因为你这个文件正在被使用，当你清空并写入的时候，它能感知到修改，修改文件内容很可能导致程序逻辑错误甚至崩溃。所以禁止你对正在使用的文件执行cp替换。</p>
+<p>当你执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">rm backend_server
+</span></span><span class="line"><span class="cl">mv new_backend_server backend_server
+</span></span><span class="line"><span class="cl">service restart backend_server
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>就可以成功替换新的文件。<br>
+这又是为什么呢，因为当你使用<code>rm&amp;mv</code>的时候是直接unlink旧的文件，由于文件被进程占用，实际上并没有删除，当你把新的文件mv到当前文件的时候，直接进行rename。并不会影响当前被进程占用的那个文件（新旧的inode不同，只是名字一样）。当你重启的时候，才会释放旧的文件，使用新的文件。</p>
+<h1 id="总结">总结</h1>
+<p>最后总结一下：</p>
+<ul>
+<li>cp调用open系统函数，只会复制文件数据，不会复制inode索引节点的元数据。（不改变inode）</li>
+<li>mv调用rename系统调用，把<code>src.txt</code>重命名为目标文件，会将存储于inode索引节点上的文件元信息也移动到新文件中。（改变inode）</li>
+<li>rm调用unlink系统调用，只有当所有的进程都不占用此文件的时候，才会真正的从磁盘删除。</li>
+</ul>
+<p>&lt;全文完&gt;</p>
+<p><img src="/img/personal/qrcode_2.png" alt="pic"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">科技小飞哥</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-12-07
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/personal/wechat_pay.png">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/redis/multithreading/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">一文看懂Redis 6.0多线程IO</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/mysql/table/">
+            <span class="next-text nav-default">MySQL对于千万级的大表要怎么优化？</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="techxiaofei/techxiaofei.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://www.techxiaofei.com" class="iconfont icon-site" title="site"></a>
+      <a href="https://t.me/&#43;5OzmrG-iyJE2YzM9" class="iconfont icon-telegram" title="telegram"></a>
+      <a href="https://www.youtube.com/@techxiaofei" class="iconfont icon-youtube" title="youtube"></a>
+      <a href="https://space.bilibili.com/49756120" class="iconfont icon-bilibili" title="bilibili"></a>
+</div>
+<div class="friend-links">
+  <span class="item-content"><b>友情链接：</b></span>
+  <a href="https://www.amazonaws.cn/" title="亚马逊云科技">亚马逊云科技</a>
+  <a href="https://dev.amazoncloud.cn/" title="亚马逊开发者社区">亚马逊开发者社区</a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>科技小飞哥</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
