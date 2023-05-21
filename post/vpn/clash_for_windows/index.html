@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Clash for Windows配置V2ray教程 - 科技小飞哥</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="科技小飞哥" /><meta name="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 我们每个平台都有多种科学上网的软件，windows上最常用的就是Clash for wind" /><meta name="keywords" content="ssr, v2ray, clash" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+<meta name="msvalidate.01" content="9CB8E7A6AD8ADF22F9ED93166445E5B9" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ3LW65VYR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QZ3LW65VYR');
+</script>
+
+
+<meta name="generator" content="Hugo 0.111.3 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/vpn/clash_for_windows/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.8670b48c7d31f917f4a6f54305e7950cfd41225f00cbec112ac6e809a86ef2b9.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Clash for Windows配置V2ray教程" />
+<meta property="og:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 我们每个平台都有多种科学上网的软件，windows上最常用的就是Clash for wind" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/vpn/clash_for_windows/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-08T13:00:51+08:00" />
+<meta property="article:modified_time" content="2023-04-08T13:00:51+08:00" />
+<meta itemprop="name" content="Clash for Windows配置V2ray教程">
+<meta itemprop="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 我们每个平台都有多种科学上网的软件，windows上最常用的就是Clash for wind"><meta itemprop="datePublished" content="2023-04-08T13:00:51+08:00" />
+<meta itemprop="dateModified" content="2023-04-08T13:00:51+08:00" />
+<meta itemprop="wordCount" content="1033">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Clash for Windows配置V2ray教程"/>
+<meta name="twitter:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 我们每个平台都有多种科学上网的软件，windows上最常用的就是Clash for wind"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">科技小飞哥</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/friend/">
+        <li class="mobile-menu-item">友链</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">科技小飞哥</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/friend/">友链</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Clash for Windows配置V2ray教程</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-04-08 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"> 科学上网 </a>
+            </div>
+          <span class="more-meta"> 约 1033 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#clash-for-windows介绍">Clash for Windows介绍</a></li>
+    <li><a href="#clash-for-windows配置v2ray教程">Clash for Windows配置V2ray教程</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#安装">安装</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#视频教程">视频教程</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>。
+<img src="/img/personal/header.png" alt="header"></p>
+<h1 id="背景">背景</h1>
+<p>我们每个平台都有多种科学上网的软件，windows上最常用的就是Clash for windows了，我今天来介绍下Clash for windows如何使用，如何配置自建机场，以及如何订阅机场。</p>
+<h1 id="clash-for-windows介绍">Clash for Windows介绍</h1>
+<p><a href="https://github.com/Dreamacro/clash">Clash</a> 是一个使用 Go 语言编写、基于规则的跨平台代理核心程序。Clash目前有Windows、MacOS、Android等多个平台的GUI程序，支持SS/V2ray/Trojan多种协议，功能强大。</p>
+<p>Clash for Windows 是基于Clash内核的Windows平台程序，界面美观，某些人称之为最好用的SS/V2客户端。但如果不是使用托管地址导入配置，需要半GUI半手动编辑文件进行配置，有点蛋疼。</p>
+<p>本文介绍Clash for Windows配置V2ray教程</p>
+<h1 id="clash-for-windows配置v2ray教程">Clash for Windows配置V2ray教程</h1>
+<h3 id="安装">安装</h3>
+<ol>
+<li>首先从 <a href="https://github.com/Fndroid/clash_for_windows_pkg/releases">v2ray windows客户端</a> 下载Clash for Windows客户端</li>
+</ol>
+<p>正常的windows系统记得选带win后缀的下载，<code>不要</code>选带arm64的。</p>
+<p><img src="/img/vpn/clashforwindows/download.png" alt="download"></p>
+<ol start="2">
+<li>
+<p>双击桌面上 Clash for Windows 图标运行软件，如果出现下面的安全提示，点击“运行”：</p>
+</li>
+<li>
+<p>桌面右下角的托盘内找到Clash的图标(图标是一只猫)，点击，打开软件主界面：</p>
+</li>
+<li>
+<p>如果你有机场或他人提供的订阅地址，请点击“Profiles”，粘贴网址，点击“Download”下载配置，双击选中下载的配置，然后跳到第七步：</p>
+</li>
+<li>
+<p>如果你是自建服务器，点击 <a href="https://v2xtls.org/clash_template2.yaml">https://v2xtls.org/clash_template2.yaml</a> 下载模板配置文件，用记事本、VS Code、Notepad++等编辑器打开，找到v2ray配置块，把 server、port、uid等信息改成你v2ray科学上网服务端配置。</p>
+</li>
+</ol>
+<p><a href="https://www.techxiaofei.com/post/vpn/vpn/">https://www.techxiaofei.com/post/vpn/vpn/</a></p>
+<ol start="6">
+<li>
+<p>点击“Profiles”，把修改好的配置文件拖到clash界面中，然后双击选中拖进来的配置文件(深色表示选中)：</p>
+</li>
+<li>
+<p>接着点击“Proxies”，进入最重要的设置：选择代理模式和使用的节点：</p>
+</li>
+</ol>
+<p>最上面的Global、Rule和Direct表示全局代理、基于规则路由和直连，(可以认为)对应其他客户端的全局模式、PAC模式和禁用系统代理。绝大多数情况建议使用Rule。</p>
+<p>接着在PROXY里选择使用的节点，默认是自动选择快速节点，也可以指定使用某个节点。</p>
+<p>Final表示如果没有匹配的规则，默认走代理还是直连。个人建议默认直连，网站打不开再选择代理。</p>
+<p>其他看不懂的东西保持默认就好了。</p>
+<ol start="8">
+<li>最后回到主界面，点击“System Proxy”，开启系统代理：</li>
+</ol>
+<p>配置无误的话，接下来就可以顺利上外网了。</p>
+<h1 id="视频教程">视频教程</h1>
+<p>本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>。
+<style>
+    .meta-media {
+      position: relative;
+      margin-bottom: 30px;
+      display: flex;
+      width: 100%;
+      height: 0;
+      padding-bottom: 75%;
+    }
+    .video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+    </style>
+    <div class="meta-media">
+    <iframe src="https://www.youtube.com/embed/7P3uCPe47Os" frameborder="no" scrolling="yes" allowfullscreen="allowfullscreen" high_quality="1" framespacing="1" class="video" >
+    </iframe>
+    </div></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">科技小飞哥</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2023-04-08
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/personal/wechat_pay.png">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/cloud/aws_stable_diffusion/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">生花妙笔信手来 – 基于 SageMaker Notebook 快速搭建托管的 Stable Diffusion – AI 作画可视化环境</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/vpn/vpn/">
+            <span class="next-text nav-default">VPS搭建v2ray科学上网｜自建机场｜附各平台使用教程</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="techxiaofei/techxiaofei.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://www.techxiaofei.com" class="iconfont icon-site" title="site"></a>
+      <a href="https://www.youtube.com/@techxiaofei" class="iconfont icon-youtube" title="youtube"></a>
+      <a href="https://space.bilibili.com/49756120" class="iconfont icon-bilibili" title="bilibili"></a>
+</div>
+<div class="friend-links">
+  <span class="item-content"><b>友情链接：</b></span>
+  <a href="https://www.amazonaws.cn/" title="亚马逊云科技">亚马逊云科技</a>
+  <a href="https://dev.amazoncloud.cn/" title="亚马逊开发者社区">亚马逊开发者社区</a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>科技小飞哥</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

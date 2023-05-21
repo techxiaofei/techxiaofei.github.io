@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="科技小飞哥" /><meta name="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 目前主流的几种数据交互的格式主要有xml、" /><meta name="keywords" content="protobuf" />
+<meta name="author" content="科技小飞哥" /><meta name="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 目前主流的几种数据交互的格式主要有xml、json、protobuf等等。xml和j" /><meta name="keywords" content="protobuf" />
 
 
 <meta name="baidu-site-verification" content="code-vlQZuedAQs" />
@@ -42,7 +42,7 @@
 </script>
 
 
-<meta name="generator" content="Hugo 0.109.0 with theme even" />
+<meta name="generator" content="Hugo 0.111.3 with theme even" />
 
 
 <link rel="canonical" href="https://leftpocket.cn/post/tech/protobuf/" />
@@ -54,23 +54,23 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.04109c830719138db2a69bc19ca2dacfea60d087f438e56f49491a10cd2d6e0b.css" rel="stylesheet">
+<link href="/sass/main.min.8670b48c7d31f917f4a6f54305e7950cfd41225f00cbec112ac6e809a86ef2b9.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
 <meta property="og:title" content="protobuf是怎么序列化的" />
-<meta property="og:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 目前主流的几种数据交互的格式主要有xml、" />
+<meta property="og:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 目前主流的几种数据交互的格式主要有xml、json、protobuf等等。xml和j" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://leftpocket.cn/post/tech/protobuf/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-05-10T13:00:51+08:00" />
 <meta property="article:modified_time" content="2022-05-10T13:00:51+08:00" />
 <meta itemprop="name" content="protobuf是怎么序列化的">
-<meta itemprop="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 目前主流的几种数据交互的格式主要有xml、"><meta itemprop="datePublished" content="2022-05-10T13:00:51+08:00" />
+<meta itemprop="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 目前主流的几种数据交互的格式主要有xml、json、protobuf等等。xml和j"><meta itemprop="datePublished" content="2022-05-10T13:00:51+08:00" />
 <meta itemprop="dateModified" content="2022-05-10T13:00:51+08:00" />
-<meta itemprop="wordCount" content="6419">
+<meta itemprop="wordCount" content="6398">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="protobuf是怎么序列化的"/>
-<meta name="twitter:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 目前主流的几种数据交互的格式主要有xml、"/>
+<meta name="twitter:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 目前主流的几种数据交互的格式主要有xml、json、protobuf等等。xml和j"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -152,9 +152,9 @@
       <div class="post-meta">
         <span class="post-time"> 2022-05-10 </span>
         <div class="post-category">
-            <a href="/categories/%E5%90%8E%E7%AB%AF%E9%80%9A%E7%94%A8%E6%8A%80%E6%9C%AF/"> 后端通用技术 </a>
+            <a href="/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/"> 编程技术 </a>
             </div>
-          <span class="more-meta"> 约 6419 字 </span>
+          <span class="more-meta"> 约 6398 字 </span>
           <span class="more-meta"> 预计阅读 13 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -218,7 +218,7 @@
   </div>
 </div>
     <div class="post-content">
-      <p>本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>，加入 <a href="https://t.me/+5OzmrG-iyJE2YzM9"><strong>电报粉丝群</strong></a> 获得最新视频更新和问题解答。</p>
+      <p>本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>。</p>
 <h1 id="背景">背景</h1>
 <p>目前主流的几种数据交互的格式主要有<code>xml</code>、<code>json</code>、<code>protobuf</code>等等。<code>xml</code>和<code>json</code>我相信大家都很了解了。</p>
 <ul>
@@ -686,7 +686,6 @@ Tag是需要占字节空间的。如果<code>字段标识号&gt;15</code>时，<
     <footer id="footer" class="footer">
       <div class="social-links">
       <a href="https://www.techxiaofei.com" class="iconfont icon-site" title="site"></a>
-      <a href="https://t.me/&#43;5OzmrG-iyJE2YzM9" class="iconfont icon-telegram" title="telegram"></a>
       <a href="https://www.youtube.com/@techxiaofei" class="iconfont icon-youtube" title="youtube"></a>
       <a href="https://space.bilibili.com/49756120" class="iconfont icon-bilibili" title="bilibili"></a>
 </div>

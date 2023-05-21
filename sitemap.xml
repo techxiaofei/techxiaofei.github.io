@@ -2,22 +2,120 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://leftpocket.cn/post/chatgpt/webpro/</loc>
+    <lastmod>2023-04-11T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://leftpocket.cn/categories/ai%E4%BA%A7%E5%93%81/</loc>
+    <lastmod>2023-05-20T15:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://leftpocket.cn/categories/</loc>
-    <lastmod>2023-04-10T13:00:51+08:00</lastmod>
+    <lastmod>2023-05-20T15:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://leftpocket.cn/categories/chatgpt/</loc>
+    <lastmod>2023-05-20T15:00:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://leftpocket.cn/post/</loc>
-    <lastmod>2023-04-10T13:00:51+08:00</lastmod>
+    <lastmod>2023-05-20T15:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://leftpocket.cn/post/ai/bingai_proxy/</loc>
+    <lastmod>2023-05-20T15:00:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://leftpocket.cn/</loc>
-    <lastmod>2023-04-10T13:00:51+08:00</lastmod>
+    <lastmod>2023-05-20T15:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://leftpocket.cn/post/telegram/cn/</loc>
+    <lastmod>2023-05-20T01:00:55+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://leftpocket.cn/categories/%E6%B1%89%E5%8C%96%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2023-05-20T01:00:55+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://leftpocket.cn/categories/notion/</loc>
+    <lastmod>2023-05-14T01:00:55+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://leftpocket.cn/post/notion/cn/</loc>
+    <lastmod>2023-05-14T01:00:55+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://leftpocket.cn/post/tools/search/</loc>
+    <lastmod>2023-05-06T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://leftpocket.cn/categories/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2023-05-06T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://leftpocket.cn/post/ai/claude/</loc>
+    <lastmod>2023-05-02T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://leftpocket.cn/post/chatgpt/freeweb/</loc>
+    <lastmod>2023-04-30T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://leftpocket.cn/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
+    <lastmod>2023-04-30T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://leftpocket.cn/post/chatgpt/wechat_mp/</loc>
+    <lastmod>2023-04-13T13:00:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -25,20 +123,6 @@
   <url>
     <loc>https://leftpocket.cn/post/cloud/aws_stable_diffusion/</loc>
     <lastmod>2023-04-10T13:00:51+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://leftpocket.cn/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
-    <lastmod>2023-04-10T13:00:51+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://leftpocket.cn/categories/ai/</loc>
-    <lastmod>2023-04-06T13:00:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -65,22 +149,8 @@
   </url>
   
   <url>
-    <loc>https://leftpocket.cn/categories/chatgpt/</loc>
-    <lastmod>2023-04-02T13:00:51+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://leftpocket.cn/post/chatgpt/english/</loc>
     <lastmod>2023-04-02T13:00:51+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://leftpocket.cn/categories/notion/</loc>
-    <lastmod>2023-03-26T01:04:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -205,13 +275,6 @@
   </url>
   
   <url>
-    <loc>https://leftpocket.cn/categories/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2023-01-16T13:00:51+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://leftpocket.cn/post/cloud/aws_cloud/</loc>
     <lastmod>2023-01-12T13:00:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -233,7 +296,7 @@
   </url>
   
   <url>
-    <loc>https://leftpocket.cn/categories/redis/</loc>
+    <loc>https://leftpocket.cn/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/</loc>
     <lastmod>2023-01-08T01:00:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -268,13 +331,6 @@
   </url>
   
   <url>
-    <loc>https://leftpocket.cn/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</loc>
-    <lastmod>2022-12-22T18:00:51+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://leftpocket.cn/post/script/auto_booking/</loc>
     <lastmod>2022-12-14T13:00:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -296,22 +352,8 @@
   </url>
   
   <url>
-    <loc>https://leftpocket.cn/categories/%E9%9D%A2%E8%AF%95/</loc>
-    <lastmod>2022-07-06T00:00:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://leftpocket.cn/post/tech/rand/</loc>
     <lastmod>2022-07-06T00:00:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://leftpocket.cn/categories/golang/</loc>
-    <lastmod>2022-07-02T13:00:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -325,13 +367,6 @@
   
   <url>
     <loc>https://leftpocket.cn/post/tech/protobuf/</loc>
-    <lastmod>2022-05-10T13:00:51+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://leftpocket.cn/categories/%E5%90%8E%E7%AB%AF%E9%80%9A%E7%94%A8%E6%8A%80%E6%9C%AF/</loc>
     <lastmod>2022-05-10T13:00:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -354,13 +389,6 @@
   <url>
     <loc>https://leftpocket.cn/categories/%E6%96%B0%E5%8A%A0%E5%9D%A1%E7%94%9F%E6%B4%BB/</loc>
     <lastmod>2022-04-30T00:00:51+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://leftpocket.cn/categories/mysql/</loc>
-    <lastmod>2022-04-29T13:00:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -394,13 +422,6 @@
   </url>
   
   <url>
-    <loc>https://leftpocket.cn/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2022-01-01T00:00:02+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://leftpocket.cn/post/system_design/short_url/</loc>
     <lastmod>2021-12-23T00:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -424,13 +445,6 @@
   <url>
     <loc>https://leftpocket.cn/post/mysql/table/</loc>
     <lastmod>2021-12-04T00:00:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://leftpocket.cn/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2021-12-03T14:00:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -522,13 +536,6 @@
   <url>
     <loc>https://leftpocket.cn/post/system_design/lru/</loc>
     <lastmod>2021-11-23T18:00:51+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://leftpocket.cn/categories/c&#43;&#43;/</loc>
-    <lastmod>2021-11-22T15:00:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

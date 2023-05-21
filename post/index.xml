@@ -6,7 +6,79 @@
     <description>Recent content in Posts on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 10 Apr 2023 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 20 May 2023 15:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>国内无法使用ChatGPT？教你使用云服务器一键部署自己的ChatGPT网站｜无需科学上网</title>
+      <link>https://leftpocket.cn/post/chatgpt/webpro/</link>
+      <pubDate>Tue, 11 Apr 2023 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/chatgpt/webpro/</guid>
+      <description>背景 由于众所周知的原因，ChatGPT在中国无法访问，如果你有经常使用ChatGPT的需求怎么办呢？即使你使用了科学上网，由于你订阅的机场使</description>
+    </item>
+    
+    <item>
+      <title>教你搭建GPT4网站，完全免费，无需登录，无需魔法，3分钟拥有一个GPT4的bing AI网站</title>
+      <link>https://leftpocket.cn/post/ai/bingai_proxy/</link>
+      <pubDate>Sat, 20 May 2023 15:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/ai/bingai_proxy/</guid>
+      <description>背景 我知道很小伙伴想使用ChatGPT，但是经常被IP限制，今天就给大家分享一个无需登录，完全免费的GPT4的网站。 同时如果你想要自己搭建一</description>
+    </item>
+    
+    <item>
+      <title>Telegram电报全平台中文汉化教程-支持Windows、MacOS、安卓，苹果系统</title>
+      <link>https://leftpocket.cn/post/telegram/cn/</link>
+      <pubDate>Sat, 20 May 2023 01:00:55 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/telegram/cn/</guid>
+      <description>背景 各位观众朋友们大家好，欢迎回到我的频道，如果你能看到我的视频，那么我相信你一定有Telegram-电报这个聊天工具。如果不会注册使用的评</description>
+    </item>
+    
+    <item>
+      <title>Notion全平台中文汉化教程-支持网页、Windows、MacOS、安卓系统</title>
+      <link>https://leftpocket.cn/post/notion/cn/</link>
+      <pubDate>Sun, 14 May 2023 01:00:55 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/notion/cn/</guid>
+      <description>背景 上篇教程我给大家介绍了我认为最好用效率笔记软件，Notion。 Youtube : Notion-你的最后一款笔记软件 但是Notion有一个非常不友好的地</description>
+    </item>
+    
+    <item>
+      <title>99%的人都不知道的搜索引擎搜索技巧｜支持谷歌、百度、必应等搜索引擎｜让你的效率提升10倍</title>
+      <link>https://leftpocket.cn/post/tools/search/</link>
+      <pubDate>Sat, 06 May 2023 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/tools/search/</guid>
+      <description>背景 相信大家经常使用搜索引擎。比如在搜索框里面输入一个或者多个关键字，比如 科技小飞哥，这样非常简单，每个人都会做。 但是这样容易搜到自己不感兴</description>
+    </item>
+    
+    <item>
+      <title>ChatGPT最强平替，Claude保姆级教程，完全免费，支持手机端</title>
+      <link>https://leftpocket.cn/post/ai/claude/</link>
+      <pubDate>Tue, 02 May 2023 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/ai/claude/</guid>
+      <description>背景 由于众所周知的原因，ChatGPT目前注册非常难，且国内访问受限。所以我来介绍一款ChatGPT最强的替代版，Claude。Claude</description>
+    </item>
+    
+    <item>
+      <title>无需云服务器，一键部署你的ChatGPT Web网站｜完全免费</title>
+      <link>https://leftpocket.cn/post/chatgpt/freeweb/</link>
+      <pubDate>Sun, 30 Apr 2023 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/chatgpt/freeweb/</guid>
+      <description>背景 我之前做了怎么注册ChatGPT，以及把ChatGPT接入到微信公众号、电报telegram等平台的教程，今天我来教大家如何一键部署Ch</description>
+    </item>
+    
+    <item>
+      <title>【全网最简单方法】ChatGPT接入微信公众号 - 包教包会，100%成功</title>
+      <link>https://leftpocket.cn/post/chatgpt/wechat_mp/</link>
+      <pubDate>Thu, 13 Apr 2023 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/chatgpt/wechat_mp/</guid>
+      <description>背景 之前我已经做了一期ChatGPT接入公众号的教程。但是教程需要执行大量的命令，一不小心执行命令的时候就会出错，所以我决定把这些繁琐的工作</description>
+    </item>
+    
     <item>
       <title>生花妙笔信手来 – 基于 SageMaker Notebook 快速搭建托管的 Stable Diffusion – AI 作画可视化环境</title>
       <link>https://leftpocket.cn/post/cloud/aws_stable_diffusion/</link>
@@ -22,7 +94,7 @@
       <pubDate>Thu, 06 Apr 2023 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/ai/cartoon/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 之前我制作了一篇视频，教大家怎么从零开始使</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 之前我制作了一篇视频，教大家怎么从零开始使用Midjourney并通过简单的提示词来</description>
     </item>
     
     <item>
@@ -31,7 +103,7 @@
       <pubDate>Tue, 04 Apr 2023 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/tools/chrome_extension/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 Chrome浏览器之所以如此受欢迎，除了其</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 Chrome浏览器之所以如此受欢迎，除了其本身体验好之外，还有一个很重要的原因就是它</description>
     </item>
     
     <item>
@@ -40,7 +112,7 @@
       <pubDate>Sun, 02 Apr 2023 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/chatgpt/english/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 前几期教程，我给大家演示了如何注册并使用C</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 前几期教程，我给大家演示了如何注册并使用ChatGPT，同时也教大家如何把ChatG</description>
     </item>
     
     <item>
@@ -49,7 +121,7 @@
       <pubDate>Sun, 26 Mar 2023 01:04:55 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/common/freedomain/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 你想不想不花一分钱就拥有自己的免费域名呢？</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 你想不想不花一分钱就拥有自己的免费域名呢？之前最火的免费域名网站Freenom提供了</description>
     </item>
     
     <item>
@@ -58,7 +130,7 @@
       <pubDate>Sat, 25 Mar 2023 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/chatgpt/wechatpro/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 我之前的教程已经教了大家怎么注册ChatG</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 我之前的教程已经教了大家怎么注册ChatGPT，并教了大家怎么接入微信，微信公众号，</description>
     </item>
     
     <item>
@@ -67,7 +139,7 @@
       <pubDate>Thu, 23 Mar 2023 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/chatgpt/web/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 我之前做了怎么注册ChatGPT以及把Ch</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 我之前做了怎么注册ChatGPT以及把ChatGPT接入微信、公众号、电报teleg</description>
     </item>
     
     <item>
@@ -76,7 +148,7 @@
       <pubDate>Sun, 19 Mar 2023 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/chatgpt/plugin/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 近期，ChatGPT变得越来越热门，为此，</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 近期，ChatGPT变得越来越热门，为此，许多浏览器插件也随之问世。这些基于Chat</description>
     </item>
     
     <item>
@@ -85,7 +157,7 @@
       <pubDate>Wed, 15 Mar 2023 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/chatgpt/gpt4/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 北京时间3月15日凌晨，OpenAI在官网</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 北京时间3月15日凌晨，OpenAI在官网上宣告了多模态大模型GPT-4的诞生。优化</description>
     </item>
     
     <item>
@@ -94,7 +166,7 @@
       <pubDate>Thu, 09 Mar 2023 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/chatgpt/bing/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 随着ChatGPT的快速走红，科技巨头们也</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 随着ChatGPT的快速走红，科技巨头们也纷纷入局AI之战。目前看来动作最快的要数微</description>
     </item>
     
     <item>
@@ -103,7 +175,7 @@
       <pubDate>Wed, 08 Mar 2023 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/chatgpt/telegram/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 我之前的教程已经教了大家怎么注册ChatG</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 我之前的教程已经教了大家怎么注册ChatGPT，同时教大家怎么接入微信、微信公众号等</description>
     </item>
     
     <item>
@@ -112,7 +184,7 @@
       <pubDate>Wed, 08 Mar 2023 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/chatgpt/official/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 我之前的教程已经教了大家怎么注册ChatG</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 我之前的教程已经教了大家怎么注册ChatGPT，如果还没有注册的小伙伴可以看我之前的</description>
     </item>
     
     <item>
@@ -121,7 +193,7 @@
       <pubDate>Wed, 01 Mar 2023 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/chatgpt/wechat/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 我之前的教程已经教了大家怎么注册ChatG</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 我之前的教程已经教了大家怎么注册ChatGPT，如果还没有注册的小伙伴可以看我之前的</description>
     </item>
     
     <item>
@@ -130,7 +202,7 @@
       <pubDate>Sat, 25 Feb 2023 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/chatgpt/register/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 一、 背景 最近一段时间，大家都在讨论ChatGP</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 一、 背景 最近一段时间，大家都在讨论ChatGPT，一些主流的技术社区更是将ChatGPT</description>
     </item>
     
     <item>
@@ -139,7 +211,7 @@
       <pubDate>Wed, 22 Feb 2023 01:04:55 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/notion/domain/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 今天我们讲使用Notion搭建个人网站系列</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 今天我们讲使用Notion搭建个人网站系列的第三篇，申请免费域名并绑定到Notion</description>
     </item>
     
     <item>
@@ -148,7 +220,7 @@
       <pubDate>Fri, 17 Feb 2023 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/cloud/aws/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 AWS海外区云产品免费使用页面：https</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 AWS海外区云产品免费使用页面：https://aws.amazon.com/cn/</description>
     </item>
     
     <item>
@@ -157,7 +229,7 @@
       <pubDate>Thu, 16 Feb 2023 01:00:56 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/notion/vercel/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 这个系列适合所有零基础的电脑小白用户，轻轻</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 这个系列适合所有零基础的电脑小白用户，轻轻松松搭建属于自己的个人网站 如果对怎么使用N</description>
     </item>
     
     <item>
@@ -166,7 +238,7 @@
       <pubDate>Wed, 15 Feb 2023 01:00:55 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/notion/blog/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 今天我们开启一个新的系列教程，使用Noti</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 今天我们开启一个新的系列教程，使用Notion搭建个人网站系列。 这是这个系列的第一篇</description>
     </item>
     
     <item>
@@ -175,7 +247,7 @@
       <pubDate>Fri, 27 Jan 2023 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/tools/chrome_plugin/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 Chrome浏览器的特点除了非常快之外，还</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 Chrome浏览器的特点除了非常快之外，还有就是它丰富的插件。可以极大的提升你的网上</description>
     </item>
     
     <item>
@@ -184,7 +256,7 @@
       <pubDate>Mon, 16 Jan 2023 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/script/py_auto/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 之前制作了一篇教程： 《使用Go语言开发自动</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 之前制作了一篇教程： 《使用Go语言开发自动化脚本 - 一键定场，抢课，捡漏，预约等。》 有</description>
     </item>
     
     <item>
@@ -193,7 +265,7 @@
       <pubDate>Thu, 12 Jan 2023 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/cloud/aws_cloud/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 好消息，Amazon最近活动免费12个月云</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 好消息，Amazon最近活动免费12个月云服务器，点击就送，薅羊毛的好机会。 我这篇教</description>
     </item>
     
     <item>
@@ -202,7 +274,7 @@
       <pubDate>Tue, 10 Jan 2023 01:01:55 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/hugo/hugo_shortcode/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 前言 使用个人博客也有一年多的时间，这一年多的时</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 前言 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一</description>
     </item>
     
     <item>
@@ -229,7 +301,7 @@
       <pubDate>Mon, 02 Jan 2023 00:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/redis/fast/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 前言 Redis作为非关系型内存数据库，只要是一</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 前言 Redis作为非关系型内存数据库，只要是一个互联网公司都会使用到。Redis相关的问</description>
     </item>
     
     <item>
@@ -238,7 +310,7 @@
       <pubDate>Thu, 22 Dec 2022 18:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/system_design/password/</guid>
-      <description>​​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 现在很多网站都因为爆库导致密码泄漏，要</description>
+      <description>​​ 本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 现在很多网站都因为爆库导致密码泄漏，要设计怎么样的密码储存机制，才能保证最大限度</description>
     </item>
     
     <item>
@@ -247,7 +319,7 @@
       <pubDate>Wed, 14 Dec 2022 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/script/auto_booking/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 不知道大家有没有这种经历，想要抢课，定场，</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 不知道大家有没有这种经历，想要抢课，定场，发现抢不到，想要捡漏，又要随时刷，今天我就</description>
     </item>
     
     <item>
@@ -256,7 +328,7 @@
       <pubDate>Sat, 10 Dec 2022 01:01:55 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/hugo/hugo_adsense/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 前言 使用个人博客也有一年多的时间，这一年多的时</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 前言 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一</description>
     </item>
     
     <item>
@@ -265,7 +337,7 @@
       <pubDate>Fri, 02 Dec 2022 01:04:55 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/hugo/hugo_search/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 序言 使用个人博客也有一年多的时间，这一年多的时</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 序言 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一</description>
     </item>
     
     <item>
@@ -274,7 +346,7 @@
       <pubDate>Wed, 06 Jul 2022 00:00:00 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/tech/rand/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 这要追溯到大四找工作的时候，做面试题，然后</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 这要追溯到大四找工作的时候，做面试题，然后有一类关于产生随机数的类型的题目。感觉题目</description>
     </item>
     
     <item>
@@ -292,7 +364,7 @@
       <pubDate>Tue, 10 May 2022 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/tech/protobuf/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 目前主流的几种数据交互的格式主要有xml、</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 目前主流的几种数据交互的格式主要有xml、json、protobuf等等。xml和j</description>
     </item>
     
     <item>
@@ -301,7 +373,7 @@
       <pubDate>Fri, 06 May 2022 00:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/golang/time_after/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 我刚转做go语言开发开始写入职小程序的时候</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 我刚转做go语言开发开始写入职小程序的时候，写下了如下的代码： 1 2 3 4 5 6 7 8 9 10 for</description>
     </item>
     
     <item>
@@ -310,7 +382,7 @@
       <pubDate>Sat, 30 Apr 2022 00:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/singapore_life/pr/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 终于拿到新加坡PR啦，也算是2022的一个欣慰</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 终于拿到新加坡PR啦，也算是2022的一个欣慰。 介绍一下基本情况，给想要申请PR的朋友们</description>
     </item>
     
     <item>
@@ -319,7 +391,7 @@
       <pubDate>Fri, 29 Apr 2022 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/mysql/update_optimization/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 现在的互联网大厂，都经历了数据量和访问量从</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 现在的互联网大厂，都经历了数据量和访问量从零到亿级别的飞速增长。在这业务增长的过程中</description>
     </item>
     
     <item>
@@ -328,7 +400,7 @@
       <pubDate>Wed, 27 Apr 2022 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/system_design/hotspot/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 最近不少人问我，怎么解决热点Key问题。我</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 最近不少人问我，怎么解决热点Key问题。我说，你提到这个我可就不困了。因为刚好，我手</description>
     </item>
     
     <item>
@@ -337,7 +409,7 @@
       <pubDate>Fri, 22 Apr 2022 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/system_design/unique_id_buffer/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 在之前的文章中，我们讲了分布式ID生成方案</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 在之前的文章中，我们讲了分布式ID生成方案-snowflake算法。这也是我们的生产</description>
     </item>
     
     <item>
@@ -346,7 +418,7 @@
       <pubDate>Sat, 01 Jan 2022 00:00:02 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/tcpip/kcp/</guid>
-      <description>​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 可能你从来没有听说过KCP是什么，但是你</description>
+      <description>​ 本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 可能你从来没有听说过KCP是什么，但是你肯定知道TCP和UDP。 这里我们通过KCP</description>
     </item>
     
     <item>
@@ -355,7 +427,7 @@
       <pubDate>Thu, 23 Dec 2021 00:00:00 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/system_design/short_url/</guid>
-      <description>​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 短网址（short url），就是将长网址</description>
+      <description>​ 本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 短网址（short url），就是将长网址缩短为一个很短的网址，用户访问这个短网址可</description>
     </item>
     
     <item>
@@ -364,7 +436,7 @@
       <pubDate>Thu, 09 Dec 2021 00:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/redis/multithreading/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 Redis基础 Redis是什么 Redis是一个</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 Redis基础 Redis是什么 Redis是一个基于BSD开源的项目，是一个把结构化的数据</description>
     </item>
     
     <item>
@@ -373,7 +445,7 @@
       <pubDate>Tue, 07 Dec 2021 00:00:00 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/tech/cp/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 如果你突然被面试官问：cp和mv这两个li</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 如果你突然被面试官问：cp和mv这两个linux的命令有什么区别？ 你会不会一脸懵逼，</description>
     </item>
     
     <item>
@@ -382,7 +454,7 @@
       <pubDate>Sat, 04 Dec 2021 00:00:00 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/mysql/table/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 目前做电商后台开发，经历了数据从零到百万到</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 目前做电商后台开发，经历了数据从零到百万到百亿级别的增长。在这个增长的过程中，我们做</description>
     </item>
     
     <item>
@@ -391,7 +463,7 @@
       <pubDate>Fri, 03 Dec 2021 14:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/backend/game_server/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 我做过六年游戏服务端开发，后来想换个方向，</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 我做过六年游戏服务端开发，后来想换个方向，转做电商后端开发，做了两年之后感悟很多，也</description>
     </item>
     
     <item>
@@ -400,7 +472,7 @@
       <pubDate>Thu, 02 Dec 2021 10:00:00 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/mysql/innodb/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 MySQL的InnoDB引擎一棵B+树可以</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 MySQL的InnoDB引擎一棵B+树可以存放多少行数据？这是一个很有趣的面试题。 也</description>
     </item>
     
     <item>
@@ -409,7 +481,7 @@
       <pubDate>Thu, 02 Dec 2021 01:04:55 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/hugo/hugo_dns/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 使用个人博客也有一年多的时间，这一年多的时</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一</description>
     </item>
     
     <item>
@@ -418,7 +490,7 @@
       <pubDate>Thu, 02 Dec 2021 01:03:55 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/hugo/hugo_vercel/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 使用个人博客也有一年多的时间，这一年多的时</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一</description>
     </item>
     
     <item>
@@ -427,7 +499,7 @@
       <pubDate>Thu, 02 Dec 2021 01:02:55 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/hugo/hugo_advanced/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 使用个人博客也有一年多的时间，这一年多的时</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一</description>
     </item>
     
     <item>
@@ -436,7 +508,7 @@
       <pubDate>Thu, 02 Dec 2021 01:01:55 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/hugo/hugo_github/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 使用个人博客也有一年多的时间，这一年多的时</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一</description>
     </item>
     
     <item>
@@ -445,7 +517,7 @@
       <pubDate>Thu, 02 Dec 2021 01:00:55 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/hugo/hugo_creation/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 使用个人博客也有一年多的时间，这一年多的时</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一</description>
     </item>
     
     <item>
@@ -454,7 +526,7 @@
       <pubDate>Thu, 02 Dec 2021 01:00:50 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/hugo/hugo_collection/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 使用个人博客也有一年多的时间，这一年多的时</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一</description>
     </item>
     
     <item>
@@ -463,7 +535,7 @@
       <pubDate>Tue, 30 Nov 2021 14:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/backend/backend_development/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 很多刚接触后端开发的同学，会发现，后端开发</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 很多刚接触后端开发的同学，会发现，后端开发不就是增删改查吗？的确，如果你做的东西只是</description>
     </item>
     
     <item>
@@ -472,7 +544,7 @@
       <pubDate>Fri, 26 Nov 2021 00:00:00 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/mysql/covering_index/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 后端面试系列将剖析后端面试中常考技术点，用尽量</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 背景 关于</description>
     </item>
     
     <item>
@@ -481,7 +553,7 @@
       <pubDate>Thu, 25 Nov 2021 00:00:02 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/tcpip/close_shutdown/</guid>
-      <description>​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 后端面试系列将剖析后端面试中常考技术点，用尽</description>
+      <description>​ 本篇博客的视频教程首发于 Youtube：科技小飞哥。 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 shu</description>
     </item>
     
     <item>
@@ -490,7 +562,7 @@
       <pubDate>Thu, 25 Nov 2021 00:00:00 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/tcpip/socket_read_write/</guid>
-      <description>​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 后端面试系列将剖析后端面试中常考技术点，用尽</description>
+      <description>​ 本篇博客的视频教程首发于 Youtube：科技小飞哥。 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 结论 如</description>
     </item>
     
     <item>
@@ -499,7 +571,7 @@
       <pubDate>Tue, 23 Nov 2021 18:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/system_design/lru/</guid>
-      <description>​​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 概述 LRU是Least Recently Used的缩写，译</description>
+      <description>​​ 本篇博客的视频教程首发于 Youtube：科技小飞哥。 概述 LRU是Least Recently Used的缩写，译为最近最少使用。它的理论基础为 “最近使用的</description>
     </item>
     
     <item>
@@ -508,7 +580,7 @@
       <pubDate>Mon, 22 Nov 2021 15:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/cpp/do_while/</guid>
-      <description>​​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 零.导引 第一次见到 do{...}while(0) 是在学习 libevent 的时候，看到</description>
+      <description>​​ 本篇博客的视频教程首发于 Youtube：科技小飞哥。 零.导引 第一次见到 do{...}while(0) 是在学习 libevent 的时候，看到里面有很多类似 1 2 3 4 5 6 7 #define TT_URI(want) do { \ char *ret</description>
     </item>
     
     <item>
@@ -517,7 +589,7 @@
       <pubDate>Mon, 22 Nov 2021 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/cpp/static/</guid>
-      <description>​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 static 是 C/C++ 中很常用的修饰符，它被用来控制变量</description>
+      <description>​ 本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 static 是 C/C++ 中很常用的修饰符，它被用来控制变量的存储方式和可见性。而 static 在 C 语言和 C++ 语言中</description>
     </item>
     
     <item>
@@ -526,7 +598,7 @@
       <pubDate>Sun, 21 Nov 2021 14:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/backend/game_development/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 回顾我的码农生涯，在做互联网电商后端开发之</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 回顾我的码农生涯，在做互联网电商后端开发之前做过大概6年的游戏后端开发，想总结一下手</description>
     </item>
     
     <item>
@@ -535,7 +607,7 @@
       <pubDate>Sun, 21 Nov 2021 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/cpp/secondary_pointer/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 一、概念 在如下的A指向B、B指向C的指向关系中</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 一、概念 在如下的A指向B、B指向C的指向关系中： 首先 C是&amp;quot;一段内容&amp;quot;</description>
     </item>
     
     <item>
@@ -544,7 +616,7 @@
       <pubDate>Sat, 20 Nov 2021 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/tech/git_rebase/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 在你看这篇文章之前，我假设你已经至少会gi</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 在你看这篇文章之前，我假设你已经至少会git的一些基本指令，能进行简单的git rep</description>
     </item>
     
     <item>
@@ -553,7 +625,7 @@
       <pubDate>Sun, 18 Apr 2021 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/golang/goroutine_implementation/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 Go语言最大的特色就是从语言层面支持并发（</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 Go语言最大的特色就是从语言层面支持并发（Goroutine），Goroutine是</description>
     </item>
     
     <item>
@@ -562,7 +634,7 @@
       <pubDate>Sat, 20 Mar 2021 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/golang/append/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 最近开发的时候写了下面这段类似的代码。 1 2</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 最近开发的时候写了下面这段类似的代码。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 func TestAppend() (result []int) { var wg</description>
     </item>
     
     <item>
@@ -571,7 +643,7 @@
       <pubDate>Thu, 18 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/golang/functional_options/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 概览 最近阅读源码的时候看到一段不错的代码，但是</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 概览 最近阅读源码的时候看到一段不错的代码，但是当时却不是非常理解为什么这么写。 我们先来看</description>
     </item>
     
     <item>
@@ -580,7 +652,7 @@
       <pubDate>Thu, 18 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/golang/decorator/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 今天我们来介绍decorator这个经典的设计</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 今天我们来介绍decorator这个经典的设计模式。 定义：装饰器模式主要对现有的类对象进</description>
     </item>
     
     <item>
@@ -589,7 +661,7 @@
       <pubDate>Wed, 17 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/redis/redis_sds/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 SDS （Simple Dynamic String，简单动态字符串</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 SDS （Simple Dynamic String，简单动态字符串）是 Redis 底层所使用的字符串表示， 几乎所有的 Redis</description>
     </item>
     
     <item>
@@ -598,7 +670,7 @@
       <pubDate>Wed, 03 Feb 2021 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/system_design/bloom_filter/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 布隆过滤器是什么 本质上布隆过滤器(Bloom F</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 布隆过滤器是什么 本质上布隆过滤器(Bloom Filter)是一种数据结构，比较巧妙的概率</description>
     </item>
     
     <item>
@@ -607,7 +679,7 @@
       <pubDate>Fri, 22 Jan 2021 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/system_design/friends_comment_like/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 上篇文章介绍了朋友圈的技术设计，这篇将介绍朋友</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 上篇文章介绍了朋友圈的技术设计，这篇将介绍朋友圈点赞和评论的实现方式。 需求介绍 对某条状态</description>
     </item>
     
     <item>
@@ -616,7 +688,7 @@
       <pubDate>Sat, 12 Dec 2020 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/tech/vscode_leetcode/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 作为一名合格的程序猿，大家找工作的时候经常需要</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 作为一名合格的程序猿，大家找工作的时候经常需要刷leetcode, leetcode官网上</description>
     </item>
     
     <item>
@@ -625,7 +697,7 @@
       <pubDate>Fri, 04 Dec 2020 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/redis/redis_zset_score/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 最近使用Redis的SortedSet，使</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 最近使用Redis的SortedSet，使用int64作为score时遇到了一些预料</description>
     </item>
     
     <item>
@@ -634,7 +706,7 @@
       <pubDate>Tue, 24 Nov 2020 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/system_design/snowflake/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 在互联网的业务系统中，涉及到各种各样的ID</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 在互联网的业务系统中，涉及到各种各样的ID，这些ID需要保证全局唯一。我们称之为分布</description>
     </item>
     
     <item>
@@ -643,7 +715,7 @@
       <pubDate>Thu, 06 Aug 2020 13:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/post/mysql/db_tidb_write_conflict/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 我们线上使用TiDB来储存数据，最近DBA</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 我们线上使用TiDB来储存数据，最近DBA报告TiDB发生了write conflict. 1 2 3 4 5 [2020/08/25</description>
     </item>
     
   </channel>

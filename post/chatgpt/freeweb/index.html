@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>无需云服务器，一键部署你的ChatGPT Web网站｜完全免费 - 科技小飞哥</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="科技小飞哥" /><meta name="description" content="背景 我之前做了怎么注册ChatGPT，以及把ChatGPT接入到微信公众号、电报telegram等平台的教程，今天我来教大家如何一键部署Ch" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+<meta name="msvalidate.01" content="9CB8E7A6AD8ADF22F9ED93166445E5B9" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ3LW65VYR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QZ3LW65VYR');
+</script>
+
+
+<meta name="generator" content="Hugo 0.111.3 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/chatgpt/freeweb/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.8670b48c7d31f917f4a6f54305e7950cfd41225f00cbec112ac6e809a86ef2b9.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="无需云服务器，一键部署你的ChatGPT Web网站｜完全免费" />
+<meta property="og:description" content="背景 我之前做了怎么注册ChatGPT，以及把ChatGPT接入到微信公众号、电报telegram等平台的教程，今天我来教大家如何一键部署Ch" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/chatgpt/freeweb/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-30T13:00:51+08:00" />
+<meta property="article:modified_time" content="2023-04-30T13:00:51+08:00" />
+<meta itemprop="name" content="无需云服务器，一键部署你的ChatGPT Web网站｜完全免费">
+<meta itemprop="description" content="背景 我之前做了怎么注册ChatGPT，以及把ChatGPT接入到微信公众号、电报telegram等平台的教程，今天我来教大家如何一键部署Ch"><meta itemprop="datePublished" content="2023-04-30T13:00:51+08:00" />
+<meta itemprop="dateModified" content="2023-04-30T13:00:51+08:00" />
+<meta itemprop="wordCount" content="2139">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="无需云服务器，一键部署你的ChatGPT Web网站｜完全免费"/>
+<meta name="twitter:description" content="背景 我之前做了怎么注册ChatGPT，以及把ChatGPT接入到微信公众号、电报telegram等平台的教程，今天我来教大家如何一键部署Ch"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">科技小飞哥</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/friend/">
+        <li class="mobile-menu-item">友链</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">科技小飞哥</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/friend/">友链</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">无需云服务器，一键部署你的ChatGPT Web网站｜完全免费</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-04-30 </span>
+        <div class="post-category">
+            <a href="/categories/chatgpt/"> ChatGPT </a>
+            <a href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/"> 云服务器 </a>
+            </div>
+          <span class="more-meta"> 约 2139 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#开始">开始</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#1-github">1. Github</a></li>
+            <li><a href="#vercel">Vercel</a></li>
+            <li><a href="#api-key">API key</a></li>
+            <li><a href="#部署">部署</a></li>
+            <li><a href="#使用">使用</a></li>
+            <li><a href="#角色扮演">角色扮演</a></li>
+            <li><a href="#密码访问">密码访问</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#后记">后记</a></li>
+    <li><a href="#视频教程">视频教程</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="背景">背景</h1>
+<p>我之前做了怎么注册ChatGPT，以及把ChatGPT接入到微信公众号、电报telegram等平台的教程，今天我来教大家如何一键部署<code>ChatGPT web</code>网站。</p>
+<p>这个部署<strong>完全免费</strong>也不需要<strong>云服务器</strong>，非常简单。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/home.png" alt="home"></p>
+<p>我们为什么要部署自己的ChatGPT Web网站呢？</p>
+<p>主要有两个目的：</p>
+<ol>
+<li>可以绕过某些区域无法访问ChatGPT的问题</li>
+<li>可以轻松分享给自己的朋友一起使用，当然你也可以添加密码防止被其他人恶意滥用。</li>
+</ol>
+<p>想要搭建自己的ChatGPT Web网站，我们只需要两个账号：</p>
+<ol>
+<li><a href="https://github.com/">Github账号</a></li>
+<li><a href="https://vercel.com/login">Vercel账号</a></li>
+</ol>
+<p>其实<code>Vercel</code>账号可以使用Github账号直接登录：</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/vercel_login.png" alt="vercel_login"></p>
+<p>所以我们只需要注册一个Github账号即可。</p>
+<h1 id="开始">开始</h1>
+<h3 id="1-github">1. Github</h3>
+<p>我们首先先在<a href="https://github.com/">Github</a>上访问这个地址：<a href="https://github.com/Yidadaa/ChatGPT-Next-Web">ChatGPT-Next-Web</a></p>
+<p>然后点击右上角的<code>Fork</code>也就是克隆，然后点击<code>Create Fork</code>把这个仓库克隆到你的账号下</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/create_fork.png" alt="create_fork"></p>
+<p>这个时候就会把这个github 仓库克隆到你的个人账号下面。</p>
+<h3 id="vercel">Vercel</h3>
+<p>克隆之后我们去到Vercel平台。<a href="https://vercel.com/login">Vercel</a> 使用刚才的Github账号登录并授权。</p>
+<p>我们直接点击<code>Add New-&gt;Project</code>，然后找到我们的<code>ChatGPT-next-web</code>这个Github仓库，点击<code>Import</code>导入</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/import.png" alt="import"></p>
+<p>这个<strong>project name</strong>我们可以随便选，使用默认的即可。</p>
+<p>我们唯一要注意的就是这个环境变量，我们需要把ChatGPT的<code>API Key</code>添加进来，然后部署。</p>
+<p>这个API Key是为了验证你的身份，需要你有<strong>OpenAI</strong>账号。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/deploy.png" alt="deploy"></p>
+<h3 id="api-key">API key</h3>
+<p>如果你不知道上面的API Key怎么获得，这个非常简单，我们打开openai的平台地址：https://platform.openai.com/</p>
+<p>登录之后点击右上角的头像，点击<code>Manage Account</code>-&gt;<code>API Keys</code>-&gt;<code>Create New Secret Key</code>, 然后复制下来保存备用。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/wechat/key.png" alt="key"></p>
+<h3 id="部署">部署</h3>
+<p>然后回到刚才的部署界面，在刚才的环境变量在<strong>Name</strong>里面输入 <code>OEPNAI_API_KEY</code>，然后<code>Value</code>就输入我们刚才复制的API Key</p>
+<p>点击<code>Add</code>添加，然后我们点击<code>Deploy</code>部署。</p>
+<p>当然如果你需要你的ChatGPT支持密码访问，可以添加一个新的环境变量，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Name: CODE
+</span></span><span class="line"><span class="cl">Value: 你想要设置的密码
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个时候，我们的网站就会需要密码访问。</p>
+<p>我们点击<strong>Deploy</strong>，可以看到它就开始部署了
+我们稍等一会就可以看到我们的网站就能部署成功了。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/congratulation.png" alt="congratulation"></p>
+<h3 id="使用">使用</h3>
+<p>我们可以点击就可以进入到我们的ChatGPT 个人网站了。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/home.png" alt="home"></p>
+<p>此时Vercel 给我们自动分配了域名，当然这个域名由于某些原因，在国内可能无法访问，你可能需要使用自己的域名。</p>
+<p>我们在刚才的部署成功的页面点击右边的<code>Add Domain</code>添加域名，</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/add_domain.png" alt="add_domain"></p>
+<p>然后输入我们的域名，点击添加。
+我们选择默认的选项，
+然后点击添加</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/add_domain2.png" alt="add_domain2"></p>
+<p>添加之后Vercel会提示我们需要添加两条记录，一条是<code>A记录</code>，一条是<code>CNAME记录</code>。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/record.png" alt="record"></p>
+<p>我们进入到我们的域名解析商，这里我使用<code>cloudflare</code>来解析我的域名。</p>
+<p>我们在这里点击添加记录：</p>
+<ul>
+<li>首先我们添加A记录，记录类型是<code>A</code>，名称是<code>@</code>，然后ipv4地址就是刚才的ip地址</li>
+<li>然后我们再添加一条 CNAME 记录，记录类型是<code>CNAME</code>，名称是<code>www</code>，值是刚才的值</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/add_record.png" alt="add_record"></p>
+<p>现在我们这两条记录，就已经添加成功了</p>
+<p>我们再回到我们的 Vercel 托管平台，可以看到，我们的DNS记录已经设置成功了</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/success.png" alt="success"></p>
+<p>我们添加成功之后直接点击跳转，用我们自己的域名就可以访问ChatGPT Web网站了。</p>
+<p>那我们可以开始在这里和ChatGPT进行聊天了。</p>
+<h3 id="角色扮演">角色扮演</h3>
+<p>我们也可以让ChatGPT来扮演各种角色，此时ChatGPT的回答会更具有专业性。</p>
+<p>我们可以看到这里有非常多的角色，我们来让他帮我们扮演一个职业顾问，点击左下角<code>新的聊天</code>，找到<code>职业顾问</code>点击跳转新的聊天。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/role.png" alt="role"></p>
+<p>然后我们问他问题：<strong>作为一个程序员，我以后的职业生涯应该怎么规划？</strong></p>
+<p>点击发送，可以看到作为一个职业顾问，他给我们详细列明了我们有很多职业道路可以选择，然后还给我们的职业生活也做了一些规划。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/consultant.png" alt="consultant"></p>
+<p>如果不让它扮演职业顾问，它给的回答是怎么样的呢？</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/new_chat.png" alt="new_chat"></p>
+<p>可以看到，同样的问题，当我们不让他扮演任何角色的时候，他给我们的答案就相对专业性就没有那么强。</p>
+<p>所以角色扮演在专业的问题上，ChatGPT能给到更好的回答，我们可以使用这个来获得更优秀的答案。</p>
+<h3 id="密码访问">密码访问</h3>
+<p>同时这个ChatGPT网站也是支持密码访问的，想要支持密码访问非常简单，上面已经告诉你如何添加环境变量。</p>
+<p>如果你之前没有添加，这里教你如何再次添加。</p>
+<p>点击你的当前项目，找到<code>settings</code>设置项，然后找到左边的<code>Environment Variables</code>也就是环境变量。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/add_env.png" alt="add_env"></p>
+<p>密码的环境变量的key是<code>CODE</code>，这个值你可以填写你的密码，比如说我填写<strong>techxiaofei</strong>，然后点击保存</p>
+<p>现在我们环境已经添加成功了，添加成功之后我们重新编译一下，我们点击redeploy就是重编译。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/redeploy.png" alt="redeploy"></p>
+<p>重新访问我们的ChatGPT网站，可以看到上面提示：<strong>现在是未授权状态，请点击左下角设置按钮输入访问密码。</strong></p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/pass.png" alt="pass"></p>
+<p>我们点击左下角的设置，然后找到访问密码，输入我们的访问密码，就可以正常和ChatGPT对话了。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/add_pass.png" alt="add_pass"></p>
+<h1 id="后记">后记</h1>
+<p>这个ChatGPT Web网站可以解决在国内无法正常访问ChatGPT的问题</p>
+<p>而且它也不需要云服务器，不需要你购买任何东西，完全免费，任何人都可以轻松一键部署，所以赶紧尝试一下吧。</p>
+<h1 id="视频教程">视频教程</h1>
+<p>本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>。
+<style>
+    .meta-media {
+      position: relative;
+      margin-bottom: 30px;
+      display: flex;
+      width: 100%;
+      height: 0;
+      padding-bottom: 75%;
+    }
+    .video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+    </style>
+    <div class="meta-media">
+    <iframe src="https://www.youtube.com/embed/Z9-vvIX80sg" frameborder="no" scrolling="yes" allowfullscreen="allowfullscreen" high_quality="1" framespacing="1" class="video" >
+    </iframe>
+    </div></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">科技小飞哥</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2023-04-30
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/personal/wechat_pay.png">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/ai/claude/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">ChatGPT最强平替，Claude保姆级教程，完全免费，支持手机端</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/chatgpt/wechat_mp/">
+            <span class="next-text nav-default">【全网最简单方法】ChatGPT接入微信公众号 - 包教包会，100%成功</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="techxiaofei/techxiaofei.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://www.techxiaofei.com" class="iconfont icon-site" title="site"></a>
+      <a href="https://www.youtube.com/@techxiaofei" class="iconfont icon-youtube" title="youtube"></a>
+      <a href="https://space.bilibili.com/49756120" class="iconfont icon-bilibili" title="bilibili"></a>
+</div>
+<div class="friend-links">
+  <span class="item-content"><b>友情链接：</b></span>
+  <a href="https://www.amazonaws.cn/" title="亚马逊云科技">亚马逊云科技</a>
+  <a href="https://dev.amazoncloud.cn/" title="亚马逊开发者社区">亚马逊开发者社区</a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>科技小飞哥</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>VPS搭建v2ray科学上网｜自建机场｜附各平台使用教程 - 科技小飞哥</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="科技小飞哥" /><meta name="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 亲爱的小伙伴大家好，今天教大家如何在云服务器上自建机场进行科学上网。 为什么自建机场？" /><meta name="keywords" content="ssr, v2ray" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+<meta name="msvalidate.01" content="9CB8E7A6AD8ADF22F9ED93166445E5B9" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ3LW65VYR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QZ3LW65VYR');
+</script>
+
+
+<meta name="generator" content="Hugo 0.111.3 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/vpn/vpn/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.8670b48c7d31f917f4a6f54305e7950cfd41225f00cbec112ac6e809a86ef2b9.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="VPS搭建v2ray科学上网｜自建机场｜附各平台使用教程" />
+<meta property="og:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 亲爱的小伙伴大家好，今天教大家如何在云服务器上自建机场进行科学上网。 为什么自建机场？" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/vpn/vpn/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-07T13:00:51+08:00" />
+<meta property="article:modified_time" content="2023-04-07T13:00:51+08:00" />
+<meta itemprop="name" content="VPS搭建v2ray科学上网｜自建机场｜附各平台使用教程">
+<meta itemprop="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 亲爱的小伙伴大家好，今天教大家如何在云服务器上自建机场进行科学上网。 为什么自建机场？"><meta itemprop="datePublished" content="2023-04-07T13:00:51+08:00" />
+<meta itemprop="dateModified" content="2023-04-07T13:00:51+08:00" />
+<meta itemprop="wordCount" content="2241">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="VPS搭建v2ray科学上网｜自建机场｜附各平台使用教程"/>
+<meta name="twitter:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 亲爱的小伙伴大家好，今天教大家如何在云服务器上自建机场进行科学上网。 为什么自建机场？"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">科技小飞哥</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/friend/">
+        <li class="mobile-menu-item">友链</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">科技小飞哥</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/friend/">友链</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">VPS搭建v2ray科学上网｜自建机场｜附各平台使用教程</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-04-07 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"> 科学上网 </a>
+            </div>
+          <span class="more-meta"> 约 2241 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a>
+      <ul>
+        <li><a href="#为什么自建机场">为什么自建机场？</a></li>
+        <li><a href="#为什么不选择国内的云服务器供应商">为什么不选择国内的云服务器供应商？</a></li>
+        <li><a href="#vps云服务器">VPS/云服务器</a></li>
+        <li><a href="#协议选择">协议选择</a></li>
+      </ul>
+    </li>
+    <li><a href="#快速搭建-v2ray">快速搭建 v2ray</a>
+      <ul>
+        <li><a href="#v2ray-一键脚本安装">v2ray 一键脚本安装</a></li>
+        <li><a href="#安装">安装</a>
+          <ul>
+            <li><a href="#tcp协议">TCP协议</a></li>
+          </ul>
+        </li>
+        <li><a href="#安装成功">安装成功</a>
+          <ul>
+            <li><a href="#1tcp成功">1.TCP成功</a></li>
+          </ul>
+        </li>
+        <li><a href="#查看">查看</a>
+          <ul>
+            <li><a href="#v2ary命令">v2ary命令</a></li>
+            <li><a href="#linux命令">Linux命令</a></li>
+          </ul>
+        </li>
+        <li><a href="#配置信息">配置信息</a></li>
+        <li><a href="#防火墙">防火墙</a></li>
+      </ul>
+    </li>
+    <li><a href="#不同平台客户端">不同平台客户端</a>
+      <ul>
+        <li><a href="#1-windows">1. Windows</a></li>
+        <li><a href="#2-android">2. Android</a></li>
+        <li><a href="#3-macos">3. MacOS</a></li>
+        <li><a href="#4-ios">4. iOS</a></li>
+      </ul>
+    </li>
+    <li><a href="#结语">结语</a></li>
+    <li><a href="#视频教程">视频教程</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>。
+<img src="/img/personal/header.png" alt="header"></p>
+<h1 id="背景">背景</h1>
+<p>亲爱的小伙伴大家好，今天教大家如何在云服务器上自建机场进行科学上网。</p>
+<h2 id="为什么自建机场">为什么自建机场？</h2>
+<p>Chatgpt的爆火带动了一批科学上网的需求剧增，很多人都是订阅机场来满足科学上网的需求，订阅的机场第一是非常不安全容易暴露个人隐私，第二是使用同一IP的人数太多，像使用来访问chatgpt，非常容易被识别出来然后被封号。所以这种场景下还是自己搭建科学上网梯子最安全，独立的IP地址，同时个人隐私也有保障。</p>
+<h2 id="为什么不选择国内的云服务器供应商">为什么不选择国内的云服务器供应商？</h2>
+<p>自己搭建机场需要一台VPS或者云服务器，拥有一台VPS不仅可以搭建机场，还可以用来部署服务把chatgpt接入各种平台，比如微信，公众号，网站，电报等等。</p>
+<p>国内的云服务器供应商，如果搭建科学上网或者部署Chatgpt服务，都面临被封的风险，所以建议有此需求的小伙伴去国外的服务器供应商购买。</p>
+<h2 id="vps云服务器">VPS/云服务器</h2>
+<p>如果你还没有VPS或者云服务器，我给大家推荐一家国外的云服务器供应商。可以点此地址购买：<a href="http://bit.ly/3GlfucW">http://bit.ly/3GlfucW</a></p>
+<p>它们的<code>VPS</code>非常便宜，最便宜的VPS只需要3美刀一个月，你可以在上面自建机场搭建<code>科学上网</code>，搭建<code>个人网站</code>，也可以用来<code>接入ChatGPT</code>。如果你的预算充足，也可以直接购买<code>云服务器</code>，也非常便宜，每个月只需要7美刀左右。</p>
+<p><img src="/img/vpn/v2ray/raksmart.png" alt="raksmart"></p>
+<p>你购买一个靠谱的机场的价格也差不多这个价，但是自己购买VPS可以在上面自建机场代理，同时还可以接入ChatGPT。有需求的小伙伴可以点此 <a href="http://bit.ly/3GlfucW">http://bit.ly/3GlfucW</a> 链接注册购买。</p>
+<h2 id="协议选择">协议选择</h2>
+<p>科学上网的技术一直在发展。从最开始的VPN到SS到SSR再到v2ray，像VPN或者SSR这些前些年比较火，但是由于流量特征比较明显，非常容易被识别并被封。所以现在已经很少使用了。</p>
+<p>V2Ray使用了新的自行研发的VMess协议，改正了SSR一些已有的缺点，更难被墙检测到。所以V2ray就成了最近非常火的科学上网工具。v2ray要说缺点，那就是配置比较复杂，不过现在越来越多的大牛写了很多一键部署脚本，让小白少走很多弯路，可以轻松一键部署v2ray进行科学上网。</p>
+<h1 id="快速搭建-v2ray">快速搭建 v2ray</h1>
+<p>我们使用Ubuntu服务器来快速搭建v2ray，首先你需要有一台在境外的ubuntu云服务器，</p>
+<p>如果没有可以点此地址购买，它们的VPS服务器非常便宜：<a href="http://bit.ly/3GlfucW">http://bit.ly/3GlfucW</a></p>
+<h2 id="v2ray-一键脚本安装">v2ray 一键脚本安装</h2>
+<p>我们直接使用大神一键安装脚本。</p>
+<ol>
+<li>切换root权限</li>
+<li>执行v2ray一键安装脚本</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">sudo su
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">bash &lt;<span class="o">(</span>curl -s -L https://git.io/v2ray.sh<span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果提示<code>-bash: curl: command not found</code>，执行如下命令安装curl：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo apt install curl -y
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="安装">安装</h2>
+<p>执行上述命令然后点击Enter</p>
+<p><img src="/img/vpn/v2ray/install.png" alt="install"></p>
+<p>输入1选择安装</p>
+<!--
+然后选择协议，你可以选择如下两个协议： 
+1. TCP
+4. WS+TLS协议
+-->
+<h3 id="tcp协议">TCP协议</h3>
+<p>如果选择TCP协议，之后所有的都选默认（点击Enter即可，不需要输入），点击继续。</p>
+<!--
+### WS+TLS协议
+`更新`：由于流量特征明显容易被封，如果你有域名，在这里建议输入4，选择WS+TLS，比较难被封（即使IP被封，后续会通过cloudflare CDN转发解决），如
+![protocol](/img/vpn/vpn/protocol.png)
+
+`更新`：如果选择的`4 : WS+TLS`，需要输入域名，并把域名解析（建议使用cloudflare）到指定的IP地址。
+
+![resolution](/img/vpn/vpn/resolution.png)
+
+**自动配置TLS**：Y
+
+![tls](/img/vpn/vpn/tls.png)
+
+**是否开启 网站伪装 和 路径分流**： Y
+![distribute](/img/vpn/vpn/distribute.png)
+
+** 输入正确的网址作为 网站的伪装：
+
+![url](/img/vpn/vpn/url.png)
+
+其它的都选默认
+-->
+<h2 id="安装成功">安装成功</h2>
+<p>如果提示需要重启服务，选择Yes即可。</p>
+<p><img src="/img/vpn/vpn/restart.png" alt="restart"></p>
+<h3 id="1tcp成功">1.TCP成功</h3>
+<p>如果你选择的1：TCP。</p>
+<p>有几个信息比较重要，是需要配置在你连接v2ray的客户端上的。</p>
+<p><img src="/img/vpn/vpn/info.png" alt="info"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">地址（Address）
+</span></span><span class="line"><span class="cl">端口（Port）
+</span></span><span class="line"><span class="cl">用户ID（UUID） 
+</span></span><span class="line"><span class="cl">额外ID（Alter ID）
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以保存下来，也可以之后进入到 <code>/etc/v2ray/config.json</code> 文件查看。</p>
+<!--
+### 2.WS+TLS成功
+如果你选择的4：WS+TLS：
+![ws_config](/img/vpn/vpn/ws_config.png)
+
+需要配置的东西会更多一些，主要是传输协议，伪装域名，路径和TLS需要配置。
+
+可以保存下来，也可以之后进入到 `/etc/v2ray/config.json` 文件查看。
+-->
+<h2 id="查看">查看</h2>
+<p>执行完成之后，v2ray已经默认启动了，你可以执行指令查看是否真的启动</p>
+<h3 id="v2ary命令">v2ary命令</h3>
+<p>输入<code>v2ray</code>命令查看运行状态：
+<img src="/img/vpn/vpn/run.png" alt="run"></p>
+<p>显示正在运行代表运行成功。</p>
+<h3 id="linux命令">Linux命令</h3>
+<p>linux命令，可以查看v2ray的进程是否存在</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">ps -ef <span class="p">|</span> grep -v grep <span class="p">|</span> grep v2ray
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/img/vpn/vpn/grep.png" alt="grep"></p>
+<h2 id="配置信息">配置信息</h2>
+<p>如果你刚才保存了地址，端口等配置信息，就不需要查看了，如果忘了保存。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cat /etc/v2ray/config.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以查看配置信息</p>
+<p>里面的inbounds信息比较重要，也就是入口流量</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;inbounds&#34;</span><span class="err">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nt">&#34;port&#34;</span><span class="p">:</span> <span class="mi">24649</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nt">&#34;protocol&#34;</span><span class="p">:</span> <span class="s2">&#34;vmess&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nt">&#34;settings&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nt">&#34;clients&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">					<span class="p">{</span>
+</span></span><span class="line"><span class="cl">						<span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;16b44a2c-106d-44f2-b4e9-e756b2294044&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">						<span class="nt">&#34;level&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">						<span class="nt">&#34;alterId&#34;</span><span class="p">:</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">					<span class="p">}</span>
+</span></span><span class="line"><span class="cl">				<span class="p">]</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="nt">&#34;streamSettings&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nt">&#34;network&#34;</span><span class="p">:</span> <span class="s2">&#34;tcp&#34;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="nt">&#34;sniffing&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nt">&#34;enabled&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nt">&#34;destOverride&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">					<span class="s2">&#34;http&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">					<span class="s2">&#34;tls&#34;</span>
+</span></span><span class="line"><span class="cl">				<span class="p">]</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="防火墙">防火墙</h2>
+<p>一般的云服务器都会有防火墙来阻挡非法流量，你需要把刚才的端口加到安全组策略里面。</p>
+<p>你可以在个人电脑尝试telent你的IP和端口</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># 例子 telnet IP port，使用你的真实IP和端口代替</span>
+</span></span><span class="line"><span class="cl">telnet a.b.c.d <span class="m">12345</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果能联通，说明可以使用，如果不行，那么就需要设置安全组策略。
+<img src="/img/vpn/vpn/wall.png" alt="wall"></p>
+<ul>
+<li>规则方向选择入口流量</li>
+<li>协议选择自定义TCP</li>
+<li>端口选择你部署的v2ray端口</li>
+<li>授权IP填写 0.0.0.0/0</li>
+</ul>
+<p>添加成功之后使用 <code>telnet IP port</code>就可以成功了。（使用你的真实IP端口代替）</p>
+<h1 id="不同平台客户端">不同平台客户端</h1>
+<p>每个平台都有多种客户端可以连接v2ray进行科学上网。</p>
+<p>客户端连接一般来说只需要填写</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">地址（Address）
+</span></span><span class="line"><span class="cl">端口（Port）
+</span></span><span class="line"><span class="cl">用户ID（UUID） 
+</span></span><span class="line"><span class="cl">额外ID（Alter ID）
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我这里每个平台推荐一个软件来进行科学上网。</p>
+<h2 id="1-windows">1. Windows</h2>
+<p>Windows推荐使用Clash For Window客户端，教程可以参考：</p>
+<p><a href="https://www.techxiaofei.com/post/vpn/clash_for_windows/">https://www.techxiaofei.com/post/vpn/clash_for_windows/</a></p>
+<h2 id="2-android">2. Android</h2>
+<p>安卓系统推荐使用 <a href="https://github.com/2dust/v2rayNG">V2rayNG</a></p>
+<p>点击右边的Release选择最新版下载。</p>
+<h2 id="3-macos">3. MacOS</h2>
+<p>MacOS系统推荐使用ClashX客户端，教程可以参考：</p>
+<p><a href="https://www.techxiaofei.com/post/vpn/clashx/">https://www.techxiaofei.com/post/vpn/clashx/</a></p>
+<h2 id="4-ios">4. iOS</h2>
+<p>如果你是<code>iPhone/iPad</code>用户，那么最好的选择就是去海外的<code>App Store</code>下载 <code>Shadowrocket</code>，这是一个付费软件，但是是iOS系统上最好用的代理软件，，支持多种协议。（需海外App Sotre账号）</p>
+<p><img src="/img/vpn/v2ray/iphone_app.png" alt="iphone_app"></p>
+<p>只需要配置下面信息即可：</p>
+<ul>
+<li>协议类型选择你的代理的协议类型，我使用的是v2ary的VMESS协议。</li>
+<li>IP/端口/UUID/额外ID 选择你的代理配置即可。
+<img src="/img/vpn/vpn/ss.png" alt="ss"></li>
+</ul>
+<h1 id="结语">结语</h1>
+<p>我只是推荐了几款我觉得比较好用的客户端，v2ray整体来说配置有一定的难度，如果你需要某个系统的客户端安装配置教程，可以评论区留言，我会单独制作一篇教程。</p>
+<p>&lt;全文完&gt;</p>
+<h1 id="视频教程">视频教程</h1>
+<p>本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>。
+<style>
+    .meta-media {
+      position: relative;
+      margin-bottom: 30px;
+      display: flex;
+      width: 100%;
+      height: 0;
+      padding-bottom: 75%;
+    }
+    .video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+    </style>
+    <div class="meta-media">
+    <iframe src="https://www.youtube.com/embed/7P3uCPe47Os" frameborder="no" scrolling="yes" allowfullscreen="allowfullscreen" high_quality="1" framespacing="1" class="video" >
+    </iframe>
+    </div></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">科技小飞哥</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2023-04-07
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/personal/wechat_pay.png">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/vpn/clash_for_windows/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Clash for Windows配置V2ray教程</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/ai/cartoon/">
+            <span class="next-text nav-default">Midjourney - 用AI绘制你的专属迪斯尼卡通头像</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="techxiaofei/techxiaofei.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://www.techxiaofei.com" class="iconfont icon-site" title="site"></a>
+      <a href="https://www.youtube.com/@techxiaofei" class="iconfont icon-youtube" title="youtube"></a>
+      <a href="https://space.bilibili.com/49756120" class="iconfont icon-bilibili" title="bilibili"></a>
+</div>
+<div class="friend-links">
+  <span class="item-content"><b>友情链接：</b></span>
+  <a href="https://www.amazonaws.cn/" title="亚马逊云科技">亚马逊云科技</a>
+  <a href="https://dev.amazoncloud.cn/" title="亚马逊开发者社区">亚马逊开发者社区</a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>科技小飞哥</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>【全网最简单方法】ChatGPT接入微信公众号 - 包教包会，100%成功 - 科技小飞哥</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="科技小飞哥" /><meta name="description" content="背景 之前我已经做了一期ChatGPT接入公众号的教程。但是教程需要执行大量的命令，一不小心执行命令的时候就会出错，所以我决定把这些繁琐的工作" /><meta name="keywords" content="ChatGPT" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+<meta name="msvalidate.01" content="9CB8E7A6AD8ADF22F9ED93166445E5B9" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ3LW65VYR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QZ3LW65VYR');
+</script>
+
+
+<meta name="generator" content="Hugo 0.111.3 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/chatgpt/wechat_mp/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.8670b48c7d31f917f4a6f54305e7950cfd41225f00cbec112ac6e809a86ef2b9.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="【全网最简单方法】ChatGPT接入微信公众号 - 包教包会，100%成功" />
+<meta property="og:description" content="背景 之前我已经做了一期ChatGPT接入公众号的教程。但是教程需要执行大量的命令，一不小心执行命令的时候就会出错，所以我决定把这些繁琐的工作" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/chatgpt/wechat_mp/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-13T13:00:51+08:00" />
+<meta property="article:modified_time" content="2023-04-13T13:00:51+08:00" />
+<meta itemprop="name" content="【全网最简单方法】ChatGPT接入微信公众号 - 包教包会，100%成功">
+<meta itemprop="description" content="背景 之前我已经做了一期ChatGPT接入公众号的教程。但是教程需要执行大量的命令，一不小心执行命令的时候就会出错，所以我决定把这些繁琐的工作"><meta itemprop="datePublished" content="2023-04-13T13:00:51+08:00" />
+<meta itemprop="dateModified" content="2023-04-13T13:00:51+08:00" />
+<meta itemprop="wordCount" content="2195">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="【全网最简单方法】ChatGPT接入微信公众号 - 包教包会，100%成功"/>
+<meta name="twitter:description" content="背景 之前我已经做了一期ChatGPT接入公众号的教程。但是教程需要执行大量的命令，一不小心执行命令的时候就会出错，所以我决定把这些繁琐的工作"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">科技小飞哥</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/friend/">
+        <li class="mobile-menu-item">友链</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">科技小飞哥</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/friend/">友链</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">【全网最简单方法】ChatGPT接入微信公众号 - 包教包会，100%成功</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-04-13 </span>
+        <div class="post-category">
+            <a href="/categories/chatgpt/"> ChatGPT </a>
+            </div>
+          <span class="more-meta"> 约 2195 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a>
+      <ul>
+        <li><a href="#优化">优化</a></li>
+      </ul>
+    </li>
+    <li><a href="#教程">教程</a>
+      <ul>
+        <li><a href="#云服务器">云服务器</a>
+          <ul>
+            <li><a href="#注册">注册</a></li>
+            <li><a href="#购买">购买</a></li>
+            <li><a href="#付款">付款</a></li>
+          </ul>
+        </li>
+        <li><a href="#云服务器-1">云服务器</a>
+          <ul>
+            <li><a href="#新增安全组策略">新增安全组策略</a></li>
+            <li><a href="#windows登录">Windows登录</a></li>
+            <li><a href="#macoslinux登录">MacOS/Linux登录</a></li>
+          </ul>
+        </li>
+        <li><a href="#api-key">API Key</a></li>
+        <li><a href="#部署">部署</a>
+          <ul>
+            <li><a href="#5浏览器打开werobot">5.浏览器打开WeRoBot</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#公众号设置">公众号设置</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#1设置公众号回调地址">1.设置公众号回调地址</a></li>
+            <li><a href="#2启用配置">2.启用配置</a></li>
+            <li><a href="#3使用">3.使用</a></li>
+          </ul>
+        </li>
+        <li><a href="#自己编译镜像运行">自己编译镜像运行</a></li>
+      </ul>
+    </li>
+    <li><a href="#结语">结语</a></li>
+    <li><a href="#视频教程">视频教程</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="背景">背景</h1>
+<!--
+小伙伴们大家好，欢迎回到我的频道
+-->
+<p>之前我已经做了一期<code>ChatGPT接入公众号</code>的教程。但是教程需要执行大量的命令，一不小心执行命令的时候就会出错，所以我决定把这些繁琐的工作我都给大家打包好，让大家能够一键轻松使用。</p>
+<p><strong>简易版教程（链接和指令列表）</strong>：<a href="https://techxiaofei.eu.org/post/chatgpt/wechat_mp">https://techxiaofei.eu.org/post/chatgpt/wechat_mp</a></p>
+<h2 id="优化">优化</h2>
+<p>我把所有的需要安装的软件都打包成了<code>Docker镜像</code>，公众号专用的<code>json配置</code>也单独上传了，你只需要把这两个内容下载下来，然后json配置里面的<code>api_key</code>改成你自己的key，直接运行就可以。简单到你想不到。</p>
+<h1 id="教程">教程</h1>
+<p>想要把ChatGPT接入到微信公众号，首先我们需要有一台境外的云服务器，如果你没有云服务器，可以点击下方的链接购买，有9折优惠。我亲测在这个云服务器上（美国区）能正常运行，其他的云服务器没有测试过，不做保证。</p>
+<h2 id="云服务器">云服务器</h2>
+<p>点此链接注册购买：<a href="http://bit.ly/3GlfucW">http://bit.ly/3GlfucW</a></p>
+<p>付款时输入：<strong>RAKBL9</strong> 有9折优惠。</p>
+<p>建议选择系统：<strong>Ubuntu 20.04</strong>或者<strong>Ubuntu 22.04</strong>。</p>
+<p>最便宜的<code>VPS</code>只需要3美金，当然，如果你的预算充足，我推荐你直接购买<code>云服务器</code>，会有更好的机器配置，折后每个月也只需要6美金左右。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/vpn/v2ray/raksmart.png" alt="raksmart"></p>
+<h3 id="注册">注册</h3>
+<p>点此链接注册购买：<a href="http://bit.ly/3GlfucW">http://bit.ly/3GlfucW</a></p>
+<p>付款时输入：<strong>RAKBL9</strong> 有9折优惠。</p>
+<p>点击右上角的注册按钮：
+<img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/register.png" alt="register"></p>
+<p>然后填写个人信息即可注册，非常方便。</p>
+<p>邮箱地址就是你的登录邮箱。</p>
+<h3 id="购买">购买</h3>
+<p>你可以根据需求选择区域购买云服务器，可以看到云服务器每个月只需要7美刀左右，非常便宜。</p>
+<p>如果你需要更好的配置，也可以选择升级处理器和内存。</p>
+<p>操作系统选择 <code>Ubuntu</code> 最新的版本， <code>Ubuntu-20.04</code> 或者 <code>Ubuntu-22.04</code> 都可以。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/buy.png" alt="buy"></p>
+<h3 id="付款">付款</h3>
+<p>付款界面输入优惠码：<code>RAKBL9</code> 点击验证，即可享受9折优惠。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/voucher.png" alt="voucher"></p>
+<h2 id="云服务器-1">云服务器</h2>
+<p>我们进入云服务器信息界面，记住 IP，密码，和端口号，用户名默认是 <code>root</code>，购买成功后也会收到邮件，查看邮件确认具体的信息。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/server.png" alt="server"></p>
+<h3 id="新增安全组策略">新增安全组策略</h3>
+<p>如果端口不是默认的<code>22</code>号端口，需要把端口添加到安全组策略里面，这样才能开放端口访问。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/safe.png" alt="safe"></p>
+<h3 id="windows登录">Windows登录</h3>
+<p>Windows可以使用任意的<code>SSH客户端</code>登录， 我这里使用的<code>Putty</code>登录，如果你是<code>Final Shell</code>或者<code>XShell</code>等客户端也是可以的。</p>
+<p>Putty下载地址：<a href="https://www.putty.org">https://www.putty.org</a></p>
+<p><strong>输入IP+端口：</strong>
+<img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/putty.png" alt="putty"></p>
+<p><strong>输入账号+密码：</strong>
+<img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/password.png" alt="password"></p>
+<h3 id="macoslinux登录">MacOS/Linux登录</h3>
+<p>MacOS和Linux系统直接在终端使用<code>ssh</code>命令登录即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># -p 是端口号，如果是22默认端口号则不需要输入
+</span></span><span class="line"><span class="cl"># root是用户名，默认分配的用户名是root
+</span></span><span class="line"><span class="cl">ssh -p 13647 root@137.175.50.252
+</span></span><span class="line"><span class="cl"># 输入密码
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="api-key">API Key</h2>
+<p>需要一个chatGPT账号并生成一个API Key，这个API secret Key是为了验证你的身份。</p>
+<p>这个非常简单，我们打开openai的平台地址：https://platform.openai.com/</p>
+<p>登录之后点击右上角的头像，点击<code>Manage Account</code>-&gt;<code>API Keys</code>-&gt;<code>Create New Secret Key</code>, 然后复制下来保存备用。
+<img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/wechat/key.png" alt="key"></p>
+<h2 id="部署">部署</h2>
+<p>现在我们有了云服务器，也有了API Key，下一步就是在云服务器上部署ChatGPT接入公众号的程序，我这里已经把所有的东西都给你打包好了，只需要下载即可轻松使用，再也不用担心安装出错而不知道找谁解决了。</p>
+<p><code>附：</code>
+Docker Hub地址：<a href="https://hub.docker.com/r/techxiaofei/bot-on-anything">https://hub.docker.com/r/techxiaofei/bot-on-anything</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 更新包管理器</span>
+</span></span><span class="line"><span class="cl">sudo apt-get update
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装docker</span>
+</span></span><span class="line"><span class="cl">apt install docker.io -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 下载docker镜像</span>
+</span></span><span class="line"><span class="cl">docker pull techxiaofei/bot-on-anything:latest
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 给镜像打标签</span>
+</span></span><span class="line"><span class="cl">docker tag techxiaofei/bot-on-anything bot-on-anything
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 下载配置文件（公众号版），只需要改 api_key 即可</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># token可改可不改，只需要保证和公众号里面配置的一样即可。</span>
+</span></span><span class="line"><span class="cl">wget -O config.json https://raw.githubusercontent.com/techxiaofei/resource/main/config/chatgpt/official/config.json
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 后台运行</span>
+</span></span><span class="line"><span class="cl">docker run --name bot-on-anything -d -p 0.0.0.0:80:80 -v <span class="s2">&#34;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">/config.json:/app/config.json&#34;</span> bot-on-anything python app.py
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看log</span>
+</span></span><span class="line"><span class="cl">docker logs -f bot-on-anything
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="5浏览器打开werobot">5.浏览器打开WeRoBot</h3>
+<p>浏览器输入你的服务器的<code>IP地址</code>打开WeRoBot页面代表服务正常运行。</p>
+<p>这个IP地址的http链接后面需要填到公众号里面。</p>
+<p><a href="http://a.b.c.d/">http://a.b.c.d/</a></p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/official/werobot.png" alt="werobot"></p>
+<h1 id="公众号设置">公众号设置</h1>
+<h3 id="1设置公众号回调地址">1.设置公众号回调地址</h3>
+<p>在 <a href="https://mp.weixin.qq.com/">微信公众平台</a> 中进入个人订阅号，点击左边侧边栏的<strong>基本配置</strong>，然后点击右边<strong>修改配置</strong>，进入以下界面。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/official/setting.png" alt="setting"></p>
+<p><code>URL</code>就是你的服务器的IP地址：http://a.b.c.d/</p>
+<p><code>Token</code>就是你服务器的config.json配置的那个Token</p>
+<p>消息加密密钥随机生成即可，选择默认的明文模式，点击<code>提交</code>。</p>
+<h3 id="2启用配置">2.启用配置</h3>
+<p>修改完配置点击右方的<code>启用</code>配置，会显示为：<strong>服务器配置（已启用）</strong>。此时我们的服务器配置已经启用成功。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/official/start.png" alt="start"></p>
+<h3 id="3使用">3.使用</h3>
+<p>用户关注订阅号后，发送消息即可。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/wechat_mp/background.png" alt="background"></p>
+<blockquote>
+<p>注：用户发送消息后，微信后台会向配置的URL地址推送，但如果5s内未回复就会断开连接，同时重试3次，但往往请求openai接口不止5s。本项目中通过异步和缓存将5s超时限制优化至30s。超过30s需要点击<code>继续</code>主动拉取缓存信息。待后续优化。</p>
+</blockquote>
+<h2 id="自己编译镜像运行">自己编译镜像运行</h2>
+<p><strong>注：</strong> 通常你不需要执行这个步骤，除非你需要自己修改代码然后编译运行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 克隆代码并进入到 bot-on-anything 目录</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/techxiaofei/bot-on-anything
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> bot-on-anything/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 修改代码（如果有需要）</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 更新包管理器</span>
+</span></span><span class="line"><span class="cl">sudo apt-get update
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装docker</span>
+</span></span><span class="line"><span class="cl">apt install docker.io
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># build</span>
+</span></span><span class="line"><span class="cl">docker build -t bot-on-anything .
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 下载公众号专有配置并修改</span>
+</span></span><span class="line"><span class="cl">wget -O config.json https://raw.githubusercontent.com/techxiaofei/resource/main/config/chatgpt/official/config.json
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 后台运行</span>
+</span></span><span class="line"><span class="cl">docker run --name bot-on-anything -d -p 0.0.0.0:80:80 -v <span class="s2">&#34;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">/config.json:/app/config.json&#34;</span> bot-on-anything python app.py
+</span></span></code></pre></td></tr></table>
+</div>
+</div><!--
+# push (可以带tag)
+docker login
+docker tag bot-on-anything techxiaofei/bot-on-anything
+docker push techxiaofei/bot-on-anything
+-->
+<h1 id="结语">结语</h1>
+<p>今天的全网最简单方法的ChatGPT接入微信公众号的教程就完成了，希望大家都能成功接入ChatGPT到公众号。</p>
+<p>&lt;全文完&gt;</p>
+<h1 id="视频教程">视频教程</h1>
+<p>本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>。
+<style>
+    .meta-media {
+      position: relative;
+      margin-bottom: 30px;
+      display: flex;
+      width: 100%;
+      height: 0;
+      padding-bottom: 75%;
+    }
+    .video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+    </style>
+    <div class="meta-media">
+    <iframe src="https://www.youtube.com/embed/qWG1-eFQGvg" frameborder="no" scrolling="yes" allowfullscreen="allowfullscreen" high_quality="1" framespacing="1" class="video" >
+    </iframe>
+    </div></p>
+<!--
+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
+-->
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">科技小飞哥</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2023-04-13
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/personal/wechat_pay.png">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/chatgpt/freeweb/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">无需云服务器，一键部署你的ChatGPT Web网站｜完全免费</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/cloud/aws_stable_diffusion/">
+            <span class="next-text nav-default">生花妙笔信手来 – 基于 SageMaker Notebook 快速搭建托管的 Stable Diffusion – AI 作画可视化环境</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="techxiaofei/techxiaofei.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://www.techxiaofei.com" class="iconfont icon-site" title="site"></a>
+      <a href="https://www.youtube.com/@techxiaofei" class="iconfont icon-youtube" title="youtube"></a>
+      <a href="https://space.bilibili.com/49756120" class="iconfont icon-bilibili" title="bilibili"></a>
+</div>
+<div class="friend-links">
+  <span class="item-content"><b>友情链接：</b></span>
+  <a href="https://www.amazonaws.cn/" title="亚马逊云科技">亚马逊云科技</a>
+  <a href="https://dev.amazoncloud.cn/" title="亚马逊开发者社区">亚马逊开发者社区</a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>科技小飞哥</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

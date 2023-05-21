@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="科技小飞哥" /><meta name="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 最近不少人问我，怎么解决热点Key问题。我" /><meta name="keywords" content="系统设计" />
+<meta name="author" content="科技小飞哥" /><meta name="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 最近不少人问我，怎么解决热点Key问题。我说，你提到这个我可就不困了。因为刚好，我手" /><meta name="keywords" content="系统设计" />
 
 
 <meta name="baidu-site-verification" content="code-vlQZuedAQs" />
@@ -42,7 +42,7 @@
 </script>
 
 
-<meta name="generator" content="Hugo 0.109.0 with theme even" />
+<meta name="generator" content="Hugo 0.111.3 with theme even" />
 
 
 <link rel="canonical" href="https://leftpocket.cn/post/system_design/hotspot/" />
@@ -54,23 +54,23 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.04109c830719138db2a69bc19ca2dacfea60d087f438e56f49491a10cd2d6e0b.css" rel="stylesheet">
+<link href="/sass/main.min.8670b48c7d31f917f4a6f54305e7950cfd41225f00cbec112ac6e809a86ef2b9.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
 <meta property="og:title" content="谈一谈热点Key解决方案" />
-<meta property="og:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 最近不少人问我，怎么解决热点Key问题。我" />
+<meta property="og:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 最近不少人问我，怎么解决热点Key问题。我说，你提到这个我可就不困了。因为刚好，我手" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://leftpocket.cn/post/system_design/hotspot/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-04-27T13:00:51+08:00" />
 <meta property="article:modified_time" content="2022-04-27T13:00:51+08:00" />
 <meta itemprop="name" content="谈一谈热点Key解决方案">
-<meta itemprop="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 最近不少人问我，怎么解决热点Key问题。我"><meta itemprop="datePublished" content="2022-04-27T13:00:51+08:00" />
+<meta itemprop="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 最近不少人问我，怎么解决热点Key问题。我说，你提到这个我可就不困了。因为刚好，我手"><meta itemprop="datePublished" content="2022-04-27T13:00:51+08:00" />
 <meta itemprop="dateModified" content="2022-04-27T13:00:51+08:00" />
-<meta itemprop="wordCount" content="3012">
+<meta itemprop="wordCount" content="2991">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="谈一谈热点Key解决方案"/>
-<meta name="twitter:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 最近不少人问我，怎么解决热点Key问题。我"/>
+<meta name="twitter:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 最近不少人问我，怎么解决热点Key问题。我说，你提到这个我可就不困了。因为刚好，我手"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -152,11 +152,11 @@
       <div class="post-meta">
         <span class="post-time"> 2022-04-27 </span>
         <div class="post-category">
-            <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/"> 系统设计 </a>
+            <a href="/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/"> 编程技术 </a>
             <a href="/categories//"> 　 </a>
             </div>
-          <span class="more-meta"> 约 3012 字 </span>
-          <span class="more-meta"> 预计阅读 7 分钟 </span>
+          <span class="more-meta"> 约 2991 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -189,7 +189,7 @@
   </div>
 </div>
     <div class="post-content">
-      <p>本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>，加入 <a href="https://t.me/+5OzmrG-iyJE2YzM9"><strong>电报粉丝群</strong></a> 获得最新视频更新和问题解答。</p>
+      <p>本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>。</p>
 <h1 id="背景">背景</h1>
 <p>最近不少人问我，怎么解决热点Key问题。我说，你提到这个我可就不困了。因为刚好，我手上的两个业务都有实现热点Key解决方案并且使用了不同的方案。</p>
 <p>我们的这两个服务都是支持百万级别QPS的服务，对热点Key的处理也算是经得起高并发的考验。</p>
@@ -209,7 +209,7 @@
 <p>当缓存服务崩溃后，此时再有请求产生，会缓存到后台 DB 上，由于DB 本身性能较弱，在面临大请求时很容易发生请求穿透现象，会进一步导致雪崩现象，严重影响设备的性能。</p>
 <h1 id="解决方案">解决方案</h1>
 <h2 id="方案一内存lru缓存">方案一：内存LRU缓存</h2>
-<p>这个方案可以看我的另外一篇文章：<a href="https://www.leftpocket.cn/post/system_design/lru/">LRU缓存机制，你想知道的这里都有</a></p>
+<p>这个方案可以看我的另外一篇文章：<a href="https://www.techxiaofei.com/post/system_design/lru/">LRU缓存机制，你想知道的这里都有</a></p>
 <h3 id="电商大促">电商大促</h3>
 <p>大促期间秒杀促销或者人气店铺</p>
 <p>我们在实际业务中使用了LRU缓存，主要是为了解决热点数据的访问问题。</p>
@@ -363,7 +363,6 @@
     <footer id="footer" class="footer">
       <div class="social-links">
       <a href="https://www.techxiaofei.com" class="iconfont icon-site" title="site"></a>
-      <a href="https://t.me/&#43;5OzmrG-iyJE2YzM9" class="iconfont icon-telegram" title="telegram"></a>
       <a href="https://www.youtube.com/@techxiaofei" class="iconfont icon-youtube" title="youtube"></a>
       <a href="https://space.bilibili.com/49756120" class="iconfont icon-bilibili" title="bilibili"></a>
 </div>

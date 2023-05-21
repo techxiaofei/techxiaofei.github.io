@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AI产品 on 科技小飞哥</title>
+    <link>https://leftpocket.cn/categories/ai%E4%BA%A7%E5%93%81/</link>
+    <description>Recent content in AI产品 on 科技小飞哥</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 20 May 2023 15:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/ai%E4%BA%A7%E5%93%81/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>教你搭建GPT4网站，完全免费，无需登录，无需魔法，3分钟拥有一个GPT4的bing AI网站</title>
+      <link>https://leftpocket.cn/post/ai/bingai_proxy/</link>
+      <pubDate>Sat, 20 May 2023 15:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/ai/bingai_proxy/</guid>
+      <description>背景 我知道很小伙伴想使用ChatGPT，但是经常被IP限制，今天就给大家分享一个无需登录，完全免费的GPT4的网站。 同时如果你想要自己搭建一</description>
+    </item>
+    
+    <item>
+      <title>ChatGPT最强平替，Claude保姆级教程，完全免费，支持手机端</title>
+      <link>https://leftpocket.cn/post/ai/claude/</link>
+      <pubDate>Tue, 02 May 2023 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/ai/claude/</guid>
+      <description>背景 由于众所周知的原因，ChatGPT目前注册非常难，且国内访问受限。所以我来介绍一款ChatGPT最强的替代版，Claude。Claude</description>
+    </item>
+    
+    <item>
+      <title>Midjourney - 用AI绘制你的专属迪斯尼卡通头像</title>
+      <link>https://leftpocket.cn/post/ai/cartoon/</link>
+      <pubDate>Thu, 06 Apr 2023 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/ai/cartoon/</guid>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 之前我制作了一篇视频，教大家怎么从零开始使用Midjourney并通过简单的提示词来</description>
+    </item>
+    
+  </channel>
+</rss>

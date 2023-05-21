@@ -6,22 +6,58 @@
     <description>Recent content in Categories on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 10 Apr 2023 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 20 May 2023 15:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>云服务器</title>
-      <link>https://leftpocket.cn/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
-      <pubDate>Mon, 10 Apr 2023 13:00:51 +0800</pubDate>
+      <title>AI产品</title>
+      <link>https://leftpocket.cn/categories/ai%E4%BA%A7%E5%93%81/</link>
+      <pubDate>Sat, 20 May 2023 15:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+      <guid>https://leftpocket.cn/categories/ai%E4%BA%A7%E5%93%81/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>AI</title>
-      <link>https://leftpocket.cn/categories/ai/</link>
-      <pubDate>Thu, 06 Apr 2023 13:00:51 +0800</pubDate>
+      <title>ChatGPT</title>
+      <link>https://leftpocket.cn/categories/chatgpt/</link>
+      <pubDate>Sat, 20 May 2023 15:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/categories/ai/</guid>
+      <guid>https://leftpocket.cn/categories/chatgpt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>汉化教程</title>
+      <link>https://leftpocket.cn/categories/%E6%B1%89%E5%8C%96%E6%95%99%E7%A8%8B/</link>
+      <pubDate>Sat, 20 May 2023 01:00:55 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/categories/%E6%B1%89%E5%8C%96%E6%95%99%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>notion</title>
+      <link>https://leftpocket.cn/categories/notion/</link>
+      <pubDate>Sun, 14 May 2023 01:00:55 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/categories/notion/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>脚本工具</title>
+      <link>https://leftpocket.cn/categories/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Sat, 06 May 2023 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/categories/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>云服务器</title>
+      <link>https://leftpocket.cn/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+      <pubDate>Sun, 30 Apr 2023 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
       <description></description>
     </item>
     
@@ -35,38 +71,11 @@
     </item>
     
     <item>
-      <title>ChatGPT</title>
-      <link>https://leftpocket.cn/categories/chatgpt/</link>
-      <pubDate>Sun, 02 Apr 2023 13:00:51 +0800</pubDate>
-      
-      <guid>https://leftpocket.cn/categories/chatgpt/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>notion</title>
-      <link>https://leftpocket.cn/categories/notion/</link>
-      <pubDate>Sun, 26 Mar 2023 01:04:55 +0800</pubDate>
-      
-      <guid>https://leftpocket.cn/categories/notion/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>免费白嫖</title>
       <link>https://leftpocket.cn/categories/%E5%85%8D%E8%B4%B9%E7%99%BD%E5%AB%96/</link>
       <pubDate>Sun, 26 Mar 2023 01:04:55 +0800</pubDate>
       
       <guid>https://leftpocket.cn/categories/%E5%85%8D%E8%B4%B9%E7%99%BD%E5%AB%96/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>脚本工具</title>
-      <link>https://leftpocket.cn/categories/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/</link>
-      <pubDate>Mon, 16 Jan 2023 13:00:51 +0800</pubDate>
-      
-      <guid>https://leftpocket.cn/categories/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/</guid>
       <description></description>
     </item>
     
@@ -80,47 +89,11 @@
     </item>
     
     <item>
-      <title>Redis</title>
-      <link>https://leftpocket.cn/categories/redis/</link>
+      <title>编程技术</title>
+      <link>https://leftpocket.cn/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/</link>
       <pubDate>Sun, 08 Jan 2023 01:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/categories/redis/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>系统设计</title>
-      <link>https://leftpocket.cn/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</link>
-      <pubDate>Thu, 22 Dec 2022 18:00:51 +0800</pubDate>
-      
-      <guid>https://leftpocket.cn/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>面试</title>
-      <link>https://leftpocket.cn/categories/%E9%9D%A2%E8%AF%95/</link>
-      <pubDate>Wed, 06 Jul 2022 00:00:00 +0800</pubDate>
-      
-      <guid>https://leftpocket.cn/categories/%E9%9D%A2%E8%AF%95/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Golang</title>
-      <link>https://leftpocket.cn/categories/golang/</link>
-      <pubDate>Sat, 02 Jul 2022 13:00:51 +0800</pubDate>
-      
-      <guid>https://leftpocket.cn/categories/golang/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>后端通用技术</title>
-      <link>https://leftpocket.cn/categories/%E5%90%8E%E7%AB%AF%E9%80%9A%E7%94%A8%E6%8A%80%E6%9C%AF/</link>
-      <pubDate>Tue, 10 May 2022 13:00:51 +0800</pubDate>
-      
-      <guid>https://leftpocket.cn/categories/%E5%90%8E%E7%AB%AF%E9%80%9A%E7%94%A8%E6%8A%80%E6%9C%AF/</guid>
+      <guid>https://leftpocket.cn/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/</guid>
       <description></description>
     </item>
     
@@ -130,42 +103,6 @@
       <pubDate>Sat, 30 Apr 2022 00:00:51 +0800</pubDate>
       
       <guid>https://leftpocket.cn/categories/%E6%96%B0%E5%8A%A0%E5%9D%A1%E7%94%9F%E6%B4%BB/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>MySQL</title>
-      <link>https://leftpocket.cn/categories/mysql/</link>
-      <pubDate>Fri, 29 Apr 2022 13:00:51 +0800</pubDate>
-      
-      <guid>https://leftpocket.cn/categories/mysql/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>网络编程</title>
-      <link>https://leftpocket.cn/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
-      <pubDate>Sat, 01 Jan 2022 00:00:02 +0800</pubDate>
-      
-      <guid>https://leftpocket.cn/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>后端开发</title>
-      <link>https://leftpocket.cn/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/</link>
-      <pubDate>Fri, 03 Dec 2021 14:00:51 +0800</pubDate>
-      
-      <guid>https://leftpocket.cn/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>c&#43;&#43;</title>
-      <link>https://leftpocket.cn/categories/c&#43;&#43;/</link>
-      <pubDate>Mon, 22 Nov 2021 15:00:51 +0800</pubDate>
-      
-      <guid>https://leftpocket.cn/categories/c&#43;&#43;/</guid>
       <description></description>
     </item>
     

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>国内无法使用ChatGPT？教你使用云服务器一键部署自己的ChatGPT网站｜无需科学上网 - 科技小飞哥</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="科技小飞哥" /><meta name="description" content="背景 由于众所周知的原因，ChatGPT在中国无法访问，如果你有经常使用ChatGPT的需求怎么办呢？即使你使用了科学上网，由于你订阅的机场使" /><meta name="keywords" content="raksmart" />
+
+
+<meta name="baidu-site-verification" content="code-vlQZuedAQs" />
+<meta name="google-site-verification" content="wSRHVihIZDd-cqk3DLM6gAefwX46kynOT6WKGyOGQnM" />
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+<meta name="msvalidate.01" content="9CB8E7A6AD8ADF22F9ED93166445E5B9" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ3LW65VYR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QZ3LW65VYR');
+</script>
+
+
+<meta name="generator" content="Hugo 0.111.3 with theme even" />
+
+
+<link rel="canonical" href="https://leftpocket.cn/post/chatgpt/webpro/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.8670b48c7d31f917f4a6f54305e7950cfd41225f00cbec112ac6e809a86ef2b9.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="国内无法使用ChatGPT？教你使用云服务器一键部署自己的ChatGPT网站｜无需科学上网" />
+<meta property="og:description" content="背景 由于众所周知的原因，ChatGPT在中国无法访问，如果你有经常使用ChatGPT的需求怎么办呢？即使你使用了科学上网，由于你订阅的机场使" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leftpocket.cn/post/chatgpt/webpro/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-04-11T13:00:51+08:00" />
+<meta property="article:modified_time" content="2023-04-11T13:00:51+08:00" />
+<meta itemprop="name" content="国内无法使用ChatGPT？教你使用云服务器一键部署自己的ChatGPT网站｜无需科学上网">
+<meta itemprop="description" content="背景 由于众所周知的原因，ChatGPT在中国无法访问，如果你有经常使用ChatGPT的需求怎么办呢？即使你使用了科学上网，由于你订阅的机场使"><meta itemprop="datePublished" content="2023-04-11T13:00:51+08:00" />
+<meta itemprop="dateModified" content="2023-04-11T13:00:51+08:00" />
+<meta itemprop="wordCount" content="2262">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="国内无法使用ChatGPT？教你使用云服务器一键部署自己的ChatGPT网站｜无需科学上网"/>
+<meta name="twitter:description" content="背景 由于众所周知的原因，ChatGPT在中国无法访问，如果你有经常使用ChatGPT的需求怎么办呢？即使你使用了科学上网，由于你订阅的机场使"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">科技小飞哥</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/friend/">
+        <li class="mobile-menu-item">友链</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">科技小飞哥</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/friend/">友链</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">国内无法使用ChatGPT？教你使用云服务器一键部署自己的ChatGPT网站｜无需科学上网</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-04-11 </span>
+        <div class="post-category">
+            <a href="/categories/chatgpt/"> ChatGPT </a>
+            <a href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/"> 云服务器 </a>
+            </div>
+          <span class="more-meta"> 约 2262 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#界面效果">界面效果</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#云服务器">云服务器</a>
+      <ul>
+        <li><a href="#注册">注册</a></li>
+        <li><a href="#购买">购买</a></li>
+        <li><a href="#付款">付款</a></li>
+        <li><a href="#云服务器-1">云服务器</a></li>
+        <li><a href="#新增安全组策略">新增安全组策略</a></li>
+        <li><a href="#windows登录">Windows登录</a></li>
+        <li><a href="#macoslinux登录">MacOS/Linux登录</a></li>
+      </ul>
+    </li>
+    <li><a href="#获取api-keys教程">获取API Keys教程</a>
+      <ul>
+        <li><a href="#api-key">API key</a></li>
+        <li><a href="#access-token">access token</a></li>
+      </ul>
+    </li>
+    <li><a href="#部署教程">部署教程</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#绑定域名">绑定域名</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#更多配置">更多配置</a></li>
+    <li><a href="#后记">后记</a></li>
+    <li><a href="#视频教程">视频教程</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <!--
+国内无法访问ChatGPT？免翻墙教你轻松使用ChatGPT
+-->
+<h1 id="背景">背景</h1>
+<p>由于众所周知的原因，ChatGPT在中国无法访问，如果你有经常使用ChatGPT的需求怎么办呢？即使你使用了科学上网，由于你订阅的机场使用同一IP的人数过多，会触发ChatGPT的风险值然后封号。前段时间就封了很多ChatGPT账号。</p>
+<p>我这里教大家轻松使用VPS搭建ChatGPT网站，在国内无需科学上网随时随地访问ChatGPT。还可以分享给朋友使用。</p>
+<h3 id="界面效果">界面效果</h3>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/web/pc.png" alt="pc"></p>
+<h1 id="云服务器">云服务器</h1>
+<p>想要搭建自己的ChatGPT网站，我们需要一台境外的云服务器。</p>
+<p>如果没有云服务器的小伙伴，我这里推荐一家便宜的云服务器。</p>
+<p><code>点此链接注册购买有优惠</code>：<a href="http://bit.ly/3GlfucW">http://bit.ly/3GlfucW</a></p>
+<p>购买时输入<code>RAKBL9</code>优惠码有9折优惠。</p>
+<p>建议选择系统：<strong>Ubuntu 20.04</strong>或者<strong>Ubuntu 22.04</strong>。</p>
+<p>最便宜的VPS只需要3美金，当然，如果你的预算充足，我推荐你直接购买云服务器，会有更好的机器配置，每个月也只需要7美金左右。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/vpn/v2ray/raksmart.png" alt="raksmart"></p>
+<h2 id="注册">注册</h2>
+<p><code>点此链接注册购买有优惠</code>：<a href="http://bit.ly/3GlfucW">http://bit.ly/3GlfucW</a></p>
+<p>点击右上角的注册按钮：
+<img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/register.png" alt="register"></p>
+<p>然后填写个人信息即可注册，非常方便。</p>
+<p>邮箱地址就是你的登录邮箱。</p>
+<h2 id="购买">购买</h2>
+<p>你可以根据需求选择区域购买云服务器，可以看到云服务器每个月只需要7美刀左右，非常便宜。</p>
+<p>如果你需要更好的配置，也可以选择升级处理器和内存。</p>
+<p>操作系统选择 <code>Ubuntu</code> 最新的版本， <code>Ubuntu-20.04</code> 或者 <code>Ubuntu-22.04</code> 都可以。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/buy.png" alt="buy"></p>
+<h2 id="付款">付款</h2>
+<p>付款界面输入优惠码：<code>RAKBL9</code> 点击验证，即可享受9折优惠。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/voucher.png" alt="voucher"></p>
+<h2 id="云服务器-1">云服务器</h2>
+<p>我们进入云服务器信息界面，记住 IP，密码，和端口号，用户名默认是 <code>root</code>，购买成功后也会收到邮件，查看邮件确认具体的信息。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/server.png" alt="server"></p>
+<h2 id="新增安全组策略">新增安全组策略</h2>
+<p>如果端口不是默认的<code>22</code>号端口，需要把端口添加到安全组策略里面，这样才能开放端口访问。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/safe.png" alt="safe"></p>
+<h2 id="windows登录">Windows登录</h2>
+<p>Putty下载地址：<a href="https://www.putty.org">https://www.putty.org</a></p>
+<p><strong>输入IP+端口：</strong>
+<img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/putty.png" alt="putty"></p>
+<p><strong>输入账号+密码：</strong>
+<img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/password.png" alt="password"></p>
+<h2 id="macoslinux登录">MacOS/Linux登录</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># -p 是端口号，如果是22默认端口号则不需要输入
+</span></span><span class="line"><span class="cl"># root是用户名，默认分配的用户名是root
+</span></span><span class="line"><span class="cl">ssh -p 13647 root@137.175.50.252
+</span></span><span class="line"><span class="cl"># 输入密码
+</span></span></code></pre></td></tr></table>
+</div>
+</div><!--
+还可以在上面自建机场，搭建科学上网梯子。有需要的可以看我之前的教程如何在在自己的云服务器上自建机场。
+-->
+<h1 id="获取api-keys教程">获取API Keys教程</h1>
+<h2 id="api-key">API key</h2>
+<p>需要一个chatGPT账号并生成一个API Key，这个API secret Key是为了验证你的身份。</p>
+<p>这个非常简单，我们打开openai的平台地址：https://platform.openai.com/</p>
+<p>登录之后点击右上角的头像，点击<code>Manage Account</code>-&gt;<code>API Keys</code>-&gt;<code>Create New Secret Key</code>, 然后复制下来保存备用。</p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/wechat/key.png" alt="key"></p>
+<h2 id="access-token">access token</h2>
+<p>如果没有API keys或者额度用完了，可以使用access token，限制是同时只能有一个人提问，Token一个月过期，一个月后需要重新获取。<a href="https://chat.openai.com/api/auth/session">https://chat.openai.com/api/auth/session</a></p>
+<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/token.png" alt="token"></p>
+<h1 id="部署教程">部署教程</h1>
+<p>到此为止我们有了Linux的Ubuntu操作系统，也有了API Key，可以来部署我们的ChatGPT网站了。</p>
+<p>部署ChatGPT网站非常简单，只需要执行下面的几个命令安装docker然后下载，运行即可。</p>
+<p><code>附：</code>
+Docker Hub地址：<a href="https://hub.docker.com/r/techxiaofei/chatgpt-web">https://hub.docker.com/r/techxiaofei/chatgpt-web</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 更新包管理器</span>
+</span></span><span class="line"><span class="cl">sudo apt-get update
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装docker</span>
+</span></span><span class="line"><span class="cl">apt install docker.io
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 下载docker镜像</span>
+</span></span><span class="line"><span class="cl">docker pull techxiaofei/chatgpt-web:latest
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 给镜像打标签</span>
+</span></span><span class="line"><span class="cl">docker tag techxiaofei/chatgpt-web chatgpt-web
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 后台运行，可修改主机端口 比如：80-&gt;8080，3002是容器端口，不可修改</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># your_api_key替换成你的API Key</span>
+</span></span><span class="line"><span class="cl">docker run --name chatgpt-web -d -p 0.0.0.0:80:3002 --env <span class="nv">OPENAI_API_KEY</span><span class="o">=</span>your_api_key chatgpt-web
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 后台运行，带密码访问</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 添加环境变量方式： --env KEY=XXX</span>
+</span></span><span class="line"><span class="cl">docker run --name chatgpt-web -d -p 0.0.0.0:80:3002 --env <span class="nv">OPENAI_API_KEY</span><span class="o">=</span>your_api_key --env <span class="nv">AUTH_SECRET_KEY</span><span class="o">=</span>techxiaofei chatgpt-web
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 停掉进程（如需重启）</span>
+</span></span><span class="line"><span class="cl">docker stop chatgpt-web
+</span></span><span class="line"><span class="cl">docker rm chatgpt-web
+</span></span></code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th>环境变量名称</th>
+<th>必填</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>OPENAI_API_KEY</code></td>
+<td><code>OpenAI API</code> 二选一</td>
+<td>使用 <code>OpenAI API</code> 所需的 <code>apiKey</code> <a href="https://platform.openai.com/overview">(获取 apiKey)</a></td>
+</tr>
+<tr>
+<td><code>OPENAI_ACCESS_TOKEN</code></td>
+<td><code>Web API</code> 二选一</td>
+<td>使用 <code>Web API</code> 所需的 <code>accessToken</code> <a href="https://chat.openai.com/api/auth/session">(获取 accessToken)</a></td>
+</tr>
+<tr>
+<td><code>AUTH_SECRET_KEY</code></td>
+<td>可选</td>
+<td>访问权限密钥</td>
+</tr>
+<tr>
+<td><code>MAX_REQUEST_PER_HOUR</code></td>
+<td>可选</td>
+<td>每小时最大请求次数，可选，默认无限</td>
+</tr>
+<tr>
+<td><code>TIMEOUT_MS</code></td>
+<td>可选</td>
+<td>超时时间，单位毫秒</td>
+</tr>
+<tr>
+<td><code>OPENAI_API_BASE_URL</code></td>
+<td>可选，<code>OpenAI API</code> 时可用</td>
+<td><code>API</code>接口地址</td>
+</tr>
+<tr>
+<td><code>OPENAI_API_MODEL</code></td>
+<td>可选，<code>OpenAI API</code> 时可用</td>
+<td><code>API</code>模型</td>
+</tr>
+<tr>
+<td><code>API_REVERSE_PROXY</code></td>
+<td>可选，<code>Web API</code> 时可用</td>
+<td><code>Web API</code> 反向代理地址 <a href="https://github.com/transitive-bullshit/chatgpt-api#reverse-proxy">详情</a></td>
+</tr>
+<tr>
+<td><code>SOCKS_PROXY_HOST</code></td>
+<td>可选，和 <code>SOCKS_PROXY_PORT</code> 一起时生效</td>
+<td>Socks代理</td>
+</tr>
+<tr>
+<td><code>SOCKS_PROXY_PORT</code></td>
+<td>可选，和 <code>SOCKS_PROXY_HOST</code> 一起时生效</td>
+<td>Socks代理端口</td>
+</tr>
+<tr>
+<td><code>HTTPS_PROXY</code></td>
+<td>可选</td>
+<td>HTTPS 代理，支持 http，https, socks5</td>
+</tr>
+</tbody>
+</table>
+<h3 id="绑定域名">绑定域名</h3>
+<p>如果你有域名，可以直接绑定到你的公网IP上，既可以绑定<code>顶级域名</code>也可以绑定到<code>二级域名</code>。</p>
+<p>只需要在域名解析商添加一条A记录即可。我这里使用的cloudflare，如果你使用的其它域名解析商，也是一样的。</p>
+<p><strong>顶级域名</strong></p>
+<p>使用 <a href="http://example.com">http://example.com</a> 就可以访问了。
+<img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/web/domain1.png" alt="domain1"></p>
+<p><strong>二级域名</strong></p>
+<p>使用 <a href="http://chat.example.com">http://chat.example.com</a> 就可以访问了。
+<img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/web/domain2.png" alt="domain2"></p>
+<h1 id="更多配置">更多配置</h1>
+<p>当然如果你想要更加灵活的控制你的网站，比如修改<code>标题</code>，修改<code>密码文本提示</code>，<code>头像，名称，描述</code> 等等。
+需要自己下载源码编译。</p>
+<p>需要使用源码修改后重新编译镜像。</p>
+<p><strong>注意：</strong></p>
+<ul>
+<li>头像，名称，描述目录：<code>src/store/modules/user/helper.ts</code></li>
+<li>标题目录：<code>index.html</code></li>
+<li>密码文本提示目录：<code>src/locales/zh-CN.ts</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 下载源码</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/techxiaofei/chatgpt-web.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> chatgpt-web
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装依赖</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装nodejs</span>
+</span></span><span class="line"><span class="cl">apt install nodejs
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装node包管理器</span>
+</span></span><span class="line"><span class="cl">apt install npm
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 升级包管理工具upgrade</span>
+</span></span><span class="line"><span class="cl">npm install -g n
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 升级到node.js最新稳定版</span>
+</span></span><span class="line"><span class="cl">n stable <span class="c1"># latest</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">hash</span> -r
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看版本，如果是 18及以上就可以了</span>
+</span></span><span class="line"><span class="cl">node -v
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装pnpm</span>
+</span></span><span class="line"><span class="cl">npm install pnpm -g
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 编译</span>
+</span></span><span class="line"><span class="cl">pnpm bootstrap
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">pnpm build
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker build -t chatgpt-web .
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 后台运行，可修改主机端口 比如：80-&gt;8080，3002是容器端口，不可修改</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># your_api_key替换成你的API Key</span>
+</span></span><span class="line"><span class="cl">docker run --name chatgpt-web -d -p 0.0.0.0:80:3002 --env <span class="nv">OPENAI_API_KEY</span><span class="o">=</span>your_api_key chatgpt-web
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="后记">后记</h1>
+<p>现在你应该能轻轻松松在国内的任意网络下访问chatgpt了，赶紧分享给你的朋友使用吧。</p>
+<h1 id="视频教程">视频教程</h1>
+<p>本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>。
+<style>
+    .meta-media {
+      position: relative;
+      margin-bottom: 30px;
+      display: flex;
+      width: 100%;
+      height: 0;
+      padding-bottom: 75%;
+    }
+    .video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+    </style>
+    <div class="meta-media">
+    <iframe src="https://www.youtube.com/embed/rjTrGMj1aok" frameborder="no" scrolling="yes" allowfullscreen="allowfullscreen" high_quality="1" framespacing="1" class="video" >
+    </iframe>
+    </div></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">科技小飞哥</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2023-04-11
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/personal/wechat_pay.png">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/ai/bingai_proxy/">
+            <span class="next-text nav-default">教你搭建GPT4网站，完全免费，无需登录，无需魔法，3分钟拥有一个GPT4的bing AI网站</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="techxiaofei/techxiaofei.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://www.techxiaofei.com" class="iconfont icon-site" title="site"></a>
+      <a href="https://www.youtube.com/@techxiaofei" class="iconfont icon-youtube" title="youtube"></a>
+      <a href="https://space.bilibili.com/49756120" class="iconfont icon-bilibili" title="bilibili"></a>
+</div>
+<div class="friend-links">
+  <span class="item-content"><b>友情链接：</b></span>
+  <a href="https://www.amazonaws.cn/" title="亚马逊云科技">亚马逊云科技</a>
+  <a href="https://dev.amazoncloud.cn/" title="亚马逊开发者社区">亚马逊开发者社区</a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>科技小飞哥</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
