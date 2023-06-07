@@ -192,7 +192,7 @@
       <h1 id="背景">背景</h1>
 <p>我之前做了怎么注册ChatGPT，以及把ChatGPT接入到微信公众号、电报telegram等平台的教程，今天我来教大家如何一键部署<code>ChatGPT web</code>网站。</p>
 <p>这个部署<strong>完全免费</strong>也不需要<strong>云服务器</strong>，非常简单。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/home.png" alt="home"></p>
+<p><img src="/img/chatGPT/freeweb/home.png" alt="home"></p>
 <p>我们为什么要部署自己的ChatGPT Web网站呢？</p>
 <p>主要有两个目的：</p>
 <ol>
@@ -205,26 +205,26 @@
 <li><a href="https://vercel.com/login">Vercel账号</a></li>
 </ol>
 <p>其实<code>Vercel</code>账号可以使用Github账号直接登录：</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/vercel_login.png" alt="vercel_login"></p>
+<p><img src="/img/chatGPT/freeweb/vercel_login.png" alt="vercel_login"></p>
 <p>所以我们只需要注册一个Github账号即可。</p>
 <h1 id="开始">开始</h1>
 <h3 id="1-github">1. Github</h3>
 <p>我们首先先在<a href="https://github.com/">Github</a>上访问这个地址：<a href="https://github.com/Yidadaa/ChatGPT-Next-Web">ChatGPT-Next-Web</a></p>
 <p>然后点击右上角的<code>Fork</code>也就是克隆，然后点击<code>Create Fork</code>把这个仓库克隆到你的账号下</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/create_fork.png" alt="create_fork"></p>
+<p><img src="/img/chatGPT/freeweb/create_fork.png" alt="create_fork"></p>
 <p>这个时候就会把这个github 仓库克隆到你的个人账号下面。</p>
 <h3 id="vercel">Vercel</h3>
 <p>克隆之后我们去到Vercel平台。<a href="https://vercel.com/login">Vercel</a> 使用刚才的Github账号登录并授权。</p>
 <p>我们直接点击<code>Add New-&gt;Project</code>，然后找到我们的<code>ChatGPT-next-web</code>这个Github仓库，点击<code>Import</code>导入</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/import.png" alt="import"></p>
+<p><img src="/img/chatGPT/freeweb/import.png" alt="import"></p>
 <p>这个<strong>project name</strong>我们可以随便选，使用默认的即可。</p>
 <p>我们唯一要注意的就是这个环境变量，我们需要把ChatGPT的<code>API Key</code>添加进来，然后部署。</p>
 <p>这个API Key是为了验证你的身份，需要你有<strong>OpenAI</strong>账号。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/deploy.png" alt="deploy"></p>
+<p><img src="/img/chatGPT/freeweb/deploy.png" alt="deploy"></p>
 <h3 id="api-key">API key</h3>
 <p>如果你不知道上面的API Key怎么获得，这个非常简单，我们打开openai的平台地址：https://platform.openai.com/</p>
 <p>登录之后点击右上角的头像，点击<code>Manage Account</code>-&gt;<code>API Keys</code>-&gt;<code>Create New Secret Key</code>, 然后复制下来保存备用。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/wechat/key.png" alt="key"></p>
+<p><img src="/img/chatGPT/wechat/key.png" alt="key"></p>
 <h3 id="部署">部署</h3>
 <p>然后回到刚才的部署界面，在刚才的环境变量在<strong>Name</strong>里面输入 <code>OEPNAI_API_KEY</code>，然后<code>Value</code>就输入我们刚才复制的API Key</p>
 <p>点击<code>Add</code>添加，然后我们点击<code>Deploy</code>部署。</p>
@@ -242,54 +242,54 @@
 </div><p>这个时候，我们的网站就会需要密码访问。</p>
 <p>我们点击<strong>Deploy</strong>，可以看到它就开始部署了
 我们稍等一会就可以看到我们的网站就能部署成功了。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/congratulation.png" alt="congratulation"></p>
+<p><img src="/img/chatGPT/freeweb/congratulation.png" alt="congratulation"></p>
 <h3 id="使用">使用</h3>
 <p>我们可以点击就可以进入到我们的ChatGPT 个人网站了。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/home.png" alt="home"></p>
+<p><img src="/img/chatGPT/freeweb/home.png" alt="home"></p>
 <p>此时Vercel 给我们自动分配了域名，当然这个域名由于某些原因，在国内可能无法访问，你可能需要使用自己的域名。</p>
 <p>我们在刚才的部署成功的页面点击右边的<code>Add Domain</code>添加域名，</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/add_domain.png" alt="add_domain"></p>
+<p><img src="/img/chatGPT/freeweb/add_domain.png" alt="add_domain"></p>
 <p>然后输入我们的域名，点击添加。
 我们选择默认的选项，
 然后点击添加</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/add_domain2.png" alt="add_domain2"></p>
+<p><img src="/img/chatGPT/freeweb/add_domain2.png" alt="add_domain2"></p>
 <p>添加之后Vercel会提示我们需要添加两条记录，一条是<code>A记录</code>，一条是<code>CNAME记录</code>。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/record.png" alt="record"></p>
+<p><img src="/img/chatGPT/freeweb/record.png" alt="record"></p>
 <p>我们进入到我们的域名解析商，这里我使用<code>cloudflare</code>来解析我的域名。</p>
 <p>我们在这里点击添加记录：</p>
 <ul>
 <li>首先我们添加A记录，记录类型是<code>A</code>，名称是<code>@</code>，然后ipv4地址就是刚才的ip地址</li>
 <li>然后我们再添加一条 CNAME 记录，记录类型是<code>CNAME</code>，名称是<code>www</code>，值是刚才的值</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/add_record.png" alt="add_record"></p>
+<p><img src="/img/chatGPT/freeweb/add_record.png" alt="add_record"></p>
 <p>现在我们这两条记录，就已经添加成功了</p>
 <p>我们再回到我们的 Vercel 托管平台，可以看到，我们的DNS记录已经设置成功了</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/success.png" alt="success"></p>
+<p><img src="/img/chatGPT/freeweb/success.png" alt="success"></p>
 <p>我们添加成功之后直接点击跳转，用我们自己的域名就可以访问ChatGPT Web网站了。</p>
 <p>那我们可以开始在这里和ChatGPT进行聊天了。</p>
 <h3 id="角色扮演">角色扮演</h3>
 <p>我们也可以让ChatGPT来扮演各种角色，此时ChatGPT的回答会更具有专业性。</p>
 <p>我们可以看到这里有非常多的角色，我们来让他帮我们扮演一个职业顾问，点击左下角<code>新的聊天</code>，找到<code>职业顾问</code>点击跳转新的聊天。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/role.png" alt="role"></p>
+<p><img src="/img/chatGPT/freeweb/role.png" alt="role"></p>
 <p>然后我们问他问题：<strong>作为一个程序员，我以后的职业生涯应该怎么规划？</strong></p>
 <p>点击发送，可以看到作为一个职业顾问，他给我们详细列明了我们有很多职业道路可以选择，然后还给我们的职业生活也做了一些规划。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/consultant.png" alt="consultant"></p>
+<p><img src="/img/chatGPT/freeweb/consultant.png" alt="consultant"></p>
 <p>如果不让它扮演职业顾问，它给的回答是怎么样的呢？</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/new_chat.png" alt="new_chat"></p>
+<p><img src="/img/chatGPT/freeweb/new_chat.png" alt="new_chat"></p>
 <p>可以看到，同样的问题，当我们不让他扮演任何角色的时候，他给我们的答案就相对专业性就没有那么强。</p>
 <p>所以角色扮演在专业的问题上，ChatGPT能给到更好的回答，我们可以使用这个来获得更优秀的答案。</p>
 <h3 id="密码访问">密码访问</h3>
 <p>同时这个ChatGPT网站也是支持密码访问的，想要支持密码访问非常简单，上面已经告诉你如何添加环境变量。</p>
 <p>如果你之前没有添加，这里教你如何再次添加。</p>
 <p>点击你的当前项目，找到<code>settings</code>设置项，然后找到左边的<code>Environment Variables</code>也就是环境变量。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/add_env.png" alt="add_env"></p>
+<p><img src="/img/chatGPT/freeweb/add_env.png" alt="add_env"></p>
 <p>密码的环境变量的key是<code>CODE</code>，这个值你可以填写你的密码，比如说我填写<strong>techxiaofei</strong>，然后点击保存</p>
 <p>现在我们环境已经添加成功了，添加成功之后我们重新编译一下，我们点击redeploy就是重编译。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/redeploy.png" alt="redeploy"></p>
+<p><img src="/img/chatGPT/freeweb/redeploy.png" alt="redeploy"></p>
 <p>重新访问我们的ChatGPT网站，可以看到上面提示：<strong>现在是未授权状态，请点击左下角设置按钮输入访问密码。</strong></p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/pass.png" alt="pass"></p>
+<p><img src="/img/chatGPT/freeweb/pass.png" alt="pass"></p>
 <p>我们点击左下角的设置，然后找到访问密码，输入我们的访问密码，就可以正常和ChatGPT对话了。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/freeweb/add_pass.png" alt="add_pass"></p>
+<p><img src="/img/chatGPT/freeweb/add_pass.png" alt="add_pass"></p>
 <h1 id="后记">后记</h1>
 <p>这个ChatGPT Web网站可以解决在国内无法正常访问ChatGPT的问题</p>
 <p>而且它也不需要云服务器，不需要你购买任何东西，完全免费，任何人都可以轻松一键部署，所以赶紧尝试一下吧。</p>

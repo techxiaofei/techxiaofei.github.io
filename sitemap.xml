@@ -2,49 +2,77 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://leftpocket.cn/post/chatgpt/webpro/</loc>
-    <lastmod>2023-04-11T13:00:51+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://leftpocket.cn/categories/ai%E4%BA%A7%E5%93%81/</loc>
-    <lastmod>2023-05-20T15:00:51+08:00</lastmod>
+    <lastmod>2023-06-06T08:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://leftpocket.cn/categories/</loc>
-    <lastmod>2023-05-20T15:00:51+08:00</lastmod>
+    <lastmod>2023-06-06T08:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://leftpocket.cn/post/ai/character/</loc>
+    <lastmod>2023-06-06T08:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://leftpocket.cn/categories/chatgpt/</loc>
-    <lastmod>2023-05-20T15:00:51+08:00</lastmod>
+    <lastmod>2023-06-06T08:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://leftpocket.cn/post/</loc>
-    <lastmod>2023-05-20T15:00:51+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://leftpocket.cn/post/ai/bingai_proxy/</loc>
-    <lastmod>2023-05-20T15:00:51+08:00</lastmod>
+    <lastmod>2023-06-06T08:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://leftpocket.cn/</loc>
+    <lastmod>2023-06-06T08:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://leftpocket.cn/post/ai/bard/</loc>
+    <lastmod>2023-06-01T08:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://leftpocket.cn/post/chatgpt/local/</loc>
+    <lastmod>2023-05-25T01:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://leftpocket.cn/categories/telegram/</loc>
+    <lastmod>2023-05-24T01:00:55+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://leftpocket.cn/post/telegram/register/</loc>
+    <lastmod>2023-05-24T01:00:55+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://leftpocket.cn/post/ai/bingai_proxy/</loc>
     <lastmod>2023-05-20T15:00:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -116,6 +144,13 @@
   <url>
     <loc>https://leftpocket.cn/post/chatgpt/wechat_mp/</loc>
     <lastmod>2023-04-13T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://leftpocket.cn/post/chatgpt/webpro/</loc>
+    <lastmod>2023-04-11T13:00:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

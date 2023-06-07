@@ -6,14 +6,41 @@
     <description>Recent content in Posts on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 20 May 2023 15:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Jun 2023 08:00:00 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>国内无法使用ChatGPT？教你使用云服务器一键部署自己的ChatGPT网站｜无需科学上网</title>
-      <link>https://leftpocket.cn/post/chatgpt/webpro/</link>
-      <pubDate>Tue, 11 Apr 2023 13:00:51 +0800</pubDate>
+      <title>Character AI，比ChatGPT更火爆的可定制化AI聊天工具</title>
+      <link>https://leftpocket.cn/post/ai/character/</link>
+      <pubDate>Tue, 06 Jun 2023 08:00:00 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/chatgpt/webpro/</guid>
-      <description>背景 由于众所周知的原因，ChatGPT在中国无法访问，如果你有经常使用ChatGPT的需求怎么办呢？即使你使用了科学上网，由于你订阅的机场使</description>
+      <guid>https://leftpocket.cn/post/ai/character/</guid>
+      <description>背景 今天我们聊了Character.AI这款爆火的角色扮演类AI聊天新宠，它可以扮演各种角色，包括名人，游戏角色，动漫角色等等，甚至还可以自</description>
+    </item>
+    
+    <item>
+      <title>Google Bard初体验，相比ChatGPT谁更强</title>
+      <link>https://leftpocket.cn/post/ai/bard/</link>
+      <pubDate>Thu, 01 Jun 2023 08:00:00 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/ai/bard/</guid>
+      <description>背景 Google Bard AI已经发布有一段时间了，我来深度体验一下，看一下它和ChatGPT谁更强，Google AI能不能实现弯道超车，巩固自己的地位。 自从</description>
+    </item>
+    
+    <item>
+      <title>本地搭建ChatGPT，完全免费，免翻墙体验原汁原味的ChatGPT</title>
+      <link>https://leftpocket.cn/post/chatgpt/local/</link>
+      <pubDate>Thu, 25 May 2023 01:00:00 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/chatgpt/local/</guid>
+      <description>背景 我相信很多小伙伴在国内使用机场使用ChatGPT有被封号的，因为公共机场的IP都是大家共用的，很容易被ChatGPT识别出来并封号。 比如</description>
+    </item>
+    
+    <item>
+      <title>Telegram电报收不到验证码怎么办？一分钟教会你轻松注册、汉化</title>
+      <link>https://leftpocket.cn/post/telegram/register/</link>
+      <pubDate>Wed, 24 May 2023 01:00:55 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/telegram/register/</guid>
+      <description>背景 大家好，我是科技小飞哥。 我之前的教程教大家如何汉化Telegram，但是有粉丝反馈，根本无法注册成功telegram，因为收不到验证码。</description>
     </item>
     
     <item>
@@ -77,6 +104,15 @@
       
       <guid>https://leftpocket.cn/post/chatgpt/wechat_mp/</guid>
       <description>背景 之前我已经做了一期ChatGPT接入公众号的教程。但是教程需要执行大量的命令，一不小心执行命令的时候就会出错，所以我决定把这些繁琐的工作</description>
+    </item>
+    
+    <item>
+      <title>国内无法使用ChatGPT？教你使用云服务器一键部署自己的ChatGPT网站｜无需科学上网</title>
+      <link>https://leftpocket.cn/post/chatgpt/webpro/</link>
+      <pubDate>Tue, 11 Apr 2023 13:00:51 +0800</pubDate>
+      
+      <guid>https://leftpocket.cn/post/chatgpt/webpro/</guid>
+      <description>背景 由于众所周知的原因，ChatGPT在中国无法访问，如果你有经常使用ChatGPT的需求怎么办呢？即使你使用了科学上网，由于你订阅的机场使</description>
     </item>
     
     <item>

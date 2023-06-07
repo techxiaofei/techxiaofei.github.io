@@ -210,13 +210,14 @@
 </div>
     <div class="post-content">
       <!--
+weight: 1
 国内无法访问ChatGPT？免翻墙教你轻松使用ChatGPT
 -->
 <h1 id="背景">背景</h1>
 <p>由于众所周知的原因，ChatGPT在中国无法访问，如果你有经常使用ChatGPT的需求怎么办呢？即使你使用了科学上网，由于你订阅的机场使用同一IP的人数过多，会触发ChatGPT的风险值然后封号。前段时间就封了很多ChatGPT账号。</p>
 <p>我这里教大家轻松使用VPS搭建ChatGPT网站，在国内无需科学上网随时随地访问ChatGPT。还可以分享给朋友使用。</p>
 <h3 id="界面效果">界面效果</h3>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/web/pc.png" alt="pc"></p>
+<p><img src="/img/chatGPT/web/pc.png" alt="pc"></p>
 <h1 id="云服务器">云服务器</h1>
 <p>想要搭建自己的ChatGPT网站，我们需要一台境外的云服务器。</p>
 <p>如果没有云服务器的小伙伴，我这里推荐一家便宜的云服务器。</p>
@@ -224,33 +225,33 @@
 <p>购买时输入<code>RAKBL9</code>优惠码有9折优惠。</p>
 <p>建议选择系统：<strong>Ubuntu 20.04</strong>或者<strong>Ubuntu 22.04</strong>。</p>
 <p>最便宜的VPS只需要3美金，当然，如果你的预算充足，我推荐你直接购买云服务器，会有更好的机器配置，每个月也只需要7美金左右。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/vpn/v2ray/raksmart.png" alt="raksmart"></p>
+<p><img src="/img/vpn/v2ray/raksmart.png" alt="raksmart"></p>
 <h2 id="注册">注册</h2>
 <p><code>点此链接注册购买有优惠</code>：<a href="http://bit.ly/3GlfucW">http://bit.ly/3GlfucW</a></p>
 <p>点击右上角的注册按钮：
-<img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/register.png" alt="register"></p>
+<img src="/img/chatGPT/webpro/register.png" alt="register"></p>
 <p>然后填写个人信息即可注册，非常方便。</p>
 <p>邮箱地址就是你的登录邮箱。</p>
 <h2 id="购买">购买</h2>
 <p>你可以根据需求选择区域购买云服务器，可以看到云服务器每个月只需要7美刀左右，非常便宜。</p>
 <p>如果你需要更好的配置，也可以选择升级处理器和内存。</p>
 <p>操作系统选择 <code>Ubuntu</code> 最新的版本， <code>Ubuntu-20.04</code> 或者 <code>Ubuntu-22.04</code> 都可以。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/buy.png" alt="buy"></p>
+<p><img src="/img/chatGPT/webpro/buy.png" alt="buy"></p>
 <h2 id="付款">付款</h2>
 <p>付款界面输入优惠码：<code>RAKBL9</code> 点击验证，即可享受9折优惠。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/voucher.png" alt="voucher"></p>
+<p><img src="/img/chatGPT/webpro/voucher.png" alt="voucher"></p>
 <h2 id="云服务器-1">云服务器</h2>
 <p>我们进入云服务器信息界面，记住 IP，密码，和端口号，用户名默认是 <code>root</code>，购买成功后也会收到邮件，查看邮件确认具体的信息。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/server.png" alt="server"></p>
+<p><img src="/img/chatGPT/webpro/server.png" alt="server"></p>
 <h2 id="新增安全组策略">新增安全组策略</h2>
 <p>如果端口不是默认的<code>22</code>号端口，需要把端口添加到安全组策略里面，这样才能开放端口访问。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/safe.png" alt="safe"></p>
+<p><img src="/img/chatGPT/webpro/safe.png" alt="safe"></p>
 <h2 id="windows登录">Windows登录</h2>
 <p>Putty下载地址：<a href="https://www.putty.org">https://www.putty.org</a></p>
 <p><strong>输入IP+端口：</strong>
-<img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/putty.png" alt="putty"></p>
+<img src="/img/chatGPT/webpro/putty.png" alt="putty"></p>
 <p><strong>输入账号+密码：</strong>
-<img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/password.png" alt="password"></p>
+<img src="/img/chatGPT/webpro/password.png" alt="password"></p>
 <h2 id="macoslinux登录">MacOS/Linux登录</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -274,10 +275,10 @@
 <p>需要一个chatGPT账号并生成一个API Key，这个API secret Key是为了验证你的身份。</p>
 <p>这个非常简单，我们打开openai的平台地址：https://platform.openai.com/</p>
 <p>登录之后点击右上角的头像，点击<code>Manage Account</code>-&gt;<code>API Keys</code>-&gt;<code>Create New Secret Key</code>, 然后复制下来保存备用。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/wechat/key.png" alt="key"></p>
+<p><img src="/img/chatGPT/wechat/key.png" alt="key"></p>
 <h2 id="access-token">access token</h2>
 <p>如果没有API keys或者额度用完了，可以使用access token，限制是同时只能有一个人提问，Token一个月过期，一个月后需要重新获取。<a href="https://chat.openai.com/api/auth/session">https://chat.openai.com/api/auth/session</a></p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/webpro/token.png" alt="token"></p>
+<p><img src="/img/chatGPT/webpro/token.png" alt="token"></p>
 <h1 id="部署教程">部署教程</h1>
 <p>到此为止我们有了Linux的Ubuntu操作系统，也有了API Key，可以来部署我们的ChatGPT网站了。</p>
 <p>部署ChatGPT网站非常简单，只需要执行下面的几个命令安装docker然后下载，运行即可。</p>
@@ -406,10 +407,10 @@ Docker Hub地址：<a href="https://hub.docker.com/r/techxiaofei/chatgpt-web">ht
 <p>只需要在域名解析商添加一条A记录即可。我这里使用的cloudflare，如果你使用的其它域名解析商，也是一样的。</p>
 <p><strong>顶级域名</strong></p>
 <p>使用 <a href="http://example.com">http://example.com</a> 就可以访问了。
-<img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/web/domain1.png" alt="domain1"></p>
+<img src="/img/chatGPT/web/domain1.png" alt="domain1"></p>
 <p><strong>二级域名</strong></p>
 <p>使用 <a href="http://chat.example.com">http://chat.example.com</a> 就可以访问了。
-<img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/chatGPT/web/domain2.png" alt="domain2"></p>
+<img src="/img/chatGPT/web/domain2.png" alt="domain2"></p>
 <h1 id="更多配置">更多配置</h1>
 <p>当然如果你想要更加灵活的控制你的网站，比如修改<code>标题</code>，修改<code>密码文本提示</code>，<code>头像，名称，描述</code> 等等。
 需要自己下载源码编译。</p>
@@ -553,9 +554,13 @@ Docker Hub地址：<a href="https://hub.docker.com/r/techxiaofei/chatgpt-web">ht
 </div><footer class="post-footer">
       
       <nav class="post-nav">
-        
-        <a class="next" href="/post/ai/bingai_proxy/">
-            <span class="next-text nav-default">教你搭建GPT4网站，完全免费，无需登录，无需魔法，3分钟拥有一个GPT4的bing AI网站</span>
+        <a class="prev" href="/post/chatgpt/wechat_mp/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">【全网最简单方法】ChatGPT接入微信公众号 - 包教包会，100%成功</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/cloud/aws_stable_diffusion/">
+            <span class="next-text nav-default">生花妙笔信手来 – 基于 SageMaker Notebook 快速搭建托管的 Stable Diffusion – AI 作画可视化环境</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>

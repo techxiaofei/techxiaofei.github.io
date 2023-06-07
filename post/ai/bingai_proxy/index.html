@@ -192,7 +192,7 @@
 <p>同时如果你想要自己搭建一个这样的网站，只需要三分钟就可自己搭建一个不用魔法，不用登录的基于GPT4的AI网站。</p>
 <p>打开这个界面，是不是非常熟悉，这不就是基于GPT4的微软New Bing AI聊天机器人吗？</p>
 <p>而这实际上是我自己基于new bing的API和Cookie搭建的GPT4网站，内容是原滋原味的New Bing AI，甚至还内嵌了很多Prompt提示词。可以说非常强大。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/ai/bing_proxy/home.png" alt="home"></p>
+<p><img src="/img/ai/bing_proxy/home.png" alt="home"></p>
 <h2 id="免费使用">免费使用</h2>
 <p>如果你想体验直接点击 <a href="https://bing.techxiaofei.com">我的New Bing AI网站</a> 即可体验。</p>
 <p>如果上述链接无法访问，可以使用<a href="https://bing.vcanbb.top/">原作者提供的链接</a> 访问。</p>
@@ -202,31 +202,31 @@
 <h3 id="github账号">Github账号</h3>
 <p>我们首先在 <a href="https://github.com/">Github</a> 上访问这个地址：<a href="https://github.com/adams549659584/go-proxy-bingai">go-proxy-bingai</a></p>
 <p>然后点击右上角的<code>Fork</code>也就是克隆，然后点击<code>Create Fork</code>把这个仓库克隆到你的账号下</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/ai/bing_proxy/create_fork.png" alt="create_fork"></p>
+<p><img src="/img/ai/bing_proxy/create_fork.png" alt="create_fork"></p>
 <p>这个时候就会把这个github 仓库克隆到你的个人账号下面。</p>
 <h3 id="vercel账号">Vercel账号</h3>
 <p>克隆Github仓库之后我们进入Vercel平台。<a href="https://vercel.com/login">Vercel</a> 直接使用刚才的Github账号登录并授权。</p>
 <p>我们直接点击<code>Add New-&gt;Project</code>，然后找到我们的<code>go-proxy-bingai</code>这个Github仓库，点击<code>Import</code>导入</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/ai/bing_proxy/import.png" alt="import"></p>
+<p><img src="/img/ai/bing_proxy/import.png" alt="import"></p>
 <p>这个<strong>project name</strong>我们可以随便选，使用默认的即可。</p>
 <p>然后直接点击<code>Deploy</code>等待一段时间就可以完成部署。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/ai/bing_proxy/deploy.png" alt="deploy"></p>
+<p><img src="/img/ai/bing_proxy/deploy.png" alt="deploy"></p>
 <h3 id="添加域名">添加域名</h3>
 <p>部署完成之后我们就可以直接使用了，默认是使用的Vercel给我们提供的域名，但是这个域名有时候在国内访问受限，我们需要配置自己的域名。</p>
 <p>我们在当前项目里面点击<code>Setting</code>设置选项。
-<img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/ai/bing_proxy/setting.png" alt="setting"></p>
+<img src="/img/ai/bing_proxy/setting.png" alt="setting"></p>
 <p>然后点击左边的菜单栏<code>Domain</code>添加域名，这里可以添加<code>顶级域名</code>也可以添加<code>二级域名</code>，我这里添加的是二级域名 <code>bing.techxiaofei.com</code>。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/ai/bing_proxy/add_domain.png" alt="add_domain"></p>
+<p><img src="/img/ai/bing_proxy/add_domain.png" alt="add_domain"></p>
 <p>添加完会提示非法配置，我们需要在域名解析商里面添加记录。</p>
 <p>添加一条A记录，然后名称是你的二级域名的值，我使用bing前缀，IP地址就是Vercel平台提供的的IP地址<code>76.76.21.21</code>。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/ai/bing_proxy/record.png" alt="record"></p>
+<p><img src="/img/ai/bing_proxy/record.png" alt="record"></p>
 <p>添加之后就可以使用你的二级域名 bing.xxx.com 访问了。</p>
 <h2 id="添加cookie">添加Cookie</h2>
 <p>这个网站原作者默认提供了一些Cookie，如果出现：**很抱歉，你似乎已注销。**说明Cookie已过期，我们需要重新设置Cookie，点击右上方的<code>设置</code>图标，然后点击<code>设置用户</code>，这个输入框填写的就是Cookie的值。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/ai/bing_proxy/save_cookie.png" alt="save_cookie"></p>
+<p><img src="/img/ai/bing_proxy/save_cookie.png" alt="save_cookie"></p>
 <p>这个Cookie怎么获得呢？非常简单。</p>
 <p>打开 <a href="http://www.bing.com">http://www.bing.com</a> 网站，按<code>F12</code>进入开发者模式，点击<code>应用程序</code>，左边的<code>Cookie</code>-&gt;<code>www.bing.com</code>，然后找到 <code>_U</code>的值，就是Cookie，复制即可。</p>
-<p><img src="https://raw.githubusercontent.com/techxiaofei/resource/main/blog/img/ai/bing_proxy/cookie.png" alt="cookie"></p>
+<p><img src="/img/ai/bing_proxy/cookie.png" alt="cookie"></p>
 <p>然后回到刚才的<code>设置用户</code>界面，输入刚才的Cookie保存，然后点击下方的新主题打开一个新的主题即可重新聊天。</p>
 <h2 id="结尾">结尾</h2>
 <p>现在你就可以无限制使用自己搭建的ChatGPT网站了。赶紧尝试下吧。</p>
@@ -285,9 +285,9 @@
 </div><footer class="post-footer">
       
       <nav class="post-nav">
-        <a class="prev" href="/post/chatgpt/webpro/">
+        <a class="prev" href="/post/telegram/register/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">国内无法使用ChatGPT？教你使用云服务器一键部署自己的ChatGPT网站｜无需科学上网</span>
+            <span class="prev-text nav-default">Telegram电报收不到验证码怎么办？一分钟教会你轻松注册、汉化</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         <a class="next" href="/post/telegram/cn/">
