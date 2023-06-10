@@ -2,53 +2,53 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>云服务器 on 科技小飞哥</title>
-    <link>https://leftpocket.cn/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+    <link>https://www.techxiaofei.com/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
     <description>Recent content in 云服务器 on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 30 Apr 2023 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 30 Apr 2023 13:00:51 +0800</lastBuildDate><atom:link href="https://www.techxiaofei.com/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>无需云服务器，一键部署你的ChatGPT Web网站｜完全免费</title>
-      <link>https://leftpocket.cn/post/chatgpt/freeweb/</link>
+      <link>https://www.techxiaofei.com/post/chatgpt/freeweb/</link>
       <pubDate>Sun, 30 Apr 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/chatgpt/freeweb/</guid>
+      <guid>https://www.techxiaofei.com/post/chatgpt/freeweb/</guid>
       <description>背景 我之前做了怎么注册ChatGPT，以及把ChatGPT接入到微信公众号、电报telegram等平台的教程，今天我来教大家如何一键部署Ch</description>
     </item>
     
     <item>
       <title>国内无法使用ChatGPT？教你使用云服务器一键部署自己的ChatGPT网站｜无需科学上网</title>
-      <link>https://leftpocket.cn/post/chatgpt/webpro/</link>
+      <link>https://www.techxiaofei.com/post/chatgpt/webpro/</link>
       <pubDate>Tue, 11 Apr 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/chatgpt/webpro/</guid>
+      <guid>https://www.techxiaofei.com/post/chatgpt/webpro/</guid>
       <description>背景 由于众所周知的原因，ChatGPT在中国无法访问，如果你有经常使用ChatGPT的需求怎么办呢？即使你使用了科学上网，由于你订阅的机场使</description>
     </item>
     
     <item>
       <title>生花妙笔信手来 – 基于 SageMaker Notebook 快速搭建托管的 Stable Diffusion – AI 作画可视化环境</title>
-      <link>https://leftpocket.cn/post/cloud/aws_stable_diffusion/</link>
+      <link>https://www.techxiaofei.com/post/cloud/aws_stable_diffusion/</link>
       <pubDate>Mon, 10 Apr 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/cloud/aws_stable_diffusion/</guid>
+      <guid>https://www.techxiaofei.com/post/cloud/aws_stable_diffusion/</guid>
       <description>AWS免费试用产品链接：https://aws.amazon.com/cn/free/ 原文链接：https://aws.amazon.com</description>
     </item>
     
     <item>
       <title>AWS免费云产品注册就送 - 真正12个月免费的云服务器</title>
-      <link>https://leftpocket.cn/post/cloud/aws/</link>
+      <link>https://www.techxiaofei.com/post/cloud/aws/</link>
       <pubDate>Fri, 17 Feb 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/cloud/aws/</guid>
+      <guid>https://www.techxiaofei.com/post/cloud/aws/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 AWS海外区云产品免费使用页面：https://aws.amazon.com/cn/</description>
     </item>
     
     <item>
       <title>AWS云服务器-12个月免费，教你薅羊毛</title>
-      <link>https://leftpocket.cn/post/cloud/aws_cloud/</link>
+      <link>https://www.techxiaofei.com/post/cloud/aws_cloud/</link>
       <pubDate>Thu, 12 Jan 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/cloud/aws_cloud/</guid>
+      <guid>https://www.techxiaofei.com/post/cloud/aws_cloud/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 好消息，Amazon最近活动免费12个月云服务器，点击就送，薅羊毛的好机会。 我这篇教</description>
     </item>
     

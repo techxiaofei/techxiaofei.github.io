@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>footnote on 科技小飞哥</title>
+    <link>https://www.techxiaofei.com/tags/footnote/</link>
+    <description>Recent content in footnote on 科技小飞哥</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 01 Mar 2018 16:01:23 +0800</lastBuildDate><atom:link href="https://www.techxiaofei.com/tags/footnote/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Demo: Footnote</title>
+      <link>https://www.techxiaofei.com/post/demo/4-footnote/</link>
+      <pubDate>Thu, 01 Mar 2018 16:01:23 +0800</pubDate>
+      
+      <guid>https://www.techxiaofei.com/post/demo/4-footnote/</guid>
+      <description>&lt;p&gt;Hugo-theme-jane optimized for footnote. When you mouse hover the footnote&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; , footnote content will be displayed.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

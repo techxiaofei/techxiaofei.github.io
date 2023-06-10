@@ -2,44 +2,44 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>脚本工具 on 科技小飞哥</title>
-    <link>https://leftpocket.cn/categories/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/</link>
+    <link>https://www.techxiaofei.com/categories/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/</link>
     <description>Recent content in 脚本工具 on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 06 May 2023 13:00:51 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 May 2023 13:00:51 +0800</lastBuildDate><atom:link href="https://www.techxiaofei.com/categories/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>99%的人都不知道的搜索引擎搜索技巧｜支持谷歌、百度、必应等搜索引擎｜让你的效率提升10倍</title>
-      <link>https://leftpocket.cn/post/tools/search/</link>
+      <link>https://www.techxiaofei.com/post/tools/search/</link>
       <pubDate>Sat, 06 May 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/tools/search/</guid>
+      <guid>https://www.techxiaofei.com/post/tools/search/</guid>
       <description>背景 相信大家经常使用搜索引擎。比如在搜索框里面输入一个或者多个关键字，比如 科技小飞哥，这样非常简单，每个人都会做。 但是这样容易搜到自己不感兴</description>
     </item>
     
     <item>
       <title>Python开发自动化抢购脚本--一键定场、抢课、预约、自动回复，它都能做</title>
-      <link>https://leftpocket.cn/post/script/py_auto/</link>
+      <link>https://www.techxiaofei.com/post/script/py_auto/</link>
       <pubDate>Mon, 16 Jan 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/script/py_auto/</guid>
+      <guid>https://www.techxiaofei.com/post/script/py_auto/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 之前制作了一篇教程： 《使用Go语言开发自动化脚本 - 一键定场，抢课，捡漏，预约等。》 有</description>
     </item>
     
     <item>
       <title>使用go语言开发自动化脚本 - 一键定场、抢购、预约、捡漏</title>
-      <link>https://leftpocket.cn/post/script/auto_booking/</link>
+      <link>https://www.techxiaofei.com/post/script/auto_booking/</link>
       <pubDate>Wed, 14 Dec 2022 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/script/auto_booking/</guid>
+      <guid>https://www.techxiaofei.com/post/script/auto_booking/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 不知道大家有没有这种经历，想要抢课，定场，发现抢不到，想要捡漏，又要随时刷，今天我就</description>
     </item>
     
     <item>
       <title>vscode配置leetcode插件</title>
-      <link>https://leftpocket.cn/post/tech/vscode_leetcode/</link>
+      <link>https://www.techxiaofei.com/post/tech/vscode_leetcode/</link>
       <pubDate>Sat, 12 Dec 2020 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/tech/vscode_leetcode/</guid>
+      <guid>https://www.techxiaofei.com/post/tech/vscode_leetcode/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 作为一名合格的程序猿，大家找工作的时候经常需要刷leetcode, leetcode官网上</description>
     </item>
     

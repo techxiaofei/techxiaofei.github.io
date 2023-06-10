@@ -4,4 +4,4 @@ Allow: /post/
 Allow: /about/
 Disallow: /tags/
 Disallow: /categories/
-Sitemap: https://leftpocket.cn/sitemap.xml
+Sitemap: https://www.techxiaofei.com/sitemap.xml

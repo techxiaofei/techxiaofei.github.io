@@ -2,116 +2,188 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on 科技小飞哥</title>
-    <link>https://leftpocket.cn/categories/</link>
+    <link>https://www.techxiaofei.com/categories/</link>
     <description>Recent content in Categories on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 06 Jun 2023 08:00:00 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 10 Jun 2023 13:00:00 +0800</lastBuildDate><atom:link href="https://www.techxiaofei.com/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>AI产品</title>
-      <link>https://leftpocket.cn/categories/ai%E4%BA%A7%E5%93%81/</link>
-      <pubDate>Tue, 06 Jun 2023 08:00:00 +0800</pubDate>
+      <title>ChatGPT</title>
+      <link>https://www.techxiaofei.com/categories/chatgpt/</link>
+      <pubDate>Sat, 10 Jun 2023 13:00:00 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/categories/ai%E4%BA%A7%E5%93%81/</guid>
+      <guid>https://www.techxiaofei.com/categories/chatgpt/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>ChatGPT</title>
-      <link>https://leftpocket.cn/categories/chatgpt/</link>
+      <title>AI产品</title>
+      <link>https://www.techxiaofei.com/categories/ai%E4%BA%A7%E5%93%81/</link>
       <pubDate>Tue, 06 Jun 2023 08:00:00 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/categories/chatgpt/</guid>
+      <guid>https://www.techxiaofei.com/categories/ai%E4%BA%A7%E5%93%81/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Telegram</title>
-      <link>https://leftpocket.cn/categories/telegram/</link>
+      <link>https://www.techxiaofei.com/categories/telegram/</link>
       <pubDate>Wed, 24 May 2023 01:00:55 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/categories/telegram/</guid>
+      <guid>https://www.techxiaofei.com/categories/telegram/</guid>
       <description></description>
     </item>
     
     <item>
       <title>汉化教程</title>
-      <link>https://leftpocket.cn/categories/%E6%B1%89%E5%8C%96%E6%95%99%E7%A8%8B/</link>
+      <link>https://www.techxiaofei.com/categories/%E6%B1%89%E5%8C%96%E6%95%99%E7%A8%8B/</link>
       <pubDate>Sat, 20 May 2023 01:00:55 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/categories/%E6%B1%89%E5%8C%96%E6%95%99%E7%A8%8B/</guid>
+      <guid>https://www.techxiaofei.com/categories/%E6%B1%89%E5%8C%96%E6%95%99%E7%A8%8B/</guid>
       <description></description>
     </item>
     
     <item>
       <title>notion</title>
-      <link>https://leftpocket.cn/categories/notion/</link>
+      <link>https://www.techxiaofei.com/categories/notion/</link>
       <pubDate>Sun, 14 May 2023 01:00:55 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/categories/notion/</guid>
+      <guid>https://www.techxiaofei.com/categories/notion/</guid>
       <description></description>
     </item>
     
     <item>
       <title>脚本工具</title>
-      <link>https://leftpocket.cn/categories/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/</link>
+      <link>https://www.techxiaofei.com/categories/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/</link>
       <pubDate>Sat, 06 May 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/categories/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/</guid>
+      <guid>https://www.techxiaofei.com/categories/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/</guid>
       <description></description>
     </item>
     
     <item>
       <title>云服务器</title>
-      <link>https://leftpocket.cn/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+      <link>https://www.techxiaofei.com/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
       <pubDate>Sun, 30 Apr 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+      <guid>https://www.techxiaofei.com/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>科学上网</title>
+      <link>https://www.techxiaofei.com/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</link>
+      <pubDate>Sat, 08 Apr 2023 13:00:51 +0800</pubDate>
+      
+      <guid>https://www.techxiaofei.com/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</guid>
       <description></description>
     </item>
     
     <item>
       <title>浏览器插件</title>
-      <link>https://leftpocket.cn/categories/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/</link>
+      <link>https://www.techxiaofei.com/categories/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/</link>
       <pubDate>Tue, 04 Apr 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/categories/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/</guid>
+      <guid>https://www.techxiaofei.com/categories/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/</guid>
       <description></description>
     </item>
     
     <item>
       <title>免费白嫖</title>
-      <link>https://leftpocket.cn/categories/%E5%85%8D%E8%B4%B9%E7%99%BD%E5%AB%96/</link>
+      <link>https://www.techxiaofei.com/categories/%E5%85%8D%E8%B4%B9%E7%99%BD%E5%AB%96/</link>
       <pubDate>Sun, 26 Mar 2023 01:04:55 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/categories/%E5%85%8D%E8%B4%B9%E7%99%BD%E5%AB%96/</guid>
+      <guid>https://www.techxiaofei.com/categories/%E5%85%8D%E8%B4%B9%E7%99%BD%E5%AB%96/</guid>
       <description></description>
     </item>
     
     <item>
       <title>hugo</title>
-      <link>https://leftpocket.cn/categories/hugo/</link>
+      <link>https://www.techxiaofei.com/categories/hugo/</link>
       <pubDate>Tue, 10 Jan 2023 01:01:55 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/categories/hugo/</guid>
+      <guid>https://www.techxiaofei.com/categories/hugo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>编程技术</title>
-      <link>https://leftpocket.cn/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/</link>
+      <link>https://www.techxiaofei.com/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/</link>
       <pubDate>Sun, 08 Jan 2023 01:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/</guid>
+      <guid>https://www.techxiaofei.com/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/</guid>
       <description></description>
     </item>
     
     <item>
       <title>新加坡生活</title>
-      <link>https://leftpocket.cn/categories/%E6%96%B0%E5%8A%A0%E5%9D%A1%E7%94%9F%E6%B4%BB/</link>
+      <link>https://www.techxiaofei.com/categories/%E6%96%B0%E5%8A%A0%E5%9D%A1%E7%94%9F%E6%B4%BB/</link>
       <pubDate>Sat, 30 Apr 2022 00:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/categories/%E6%96%B0%E5%8A%A0%E5%9D%A1%E7%94%9F%E6%B4%BB/</guid>
+      <guid>https://www.techxiaofei.com/categories/%E6%96%B0%E5%8A%A0%E5%9D%A1%E7%94%9F%E6%B4%BB/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Development</title>
+      <link>https://www.techxiaofei.com/categories/development/</link>
+      <pubDate>Tue, 22 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.techxiaofei.com/categories/development/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>golang</title>
+      <link>https://www.techxiaofei.com/categories/golang/</link>
+      <pubDate>Tue, 22 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.techxiaofei.com/categories/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>index</title>
+      <link>https://www.techxiaofei.com/categories/index/</link>
+      <pubDate>Tue, 22 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.techxiaofei.com/categories/index/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>demo</title>
+      <link>https://www.techxiaofei.com/categories/demo/</link>
+      <pubDate>Mon, 04 Mar 2019 16:01:23 +0800</pubDate>
+      
+      <guid>https://www.techxiaofei.com/categories/demo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>math</title>
+      <link>https://www.techxiaofei.com/categories/math/</link>
+      <pubDate>Mon, 04 Mar 2019 16:01:23 +0800</pubDate>
+      
+      <guid>https://www.techxiaofei.com/categories/math/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>shortcodes</title>
+      <link>https://www.techxiaofei.com/categories/shortcodes/</link>
+      <pubDate>Sun, 04 Mar 2018 16:01:23 +0800</pubDate>
+      
+      <guid>https://www.techxiaofei.com/categories/shortcodes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Syntax Highlighting</title>
+      <link>https://www.techxiaofei.com/categories/syntax-highlighting/</link>
+      <pubDate>Tue, 30 Aug 2011 16:01:23 +0800</pubDate>
+      
+      <guid>https://www.techxiaofei.com/categories/syntax-highlighting/</guid>
       <description></description>
     </item>
     

@@ -2,170 +2,179 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ChatGPT on 科技小飞哥</title>
-    <link>https://leftpocket.cn/categories/chatgpt/</link>
+    <link>https://www.techxiaofei.com/categories/chatgpt/</link>
     <description>Recent content in ChatGPT on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 06 Jun 2023 08:00:00 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/chatgpt/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 10 Jun 2023 13:00:00 +0800</lastBuildDate><atom:link href="https://www.techxiaofei.com/categories/chatgpt/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ChatGPT官方App正式发布，无限制使用GPT4，附美区Apple ID注册教程，完全免费</title>
+      <link>https://www.techxiaofei.com/post/chatgpt/app/</link>
+      <pubDate>Sat, 10 Jun 2023 13:00:00 +0800</pubDate>
+      
+      <guid>https://www.techxiaofei.com/post/chatgpt/app/</guid>
+      <description>背景 前几天，OpenAI 官方正式推出了 ChatGPT iOS应用。https://openai.com/blog/introducing-the-chat</description>
+    </item>
+    
     <item>
       <title>Character AI，比ChatGPT更火爆的可定制化AI聊天工具</title>
-      <link>https://leftpocket.cn/post/ai/character/</link>
+      <link>https://www.techxiaofei.com/post/ai/character/</link>
       <pubDate>Tue, 06 Jun 2023 08:00:00 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/ai/character/</guid>
+      <guid>https://www.techxiaofei.com/post/ai/character/</guid>
       <description>背景 今天我们聊了Character.AI这款爆火的角色扮演类AI聊天新宠，它可以扮演各种角色，包括名人，游戏角色，动漫角色等等，甚至还可以自</description>
     </item>
     
     <item>
       <title>Google Bard初体验，相比ChatGPT谁更强</title>
-      <link>https://leftpocket.cn/post/ai/bard/</link>
+      <link>https://www.techxiaofei.com/post/ai/bard/</link>
       <pubDate>Thu, 01 Jun 2023 08:00:00 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/ai/bard/</guid>
+      <guid>https://www.techxiaofei.com/post/ai/bard/</guid>
       <description>背景 Google Bard AI已经发布有一段时间了，我来深度体验一下，看一下它和ChatGPT谁更强，Google AI能不能实现弯道超车，巩固自己的地位。 自从</description>
     </item>
     
     <item>
       <title>本地搭建ChatGPT，完全免费，免翻墙体验原汁原味的ChatGPT</title>
-      <link>https://leftpocket.cn/post/chatgpt/local/</link>
+      <link>https://www.techxiaofei.com/post/chatgpt/local/</link>
       <pubDate>Thu, 25 May 2023 01:00:00 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/chatgpt/local/</guid>
+      <guid>https://www.techxiaofei.com/post/chatgpt/local/</guid>
       <description>背景 我相信很多小伙伴在国内使用机场使用ChatGPT有被封号的，因为公共机场的IP都是大家共用的，很容易被ChatGPT识别出来并封号。 比如</description>
     </item>
     
     <item>
       <title>教你搭建GPT4网站，完全免费，无需登录，无需魔法，3分钟拥有一个GPT4的bing AI网站</title>
-      <link>https://leftpocket.cn/post/ai/bingai_proxy/</link>
+      <link>https://www.techxiaofei.com/post/ai/bingai_proxy/</link>
       <pubDate>Sat, 20 May 2023 15:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/ai/bingai_proxy/</guid>
+      <guid>https://www.techxiaofei.com/post/ai/bingai_proxy/</guid>
       <description>背景 我知道很小伙伴想使用ChatGPT，但是经常被IP限制，今天就给大家分享一个无需登录，完全免费的GPT4的网站。 同时如果你想要自己搭建一</description>
     </item>
     
     <item>
       <title>ChatGPT最强平替，Claude保姆级教程，完全免费，支持手机端</title>
-      <link>https://leftpocket.cn/post/ai/claude/</link>
+      <link>https://www.techxiaofei.com/post/ai/claude/</link>
       <pubDate>Tue, 02 May 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/ai/claude/</guid>
+      <guid>https://www.techxiaofei.com/post/ai/claude/</guid>
       <description>背景 由于众所周知的原因，ChatGPT目前注册非常难，且国内访问受限。所以我来介绍一款ChatGPT最强的替代版，Claude。Claude</description>
     </item>
     
     <item>
       <title>无需云服务器，一键部署你的ChatGPT Web网站｜完全免费</title>
-      <link>https://leftpocket.cn/post/chatgpt/freeweb/</link>
+      <link>https://www.techxiaofei.com/post/chatgpt/freeweb/</link>
       <pubDate>Sun, 30 Apr 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/chatgpt/freeweb/</guid>
+      <guid>https://www.techxiaofei.com/post/chatgpt/freeweb/</guid>
       <description>背景 我之前做了怎么注册ChatGPT，以及把ChatGPT接入到微信公众号、电报telegram等平台的教程，今天我来教大家如何一键部署Ch</description>
     </item>
     
     <item>
       <title>【全网最简单方法】ChatGPT接入微信公众号 - 包教包会，100%成功</title>
-      <link>https://leftpocket.cn/post/chatgpt/wechat_mp/</link>
+      <link>https://www.techxiaofei.com/post/chatgpt/wechat_mp/</link>
       <pubDate>Thu, 13 Apr 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/chatgpt/wechat_mp/</guid>
+      <guid>https://www.techxiaofei.com/post/chatgpt/wechat_mp/</guid>
       <description>背景 之前我已经做了一期ChatGPT接入公众号的教程。但是教程需要执行大量的命令，一不小心执行命令的时候就会出错，所以我决定把这些繁琐的工作</description>
     </item>
     
     <item>
       <title>国内无法使用ChatGPT？教你使用云服务器一键部署自己的ChatGPT网站｜无需科学上网</title>
-      <link>https://leftpocket.cn/post/chatgpt/webpro/</link>
+      <link>https://www.techxiaofei.com/post/chatgpt/webpro/</link>
       <pubDate>Tue, 11 Apr 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/chatgpt/webpro/</guid>
+      <guid>https://www.techxiaofei.com/post/chatgpt/webpro/</guid>
       <description>背景 由于众所周知的原因，ChatGPT在中国无法访问，如果你有经常使用ChatGPT的需求怎么办呢？即使你使用了科学上网，由于你订阅的机场使</description>
     </item>
     
     <item>
       <title>使用ChatGPT免费练习英语口语和听力，助你练成流利英语</title>
-      <link>https://leftpocket.cn/post/chatgpt/english/</link>
+      <link>https://www.techxiaofei.com/post/chatgpt/english/</link>
       <pubDate>Sun, 02 Apr 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/chatgpt/english/</guid>
+      <guid>https://www.techxiaofei.com/post/chatgpt/english/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 前几期教程，我给大家演示了如何注册并使用ChatGPT，同时也教大家如何把ChatG</description>
     </item>
     
     <item>
       <title>ChatGPT接入到微信和公众号升级版教程，支持国内云服务器</title>
-      <link>https://leftpocket.cn/post/chatgpt/wechatpro/</link>
+      <link>https://www.techxiaofei.com/post/chatgpt/wechatpro/</link>
       <pubDate>Sat, 25 Mar 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/chatgpt/wechatpro/</guid>
+      <guid>https://www.techxiaofei.com/post/chatgpt/wechatpro/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 我之前的教程已经教了大家怎么注册ChatGPT，并教了大家怎么接入微信，微信公众号，</description>
     </item>
     
     <item>
       <title>ChatGPT接入到web网站保姆级教程</title>
-      <link>https://leftpocket.cn/post/chatgpt/web/</link>
+      <link>https://www.techxiaofei.com/post/chatgpt/web/</link>
       <pubDate>Thu, 23 Mar 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/chatgpt/web/</guid>
+      <guid>https://www.techxiaofei.com/post/chatgpt/web/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 我之前做了怎么注册ChatGPT以及把ChatGPT接入微信、公众号、电报teleg</description>
     </item>
     
     <item>
       <title>推荐5个非常强大的ChatGPT浏览器插件｜你的生产力提高工具</title>
-      <link>https://leftpocket.cn/post/chatgpt/plugin/</link>
+      <link>https://www.techxiaofei.com/post/chatgpt/plugin/</link>
       <pubDate>Sun, 19 Mar 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/chatgpt/plugin/</guid>
+      <guid>https://www.techxiaofei.com/post/chatgpt/plugin/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 近期，ChatGPT变得越来越热门，为此，许多浏览器插件也随之问世。这些基于Chat</description>
     </item>
     
     <item>
       <title>GPT-4隆重发布，新版ChatGPT抢先体验</title>
-      <link>https://leftpocket.cn/post/chatgpt/gpt4/</link>
+      <link>https://www.techxiaofei.com/post/chatgpt/gpt4/</link>
       <pubDate>Wed, 15 Mar 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/chatgpt/gpt4/</guid>
+      <guid>https://www.techxiaofei.com/post/chatgpt/gpt4/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 北京时间3月15日凌晨，OpenAI在官网上宣告了多模态大模型GPT-4的诞生。优化</description>
     </item>
     
     <item>
       <title>还没有ChatGPT账号？微软新必应 AI来了，使用体验和申请教程</title>
-      <link>https://leftpocket.cn/post/chatgpt/bing/</link>
+      <link>https://www.techxiaofei.com/post/chatgpt/bing/</link>
       <pubDate>Thu, 09 Mar 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/chatgpt/bing/</guid>
+      <guid>https://www.techxiaofei.com/post/chatgpt/bing/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 随着ChatGPT的快速走红，科技巨头们也纷纷入局AI之战。目前看来动作最快的要数微</description>
     </item>
     
     <item>
       <title>ChatGPT接入到telegram电报群教程</title>
-      <link>https://leftpocket.cn/post/chatgpt/telegram/</link>
+      <link>https://www.techxiaofei.com/post/chatgpt/telegram/</link>
       <pubDate>Wed, 08 Mar 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/chatgpt/telegram/</guid>
+      <guid>https://www.techxiaofei.com/post/chatgpt/telegram/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 我之前的教程已经教了大家怎么注册ChatGPT，同时教大家怎么接入微信、微信公众号等</description>
     </item>
     
     <item>
       <title>ChatGPT接入到公众号保姆级教程</title>
-      <link>https://leftpocket.cn/post/chatgpt/official/</link>
+      <link>https://www.techxiaofei.com/post/chatgpt/official/</link>
       <pubDate>Wed, 08 Mar 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/chatgpt/official/</guid>
+      <guid>https://www.techxiaofei.com/post/chatgpt/official/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 我之前的教程已经教了大家怎么注册ChatGPT，如果还没有注册的小伙伴可以看我之前的</description>
     </item>
     
     <item>
       <title>ChatGPT接入到微信、WeChat保姆级教程</title>
-      <link>https://leftpocket.cn/post/chatgpt/wechat/</link>
+      <link>https://www.techxiaofei.com/post/chatgpt/wechat/</link>
       <pubDate>Wed, 01 Mar 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/chatgpt/wechat/</guid>
+      <guid>https://www.techxiaofei.com/post/chatgpt/wechat/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 我之前的教程已经教了大家怎么注册ChatGPT，如果还没有注册的小伙伴可以看我之前的</description>
     </item>
     
     <item>
       <title>国内注册ChatGPT完整流程，百分百成功</title>
-      <link>https://leftpocket.cn/post/chatgpt/register/</link>
+      <link>https://www.techxiaofei.com/post/chatgpt/register/</link>
       <pubDate>Sat, 25 Feb 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/chatgpt/register/</guid>
+      <guid>https://www.techxiaofei.com/post/chatgpt/register/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 一、 背景 最近一段时间，大家都在讨论ChatGPT，一些主流的技术社区更是将ChatGPT</description>
     </item>
     

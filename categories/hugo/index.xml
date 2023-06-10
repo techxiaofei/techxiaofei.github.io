@@ -2,89 +2,89 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>hugo on 科技小飞哥</title>
-    <link>https://leftpocket.cn/categories/hugo/</link>
+    <link>https://www.techxiaofei.com/categories/hugo/</link>
     <description>Recent content in hugo on 科技小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 10 Jan 2023 01:01:55 +0800</lastBuildDate><atom:link href="https://leftpocket.cn/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 Jan 2023 01:01:55 +0800</lastBuildDate><atom:link href="https://www.techxiaofei.com/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>从零开始搭建个人博客网站系列 七、Hugo使用Shortcode插入bilibili、Youtube视频</title>
-      <link>https://leftpocket.cn/post/hugo/hugo_shortcode/</link>
+      <link>https://www.techxiaofei.com/post/hugo/hugo_shortcode/</link>
       <pubDate>Tue, 10 Jan 2023 01:01:55 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/hugo/hugo_shortcode/</guid>
+      <guid>https://www.techxiaofei.com/post/hugo/hugo_shortcode/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 前言 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一</description>
     </item>
     
     <item>
       <title>从零开始搭建个人博客网站系列 六、接入google adsense广告创收</title>
-      <link>https://leftpocket.cn/post/hugo/hugo_adsense/</link>
+      <link>https://www.techxiaofei.com/post/hugo/hugo_adsense/</link>
       <pubDate>Sat, 10 Dec 2022 01:01:55 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/hugo/hugo_adsense/</guid>
+      <guid>https://www.techxiaofei.com/post/hugo/hugo_adsense/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 前言 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一</description>
     </item>
     
     <item>
       <title>从零开始搭建个人博客网站系列 五、让搜索引擎收录你的个人博客网站</title>
-      <link>https://leftpocket.cn/post/hugo/hugo_search/</link>
+      <link>https://www.techxiaofei.com/post/hugo/hugo_search/</link>
       <pubDate>Fri, 02 Dec 2022 01:04:55 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/hugo/hugo_search/</guid>
+      <guid>https://www.techxiaofei.com/post/hugo/hugo_search/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 序言 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一</description>
     </item>
     
     <item>
       <title>从零开始搭建个人博客网站系列 四、申请免费域名并绑定到个人博客</title>
-      <link>https://leftpocket.cn/post/hugo/hugo_dns/</link>
+      <link>https://www.techxiaofei.com/post/hugo/hugo_dns/</link>
       <pubDate>Thu, 02 Dec 2021 01:04:55 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/hugo/hugo_dns/</guid>
+      <guid>https://www.techxiaofei.com/post/hugo/hugo_dns/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一</description>
     </item>
     
     <item>
       <title>从零开始搭建个人博客网站系列 三、hugo站点自动部署到vercel托管平台</title>
-      <link>https://leftpocket.cn/post/hugo/hugo_vercel/</link>
+      <link>https://www.techxiaofei.com/post/hugo/hugo_vercel/</link>
       <pubDate>Thu, 02 Dec 2021 01:03:55 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/hugo/hugo_vercel/</guid>
+      <guid>https://www.techxiaofei.com/post/hugo/hugo_vercel/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一</description>
     </item>
     
     <item>
       <title>从零开始搭建个人博客网站系列 [附录] hugo高级配置，让博客更亮眼</title>
-      <link>https://leftpocket.cn/post/hugo/hugo_advanced/</link>
+      <link>https://www.techxiaofei.com/post/hugo/hugo_advanced/</link>
       <pubDate>Thu, 02 Dec 2021 01:02:55 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/hugo/hugo_advanced/</guid>
+      <guid>https://www.techxiaofei.com/post/hugo/hugo_advanced/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一</description>
     </item>
     
     <item>
       <title>从零开始搭建个人博客网站系列 二、把Hugo个人站点托管到Github Pages上</title>
-      <link>https://leftpocket.cn/post/hugo/hugo_github/</link>
+      <link>https://www.techxiaofei.com/post/hugo/hugo_github/</link>
       <pubDate>Thu, 02 Dec 2021 01:01:55 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/hugo/hugo_github/</guid>
+      <guid>https://www.techxiaofei.com/post/hugo/hugo_github/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一</description>
     </item>
     
     <item>
       <title>从零开始搭建个人博客网站系列 一、使用hugo创建个人站点</title>
-      <link>https://leftpocket.cn/post/hugo/hugo_creation/</link>
+      <link>https://www.techxiaofei.com/post/hugo/hugo_creation/</link>
       <pubDate>Thu, 02 Dec 2021 01:00:55 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/hugo/hugo_creation/</guid>
+      <guid>https://www.techxiaofei.com/post/hugo/hugo_creation/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一</description>
     </item>
     
     <item>
       <title>从零开始搭建个人博客网站系列 - 合集</title>
-      <link>https://leftpocket.cn/post/hugo/hugo_collection/</link>
+      <link>https://www.techxiaofei.com/post/hugo/hugo_collection/</link>
       <pubDate>Thu, 02 Dec 2021 01:00:50 +0800</pubDate>
       
-      <guid>https://leftpocket.cn/post/hugo/hugo_collection/</guid>
+      <guid>https://www.techxiaofei.com/post/hugo/hugo_collection/</guid>
       <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 使用个人博客也有一年多的时间，这一年多的时候踩了很多坑，也学到了很多知识。 这里分享一</description>
     </item>
     
