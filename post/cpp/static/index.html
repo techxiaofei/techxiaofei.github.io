@@ -29,7 +29,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="科技小飞哥" />
-  <meta name="description" content="​ 本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 static 是 C/C&#43;&#43; 中很常用的修饰符，它被用来控制变量的存储方式和可见性。而 static 在 C 语言和 C&#43;&#43; 语言中" />
+  <meta name="description" content="​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 static 是 C/C&#43;&#43; 中很常用的修饰符，它被用来控制变量" />
 <meta name="keywords" content="c&#43;&#43;, static" />
 
 
@@ -57,7 +57,7 @@
 </script>
 
 
-<meta name="generator" content="Hugo 0.111.3" />
+<meta name="generator" content="Hugo 0.115.4" />
 
 
 <link rel="canonical" href="https://www.techxiaofei.com/post/cpp/static/" />
@@ -87,18 +87,18 @@
 
 
 <meta property="og:title" content="c&#43;&#43;中static的用法详解" />
-<meta property="og:description" content="​ 本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 static 是 C/C&#43;&#43; 中很常用的修饰符，它被用来控制变量的存储方式和可见性。而 static 在 C 语言和 C&#43;&#43; 语言中" />
+<meta property="og:description" content="​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 static 是 C/C&#43;&#43; 中很常用的修饰符，它被用来控制变量" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.techxiaofei.com/post/cpp/static/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-11-22T13:00:51+08:00" />
 <meta property="article:modified_time" content="2021-11-22T13:00:51+08:00" />
 <meta itemprop="name" content="c&#43;&#43;中static的用法详解">
-<meta itemprop="description" content="​ 本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 static 是 C/C&#43;&#43; 中很常用的修饰符，它被用来控制变量的存储方式和可见性。而 static 在 C 语言和 C&#43;&#43; 语言中"><meta itemprop="datePublished" content="2021-11-22T13:00:51+08:00" />
+<meta itemprop="description" content="​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 static 是 C/C&#43;&#43; 中很常用的修饰符，它被用来控制变量"><meta itemprop="datePublished" content="2021-11-22T13:00:51+08:00" />
 <meta itemprop="dateModified" content="2021-11-22T13:00:51+08:00" />
-<meta itemprop="wordCount" content="3182">
+<meta itemprop="wordCount" content="3195">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="c&#43;&#43;中static的用法详解"/>
-<meta name="twitter:description" content="​ 本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 static 是 C/C&#43;&#43; 中很常用的修饰符，它被用来控制变量的存储方式和可见性。而 static 在 C 语言和 C&#43;&#43; 语言中"/>
+<meta name="twitter:description" content="​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 static 是 C/C&#43;&#43; 中很常用的修饰符，它被用来控制变量"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -162,47 +162,6 @@
           
             <a class="menu-item-link" href="https://www.techxiaofei.com/about/">关于</a>
           
-        
-      </li><li class="mobile-menu-item">
-        
-          
-          <div class="mobile-menu-parent">
-            <span class="mobile-submenu-open"></span>
-            <a href="https://www.techxiaofei.com/">
-              demo
-            </a>
-          </div>
-          <ul class="mobile-submenu-list">
-            
-              <li>
-                <a href="https://www.techxiaofei.com/post/demo/1-image/">Demo: Image</a>
-              </li>
-            
-              <li>
-                <a href="https://www.techxiaofei.com/post/demo/2-toc/">Demo: toc</a>
-              </li>
-            
-              <li>
-                <a href="https://www.techxiaofei.com/post/demo/3-syntax-highlighting/">Demo: Syntax Highlighting</a>
-              </li>
-            
-              <li>
-                <a href="https://www.techxiaofei.com/post/demo/4-footnote/">Demo: Footnote</a>
-              </li>
-            
-              <li>
-                <a href="https://www.techxiaofei.com/post/demo/5-math/">Demo: Math</a>
-              </li>
-            
-              <li>
-                <a href="https://www.techxiaofei.com/post/demo/6-shortcode-notice/">Demo: Shortcodes Notice</a>
-              </li>
-            
-              <li>
-                <a href="https://www.techxiaofei.com/post/demo/7-shortcodes-preview/">Demo: more Shortcodes</a>
-              </li>
-            
-          </ul>
         
       </li>
     
@@ -287,46 +246,6 @@
 
       </li>
     
-        <li class="menu-item">
-        
-          
-          <a class="menu-item-link menu-parent" href="https://www.techxiaofei.com/">demo</a>
-          <ul class="submenu">
-            
-              <li class="submenu-item">
-                <a href="https://www.techxiaofei.com/post/demo/1-image/">Demo: Image</a>
-              </li>
-            
-              <li class="submenu-item">
-                <a href="https://www.techxiaofei.com/post/demo/2-toc/">Demo: toc</a>
-              </li>
-            
-              <li class="submenu-item">
-                <a href="https://www.techxiaofei.com/post/demo/3-syntax-highlighting/">Demo: Syntax Highlighting</a>
-              </li>
-            
-              <li class="submenu-item">
-                <a href="https://www.techxiaofei.com/post/demo/4-footnote/">Demo: Footnote</a>
-              </li>
-            
-              <li class="submenu-item">
-                <a href="https://www.techxiaofei.com/post/demo/5-math/">Demo: Math</a>
-              </li>
-            
-              <li class="submenu-item">
-                <a href="https://www.techxiaofei.com/post/demo/6-shortcode-notice/">Demo: Shortcodes Notice</a>
-              </li>
-            
-              <li class="submenu-item">
-                <a href="https://www.techxiaofei.com/post/demo/7-shortcodes-preview/">Demo: more Shortcodes</a>
-              </li>
-            
-          </ul>
-
-        
-
-      </li>
-    
 
     
     
@@ -369,7 +288,7 @@
 
   <div class="post-meta__right">
     <span class="post-meta-more">
-        约 3182 字 -
+        约 3195 字 -
         预计阅读 7 分钟
       </span>
 
@@ -393,7 +312,7 @@
         
         <div class="post-content">
           <p>​
-本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>。</p>
+本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>，加入 <a href="https://t.me/+5OzmrG-iyJE2YzM9"><strong>电报粉丝群</strong></a> 获得最新视频更新和问题解答。</p>
 <h1 id="背景">背景</h1>
 <p><strong>static</strong> 是 <strong>C/C++</strong> 中很常用的修饰符，它被用来控制变量的存储方式和可见性。而 <strong>static</strong> 在 <strong>C</strong> 语言和 <strong>C++</strong> 语言中各有多个用途，下面我就分类讲解：</p>
 <ul>
@@ -404,22 +323,22 @@
 <p>C 语言的 static 关键字有三种（具体来说是两种）用途：</p>
 <h2 id="1-静态局部变量">1. 静态局部变量</h2>
 <p>用于函数体内部修饰变量，这种变量的生存期长于该函数。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt" id="hl-0-1"><a class="lnlinks" href="#hl-0-1">1</a>
-</span><span class="lnt" id="hl-0-2"><a class="lnlinks" href="#hl-0-2">2</a>
-</span><span class="lnt" id="hl-0-3"><a class="lnlinks" href="#hl-0-3">3</a>
-</span><span class="lnt" id="hl-0-4"><a class="lnlinks" href="#hl-0-4">4</a>
-</span><span class="lnt" id="hl-0-5"><a class="lnlinks" href="#hl-0-5">5</a>
-</span><span class="lnt" id="hl-0-6"><a class="lnlinks" href="#hl-0-6">6</a>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-2">2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-3">3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-4">4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-5">5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-6">6</a>
 </span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">foo</span><span class="p">(){</span>
-</span></span><span class="line"><span class="cl">	<span class="k">static</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// note:1
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">//int i = 1;  // note:2
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">i</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#902000">int</span> <span style="color:#06287e">foo</span>(){
+</span></span><span style="display:flex;"><span>	<span style="color:#007020;font-weight:bold">static</span> <span style="color:#902000">int</span> i <span style="color:#666">=</span> <span style="color:#40a070">1</span>; <span style="color:#60a0b0;font-style:italic">// note:1
+</span></span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"></span>	<span style="color:#60a0b0;font-style:italic">//int i = 1;  // note:2
+</span></span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"></span>	i <span style="color:#666">+=</span> <span style="color:#40a070">1</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#007020;font-weight:bold">return</span> i;
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>要明白这个用法，我们首先要了解 <strong>c/c++</strong> 的内存分布，以及 <strong>static</strong> 所在的区间。</p>
@@ -446,26 +365,26 @@
 </ul>
 <h2 id="2静态全局变量">2.静态全局变量</h2>
 <p>定义在函数体外，用于修饰全局变量，表示该变量只在本文件可见。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt" id="hl-1-1"><a class="lnlinks" href="#hl-1-1">1</a>
-</span><span class="lnt" id="hl-1-2"><a class="lnlinks" href="#hl-1-2">2</a>
-</span><span class="lnt" id="hl-1-3"><a class="lnlinks" href="#hl-1-3">3</a>
-</span><span class="lnt" id="hl-1-4"><a class="lnlinks" href="#hl-1-4">4</a>
-</span><span class="lnt" id="hl-1-5"><a class="lnlinks" href="#hl-1-5">5</a>
-</span><span class="lnt" id="hl-1-6"><a class="lnlinks" href="#hl-1-6">6</a>
-</span><span class="lnt" id="hl-1-7"><a class="lnlinks" href="#hl-1-7">7</a>
-</span><span class="lnt" id="hl-1-8"><a class="lnlinks" href="#hl-1-8">8</a>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-2">2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-3">3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-4">4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-5">5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-6">6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-7">7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-8">8</a>
 </span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">//note:3
-</span></span></span><span class="line"><span class="cl"><span class="c1">//int i = 1;  //note:4
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">foo</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">i</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#007020;font-weight:bold">static</span> <span style="color:#902000">int</span> i <span style="color:#666">=</span> <span style="color:#40a070">1</span>;  <span style="color:#60a0b0;font-style:italic">//note:3
+</span></span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic">//int i = 1;  //note:4
+</span></span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#902000">int</span> <span style="color:#06287e">foo</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	i <span style="color:#666">+=</span> <span style="color:#40a070">1</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#007020;font-weight:bold">return</span> i;
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>note:3</strong> 和 <strong>note:4</strong> 有什么差异呢？</p>
@@ -473,82 +392,75 @@
 <p><strong>文件隔离！</strong></p>
 <p>假设我有一个文件a.c,我们再新建一个b.c,内容如下。
  </p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt" id="hl-2-1"><a class="lnlinks" href="#hl-2-1">1</a>
-</span><span class="lnt" id="hl-2-2"><a class="lnlinks" href="#hl-2-2">2</a>
-</span><span class="lnt" id="hl-2-3"><a class="lnlinks" href="#hl-2-3">3</a>
-</span><span class="lnt" id="hl-2-4"><a class="lnlinks" href="#hl-2-4">4</a>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-2">2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-3">3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-4">4</a>
 </span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//file a.c
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl"><span class="c1">//static int n = 15;  //note:5
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>  <span class="c1">//note:6
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic">//file a.c
+</span></span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic">//static int n = 15;  //note:5
+</span></span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"></span><span style="color:#902000">int</span> n <span style="color:#666">=</span> <span style="color:#40a070">15</span>;  <span style="color:#60a0b0;font-style:italic">//note:6
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt" id="hl-3-1"><a class="lnlinks" href="#hl-3-1"> 1</a>
-</span><span class="lnt" id="hl-3-2"><a class="lnlinks" href="#hl-3-2"> 2</a>
-</span><span class="lnt" id="hl-3-3"><a class="lnlinks" href="#hl-3-3"> 3</a>
-</span><span class="lnt" id="hl-3-4"><a class="lnlinks" href="#hl-3-4"> 4</a>
-</span><span class="lnt" id="hl-3-5"><a class="lnlinks" href="#hl-3-5"> 5</a>
-</span><span class="lnt" id="hl-3-6"><a class="lnlinks" href="#hl-3-6"> 6</a>
-</span><span class="lnt" id="hl-3-7"><a class="lnlinks" href="#hl-3-7"> 7</a>
-</span><span class="lnt" id="hl-3-8"><a class="lnlinks" href="#hl-3-8"> 8</a>
-</span><span class="lnt" id="hl-3-9"><a class="lnlinks" href="#hl-3-9"> 9</a>
-</span><span class="lnt" id="hl-3-10"><a class="lnlinks" href="#hl-3-10">10</a>
-</span><span class="lnt" id="hl-3-11"><a class="lnlinks" href="#hl-3-11">11</a>
-</span><span class="lnt" id="hl-3-12"><a class="lnlinks" href="#hl-3-12">12</a>
-</span><span class="lnt" id="hl-3-13"><a class="lnlinks" href="#hl-3-13">13</a>
-</span><span class="lnt" id="hl-3-14"><a class="lnlinks" href="#hl-3-14">14</a>
-</span><span class="lnt" id="hl-3-15"><a class="lnlinks" href="#hl-3-15">15</a>
-</span><span class="lnt" id="hl-3-16"><a class="lnlinks" href="#hl-3-16">16</a>
-</span><span class="lnt" id="hl-3-17"><a class="lnlinks" href="#hl-3-17">17</a>
+</div><div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-15">15</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-16">16</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-17"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-17">17</a>
 </span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//file b.c
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">fn</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="n">n</span><span class="o">++</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="n">printf</span><span class="p">(</span><span class="s">&#34;after: %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">main</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="n">printf</span><span class="p">(</span><span class="s">&#34;before: %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="n">fn</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic">//file b.c
+</span></span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"></span><span style="color:#007020">#include</span> <span style="color:#007020">&lt;stdio.h&gt;</span><span style="color:#007020">
+</span></span></span><span style="display:flex;"><span><span style="color:#007020"></span>
+</span></span><span style="display:flex;"><span><span style="color:#007020;font-weight:bold">extern</span> <span style="color:#902000">int</span> n;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#902000">void</span> <span style="color:#06287e">fn</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	n<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>	printf(<span style="color:#4070a0">&#34;after: %d</span><span style="color:#4070a0;font-weight:bold">\n</span><span style="color:#4070a0">&#34;</span>,n);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#902000">void</span> <span style="color:#06287e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	printf(<span style="color:#4070a0">&#34;before: %d</span><span style="color:#4070a0;font-weight:bold">\n</span><span style="color:#4070a0">&#34;</span>,n);
+</span></span><span style="display:flex;"><span>	fn();
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>我们先使用 <strong>note:6</strong>,也就是 <strong>非静态全局变量</strong>，发现输出为:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt" id="hl-4-1"><a class="lnlinks" href="#hl-4-1">1</a>
-</span><span class="lnt" id="hl-4-2"><a class="lnlinks" href="#hl-4-2">2</a>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-2">2</a>
 </span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="nl">before</span><span class="p">:</span> <span class="mi">15</span>
-</span></span><span class="line"><span class="cl"><span class="nl">after</span><span class="p">:</span> <span class="mi">16</span>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#002070;font-weight:bold">before</span>: <span style="color:#40a070">15</span>
+</span></span><span style="display:flex;"><span><span style="color:#002070;font-weight:bold">after</span>: <span style="color:#40a070">16</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>也就是我们的 <em>b.c</em> 通过 <strong>extern</strong> 使用了 <em>a.c</em> 定义的全局变量。
 那么我们改成使用 <strong>note:5</strong>,也就是使用静态全局变量呢？</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt" id="hl-5-1"><a class="lnlinks" href="#hl-5-1">1</a>
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">gcc a.c b.c -o output.out
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>会出现类似 <code>undeference to &quot;n&quot;</code> 的报错，它是找不到n的，因为 <strong>static</strong> 进行了文件隔离，你是没办法访问 <em>a.c</em> 定义的静态全局变量的，当然你用
+<pre tabindex="0"><code>gcc a.c b.c -o output.out
+</code></pre><p>会出现类似 <code>undeference to &quot;n&quot;</code> 的报错，它是找不到n的，因为 <strong>static</strong> 进行了文件隔离，你是没办法访问 <em>a.c</em> 定义的静态全局变量的，当然你用
 <code>#include &quot;a.c&quot;</code>
 那就不一样了。</p>
 <p><strong>以上我们就可以得出静态全局变量的特点：</strong></p>
@@ -558,69 +470,55 @@
 </ul>
 <h2 id="3静态函数">3.静态函数</h2>
 <p>准确的说，静态函数跟静态全局变量的作用类似：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt" id="hl-6-1"><a class="lnlinks" href="#hl-6-1">1</a>
-</span><span class="lnt" id="hl-6-2"><a class="lnlinks" href="#hl-6-2">2</a>
-</span><span class="lnt" id="hl-6-3"><a class="lnlinks" href="#hl-6-3">3</a>
-</span><span class="lnt" id="hl-6-4"><a class="lnlinks" href="#hl-6-4">4</a>
-</span><span class="lnt" id="hl-6-5"><a class="lnlinks" href="#hl-6-5">5</a>
-</span><span class="lnt" id="hl-6-6"><a class="lnlinks" href="#hl-6-6">6</a>
-</span><span class="lnt" id="hl-6-7"><a class="lnlinks" href="#hl-6-7">7</a>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-2">2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-3">3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-4">4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-5">5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-6">6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-7">7</a>
 </span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//file a.c
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">fn</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="n">printf</span><span class="p">(</span><span class="s">&#34;this is non-static func in a&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic">//file a.c
+</span></span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"></span><span style="color:#007020">#include</span> <span style="color:#007020">&lt;stdio.h&gt;</span><span style="color:#007020">
+</span></span></span><span style="display:flex;"><span><span style="color:#007020"></span>
+</span></span><span style="display:flex;"><span><span style="color:#902000">void</span> <span style="color:#06287e">fn</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	printf(<span style="color:#4070a0">&#34;this is non-static func in a&#34;</span>);
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt" id="hl-7-1"><a class="lnlinks" href="#hl-7-1">1</a>
-</span><span class="lnt" id="hl-7-2"><a class="lnlinks" href="#hl-7-2">2</a>
-</span><span class="lnt" id="hl-7-3"><a class="lnlinks" href="#hl-7-3">3</a>
-</span><span class="lnt" id="hl-7-4"><a class="lnlinks" href="#hl-7-4">4</a>
-</span><span class="lnt" id="hl-7-5"><a class="lnlinks" href="#hl-7-5">5</a>
-</span><span class="lnt" id="hl-7-6"><a class="lnlinks" href="#hl-7-6">6</a>
-</span><span class="lnt" id="hl-7-7"><a class="lnlinks" href="#hl-7-7">7</a>
-</span><span class="lnt" id="hl-7-8"><a class="lnlinks" href="#hl-7-8">8</a>
-</span><span class="lnt" id="hl-7-9"><a class="lnlinks" href="#hl-7-9">9</a>
+</div><div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-2">2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-3">3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-4">4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-5">5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-6">6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-7">7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-8">8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-9">9</a>
 </span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//file b.c
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="kt">void</span> <span class="nf">fn</span><span class="p">();</span>  <span class="c1">//我们用extern声明其他文件的fn(),供本文件使用。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">main</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="n">fn</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic">//file b.c
+</span></span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"></span><span style="color:#007020">#include</span> <span style="color:#007020">&lt;stdio.h&gt;</span><span style="color:#007020">
+</span></span></span><span style="display:flex;"><span><span style="color:#007020"></span>
+</span></span><span style="display:flex;"><span><span style="color:#007020;font-weight:bold">extern</span> <span style="color:#902000">void</span> <span style="color:#06287e">fn</span>();  <span style="color:#60a0b0;font-style:italic">//我们用extern声明其他文件的fn(),供本文件使用。
+</span></span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#902000">void</span> <span style="color:#06287e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	fn();
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以正常输出：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt" id="hl-8-1"><a class="lnlinks" href="#hl-8-1">1</a>
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">this is non-static func in a。
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>当给void fn()加上static的关键字之后呢？</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt" id="hl-9-1"><a class="lnlinks" href="#hl-9-1">1</a>
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">undefined reference to &#34;fn&#34;.
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>所以，静态函数的好处跟静态全局变量的好处就类似了：</strong></p>
+<pre tabindex="0"><code>this is non-static func in a。
+</code></pre><p>当给void fn()加上static的关键字之后呢？</p>
+<pre tabindex="0"><code>undefined reference to &#34;fn&#34;.
+</code></pre><p><strong>所以，静态函数的好处跟静态全局变量的好处就类似了：</strong></p>
 <ul>
 <li>1.静态函数不能被其它文件所用;</li>
 <li>2.其它文件中可以定义相同名字的函数，不会发生冲突;</li>
@@ -635,110 +533,99 @@
 当然以上的几种，也可以用在c++中。还有额外的两种用法：</p>
 <h2 id="1静态数据成员">1.静态数据成员</h2>
 <p>用于修饰 class 的数据成员，即所谓“静态成员”。这种数据成员的生存期大于 class 的对象（实体 instance）。静态数据成员是每个 class 有一份，普通数据成员是每个 instance 有一份，因此静态数据成员也叫做类变量，而普通数据成员也叫做实例变量。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt" id="hl-10-1"><a class="lnlinks" href="#hl-10-1"> 1</a>
-</span><span class="lnt" id="hl-10-2"><a class="lnlinks" href="#hl-10-2"> 2</a>
-</span><span class="lnt" id="hl-10-3"><a class="lnlinks" href="#hl-10-3"> 3</a>
-</span><span class="lnt" id="hl-10-4"><a class="lnlinks" href="#hl-10-4"> 4</a>
-</span><span class="lnt" id="hl-10-5"><a class="lnlinks" href="#hl-10-5"> 5</a>
-</span><span class="lnt" id="hl-10-6"><a class="lnlinks" href="#hl-10-6"> 6</a>
-</span><span class="lnt" id="hl-10-7"><a class="lnlinks" href="#hl-10-7"> 7</a>
-</span><span class="lnt" id="hl-10-8"><a class="lnlinks" href="#hl-10-8"> 8</a>
-</span><span class="lnt" id="hl-10-9"><a class="lnlinks" href="#hl-10-9"> 9</a>
-</span><span class="lnt" id="hl-10-10"><a class="lnlinks" href="#hl-10-10">10</a>
-</span><span class="lnt" id="hl-10-11"><a class="lnlinks" href="#hl-10-11">11</a>
-</span><span class="lnt" id="hl-10-12"><a class="lnlinks" href="#hl-10-12">12</a>
-</span><span class="lnt" id="hl-10-13"><a class="lnlinks" href="#hl-10-13">13</a>
-</span><span class="lnt" id="hl-10-14"><a class="lnlinks" href="#hl-10-14">14</a>
-</span><span class="lnt" id="hl-10-15"><a class="lnlinks" href="#hl-10-15">15</a>
-</span><span class="lnt" id="hl-10-16"><a class="lnlinks" href="#hl-10-16">16</a>
-</span><span class="lnt" id="hl-10-17"><a class="lnlinks" href="#hl-10-17">17</a>
-</span><span class="lnt" id="hl-10-18"><a class="lnlinks" href="#hl-10-18">18</a>
-</span><span class="lnt" id="hl-10-19"><a class="lnlinks" href="#hl-10-19">19</a>
-</span><span class="lnt" id="hl-10-20"><a class="lnlinks" href="#hl-10-20">20</a>
-</span><span class="lnt" id="hl-10-21"><a class="lnlinks" href="#hl-10-21">21</a>
-</span><span class="lnt" id="hl-10-22"><a class="lnlinks" href="#hl-10-22">22</a>
-</span><span class="lnt" id="hl-10-23"><a class="lnlinks" href="#hl-10-23">23</a>
-</span><span class="lnt" id="hl-10-24"><a class="lnlinks" href="#hl-10-24">24</a>
-</span><span class="lnt" id="hl-10-25"><a class="lnlinks" href="#hl-10-25">25</a>
-</span><span class="lnt" id="hl-10-26"><a class="lnlinks" href="#hl-10-26">26</a>
-</span><span class="lnt" id="hl-10-27"><a class="lnlinks" href="#hl-10-27">27</a>
-</span><span class="lnt" id="hl-10-28"><a class="lnlinks" href="#hl-10-28">28</a>
-</span><span class="lnt" id="hl-10-29"><a class="lnlinks" href="#hl-10-29">29</a>
-</span><span class="lnt" id="hl-10-30"><a class="lnlinks" href="#hl-10-30">30</a>
-</span><span class="lnt" id="hl-10-31"><a class="lnlinks" href="#hl-10-31">31</a>
-</span><span class="lnt" id="hl-10-32"><a class="lnlinks" href="#hl-10-32">32</a>
-</span><span class="lnt" id="hl-10-33"><a class="lnlinks" href="#hl-10-33">33</a>
-</span><span class="lnt" id="hl-10-34"><a class="lnlinks" href="#hl-10-34">34</a>
-</span><span class="lnt" id="hl-10-35"><a class="lnlinks" href="#hl-10-35">35</a>
-</span><span class="lnt" id="hl-10-36"><a class="lnlinks" href="#hl-10-36">36</a>
-</span><span class="lnt" id="hl-10-37"><a class="lnlinks" href="#hl-10-37">37</a>
-</span><span class="lnt" id="hl-10-38"><a class="lnlinks" href="#hl-10-38">38</a>
-</span><span class="lnt" id="hl-10-39"><a class="lnlinks" href="#hl-10-39">39</a>
-</span><span class="lnt" id="hl-10-40"><a class="lnlinks" href="#hl-10-40">40</a>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-15">15</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-16">16</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-17"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-17">17</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-18"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-18">18</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-19"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-19">19</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-20"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-20">20</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-21"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-21">21</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-22"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-22">22</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-23"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-23">23</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-24"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-24">24</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-25"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-25">25</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-26"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-26">26</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-27"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-27">27</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-28"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-28">28</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-29"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-29">29</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-30"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-30">30</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-31"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-31">31</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-32"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-32">32</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-33"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-33">33</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-34"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-34">34</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-35"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-35">35</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-36"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-36">36</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-37"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-37">37</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-38"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-38">38</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-39"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-39">39</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-40"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-40">40</a>
 </span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Rectangle</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">m_w</span><span class="p">,</span><span class="n">m_h</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="k">static</span> <span class="kt">int</span> <span class="n">s_sum</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">	<span class="n">Rectangle</span><span class="p">(</span><span class="kt">int</span> <span class="n">w</span><span class="p">,</span><span class="kt">int</span> <span class="n">h</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="k">this</span><span class="o">-&gt;</span><span class="n">m_w</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">		<span class="k">this</span><span class="o">-&gt;</span><span class="n">m_h</span> <span class="o">=</span> <span class="n">h</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">		<span class="n">s_sum</span> <span class="o">+=</span> <span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_w</span> <span class="o">*</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">m_h</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="kt">void</span> <span class="nf">GetSum</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">	<span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;sum = &#34;</span><span class="o">&lt;&lt;</span><span class="n">s_sum</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">Rectangle</span><span class="o">::</span><span class="n">s_sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="c1">//初始化
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;sizeof(Rectangle)=&#34;</span><span class="o">&lt;&lt;</span><span class="k">sizeof</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="n">Rectangle</span> <span class="o">*</span><span class="n">rect1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Rectangle</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="n">rect1</span><span class="o">-&gt;</span><span class="n">GetSum</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;sizeof(rect1)=&#34;</span><span class="o">&lt;&lt;</span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">rect1</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="n">Rectangle</span> <span class="n">rect2</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="n">rect2</span><span class="p">.</span><span class="n">GetSum</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;sizeof(rect2)=&#34;</span><span class="o">&lt;&lt;</span><span class="k">sizeof</span><span class="p">(</span><span class="n">rect2</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl">	<span class="n">system</span><span class="p">(</span><span class="s">&#34;pause&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#007020">#include</span><span style="color:#007020">&lt;iostream&gt;</span><span style="color:#007020">
+</span></span></span><span style="display:flex;"><span><span style="color:#007020"></span>
+</span></span><span style="display:flex;"><span><span style="color:#007020;font-weight:bold">using</span> <span style="color:#007020;font-weight:bold">namespace</span> std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">Rectangle</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#007020;font-weight:bold">private</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#902000">int</span> m_w,m_h;
+</span></span><span style="display:flex;"><span>	<span style="color:#007020;font-weight:bold">static</span> <span style="color:#902000">int</span> s_sum;
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span><span style="color:#007020;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>	Rectangle(<span style="color:#902000">int</span> w,<span style="color:#902000">int</span> h)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#007020;font-weight:bold">this</span><span style="color:#666">-&gt;</span>m_w <span style="color:#666">=</span> w;
+</span></span><span style="display:flex;"><span>		<span style="color:#007020;font-weight:bold">this</span><span style="color:#666">-&gt;</span>m_h <span style="color:#666">=</span> h;
+</span></span><span style="display:flex;"><span>		s_sum <span style="color:#666">+=</span> (<span style="color:#007020;font-weight:bold">this</span><span style="color:#666">-&gt;</span>m_w <span style="color:#666">*</span> <span style="color:#007020;font-weight:bold">this</span><span style="color:#666">-&gt;</span>m_h);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#902000">void</span> <span style="color:#06287e">GetSum</span>()
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		cout<span style="color:#666">&lt;&lt;</span><span style="color:#4070a0">&#34;sum = &#34;</span><span style="color:#666">&lt;&lt;</span>s_sum<span style="color:#666">&lt;&lt;</span>endl;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#902000">int</span> Rectangle<span style="color:#666">::</span>s_sum <span style="color:#666">=</span> <span style="color:#40a070">0</span>;  <span style="color:#60a0b0;font-style:italic">//初始化
+</span></span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#902000">int</span> <span style="color:#06287e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	cout<span style="color:#666">&lt;&lt;</span><span style="color:#4070a0">&#34;sizeof(Rectangle)=&#34;</span><span style="color:#666">&lt;&lt;</span><span style="color:#007020;font-weight:bold">sizeof</span>(Rectangle)<span style="color:#666">&lt;&lt;</span>endl;
+</span></span><span style="display:flex;"><span>	Rectangle <span style="color:#666">*</span>rect1 <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">new</span> Rectangle(<span style="color:#40a070">3</span>,<span style="color:#40a070">4</span>);
+</span></span><span style="display:flex;"><span>	rect1<span style="color:#666">-&gt;</span>GetSum();
+</span></span><span style="display:flex;"><span>	cout<span style="color:#666">&lt;&lt;</span><span style="color:#4070a0">&#34;sizeof(rect1)=&#34;</span><span style="color:#666">&lt;&lt;</span><span style="color:#007020;font-weight:bold">sizeof</span>(<span style="color:#666">*</span>rect1)<span style="color:#666">&lt;&lt;</span>endl;
+</span></span><span style="display:flex;"><span>	Rectangle rect2(<span style="color:#40a070">2</span>,<span style="color:#40a070">3</span>);
+</span></span><span style="display:flex;"><span>	rect2.GetSum();
+</span></span><span style="display:flex;"><span>	cout<span style="color:#666">&lt;&lt;</span><span style="color:#4070a0">&#34;sizeof(rect2)=&#34;</span><span style="color:#666">&lt;&lt;</span><span style="color:#007020;font-weight:bold">sizeof</span>(rect2)<span style="color:#666">&lt;&lt;</span>endl;
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	system(<span style="color:#4070a0">&#34;pause&#34;</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#007020;font-weight:bold">return</span> <span style="color:#40a070">0</span>;
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>结果如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt" id="hl-11-1"><a class="lnlinks" href="#hl-11-1">1</a>
-</span><span class="lnt" id="hl-11-2"><a class="lnlinks" href="#hl-11-2">2</a>
-</span><span class="lnt" id="hl-11-3"><a class="lnlinks" href="#hl-11-3">3</a>
-</span><span class="lnt" id="hl-11-4"><a class="lnlinks" href="#hl-11-4">4</a>
-</span><span class="lnt" id="hl-11-5"><a class="lnlinks" href="#hl-11-5">5</a>
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sizeof(Rectangle)=8
-</span></span><span class="line"><span class="cl">sum = 12
-</span></span><span class="line"><span class="cl">sizeof(rect1)=8
-</span></span><span class="line"><span class="cl">sum = 12
-</span></span><span class="line"><span class="cl">sizeof(rect1)=8
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>由此可知：<code>sizeof(Rectangle)=8bytes=sizeof(m_w)+sizeof(m_h)</code>。也就是说 <strong>static</strong> 并不占用 <strong>Rectangle</strong> 的内存空间。
+<pre tabindex="0"><code>sizeof(Rectangle)=8
+sum = 12
+sizeof(rect1)=8
+sum = 12
+sizeof(rect1)=8
+</code></pre><p>由此可知：<code>sizeof(Rectangle)=8bytes=sizeof(m_w)+sizeof(m_h)</code>。也就是说 <strong>static</strong> 并不占用 <strong>Rectangle</strong> 的内存空间。
 那么 <strong>static</strong> 在哪里分配内存的呢？是的，全局数据区(静态区)。
 再看看 <strong>GetSum()</strong>，第一次12=3*4，第二次18=12+2*3。由此可得，<strong>static</strong> 只会被初始化一次，于实例无关。</p>
 <p><strong>结论：</strong></p>
@@ -748,92 +635,92 @@
 <h2 id="2静态成员函数">2.静态成员函数</h2>
 <p>用于修饰 class 的成员函数。</p>
 <p>我们对上面的例子稍加改动：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt" id="hl-12-1"><a class="lnlinks" href="#hl-12-1"> 1</a>
-</span><span class="lnt" id="hl-12-2"><a class="lnlinks" href="#hl-12-2"> 2</a>
-</span><span class="lnt" id="hl-12-3"><a class="lnlinks" href="#hl-12-3"> 3</a>
-</span><span class="lnt" id="hl-12-4"><a class="lnlinks" href="#hl-12-4"> 4</a>
-</span><span class="lnt" id="hl-12-5"><a class="lnlinks" href="#hl-12-5"> 5</a>
-</span><span class="lnt" id="hl-12-6"><a class="lnlinks" href="#hl-12-6"> 6</a>
-</span><span class="lnt" id="hl-12-7"><a class="lnlinks" href="#hl-12-7"> 7</a>
-</span><span class="lnt" id="hl-12-8"><a class="lnlinks" href="#hl-12-8"> 8</a>
-</span><span class="lnt" id="hl-12-9"><a class="lnlinks" href="#hl-12-9"> 9</a>
-</span><span class="lnt" id="hl-12-10"><a class="lnlinks" href="#hl-12-10">10</a>
-</span><span class="lnt" id="hl-12-11"><a class="lnlinks" href="#hl-12-11">11</a>
-</span><span class="lnt" id="hl-12-12"><a class="lnlinks" href="#hl-12-12">12</a>
-</span><span class="lnt" id="hl-12-13"><a class="lnlinks" href="#hl-12-13">13</a>
-</span><span class="lnt" id="hl-12-14"><a class="lnlinks" href="#hl-12-14">14</a>
-</span><span class="lnt" id="hl-12-15"><a class="lnlinks" href="#hl-12-15">15</a>
-</span><span class="lnt" id="hl-12-16"><a class="lnlinks" href="#hl-12-16">16</a>
-</span><span class="lnt" id="hl-12-17"><a class="lnlinks" href="#hl-12-17">17</a>
-</span><span class="lnt" id="hl-12-18"><a class="lnlinks" href="#hl-12-18">18</a>
-</span><span class="lnt" id="hl-12-19"><a class="lnlinks" href="#hl-12-19">19</a>
-</span><span class="lnt" id="hl-12-20"><a class="lnlinks" href="#hl-12-20">20</a>
-</span><span class="lnt" id="hl-12-21"><a class="lnlinks" href="#hl-12-21">21</a>
-</span><span class="lnt" id="hl-12-22"><a class="lnlinks" href="#hl-12-22">22</a>
-</span><span class="lnt" id="hl-12-23"><a class="lnlinks" href="#hl-12-23">23</a>
-</span><span class="lnt" id="hl-12-24"><a class="lnlinks" href="#hl-12-24">24</a>
-</span><span class="lnt" id="hl-12-25"><a class="lnlinks" href="#hl-12-25">25</a>
-</span><span class="lnt" id="hl-12-26"><a class="lnlinks" href="#hl-12-26">26</a>
-</span><span class="lnt" id="hl-12-27"><a class="lnlinks" href="#hl-12-27">27</a>
-</span><span class="lnt" id="hl-12-28"><a class="lnlinks" href="#hl-12-28">28</a>
-</span><span class="lnt" id="hl-12-29"><a class="lnlinks" href="#hl-12-29">29</a>
-</span><span class="lnt" id="hl-12-30"><a class="lnlinks" href="#hl-12-30">30</a>
-</span><span class="lnt" id="hl-12-31"><a class="lnlinks" href="#hl-12-31">31</a>
-</span><span class="lnt" id="hl-12-32"><a class="lnlinks" href="#hl-12-32">32</a>
-</span><span class="lnt" id="hl-12-33"><a class="lnlinks" href="#hl-12-33">33</a>
-</span><span class="lnt" id="hl-12-34"><a class="lnlinks" href="#hl-12-34">34</a>
-</span><span class="lnt" id="hl-12-35"><a class="lnlinks" href="#hl-12-35">35</a>
-</span><span class="lnt" id="hl-12-36"><a class="lnlinks" href="#hl-12-36">36</a>
-</span><span class="lnt" id="hl-12-37"><a class="lnlinks" href="#hl-12-37">37</a>
-</span><span class="lnt" id="hl-12-38"><a class="lnlinks" href="#hl-12-38">38</a>
-</span><span class="lnt" id="hl-12-39"><a class="lnlinks" href="#hl-12-39">39</a>
-</span><span class="lnt" id="hl-12-40"><a class="lnlinks" href="#hl-12-40">40</a>
-</span><span class="lnt" id="hl-12-41"><a class="lnlinks" href="#hl-12-41">41</a>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-15">15</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-16">16</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-17"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-17">17</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-18"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-18">18</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-19"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-19">19</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-20"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-20">20</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-21"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-21">21</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-22"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-22">22</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-23"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-23">23</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-24"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-24">24</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-25"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-25">25</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-26"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-26">26</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-27"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-27">27</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-28"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-28">28</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-29"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-29">29</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-30"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-30">30</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-31"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-31">31</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-32"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-32">32</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-33"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-33">33</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-34"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-34">34</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-35"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-35">35</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-36"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-36">36</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-37"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-37">37</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-38"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-38">38</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-39"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-39">39</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-40"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-40">40</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-41"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-41">41</a>
 </span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Rectangle</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">m_w</span><span class="p">,</span><span class="n">m_h</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="k">static</span> <span class="kt">int</span> <span class="n">s_sum</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">	<span class="n">Rectangle</span><span class="p">(</span><span class="kt">int</span> <span class="n">w</span><span class="p">,</span><span class="kt">int</span> <span class="n">h</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="k">this</span><span class="o">-&gt;</span><span class="n">m_w</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">		<span class="k">this</span><span class="o">-&gt;</span><span class="n">m_h</span> <span class="o">=</span> <span class="n">h</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">		<span class="n">s_sum</span> <span class="o">+=</span> <span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_w</span> <span class="o">*</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">m_h</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="k">static</span> <span class="kt">void</span> <span class="nf">GetSum</span><span class="p">()</span>  <span class="c1">//这里加上static
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;sum = &#34;</span><span class="o">&lt;&lt;</span><span class="n">s_sum</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">Rectangle</span><span class="o">::</span><span class="n">s_sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="c1">//初始化
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;sizeof(Rectangle)=&#34;</span><span class="o">&lt;&lt;</span><span class="k">sizeof</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="n">Rectangle</span> <span class="o">*</span><span class="n">rect1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Rectangle</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="n">rect1</span><span class="o">-&gt;</span><span class="n">GetSum</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;sizeof(rect1)=&#34;</span><span class="o">&lt;&lt;</span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">rect1</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="n">Rectangle</span> <span class="n">rect2</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="n">rect2</span><span class="p">.</span><span class="n">GetSum</span><span class="p">();</span>  <span class="c1">//可以用对象名.函数名访问
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;sizeof(rect2)=&#34;</span><span class="o">&lt;&lt;</span><span class="k">sizeof</span><span class="p">(</span><span class="n">rect2</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="n">Rectangle</span><span class="o">::</span><span class="n">GetSum</span><span class="p">();</span>  <span class="c1">//也可以可以用类名::函数名访问
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">	<span class="n">system</span><span class="p">(</span><span class="s">&#34;pause&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#007020">#include</span><span style="color:#007020">&lt;iostream&gt;</span><span style="color:#007020">
+</span></span></span><span style="display:flex;"><span><span style="color:#007020"></span>
+</span></span><span style="display:flex;"><span><span style="color:#007020;font-weight:bold">using</span> <span style="color:#007020;font-weight:bold">namespace</span> std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">Rectangle</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#007020;font-weight:bold">private</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#902000">int</span> m_w,m_h;
+</span></span><span style="display:flex;"><span>	<span style="color:#007020;font-weight:bold">static</span> <span style="color:#902000">int</span> s_sum;
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span><span style="color:#007020;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>	Rectangle(<span style="color:#902000">int</span> w,<span style="color:#902000">int</span> h)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#007020;font-weight:bold">this</span><span style="color:#666">-&gt;</span>m_w <span style="color:#666">=</span> w;
+</span></span><span style="display:flex;"><span>		<span style="color:#007020;font-weight:bold">this</span><span style="color:#666">-&gt;</span>m_h <span style="color:#666">=</span> h;
+</span></span><span style="display:flex;"><span>		s_sum <span style="color:#666">+=</span> (<span style="color:#007020;font-weight:bold">this</span><span style="color:#666">-&gt;</span>m_w <span style="color:#666">*</span> <span style="color:#007020;font-weight:bold">this</span><span style="color:#666">-&gt;</span>m_h);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#007020;font-weight:bold">static</span> <span style="color:#902000">void</span> <span style="color:#06287e">GetSum</span>()  <span style="color:#60a0b0;font-style:italic">//这里加上static
+</span></span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"></span>	{
+</span></span><span style="display:flex;"><span>		cout<span style="color:#666">&lt;&lt;</span><span style="color:#4070a0">&#34;sum = &#34;</span><span style="color:#666">&lt;&lt;</span>s_sum<span style="color:#666">&lt;&lt;</span>endl;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#902000">int</span> Rectangle<span style="color:#666">::</span>s_sum <span style="color:#666">=</span> <span style="color:#40a070">0</span>;  <span style="color:#60a0b0;font-style:italic">//初始化
+</span></span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#902000">int</span> <span style="color:#06287e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	cout<span style="color:#666">&lt;&lt;</span><span style="color:#4070a0">&#34;sizeof(Rectangle)=&#34;</span><span style="color:#666">&lt;&lt;</span><span style="color:#007020;font-weight:bold">sizeof</span>(Rectangle)<span style="color:#666">&lt;&lt;</span>endl;
+</span></span><span style="display:flex;"><span>	Rectangle <span style="color:#666">*</span>rect1 <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">new</span> Rectangle(<span style="color:#40a070">3</span>,<span style="color:#40a070">4</span>);
+</span></span><span style="display:flex;"><span>	rect1<span style="color:#666">-&gt;</span>GetSum();
+</span></span><span style="display:flex;"><span>	cout<span style="color:#666">&lt;&lt;</span><span style="color:#4070a0">&#34;sizeof(rect1)=&#34;</span><span style="color:#666">&lt;&lt;</span><span style="color:#007020;font-weight:bold">sizeof</span>(<span style="color:#666">*</span>rect1)<span style="color:#666">&lt;&lt;</span>endl;
+</span></span><span style="display:flex;"><span>	Rectangle rect2(<span style="color:#40a070">2</span>,<span style="color:#40a070">3</span>);
+</span></span><span style="display:flex;"><span>	rect2.GetSum();  <span style="color:#60a0b0;font-style:italic">//可以用对象名.函数名访问
+</span></span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"></span>	cout<span style="color:#666">&lt;&lt;</span><span style="color:#4070a0">&#34;sizeof(rect2)=&#34;</span><span style="color:#666">&lt;&lt;</span><span style="color:#007020;font-weight:bold">sizeof</span>(rect2)<span style="color:#666">&lt;&lt;</span>endl;
+</span></span><span style="display:flex;"><span>	Rectangle<span style="color:#666">::</span>GetSum();  <span style="color:#60a0b0;font-style:italic">//也可以可以用类名::函数名访问
+</span></span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>	system(<span style="color:#4070a0">&#34;pause&#34;</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#007020;font-weight:bold">return</span> <span style="color:#40a070">0</span>;
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>上面注释可见:</strong>
@@ -849,7 +736,6 @@
 <p>有点晕吗？没关系，我来给你解释：</p>
 <p>因为静态是属于类的，它是不知道你创建了10个还是100个对象，所以它对你对象的函数或者数据是一无所知的，所以它没办法调用，而反过来，你创建的对象是对类一清二楚的(不然你怎么从它那里实例化呢)，所以你是可以调用类函数和类成员的，就像不管 <strong>GetSum</strong> 是不是 <strong>static</strong>，都可以调用 <strong>static</strong> 的 <strong>s_sum</strong> 一样。</p>
 <p>​&lt;全文完&gt;</p>
-<p><img src="/img/personal/qrcode_2.png" alt="pic"></p>
 
         </div>
 
@@ -929,6 +815,17 @@
 
   
   
+    <div class="post">
+  <script src="https://utteranc.es/client.js"
+        repo= "techxiaofei/techxiaofei.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+  </script>
+</div>
+
+  
 
   
 
@@ -969,6 +866,36 @@
         <div class="icon-links">
   
   
+    <a href="https://www.techxiaofei.com" rel="me noopener" class="iconfont"
+      title="site"  target="_blank"
+      >
+      <svg width="36" height="36" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>科技小飞哥的个人网站</title>
+  <path id="svg_1" d="m333,333.5" opacity="NaN" stroke="#000" fill="#fff"/>
+  <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_2" y="474.5" x="381" stroke-width="0" stroke="#000" fill="#000000">科技</text>
+  <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_3" y="504.5" x="369" stroke-width="0" stroke="#000" fill="#000000">小飞哥</text>
+  <text stroke="#000" font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" id="svg_5" y="13.5" x="3" stroke-width="0" fill="#000000">科技</text>
+  <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="12" id="svg_6" y="29.5" x="0" stroke-width="0" stroke="#000" fill="#000000">小飞哥</text>
+ </g>
+</svg>
+    </a>
+  
+    <a href="https://www.youtube.com/@techxiaofei" rel="me noopener" class="iconfont"
+      title="youtube"  target="_blank"
+      >
+      <svg
+  class="icon" style="" viewBox="0 0 36 36" version="1.1" width="36"
+  height="36" id="svg8">
+  <path
+      style=""
+      d="m 1.8724447,28.346305 c -1.89825625,-2.287259 -1.89825625,-18.4053514 0,-20.6926103 C 3.0356132,6.2521624 5.4948113,6 18,6 35.952296,6 35.5,5.6898541 35.5,18 35.5,30.310146 35.952296,30 18,30 5.4948113,30 3.0356132,29.747838 1.8724447,28.346305 Z M 19.113845,20.815859 C 21.25123,19.614581 23,18.347445 23,18 23,17.348349 15.706815,13 14.613845,13 14.27623,13 14,15.25 14,18 c 0,2.75 0.27623,5 0.613845,5 0.337616,0 2.362616,-0.982863 4.5,-2.184141 z"
+      id="rect824"/>
+</svg>
+
+    </a>
+  
     <a href="https://space.bilibili.com/49756120" rel="me noopener" class="iconfont"
       title="bilibili"  target="_blank"
       >
@@ -979,6 +906,16 @@
       style=""
       d="M 744.60599,0.00486267 A 41.779915,41.779915 0 0 0 710.4184,18.673394 L 548.5048,255.32642 h -11.70046 a 41.779915,41.779915 0 0 0 -10.80295,-7.84928 L 235.66,97.084498 a 41.779915,41.779915 0 0 0 -20.07193,-4.960864 41.779915,41.779915 0 0 0 -18.3748,79.145436 L 359.4859,255.32642 H 128.16909 c -49.458302,0 -89.27932,39.82105 -89.27932,89.27932 v 508.65224 c 0,49.4583 39.821018,89.27934 89.27932,89.27934 h 19.48445 C 149.12802,984.5043 179.92773,1024 224.79179,1024 c 44.86407,0 75.66379,-39.4957 77.13826,-81.46268 H 719.98116 C 721.45559,984.5043 752.25533,1024 797.1194,1024 c 44.86406,0 75.6638,-39.4957 77.13824,-81.46268 h 21.57323 c 49.45831,0 89.27936,-39.82104 89.27936,-89.27934 V 344.60574 c 0,-49.45827 -39.82105,-89.27932 -89.27936,-89.27932 H 649.74567 L 779.38103,65.866924 A 41.779915,41.779915 0 0 0 744.60599,0.00486267 Z M 644.49108,418.70871 c 6.29985,0.21538 12.44451,2.01107 17.86888,5.22196 l 171.36218,98.10771 c 18.23417,10.21935 24.63334,33.34627 14.24614,51.48533 -10.38726,18.13909 -33.57344,24.32718 -51.61587,13.77296 L 624.9903,489.18895 c -15.21356,-8.41858 -22.66871,-26.1765 -18.03211,-42.93436 4.63664,-16.75784 20.15573,-28.14465 37.53289,-27.54588 z M 350.2006,432.31846 c 16.89952,0.0317 31.69582,11.33328 36.17844,27.62747 4.48262,16.2942 -2.44981,33.57765 -16.95507,42.24898 l -140.7157,86.91312 c -17.68528,11.18244 -41.09629,5.77692 -52.08912,-12.02686 -10.99282,-17.80373 -5.33855,-41.15658 12.58167,-51.95857 L 329.9002,438.2095 c 6.0643,-3.86439 13.10951,-5.90891 20.3004,-5.89104 z M 501.605,641.53985 c 3.75002,-0.15248 7.48645,0.53903 10.93349,2.0235 0.15842,0.0637 0.31618,0.12888 0.47325,0.19582 0.59328,0.27092 1.17574,0.56489 1.74609,0.88121 0.15868,0.0854 0.31643,0.17233 0.47325,0.2611 0.55694,0.32165 1.10131,0.66458 1.63185,1.02807 0.16455,0.1123 0.32777,0.2265 0.48956,0.34269 0.50382,0.36781 0.99371,0.75428 1.46868,1.15864 0.18724,0.15504 0.37218,0.31282 0.55484,0.47323 0.43271,0.38784 0.8518,0.79061 1.25653,1.20756 0.15449,0.16114 0.30679,0.32437 0.45693,0.48959 0.40798,0.44266 0.79989,0.89988 1.17494,1.37076 0.17799,0.22544 0.35205,0.45395 0.5222,0.68538 0.25932,0.34701 0.50964,0.70071 0.75064,1.06071 0.26712,0.39516 0.52286,0.79784 0.76699,1.20757 0.16907,0.29043 0.33231,0.58424 0.48957,0.88123 0.21836,0.41297 0.42513,0.83199 0.62009,1.25653 0.14836,0.32333 0.28983,0.64976 0.42429,0.97911 0.21319,0.51552 0.40915,1.03801 0.58747,1.5666 0.0677,0.19499 0.13296,0.39085 0.19582,0.58748 0.18652,0.60823 0.34984,1.22334 0.48957,1.84399 0.0397,0.16277 0.0779,0.32601 0.11423,0.48957 0.1436,0.69112 0.25788,1.38801 0.34269,2.08877 0.005,0.0381 0.0111,0.0761 0.0163,0.11424 0.0857,0.78056 0.13474,1.56471 0.14687,2.34988 0.005,0.0543 0.0111,0.10879 0.0163,0.1632 0,0 -0.008,1.12132 0,1.45234 0,0 -0.14697,17.84761 5.89102,34.12231 3.01902,8.13734 7.33278,15.10615 12.61433,19.61501 5.28157,4.50889 11.42894,7.62081 23.64572,7.62081 12.2168,0 18.36416,-3.11192 23.64573,-7.62081 5.28154,-4.50886 9.5953,-11.47767 12.6143,-19.61501 6.03799,-16.2747 5.89103,-34.12231 5.89103,-34.12231 -0.44885,-13.87045 10.45922,-25.46302 24.3311,-25.86506 13.87189,-0.40201 25.42828,10.53953 25.78348,24.41272 0,0 1.11929,25.7226 -9.00791,53.01927 -5.06359,13.64832 -13.1986,28.46036 -27.05631,40.29073 -13.85772,11.83039 -33.5454,19.63135 -56.20142,19.63135 -22.65603,0 -42.34371,-7.80096 -56.20141,-19.63135 -4.1801,-3.56856 -7.78733,-7.42433 -10.99878,-11.42303 -3.21235,4.00037 -6.81703,7.85309 -10.99876,11.42303 -13.85773,11.83039 -33.5454,19.63135 -56.20144,19.63135 -22.65601,0 -42.3437,-7.80096 -56.2014,-19.63135 -13.85775,-11.83037 -21.99272,-26.64241 -27.05632,-40.29073 -10.12725,-27.29667 -9.00789,-53.01928 -9.00789,-53.01927 0.20714,-13.83687 11.58744,-24.88848 25.42444,-24.69013 14.1263,0.19991 25.2971,12.0278 24.69011,26.14247 0,0 -0.14697,17.84761 5.89103,34.12231 3.01902,8.13734 7.31646,15.10615 12.598,19.61501 5.28155,4.50889 11.44526,7.62081 23.66203,7.62081 12.21681,0 18.36418,-3.11192 23.64573,-7.62081 5.28154,-4.50886 9.57899,-11.47767 12.598,-19.61501 5.76352,-15.53489 5.89112,-32.05691 5.89103,-33.56746 0.006,-0.37466 0.0111,-1.05336 0.0163,-1.20759 -0.0117,-0.74583 0.0105,-1.49177 0.0652,-2.23565 0.009,-0.15784 0.0204,-0.31561 0.0327,-0.47324 0.14204,-1.56859 0.43163,-3.12027 0.86487,-4.63449 0.0213,-0.0763 0.0433,-0.15244 0.0652,-0.22848 3.0335,-10.25748 12.24157,-17.46007 22.92769,-17.93417 z"
       id="rect824"/>
+</svg>
+
+    </a>
+  
+    <a href="mailto:techxiaofei@gmail.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
 </svg>
 
     </a>
@@ -997,8 +934,8 @@
 </div>
 <div class="friend-links">
   <span class="item-content"><b>友情链接：</b></span>
-  <a href="https://www.amazonaws.cn/" title="亚马逊云科技">亚马逊云科技</a>
-  <a href="https://dev.amazoncloud.cn/" title="亚马逊开发者社区">亚马逊开发者社区</a>
+  <a href="https://www.amazonaws.cn/" title="亚马逊云科技" target="_blank">亚马逊云科技</a>
+  <a href="https://dev.amazoncloud.cn/" title="亚马逊开发者社区" target="_blank">亚马逊开发者社区</a>
 </div>
 
 <div class="copyright">

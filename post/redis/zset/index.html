@@ -57,7 +57,7 @@
 </script>
 
 
-<meta name="generator" content="Hugo 0.111.3" />
+<meta name="generator" content="Hugo 0.115.4" />
 
 
 <link rel="canonical" href="https://www.techxiaofei.com/post/redis/zset/" />
@@ -163,47 +163,6 @@
             <a class="menu-item-link" href="https://www.techxiaofei.com/about/">关于</a>
           
         
-      </li><li class="mobile-menu-item">
-        
-          
-          <div class="mobile-menu-parent">
-            <span class="mobile-submenu-open"></span>
-            <a href="https://www.techxiaofei.com/">
-              demo
-            </a>
-          </div>
-          <ul class="mobile-submenu-list">
-            
-              <li>
-                <a href="https://www.techxiaofei.com/post/demo/1-image/">Demo: Image</a>
-              </li>
-            
-              <li>
-                <a href="https://www.techxiaofei.com/post/demo/2-toc/">Demo: toc</a>
-              </li>
-            
-              <li>
-                <a href="https://www.techxiaofei.com/post/demo/3-syntax-highlighting/">Demo: Syntax Highlighting</a>
-              </li>
-            
-              <li>
-                <a href="https://www.techxiaofei.com/post/demo/4-footnote/">Demo: Footnote</a>
-              </li>
-            
-              <li>
-                <a href="https://www.techxiaofei.com/post/demo/5-math/">Demo: Math</a>
-              </li>
-            
-              <li>
-                <a href="https://www.techxiaofei.com/post/demo/6-shortcode-notice/">Demo: Shortcodes Notice</a>
-              </li>
-            
-              <li>
-                <a href="https://www.techxiaofei.com/post/demo/7-shortcodes-preview/">Demo: more Shortcodes</a>
-              </li>
-            
-          </ul>
-        
       </li>
     
 
@@ -282,46 +241,6 @@
           
             <a class="menu-item-link" href="https://www.techxiaofei.com/about/">关于</a>
           
-
-        
-
-      </li>
-    
-        <li class="menu-item">
-        
-          
-          <a class="menu-item-link menu-parent" href="https://www.techxiaofei.com/">demo</a>
-          <ul class="submenu">
-            
-              <li class="submenu-item">
-                <a href="https://www.techxiaofei.com/post/demo/1-image/">Demo: Image</a>
-              </li>
-            
-              <li class="submenu-item">
-                <a href="https://www.techxiaofei.com/post/demo/2-toc/">Demo: toc</a>
-              </li>
-            
-              <li class="submenu-item">
-                <a href="https://www.techxiaofei.com/post/demo/3-syntax-highlighting/">Demo: Syntax Highlighting</a>
-              </li>
-            
-              <li class="submenu-item">
-                <a href="https://www.techxiaofei.com/post/demo/4-footnote/">Demo: Footnote</a>
-              </li>
-            
-              <li class="submenu-item">
-                <a href="https://www.techxiaofei.com/post/demo/5-math/">Demo: Math</a>
-              </li>
-            
-              <li class="submenu-item">
-                <a href="https://www.techxiaofei.com/post/demo/6-shortcode-notice/">Demo: Shortcodes Notice</a>
-              </li>
-            
-              <li class="submenu-item">
-                <a href="https://www.techxiaofei.com/post/demo/7-shortcodes-preview/">Demo: more Shortcodes</a>
-              </li>
-            
-          </ul>
 
         
 
@@ -417,12 +336,12 @@
 <p>这是因为有序集合中每个成员都会关联一个 <code>double64</code>（双精度浮点数）类型的 <code>score</code> (分数值)，Redis 正是通过 score 实现了对集合成员的排序。</p>
 <p>zset 是 Redis 常用数据类型之一，它适用于排行榜类型的业务场景。</p>
 <p>Redis 使用以下命令创建一个有序集合：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt" id="hl-0-1"><a class="lnlinks" href="#hl-0-1">1</a>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-1">1</a>
 </span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:6379&gt; ZADD key score member <span class="o">[</span>score member ...<span class="o">]</span>  
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>127.0.0.1:6379&gt; ZADD key score member <span style="color:#666">[</span>score member ...<span style="color:#666">]</span>  
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -442,42 +361,42 @@
 <h1 id="zset怎么用">ZSET怎么用</h1>
 <p>最简单的增删改查，统计数量，范围查找，交集并集等等都是很方便的支持的。完成的命令可以查看官网文档：<a href="https://redis.io/commands/?group=sorted-set">sorted-set</a></p>
 <p>几个最简单的例子：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt" id="hl-1-1"><a class="lnlinks" href="#hl-1-1"> 1</a>
-</span><span class="lnt" id="hl-1-2"><a class="lnlinks" href="#hl-1-2"> 2</a>
-</span><span class="lnt" id="hl-1-3"><a class="lnlinks" href="#hl-1-3"> 3</a>
-</span><span class="lnt" id="hl-1-4"><a class="lnlinks" href="#hl-1-4"> 4</a>
-</span><span class="lnt" id="hl-1-5"><a class="lnlinks" href="#hl-1-5"> 5</a>
-</span><span class="lnt" id="hl-1-6"><a class="lnlinks" href="#hl-1-6"> 6</a>
-</span><span class="lnt" id="hl-1-7"><a class="lnlinks" href="#hl-1-7"> 7</a>
-</span><span class="lnt" id="hl-1-8"><a class="lnlinks" href="#hl-1-8"> 8</a>
-</span><span class="lnt" id="hl-1-9"><a class="lnlinks" href="#hl-1-9"> 9</a>
-</span><span class="lnt" id="hl-1-10"><a class="lnlinks" href="#hl-1-10">10</a>
-</span><span class="lnt" id="hl-1-11"><a class="lnlinks" href="#hl-1-11">11</a>
-</span><span class="lnt" id="hl-1-12"><a class="lnlinks" href="#hl-1-12">12</a>
-</span><span class="lnt" id="hl-1-13"><a class="lnlinks" href="#hl-1-13">13</a>
-</span><span class="lnt" id="hl-1-14"><a class="lnlinks" href="#hl-1-14">14</a>
-</span><span class="lnt" id="hl-1-15"><a class="lnlinks" href="#hl-1-15">15</a>
-</span><span class="lnt" id="hl-1-16"><a class="lnlinks" href="#hl-1-16">16</a>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-15">15</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-16">16</a>
 </span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># key: fighting_rank, member: ana, score: 100000</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; ZADD fighting_rank <span class="m">100000</span> <span class="s2">&#34;ana&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 取排行榜前三名</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; ZREVRANGE fighting_rank <span class="m">0</span> <span class="m">2</span>
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;fff&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;eee&#34;</span>
-</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;ddd&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># zset长度</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; ZCARD fighting_rank
-</span></span><span class="line"><span class="cl"><span class="m">4</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 取某一个member的score</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; ZSCORE fighting_rank <span class="s2">&#34;aaa&#34;</span>
-</span></span><span class="line"><span class="cl">100000.0
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"># key: fighting_rank, member: ana, score: 100000</span>
+</span></span><span style="display:flex;"><span>127.0.0.1:6379&gt; ZADD fighting_rank <span style="color:#40a070">100000</span> <span style="color:#4070a0">&#34;ana&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"># 取排行榜前三名</span>
+</span></span><span style="display:flex;"><span>127.0.0.1:6379&gt; ZREVRANGE fighting_rank <span style="color:#40a070">0</span> <span style="color:#40a070">2</span>
+</span></span><span style="display:flex;"><span>1<span style="color:#666">)</span> <span style="color:#4070a0">&#34;fff&#34;</span>
+</span></span><span style="display:flex;"><span>2<span style="color:#666">)</span> <span style="color:#4070a0">&#34;eee&#34;</span>
+</span></span><span style="display:flex;"><span>3<span style="color:#666">)</span> <span style="color:#4070a0">&#34;ddd&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"># zset长度</span>
+</span></span><span style="display:flex;"><span>127.0.0.1:6379&gt; ZCARD fighting_rank
+</span></span><span style="display:flex;"><span><span style="color:#40a070">4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"># 取某一个member的score</span>
+</span></span><span style="display:flex;"><span>127.0.0.1:6379&gt; ZSCORE fighting_rank <span style="color:#4070a0">&#34;aaa&#34;</span>
+</span></span><span style="display:flex;"><span>100000.0
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>你也可以自己在线测试Redis的命令来熟悉。https://try.redis.io/</p>
@@ -490,20 +409,20 @@
 <li>每个元素（member）长度小于64字节</li>
 </ul>
 <p>注意：这两个参数可以通过<code>redis.conf</code>里面的<code>zset-max-ziplist-entries</code> 选项和 <code>zset-max-ziplist-value</code> 进行修改。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt" id="hl-2-1"><a class="lnlinks" href="#hl-2-1">1</a>
-</span><span class="lnt" id="hl-2-2"><a class="lnlinks" href="#hl-2-2">2</a>
-</span><span class="lnt" id="hl-2-3"><a class="lnlinks" href="#hl-2-3">3</a>
-</span><span class="lnt" id="hl-2-4"><a class="lnlinks" href="#hl-2-4">4</a>
-</span><span class="lnt" id="hl-2-5"><a class="lnlinks" href="#hl-2-5">5</a>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-2">2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-3">3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-4">4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-5">5</a>
 </span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-s" data-lang="s"><span class="line"><span class="cl"><span class="c1"># Similarly to hashes and lists, sorted sets are also specially encoded in</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># order to save a lot of space. This encoding is only used when the length and</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># elements of a sorted set are below the following limits:</span>
-</span></span><span class="line"><span class="cl"><span class="n">zset</span><span class="o">-</span><span class="n">max</span><span class="o">-</span><span class="n">ziplist</span><span class="o">-</span><span class="n">entries</span> <span class="m">128</span>
-</span></span><span class="line"><span class="cl"><span class="n">zset</span><span class="o">-</span><span class="n">max</span><span class="o">-</span><span class="n">ziplist</span><span class="o">-</span><span class="n">value</span> <span class="m">64</span>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"># Similarly to hashes and lists, sorted sets are also specially encoded in</span>
+</span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"># order to save a lot of space. This encoding is only used when the length and</span>
+</span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"># elements of a sorted set are below the following limits:</span>
+</span></span><span style="display:flex;"><span>zset-max-ziplist-entries <span style="color:#40a070">128</span>
+</span></span><span style="display:flex;"><span>zset-max-ziplist-value <span style="color:#40a070">64</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="1-ziplist-压缩列表">1. ziplist 压缩列表</h2>
@@ -523,70 +442,70 @@
 <p>这里你应该明白了，为什么在数据量和长度比较小的时候使用ziplist了，因为Redis的瓶颈之一就是内存，所以Redis的设计极致的考虑了内存的使用。在数据量较少的时候，ziplist充分体现了它内存的优势，又不会影响整体的查询效率。</p>
 <!-- ziplist图解 -->
 <h3 id="zset中entry的添加">zset中entry的添加</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt" id="hl-3-1"><a class="lnlinks" href="#hl-3-1"> 1</a>
-</span><span class="lnt" id="hl-3-2"><a class="lnlinks" href="#hl-3-2"> 2</a>
-</span><span class="lnt" id="hl-3-3"><a class="lnlinks" href="#hl-3-3"> 3</a>
-</span><span class="lnt" id="hl-3-4"><a class="lnlinks" href="#hl-3-4"> 4</a>
-</span><span class="lnt" id="hl-3-5"><a class="lnlinks" href="#hl-3-5"> 5</a>
-</span><span class="lnt" id="hl-3-6"><a class="lnlinks" href="#hl-3-6"> 6</a>
-</span><span class="lnt" id="hl-3-7"><a class="lnlinks" href="#hl-3-7"> 7</a>
-</span><span class="lnt" id="hl-3-8"><a class="lnlinks" href="#hl-3-8"> 8</a>
-</span><span class="lnt" id="hl-3-9"><a class="lnlinks" href="#hl-3-9"> 9</a>
-</span><span class="lnt" id="hl-3-10"><a class="lnlinks" href="#hl-3-10">10</a>
-</span><span class="lnt" id="hl-3-11"><a class="lnlinks" href="#hl-3-11">11</a>
-</span><span class="lnt" id="hl-3-12"><a class="lnlinks" href="#hl-3-12">12</a>
-</span><span class="lnt" id="hl-3-13"><a class="lnlinks" href="#hl-3-13">13</a>
-</span><span class="lnt" id="hl-3-14"><a class="lnlinks" href="#hl-3-14">14</a>
-</span><span class="lnt" id="hl-3-15"><a class="lnlinks" href="#hl-3-15">15</a>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-15">15</a>
 </span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">zzlInsertAt</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">zl</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">eptr</span><span class="p">,</span> <span class="n">sds</span> <span class="n">ele</span><span class="p">,</span> <span class="kt">double</span> <span class="n">score</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// some code hide here
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// ...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="cm">/* Keep offset relative to zl, as it might be re-allocated. */</span>
-</span></span><span class="line"><span class="cl">    <span class="n">offset</span> <span class="o">=</span> <span class="n">eptr</span><span class="o">-</span><span class="n">zl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">zl</span> <span class="o">=</span> <span class="nf">ziplistInsert</span><span class="p">(</span><span class="n">zl</span><span class="p">,</span><span class="n">eptr</span><span class="p">,(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">ele</span><span class="p">,</span><span class="nf">sdslen</span><span class="p">(</span><span class="n">ele</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    <span class="n">eptr</span> <span class="o">=</span> <span class="n">zl</span><span class="o">+</span><span class="n">offset</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="cm">/* Insert score after the element. */</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">serverAssert</span><span class="p">((</span><span class="n">sptr</span> <span class="o">=</span> <span class="nf">ziplistNext</span><span class="p">(</span><span class="n">zl</span><span class="p">,</span><span class="n">eptr</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">zl</span> <span class="o">=</span> <span class="nf">ziplistInsert</span><span class="p">(</span><span class="n">zl</span><span class="p">,</span><span class="n">sptr</span><span class="p">,(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">scorebuf</span><span class="p">,</span><span class="n">scorelen</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">zl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#902000">unsigned</span> <span style="color:#902000">char</span> <span style="color:#666">*</span><span style="color:#06287e">zzlInsertAt</span>(<span style="color:#902000">unsigned</span> <span style="color:#902000">char</span> <span style="color:#666">*</span>zl, <span style="color:#902000">unsigned</span> <span style="color:#902000">char</span> <span style="color:#666">*</span>eptr, sds ele, <span style="color:#902000">double</span> score) {
+</span></span><span style="display:flex;"><span>    <span style="color:#60a0b0;font-style:italic">// some code hide here
+</span></span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"></span>    <span style="color:#60a0b0;font-style:italic">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#60a0b0;font-style:italic">/* Keep offset relative to zl, as it might be re-allocated. */</span>
+</span></span><span style="display:flex;"><span>    offset <span style="color:#666">=</span> eptr<span style="color:#666">-</span>zl;
+</span></span><span style="display:flex;"><span>    zl <span style="color:#666">=</span> <span style="color:#06287e">ziplistInsert</span>(zl,eptr,(<span style="color:#902000">unsigned</span> <span style="color:#902000">char</span><span style="color:#666">*</span>)ele,<span style="color:#06287e">sdslen</span>(ele));
+</span></span><span style="display:flex;"><span>    eptr <span style="color:#666">=</span> zl<span style="color:#666">+</span>offset;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#60a0b0;font-style:italic">/* Insert score after the element. */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#06287e">serverAssert</span>((sptr <span style="color:#666">=</span> <span style="color:#06287e">ziplistNext</span>(zl,eptr)) <span style="color:#666">!=</span> <span style="color:#007020">NULL</span>);
+</span></span><span style="display:flex;"><span>    zl <span style="color:#666">=</span> <span style="color:#06287e">ziplistInsert</span>(zl,sptr,(<span style="color:#902000">unsigned</span> <span style="color:#902000">char</span><span style="color:#666">*</span>)scorebuf,scorelen);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#007020;font-weight:bold">return</span> zl;
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="自动转换编码格式">自动转换编码格式</h3>
 <p>如果发现满足ziplist的规则（长度小于等于128且最大的元素的长度小于等于64）</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt" id="hl-4-1"><a class="lnlinks" href="#hl-4-1"> 1</a>
-</span><span class="lnt" id="hl-4-2"><a class="lnlinks" href="#hl-4-2"> 2</a>
-</span><span class="lnt" id="hl-4-3"><a class="lnlinks" href="#hl-4-3"> 3</a>
-</span><span class="lnt" id="hl-4-4"><a class="lnlinks" href="#hl-4-4"> 4</a>
-</span><span class="lnt" id="hl-4-5"><a class="lnlinks" href="#hl-4-5"> 5</a>
-</span><span class="lnt" id="hl-4-6"><a class="lnlinks" href="#hl-4-6"> 6</a>
-</span><span class="lnt" id="hl-4-7"><a class="lnlinks" href="#hl-4-7"> 7</a>
-</span><span class="lnt" id="hl-4-8"><a class="lnlinks" href="#hl-4-8"> 8</a>
-</span><span class="lnt" id="hl-4-9"><a class="lnlinks" href="#hl-4-9"> 9</a>
-</span><span class="lnt" id="hl-4-10"><a class="lnlinks" href="#hl-4-10">10</a>
-</span><span class="lnt" id="hl-4-11"><a class="lnlinks" href="#hl-4-11">11</a>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-11">11</a>
 </span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/* Convert the sorted set object into a ziplist if it is not already a ziplist
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * and if the number of elements and the maximum element size is within the
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * expected ranges. */</span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">zsetConvertToZiplistIfNeeded</span><span class="p">(</span><span class="n">robj</span> <span class="o">*</span><span class="n">zobj</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">maxelelen</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">zobj</span><span class="o">-&gt;</span><span class="n">encoding</span> <span class="o">==</span> <span class="n">OBJ_ENCODING_ZIPLIST</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">zset</span> <span class="o">*</span><span class="n">zset</span> <span class="o">=</span> <span class="n">zobj</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">zset</span><span class="o">-&gt;</span><span class="n">zsl</span><span class="o">-&gt;</span><span class="n">length</span> <span class="o">&lt;=</span> <span class="n">server</span><span class="p">.</span><span class="n">zset_max_ziplist_entries</span> <span class="o">&amp;&amp;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">maxelelen</span> <span class="o">&lt;=</span> <span class="n">server</span><span class="p">.</span><span class="n">zset_max_ziplist_value</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="nf">zsetConvert</span><span class="p">(</span><span class="n">zobj</span><span class="p">,</span><span class="n">OBJ_ENCODING_ZIPLIST</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic">/* Convert the sorted set object into a ziplist if it is not already a ziplist
+</span></span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"> * and if the number of elements and the maximum element size is within the
+</span></span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"> * expected ranges. */</span>
+</span></span><span style="display:flex;"><span><span style="color:#902000">void</span> <span style="color:#06287e">zsetConvertToZiplistIfNeeded</span>(robj <span style="color:#666">*</span>zobj, <span style="color:#902000">size_t</span> maxelelen) {
+</span></span><span style="display:flex;"><span>    <span style="color:#007020;font-weight:bold">if</span> (zobj<span style="color:#666">-&gt;</span>encoding <span style="color:#666">==</span> OBJ_ENCODING_ZIPLIST) <span style="color:#007020;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>    zset <span style="color:#666">*</span>zset <span style="color:#666">=</span> zobj<span style="color:#666">-&gt;</span>ptr;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#007020;font-weight:bold">if</span> (zset<span style="color:#666">-&gt;</span>zsl<span style="color:#666">-&gt;</span>length <span style="color:#666">&lt;=</span> server.zset_max_ziplist_entries <span style="color:#666">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>        maxelelen <span style="color:#666">&lt;=</span> server.zset_max_ziplist_value)
+</span></span><span style="display:flex;"><span>            <span style="color:#06287e">zsetConvert</span>(zobj,OBJ_ENCODING_ZIPLIST);
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到，在作为zset实现的时候，每当插入一个<code>&lt;member, score&gt;</code> pair，就insert了两个连续的entry，第一个为member，第二个为score。</p>
@@ -599,39 +518,39 @@ ziplist是一个为Redis专门提供的底层数据结构之一，本身可以�
 <p>跳跃表是一种有序的数据结构，它通过在每个节点中维持多个指向其它节点的指针，从而达到快速访问节点的目的。</p>
 <p>跳跃表支持平均O(logN)复杂度的节点查找，还可以通过顺序性操作来批量处理节点。</p>
 <p>如果任意一个条件不满足，就会Convert为<code>SKIPLIST</code>底层实现。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt" id="hl-5-1"><a class="lnlinks" href="#hl-5-1">1</a>
-</span><span class="lnt" id="hl-5-2"><a class="lnlinks" href="#hl-5-2">2</a>
-</span><span class="lnt" id="hl-5-3"><a class="lnlinks" href="#hl-5-3">3</a>
-</span><span class="lnt" id="hl-5-4"><a class="lnlinks" href="#hl-5-4">4</a>
-</span><span class="lnt" id="hl-5-5"><a class="lnlinks" href="#hl-5-5">5</a>
-</span><span class="lnt" id="hl-5-6"><a class="lnlinks" href="#hl-5-6">6</a>
-</span><span class="lnt" id="hl-5-7"><a class="lnlinks" href="#hl-5-7">7</a>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-2">2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-3">3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-4">4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-5">5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-6">6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-7">7</a>
 </span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/* Optimize: check if the element is too large or the list
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * becomes too long *before* executing zzlInsert. */</span>
-</span></span><span class="line"><span class="cl"><span class="n">zobj</span><span class="o">-&gt;</span><span class="n">ptr</span> <span class="o">=</span> <span class="nf">zzlInsert</span><span class="p">(</span><span class="n">zobj</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">,</span><span class="n">ele</span><span class="p">,</span><span class="n">score</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nf">zzlLength</span><span class="p">(</span><span class="n">zobj</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">server</span><span class="p">.</span><span class="n">zset_max_ziplist_entries</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">zsetConvert</span><span class="p">(</span><span class="n">zobj</span><span class="p">,</span><span class="n">OBJ_ENCODING_SKIPLIST</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nf">sdslen</span><span class="p">(</span><span class="n">ele</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">server</span><span class="p">.</span><span class="n">zset_max_ziplist_value</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">zsetConvert</span><span class="p">(</span><span class="n">zobj</span><span class="p">,</span><span class="n">OBJ_ENCODING_SKIPLIST</span><span class="p">);</span>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic">/* Optimize: check if the element is too large or the list
+</span></span></span><span style="display:flex;"><span><span style="color:#60a0b0;font-style:italic"> * becomes too long *before* executing zzlInsert. */</span>
+</span></span><span style="display:flex;"><span>zobj<span style="color:#666">-&gt;</span>ptr <span style="color:#666">=</span> <span style="color:#06287e">zzlInsert</span>(zobj<span style="color:#666">-&gt;</span>ptr,ele,score);
+</span></span><span style="display:flex;"><span><span style="color:#007020;font-weight:bold">if</span> (<span style="color:#06287e">zzlLength</span>(zobj<span style="color:#666">-&gt;</span>ptr) <span style="color:#666">&gt;</span> server.zset_max_ziplist_entries)
+</span></span><span style="display:flex;"><span>    <span style="color:#06287e">zsetConvert</span>(zobj,OBJ_ENCODING_SKIPLIST);
+</span></span><span style="display:flex;"><span><span style="color:#007020;font-weight:bold">if</span> (<span style="color:#06287e">sdslen</span>(ele) <span style="color:#666">&gt;</span> server.zset_max_ziplist_value)
+</span></span><span style="display:flex;"><span>    <span style="color:#06287e">zsetConvert</span>(zobj,OBJ_ENCODING_SKIPLIST);
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里的<code>OBJ_ENCODING_SKIPLIST</code>，实际上是<code>skiplist</code>(跳跃表)+<code>dict</code>（字典）。</p>
 <p>为什么要这么设计呢？我们知道数据量大的时候才会使用skiplist，skiplist的查询时间复杂度为O(logN)。</p>
 <p><code>dict</code>保存着<strong>member</strong>到<strong>score</strong>的映射，这样就可以使用<code>O(1)</code>的复杂度来查找<strong>member</strong>对应的<strong>score</strong>值。虽然同时使用两种结构，但它们会通过指针来共享相同元素的 <strong>member</strong> 和 <strong>score</strong>，因此不会浪费额外的内存。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt" id="hl-6-1"><a class="lnlinks" href="#hl-6-1">1</a>
-</span><span class="lnt" id="hl-6-2"><a class="lnlinks" href="#hl-6-2">2</a>
-</span><span class="lnt" id="hl-6-3"><a class="lnlinks" href="#hl-6-3">3</a>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-2">2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-3">3</a>
 </span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">tmp</span> <span class="o">=</span> <span class="nf">zuiNewSdsFromValue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">zval</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">znode</span> <span class="o">=</span> <span class="nf">zslInsert</span><span class="p">(</span><span class="n">dstzset</span><span class="o">-&gt;</span><span class="n">zsl</span><span class="p">,</span><span class="n">score</span><span class="p">,</span><span class="n">tmp</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="nf">dictAdd</span><span class="p">(</span><span class="n">dstzset</span><span class="o">-&gt;</span><span class="n">dict</span><span class="p">,</span><span class="n">tmp</span><span class="p">,</span><span class="o">&amp;</span><span class="n">znode</span><span class="o">-&gt;</span><span class="n">score</span><span class="p">);</span>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>tmp <span style="color:#666">=</span> <span style="color:#06287e">zuiNewSdsFromValue</span>(<span style="color:#666">&amp;</span>zval);
+</span></span><span style="display:flex;"><span>znode <span style="color:#666">=</span> <span style="color:#06287e">zslInsert</span>(dstzset<span style="color:#666">-&gt;</span>zsl,score,tmp);
+</span></span><span style="display:flex;"><span><span style="color:#06287e">dictAdd</span>(dstzset<span style="color:#666">-&gt;</span>dict,tmp,<span style="color:#666">&amp;</span>znode<span style="color:#666">-&gt;</span>score);
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>就是为了性能而做的考虑。</p>
@@ -646,7 +565,6 @@ ziplist是一个为Redis专门提供的底层数据结构之一，本身可以�
 <h1 id="结论">结论</h1>
 <p>看了Redis ZSET的实现，不得不感叹，Redis的设计真的优秀，每个细节都考虑到了，对内存的使用有着完美的执着。这也就是为什么Redis能火，成为互联网公司必使用的技术之一。也是程序员面试的必面类型之一。了解Redis不仅能让你轻松通过面试，也能让你掌握更多知识，轻松应付工作中的各种需求。</p>
 <p>&lt;全文完&gt;</p>
-<p><img src="/img/personal/qrcode_2.png" alt="pic"></p>
 
         </div>
 
@@ -726,6 +644,17 @@ ziplist是一个为Redis专门提供的底层数据结构之一，本身可以�
 
   
   
+    <div class="post">
+  <script src="https://utteranc.es/client.js"
+        repo= "techxiaofei/techxiaofei.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+  </script>
+</div>
+
+  
 
   
 
@@ -773,6 +702,36 @@ ziplist是一个为Redis专门提供的底层数据结构之一，本身可以�
         <div class="icon-links">
   
   
+    <a href="https://www.techxiaofei.com" rel="me noopener" class="iconfont"
+      title="site"  target="_blank"
+      >
+      <svg width="36" height="36" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>科技小飞哥的个人网站</title>
+  <path id="svg_1" d="m333,333.5" opacity="NaN" stroke="#000" fill="#fff"/>
+  <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_2" y="474.5" x="381" stroke-width="0" stroke="#000" fill="#000000">科技</text>
+  <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_3" y="504.5" x="369" stroke-width="0" stroke="#000" fill="#000000">小飞哥</text>
+  <text stroke="#000" font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" id="svg_5" y="13.5" x="3" stroke-width="0" fill="#000000">科技</text>
+  <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="12" id="svg_6" y="29.5" x="0" stroke-width="0" stroke="#000" fill="#000000">小飞哥</text>
+ </g>
+</svg>
+    </a>
+  
+    <a href="https://www.youtube.com/@techxiaofei" rel="me noopener" class="iconfont"
+      title="youtube"  target="_blank"
+      >
+      <svg
+  class="icon" style="" viewBox="0 0 36 36" version="1.1" width="36"
+  height="36" id="svg8">
+  <path
+      style=""
+      d="m 1.8724447,28.346305 c -1.89825625,-2.287259 -1.89825625,-18.4053514 0,-20.6926103 C 3.0356132,6.2521624 5.4948113,6 18,6 35.952296,6 35.5,5.6898541 35.5,18 35.5,30.310146 35.952296,30 18,30 5.4948113,30 3.0356132,29.747838 1.8724447,28.346305 Z M 19.113845,20.815859 C 21.25123,19.614581 23,18.347445 23,18 23,17.348349 15.706815,13 14.613845,13 14.27623,13 14,15.25 14,18 c 0,2.75 0.27623,5 0.613845,5 0.337616,0 2.362616,-0.982863 4.5,-2.184141 z"
+      id="rect824"/>
+</svg>
+
+    </a>
+  
     <a href="https://space.bilibili.com/49756120" rel="me noopener" class="iconfont"
       title="bilibili"  target="_blank"
       >
@@ -783,6 +742,16 @@ ziplist是一个为Redis专门提供的底层数据结构之一，本身可以�
       style=""
       d="M 744.60599,0.00486267 A 41.779915,41.779915 0 0 0 710.4184,18.673394 L 548.5048,255.32642 h -11.70046 a 41.779915,41.779915 0 0 0 -10.80295,-7.84928 L 235.66,97.084498 a 41.779915,41.779915 0 0 0 -20.07193,-4.960864 41.779915,41.779915 0 0 0 -18.3748,79.145436 L 359.4859,255.32642 H 128.16909 c -49.458302,0 -89.27932,39.82105 -89.27932,89.27932 v 508.65224 c 0,49.4583 39.821018,89.27934 89.27932,89.27934 h 19.48445 C 149.12802,984.5043 179.92773,1024 224.79179,1024 c 44.86407,0 75.66379,-39.4957 77.13826,-81.46268 H 719.98116 C 721.45559,984.5043 752.25533,1024 797.1194,1024 c 44.86406,0 75.6638,-39.4957 77.13824,-81.46268 h 21.57323 c 49.45831,0 89.27936,-39.82104 89.27936,-89.27934 V 344.60574 c 0,-49.45827 -39.82105,-89.27932 -89.27936,-89.27932 H 649.74567 L 779.38103,65.866924 A 41.779915,41.779915 0 0 0 744.60599,0.00486267 Z M 644.49108,418.70871 c 6.29985,0.21538 12.44451,2.01107 17.86888,5.22196 l 171.36218,98.10771 c 18.23417,10.21935 24.63334,33.34627 14.24614,51.48533 -10.38726,18.13909 -33.57344,24.32718 -51.61587,13.77296 L 624.9903,489.18895 c -15.21356,-8.41858 -22.66871,-26.1765 -18.03211,-42.93436 4.63664,-16.75784 20.15573,-28.14465 37.53289,-27.54588 z M 350.2006,432.31846 c 16.89952,0.0317 31.69582,11.33328 36.17844,27.62747 4.48262,16.2942 -2.44981,33.57765 -16.95507,42.24898 l -140.7157,86.91312 c -17.68528,11.18244 -41.09629,5.77692 -52.08912,-12.02686 -10.99282,-17.80373 -5.33855,-41.15658 12.58167,-51.95857 L 329.9002,438.2095 c 6.0643,-3.86439 13.10951,-5.90891 20.3004,-5.89104 z M 501.605,641.53985 c 3.75002,-0.15248 7.48645,0.53903 10.93349,2.0235 0.15842,0.0637 0.31618,0.12888 0.47325,0.19582 0.59328,0.27092 1.17574,0.56489 1.74609,0.88121 0.15868,0.0854 0.31643,0.17233 0.47325,0.2611 0.55694,0.32165 1.10131,0.66458 1.63185,1.02807 0.16455,0.1123 0.32777,0.2265 0.48956,0.34269 0.50382,0.36781 0.99371,0.75428 1.46868,1.15864 0.18724,0.15504 0.37218,0.31282 0.55484,0.47323 0.43271,0.38784 0.8518,0.79061 1.25653,1.20756 0.15449,0.16114 0.30679,0.32437 0.45693,0.48959 0.40798,0.44266 0.79989,0.89988 1.17494,1.37076 0.17799,0.22544 0.35205,0.45395 0.5222,0.68538 0.25932,0.34701 0.50964,0.70071 0.75064,1.06071 0.26712,0.39516 0.52286,0.79784 0.76699,1.20757 0.16907,0.29043 0.33231,0.58424 0.48957,0.88123 0.21836,0.41297 0.42513,0.83199 0.62009,1.25653 0.14836,0.32333 0.28983,0.64976 0.42429,0.97911 0.21319,0.51552 0.40915,1.03801 0.58747,1.5666 0.0677,0.19499 0.13296,0.39085 0.19582,0.58748 0.18652,0.60823 0.34984,1.22334 0.48957,1.84399 0.0397,0.16277 0.0779,0.32601 0.11423,0.48957 0.1436,0.69112 0.25788,1.38801 0.34269,2.08877 0.005,0.0381 0.0111,0.0761 0.0163,0.11424 0.0857,0.78056 0.13474,1.56471 0.14687,2.34988 0.005,0.0543 0.0111,0.10879 0.0163,0.1632 0,0 -0.008,1.12132 0,1.45234 0,0 -0.14697,17.84761 5.89102,34.12231 3.01902,8.13734 7.33278,15.10615 12.61433,19.61501 5.28157,4.50889 11.42894,7.62081 23.64572,7.62081 12.2168,0 18.36416,-3.11192 23.64573,-7.62081 5.28154,-4.50886 9.5953,-11.47767 12.6143,-19.61501 6.03799,-16.2747 5.89103,-34.12231 5.89103,-34.12231 -0.44885,-13.87045 10.45922,-25.46302 24.3311,-25.86506 13.87189,-0.40201 25.42828,10.53953 25.78348,24.41272 0,0 1.11929,25.7226 -9.00791,53.01927 -5.06359,13.64832 -13.1986,28.46036 -27.05631,40.29073 -13.85772,11.83039 -33.5454,19.63135 -56.20142,19.63135 -22.65603,0 -42.34371,-7.80096 -56.20141,-19.63135 -4.1801,-3.56856 -7.78733,-7.42433 -10.99878,-11.42303 -3.21235,4.00037 -6.81703,7.85309 -10.99876,11.42303 -13.85773,11.83039 -33.5454,19.63135 -56.20144,19.63135 -22.65601,0 -42.3437,-7.80096 -56.2014,-19.63135 -13.85775,-11.83037 -21.99272,-26.64241 -27.05632,-40.29073 -10.12725,-27.29667 -9.00789,-53.01928 -9.00789,-53.01927 0.20714,-13.83687 11.58744,-24.88848 25.42444,-24.69013 14.1263,0.19991 25.2971,12.0278 24.69011,26.14247 0,0 -0.14697,17.84761 5.89103,34.12231 3.01902,8.13734 7.31646,15.10615 12.598,19.61501 5.28155,4.50889 11.44526,7.62081 23.66203,7.62081 12.21681,0 18.36418,-3.11192 23.64573,-7.62081 5.28154,-4.50886 9.57899,-11.47767 12.598,-19.61501 5.76352,-15.53489 5.89112,-32.05691 5.89103,-33.56746 0.006,-0.37466 0.0111,-1.05336 0.0163,-1.20759 -0.0117,-0.74583 0.0105,-1.49177 0.0652,-2.23565 0.009,-0.15784 0.0204,-0.31561 0.0327,-0.47324 0.14204,-1.56859 0.43163,-3.12027 0.86487,-4.63449 0.0213,-0.0763 0.0433,-0.15244 0.0652,-0.22848 3.0335,-10.25748 12.24157,-17.46007 22.92769,-17.93417 z"
       id="rect824"/>
+</svg>
+
+    </a>
+  
+    <a href="mailto:techxiaofei@gmail.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
 </svg>
 
     </a>
@@ -801,8 +770,8 @@ ziplist是一个为Redis专门提供的底层数据结构之一，本身可以�
 </div>
 <div class="friend-links">
   <span class="item-content"><b>友情链接：</b></span>
-  <a href="https://www.amazonaws.cn/" title="亚马逊云科技">亚马逊云科技</a>
-  <a href="https://dev.amazoncloud.cn/" title="亚马逊开发者社区">亚马逊开发者社区</a>
+  <a href="https://www.amazonaws.cn/" title="亚马逊云科技" target="_blank">亚马逊云科技</a>
+  <a href="https://dev.amazoncloud.cn/" title="亚马逊开发者社区" target="_blank">亚马逊开发者社区</a>
 </div>
 
 <div class="copyright">

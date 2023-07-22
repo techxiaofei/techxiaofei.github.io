@@ -31,7 +31,7 @@
       <pubDate>Mon, 02 Jan 2023 00:00:51 +0800</pubDate>
       
       <guid>https://www.techxiaofei.com/post/redis/fast/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 前言 Redis作为非关系型内存数据库，只要是一个互联网公司都会使用到。Redis相关的问</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 前言 Redis作为非关系型内存数据库，只要是一</description>
     </item>
     
     <item>
@@ -40,7 +40,7 @@
       <pubDate>Thu, 22 Dec 2022 18:00:51 +0800</pubDate>
       
       <guid>https://www.techxiaofei.com/post/system_design/password/</guid>
-      <description>​​ 本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 现在很多网站都因为爆库导致密码泄漏，要设计怎么样的密码储存机制，才能保证最大限度</description>
+      <description>​​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 现在很多网站都因为爆库导致密码泄漏，要</description>
     </item>
     
     <item>
@@ -49,7 +49,7 @@
       <pubDate>Wed, 06 Jul 2022 00:00:00 +0800</pubDate>
       
       <guid>https://www.techxiaofei.com/post/tech/rand/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 这要追溯到大四找工作的时候，做面试题，然后有一类关于产生随机数的类型的题目。感觉题目</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 这要追溯到大四找工作的时候，做面试题，然后</description>
     </item>
     
     <item>
@@ -67,7 +67,7 @@
       <pubDate>Tue, 10 May 2022 13:00:51 +0800</pubDate>
       
       <guid>https://www.techxiaofei.com/post/tech/protobuf/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 目前主流的几种数据交互的格式主要有xml、json、protobuf等等。xml和j</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 目前主流的几种数据交互的格式主要有xml、</description>
     </item>
     
     <item>
@@ -76,7 +76,7 @@
       <pubDate>Fri, 06 May 2022 00:00:51 +0800</pubDate>
       
       <guid>https://www.techxiaofei.com/post/golang/time_after/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 我刚转做go语言开发开始写入职小程序的时候，写下了如下的代码： 1 2 3 4 5 6 7 8 9 10 for</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 我刚转做go语言开发开始写入职小程序的时候</description>
     </item>
     
     <item>
@@ -85,7 +85,7 @@
       <pubDate>Fri, 29 Apr 2022 13:00:51 +0800</pubDate>
       
       <guid>https://www.techxiaofei.com/post/mysql/update_optimization/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 现在的互联网大厂，都经历了数据量和访问量从零到亿级别的飞速增长。在这业务增长的过程中</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 现在的互联网大厂，都经历了数据量和访问量从</description>
     </item>
     
     <item>
@@ -94,7 +94,7 @@
       <pubDate>Wed, 27 Apr 2022 13:00:51 +0800</pubDate>
       
       <guid>https://www.techxiaofei.com/post/system_design/hotspot/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 最近不少人问我，怎么解决热点Key问题。我说，你提到这个我可就不困了。因为刚好，我手</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 最近不少人问我，怎么解决热点Key问题。我</description>
     </item>
     
     <item>
@@ -103,7 +103,7 @@
       <pubDate>Fri, 22 Apr 2022 13:00:51 +0800</pubDate>
       
       <guid>https://www.techxiaofei.com/post/system_design/unique_id_buffer/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 在之前的文章中，我们讲了分布式ID生成方案-snowflake算法。这也是我们的生产</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 在之前的文章中，我们讲了分布式ID生成方案</description>
     </item>
     
     <item>
@@ -112,7 +112,7 @@
       <pubDate>Sat, 01 Jan 2022 00:00:02 +0800</pubDate>
       
       <guid>https://www.techxiaofei.com/post/tcpip/kcp/</guid>
-      <description>​ 本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 可能你从来没有听说过KCP是什么，但是你肯定知道TCP和UDP。 这里我们通过KCP</description>
+      <description>​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 可能你从来没有听说过KCP是什么，但是你</description>
     </item>
     
     <item>
@@ -121,7 +121,7 @@
       <pubDate>Thu, 23 Dec 2021 00:00:00 +0800</pubDate>
       
       <guid>https://www.techxiaofei.com/post/system_design/short_url/</guid>
-      <description>​ 本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 短网址（short url），就是将长网址缩短为一个很短的网址，用户访问这个短网址可</description>
+      <description>​ 本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 短网址（short url），就是将长网址</description>
     </item>
     
     <item>
@@ -130,7 +130,7 @@
       <pubDate>Thu, 09 Dec 2021 00:00:51 +0800</pubDate>
       
       <guid>https://www.techxiaofei.com/post/redis/multithreading/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 Redis基础 Redis是什么 Redis是一个基于BSD开源的项目，是一个把结构化的数据</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 Redis基础 Redis是什么 Redis是一个</description>
     </item>
     
     <item>
@@ -139,7 +139,7 @@
       <pubDate>Tue, 07 Dec 2021 00:00:00 +0800</pubDate>
       
       <guid>https://www.techxiaofei.com/post/tech/cp/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 如果你突然被面试官问：cp和mv这两个linux的命令有什么区别？ 你会不会一脸懵逼，</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 如果你突然被面试官问：cp和mv这两个li</description>
     </item>
     
     <item>
@@ -148,7 +148,7 @@
       <pubDate>Sat, 04 Dec 2021 00:00:00 +0800</pubDate>
       
       <guid>https://www.techxiaofei.com/post/mysql/table/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 目前做电商后台开发，经历了数据从零到百万到百亿级别的增长。在这个增长的过程中，我们做</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 目前做电商后台开发，经历了数据从零到百万到</description>
     </item>
     
     <item>
@@ -157,7 +157,7 @@
       <pubDate>Fri, 03 Dec 2021 14:00:51 +0800</pubDate>
       
       <guid>https://www.techxiaofei.com/post/backend/game_server/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 我做过六年游戏服务端开发，后来想换个方向，转做电商后端开发，做了两年之后感悟很多，也</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 我做过六年游戏服务端开发，后来想换个方向，</description>
     </item>
     
     <item>
@@ -166,7 +166,7 @@
       <pubDate>Thu, 02 Dec 2021 10:00:00 +0800</pubDate>
       
       <guid>https://www.techxiaofei.com/post/mysql/innodb/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 MySQL的InnoDB引擎一棵B+树可以存放多少行数据？这是一个很有趣的面试题。 也</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 MySQL的InnoDB引擎一棵B+树可以</description>
     </item>
     
     <item>
@@ -175,7 +175,7 @@
       <pubDate>Tue, 30 Nov 2021 14:00:51 +0800</pubDate>
       
       <guid>https://www.techxiaofei.com/post/backend/backend_development/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 背景 很多刚接触后端开发的同学，会发现，后端开发不就是增删改查吗？的确，如果你做的东西只是</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 背景 很多刚接触后端开发的同学，会发现，后端开发</description>
     </item>
     
     <item>
@@ -184,7 +184,7 @@
       <pubDate>Fri, 26 Nov 2021 00:00:00 +0800</pubDate>
       
       <guid>https://www.techxiaofei.com/post/mysql/covering_index/</guid>
-      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥。 后端面试系列将剖析后端面试中常考技术点，用尽量短的篇幅把一个一个技术点呈现出来。 背景 关于</description>
+      <description>本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 后端面试系列将剖析后端面试中常考技术点，用尽量</description>
     </item>
     
   </channel>
